@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaynos — Help Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#fafaf9;--bg-sidebar:#f5f5f4;--bg-card:#fff;--bg-code:#f5f5f4;
+--text:#1c1917;--text-secondary:#78716c;--text-tertiary:#a8a29e;
+--border:#e7e5e4;--border-light:#f0efed;
+--accent:#1d4ed8;--accent-light:#eff6ff;--accent-dark:#1e3a8a;
+--success:#16a34a;--warning:#d97706;--danger:#dc2626;
+--font-body:'DM Sans',system-ui,sans-serif;
+--font-mono:'JetBrains Mono',monospace;
+--sidebar-w:280px;--header-h:56px;
+--radius:8px;
+}
+@media(prefers-color-scheme:dark){
+:root{
+--bg:#1c1917;--bg-sidebar:#171412;--bg-card:#292524;--bg-code:#292524;
+--text:#e7e5e4;--text-secondary:#a8a29e;--text-tertiary:#78716c;
+--border:#3f3a36;--border-light:#292524;
+--accent:#60a5fa;--accent-light:#1e3a5f;--accent-dark:#93c5fd;
+}
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:var(--font-body);color:var(--text);background:var(--bg);line-height:1.7;-webkit-font-smoothing:antialiased}
+
+/* HEADER */
+.header{position:fixed;top:0;left:0;right:0;height:var(--header-h);background:var(--bg-sidebar);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;z-index:100;gap:16px}
+.header-logo{font-weight:600;font-size:15px;letter-spacing:-.02em;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px}
+.header-logo span{opacity:.4;font-weight:400}
+.header-search{flex:1;max-width:400px;position:relative}
+.header-search input{width:100%;height:36px;padding:0 12px 0 36px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);font-family:var(--font-body);font-size:14px;color:var(--text);outline:none;transition:border-color .15s}
+.header-search input:focus{border-color:var(--accent)}
+.header-search input::placeholder{color:var(--text-tertiary)}
+.header-search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-tertiary);pointer-events:none}
+.menu-btn{display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:4px}
+.search-results{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);max-height:360px;overflow-y:auto;display:none;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.search-results.active{display:block}
+.search-result{padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--border-light);font-size:14px}
+.search-result:last-child{border-bottom:none}
+.search-result:hover{background:var(--accent-light)}
+.search-result .sr-title{font-weight:500;margin-bottom:2px}
+.search-result .sr-section{font-size:12px;color:var(--text-tertiary)}
+.search-result .sr-snippet{font-size:13px;color:var(--text-secondary);margin-top:4px}
+.search-result mark{background:var(--accent-light);color:var(--accent);border-radius:2px;padding:0 2px}
+.search-empty{padding:20px 14px;text-align:center;color:var(--text-tertiary);font-size:14px}
+
+/* SIDEBAR */
+.sidebar{position:fixed;top:var(--header-h);left:0;width:var(--sidebar-w);height:calc(100vh - var(--header-h));background:var(--bg-sidebar);border-right:1px solid var(--border);overflow-y:auto;padding:20px 0;z-index:90;transition:transform .25s ease}
+.sidebar-section{margin-bottom:8px}
+.sidebar-section-title{padding:6px 20px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-tertiary)}
+.sidebar-link{display:block;padding:6px 20px 6px 28px;font-size:14px;color:var(--text-secondary);text-decoration:none;transition:color .1s,background .1s;cursor:pointer;border-left:2px solid transparent}
+.sidebar-link:hover{color:var(--text);background:rgba(0,0,0,.03)}
+.sidebar-link.active{color:var(--accent);border-left-color:var(--accent);font-weight:500;background:var(--accent-light)}
+
+/* CONTENT */
+.content{margin-left:var(--sidebar-w);margin-top:var(--header-h);min-height:calc(100vh - var(--header-h))}
+.content-inner{max-width:740px;margin:0 auto;padding:40px 48px 80px}
+
+/* TYPOGRAPHY */
+.content-inner h1{font-size:28px;font-weight:600;letter-spacing:-.02em;margin-bottom:8px;line-height:1.3}
+.content-inner h2{font-size:20px;font-weight:600;letter-spacing:-.01em;margin-top:40px;margin-bottom:12px;padding-top:24px;border-top:1px solid var(--border-light);line-height:1.4}
+.content-inner h2:first-of-type{border-top:none;padding-top:0}
+.content-inner h3{font-size:16px;font-weight:600;margin-top:28px;margin-bottom:8px}
+.content-inner p{margin-bottom:16px;color:var(--text)}
+.content-inner ul,.content-inner ol{margin-bottom:16px;padding-left:24px}
+.content-inner li{margin-bottom:6px;color:var(--text)}
+.content-inner strong{font-weight:600}
+.content-inner code{font-family:var(--font-mono);font-size:13px;background:var(--bg-code);padding:2px 6px;border-radius:4px;color:var(--accent)}
+.content-inner a{color:var(--accent);text-decoration:none}
+.content-inner a:hover{text-decoration:underline}
+.content-inner hr{border:none;border-top:1px solid var(--border);margin:32px 0}
+
+/* TABLES */
+.content-inner table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:14px}
+.content-inner th{text-align:left;padding:10px 14px;background:var(--bg-code);font-weight:600;font-size:13px;border:1px solid var(--border)}
+.content-inner td{padding:10px 14px;border:1px solid var(--border);vertical-align:top}
+
+/* HINTS */
+.hint{padding:14px 16px;border-radius:var(--radius);margin-bottom:16px;font-size:14px;display:flex;gap:10px;line-height:1.6}
+.hint-warning{background:#fef3c7;border:1px solid #fcd34d;color:#92400e}
+.hint-info{background:var(--accent-light);border:1px solid var(--accent);color:var(--accent-dark)}
+.hint-icon{font-size:16px;flex-shrink:0;margin-top:2px}
+
+/* QUICK LINKS */
+.quick-links{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
+.quick-link{padding:14px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);text-decoration:none;color:var(--text);transition:border-color .15s,box-shadow .15s;cursor:pointer;font-size:14px}
+.quick-link:hover{border-color:var(--accent);box-shadow:0 2px 8px rgba(0,0,0,.06);text-decoration:none}
+.quick-link .ql-title{font-weight:500;margin-bottom:2px}
+.quick-link .ql-desc{font-size:13px;color:var(--text-secondary)}
+
+/* BREADCRUMB */
+.breadcrumb{font-size:13px;color:var(--text-tertiary);margin-bottom:16px}
+.breadcrumb a{color:var(--text-tertiary);text-decoration:none}
+.breadcrumb a:hover{color:var(--accent)}
+.breadcrumb span{margin:0 6px}
+
+/* FOOTER NAV */
+.footer-nav{display:flex;justify-content:space-between;margin-top:48px;padding-top:24px;border-top:1px solid var(--border)}
+.footer-nav a{text-decoration:none;color:var(--text-secondary);font-size:14px;display:flex;align-items:center;gap:6px;transition:color .15s}
+.footer-nav a:hover{color:var(--accent)}
+.footer-nav .fn-label{font-size:12px;color:var(--text-tertiary)}
+.footer-nav .fn-title{font-weight:500;color:var(--text)}
+.footer-nav a:hover .fn-title{color:var(--accent)}
+
+/* MOBILE */
+@media(max-width:768px){
+.sidebar{transform:translateX(-100%)}
+.sidebar.open{transform:translateX(0)}
+.content{margin-left:0}
+.content-inner{padding:24px 20px 60px}
+.menu-btn{display:block}
+.header-search{max-width:none}
+.quick-links{grid-template-columns:1fr}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:85}
+.overlay.active{display:block}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+<button class="menu-btn" onclick="toggleSidebar()" aria-label="Menu">
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/></svg>
+</button>
+<a href="#" class="header-logo" onclick="navigate('welcome');return false">kaynos <span>docs</span></a>
+<div class="header-search">
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"/><line x1="10.5" y1="10.5" x2="14" y2="14"/></svg>
+<input type="text" id="searchInput" placeholder="Search docs..." oninput="handleSearch(this.value)" onfocus="handleSearch(this.value)" autocomplete="off">
+<div class="search-results" id="searchResults"></div>
+</div>
+</header>
+
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<nav class="sidebar" id="sidebar"></nav>
+
+<main class="content">
+<div class="content-inner" id="pageContent"></div>
+</main>
+
+<script>
+const PAGES = {
+welcome: {
+  title: "Welcome to Kaynos",
+  section: "",
+  content: `
+<h1>Welcome to Kaynos</h1>
+<p>Kaynos is a video review and training management platform built for martial arts schools. Instructors upload training videos, add timestamped notes, and students review their sessions on their own time.</p>
+<p>This help center covers everything you need to get started, manage your school, and troubleshoot any issues.</p>
+<h2>Quick links</h2>
+<div class="quick-links">
+<a class="quick-link" onclick="navigate('setup')"><div class="ql-title">Setting up your school</div><div class="ql-desc">Get started with your new account</div></a>
+<a class="quick-link" onclick="navigate('first-upload')"><div class="ql-title">Your first video upload</div><div class="ql-desc">Upload and share training footage</div></a>
+<a class="quick-link" onclick="navigate('upload-issues')"><div class="ql-title">Video upload problems</div><div class="ql-desc">Troubleshoot upload issues</div></a>
+<a class="quick-link" onclick="navigate('playback-issues')"><div class="ql-title">Video playback problems</div><div class="ql-desc">Fix video that won't play</div></a>
+<a class="quick-link" onclick="navigate('inviting-members')"><div class="ql-title">Inviting your team</div><div class="ql-desc">Add instructors and students</div></a>
+<a class="quick-link" onclick="navigate('subscription')"><div class="ql-title">Subscription &amp; pricing</div><div class="ql-desc">Understand your bill</div></a>
+</div>
+<h2>Need more help?</h2>
+<p>If you can't find what you're looking for, reach out to us directly:</p>
+<ul>
+<li><strong>Email:</strong> support@kaynos.net</li>
+<li><strong>Live chat:</strong> Available in the bottom-right corner of the app</li>
+<li><strong>Response time:</strong> We aim to respond within a few hours during business days</li>
+</ul>
+`},
+
+setup: {
+  title: "Setting up your school",
+  section: "Getting Started",
+  content: `
+<h1>Setting up your school</h1>
+<p>When you subscribe to Kaynos, our team creates your school account and sends login credentials to the email address you provided. Here's what to do once you're in.</p>
+<h2>First login</h2>
+<ol>
+<li>Open the link in your welcome email or go to <strong>app.kaynos.net</strong>.</li>
+<li>Enter the email and password provided in your welcome email.</li>
+<li>You'll land on the <strong>Instructor Dashboard</strong> — this is your home base.</li>
+</ol>
+<h2>Update your password</h2>
+<p>The first thing you should do is change your temporary password.</p>
+<ol>
+<li>Click your name in the sidebar (or tap the menu icon on mobile).</li>
+<li>Go to <strong>Profile</strong>.</li>
+<li>Under <strong>Change Password</strong>, enter your current password and choose a new one.</li>
+<li>Click <strong>Update Password</strong>.</li>
+</ol>
+<h2>School settings</h2>
+<p>As a School Admin, you have access to school-level settings. From the sidebar, navigate to <strong>Admin</strong> to view your school's roster, monitor activity, and manage invitations and member roles.</p>
+`},
+
+"inviting-members": {
+  title: "Inviting your team",
+  section: "Getting Started",
+  content: `
+<h1>Inviting your team</h1>
+<p>Kaynos uses an invitation system to add instructors and students to your school. Only School Admins and Instructors can send invitations.</p>
+<h2>How to invite someone</h2>
+<ol>
+<li>Go to <strong>Admin</strong> in the sidebar.</li>
+<li>Click <strong>Add Member</strong>.</li>
+<li>Enter the person's <strong>name</strong>, <strong>email address</strong>, and select their <strong>role</strong> (instructor or student).</li>
+<li>Click <strong>Send Invite</strong>.</li>
+</ol>
+<p>The person will receive an email with a link to set up their account and create a password. If they don't see the email, ask them to check their spam or junk folder.</p>
+<h2>Roles you can assign</h2>
+<table><thead><tr><th>Role</th><th>What they can do</th></tr></thead><tbody>
+<tr><td><strong>Admin</strong></td><td>Everything an instructor can do, plus manage members, invite users, and access school settings.</td></tr>
+<tr><td><strong>Instructor</strong></td><td>Create sessions and classes, upload videos, add notes, view all students and their progress.</td></tr>
+<tr><td><strong>Student</strong></td><td>View assigned sessions and school classes, watch videos, add notes, and track progress.</td></tr>
+</tbody></table>
+<h2>Resending an invitation</h2>
+<p>If someone didn't receive their invite or their link expired, go to <strong>Admin</strong> → member roster, find the person, and click <strong>Resend Invite</strong>.</p>
+<h2>Tips</h2>
+<ul>
+<li>Invite instructors first so they can start creating sessions before students arrive.</li>
+<li>Use the student's actual email address — they'll need it to log in.</li>
+<li>There's no limit on the number of members you can add to your school.</li>
+</ul>
+`},
+
+"first-upload": {
+  title: "Your first video upload",
+  section: "Getting Started",
+  content: `
+<h1>Your first video upload</h1>
+<p>Uploading a training video to Kaynos takes just a few steps. Videos are attached to either a <strong>session</strong> (one-on-one) or a <strong>class</strong> (group instruction).</p>
+<h2>Step by step</h2>
+<ol>
+<li>Create a new session or class from the sidebar.</li>
+<li>On the creation form, you'll see a <strong>drag-and-drop upload zone</strong> at the bottom.</li>
+<li>Either drag your video file onto the zone or click it to browse your files.</li>
+<li>The upload begins immediately with a progress bar, speed readout, and time estimate.</li>
+<li>Once complete, a green checkmark confirms success.</li>
+<li>Fill in the remaining details and save.</li>
+</ol>
+<h2>What to expect</h2>
+<ul>
+<li><strong>Small files</strong> (under 100 MB) upload in a single transfer.</li>
+<li><strong>Large files</strong> are automatically split into chunks and uploaded in parallel — faster and more reliable.</li>
+<li>Failed chunks retry automatically up to 3 times.</li>
+<li>You can <strong>cancel</strong> any upload in progress.</li>
+</ul>
+<h2>Supported file types</h2>
+<table><thead><tr><th>Format</th><th>Extension</th><th>Notes</th></tr></thead><tbody>
+<tr><td>MP4</td><td>.mp4</td><td>Recommended — best compatibility</td></tr>
+<tr><td>MOV</td><td>.mov</td><td>Common from iPhones and GoPros</td></tr>
+<tr><td>WebM</td><td>.webm</td><td>Good for web-native recordings</td></tr>
+<tr><td>MKV</td><td>.mkv</td><td>Supported but less common</td></tr>
+</tbody></table>
+<p>Maximum file size: <strong>5 GB</strong> per video.</p>
+<h2>Tips for recording</h2>
+<ul>
+<li><strong>Landscape orientation</strong> works best for training footage.</li>
+<li>Place your camera at a slight elevation to capture the full mat.</li>
+<li>Consistent lighting makes technique details easier to review.</li>
+</ul>
+`},
+
+roles: {
+  title: "Understanding user roles",
+  section: "Getting Started",
+  content: `
+<h1>Understanding user roles</h1>
+<p>Kaynos has three user roles within each school. Each role has different permissions.</p>
+<h2>Admin</h2>
+<p>The School Admin is typically the school owner or head instructor. Admins can do everything an instructor can do, plus invite and remove members, change member roles, and access the Admin dashboard with school-wide activity and stats.</p>
+<h2>Instructor</h2>
+<p>Instructors are coaches and professors who run training. They can create one-on-one sessions and group classes, upload training videos, add and manage timestamped notes, tag content for organization, and view all students' progress.</p>
+<h2>Student</h2>
+<p>Students are practitioners reviewing their training. They can view sessions they're assigned to and all school classes, watch training videos, add their own notes (question type for instructor follow-up), and track their watch progress. Students cannot create sessions, upload videos, or see other students' private sessions.</p>
+<h2>Changing a member's role</h2>
+<p>Only Admins can change roles. Go to <strong>Admin</strong>, find the member in the roster, click their name, and select a new role from the dropdown.</p>
+<div class="hint hint-warning"><span class="hint-icon">⚠️</span>Changing an instructor to a student removes their ability to create sessions and upload videos. Previously created content remains accessible.</div>
+`},
+
+uploading: {
+  title: "Uploading videos",
+  section: "Video",
+  content: `
+<h1>Uploading videos</h1>
+<p>Videos are attached to sessions and classes. You can upload during creation or add a video to an existing session or class.</p>
+<h2>How uploads work</h2>
+<p>Kaynos uses <strong>multipart uploads</strong> for large files. Your video is automatically split into chunks and uploaded in parallel using 6 concurrent connections. If any chunk fails, it retries automatically up to 3 times with exponential backoff.</p>
+<h2>Upload requirements</h2>
+<ul>
+<li><strong>Accepted formats:</strong> MP4, MOV, WebM, MKV</li>
+<li><strong>Maximum size:</strong> 5 GB per video</li>
+<li><strong>Who can upload:</strong> Admins and Instructors only</li>
+</ul>
+<h2>During upload</h2>
+<p>You'll see a progress bar with percentage, upload speed (e.g., 12.5 MB/s), estimated time remaining, and a Cancel button.</p>
+<h2>Replacing a video</h2>
+<p>Open the session or class, click the remove button (X) next to the current video, and upload the new file. The original video is deleted from storage when replaced.</p>
+`},
+
+playback: {
+  title: "Watching and reviewing",
+  section: "Video",
+  content: `
+<h1>Watching and reviewing</h1>
+<p>Kaynos includes a built-in video player designed for training review. It works directly in your browser with no additional software.</p>
+<h2>Playback speed</h2>
+<p>Click the speed indicator to choose from: <strong>0.5x</strong> (great for breaking down fast transitions), <strong>0.75x</strong>, <strong>1x</strong>, <strong>1.25x</strong>, <strong>1.5x</strong>, or <strong>2x</strong> (for scanning through footage).</p>
+<h2>Timeline and note markers</h2>
+<p>The progress bar shows colored markers for each timestamped note. Hover to preview the note text, click to jump directly to that moment.</p>
+<h2>Adding notes while watching</h2>
+<ol>
+<li>Pause the video at the moment you want to annotate.</li>
+<li>Click <strong>Add Note</strong> on the player controls.</li>
+<li>Type your note and click <strong>Save</strong>.</li>
+</ol>
+<p>The note is automatically timestamped to the current playback position.</p>
+<h2>Watch progress</h2>
+<p>Kaynos tracks where you left off. When you return to a video, it resumes from your last position. Completion status is also tracked so instructors can see who has reviewed their footage.</p>
+`},
+
+formats: {
+  title: "Supported formats and limits",
+  section: "Video",
+  content: `
+<h1>Supported formats and limits</h1>
+<table><thead><tr><th>Format</th><th>Extension</th><th>Support Level</th></tr></thead><tbody>
+<tr><td>MP4</td><td>.mp4</td><td>Recommended</td></tr>
+<tr><td>MOV</td><td>.mov</td><td>Fully supported</td></tr>
+<tr><td>WebM</td><td>.webm</td><td>Fully supported</td></tr>
+<tr><td>MKV</td><td>.mkv</td><td>Supported</td></tr>
+</tbody></table>
+<p><strong>MP4 is recommended.</strong> It has the widest browser compatibility and good compression. Most phones and cameras record in MP4 by default. MOV files from iPhones and GoPros work perfectly with no conversion needed.</p>
+<h2>File size limits</h2>
+<ul>
+<li><strong>Maximum:</strong> 5 GB per video</li>
+<li><strong>Recommended:</strong> Under 2 GB for the smoothest upload experience</li>
+</ul>
+<h2>Tips for smaller files</h2>
+<ul>
+<li>Record at <strong>1080p</strong> instead of 4K — more than sufficient for reviewing technique.</li>
+<li>Use <strong>H.264 codec</strong> if your camera gives you a choice.</li>
+<li>Trim warmup and cooldown before uploading.</li>
+</ul>
+`},
+
+storage: {
+  title: "Video storage and retention",
+  section: "Video",
+  content: `
+<h1>Video storage and retention</h1>
+<h2>Where videos are stored</h2>
+<p>All videos are stored securely in Backblaze B2 cloud object storage, delivered through Cloudflare's CDN for fast playback worldwide. Videos are stored in the United States.</p>
+<h2>How long are videos kept?</h2>
+<p>Videos remain available for as long as your subscription is active. There is no automatic expiration or deletion.</p>
+<h2>What happens if I cancel?</h2>
+<p>After cancellation, your data is retained for <strong>30 days</strong>. During this window, contact support@kaynos.net to request a data export. After 30 days, all videos and data are permanently deleted.</p>
+<h2>Storage costs</h2>
+<p>Video storage is included in your subscription. No per-gigabyte charges, overage fees, or bandwidth limits. Your monthly subscription covers everything.</p>
+<h2>Data security</h2>
+<ul>
+<li>Videos are transmitted over encrypted connections (TLS/HTTPS).</li>
+<li>Each school's videos use unique keys and can't be accessed by other schools.</li>
+<li>Playback URLs are temporary (presigned) and expire quickly.</li>
+</ul>
+`},
+
+"creating-sessions": {
+  title: "Creating a session",
+  section: "Sessions & Classes",
+  content: `
+<h1>Creating a session</h1>
+<p>A <strong>session</strong> is a one-on-one training interaction between an instructor and a student. Use sessions for private lessons, individual drilling, and personal technique review.</p>
+<h2>How to create a session</h2>
+<ol>
+<li>From the sidebar, click <strong>Sessions</strong> then <strong>New Session</strong>.</li>
+<li>Fill in the title, date, and select the student from your roster.</li>
+<li>Optionally add tags for organization (e.g., "guard," "takedowns").</li>
+<li>Optionally upload a video.</li>
+<li>Click <strong>Create Session</strong>.</li>
+</ol>
+<h2>Who can see sessions?</h2>
+<p>Sessions are visible to the assigned student, the instructor who created them, and school admins. Other students cannot see each other's private sessions.</p>
+`},
+
+"creating-classes": {
+  title: "Creating a class",
+  section: "Sessions & Classes",
+  content: `
+<h1>Creating a class</h1>
+<p>A <strong>class</strong> is a group training session. Use classes for regular group instruction, seminars, open mats, and training that involves multiple students.</p>
+<h2>How to create a class</h2>
+<ol>
+<li>From the sidebar, click <strong>Classes</strong> then <strong>New Class</strong>.</li>
+<li>Fill in the title, date, and optionally a description.</li>
+<li>Add tags for organization.</li>
+<li>Optionally upload a video.</li>
+<li>Click <strong>Create Class</strong>.</li>
+</ol>
+<h2>Who can see classes?</h2>
+<p>All students, instructors, and admins in the school can see every class. Classes are not restricted to specific students like sessions are.</p>
+`},
+
+notes: {
+  title: "Notes and timestamps",
+  section: "Sessions & Classes",
+  content: `
+<h1>Notes and timestamps</h1>
+<p>Notes let instructors annotate specific moments in a training video so students can jump directly to key techniques, drills, and teaching points.</p>
+<h2>Note types</h2>
+<table><thead><tr><th>Type</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><strong>Note</strong></td><td>General observations and commentary</td></tr>
+<tr><td><strong>Key</strong></td><td>Important techniques or concepts to remember</td></tr>
+<tr><td><strong>Drill</strong></td><td>Drills the student should practice</td></tr>
+<tr><td><strong>Question</strong></td><td>Student questions for the instructor</td></tr>
+</tbody></table>
+<h2>Adding a note from the video player</h2>
+<ol>
+<li>Pause the video at the moment you want to annotate.</li>
+<li>Click <strong>Add Note</strong> on the player controls.</li>
+<li>Select the type, write your text, and click <strong>Save</strong>.</li>
+</ol>
+<p>The note is automatically timestamped to the exact second you paused at. On the timeline, each note appears as a colored marker — click to jump directly to that moment.</p>
+<h2>Editing and deleting</h2>
+<p>Instructors can edit or delete any note. Students can only edit or delete their own notes.</p>
+<h2>Tips</h2>
+<ul>
+<li>Use <strong>Key</strong> notes for core techniques — they stand out in the notes panel.</li>
+<li>Encourage students to use <strong>Question</strong> notes to flag things for their next lesson.</li>
+<li>Keep notes concise. "Underhook to single leg at 2:15" is more useful than a paragraph.</li>
+</ul>
+`},
+
+tags: {
+  title: "Tags and organization",
+  section: "Sessions & Classes",
+  content: `
+<h1>Tags and organization</h1>
+<p>Tags help you categorize and filter sessions and classes so you can quickly find specific training content.</p>
+<h2>Example tags</h2>
+<ul>
+<li>Technique: <code>guard</code>, <code>takedowns</code>, <code>submissions</code>, <code>escapes</code></li>
+<li>Format: <code>no-gi</code>, <code>gi</code>, <code>open-mat</code>, <code>competition-prep</code></li>
+<li>Level: <code>fundamentals</code>, <code>advanced</code></li>
+</ul>
+<h2>Adding tags</h2>
+<p>When creating or editing a session or class, type in the tag input field and press Enter to add each tag.</p>
+<h2>Filtering</h2>
+<p>On the sessions or classes list page, filter by tag to find matching content. Helpful when a student wants to review all guard-related training or an instructor needs competition prep sessions.</p>
+<h2>Tips</h2>
+<ul>
+<li>Keep tags short and consistent — use <code>guard</code> not <code>guard work</code>.</li>
+<li>Agree on standard tags with your instructors.</li>
+<li>Tags are shared across your school.</li>
+</ul>
+`},
+
+progress: {
+  title: "Progress tracking",
+  section: "Sessions & Classes",
+  content: `
+<h1>Progress tracking</h1>
+<p>Kaynos automatically tracks how students engage with their training videos.</p>
+<h2>What's tracked</h2>
+<ul>
+<li><strong>Last watched position</strong> — so students can resume later.</li>
+<li><strong>Completion status</strong> — whether they watched the full video.</li>
+<li><strong>Last viewed time</strong> — when they most recently watched.</li>
+</ul>
+<h2>For students</h2>
+<p>Your progress is saved automatically. When you return to a video, it picks up where you left off. Your dashboard shows which sessions you've reviewed and which are unwatched.</p>
+<h2>For instructors</h2>
+<p>On the instructor dashboard and student profile pages, you can see which sessions each student has reviewed, whether they completed the video, and when they last viewed it.</p>
+<h2>Privacy note</h2>
+<p>Tracking is limited to what's listed above. Kaynos does not record viewing count, detailed patterns, or granular analytics. The goal is simple: did they watch it, and where did they leave off?</p>
+`},
+
+"managing-members": {
+  title: "Managing members",
+  section: "Account Management",
+  content: `
+<h1>Managing members</h1>
+<p>School Admins and Instructors can manage the roster from the Admin area.</p>
+<h2>Adding members</h2>
+<p>See <a onclick="navigate('inviting-members')">Inviting your team</a> for step-by-step instructions.</p>
+<h2>Changing a member's role</h2>
+<p>Go to <strong>Admin</strong>, find the member, click their name, change the role dropdown, and save. Changes take effect immediately.</p>
+<h2>Removing a member</h2>
+<p>Go to <strong>Admin</strong>, find the member, and click <strong>Remove Member</strong>. Removal is immediate — the person can no longer log in. Their previously created notes remain in the system.</p>
+<h2>Common questions</h2>
+<p><strong>Can a member belong to multiple schools?</strong> Not with the same email address. Each account is tied to a single school.</p>
+<p><strong>Is there a member limit?</strong> No. Add as many members as you need — all included in your subscription.</p>
+<p><strong>Can students invite other students?</strong> No. Only Admins and Instructors can send invitations.</p>
+`},
+
+profile: {
+  title: "Profile and password",
+  section: "Account Management",
+  content: `
+<h1>Profile and password</h1>
+<h2>Accessing your profile</h2>
+<p>Click your name in the sidebar (desktop) or tap the menu icon and select your name (mobile).</p>
+<h2>Updating your name</h2>
+<p>Edit the Name field on your profile page and click <strong>Save Changes</strong>.</p>
+<h2>Changing your password</h2>
+<ol>
+<li>Scroll to <strong>Change Password</strong> on your profile page.</li>
+<li>Enter your current password.</li>
+<li>Enter and confirm your new password.</li>
+<li>Click <strong>Update Password</strong>.</li>
+</ol>
+<p>If you forget your password, contact your School Admin or email support@kaynos.net for a reset.</p>
+<h2>Google sign-in users</h2>
+<p>If you signed up using Google, your authentication is handled by Google. Update your credentials through your Google account settings.</p>
+`},
+
+"google-signin": {
+  title: "Google sign-in",
+  section: "Account Management",
+  content: `
+<h1>Google sign-in</h1>
+<p>Kaynos supports signing in with your Google account for a faster, passwordless login.</p>
+<h2>How it works</h2>
+<p>Click <strong>Sign in with Google</strong> on the login page. Google's sign-in flow handles authentication. No password is stored on Kaynos for Google-authenticated users.</p>
+<h2>What Kaynos receives from Google</h2>
+<ul>
+<li>Your <strong>name</strong> (used as your display name).</li>
+<li>Your <strong>email address</strong> (used to identify your account).</li>
+<li>Your <strong>Google ID</strong> (a unique identifier, never displayed).</li>
+</ul>
+<p>Kaynos does not access your Google Drive, Calendar, contacts, or any other Google service.</p>
+<h2>Troubleshooting</h2>
+<ul>
+<li>Make sure you're using the same Google email associated with your Kaynos account.</li>
+<li>Enable third-party cookies in your browser (required for OAuth).</li>
+<li>Try clearing your browser cache.</li>
+<li>If it still doesn't work, log in with email and password instead.</li>
+</ul>
+`},
+
+notifications: {
+  title: "Email notifications",
+  section: "Account Management",
+  content: `
+<h1>Email notifications</h1>
+<h2>What notifications are sent</h2>
+<ul>
+<li><strong>New session assigned</strong> — Students are notified when an instructor creates a session with them.</li>
+<li><strong>New class posted</strong> — Students are notified when a new class is added.</li>
+<li><strong>Member invitation</strong> — New members receive an email with their login link.</li>
+</ul>
+<h2>Managing preferences</h2>
+<p>Go to your <strong>Profile</strong> page and toggle <strong>Email Notifications</strong> on or off. Changes take effect immediately. Critical account emails (password resets, security notices) are always sent regardless of this setting.</p>
+<h2>Not receiving emails?</h2>
+<ol>
+<li>Check your spam or junk folder.</li>
+<li>Verify your email address on your profile is correct.</li>
+<li>Ensure notifications are toggled on.</li>
+<li>Contact support@kaynos.net if the issue persists.</li>
+</ol>
+`},
+
+subscription: {
+  title: "Subscription and pricing",
+  section: "Billing",
+  content: `
+<h1>Subscription and pricing</h1>
+<h2>Current pricing</h2>
+<p>Kaynos is <strong>$49 per month per school</strong>. This flat rate includes unlimited instructors, students, sessions, classes, video uploads, storage, and playback. No tiered plans or locked features.</p>
+<h2>How billing works</h2>
+<ul>
+<li>Billed <strong>monthly in advance</strong> on the same day each month.</li>
+<li>Processed through <strong>Stripe</strong>, a PCI-compliant payment processor.</li>
+<li>Kaynos does not store your credit card information.</li>
+<li>You'll receive an email receipt from Stripe after each payment.</li>
+</ul>
+<h2>Failed payments</h2>
+<p>If a payment fails, Stripe retries up to 3 times over 10 days. If payment remains unsuccessful, your school's access may be suspended. Suspended schools retain data for 30 days.</p>
+`},
+
+payment: {
+  title: "Updating payment info",
+  section: "Billing",
+  content: `
+<h1>Updating payment info</h1>
+<p>Your payment information is managed through Stripe's secure portal.</p>
+<h2>Updating your card</h2>
+<p>Log in as a School Admin, navigate to billing settings, and click <strong>Manage Billing</strong> to open the Stripe customer portal where you can update your card. Alternatively, email support@kaynos.net for a direct link.</p>
+<h2>Accepted payment methods</h2>
+<p>Visa, Mastercard, American Express, Discover, and digital wallets (Apple Pay, Google Pay) where available.</p>
+<h2>Receipts</h2>
+<p>Stripe automatically sends a receipt after each payment. For past receipts, contact support.</p>
+`},
+
+cancellation: {
+  title: "Cancellation and data export",
+  section: "Billing",
+  content: `
+<h1>Cancellation and data export</h1>
+<h2>How to cancel</h2>
+<p>Contact support@kaynos.net with your school name and account email. Cancellation takes effect at the end of your current billing cycle — you retain full access until then.</p>
+<h2>What happens to your data</h2>
+<ul>
+<li><strong>30-day retention</strong> — All data is retained for 30 days after your subscription ends.</li>
+<li><strong>Data export</strong> — During this window, request a full export by emailing support.</li>
+<li><strong>Permanent deletion</strong> — After 30 days, everything is permanently deleted from all systems.</li>
+</ul>
+<h2>Reactivating</h2>
+<p>Within the 30-day window, contact support to reactivate with all data intact. After 30 days, you'd need to start fresh.</p>
+<h2>Refunds</h2>
+<p>Kaynos does not offer partial-month refunds. Access continues through the end of your paid period. For billing errors, contact support and we'll work with you.</p>
+`},
+
+"upload-issues": {
+  title: "Video upload problems",
+  section: "Troubleshooting",
+  content: `
+<h1>Video upload problems</h1>
+<h2>Upload fails immediately</h2>
+<p><strong>"Please select a video file" error</strong> — The file isn't a recognized format. Kaynos accepts MP4, MOV, WebM, and MKV. Convert other formats to MP4 using a free tool like HandBrake or VLC.</p>
+<p><strong>File is too large</strong> — Maximum is 5 GB. Try recording at 1080p, trimming unnecessary footage, or compressing with HandBrake (use the "Fast 1080p" preset).</p>
+<h2>Upload gets stuck or freezes</h2>
+<ol>
+<li><strong>Wait 30-60 seconds</strong> — Large uploads sometimes pause between chunks.</li>
+<li><strong>Check your internet</strong> — Open another website to confirm your connection is active.</li>
+<li><strong>Cancel and retry</strong> — A fresh attempt often resolves stuck uploads.</li>
+</ol>
+<h2>Upload fails partway through</h2>
+<ul>
+<li><strong>"Network error during part upload"</strong> — Your connection dropped. Reconnect and retry.</li>
+<li><strong>"Part upload failed: 403"</strong> — Authorization expired on a very long upload. Cancel and start fresh.</li>
+<li><strong>"Upload failed: 500"</strong> — Server issue. Wait a few minutes and retry. If it persists, contact support.</li>
+</ul>
+<h2>Upload is very slow</h2>
+<p>Speed depends on your <strong>upload</strong> speed (not download). Check at fast.com.</p>
+<table><thead><tr><th>Upload speed</th><th>500 MB video</th><th>1 GB video</th><th>2 GB video</th></tr></thead><tbody>
+<tr><td>10 Mbps</td><td>~7 min</td><td>~14 min</td><td>~28 min</td></tr>
+<tr><td>25 Mbps</td><td>~3 min</td><td>~5 min</td><td>~11 min</td></tr>
+<tr><td>50 Mbps</td><td>~1.5 min</td><td>~3 min</td><td>~5 min</td></tr>
+<tr><td>100 Mbps</td><td>~45 sec</td><td>~1.5 min</td><td>~3 min</td></tr>
+</tbody></table>
+<p><strong>Tips:</strong> Use wired ethernet over Wi-Fi, upload when fewer people are on your network, and close cloud sync services during upload.</p>
+<h2>Video stuck in "uploading" status</h2>
+<p>If you left the page mid-upload or your browser crashed, the video may be stuck. Contact support@kaynos.net with the session or class name and we'll reset the status.</p>
+<h2>Still having trouble?</h2>
+<p>Email support@kaynos.net with your school name, browser, file size and format, and a screenshot of any error message.</p>
+`},
+
+"playback-issues": {
+  title: "Video playback problems",
+  section: "Troubleshooting",
+  content: `
+<h1>Video playback problems</h1>
+<h2>Video won't play at all</h2>
+<p><strong>Black screen with no controls:</strong></p>
+<ul>
+<li>Try refreshing the page.</li>
+<li>Clear your browser cache.</li>
+<li>Try a different browser (Chrome usually works best).</li>
+<li>Check if the video status shows "ready" — if it shows "uploading" or "failed," the upload didn't complete.</li>
+</ul>
+<p><strong>"This video file cannot be played":</strong> The format may not be supported by your browser. MKV files may have issues in Safari. Try Chrome or Firefox.</p>
+<h2>Video is choppy or buffering</h2>
+<ul>
+<li>Check your internet speed at fast.com.</li>
+<li>Close other tabs and streaming apps competing for bandwidth.</li>
+<li>Consider asking instructors to upload at 1080p for smoother playback.</li>
+</ul>
+<h2>Audio but no picture (or vice versa)</h2>
+<p>Usually a codec issue. Try a different browser. If the problem persists, re-export the video as MP4 with H.264 video and AAC audio.</p>
+<h2>Video doesn't resume from where I left off</h2>
+<p>Position saves require a brief moment after you pause. If you close the tab very quickly, the position may not save. This is rare.</p>
+`},
+
+"login-issues": {
+  title: "Login and access issues",
+  section: "Troubleshooting",
+  content: `
+<h1>Login and access issues</h1>
+<h2>Wrong password</h2>
+<ul>
+<li>Double-check you're using the correct email (the one your admin used to invite you).</li>
+<li>Make sure Caps Lock is off.</li>
+<li>Try copy-pasting your password to avoid typos.</li>
+<li>Forgot your password? Contact your School Admin or email support@kaynos.net.</li>
+</ul>
+<h2>Account locked or rate limited</h2>
+<p>For security, Kaynos limits login attempts from the same IP. If you've tried too many times, wait 15-30 minutes and try again, or contact support.</p>
+<h2>Google sign-in not working</h2>
+<ul>
+<li>Use the same Google email associated with your Kaynos account.</li>
+<li>Enable third-party cookies in your browser.</li>
+<li>Clear your browser cache and cookies.</li>
+<li>Try email/password login as a fallback.</li>
+</ul>
+<h2>"You don't have access" or blank page</h2>
+<p>This may mean your account was removed, your school's subscription is suspended, or there's a caching issue. Try an incognito/private window. If that works, clear your browser cache.</p>
+<h2>Still locked out?</h2>
+<p>Email support@kaynos.net with your name, school name, and email address.</p>
+`},
+
+"email-issues": {
+  title: "Email and notification issues",
+  section: "Troubleshooting",
+  content: `
+<h1>Email and notification issues</h1>
+<h2>Not receiving any emails</h2>
+<ol>
+<li><strong>Check spam and junk folders</strong> — the most common cause.</li>
+<li><strong>Add the sender to your contacts</strong> to prevent future filtering.</li>
+<li><strong>Check your notification setting</strong> in Profile — make sure it's on.</li>
+<li><strong>Verify your email address</strong> on your Kaynos profile.</li>
+</ol>
+<h2>Invitation email not received</h2>
+<ul>
+<li>Ask the person to check spam.</li>
+<li>Verify the email address was entered correctly.</li>
+<li>Try resending from the Admin area.</li>
+<li>Some corporate/school email systems aggressively filter — consider manually setting up the account as a workaround.</li>
+</ul>
+<h2>Getting too many notifications</h2>
+<p>Go to <strong>Profile</strong> → toggle <strong>Email Notifications</strong> off. This stops session and class emails while keeping critical account emails active.</p>
+`},
+
+performance: {
+  title: "Performance and loading",
+  section: "Troubleshooting",
+  content: `
+<h1>Performance and loading</h1>
+<h2>Pages load slowly</h2>
+<ol>
+<li><strong>Check your internet</strong> — Kaynos works best with at least 5 Mbps download.</li>
+<li><strong>Clear your browser cache</strong> for app.kaynos.net.</li>
+<li><strong>Try a different browser</strong> — Chrome and Firefox perform best.</li>
+<li><strong>Disable browser extensions</strong> — Ad blockers can interfere.</li>
+<li><strong>Close other tabs</strong> to free up memory.</li>
+</ol>
+<h2>The app looks broken or unstyled</h2>
+<p>Usually means cached CSS is outdated. Hard refresh with <strong>Ctrl+Shift+R</strong> (Windows/Linux) or <strong>Cmd+Shift+R</strong> (Mac).</p>
+<h2>Error messages</h2>
+<ul>
+<li>Try refreshing the page — transient errors often resolve themselves.</li>
+<li>Check <strong>status.kaynos.com</strong> for known outages.</li>
+<li>If the error persists, email support@kaynos.net with a screenshot and what you were doing.</li>
+</ul>
+`},
+
+mobile: {
+  title: "Mobile device tips",
+  section: "Troubleshooting",
+  content: `
+<h1>Mobile device tips</h1>
+<p>Kaynos works in mobile browsers — no app download needed.</p>
+<h2>Recommended browsers</h2>
+<ul>
+<li><strong>iPhone/iPad:</strong> Safari or Chrome</li>
+<li><strong>Android:</strong> Chrome or Firefox</li>
+</ul>
+<h2>Uploading from mobile</h2>
+<p>Tap the upload zone and select a video from your camera roll. <strong>Important:</strong> Keep the screen on and the browser tab active during upload — mobile browsers may pause background network activity.</p>
+<h2>Playback tips</h2>
+<ul>
+<li>Tap the video to play/pause. Controls auto-hide after 3 seconds.</li>
+<li>Rotate to <strong>landscape</strong> for the best viewing experience.</li>
+<li>All player features (speed, notes, timeline) work on mobile.</li>
+</ul>
+<h2>Add to home screen</h2>
+<p>For quick access, add app.kaynos.net to your home screen:</p>
+<ul>
+<li><strong>iOS:</strong> Tap the share icon → "Add to Home Screen"</li>
+<li><strong>Android:</strong> Tap the menu → "Add to Home Screen"</li>
+</ul>
+<h2>Known limitations</h2>
+<ul>
+<li>Very large files (3+ GB) may struggle on older phones due to memory.</li>
+<li>Notes panel works best in landscape on smaller screens.</li>
+</ul>
+`},
+
+faq: {
+  title: "Frequently asked questions",
+  section: "FAQ",
+  content: `
+<h1>Frequently asked questions</h1>
+<h2>What is Kaynos?</h2>
+<p>Kaynos is a video review platform for martial arts schools. Instructors record training, upload video, add timestamped notes, and students review their footage on their own time.</p>
+<h2>Do I need to install anything?</h2>
+<p>No. Kaynos runs entirely in your browser.</p>
+<h2>What martial arts does Kaynos support?</h2>
+<p>Kaynos is built with BJJ in mind, but works for any discipline that benefits from video review — wrestling, judo, MMA, Muay Thai, and more.</p>
+<hr>
+<h2>How many people can use my account?</h2>
+<p>No limit. Add as many instructors and students as you need.</p>
+<h2>Can students see each other's private sessions?</h2>
+<p>No. Sessions are private between the assigned student and instructor. Classes are visible to all school members.</p>
+<h2>Can students download videos?</h2>
+<p>No. Videos are streamed through temporary, expiring URLs. There is no download button.</p>
+<hr>
+<h2>How much does Kaynos cost?</h2>
+<p><strong>$49/month per school.</strong> Includes everything — unlimited members, videos, and storage.</p>
+<h2>Is there a free trial?</h2>
+<p>Contact support@kaynos.net to discuss a trial period.</p>
+<h2>Can I cancel anytime?</h2>
+<p>Yes. Cancellation takes effect at the end of your billing cycle. No long-term contracts.</p>
+<h2>What happens if my payment fails?</h2>
+<p>Stripe retries up to 3 times over 10 days. If it still fails, your account may be suspended. Data is retained for 30 days.</p>
+<hr>
+<h2>Is my data encrypted?</h2>
+<p>All data is transmitted over HTTPS. Passwords are cryptographically hashed and never stored in plain text.</p>
+<h2>What about video of minors?</h2>
+<p>Schools are responsible for obtaining parental or guardian consent before recording and uploading video of anyone under 18, per our Terms of Service.</p>
+<h2>What browsers are supported?</h2>
+<p>Chrome, Safari, Firefox, and Edge — all current versions. Chrome provides the best experience.</p>
+<h2>I found a bug. How do I report it?</h2>
+<p>Email support@kaynos.net with what happened, what you expected, and a screenshot if possible. We typically respond within a few hours.</p>
+`}
+};
+
+const NAV = [
+{section:"",pages:["welcome"]},
+{section:"Getting Started",pages:["setup","inviting-members","first-upload","roles"]},
+{section:"Video",pages:["uploading","playback","formats","storage"]},
+{section:"Sessions & Classes",pages:["creating-sessions","creating-classes","notes","tags","progress"]},
+{section:"Account Management",pages:["managing-members","profile","google-signin","notifications"]},
+{section:"Billing",pages:["subscription","payment","cancellation"]},
+{section:"Troubleshooting",pages:["upload-issues","playback-issues","login-issues","email-issues","performance","mobile"]},
+{section:"FAQ",pages:["faq"]}
+];
+
+const allPageKeys = NAV.flatMap(g => g.pages);
+
+function buildSidebar(){
+const sb = document.getElementById('sidebar');
+let html = '';
+NAV.forEach(g => {
+  if(g.section) html += `<div class="sidebar-section"><div class="sidebar-section-title">${g.section}</div>`;
+  else html += `<div class="sidebar-section">`;
+  g.pages.forEach(p => {
+    html += `<a class="sidebar-link" data-page="${p}" onclick="navigate('${p}')">${PAGES[p].title}</a>`;
+  });
+  html += '</div>';
+});
+sb.innerHTML = html;
+}
+
+function navigate(pageId){
+const page = PAGES[pageId];
+if(!page) return;
+document.getElementById('pageContent').innerHTML = page.content;
+document.querySelectorAll('.sidebar-link').forEach(l => l.classList.toggle('active', l.dataset.page === pageId));
+window.scrollTo(0,0);
+history.pushState({page:pageId}, '', '#'+pageId);
+document.title = page.title + ' — Kaynos Docs';
+closeSidebar();
+document.getElementById('searchInput').value = '';
+document.getElementById('searchResults').classList.remove('active');
+}
+
+function toggleSidebar(){
+document.getElementById('sidebar').classList.toggle('open');
+document.getElementById('overlay').classList.toggle('active');
+}
+function closeSidebar(){
+document.getElementById('sidebar').classList.remove('open');
+document.getElementById('overlay').classList.remove('active');
+}
+
+function handleSearch(q){
+const sr = document.getElementById('searchResults');
+if(!q || q.length < 2){sr.classList.remove('active');sr.innerHTML='';return}
+const lower = q.toLowerCase();
+const results = [];
+for(const[id,page] of Object.entries(PAGES)){
+  const text = page.content.replace(/<[^>]+>/g,' ').toLowerCase();
+  const idx = text.indexOf(lower);
+  if(idx !== -1 || page.title.toLowerCase().includes(lower)){
+    let snippet = '';
+    if(idx !== -1){
+      const start = Math.max(0,idx-40);
+      const end = Math.min(text.length,idx+q.length+60);
+      snippet = (start>0?'...':'')+text.slice(start,end).replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'),m=>`<mark>${m}</mark>`)+(end<text.length?'...':'');
+    }
+    results.push({id,title:page.title,section:page.section,snippet});
+  }
+}
+if(results.length===0){
+  sr.innerHTML='<div class="search-empty">No results found</div>';
+} else {
+  sr.innerHTML=results.slice(0,8).map(r=>`<div class="search-result" onclick="navigate('${r.id}')"><div class="sr-title">${r.title}</div>${r.section?`<div class="sr-section">${r.section}</div>`:''}${r.snippet?`<div class="sr-snippet">${r.snippet}</div>`:''}</div>`).join('');
+}
+sr.classList.add('active');
+}
+
+document.addEventListener('click',e=>{
+if(!e.target.closest('.header-search'))document.getElementById('searchResults').classList.remove('active');
+});
+document.addEventListener('keydown',e=>{
+if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();document.getElementById('searchInput').focus()}
+});
+
+window.addEventListener('popstate',e=>{
+if(e.state&&e.state.page)navigate(e.state.page);
+else navigate('welcome');
+});
+
+buildSidebar();
+const hash = location.hash.slice(1);
+navigate(hash && PAGES[hash] ? hash : 'welcome');
+</script>
+</body>
+</html>
