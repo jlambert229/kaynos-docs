@@ -161,7 +161,7 @@ welcome: {
 <a class="quick-link" onclick="navigate('upload-issues')"><div class="ql-title">Video upload problems</div><div class="ql-desc">Troubleshoot upload issues</div></a>
 <a class="quick-link" onclick="navigate('playback-issues')"><div class="ql-title">Video playback problems</div><div class="ql-desc">Fix video that won't play</div></a>
 <a class="quick-link" onclick="navigate('inviting-members')"><div class="ql-title">Inviting your team</div><div class="ql-desc">Add instructors and students</div></a>
-<a class="quick-link" onclick="navigate('subscription')"><div class="ql-title">Subscription &amp; pricing</div><div class="ql-desc">Understand your bill</div></a>
+<a class="quick-link" onclick="navigate('faq')"><div class="ql-title">FAQ</div><div class="ql-desc">Common questions answered</div></a>
 </div>
 <h2>Need more help?</h2>
 <p>If you can't find what you're looking for, reach out to us directly:</p>
@@ -177,7 +177,7 @@ setup: {
   section: "Getting Started",
   content: `
 <h1>Setting up your school</h1>
-<p>When you subscribe to Kaynos, our team creates your school account and sends login credentials to the email address you provided. Here's what to do once you're in.</p>
+<p>When you sign up for Kaynos, your school account is created and login credentials are sent to the email address you provided. Here's what to do once you're in.</p>
 <h2>First login</h2>
 <ol>
 <li>Open the link in your welcome email or go to <strong>app.kaynos.net</strong>.</li>
@@ -201,27 +201,33 @@ setup: {
   section: "Getting Started",
   content: `
 <h1>Inviting your team</h1>
-<p>Kaynos uses an invitation system to add instructors and students to your school. Only School Admins and Instructors can send invitations.</p>
-<h2>How to invite someone</h2>
+<p>Kaynos uses an invitation system to add members to your school. Admins and Instructors can add members, but Instructors can only add students.</p>
+<h2>How to add someone</h2>
 <ol>
-<li>Go to <strong>Admin</strong> in the sidebar.</li>
-<li>Click <strong>Add Member</strong>.</li>
-<li>Enter the person's <strong>name</strong>, <strong>email address</strong>, and select their <strong>role</strong> (instructor or student).</li>
+<li>Go to <strong>Admin</strong> in the sidebar (admins) or <strong>Students</strong> (instructors).</li>
+<li>Click <strong>Add Member</strong> or <strong>Add Student</strong>.</li>
+<li>Enter the person's <strong>name</strong> and <strong>email address</strong>. Admins also select a <strong>role</strong> (instructor or student).</li>
 <li>Click <strong>Send Invite</strong>.</li>
 </ol>
-<p>The person will receive an email with a link to set up their account and create a password. If they don't see the email, ask them to check their spam or junk folder.</p>
-<h2>Roles you can assign</h2>
+<p>The person will receive an email with a temporary password to log in. If they don't see the email, ask them to check their spam or junk folder.</p>
+<h2>Who can add whom</h2>
+<table><thead><tr><th>Your role</th><th>Can add</th></tr></thead><tbody>
+<tr><td><strong>Admin</strong></td><td>Instructors and students</td></tr>
+<tr><td><strong>Instructor</strong></td><td>Students only</td></tr>
+<tr><td><strong>Student</strong></td><td>Cannot add members</td></tr>
+</tbody></table>
+<h2>Roles</h2>
 <table><thead><tr><th>Role</th><th>What they can do</th></tr></thead><tbody>
 <tr><td><strong>Admin</strong></td><td>Everything an instructor can do, plus manage members, invite users, and access school settings.</td></tr>
 <tr><td><strong>Instructor</strong></td><td>Create sessions and classes, upload videos, add notes, view all students and their progress.</td></tr>
 <tr><td><strong>Student</strong></td><td>View assigned sessions and school classes, watch videos, add notes, and track progress.</td></tr>
 </tbody></table>
 <h2>Resending an invitation</h2>
-<p>If someone didn't receive their invite or their link expired, go to <strong>Admin</strong> → member roster, find the person, and click <strong>Resend Invite</strong>.</p>
+<p>If someone didn't receive their invite, go to <strong>Admin</strong>, find the person in the member roster, and click <strong>Reset Password</strong> to send them a new temporary password email.</p>
 <h2>Tips</h2>
 <ul>
-<li>Invite instructors first so they can start creating sessions before students arrive.</li>
-<li>Use the student's actual email address — they'll need it to log in.</li>
+<li>Add instructors first so they can start creating sessions before students arrive.</li>
+<li>Use the person's actual email address - they'll need it to log in.</li>
 <li>There's no limit on the number of members you can add to your school.</li>
 </ul>
 `},
@@ -231,11 +237,11 @@ setup: {
   section: "Getting Started",
   content: `
 <h1>Your first video upload</h1>
-<p>Uploading a training video to Kaynos takes just a few steps. Videos are attached to either a <strong>session</strong> (one-on-one) or a <strong>class</strong> (group instruction).</p>
-<h2>Step by step</h2>
+<p>Adding a training video to Kaynos takes just a few steps. Videos are attached to either a <strong>session</strong> (one-on-one) or a <strong>class</strong> (group instruction). You can upload a file directly or link a Vimeo video.</p>
+<h2>Uploading a file</h2>
 <ol>
-<li>Create a new session or class from the sidebar.</li>
-<li>On the creation form, you'll see a <strong>drag-and-drop upload zone</strong> at the bottom.</li>
+<li>Create a new session or class and select <strong>Upload</strong> as the video source.</li>
+<li>You'll see a <strong>drag-and-drop upload zone</strong>.</li>
 <li>Either drag your video file onto the zone or click it to browse your files.</li>
 <li>The upload begins immediately with a progress bar, speed readout, and time estimate.</li>
 <li>Once complete, a green checkmark confirms success.</li>
@@ -256,6 +262,8 @@ setup: {
 <tr><td>MKV</td><td>.mkv</td><td>Supported but less common</td></tr>
 </tbody></table>
 <p>Maximum file size: <strong>5 GB</strong> per video.</p>
+<h2>Using a Vimeo link instead</h2>
+<p>If your video is already on Vimeo, select <strong>Vimeo</strong> as the video source and paste the Vimeo URL or video ID. The video will be embedded directly in the session or class.</p>
 <h2>Tips for recording</h2>
 <ul>
 <li><strong>Landscape orientation</strong> works best for training footage.</li>
@@ -286,7 +294,7 @@ uploading: {
   section: "Video",
   content: `
 <h1>Uploading videos</h1>
-<p>Videos are attached to sessions and classes. You can upload during creation or add a video to an existing session or class.</p>
+<p>Videos are attached to sessions and classes. When creating a session or class, choose <strong>Upload</strong> to upload a file directly, <strong>Vimeo</strong> to link an existing Vimeo video, or <strong>Notes Only</strong> to skip video entirely.</p>
 <h2>How uploads work</h2>
 <p>Kaynos uses <strong>multipart uploads</strong> for large files. Your video is automatically split into chunks and uploaded in parallel using 6 concurrent connections. If any chunk fails, it retries automatically up to 3 times with exponential backoff.</p>
 <h2>Upload requirements</h2>
@@ -313,11 +321,11 @@ playback: {
 <p>The progress bar shows colored markers for each timestamped note. Hover to preview the note text, click to jump directly to that moment.</p>
 <h2>Adding notes while watching</h2>
 <ol>
-<li>Pause the video at the moment you want to annotate.</li>
+<li>Pause the video at the moment you want to annotate (or press <strong>N</strong>).</li>
 <li>Click <strong>Add Note</strong> on the player controls.</li>
 <li>Type your note and click <strong>Save</strong>.</li>
 </ol>
-<p>The note is automatically timestamped to the current playback position.</p>
+<p>The note is automatically timestamped to the current playback position. You can also use keyboard shortcuts: <strong>Space</strong> or <strong>K</strong> to play/pause, <strong>J</strong>/<strong>L</strong> to skip, and <strong>F</strong> for fullscreen.</p>
 <h2>Watch progress</h2>
 <p>Kaynos tracks where you left off. When you return to a video, it resumes from your last position. Completion status is also tracked so instructors can see who has reviewed their footage.</p>
 `},
@@ -355,11 +363,7 @@ storage: {
 <h2>Where videos are stored</h2>
 <p>All videos are stored securely in Backblaze B2 cloud object storage, delivered through Cloudflare's CDN for fast playback worldwide. Videos are stored in the United States.</p>
 <h2>How long are videos kept?</h2>
-<p>Videos remain available for as long as your subscription is active. There is no automatic expiration or deletion.</p>
-<h2>What happens if I cancel?</h2>
-<p>After cancellation, your data is retained for <strong>30 days</strong>. During this window, contact support@kaynos.net to request a data export. After 30 days, all videos and data are permanently deleted.</p>
-<h2>Storage costs</h2>
-<p>Video storage is included in your subscription. No per-gigabyte charges, overage fees, or bandwidth limits. Your monthly subscription covers everything.</p>
+<p>Videos remain available for as long as your account is active. There is no automatic expiration or deletion.</p>
 <h2>Data security</h2>
 <ul>
 <li>Videos are transmitted over encrypted connections (TLS/HTTPS).</li>
@@ -377,9 +381,9 @@ storage: {
 <h2>How to create a session</h2>
 <ol>
 <li>From the sidebar, click <strong>Sessions</strong> then <strong>New Session</strong>.</li>
+<li>Choose a video source: <strong>Upload</strong> (upload a file), <strong>Vimeo</strong> (paste a Vimeo URL or ID), or <strong>Notes Only</strong> (no video).</li>
 <li>Fill in the title, date, and select the student from your roster.</li>
 <li>Optionally add tags for organization (e.g., "guard," "takedowns").</li>
-<li>Optionally upload a video.</li>
 <li>Click <strong>Create Session</strong>.</li>
 </ol>
 <h2>Who can see sessions?</h2>
@@ -395,9 +399,9 @@ storage: {
 <h2>How to create a class</h2>
 <ol>
 <li>From the sidebar, click <strong>Classes</strong> then <strong>New Class</strong>.</li>
+<li>Choose a video source: <strong>Upload</strong> (upload a file), <strong>Vimeo</strong> (paste a Vimeo URL or ID), or <strong>Notes Only</strong> (no video).</li>
 <li>Fill in the title, date, and optionally a description.</li>
 <li>Add tags for organization.</li>
-<li>Optionally upload a video.</li>
 <li>Click <strong>Create Class</strong>.</li>
 </ol>
 <h2>Who can see classes?</h2>
@@ -409,28 +413,23 @@ notes: {
   section: "Sessions & Classes",
   content: `
 <h1>Notes and timestamps</h1>
-<p>Notes let instructors annotate specific moments in a training video so students can jump directly to key techniques, drills, and teaching points.</p>
-<h2>Note types</h2>
-<table><thead><tr><th>Type</th><th>Purpose</th></tr></thead><tbody>
-<tr><td><strong>Note</strong></td><td>General observations and commentary</td></tr>
-<tr><td><strong>Key</strong></td><td>Important techniques or concepts to remember</td></tr>
-<tr><td><strong>Drill</strong></td><td>Drills the student should practice</td></tr>
-<tr><td><strong>Question</strong></td><td>Student questions for the instructor</td></tr>
-</tbody></table>
+<p>Notes let instructors and students annotate specific moments in a training video. Click a note to jump directly to that point in the video.</p>
 <h2>Adding a note from the video player</h2>
 <ol>
-<li>Pause the video at the moment you want to annotate.</li>
+<li>Pause the video at the moment you want to annotate (or press <strong>N</strong> on your keyboard).</li>
 <li>Click <strong>Add Note</strong> on the player controls.</li>
-<li>Select the type, write your text, and click <strong>Save</strong>.</li>
+<li>Write your text and click <strong>Save</strong>.</li>
 </ol>
-<p>The note is automatically timestamped to the exact second you paused at. On the timeline, each note appears as a colored marker — click to jump directly to that moment.</p>
+<p>The note is automatically timestamped to the exact second you paused at. On the timeline, each note appears as a marker - click to jump directly to that moment.</p>
+<h2>Filtering notes</h2>
+<p>The notes panel lets you filter by <strong>All</strong>, <strong>Coach</strong> (instructor notes only), or <strong>Mine</strong> (your own notes). This makes it easy to focus on instructor feedback or your own observations.</p>
 <h2>Editing and deleting</h2>
 <p>Instructors can edit or delete any note. Students can only edit or delete their own notes.</p>
 <h2>Tips</h2>
 <ul>
-<li>Use <strong>Key</strong> notes for core techniques — they stand out in the notes panel.</li>
-<li>Encourage students to use <strong>Question</strong> notes to flag things for their next lesson.</li>
 <li>Keep notes concise. "Underhook to single leg at 2:15" is more useful than a paragraph.</li>
+<li>Students can add notes to flag questions for their next lesson.</li>
+<li>Use the Coach filter to quickly review all instructor feedback.</li>
 </ul>
 `},
 
@@ -483,7 +482,7 @@ progress: {
   section: "Account Management",
   content: `
 <h1>Managing members</h1>
-<p>School Admins and Instructors can manage the roster from the Admin area.</p>
+<p>School Admins can manage the full roster from the <strong>Admin</strong> area. Instructors can add students from the <strong>Students</strong> page.</p>
 <h2>Adding members</h2>
 <p>See <a onclick="navigate('inviting-members')">Inviting your team</a> for step-by-step instructions.</p>
 <h2>Changing a member's role</h2>
@@ -492,7 +491,7 @@ progress: {
 <p>Go to <strong>Admin</strong>, find the member, and click <strong>Remove Member</strong>. Removal is immediate — the person can no longer log in. Their previously created notes remain in the system.</p>
 <h2>Common questions</h2>
 <p><strong>Can a member belong to multiple schools?</strong> Not with the same email address. Each account is tied to a single school.</p>
-<p><strong>Is there a member limit?</strong> No. Add as many members as you need — all included in your subscription.</p>
+<p><strong>Is there a member limit?</strong> No. Add as many members as you need.</p>
 <p><strong>Can students invite other students?</strong> No. Only Admins and Instructors can send invitations.</p>
 `},
 
@@ -513,32 +512,6 @@ profile: {
 <li>Click <strong>Update Password</strong>.</li>
 </ol>
 <p>If you forget your password, contact your School Admin or email support@kaynos.net for a reset.</p>
-<h2>Google sign-in users</h2>
-<p>If you signed up using Google, your authentication is handled by Google. Update your credentials through your Google account settings.</p>
-`},
-
-"google-signin": {
-  title: "Google sign-in",
-  section: "Account Management",
-  content: `
-<h1>Google sign-in</h1>
-<p>Kaynos supports signing in with your Google account for a faster, passwordless login.</p>
-<h2>How it works</h2>
-<p>Click <strong>Sign in with Google</strong> on the login page. Google's sign-in flow handles authentication. No password is stored on Kaynos for Google-authenticated users.</p>
-<h2>What Kaynos receives from Google</h2>
-<ul>
-<li>Your <strong>name</strong> (used as your display name).</li>
-<li>Your <strong>email address</strong> (used to identify your account).</li>
-<li>Your <strong>Google ID</strong> (a unique identifier, never displayed).</li>
-</ul>
-<p>Kaynos does not access your Google Drive, Calendar, contacts, or any other Google service.</p>
-<h2>Troubleshooting</h2>
-<ul>
-<li>Make sure you're using the same Google email associated with your Kaynos account.</li>
-<li>Enable third-party cookies in your browser (required for OAuth).</li>
-<li>Try clearing your browser cache.</li>
-<li>If it still doesn't work, log in with email and password instead.</li>
-</ul>
 `},
 
 notifications: {
@@ -561,57 +534,6 @@ notifications: {
 <li>Ensure notifications are toggled on.</li>
 <li>Contact support@kaynos.net if the issue persists.</li>
 </ol>
-`},
-
-subscription: {
-  title: "Subscription and pricing",
-  section: "Billing",
-  content: `
-<h1>Subscription and pricing</h1>
-<h2>Current pricing</h2>
-<p>Kaynos is <strong>$49 per month per school</strong>. This flat rate includes unlimited instructors, students, sessions, classes, video uploads, storage, and playback. No tiered plans or locked features.</p>
-<h2>How billing works</h2>
-<ul>
-<li>Billed <strong>monthly in advance</strong> on the same day each month.</li>
-<li>Processed through <strong>Stripe</strong>, a PCI-compliant payment processor.</li>
-<li>Kaynos does not store your credit card information.</li>
-<li>You'll receive an email receipt from Stripe after each payment.</li>
-</ul>
-<h2>Failed payments</h2>
-<p>If a payment fails, Stripe retries up to 3 times over 10 days. If payment remains unsuccessful, your school's access may be suspended. Suspended schools retain data for 30 days.</p>
-`},
-
-payment: {
-  title: "Updating payment info",
-  section: "Billing",
-  content: `
-<h1>Updating payment info</h1>
-<p>Your payment information is managed through Stripe's secure portal.</p>
-<h2>Updating your card</h2>
-<p>Log in as a School Admin, navigate to billing settings, and click <strong>Manage Billing</strong> to open the Stripe customer portal where you can update your card. Alternatively, email support@kaynos.net for a direct link.</p>
-<h2>Accepted payment methods</h2>
-<p>Visa, Mastercard, American Express, Discover, and digital wallets (Apple Pay, Google Pay) where available.</p>
-<h2>Receipts</h2>
-<p>Stripe automatically sends a receipt after each payment. For past receipts, contact support.</p>
-`},
-
-cancellation: {
-  title: "Cancellation and data export",
-  section: "Billing",
-  content: `
-<h1>Cancellation and data export</h1>
-<h2>How to cancel</h2>
-<p>Contact support@kaynos.net with your school name and account email. Cancellation takes effect at the end of your current billing cycle — you retain full access until then.</p>
-<h2>What happens to your data</h2>
-<ul>
-<li><strong>30-day retention</strong> — All data is retained for 30 days after your subscription ends.</li>
-<li><strong>Data export</strong> — During this window, request a full export by emailing support.</li>
-<li><strong>Permanent deletion</strong> — After 30 days, everything is permanently deleted from all systems.</li>
-</ul>
-<h2>Reactivating</h2>
-<p>Within the 30-day window, contact support to reactivate with all data intact. After 30 days, you'd need to start fresh.</p>
-<h2>Refunds</h2>
-<p>Kaynos does not offer partial-month refunds. Access continues through the end of your paid period. For billing errors, contact support and we'll work with you.</p>
 `},
 
 "upload-issues": {
@@ -689,15 +611,8 @@ cancellation: {
 </ul>
 <h2>Account locked or rate limited</h2>
 <p>For security, Kaynos limits login attempts from the same IP. If you've tried too many times, wait 15-30 minutes and try again, or contact support.</p>
-<h2>Google sign-in not working</h2>
-<ul>
-<li>Use the same Google email associated with your Kaynos account.</li>
-<li>Enable third-party cookies in your browser.</li>
-<li>Clear your browser cache and cookies.</li>
-<li>Try email/password login as a fallback.</li>
-</ul>
 <h2>"You don't have access" or blank page</h2>
-<p>This may mean your account was removed, your school's subscription is suspended, or there's a caching issue. Try an incognito/private window. If that works, clear your browser cache.</p>
+<p>This may mean your account was removed or there's a caching issue. Try an incognito/private window. If that works, clear your browser cache.</p>
 <h2>Still locked out?</h2>
 <p>Email support@kaynos.net with your name, school name, and email address.</p>
 `},
@@ -742,8 +657,7 @@ performance: {
 <p>Usually means cached CSS is outdated. Hard refresh with <strong>Ctrl+Shift+R</strong> (Windows/Linux) or <strong>Cmd+Shift+R</strong> (Mac).</p>
 <h2>Error messages</h2>
 <ul>
-<li>Try refreshing the page — transient errors often resolve themselves.</li>
-<li>Check <strong>status.kaynos.com</strong> for known outages.</li>
+<li>Try refreshing the page - transient errors often resolve themselves.</li>
 <li>If the error persists, email support@kaynos.net with a screenshot and what you were doing.</li>
 </ul>
 `},
@@ -799,15 +713,6 @@ faq: {
 <h2>Can students download videos?</h2>
 <p>No. Videos are streamed through temporary, expiring URLs. There is no download button.</p>
 <hr>
-<h2>How much does Kaynos cost?</h2>
-<p><strong>$49/month per school.</strong> Includes everything — unlimited members, videos, and storage.</p>
-<h2>Is there a free trial?</h2>
-<p>Contact support@kaynos.net to discuss a trial period.</p>
-<h2>Can I cancel anytime?</h2>
-<p>Yes. Cancellation takes effect at the end of your billing cycle. No long-term contracts.</p>
-<h2>What happens if my payment fails?</h2>
-<p>Stripe retries up to 3 times over 10 days. If it still fails, your account may be suspended. Data is retained for 30 days.</p>
-<hr>
 <h2>Is my data encrypted?</h2>
 <p>All data is transmitted over HTTPS. Passwords are cryptographically hashed and never stored in plain text.</p>
 <h2>What about video of minors?</h2>
@@ -824,8 +729,7 @@ const NAV = [
 {section:"Getting Started",pages:["setup","inviting-members","first-upload","roles"]},
 {section:"Video",pages:["uploading","playback","formats","storage"]},
 {section:"Sessions & Classes",pages:["creating-sessions","creating-classes","notes","tags","progress"]},
-{section:"Account Management",pages:["managing-members","profile","google-signin","notifications"]},
-{section:"Billing",pages:["subscription","payment","cancellation"]},
+{section:"Account Management",pages:["managing-members","profile","notifications"]},
 {section:"Troubleshooting",pages:["upload-issues","playback-issues","login-issues","email-issues","performance","mobile"]},
 {section:"FAQ",pages:["faq"]}
 ];
