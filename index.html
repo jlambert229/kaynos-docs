@@ -1190,28 +1190,58 @@
         section: "FAQ",
         content: `
 <h1>Frequently asked questions</h1>
-<h2>What is Kaynos?</h2>
-<p>Video review for schools: coaches post footage + timestamped notes; students watch on their schedule.</p>
-<h2>Install?</h2>
-<p>Nope — browser only.</p>
-<h2>Which arts?</h2>
-<p>BJJ-first, but anything that benefits from film: wrestling, judo, MMA, striking, etc.</p>
+<p>Quick answers about Kaynos for school administrators, coaches, and members. For step-by-step help, use the sections in the sidebar or search above.</p>
+
+<h2>About the product</h2>
+
+<h3>What is Kaynos?</h3>
+<p>Kaynos is a video review and training operations platform built for martial arts schools and similar academies. Instructors upload session or class video (or link Vimeo), add timestamped notes, and assign work to students, who review on their own time in the browser.</p>
+
+<h3>Do I need to install an app?</h3>
+<p>No. Kaynos runs as a responsive web application at <strong>app.kaynos.net</strong>. Use a current desktop or mobile browser. There is no separate mobile app to download.</p>
+
+<h3>Which disciplines or sports does Kaynos support?</h3>
+<p>The product was designed with Brazilian Jiu-Jitsu workflows in mind, but it fits any coaching context where recorded training and structured review matter, including wrestling, judo, mixed martial arts, striking arts, and related programs.</p>
+
 <hr>
-<h2>Headcount limit?</h2>
-<p>None.</p>
-<h2>Students peeking other students’ sessions?</h2>
-<p>No — sessions are pairwise between coach and that student. Classes are school-wide.</p>
-<h2>Download video?</h2>
-<p>No download button; streams use short-lived URLs.</p>
+
+<h2>Organization, roles, and content</h2>
+
+<h3>Is there a limit on instructors or students?</h3>
+<p>No. The platform does not enforce a fixed seat count. Add the roster your school needs.</p>
+
+<h3>Can one student see another student’s private session?</h3>
+<p>No. A <strong>session</strong> is visible only to the assigned student, the instructor who created it, and school administrators. <strong>Classes</strong> are visible to all members of the school so group instruction can be shared broadly.</p>
+
+<h3>Can students or parents download lesson video as a file?</h3>
+<p>No. Playback uses streaming with short-lived, presigned URLs. There is no end-user download control in the product; this reduces uncontrolled redistribution of school content.</p>
+
 <hr>
-<h2>Encryption?</h2>
-<p>HTTPS on the wire; passwords hashed, not stored plain.</p>
-<h2>Kids on camera?</h2>
-<p>Schools handle consent for minors per Terms of Service.</p>
-<h2>Browsers?</h2>
-<p>Current Chrome, Safari, Firefox, Edge — Chrome tends to be smoothest.</p>
-<h2>Bug report?</h2>
-<p>support@kaynos.net — what broke, what you expected, screenshot if you can.</p>
+
+<h2>Security, privacy, and compliance</h2>
+
+<h3>How is data protected in transit and at rest?</h3>
+<p>Traffic between browsers and Kaynos uses HTTPS (TLS). Account passwords are stored using standard one-way hashing; they are never kept in plain text. Video is stored in cloud object storage and delivered through a CDN; see <a onclick="navigate('storage')">Video storage and retention</a> for where files live and how long they are kept.</p>
+
+<h3>What about filming athletes who are minors?</h3>
+<p>Each school is responsible for obtaining any required parental or guardian consent and for complying with applicable laws and internal policies before recording or uploading video of anyone under 18. Requirements are summarized in our Terms of Service; when in doubt, consult qualified legal counsel.</p>
+
+<hr>
+
+<h2>Technical requirements</h2>
+
+<h3>Which browsers are supported?</h3>
+<p>We support current versions of Google Chrome, Mozilla Firefox, Apple Safari, and Microsoft Edge. Chrome generally offers the most consistent experience for upload and playback. Keep the browser updated and allow JavaScript for <strong>app.kaynos.net</strong>.</p>
+
+<h3>Does Kaynos offer a public API?</h3>
+<p>Yes. School administrators can issue API tokens for integrations. See <a onclick="navigate('developer-api')">Developer API</a> for authentication, scopes, documentation links, and security practices.</p>
+
+<hr>
+
+<h2>Support and feedback</h2>
+
+<h3>How do I report a problem or request help?</h3>
+<p>Email <strong>support@kaynos.net</strong> with a short description of what occurred, what you expected, your school name, and the browser you used. Screenshots or screen recordings help us reproduce issues quickly. You can also use in-app chat when logged in.</p>
 `},
 
       "developer-api": {
