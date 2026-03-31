@@ -497,12 +497,6 @@
       color: var(--text-primary);
     }
 
-    .hint-icon {
-      font-size: 16px;
-      flex-shrink: 0;
-      margin-top: 2px
-    }
-
     /* QUICK LINKS */
     .quick-links {
       display: grid;
@@ -700,7 +694,7 @@
 <h1>Welcome to Kaynos</h1>
 <p>Kaynos is video review for your school: coaches publish sessions and classes, add timestamped notes, and members watch when it fits their schedule. The product lives at <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>.</p>
 <p>Use the sidebar for topics or search when you know the page you need.</p>
-<div class="hint hint-info"><span class="hint-icon" aria-hidden="true">📌</span><div><strong>This is the help center</strong><br>You are reading the documentation site. Sign in to the app to upload video, manage your school, and use in-app chat support.</div></div>
+<div class="hint hint-info"><div><strong>This is the help center</strong><br>You are reading the documentation site. Sign in to the app to upload video, manage your school, and use in-app chat support.</div></div>
 <h2>Jump in</h2>
 <div class="quick-links">
 <a class="quick-link" onclick="navigate('setup')"><div class="ql-title">Setting up your school</div><div class="ql-desc">First login, password, Admin area</div></a>
@@ -724,7 +718,7 @@
         content: `
 <h1>Setting up your school</h1>
 <p>After signup, login details go to the email you used. Change the temporary password as soon as you are in.</p>
-<div class="hint hint-tip"><span class="hint-icon" aria-hidden="true">💡</span><div>Open the product at <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>. Next steps for invites and roles: <a onclick="navigate('inviting-members')">Inviting your team</a> and <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>
+<div class="hint hint-tip"><div>Open the product at <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>. Next steps for invites and roles: <a onclick="navigate('inviting-members')">Inviting your team</a> and <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>
 <h2>First login</h2>
 <ol>
 <li>Use the welcome email link or go to <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>.</li>
@@ -748,7 +742,7 @@
         content: `
 <h1>Inviting your team</h1>
 <p>Members join by email with a temporary password. Admins may invite coaches or students; instructors may invite students only. That keeps roster control with staff. All of this happens in the app at <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a> under <strong>Admin</strong> or <strong>Students</strong>.</p>
-<div class="hint hint-info"><span class="hint-icon" aria-hidden="true">ℹ️</span><div>Role capabilities are summarized on <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>
+<div class="hint hint-info"><div>Role capabilities are summarized on <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>
 <h2>Send an invite</h2>
 <ol>
 <li><strong>Admin</strong> (for full roster control) or <strong>Students</strong> (instructors adding a student).</li>
@@ -757,7 +751,7 @@
 <li><strong>Send Invite</strong>.</li>
 </ol>
 <p>Delivery is usually quick. If nothing arrives, check spam and the address for typos.</p>
-<div class="hint hint-warning"><span class="hint-icon" aria-hidden="true">⚠️</span><div>Still missing mail? See <a onclick="navigate('email-issues')">Email and notification issues</a> or contact <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</div></div>
+<div class="hint hint-warning"><div>Still missing mail? See <a onclick="navigate('email-issues')">Email and notification issues</a> or contact <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</div></div>
 <h2>Who can invite</h2>
 <table><thead><tr><th>Your role</th><th>Can add</th></tr></thead><tbody>
 <tr><td><strong>Admin</strong></td><td>Coaches and students</td></tr>
@@ -786,7 +780,7 @@
         content: `
 <h1>Your first video upload</h1>
 <p>A <strong>session</strong> is for one assigned student (private lesson, individual review). A <strong>class</strong> is for everyone in the school (group lesson, open mat recap). Upload a file or link Vimeo in either case. Create them in the app after you <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">sign in</a>.</p>
-<div class="hint hint-tip"><span class="hint-icon" aria-hidden="true">💡</span><div>New to the flow? Read <a onclick="navigate('creating-sessions')">Creating a session</a> and <a onclick="navigate('creating-classes')">Creating a class</a>. Limits and codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
+<div class="hint hint-tip"><div>New to the flow? Read <a onclick="navigate('creating-sessions')">Creating a session</a> and <a onclick="navigate('creating-classes')">Creating a class</a>. Limits and codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 <h2>Upload a file</h2>
 <ol>
 <li>New session or class, pick <strong>Upload</strong> for the video source.</li>
@@ -832,7 +826,7 @@
 <p>Students access their assigned sessions and all school classes, watch video, add notes, and track viewing progress. They cannot upload video or view other students’ private sessions.</p>
 <h2>Change a role</h2>
 <p>Admins only: <strong>Admin</strong> → member → role dropdown → save.</p>
-<div class="hint hint-warning"><span class="hint-icon">⚠️</span><div>Downgrading an instructor to a student removes the ability to create sessions or upload video. Existing content remains available. For invite rules, see <a onclick="navigate('inviting-members')">Inviting your team</a>.</div></div>
+<div class="hint hint-warning"><div>Downgrading an instructor to a student removes the ability to create sessions or upload video. Existing content remains available. For invite rules, see <a onclick="navigate('inviting-members')">Inviting your team</a>.</div></div>
 `},
 
       uploading: {
@@ -841,7 +835,7 @@
         content: `
 <h1>Uploading videos</h1>
 <p>Each session or class uses one source: <strong>Upload</strong> (file from your device), <strong>Vimeo</strong> (embedded link), or <strong>Notes Only</strong> (no video). Upload from <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a> when creating or editing a session or class.</p>
-<div class="hint hint-info"><span class="hint-icon" aria-hidden="true">ℹ️</span><div>Format and size caps: <a onclick="navigate('formats')">Supported formats and limits</a>. Stuck? <a onclick="navigate('upload-issues')">Video upload problems</a>.</div></div>
+<div class="hint hint-info"><div>Format and size caps: <a onclick="navigate('formats')">Supported formats and limits</a>. Stuck? <a onclick="navigate('upload-issues')">Video upload problems</a>.</div></div>
 <h2>Large files</h2>
 <p>Big uploads are split into chunks and sent with parallel connections. Failed parts retry automatically (up to three times) with backoff.</p>
 <h2>Requirements</h2>
@@ -854,7 +848,7 @@
 <p>The UI shows percent complete, speed, time remaining, and <strong>Cancel</strong> if you need to stop.</p>
 <h2>Replace a video</h2>
 <p>Open the session or class, remove the current video with <strong>X</strong>, then upload a replacement. The previous file is removed from storage.</p>
-<div class="hint hint-danger"><span class="hint-icon" aria-hidden="true">⛔</span><div><strong>Replacing video is destructive</strong><br>The old file is deleted from storage. There is no undo. Download or archive a copy elsewhere first if you might need it later.</div></div>
+<div class="hint hint-danger"><div><strong>Replacing video is destructive</strong><br>The old file is deleted from storage. There is no undo. Download or archive a copy elsewhere first if you might need it later.</div></div>
 `},
 
       playback: {
@@ -863,7 +857,7 @@
         content: `
 <h1>Watching and reviewing</h1>
 <p>Playback runs in the browser. No separate app install. Open recordings at <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a> (same place you upload).</p>
-<div class="hint hint-tip"><span class="hint-icon" aria-hidden="true">💡</span><div>Problems playing video? Try <a onclick="navigate('playback-issues')">Video playback problems</a>.</div></div>
+<div class="hint hint-tip"><div>Problems playing video? Try <a onclick="navigate('playback-issues')">Video playback problems</a>.</div></div>
 <h2>Speed</h2>
 <p>Use <strong>0.5x</strong> through <strong>2x</strong> for slow analysis or faster skim.</p>
 <h2>Timeline</h2>
@@ -884,7 +878,7 @@
         content: `
 <h1>Supported formats and limits</h1>
 <p>Use common codecs your devices and browsers handle well. When unsure, export to MP4 (H.264 + AAC). Free converters: <a href="https://handbrake.fr" target="_blank" rel="noopener noreferrer">HandBrake</a>, <a href="https://www.videolan.org/vlc/" target="_blank" rel="noopener noreferrer">VLC</a>.</p>
-<div class="hint hint-info"><span class="hint-icon" aria-hidden="true">ℹ️</span><div>Where files live and how long they are kept: <a onclick="navigate('storage')">Video storage and retention</a>.</div></div>
+<div class="hint hint-info"><div>Where files live and how long they are kept: <a onclick="navigate('storage')">Video storage and retention</a>.</div></div>
 <table><thead><tr><th>Format</th><th>Extension</th><th>Support level</th></tr></thead><tbody>
 <tr><td>MP4</td><td>.mp4</td><td>Recommended default</td></tr>
 <tr><td>MOV</td><td>.mov</td><td>Supported</td></tr>
@@ -914,7 +908,7 @@
 <p>Videos are stored in <a href="https://www.backblaze.com/b2/cloud-storage.html" target="_blank" rel="noopener noreferrer">Backblaze B2</a>, delivered through <a href="https://www.cloudflare.com/application-services/products/cdn/" target="_blank" rel="noopener noreferrer">Cloudflare</a> CDN. Infrastructure is US-hosted.</p>
 <h2>Retention</h2>
 <p>Video remains available while your account is active. We do not apply an automatic 90-day deletion policy.</p>
-<div class="hint hint-tip"><span class="hint-icon" aria-hidden="true">💡</span><div>Upload limits and codecs are on <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
+<div class="hint hint-tip"><div>Upload limits and codecs are on <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 <h2>Security</h2>
 <ul>
 <li>HTTPS for data in transit.</li>
@@ -938,7 +932,7 @@
 </ol>
 <h2>Who sees it</h2>
 <p>The assigned student, the creator, and school admins. Other students cannot open someone else’s private session.</p>
-<div class="hint hint-info"><span class="hint-icon" aria-hidden="true">ℹ️</span><div>First upload walkthrough: <a onclick="navigate('first-upload')">Your first video upload</a>. Visibility model: <a onclick="navigate('faq')">FAQ</a> (sessions vs classes).</div></div>
+<div class="hint hint-info"><div>First upload walkthrough: <a onclick="navigate('first-upload')">Your first video upload</a>. Visibility model: <a onclick="navigate('faq')">FAQ</a> (sessions vs classes).</div></div>
 `},
 
       "creating-classes": {
@@ -956,7 +950,7 @@
 </ol>
 <h2>Who sees it</h2>
 <p>All members, instructors, and admins in the school. This visibility is intentional and differs from a private session.</p>
-<div class="hint hint-info"><span class="hint-icon" aria-hidden="true">ℹ️</span><div>Upload options and limits: <a onclick="navigate('uploading')">Uploading videos</a> and <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
+<div class="hint hint-info"><div>Upload options and limits: <a onclick="navigate('uploading')">Uploading videos</a> and <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 `},
 
       notes: {
@@ -981,7 +975,7 @@
 <li>Students can leave questions on their own sessions for follow-up.</li>
 <li>Use the coach filter to review instructor notes across several recordings.</li>
 </ul>
-<div class="hint hint-tip"><span class="hint-icon" aria-hidden="true">💡</span><div>Playback shortcuts and the note workflow also appear under <a onclick="navigate('playback')">Watching and reviewing</a>.</div></div>
+<div class="hint hint-tip"><div>Playback shortcuts and the note workflow also appear under <a onclick="navigate('playback')">Watching and reviewing</a>.</div></div>
 `},
 
       tags: {
@@ -1006,7 +1000,7 @@
 <li>Agree on a small shared vocabulary so the whole staff uses the same tags.</li>
 <li>Tags are shared across the school, not private to one person.</li>
 </ul>
-<div class="hint hint-info"><span class="hint-icon" aria-hidden="true">ℹ️</span><div>Filter lists in the app by tag after you <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">sign in</a>.</div></div>
+<div class="hint hint-info"><div>Filter lists in the app by tag after you <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">sign in</a>.</div></div>
 `},
 
       progress: {
@@ -1027,7 +1021,7 @@
 <p>Instructor and admin views show completion and recency. We do not track fine-grained analytics or viewer heatmaps.</p>
 <h2>What we avoid</h2>
 <p>No invasive watch analytics or third-party ad-style tracking. The product stores only what it needs for resume and high-level completion.</p>
-<div class="hint hint-info"><span class="hint-icon" aria-hidden="true">ℹ️</span><div>Roster and access control: <a onclick="navigate('managing-members')">Managing members</a>.</div></div>
+<div class="hint hint-info"><div>Roster and access control: <a onclick="navigate('managing-members')">Managing members</a>.</div></div>
 `},
 
       "managing-members": {
@@ -1042,7 +1036,7 @@
 <p><strong>Admin</strong> → select the member → role dropdown → save. Changes apply immediately. Details: <a onclick="navigate('roles')">Understanding user roles</a>.</p>
 <h2>Remove access</h2>
 <p><strong>Remove Member</strong> ends their access. Notes they already created remain for history.</p>
-<div class="hint hint-warning"><span class="hint-icon" aria-hidden="true">⚠️</span><div>Removal is immediate. The person loses login access to your school on <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>.</div></div>
+<div class="hint hint-warning"><div>Removal is immediate. The person loses login access to your school on <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>.</div></div>
 <h2>Common questions</h2>
 <p><strong>One person, two schools?</strong> Use a different email address per school. Each school ties to its own account.</p>
 <p><strong>Member limits?</strong> The product does not enforce a headcount cap.</p>
@@ -1066,7 +1060,7 @@
 <li><strong>Update Password</strong>.</li>
 </ol>
 <p>Locked out? Ask a school admin for a reset or email <a href="mailto:support@kaynos.net">support@kaynos.net</a>. Login help: <a onclick="navigate('login-issues')">Login and access issues</a>.</p>
-<div class="hint hint-info"><span class="hint-icon" aria-hidden="true">ℹ️</span><div>Profile lives in the app: <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a> → your name in the sidebar (or menu on mobile).</div></div>
+<div class="hint hint-info"><div>Profile lives in the app: <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a> → your name in the sidebar (or menu on mobile).</div></div>
 `},
 
       notifications: {
@@ -1075,7 +1069,7 @@
         content: `
 <h1>Email notifications</h1>
 <p>Email covers new sessions and classes plus onboarding (invites and temporary passwords), not billing. Toggle preferences under <strong>Profile</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>.</p>
-<div class="hint hint-tip"><span class="hint-icon" aria-hidden="true">💡</span><div>Delivery problems: <a onclick="navigate('email-issues')">Email and notification issues</a>.</div></div>
+<div class="hint hint-tip"><div>Delivery problems: <a onclick="navigate('email-issues')">Email and notification issues</a>.</div></div>
 <h2>Typical messages</h2>
 <ul>
 <li>New session assigned (students)</li>
@@ -1099,7 +1093,7 @@
         content: `
 <h1>Video upload problems</h1>
 <p>Large uploads depend on stable internet and a supported format. Check the items below before assuming an app bug.</p>
-<div class="hint hint-info"><span class="hint-icon" aria-hidden="true">ℹ️</span><div>Reference: <a onclick="navigate('formats')">Supported formats and limits</a>, <a onclick="navigate('uploading')">Uploading videos</a>. Product URL: <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>.</div></div>
+<div class="hint hint-info"><div>Reference: <a onclick="navigate('formats')">Supported formats and limits</a>, <a onclick="navigate('uploading')">Uploading videos</a>. Product URL: <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>.</div></div>
 <h2>Fails right away</h2>
 <p><strong>“Please select a video file”</strong>: the file may not be MP4, MOV, WebM, or MKV. Convert to MP4 with <a href="https://handbrake.fr" target="_blank" rel="noopener noreferrer">HandBrake</a> or <a href="https://www.videolan.org/vlc/" target="_blank" rel="noopener noreferrer">VLC</a>, then try again.</p>
 <p><strong>Too big</strong>: the limit is 5 GB. Trim the clip or export at 1080p; HandBrake’s “Fast 1080p30” preset is a common choice.</p>
@@ -1136,7 +1130,7 @@
         content: `
 <h1>Video playback problems</h1>
 <p>If the player is blank or errors, work through these checks.</p>
-<div class="hint hint-info"><span class="hint-icon" aria-hidden="true">ℹ️</span><div>General playback behavior: <a onclick="navigate('playback')">Watching and reviewing</a>. Codecs: <a onclick="navigate('formats')">Supported formats and limits</a>. App: <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>.</div></div>
+<div class="hint hint-info"><div>General playback behavior: <a onclick="navigate('playback')">Watching and reviewing</a>. Codecs: <a onclick="navigate('formats')">Supported formats and limits</a>. App: <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>.</div></div>
 <h2>Player blank or broken controls</h2>
 <p><strong>Black screen / no controls:</strong> refresh, then hard refresh or clear cache, then try <a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer">Chrome</a>. Confirm the upload finished (not “uploading” or “failed”).</p>
 <p><strong>“Cannot be played”:</strong> often a codec or browser issue. MKV can fail in Safari; try <a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer">Chrome</a> or <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener noreferrer">Firefox</a>, or re-export to MP4 with H.264 video and AAC audio.</p>
@@ -1170,7 +1164,7 @@
 <p>The account may have been removed, or the browser cached an old session. Try a private/incognito window. If that works, clear site data for <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a> in normal mode.</p>
 <h2>Still locked out</h2>
 <p>Email <a href="mailto:support@kaynos.net">support@kaynos.net</a> with your name, school, and email address.</p>
-<div class="hint hint-tip"><span class="hint-icon" aria-hidden="true">💡</span><div>Profile and password changes: <a onclick="navigate('profile')">Profile and password</a>.</div></div>
+<div class="hint hint-tip"><div>Profile and password changes: <a onclick="navigate('profile')">Profile and password</a>.</div></div>
 `},
 
       "email-issues": {
@@ -1179,7 +1173,7 @@
         content: `
 <h1>Email and notification issues</h1>
 <p>Most delivery problems are spam filtering, typos, or disabled notification settings. Preferences are under <strong>Profile</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>.</p>
-<div class="hint hint-info"><span class="hint-icon" aria-hidden="true">ℹ️</span><div>What we send: <a onclick="navigate('notifications')">Email notifications</a>. Invites: <a onclick="navigate('inviting-members')">Inviting your team</a>.</div></div>
+<div class="hint hint-info"><div>What we send: <a onclick="navigate('notifications')">Email notifications</a>. Invites: <a onclick="navigate('inviting-members')">Inviting your team</a>.</div></div>
 <h2>Not receiving messages</h2>
 <ol>
 <li>Check spam or promotions folders (Gmail often sorts automated mail here).</li>
@@ -1226,7 +1220,7 @@
         content: `
 <h1>Mobile device tips</h1>
 <p>Kaynos runs in the mobile browser; you do not need a separate app install from a store. Open <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a> in your phone’s browser.</p>
-<div class="hint hint-info"><span class="hint-icon" aria-hidden="true">ℹ️</span><div>Upload troubleshooting: <a onclick="navigate('upload-issues')">Video upload problems</a>.</div></div>
+<div class="hint hint-info"><div>Upload troubleshooting: <a onclick="navigate('upload-issues')">Video upload problems</a>.</div></div>
 <h2>Supported browsers</h2>
 <ul>
 <li>iPhone / iPad: Safari or Chrome</li>
@@ -1258,7 +1252,7 @@
         content: `
 <h1>Frequently asked questions</h1>
 <p>Kaynos is built for schools that use video review: instructors publish sessions and classes, add timestamped notes, and members watch on their own time. The rest of this help center covers setup and troubleshooting in detail.</p>
-<div class="hint hint-info"><span class="hint-icon" aria-hidden="true">📌</span><div><strong>Quick links</strong><br>App: <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a> · Support: <a href="mailto:support@kaynos.net">support@kaynos.net</a> · Setup: <a onclick="navigate('setup')">Setting up your school</a></div></div>
+<div class="hint hint-info"><div><strong>Quick links</strong><br>App: <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a> · Support: <a href="mailto:support@kaynos.net">support@kaynos.net</a> · Setup: <a onclick="navigate('setup')">Setting up your school</a></div></div>
 
 <h2>What you are signing up for</h2>
 
@@ -1319,12 +1313,12 @@
 <h1>Developer API</h1>
 <p>For schools that want automation beyond the web UI: schedules, exports, or custom reporting. The API is HTTPS-only and scoped to your school’s data. Create and manage tokens under <strong>Admin → Developer API</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a> (admin role required).</p>
 
-<div class="hint hint-info"><span class="hint-icon" aria-hidden="true">📘</span><div><strong>Swagger first</strong><br>Sign in as a <strong>school admin</strong>, then open the in-app docs. The same browser session lets <em>Try it out</em> use your cookies.<br><a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener noreferrer">Swagger UI (production)</a></div></div>
+<div class="hint hint-info"><div><strong>Swagger first</strong><br>Sign in as a <strong>school admin</strong>, then open the in-app docs. The same browser session lets <em>Try it out</em> use your cookies.<br><a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener noreferrer">Swagger UI (production)</a></div></div>
 
-<div class="hint hint-danger"><span class="hint-icon" aria-hidden="true">🔐</span><div><strong>Secrets</strong><br>API tokens are as sensitive as passwords. Store them in a secret manager or env vars; never commit them to git or expose them in frontend code.</div></div>
+<div class="hint hint-danger"><div><strong>Secrets</strong><br>API tokens are as sensitive as passwords. Store them in a secret manager or env vars; never commit them to git or expose them in frontend code.</div></div>
 
 <p>OpenAPI YAML: <a href="https://app.kaynos.net/openapi.yaml" target="_blank" rel="noopener noreferrer">app.kaynos.net/openapi.yaml</a> and mirror <a href="https://raw.githubusercontent.com/jlambert229/kaynos/main/public/openapi.yaml" target="_blank" rel="noopener noreferrer">GitHub raw</a>.</p>
-<div class="hint hint-warning"><span class="hint-icon" aria-hidden="true">⚠️</span><div>If the app URL returns HTML instead of YAML, use the GitHub raw link (some caches or routing edge cases).</div></div>
+<div class="hint hint-warning"><div>If the app URL returns HTML instead of YAML, use the GitHub raw link (some caches or routing edge cases).</div></div>
 
 <h2>Two doors in</h2>
 <ul>
