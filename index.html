@@ -1,156 +1,666 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kaynos — Help Center</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
---bg:#fafaf9;--bg-sidebar:#f5f5f4;--bg-card:#fff;--bg-code:#f5f5f4;
---text:#1c1917;--text-secondary:#78716c;--text-tertiary:#a8a29e;
---border:#e7e5e4;--border-light:#f0efed;
---accent:#1d4ed8;--accent-light:#eff6ff;--accent-dark:#1e3a8a;
---success:#16a34a;--warning:#d97706;--danger:#dc2626;
---font-body:'DM Sans',system-ui,sans-serif;
---font-mono:'JetBrains Mono',monospace;
---sidebar-w:280px;--header-h:56px;
---radius:8px;
-}
-@media(prefers-color-scheme:dark){
-:root{
---bg:#1c1917;--bg-sidebar:#171412;--bg-card:#292524;--bg-code:#292524;
---text:#e7e5e4;--text-secondary:#a8a29e;--text-tertiary:#78716c;
---border:#3f3a36;--border-light:#292524;
---accent:#60a5fa;--accent-light:#1e3a5f;--accent-dark:#93c5fd;
-}
-}
-html{font-size:16px;scroll-behavior:smooth}
-body{font-family:var(--font-body);color:var(--text);background:var(--bg);line-height:1.7;-webkit-font-smoothing:antialiased}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kaynos — Help Center</title>
+  <meta name="theme-color" content="#060609" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
 
-/* HEADER */
-.header{position:fixed;top:0;left:0;right:0;height:var(--header-h);background:var(--bg-sidebar);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;z-index:100;gap:16px}
-.header-logo{font-weight:600;font-size:15px;letter-spacing:-.02em;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px}
-.header-logo span{opacity:.4;font-weight:400}
-.header-search{flex:1;max-width:400px;position:relative}
-.header-search input{width:100%;height:36px;padding:0 12px 0 36px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);font-family:var(--font-body);font-size:14px;color:var(--text);outline:none;transition:border-color .15s}
-.header-search input:focus{border-color:var(--accent)}
-.header-search input::placeholder{color:var(--text-tertiary)}
-.header-search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-tertiary);pointer-events:none}
-.menu-btn{display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:4px}
-.search-results{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);max-height:360px;overflow-y:auto;display:none;box-shadow:0 8px 24px rgba(0,0,0,.12)}
-.search-results.active{display:block}
-.search-result{padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--border-light);font-size:14px}
-.search-result:last-child{border-bottom:none}
-.search-result:hover{background:var(--accent-light)}
-.search-result .sr-title{font-weight:500;margin-bottom:2px}
-.search-result .sr-section{font-size:12px;color:var(--text-tertiary)}
-.search-result .sr-snippet{font-size:13px;color:var(--text-secondary);margin-top:4px}
-.search-result mark{background:var(--accent-light);color:var(--accent);border-radius:2px;padding:0 2px}
-.search-empty{padding:20px 14px;text-align:center;color:var(--text-tertiary);font-size:14px}
+    /* Design tokens aligned with Kaynos app (src/styles.css) */
+    :root {
+      --bg: #060609;
+      --bg-elevated: #141418;
+      --bg-secondary: #1e1e24;
+      --bg-tertiary: #2a2a32;
+      --bg-glass: rgba(20, 20, 24, 0.82);
+      --bg-hover: rgba(245, 245, 247, 0.04);
+      --bg-active: rgba(245, 245, 247, 0.07);
+      --text-primary: #f0f0f4;
+      --text-secondary: rgba(240, 240, 244, 0.68);
+      --text-tertiary: rgba(240, 240, 244, 0.46);
+      --border: rgba(240, 240, 244, 0.08);
+      --border-strong: rgba(240, 240, 244, 0.15);
+      --accent: #3b9eff;
+      --accent-hover: #5aafff;
+      --accent-soft: rgba(59, 158, 255, 0.12);
+      --success: #32D74B;
+      --warning: #FF9F0A;
+      --danger: #FF453A;
+      --font-body: 'Inter', 'Helvetica Neue', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+      --sidebar-w: 280px;
+      --header-h: 56px;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 2px 20px rgba(0, 0, 0, 0.30), 0 0 1px rgba(255, 255, 255, 0.04);
+      --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.40), 0 0 1px rgba(255, 255, 255, 0.05);
+      --leading-normal: 1.5;
+      --leading-relaxed: 1.65;
+      --text-base: 0.875rem;
+      --text-3xl: 1.875rem;
+      --text-xl: 1.25rem;
+      --text-lg: 1.0625rem;
+      --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+      --duration-fast: 0.15s;
 
-/* SIDEBAR */
-.sidebar{position:fixed;top:var(--header-h);left:0;width:var(--sidebar-w);height:calc(100vh - var(--header-h));background:var(--bg-sidebar);border-right:1px solid var(--border);overflow-y:auto;padding:20px 0;z-index:90;transition:transform .25s ease}
-.sidebar-section{margin-bottom:8px}
-.sidebar-section-title{padding:6px 20px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-tertiary)}
-.sidebar-link{display:block;padding:6px 20px 6px 28px;font-size:14px;color:var(--text-secondary);text-decoration:none;transition:color .1s,background .1s;cursor:pointer;border-left:2px solid transparent}
-.sidebar-link:hover{color:var(--text);background:rgba(0,0,0,.03)}
-.sidebar-link.active{color:var(--accent);border-left-color:var(--accent);font-weight:500;background:var(--accent-light)}
+      /* Legacy names used in markup */
+      --text: var(--text-primary);
+      --bg-sidebar: var(--bg-elevated);
+      --bg-card: var(--bg-elevated);
+      --bg-code: var(--bg-secondary);
+      --border-light: var(--border);
+      --accent-light: var(--accent-soft);
+      --accent-dark: var(--accent-hover);
 
-/* CONTENT */
-.content{margin-left:var(--sidebar-w);margin-top:var(--header-h);min-height:calc(100vh - var(--header-h))}
-.content-inner{max-width:740px;margin:0 auto;padding:40px 48px 80px}
+      color-scheme: dark;
+    }
 
-/* TYPOGRAPHY */
-.content-inner h1{font-size:28px;font-weight:600;letter-spacing:-.02em;margin-bottom:8px;line-height:1.3}
-.content-inner h2{font-size:20px;font-weight:600;letter-spacing:-.01em;margin-top:40px;margin-bottom:12px;padding-top:24px;border-top:1px solid var(--border-light);line-height:1.4}
-.content-inner h2:first-of-type{border-top:none;padding-top:0}
-.content-inner h3{font-size:16px;font-weight:600;margin-top:28px;margin-bottom:8px}
-.content-inner p{margin-bottom:16px;color:var(--text)}
-.content-inner ul,.content-inner ol{margin-bottom:16px;padding-left:24px}
-.content-inner li{margin-bottom:6px;color:var(--text)}
-.content-inner strong{font-weight:600}
-.content-inner code{font-family:var(--font-mono);font-size:13px;background:var(--bg-code);padding:2px 6px;border-radius:4px;color:var(--accent)}
-.content-inner a{color:var(--accent);text-decoration:none}
-.content-inner a:hover{text-decoration:underline}
-.content-inner hr{border:none;border-top:1px solid var(--border);margin:32px 0}
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+      text-size-adjust: 100%;
+    }
 
-/* TABLES */
-.content-inner table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:14px}
-.content-inner th{text-align:left;padding:10px 14px;background:var(--bg-code);font-weight:600;font-size:13px;border:1px solid var(--border)}
-.content-inner td{padding:10px 14px;border:1px solid var(--border);vertical-align:top}
+    @media (prefers-reduced-motion: reduce) {
 
-/* HINTS */
-.hint{padding:14px 16px;border-radius:var(--radius);margin-bottom:16px;font-size:14px;display:flex;gap:10px;line-height:1.6}
-.hint-warning{background:#fef3c7;border:1px solid #fcd34d;color:#92400e}
-.hint-info{background:var(--accent-light);border:1px solid var(--accent);color:var(--accent-dark)}
-.hint-icon{font-size:16px;flex-shrink:0;margin-top:2px}
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
 
-/* QUICK LINKS */
-.quick-links{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
-.quick-link{padding:14px 16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);text-decoration:none;color:var(--text);transition:border-color .15s,box-shadow .15s;cursor:pointer;font-size:14px}
-.quick-link:hover{border-color:var(--accent);box-shadow:0 2px 8px rgba(0,0,0,.06);text-decoration:none}
-.quick-link .ql-title{font-weight:500;margin-bottom:2px}
-.quick-link .ql-desc{font-size:13px;color:var(--text-secondary)}
+      html {
+        scroll-behavior: auto;
+      }
+    }
 
-/* BREADCRUMB */
-.breadcrumb{font-size:13px;color:var(--text-tertiary);margin-bottom:16px}
-.breadcrumb a{color:var(--text-tertiary);text-decoration:none}
-.breadcrumb a:hover{color:var(--accent)}
-.breadcrumb span{margin:0 6px}
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: var(--bg-tertiary) transparent;
+    }
 
-/* FOOTER NAV */
-.footer-nav{display:flex;justify-content:space-between;margin-top:48px;padding-top:24px;border-top:1px solid var(--border)}
-.footer-nav a{text-decoration:none;color:var(--text-secondary);font-size:14px;display:flex;align-items:center;gap:6px;transition:color .15s}
-.footer-nav a:hover{color:var(--accent)}
-.footer-nav .fn-label{font-size:12px;color:var(--text-tertiary)}
-.footer-nav .fn-title{font-weight:500;color:var(--text)}
-.footer-nav a:hover .fn-title{color:var(--accent)}
+    *::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
 
-/* MOBILE */
-@media(max-width:768px){
-.sidebar{transform:translateX(-100%)}
-.sidebar.open{transform:translateX(0)}
-.content{margin-left:0}
-.content-inner{padding:24px 20px 60px}
-.menu-btn{display:block}
-.header-search{max-width:none}
-.quick-links{grid-template-columns:1fr}
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:85}
-.overlay.active{display:block}
-}
-</style>
+    *::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background: var(--bg-tertiary);
+      border-radius: 9999px;
+      border: 2px solid transparent;
+      background-clip: padding-box;
+    }
+
+    ::selection {
+      background: rgba(59, 158, 255, 0.30);
+      color: var(--text-primary);
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--bg);
+      line-height: var(--leading-normal);
+      font-size: var(--text-base);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* HEADER */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-h);
+      background: var(--bg-glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      z-index: 100;
+      gap: 16px
+    }
+
+    .header-logo {
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: -.02em;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .header-logo span {
+      opacity: .4;
+      font-weight: 400
+    }
+
+    .header-search {
+      flex: 1;
+      max-width: 400px;
+      position: relative
+    }
+
+    .header-search input {
+      width: 100%;
+      height: 36px;
+      padding: 0 12px 0 36px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      background: var(--bg-secondary);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--text);
+      outline: none;
+      transition: border-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+    }
+
+    .header-search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(59, 158, 255, 0.12);
+    }
+
+    .header-search input::placeholder {
+      color: var(--text-tertiary)
+    }
+
+    .header-search svg {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-tertiary);
+      pointer-events: none
+    }
+
+    .menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      padding: 4px
+    }
+
+    .search-results {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      max-height: 360px;
+      overflow-y: auto;
+      display: none;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .search-results.active {
+      display: block
+    }
+
+    .search-result {
+      padding: 10px 14px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 14px
+    }
+
+    .search-result:last-child {
+      border-bottom: none
+    }
+
+    .search-result:hover {
+      background: var(--bg-hover);
+    }
+
+    .search-result .sr-title {
+      font-weight: 500;
+      margin-bottom: 2px
+    }
+
+    .search-result .sr-section {
+      font-size: 12px;
+      color: var(--text-tertiary)
+    }
+
+    .search-result .sr-snippet {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 4px
+    }
+
+    .search-result mark {
+      background: var(--accent-soft);
+      color: var(--accent-hover);
+      border-radius: 2px;
+      padding: 0 2px;
+    }
+
+    .search-empty {
+      padding: 20px 14px;
+      text-align: center;
+      color: var(--text-tertiary);
+      font-size: 14px
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      position: fixed;
+      top: var(--header-h);
+      left: 0;
+      width: var(--sidebar-w);
+      height: calc(100vh - var(--header-h));
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      padding: 20px 0;
+      z-index: 90;
+      transition: transform 0.25s var(--ease-out);
+      box-shadow: inset 0 1px 0 rgba(59, 158, 255, 0.12);
+    }
+
+    .sidebar-section {
+      margin-bottom: 8px
+    }
+
+    .sidebar-section-title {
+      padding: 6px 20px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--text-tertiary)
+    }
+
+    .sidebar-link {
+      display: block;
+      padding: 6px 20px 6px 28px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color .1s, background .1s;
+      cursor: pointer;
+      border-left: 2px solid transparent
+    }
+
+    .sidebar-link:hover {
+      color: var(--text);
+      background: var(--bg-hover);
+    }
+
+    .sidebar-link.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      font-weight: 600;
+      background: var(--accent-soft);
+    }
+
+    /* CONTENT */
+    .content {
+      margin-left: var(--sidebar-w);
+      margin-top: var(--header-h);
+      min-height: calc(100vh - var(--header-h))
+    }
+
+    .content-inner {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 40px 48px 80px
+    }
+
+    /* TYPOGRAPHY */
+    .content-inner h1 {
+      font-size: var(--text-3xl);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .content-inner h2 {
+      font-size: var(--text-xl);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-top: 40px;
+      margin-bottom: 12px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      line-height: 1.3;
+    }
+
+    .content-inner h2:first-of-type {
+      border-top: none;
+      padding-top: 0
+    }
+
+    .content-inner h3 {
+      font-size: var(--text-lg);
+      font-weight: 600;
+      margin-top: 28px;
+      margin-bottom: 8px;
+    }
+
+    .content-inner p {
+      margin-bottom: 16px;
+      color: var(--text)
+    }
+
+    .content-inner ul,
+    .content-inner ol {
+      margin-bottom: 16px;
+      padding-left: 24px
+    }
+
+    .content-inner li {
+      margin-bottom: 6px;
+      color: var(--text)
+    }
+
+    .content-inner strong {
+      font-weight: 600
+    }
+
+    .content-inner code {
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      background: var(--bg-code);
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      color: var(--accent-hover);
+    }
+
+    .content-inner a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color var(--duration-fast) var(--ease-out);
+    }
+
+    .content-inner a:hover {
+      color: var(--accent-hover);
+      text-decoration: underline;
+    }
+
+    .content-inner hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 32px 0
+    }
+
+    /* TABLES */
+    .content-inner table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      font-size: 14px
+    }
+
+    .content-inner th {
+      text-align: left;
+      padding: 10px 14px;
+      background: var(--bg-code);
+      font-weight: 600;
+      font-size: 13px;
+      border: 1px solid var(--border)
+    }
+
+    .content-inner td {
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      vertical-align: top
+    }
+
+    /* HINTS */
+    .hint {
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 16px;
+      font-size: var(--text-base);
+      display: flex;
+      gap: 10px;
+      line-height: var(--leading-relaxed);
+    }
+
+    .hint-warning {
+      background: rgba(255, 159, 10, 0.12);
+      border: 1px solid rgba(255, 159, 10, 0.35);
+      color: var(--text-primary);
+    }
+
+    .hint-info {
+      background: var(--accent-soft);
+      border: 1px solid rgba(59, 158, 255, 0.35);
+      color: var(--text-primary);
+    }
+
+    .hint-info a {
+      color: var(--accent-hover);
+      font-weight: 500;
+    }
+
+    .hint-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 2px
+    }
+
+    /* QUICK LINKS */
+    .quick-links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 24px
+    }
+
+    .quick-link {
+      padding: 14px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color var(--duration-fast) var(--ease-out),
+        box-shadow var(--duration-fast) var(--ease-out),
+        background var(--duration-fast) var(--ease-out);
+      cursor: pointer;
+      font-size: var(--text-base);
+    }
+
+    .quick-link:hover {
+      border-color: var(--accent);
+      background: var(--bg-secondary);
+      box-shadow: var(--shadow);
+      text-decoration: none;
+    }
+
+    .quick-link .ql-title {
+      font-weight: 500;
+      margin-bottom: 2px
+    }
+
+    .quick-link .ql-desc {
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+    }
+
+    /* BREADCRUMB */
+    .breadcrumb {
+      font-size: 0.8125rem;
+      color: var(--text-tertiary);
+      margin-bottom: 16px;
+    }
+
+    .breadcrumb a {
+      color: var(--text-tertiary);
+      text-decoration: none
+    }
+
+    .breadcrumb a:hover {
+      color: var(--accent-hover);
+    }
+
+    .breadcrumb span {
+      margin: 0 6px
+    }
+
+    /* FOOTER NAV */
+    .footer-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border)
+    }
+
+    .footer-nav a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: var(--text-base);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color var(--duration-fast) var(--ease-out);
+    }
+
+    .footer-nav a:hover {
+      color: var(--accent-hover);
+    }
+
+    .footer-nav .fn-label {
+      font-size: 12px;
+      color: var(--text-tertiary)
+    }
+
+    .footer-nav .fn-title {
+      font-weight: 500;
+      color: var(--text)
+    }
+
+    .footer-nav a:hover .fn-title {
+      color: var(--accent-hover);
+    }
+
+    /* MOBILE */
+    @media(max-width:768px) {
+      .sidebar {
+        transform: translateX(-100%)
+      }
+
+      .sidebar.open {
+        transform: translateX(0)
+      }
+
+      .content {
+        margin-left: 0
+      }
+
+      .content-inner {
+        padding: 24px 20px 60px
+      }
+
+      .menu-btn {
+        display: block
+      }
+
+      .header-search {
+        max-width: none
+      }
+
+      .quick-links {
+        grid-template-columns: 1fr
+      }
+
+      .overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+        z-index: 85
+      }
+
+      .overlay.active {
+        display: block;
+      }
+    }
+
+    .menu-btn:focus-visible,
+    .header-search input:focus-visible,
+    .sidebar-link:focus-visible,
+    .quick-link:focus-visible,
+    .header-logo:focus-visible,
+    .footer-nav a:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px rgba(59, 158, 255, 0.55);
+    }
+  </style>
 </head>
+
 <body>
 
-<header class="header">
-<button class="menu-btn" onclick="toggleSidebar()" aria-label="Menu">
-<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/></svg>
-</button>
-<a href="#" class="header-logo" onclick="navigate('welcome');return false"><svg width="30" height="4" viewBox="0 0 30 4" fill="none" style="display:inline-block;vertical-align:middle"><rect x="0" y="0" width="30" height="4" fill="#1a1a1a"/><rect x="20" y="0" width="4" height="4" fill="#c62828"/><rect x="0" y="0" width="30" height="4" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/></svg> kaynos <span>docs</span></a>
-<div class="header-search">
-<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"/><line x1="10.5" y1="10.5" x2="14" y2="14"/></svg>
-<input type="text" id="searchInput" placeholder="Search docs..." oninput="handleSearch(this.value)" onfocus="handleSearch(this.value)" autocomplete="off">
-<div class="search-results" id="searchResults"></div>
-</div>
-</header>
+  <header class="header">
+    <button class="menu-btn" onclick="toggleSidebar()" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+        <line x1="3" y1="5" x2="17" y2="5" />
+        <line x1="3" y1="10" x2="17" y2="10" />
+        <line x1="3" y1="15" x2="17" y2="15" />
+      </svg>
+    </button>
+    <a href="#" class="header-logo" onclick="navigate('welcome');return false"><svg width="30" height="4"
+        viewBox="0 0 30 4" fill="none" style="display:inline-block;vertical-align:middle">
+        <rect x="0" y="0" width="30" height="4" fill="#1a1a1a" />
+        <rect x="20" y="0" width="4" height="4" fill="#c62828" />
+        <rect x="0" y="0" width="30" height="4" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.5" />
+      </svg> kaynos <span>docs</span></a>
+    <div class="header-search">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="7" cy="7" r="4.5" />
+        <line x1="10.5" y1="10.5" x2="14" y2="14" />
+      </svg>
+      <input type="text" id="searchInput" placeholder="Search docs..." oninput="handleSearch(this.value)"
+        onfocus="handleSearch(this.value)" autocomplete="off">
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </header>
 
-<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
-<nav class="sidebar" id="sidebar"></nav>
+  <nav class="sidebar" id="sidebar"></nav>
 
-<main class="content">
-<div class="content-inner" id="pageContent"></div>
-</main>
+  <main class="content">
+    <div class="content-inner" id="pageContent"></div>
+  </main>
 
-<script>
-const PAGES = {
-welcome: {
-  title: "Welcome to Kaynos",
-  section: "",
-  content: `
+  <script>
+    const PAGES = {
+      welcome: {
+        title: "Welcome to Kaynos",
+        section: "",
+        content: `
 <h1>Welcome to Kaynos</h1>
 <p>Kaynos is a video review and training management platform built for martial arts schools. Instructors upload training videos, add timestamped notes, and students review their sessions on their own time.</p>
 <p>This help center covers everything you need to get started, manage your school, and troubleshoot any issues.</p>
@@ -172,10 +682,10 @@ welcome: {
 </ul>
 `},
 
-setup: {
-  title: "Setting up your school",
-  section: "Getting Started",
-  content: `
+      setup: {
+        title: "Setting up your school",
+        section: "Getting Started",
+        content: `
 <h1>Setting up your school</h1>
 <p>When you sign up for Kaynos, your school account is created and login credentials are sent to the email address you provided. Here's what to do once you're in.</p>
 <h2>First login</h2>
@@ -196,10 +706,10 @@ setup: {
 <p>As a School Admin, you have access to school-level settings. From the sidebar, navigate to <strong>Admin</strong> to view your school's roster, monitor activity, and manage invitations and member roles.</p>
 `},
 
-"inviting-members": {
-  title: "Inviting your team",
-  section: "Getting Started",
-  content: `
+      "inviting-members": {
+        title: "Inviting your team",
+        section: "Getting Started",
+        content: `
 <h1>Inviting your team</h1>
 <p>Kaynos uses an invitation system to add members to your school. Admins and Instructors can add members, but Instructors can only add students.</p>
 <h2>How to add someone</h2>
@@ -232,10 +742,10 @@ setup: {
 </ul>
 `},
 
-"first-upload": {
-  title: "Your first video upload",
-  section: "Getting Started",
-  content: `
+      "first-upload": {
+        title: "Your first video upload",
+        section: "Getting Started",
+        content: `
 <h1>Your first video upload</h1>
 <p>Adding a training video to Kaynos takes just a few steps. Videos are attached to either a <strong>session</strong> (one-on-one) or a <strong>class</strong> (group instruction). You can upload a file directly or link a Vimeo video.</p>
 <h2>Uploading a file</h2>
@@ -272,10 +782,10 @@ setup: {
 </ul>
 `},
 
-roles: {
-  title: "Understanding user roles",
-  section: "Getting Started",
-  content: `
+      roles: {
+        title: "Understanding user roles",
+        section: "Getting Started",
+        content: `
 <h1>Understanding user roles</h1>
 <p>Kaynos has three user roles within each school. Each role has different permissions.</p>
 <h2>Admin</h2>
@@ -289,10 +799,10 @@ roles: {
 <div class="hint hint-warning"><span class="hint-icon">⚠️</span>Changing an instructor to a student removes their ability to create sessions and upload videos. Previously created content remains accessible.</div>
 `},
 
-uploading: {
-  title: "Uploading videos",
-  section: "Video",
-  content: `
+      uploading: {
+        title: "Uploading videos",
+        section: "Video",
+        content: `
 <h1>Uploading videos</h1>
 <p>Videos are attached to sessions and classes. When creating a session or class, choose <strong>Upload</strong> to upload a file directly, <strong>Vimeo</strong> to link an existing Vimeo video, or <strong>Notes Only</strong> to skip video entirely.</p>
 <h2>How uploads work</h2>
@@ -309,10 +819,10 @@ uploading: {
 <p>Open the session or class, click the remove button (X) next to the current video, and upload the new file. The original video is deleted from storage when replaced.</p>
 `},
 
-playback: {
-  title: "Watching and reviewing",
-  section: "Video",
-  content: `
+      playback: {
+        title: "Watching and reviewing",
+        section: "Video",
+        content: `
 <h1>Watching and reviewing</h1>
 <p>Kaynos includes a built-in video player designed for training review. It works directly in your browser with no additional software.</p>
 <h2>Playback speed</h2>
@@ -330,10 +840,10 @@ playback: {
 <p>Kaynos tracks where you left off. When you return to a video, it resumes from your last position. Completion status is also tracked so instructors can see who has reviewed their footage.</p>
 `},
 
-formats: {
-  title: "Supported formats and limits",
-  section: "Video",
-  content: `
+      formats: {
+        title: "Supported formats and limits",
+        section: "Video",
+        content: `
 <h1>Supported formats and limits</h1>
 <table><thead><tr><th>Format</th><th>Extension</th><th>Support Level</th></tr></thead><tbody>
 <tr><td>MP4</td><td>.mp4</td><td>Recommended</td></tr>
@@ -355,10 +865,10 @@ formats: {
 </ul>
 `},
 
-storage: {
-  title: "Video storage and retention",
-  section: "Video",
-  content: `
+      storage: {
+        title: "Video storage and retention",
+        section: "Video",
+        content: `
 <h1>Video storage and retention</h1>
 <h2>Where videos are stored</h2>
 <p>All videos are stored securely in Backblaze B2 cloud object storage, delivered through Cloudflare's CDN for fast playback worldwide. Videos are stored in the United States.</p>
@@ -372,10 +882,10 @@ storage: {
 </ul>
 `},
 
-"creating-sessions": {
-  title: "Creating a session",
-  section: "Sessions & Classes",
-  content: `
+      "creating-sessions": {
+        title: "Creating a session",
+        section: "Sessions & Classes",
+        content: `
 <h1>Creating a session</h1>
 <p>A <strong>session</strong> is a one-on-one training interaction between an instructor and a student. Use sessions for private lessons, individual drilling, and personal technique review.</p>
 <h2>How to create a session</h2>
@@ -390,10 +900,10 @@ storage: {
 <p>Sessions are visible to the assigned student, the instructor who created them, and school admins. Other students cannot see each other's private sessions.</p>
 `},
 
-"creating-classes": {
-  title: "Creating a class",
-  section: "Sessions & Classes",
-  content: `
+      "creating-classes": {
+        title: "Creating a class",
+        section: "Sessions & Classes",
+        content: `
 <h1>Creating a class</h1>
 <p>A <strong>class</strong> is a group training session. Use classes for regular group instruction, seminars, open mats, and training that involves multiple students.</p>
 <h2>How to create a class</h2>
@@ -408,10 +918,10 @@ storage: {
 <p>All students, instructors, and admins in the school can see every class. Classes are not restricted to specific students like sessions are.</p>
 `},
 
-notes: {
-  title: "Notes and timestamps",
-  section: "Sessions & Classes",
-  content: `
+      notes: {
+        title: "Notes and timestamps",
+        section: "Sessions & Classes",
+        content: `
 <h1>Notes and timestamps</h1>
 <p>Notes let instructors and students annotate specific moments in a training video. Click a note to jump directly to that point in the video.</p>
 <h2>Adding a note from the video player</h2>
@@ -433,10 +943,10 @@ notes: {
 </ul>
 `},
 
-tags: {
-  title: "Tags and organization",
-  section: "Sessions & Classes",
-  content: `
+      tags: {
+        title: "Tags and organization",
+        section: "Sessions & Classes",
+        content: `
 <h1>Tags and organization</h1>
 <p>Tags help you categorize and filter sessions and classes so you can quickly find specific training content.</p>
 <h2>Example tags</h2>
@@ -457,10 +967,10 @@ tags: {
 </ul>
 `},
 
-progress: {
-  title: "Progress tracking",
-  section: "Sessions & Classes",
-  content: `
+      progress: {
+        title: "Progress tracking",
+        section: "Sessions & Classes",
+        content: `
 <h1>Progress tracking</h1>
 <p>Kaynos automatically tracks how students engage with their training videos.</p>
 <h2>What's tracked</h2>
@@ -477,10 +987,10 @@ progress: {
 <p>Tracking is limited to what's listed above. Kaynos does not record viewing count, detailed patterns, or granular analytics. The goal is simple: did they watch it, and where did they leave off?</p>
 `},
 
-"managing-members": {
-  title: "Managing members",
-  section: "Account Management",
-  content: `
+      "managing-members": {
+        title: "Managing members",
+        section: "Account Management",
+        content: `
 <h1>Managing members</h1>
 <p>School Admins can manage the full roster from the <strong>Admin</strong> area. Instructors can add students from the <strong>Students</strong> page.</p>
 <h2>Adding members</h2>
@@ -495,10 +1005,10 @@ progress: {
 <p><strong>Can students invite other students?</strong> No. Only Admins and Instructors can send invitations.</p>
 `},
 
-profile: {
-  title: "Profile and password",
-  section: "Account Management",
-  content: `
+      profile: {
+        title: "Profile and password",
+        section: "Account Management",
+        content: `
 <h1>Profile and password</h1>
 <h2>Accessing your profile</h2>
 <p>Click your name in the sidebar (desktop) or tap the menu icon and select your name (mobile).</p>
@@ -514,10 +1024,10 @@ profile: {
 <p>If you forget your password, contact your School Admin or email support@kaynos.net for a reset.</p>
 `},
 
-notifications: {
-  title: "Email notifications",
-  section: "Account Management",
-  content: `
+      notifications: {
+        title: "Email notifications",
+        section: "Account Management",
+        content: `
 <h1>Email notifications</h1>
 <h2>What notifications are sent</h2>
 <ul>
@@ -536,10 +1046,10 @@ notifications: {
 </ol>
 `},
 
-"upload-issues": {
-  title: "Video upload problems",
-  section: "Troubleshooting",
-  content: `
+      "upload-issues": {
+        title: "Video upload problems",
+        section: "Troubleshooting",
+        content: `
 <h1>Video upload problems</h1>
 <h2>Upload fails immediately</h2>
 <p><strong>"Please select a video file" error</strong> — The file isn't a recognized format. Kaynos accepts MP4, MOV, WebM, and MKV. Convert other formats to MP4 using a free tool like HandBrake or VLC.</p>
@@ -571,10 +1081,10 @@ notifications: {
 <p>Email support@kaynos.net with your school name, browser, file size and format, and a screenshot of any error message.</p>
 `},
 
-"playback-issues": {
-  title: "Video playback problems",
-  section: "Troubleshooting",
-  content: `
+      "playback-issues": {
+        title: "Video playback problems",
+        section: "Troubleshooting",
+        content: `
 <h1>Video playback problems</h1>
 <h2>Video won't play at all</h2>
 <p><strong>Black screen with no controls:</strong></p>
@@ -597,10 +1107,10 @@ notifications: {
 <p>Position saves require a brief moment after you pause. If you close the tab very quickly, the position may not save. This is rare.</p>
 `},
 
-"login-issues": {
-  title: "Login and access issues",
-  section: "Troubleshooting",
-  content: `
+      "login-issues": {
+        title: "Login and access issues",
+        section: "Troubleshooting",
+        content: `
 <h1>Login and access issues</h1>
 <h2>Wrong password</h2>
 <ul>
@@ -617,10 +1127,10 @@ notifications: {
 <p>Email support@kaynos.net with your name, school name, and email address.</p>
 `},
 
-"email-issues": {
-  title: "Email and notification issues",
-  section: "Troubleshooting",
-  content: `
+      "email-issues": {
+        title: "Email and notification issues",
+        section: "Troubleshooting",
+        content: `
 <h1>Email and notification issues</h1>
 <h2>Not receiving any emails</h2>
 <ol>
@@ -640,10 +1150,10 @@ notifications: {
 <p>Go to <strong>Profile</strong> → toggle <strong>Email Notifications</strong> off. This stops session and class emails while keeping critical account emails active.</p>
 `},
 
-performance: {
-  title: "Performance and loading",
-  section: "Troubleshooting",
-  content: `
+      performance: {
+        title: "Performance and loading",
+        section: "Troubleshooting",
+        content: `
 <h1>Performance and loading</h1>
 <h2>Pages load slowly</h2>
 <ol>
@@ -662,10 +1172,10 @@ performance: {
 </ul>
 `},
 
-mobile: {
-  title: "Mobile device tips",
-  section: "Troubleshooting",
-  content: `
+      mobile: {
+        title: "Mobile device tips",
+        section: "Troubleshooting",
+        content: `
 <h1>Mobile device tips</h1>
 <p>Kaynos works in mobile browsers — no app download needed.</p>
 <h2>Recommended browsers</h2>
@@ -694,10 +1204,10 @@ mobile: {
 </ul>
 `},
 
-faq: {
-  title: "Frequently asked questions",
-  section: "FAQ",
-  content: `
+      faq: {
+        title: "Frequently asked questions",
+        section: "FAQ",
+        content: `
 <h1>Frequently asked questions</h1>
 <h2>What is Kaynos?</h2>
 <p>Kaynos is a video review platform for martial arts schools. Instructors record training, upload video, add timestamped notes, and students review their footage on their own time.</p>
@@ -721,98 +1231,182 @@ faq: {
 <p>Chrome, Safari, Firefox, and Edge — all current versions. Chrome provides the best experience.</p>
 <h2>I found a bug. How do I report it?</h2>
 <p>Email support@kaynos.net with what happened, what you expected, and a screenshot if possible. We typically respond within a few hours.</p>
+`},
+
+      "developer-api": {
+        title: "Developer API",
+        section: "Developers",
+        content: `
+<h1>Developer API</h1>
+<p>Kaynos exposes a versioned HTTP API so your school can integrate with scheduling tools, reporting, or internal scripts. All developer traffic uses HTTPS. Data is scoped to a single school.</p>
+
+<div class="hint hint-info"><span class="hint-icon" aria-hidden="true">📘</span><div><strong>Interactive docs (Swagger UI)</strong><br>Sign in to the Kaynos app as a <strong>school admin</strong>, then open Swagger (it loads inside the app). Use a normal click or open in a new tab.<br><a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener noreferrer">Open Swagger UI (production)</a></div></div>
+
+<p>OpenAPI 3 spec (YAML): <a href="https://app.kaynos.net/openapi.yaml" target="_blank" rel="noopener noreferrer">https://app.kaynos.net/openapi.yaml</a> · <a href="https://raw.githubusercontent.com/jlambert229/kaynos/main/public/openapi.yaml" target="_blank" rel="noopener noreferrer">Mirror on GitHub (raw)</a></p>
+<p style="font-size:0.8125rem;color:var(--text-secondary)">If the app link shows HTML instead of YAML, use the GitHub raw link or update the app deploy (the site now routes this path to a function so YAML is always returned).</p>
+
+<h2>Who can use it</h2>
+<ul>
+<li><strong>Bearer API (<code>/api/v1/...</code>):</strong> Any integration that has a valid API token. Tokens are created only by <strong>School Admins</strong> in the app under <strong>Admin → Developer API</strong>.</li>
+<li><strong>Token management (<code>/api/integrations/...</code>):</strong> List, create, and revoke tokens using your normal Kaynos session (HttpOnly cookie). In Swagger, stay logged in in the same browser so <em>Try it out</em> can send cookies.</li>
+<li><strong>Swagger UI:</strong> Available at <code>/admin/api-docs</code> in the web app. You must be logged in as a school admin.</li>
+</ul>
+
+<h2>Base URL and versioning</h2>
+<table>
+<thead><tr><th>Environment</th><th>App base</th><th>API prefix</th></tr></thead>
+<tbody>
+<tr><td>Production</td><td><code>https://app.kaynos.net</code></td><td><code>/api/v1</code></td></tr>
+<tr><td>Local (Netlify CLI)</td><td><code>http://localhost:8888</code> (typical)</td><td><code>/api/v1</code></td></tr>
+</tbody>
+</table>
+<p>Discovery: <code>GET /api/v1</code> returns a short JSON index of routes (no authentication required).</p>
+
+<h2>Authentication</h2>
+<h3>Bearer tokens (<code>/api/v1</code>)</h3>
+<p>Send the token on every request:</p>
+<pre style="background:var(--bg-code);padding:14px 16px;border-radius:var(--radius-sm);font-family:var(--font-mono);font-size:0.8125rem;overflow-x:auto;margin-bottom:16px;border:1px solid var(--border)">Authorization: Bearer kn_&lt;your-secret&gt;</pre>
+<p>Secrets look like <code>kn_</code> plus a random suffix. The full string is shown <strong>once</strong> when the admin creates the token. Store it in a secret manager or environment variable, not in source control.</p>
+
+<h3>Scopes</h3>
+<table>
+<thead><tr><th>Scope</th><th>Access</th></tr></thead>
+<tbody>
+<tr><td><code>read</code></td><td><code>GET</code> operations on sessions, classes, members, and related reads.</td></tr>
+<tr><td><code>write</code></td><td>Create, update, and delete operations. <code>write</code> also allows read operations.</td></tr>
+</tbody>
+</table>
+
+<h3>Acting identity</h3>
+<p>The API evaluates permissions as the <strong>school user who created the token</strong> (usually the admin). If that user could not perform an action in the web app, the same call with the token will fail with <code>403 Forbidden</code>.</p>
+
+<h2>Managed resources (v1)</h2>
+<p>Swagger lists every path and body field. Summary:</p>
+<ul>
+<li><strong>Sessions:</strong> list, get, create, update, delete, and view/progress tracking.</li>
+<li><strong>Classes:</strong> same pattern as sessions.</li>
+<li><strong>Members:</strong> list, add, update, remove, password reset (subject to school-admin rules in product).</li>
+<li><strong>Notes:</strong> add or edit notes on sessions and classes.</li>
+</ul>
+
+<h2>Integrations API (session cookie)</h2>
+<p>Use these only from trusted contexts (your browser while logged in, or server-side code that holds a session cookie). Typical admin workflow:</p>
+<ol>
+<li><code>GET /api/integrations/tokens</code> … list token metadata (prefix, scopes, revoked state).</li>
+<li><code>POST /api/integrations/tokens</code> … body <code>{"name":"…","scopes":["read"]}</code> or include <code>"write"</code>; response includes the plaintext token once.</li>
+<li><code>DELETE /api/integrations/tokens/{id}</code> … revoke.</li>
+</ol>
+
+<h2>Errors</h2>
+<p>Errors are JSON objects with an <code>error</code> string. Common status codes: <code>401</code> (missing or invalid token), <code>403</code> (forbidden or insufficient token scope), <code>404</code> (resource not in your school), <code>400</code> (validation).</p>
+
+<h2>Security practices</h2>
+<ul>
+<li>Rotate or revoke tokens when people leave the admin role.</li>
+<li>Prefer a <code>read</code>-only token unless your integration must mutate data.</li>
+<li>Do not embed tokens in mobile apps or public frontends; call Kaynos from your backend.</li>
+</ul>
+
+<h2>Related links</h2>
+<ul>
+<li><a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener noreferrer">Swagger UI</a> (sign in as school admin first)</li>
+<li><a href="https://app.kaynos.net/openapi.yaml" target="_blank" rel="noopener noreferrer">OpenAPI YAML on the app</a></li>
+<li><a href="https://raw.githubusercontent.com/jlambert229/kaynos/main/public/openapi.yaml" target="_blank" rel="noopener noreferrer">OpenAPI YAML on GitHub (raw)</a></li>
+</ul>
 `}
-};
+    };
 
-const NAV = [
-{section:"",pages:["welcome"]},
-{section:"Getting Started",pages:["setup","inviting-members","first-upload","roles"]},
-{section:"Video",pages:["uploading","playback","formats","storage"]},
-{section:"Sessions & Classes",pages:["creating-sessions","creating-classes","notes","tags","progress"]},
-{section:"Account Management",pages:["managing-members","profile","notifications"]},
-{section:"Troubleshooting",pages:["upload-issues","playback-issues","login-issues","email-issues","performance","mobile"]},
-{section:"FAQ",pages:["faq"]}
-];
+    const NAV = [
+      { section: "", pages: ["welcome"] },
+      { section: "Getting Started", pages: ["setup", "inviting-members", "first-upload", "roles"] },
+      { section: "Video", pages: ["uploading", "playback", "formats", "storage"] },
+      { section: "Sessions & Classes", pages: ["creating-sessions", "creating-classes", "notes", "tags", "progress"] },
+      { section: "Account Management", pages: ["managing-members", "profile", "notifications"] },
+      { section: "Developers", pages: ["developer-api"] },
+      { section: "Troubleshooting", pages: ["upload-issues", "playback-issues", "login-issues", "email-issues", "performance", "mobile"] },
+      { section: "FAQ", pages: ["faq"] }
+    ];
 
-const allPageKeys = NAV.flatMap(g => g.pages);
+    const allPageKeys = NAV.flatMap(g => g.pages);
 
-function buildSidebar(){
-const sb = document.getElementById('sidebar');
-let html = '';
-NAV.forEach(g => {
-  if(g.section) html += `<div class="sidebar-section"><div class="sidebar-section-title">${g.section}</div>`;
-  else html += `<div class="sidebar-section">`;
-  g.pages.forEach(p => {
-    html += `<a class="sidebar-link" data-page="${p}" onclick="navigate('${p}')">${PAGES[p].title}</a>`;
-  });
-  html += '</div>';
-});
-sb.innerHTML = html;
-}
-
-function navigate(pageId){
-const page = PAGES[pageId];
-if(!page) return;
-document.getElementById('pageContent').innerHTML = page.content;
-document.querySelectorAll('.sidebar-link').forEach(l => l.classList.toggle('active', l.dataset.page === pageId));
-window.scrollTo(0,0);
-history.pushState({page:pageId}, '', '#'+pageId);
-document.title = page.title + ' — Kaynos Docs';
-closeSidebar();
-document.getElementById('searchInput').value = '';
-document.getElementById('searchResults').classList.remove('active');
-}
-
-function toggleSidebar(){
-document.getElementById('sidebar').classList.toggle('open');
-document.getElementById('overlay').classList.toggle('active');
-}
-function closeSidebar(){
-document.getElementById('sidebar').classList.remove('open');
-document.getElementById('overlay').classList.remove('active');
-}
-
-function handleSearch(q){
-const sr = document.getElementById('searchResults');
-if(!q || q.length < 2){sr.classList.remove('active');sr.innerHTML='';return}
-const lower = q.toLowerCase();
-const results = [];
-for(const[id,page] of Object.entries(PAGES)){
-  const text = page.content.replace(/<[^>]+>/g,' ').toLowerCase();
-  const idx = text.indexOf(lower);
-  if(idx !== -1 || page.title.toLowerCase().includes(lower)){
-    let snippet = '';
-    if(idx !== -1){
-      const start = Math.max(0,idx-40);
-      const end = Math.min(text.length,idx+q.length+60);
-      snippet = (start>0?'...':'')+text.slice(start,end).replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'),m=>`<mark>${m}</mark>`)+(end<text.length?'...':'');
+    function buildSidebar() {
+      const sb = document.getElementById('sidebar');
+      let html = '';
+      NAV.forEach(g => {
+        if (g.section) html += `<div class="sidebar-section"><div class="sidebar-section-title">${g.section}</div>`;
+        else html += `<div class="sidebar-section">`;
+        g.pages.forEach(p => {
+          html += `<a class="sidebar-link" data-page="${p}" onclick="navigate('${p}')">${PAGES[p].title}</a>`;
+        });
+        html += '</div>';
+      });
+      sb.innerHTML = html;
     }
-    results.push({id,title:page.title,section:page.section,snippet});
-  }
-}
-if(results.length===0){
-  sr.innerHTML='<div class="search-empty">No results found</div>';
-} else {
-  sr.innerHTML=results.slice(0,8).map(r=>`<div class="search-result" onclick="navigate('${r.id}')"><div class="sr-title">${r.title}</div>${r.section?`<div class="sr-section">${r.section}</div>`:''}${r.snippet?`<div class="sr-snippet">${r.snippet}</div>`:''}</div>`).join('');
-}
-sr.classList.add('active');
-}
 
-document.addEventListener('click',e=>{
-if(!e.target.closest('.header-search'))document.getElementById('searchResults').classList.remove('active');
-});
-document.addEventListener('keydown',e=>{
-if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();document.getElementById('searchInput').focus()}
-});
+    function navigate(pageId) {
+      const page = PAGES[pageId];
+      if (!page) return;
+      document.getElementById('pageContent').innerHTML = page.content;
+      document.querySelectorAll('.sidebar-link').forEach(l => l.classList.toggle('active', l.dataset.page === pageId));
+      window.scrollTo(0, 0);
+      history.pushState({ page: pageId }, '', '#' + pageId);
+      document.title = page.title + ' — Kaynos Docs';
+      closeSidebar();
+      document.getElementById('searchInput').value = '';
+      document.getElementById('searchResults').classList.remove('active');
+    }
 
-window.addEventListener('popstate',e=>{
-if(e.state&&e.state.page)navigate(e.state.page);
-else navigate('welcome');
-});
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('open');
+      document.getElementById('overlay').classList.toggle('active');
+    }
+    function closeSidebar() {
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('overlay').classList.remove('active');
+    }
 
-buildSidebar();
-const hash = location.hash.slice(1);
-navigate(hash && PAGES[hash] ? hash : 'welcome');
-</script>
+    function handleSearch(q) {
+      const sr = document.getElementById('searchResults');
+      if (!q || q.length < 2) { sr.classList.remove('active'); sr.innerHTML = ''; return }
+      const lower = q.toLowerCase();
+      const results = [];
+      for (const [id, page] of Object.entries(PAGES)) {
+        const text = page.content.replace(/<[^>]+>/g, ' ').toLowerCase();
+        const idx = text.indexOf(lower);
+        if (idx !== -1 || page.title.toLowerCase().includes(lower)) {
+          let snippet = '';
+          if (idx !== -1) {
+            const start = Math.max(0, idx - 40);
+            const end = Math.min(text.length, idx + q.length + 60);
+            snippet = (start > 0 ? '...' : '') + text.slice(start, end).replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), m => `<mark>${m}</mark>`) + (end < text.length ? '...' : '');
+          }
+          results.push({ id, title: page.title, section: page.section, snippet });
+        }
+      }
+      if (results.length === 0) {
+        sr.innerHTML = '<div class="search-empty">No results found</div>';
+      } else {
+        sr.innerHTML = results.slice(0, 8).map(r => `<div class="search-result" onclick="navigate('${r.id}')"><div class="sr-title">${r.title}</div>${r.section ? `<div class="sr-section">${r.section}</div>` : ''}${r.snippet ? `<div class="sr-snippet">${r.snippet}</div>` : ''}</div>`).join('');
+      }
+      sr.classList.add('active');
+    }
+
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.header-search')) document.getElementById('searchResults').classList.remove('active');
+    });
+    document.addEventListener('keydown', e => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); document.getElementById('searchInput').focus() }
+    });
+
+    window.addEventListener('popstate', e => {
+      if (e.state && e.state.page) navigate(e.state.page);
+      else navigate('welcome');
+    });
+
+    buildSidebar();
+    const hash = location.hash.slice(1);
+    navigate(hash && PAGES[hash] ? hash : 'welcome');
+  </script>
 </body>
+
 </html>
