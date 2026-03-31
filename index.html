@@ -662,16 +662,16 @@
         section: "",
         content: `
 <h1>Welcome to Kaynos</h1>
-<p>You built the gym. Kaynos is where the film lives: your coaches post rolls and lessons, stamp notes on the timeline, your members watch on their own clock.</p>
-<p>Sidebar for the full playbook, search if you know what you’re hunting.</p>
+<p>Kaynos is video review for your school: coaches publish sessions and classes, add timestamped notes, and members watch when it fits their schedule.</p>
+<p>Use the sidebar for topics or search when you know the page you need.</p>
 <h2>Jump in</h2>
 <div class="quick-links">
-<a class="quick-link" onclick="navigate('setup')"><div class="ql-title">Setting up your school</div><div class="ql-desc">First login, password, where Admin lives</div></a>
-<a class="quick-link" onclick="navigate('first-upload')"><div class="ql-title">Your first video upload</div><div class="ql-desc">Get tape off the phone and onto a session</div></a>
-<a class="quick-link" onclick="navigate('upload-issues')"><div class="ql-title">Video upload problems</div><div class="ql-desc">When the bar won’t move or errors pop</div></a>
-<a class="quick-link" onclick="navigate('playback-issues')"><div class="ql-title">Video playback problems</div><div class="ql-desc">Black screen, buffer, weird codecs</div></a>
-<a class="quick-link" onclick="navigate('inviting-members')"><div class="ql-title">Inviting your team</div><div class="ql-desc">Grow the room without chaos</div></a>
-<a class="quick-link" onclick="navigate('faq')"><div class="ql-title">FAQ</div><div class="ql-desc">The stuff owners and head coaches ask first</div></a>
+<a class="quick-link" onclick="navigate('setup')"><div class="ql-title">Setting up your school</div><div class="ql-desc">First login, password, Admin area</div></a>
+<a class="quick-link" onclick="navigate('first-upload')"><div class="ql-title">Your first video upload</div><div class="ql-desc">From phone or computer to a session or class</div></a>
+<a class="quick-link" onclick="navigate('upload-issues')"><div class="ql-title">Video upload problems</div><div class="ql-desc">Stuck progress, errors, slow networks</div></a>
+<a class="quick-link" onclick="navigate('playback-issues')"><div class="ql-title">Video playback problems</div><div class="ql-desc">Black screen, buffering, codec issues</div></a>
+<a class="quick-link" onclick="navigate('inviting-members')"><div class="ql-title">Inviting your team</div><div class="ql-desc">Invites, roles, roster basics</div></a>
+<a class="quick-link" onclick="navigate('faq')"><div class="ql-title">FAQ</div><div class="ql-desc">Common questions from owners and instructors</div></a>
 </div>
 <h2>Need a hand?</h2>
 <ul>
@@ -686,22 +686,22 @@
         section: "Getting Started",
         content: `
 <h1>Setting up your school</h1>
-<p>You signed up, we sent creds to the inbox you gave us. Treat that temp password like a paper waiver: use it once, then burn it.</p>
+<p>After signup, login details go to the email you used. Change the temporary password as soon as you are in.</p>
 <h2>First login</h2>
 <ol>
 <li>Welcome email link or head to <strong>app.kaynos.net</strong>.</li>
 <li>Same email, temp password from the mail.</li>
 <li>You land on the <strong>Instructor Dashboard</strong>. That’s home base.</li>
 </ol>
-<h2>Lock it down: new password</h2>
-<p>Before you invite the whole roster, fix your own login.</p>
+<h2>Set a new password</h2>
+<p>Before inviting your full roster, secure your own account.</p>
 <ol>
 <li>Your name in the sidebar (hamburger on phone) → <strong>Profile</strong>.</li>
 <li><strong>Change Password</strong>: current, new, confirm.</li>
 <li><strong>Update Password</strong>. Done.</li>
 </ol>
-<h2>If you own the keys: Admin</h2>
-<p>Head coach / owner types: <strong>Admin</strong> in the sidebar is your roster, invites, who’s instructor vs student, and school-wide pulse. Spend five minutes clicking around before you blast invites.</p>
+<h2>Admin</h2>
+<p>School admins: use <strong>Admin</strong> in the sidebar for roster, invites, roles, and a school-wide view of activity. It helps to explore those screens before sending a large batch of invites.</p>
 `},
 
       "inviting-members": {
@@ -709,34 +709,34 @@
         section: "Getting Started",
         content: `
 <h1>Inviting your team</h1>
-<p>Growth happens one email at a time. Invite lands, they get a temp password, they walk through the same door you did. Admins can bring on coaches or students; working coaches can only add students (keeps the hierarchy clean).</p>
-<h2>Put someone on the mat</h2>
+<p>Members join by email with a temporary password. Admins may invite coaches or students; instructors may invite students only. That keeps roster control with staff.</p>
+<h2>Send an invite</h2>
 <ol>
-<li><strong>Admin</strong> if you’re running the business side, or <strong>Students</strong> if you’re a coach adding a new kid.</li>
+<li><strong>Admin</strong> (for full roster control) or <strong>Students</strong> (instructors adding a student).</li>
 <li><strong>Add Member</strong> / <strong>Add Student</strong>.</li>
 <li>Name, real email, and role if you’re admin (coach vs member).</li>
 <li><strong>Send Invite</strong>.</li>
 </ol>
-<p>Mail should hit fast. Gymshark filter ate it? Spam folder first, then typo check.</p>
-<h2>Who’s allowed to grow the room</h2>
+<p>Delivery is usually quick. If nothing arrives, check spam and the address for typos.</p>
+<h2>Who can invite</h2>
 <table><thead><tr><th>Your role</th><th>Can add</th></tr></thead><tbody>
 <tr><td><strong>Admin</strong></td><td>Coaches and students</td></tr>
 <tr><td><strong>Instructor</strong></td><td>Students only</td></tr>
 <tr><td><strong>Student</strong></td><td>Nobody</td></tr>
 </tbody></table>
-<h2>What each belt… I mean role… actually does</h2>
+<h2>What each role can do</h2>
 <table><thead><tr><th>Role</th><th>What they can do</th></tr></thead><tbody>
-<tr><td><strong>Admin</strong></td><td>Everything a coach can, plus roster, invites, settings. You’re running the academy.</td></tr>
-<tr><td><strong>Instructor</strong></td><td>Sessions, classes, film, notes, see how your students are actually watching.</td></tr>
-<tr><td><strong>Student</strong></td><td>Their private sessions, every class post, notes, progress. No uploads, no snooping neighbors’ rolls.</td></tr>
+<tr><td><strong>Admin</strong></td><td>Everything an instructor can do, plus roster, invites, and settings.</td></tr>
+<tr><td><strong>Instructor</strong></td><td>Sessions, classes, video upload, notes, tags, and student progress.</td></tr>
+<tr><td><strong>Student</strong></td><td>Private sessions assigned to them, all published classes, notes, progress. No uploads; cannot view other students’ private sessions.</td></tr>
 </tbody></table>
-<h2>They swore they didn’t get the email</h2>
+<h2>Resend or reset</h2>
 <p><strong>Admin</strong> → find them in the roster → <strong>Reset Password</strong>. Fresh temp password, new mail.</p>
-<h2>How we run it at our place</h2>
+<h2>Tips</h2>
 <ul>
-<li>Coaches on the system before you dump a hundred new students in.</li>
-<li>Gmail they actually read, not the throwaway from 2009.</li>
-<li>No fake “50 seat” cap. Bring your whole gym.</li>
+<li>Onboard coaches before adding a large student wave when you can.</li>
+<li>Use an email address people check; it becomes their login.</li>
+<li>No fixed seat limit in the product.</li>
 </ul>
 `},
 
@@ -745,35 +745,35 @@
         section: "Getting Started",
         content: `
 <h1>Your first video upload</h1>
-<p>Private lesson or highlight for one person? That’s a <strong>session</strong>. Whole room worked the same chain? That’s a <strong>class</strong>. Either way you can drop a file from your phone or paste Vimeo if you already host there.</p>
-<h2>Get the file up</h2>
+<p>A <strong>session</strong> is for one assigned student (private lesson, individual review). A <strong>class</strong> is for everyone in the school (group lesson, open mat recap). Upload a file or link Vimeo in either case.</p>
+<h2>Upload a file</h2>
 <ol>
 <li>New session or class, pick <strong>Upload</strong> for the video source.</li>
-<li>Drag onto the box or click and hunt in Finder / Files.</li>
-<li>Watch the bar: speed and ETA so you know it’s not lying to you.</li>
+<li>Drag onto the box or click to choose a file in Finder / Files.</li>
+<li>Use the progress bar for speed and ETA.</li>
 <li>Green check, then finish title / date / student and hit save.</li>
 </ol>
-<h2>What’s happening under the hood</h2>
+<h2>Upload behavior</h2>
 <ul>
-<li>Small clip (~under 100 MB): goes up in one piece.</li>
-<li>Big tournament roll: we chunk it, run parallel pieces, auto-retry if Wi‑Fi hiccups (three tries).</li>
-<li>Changed your mind mid-upload? Cancel. No shame.</li>
+<li>Smaller files (roughly under 100 MB) often upload in one request.</li>
+<li>Larger files use chunked parallel upload with automatic retries (up to three) on network errors.</li>
+<li>You can cancel an in-progress upload.</li>
 </ul>
-<h2>Formats that won’t fight you</h2>
+<h2>Supported formats</h2>
 <table><thead><tr><th>Format</th><th>Extension</th><th>Notes</th></tr></thead><tbody>
-<tr><td>MP4</td><td>.mp4</td><td>Default pick. Browsers love it.</td></tr>
-<tr><td>MOV</td><td>.mov</td><td>iPhone / GoPro life</td></tr>
-<tr><td>WebM</td><td>.webm</td><td>Screen-record escapes</td></tr>
-<tr><td>MKV</td><td>.mkv</td><td>Fine, less common at the gym</td></tr>
+<tr><td>MP4</td><td>.mp4</td><td>Recommended default</td></tr>
+<tr><td>MOV</td><td>.mov</td><td>Common on iPhone and GoPro</td></tr>
+<tr><td>WebM</td><td>.webm</td><td>Screen and browser capture</td></tr>
+<tr><td>MKV</td><td>.mkv</td><td>Supported; less common</td></tr>
 </tbody></table>
-<p>Hard ceiling <strong>5 GB</strong> per file. If you’re near that, we need to talk about bitrate before your upload dies of old age.</p>
-<h2>Already on Vimeo?</h2>
-<p><strong>Vimeo</strong> source, paste link or ID. We embed it on that session or class so you’re not double-hosting if you don’t want to.</p>
-<h2>Film like you mean it</h2>
+<p>Maximum file size <strong>5 GB</strong>. Very large files may take a long time depending on upload speed.</p>
+<h2>Vimeo</h2>
+<p>Use the <strong>Vimeo</strong> source and paste the URL or video ID to embed video you already host on Vimeo.</p>
+<h2>Recording tips</h2>
 <ul>
 <li>Landscape. Your TV and your phone both want it.</li>
-<li>Camera a bit high. See the whole mat, not just shins.</li>
-<li>Even light. Details matter when someone’s fixing grips in slow-mo later.</li>
+<li>Camera slightly high so the full training area is visible, not only lower legs.</li>
+<li>Even lighting makes small details easier to see on review.</li>
 </ul>
 `},
 
@@ -782,16 +782,16 @@
         section: "Getting Started",
         content: `
 <h1>Understanding user roles</h1>
-<p>Three hats in one academy. Pick the right one so you’re not handing keys to someone who should only be drilling.</p>
+<p>Each person has one of three roles. Assign them so permissions match how your school runs.</p>
 <h2>Admin</h2>
-<p>You own the keys or the head coach does. Same tools as any instructor, plus who’s on the roster, who gets invited, role changes, and the <strong>Admin</strong> view so you see the gym’s pulse, not just your own classes.</p>
+<p>Typically the owner or head instructor. Same capabilities as instructors, plus roster management, invites, role changes, and the <strong>Admin</strong> area for school-wide visibility.</p>
 <h2>Instructor</h2>
-<p>Coach and professor: sessions, classes, film on the wall, notes on the clock, tags so you can find “that guard pass week” again. You see your students’ progress; that’s the job.</p>
+<p>Instructors run sessions and classes, upload video, add notes and tags, and view student progress.</p>
 <h2>Student</h2>
-<p>They’re here to learn. Assigned private sessions, every class you post publicly to the school, they can scribble notes and track how much they watched. They don’t upload your curriculum or watch someone else’s private lesson. Non-negotiable.</p>
-<h2>Someone switched jobs?</h2>
-<p>Only an admin: <strong>Admin</strong> → click the human → role dropdown → save.</p>
-<div class="hint hint-warning"><span class="hint-icon">⚠️</span>Coach downgraded to student loses create and upload. Their old work stays. Think before you click.</div>
+<p>Students access their assigned sessions and all school classes, watch video, add notes, and track viewing progress. They cannot upload video or view other students’ private sessions.</p>
+<h2>Change a role</h2>
+<p>Admins only: <strong>Admin</strong> → member → role dropdown → save.</p>
+<div class="hint hint-warning"><span class="hint-icon">⚠️</span>Downgrading an instructor to a student removes the ability to create sessions or upload video. Existing content remains available.</div>
 `},
 
       uploading: {
@@ -799,19 +799,19 @@
         section: "Video",
         content: `
 <h1>Uploading videos</h1>
-<p>Every piece of content gets one of three flavors: you <strong>Upload</strong> a file, you <strong>Vimeo</strong> something you already posted, or <strong>Notes Only</strong> when it’s words without tape.</p>
-<h2>Heavy rolls</h2>
-<p>We don’t ask your router to swallow a 2 GB monolith in one bite. Big files split, six lanes at once, if a chunk fails we back off and try again (three rounds). Same idea as good standup: pressure, reset, pressure.</p>
-<h2>Rules of the road</h2>
+<p>Each session or class uses one source: <strong>Upload</strong> (file from your device), <strong>Vimeo</strong> (embedded link), or <strong>Notes Only</strong> (no video).</p>
+<h2>Large files</h2>
+<p>Big uploads are split into chunks and sent with parallel connections. Failed parts retry automatically (up to three times) with backoff.</p>
+<h2>Requirements</h2>
 <ul>
-<li>MP4, MOV, WebM, MKV. Outside that, transcode before you waste an evening.</li>
-<li>5 GB max. Seriously.</li>
-<li>Only admins and coaches upload. Members consume.</li>
+<li>Formats: MP4, MOV, WebM, MKV (convert others before uploading).</li>
+<li>Maximum 5 GB per video.</li>
+<li>Only admins and instructors may upload.</li>
 </ul>
-<h2>While it’s climbing</h2>
-<p>Percent, Mbps, time left, and a <strong>Cancel</strong> if you picked the wrong file.</p>
-<h2>Swap the film</h2>
-<p>Open the session or class, hit the <strong>X</strong> on the old clip, put the new one up. Previous file gets deleted from our storage. Clean house.</p>
+<h2>During upload</h2>
+<p>The UI shows percent complete, speed, time remaining, and <strong>Cancel</strong> if you need to stop.</p>
+<h2>Replace a video</h2>
+<p>Open the session or class, remove the current video with <strong>X</strong>, then upload a replacement. The previous file is removed from storage.</p>
 `},
 
       playback: {
@@ -819,19 +819,19 @@
         section: "Video",
         content: `
 <h1>Watching and reviewing</h1>
-<p>No app. Browser player, same as you’d use for instructionals, except the notes live on your actual gym’s tape.</p>
+<p>Playback runs in the browser. No separate app install.</p>
 <h2>Speed</h2>
-<p><strong>0.5x</strong> through <strong>2x</strong>. Slow it down for the grip detail, crank it when you’re hunting one pass in ten minutes of flow.</p>
+<p>Use <strong>0.5x</strong> through <strong>2x</strong> for slow analysis or faster skim.</p>
 <h2>Timeline</h2>
-<p>Colored ticks are coach and student notes. Hover the text, click to teleport. Film study without scrubbing blind.</p>
-<h2>Drop a note mid-roll</h2>
+<p>Markers on the timeline are notes. Hover to preview text, click to jump to that time.</p>
+<h2>Add a note while watching</h2>
 <ol>
-<li>Pause (hotkey <strong>N</strong> if your hands are already on the keyboard).</li>
-<li><strong>Add Note</strong>, say the thing, <strong>Save</strong>.</li>
+<li>Pause (shortcut <strong>N</strong>).</li>
+<li><strong>Add Note</strong>, enter text, <strong>Save</strong>.</li>
 </ol>
-<p>Stamp lands where you paused. <strong>Space</strong> / <strong>K</strong> play-pause, <strong>J</strong> / <strong>L</strong> nudge, <strong>F</strong> fullscreen for the projector wall.</p>
-<h2>Did they actually watch?</h2>
-<p>We remember where they left off. You see finished vs not and last time they opened it. Enough to coach; we’re not building creepy analytics.</p>
+<p>The note is tied to the current playhead. Shortcuts: <strong>Space</strong> / <strong>K</strong> play-pause, <strong>J</strong> / <strong>L</strong> skip, <strong>F</strong> fullscreen.</p>
+<h2>Progress</h2>
+<p>Playback position is saved for resume. Instructors can see completion and last-viewed time without heavy analytics.</p>
 `},
 
       formats: {
@@ -839,24 +839,24 @@
         section: "Video",
         content: `
 <h1>Supported formats and limits</h1>
-<p>Pick formats your coaches’ laptops already like, not whatever exotic codec came off a random camera.</p>
-<table><thead><tr><th>Format</th><th>Extension</th><th>Support Level</th></tr></thead><tbody>
-<tr><td>MP4</td><td>.mp4</td><td>Default. Boring is good.</td></tr>
+<p>Use common codecs your devices and browsers handle well. When unsure, export to MP4 (H.264 + AAC).</p>
+<table><thead><tr><th>Format</th><th>Extension</th><th>Support level</th></tr></thead><tbody>
+<tr><td>MP4</td><td>.mp4</td><td>Recommended default</td></tr>
 <tr><td>MOV</td><td>.mov</td><td>Supported</td></tr>
 <tr><td>WebM</td><td>.webm</td><td>Supported</td></tr>
 <tr><td>MKV</td><td>.mkv</td><td>Supported</td></tr>
 </tbody></table>
-<p><strong>MP4</strong> saves you a headache at Friday night upload time. iPhone MOV usually plays nice.</p>
+<p><strong>MP4</strong> is the most predictable for uploads and playback. MOV from iPhone usually works well.</p>
 <h2>Size</h2>
 <ul>
-<li>Hard stop <strong>5 GB</strong>.</li>
-<li>Under ~<strong>2 GB</strong> and your Wi‑Fi stops crying.</li>
+<li>Maximum <strong>5 GB</strong> per file.</li>
+<li>Files under about <strong>2 GB</strong> upload faster on typical home or gym Wi‑Fi.</li>
 </ul>
-<h2>Shrink it without losing the lesson</h2>
+<h2>Smaller files, same teaching value</h2>
 <ul>
-<li>1080p shows enough gi texture. 4K is ego, not pedagogy.</li>
-<li>H.264 when the camera asks.</li>
-<li>Cut the three minutes of tying belts before the good stuff.</li>
+<li><strong>1080p</strong> is enough for most instruction; very high bitrates slow uploads without much benefit.</li>
+<li>Prefer <strong>H.264</strong> video and <strong>AAC</strong> audio when your export tool offers it.</li>
+<li>Trim dead air at the start or end of clips before uploading.</li>
 </ul>
 `},
 
@@ -865,15 +865,15 @@
         section: "Video",
         content: `
 <h1>Video storage and retention</h1>
-<h2>Where the tape sleeps</h2>
-<p>Backblaze B2 buckets, fronted by Cloudflare so playback doesn’t crawl when your competitor across town hits play too. US-hosted.</p>
-<h2>How long we keep it</h2>
-<p>Your account breathes, your video stays. We’re not running a “delete after 90 days” hustle while you’re building culture.</p>
-<h2>Locks on the door</h2>
+<h2>Where video is stored</h2>
+<p>Videos are stored in Backblaze B2, delivered through Cloudflare. Infrastructure is US-hosted.</p>
+<h2>Retention</h2>
+<p>Video remains available while your account is active. We do not apply an automatic 90-day deletion policy.</p>
+<h2>Security</h2>
 <ul>
-<li>HTTPS in transit.</li>
-<li>Your school’s objects aren’t mixed into someone else’s academy.</li>
-<li>Playback links expire. Share the lesson in Kaynos, not a permanent hotlink.</li>
+<li>HTTPS for data in transit.</li>
+<li>School data is isolated; your files are not mixed with other organizations’ storage.</li>
+<li>Playback URLs are time-limited. Share access inside Kaynos rather than relying on long-lived direct links.</li>
 </ul>
 `},
 
@@ -882,16 +882,16 @@
         section: "Sessions & Classes",
         content: `
 <h1>Creating a session</h1>
-<p><strong>Session</strong> means one coach, one athlete, one conversation. Private lesson breakdown, comp tape review for a single competitor, the stuff that shouldn’t leak across the whole room.</p>
+<p>A <strong>session</strong> is one-on-one content: private lessons, individual review, or competition footage for a single student. Only that student and staff who need access should see it.</p>
 <h2>Workflow</h2>
 <ol>
 <li><strong>Sessions</strong> → <strong>New Session</strong>.</li>
 <li>Video source: <strong>Upload</strong>, <strong>Vimeo</strong>, or <strong>Notes Only</strong>.</li>
-<li>Title, date, pick the student from your roster, tags if you’re organized.</li>
+<li>Title, date, assign the student from your roster, optional tags.</li>
 <li><strong>Create Session</strong>.</li>
 </ol>
 <h2>Who sees it</h2>
-<p>That student, you (or whoever created it), and admins. Nobody else’s white belt is watching this roll.</p>
+<p>The assigned student, the creator, and school admins. Other students cannot open someone else’s private session.</p>
 `},
 
       "creating-classes": {
@@ -899,16 +899,16 @@
         section: "Sessions & Classes",
         content: `
 <h1>Creating a class</h1>
-<p><strong>Class</strong> is the whole room: Tuesday fundamentals, seminar block, open mat recap, anything that belongs to “everyone who pays dues here.”</p>
+<p>A <strong>class</strong> is school-wide: group lessons, seminars, open-mat recaps, or any recording meant for all members.</p>
 <h2>Workflow</h2>
 <ol>
 <li><strong>Classes</strong> → <strong>New Class</strong>.</li>
 <li>Same video options: <strong>Upload</strong>, <strong>Vimeo</strong>, <strong>Notes Only</strong>.</li>
-<li>Title, date, blurb if you want, tags so latecomers can filter later.</li>
+<li>Title, date, optional description, optional tags for filtering.</li>
 <li><strong>Create Class</strong>.</li>
 </ol>
 <h2>Who sees it</h2>
-<p>Every member, coach, and admin in the school. That’s the point. Different animal than a private session.</p>
+<p>All members, instructors, and admins in the school. This visibility is intentional and differs from a private session.</p>
 `},
 
       notes: {
@@ -916,22 +916,22 @@
         section: "Sessions & Classes",
         content: `
 <h1>Notes and timestamps</h1>
-<p>This is where coaching scales. Pin thoughts to the exact second so nobody’s guessing “when he said the thing about the grip.”</p>
+<p>Attach short notes to exact moments on the timeline so everyone lands on the same frame.</p>
 <h2>From the player</h2>
 <ol>
-<li>Pause. (<strong>N</strong> if you’re keyboard-heavy.)</li>
-<li><strong>Add Note</strong>, type the cue, <strong>Save</strong>.</li>
+<li>Pause (shortcut <strong>N</strong>).</li>
+<li><strong>Add Note</strong>, type the text, <strong>Save</strong>.</li>
 </ol>
-<p>Stamp lands on the frame you stopped. Bar fills with markers; click to jump.</p>
+<p>The note is saved at the current time. Markers appear on the scrub bar; click to jump.</p>
 <h2>Filters</h2>
-<p><strong>All</strong> noise, <strong>Coach</strong> for instructor voice only, <strong>Mine</strong> when a student’s reviewing their own homework.</p>
+<p><strong>All</strong> shows every note; <strong>Coach</strong> shows instructor notes only; <strong>Mine</strong> shows only the signed-in student’s notes.</p>
 <h2>Who can edit</h2>
-<p>Coaches edit anything. Students touch only their own sticky notes.</p>
-<h2>How we coach with it</h2>
+<p>Instructors may edit any note. Students may edit only notes they created.</p>
+<h2>Tips</h2>
 <ul>
-<li>One line beats a paragraph. “Underhook to single leg @ 2:15” travels.</li>
-<li>Students tag questions for Thursday so you see them cold.</li>
-<li>Coach filter: skim your voice across the whole week fast.</li>
+<li>Short, specific lines (for example a technique and timestamp) are easier to scan later.</li>
+<li>Students can leave questions on their own sessions for follow-up.</li>
+<li>Use the coach filter to review instructor notes across several recordings.</li>
 </ul>
 `},
 
@@ -940,22 +940,22 @@
         section: "Sessions & Classes",
         content: `
 <h1>Tags and organization</h1>
-<p>Without tags you’re scrolling like it’s 2008. With tags your purple belts self-serve “everything spider guard from March.”</p>
-<h2>Vocabulary ideas</h2>
+<p>Tags group related sessions and classes so lists stay easy to filter as your library grows.</p>
+<h2>Tag ideas</h2>
 <ul>
-<li>Technique lane: <code>guard</code>, <code>takedowns</code>, …</li>
-<li>Gear / format: <code>no-gi</code>, <code>gi</code>, <code>open-mat</code>, …</li>
+<li>Technique area: <code>guard</code>, <code>takedowns</code>, …</li>
+<li>Format: <code>no-gi</code>, <code>gi</code>, <code>open-mat</code>, …</li>
 <li>Level: <code>fundamentals</code>, <code>advanced</code>, …</li>
 </ul>
-<h2>Slap a label on</h2>
-<p>In the session or class form, type the tag, hit Enter, next one. Don’t overthink punctuation.</p>
-<h2>Find it later</h2>
-<p>List screens filter by tag. Comp cycle hits? Pull everything tagged <code>comp-prep</code> without asking you to export a spreadsheet.</p>
-<h2>Gym rules that save pain</h2>
+<h2>Adding tags</h2>
+<p>In the session or class form, type a tag and press Enter. Repeat for additional tags.</p>
+<h2>Finding content</h2>
+<p>List views can filter by tag, for example everything tagged <code>comp-prep</code> for a training block.</p>
+<h2>Consistency</h2>
 <ul>
-<li>One spelling per concept. Not <code>guard</code>, <code>Guard</code>, <code>open-guard</code> for the same idea.</li>
-<li>Coaches agree once in a staff message, then everyone follows.</li>
-<li>Tags are shared: you’re building a school dictionary, not private hashtags.</li>
+<li>Use one spelling and style per concept (avoid <code>guard</code>, <code>Guard</code>, and <code>open-guard</code> for the same topic).</li>
+<li>Agree on a small shared vocabulary so the whole staff uses the same tags.</li>
+<li>Tags are shared across the school, not private to one person.</li>
 </ul>
 `},
 
@@ -964,19 +964,19 @@
         section: "Sessions & Classes",
         content: `
 <h1>Progress tracking</h1>
-<p>I don’t need a NASA dashboard. I need to know if my competitor watched the chain series before Saturday.</p>
-<h2>What we actually store</h2>
+<p>Progress is simple on purpose: enough to see whether someone finished a recording and when they last opened it.</p>
+<h2>What we store</h2>
 <ul>
-<li>Where they paused (resume works)</li>
-<li>Finished the full video or not</li>
-<li>Last time they opened it</li>
+<li>Last playback position (for resume)</li>
+<li>Whether the full video was completed</li>
+<li>Last opened time</li>
 </ul>
-<h2>For your members</h2>
-<p>Pick up where they left off. Their overview shows homework still sitting there versus done.</p>
-<h2>For you as coach / owner</h2>
-<p>Your dashboard and each student’s profile tell you completion and recency without stalking click heatmaps.</p>
-<h2>What we refuse to build</h2>
-<p>No creepy watch-count graphs, no selling eyeball data. Binary stuff: did the work, where’d they bail if they did.</p>
+<h2>For members</h2>
+<p>They resume where they left off. Overviews show items that still need a full watch versus completed items.</p>
+<h2>For instructors and owners</h2>
+<p>Instructor and admin views show completion and recency. We do not track fine-grained analytics or viewer heatmaps.</p>
+<h2>What we avoid</h2>
+<p>No invasive watch analytics or third-party ad-style tracking. The product stores only what it needs for resume and high-level completion.</p>
 `},
 
       "managing-members": {
@@ -984,17 +984,17 @@
         section: "Account Management",
         content: `
 <h1>Managing members</h1>
-<p>Roster hygiene is gym hygiene. Admins live in <strong>Admin</strong>. Coaches who only teach use <strong>Students</strong> to grow their side of the room.</p>
-<h2>Bring someone on</h2>
-<p><a onclick="navigate('inviting-members')">Inviting your team</a> walks the clicks.</p>
-<h2>Promote, demote, pivot</h2>
-<p><strong>Admin</strong> → click the human → role dropdown → save. Takes seconds, affects immediately.</p>
-<h2>Cut access</h2>
-<p><strong>Remove Member</strong> and they’re off the app tonight. Notes they already wrote stay (history matters).</p>
-<h2>Stuff people ask at the front desk</h2>
-<p><strong>Same human, two affiliations?</strong> Different email per school. One login, one academy.</p>
-<p><strong>Headcount cap?</strong> Software doesn’t invent one.</p>
-<p><strong>Kids inviting kids?</strong> Nah. Owners and coaches-only.</p>
+<p>School admins use <strong>Admin</strong> for the full roster. Instructors can use <strong>Students</strong> to manage student invites on their side.</p>
+<h2>Add someone</h2>
+<p>See <a onclick="navigate('inviting-members')">Inviting your team</a> for step-by-step invite flow.</p>
+<h2>Change roles</h2>
+<p><strong>Admin</strong> → select the member → role dropdown → save. Changes apply immediately.</p>
+<h2>Remove access</h2>
+<p><strong>Remove Member</strong> ends their access. Notes they already created remain for history.</p>
+<h2>Common questions</h2>
+<p><strong>One person, two schools?</strong> Use a different email address per school. Each school ties to its own account.</p>
+<p><strong>Member limits?</strong> The product does not enforce a headcount cap.</p>
+<p><strong>Student-to-student invites?</strong> Only staff roles can invite; students cannot invite other students.</p>
 `},
 
       profile: {
@@ -1003,17 +1003,17 @@
         content: `
 <h1>Profile and password</h1>
 <h2>Open your profile</h2>
-<p>Desktop: your name in the sidebar. Phone: menu, then your name. Basic hygiene.</p>
-<h2>Name on the belt… fine, name in the system</h2>
-<p>Fix typos, married names, whatever. <strong>Save Changes</strong>.</p>
-<h2>Rotate the password</h2>
+<p>Desktop: your name in the sidebar. Mobile: open the menu, then your name.</p>
+<h2>Name and details</h2>
+<p>Update display name or other profile fields, then <strong>Save Changes</strong>.</p>
+<h2>Change password</h2>
 <ol>
 <li><strong>Change Password</strong>.</li>
-<li>Current password (yeah, the old one).</li>
-<li>New + confirm.</li>
+<li>Enter current password.</li>
+<li>New password and confirmation.</li>
 <li><strong>Update Password</strong>.</li>
 </ol>
-<p>Brain-fogged, totally locked out? Head coach with admin rights or support@kaynos.net drags you back in.</p>
+<p>Locked out? Ask a school admin for a reset or email support@kaynos.net.</p>
 `},
 
       notifications: {
@@ -1021,21 +1021,21 @@
         section: "Account Management",
         content: `
 <h1>Email notifications</h1>
-<p>We nudge people when homework lands, not when your billing statement clears. Keeps momentum without spamming the whole gym.</p>
-<h2>Mails you might see</h2>
+<p>Email covers new sessions and classes plus onboarding (invites and temporary passwords), not billing.</p>
+<h2>Typical messages</h2>
 <ul>
-<li>“You got a new session” (students)</li>
-<li>“New class dropped” (students)</li>
-<li>Invites and temp passwords (onboarding)</li>
+<li>New session assigned (students)</li>
+<li>New class available (students)</li>
+<li>Invites and temporary passwords (onboarding)</li>
 </ul>
-<h2>If someone wants quiet</h2>
-<p><strong>Profile</strong> → flip <strong>Email Notifications</strong>. Security stuff (resets, lockouts) still sends. We’re not leaving you unsafe to save an inbox.</p>
-<h2>Ghost mail</h2>
+<h2>Turning notifications off</h2>
+<p><strong>Profile</strong> → <strong>Email Notifications</strong>. Security-related messages (for example password reset) may still be sent.</p>
+<h2>Not receiving mail</h2>
 <ol>
-<li>Spam. Always spam first.</li>
-<li>Profile email still their real one?</li>
-<li>Toggle actually on?</li>
-<li>Still nothing: support@kaynos.net with the address you expected.</li>
+<li>Check spam or promotions folders.</li>
+<li>Confirm the profile email address is correct.</li>
+<li>Confirm notifications are enabled in the profile.</li>
+<li>If it still fails, contact support@kaynos.net with the expected address.</li>
 </ol>
 `},
 
@@ -1044,35 +1044,35 @@
         section: "Troubleshooting",
         content: `
 <h1>Video upload problems</h1>
-<p>Upload night at the gym: router juggling kids on TikTok and a 4 GB roll. Here’s the usual suspects before you blame the software.</p>
-<h2>Dies immediately</h2>
-<p><strong>“Please select a video file”</strong>: your file isn’t MP4/MOV/WebM/MKV. HandBrake or VLC it to MP4 and stop suffering.</p>
-<p><strong>Too big</strong>: 5 GB ceiling. Trim the dead space, export 1080p, HandBrake preset “Fast 1080p” if you need training wheels.</p>
-<h2>Frozen bar</h2>
+<p>Large uploads depend on stable internet and a supported format. Check the items below before assuming an app bug.</p>
+<h2>Fails right away</h2>
+<p><strong>“Please select a video file”</strong>: the file may not be MP4, MOV, WebM, or MKV. Convert to MP4 (for example with HandBrake or VLC) and try again.</p>
+<p><strong>Too big</strong>: the limit is 5 GB. Trim the clip or export at 1080p; HandBrake’s “Fast 1080p30” preset is a common choice.</p>
+<h2>Progress appears stuck</h2>
 <ol>
-<li>Breathe: big files pause between chunks ~30–60s.</li>
-<li>Open any other site. No internet means no miracle.</li>
-<li>Cancel and relaunch the upload.</li>
+<li>Large files can pause between chunks for roughly 30–60 seconds.</li>
+<li>Confirm the network works (open another site).</li>
+<li>Cancel the upload and start again if it does not advance.</li>
 </ol>
-<h2>Crashes halfway</h2>
+<h2>Fails partway</h2>
 <ul>
-<li><strong>Network error during part upload</strong>: cable slipped, Wi‑Fi blinked. Reconnect, retry.</li>
-<li><strong>Part upload failed: 403</strong>: long upload, session token aged out. Cancel, fresh start.</li>
-<li><strong>500</strong>: our side sneezed. Coffee break, retry; still dead, email us.</li>
+<li><strong>Network error during part upload</strong>: reconnect and retry.</li>
+<li><strong>Part upload failed: 403</strong>: on very long uploads the session can expire. Cancel and upload again.</li>
+<li><strong>500</strong>: server-side error. Wait briefly and retry; if it persists, email support@kaynos.net.</li>
 </ul>
-<h2>Takes forever</h2>
-<p>Speed test measures <strong>upload</strong>, not “how fast Netflix loads.” Try fast.com.</p>
+<h2>Slow uploads</h2>
+<p>Measure <strong>upload</strong> speed, not download (for example fast.com with upload shown).</p>
 <table><thead><tr><th>Upload speed</th><th>500 MB</th><th>1 GB</th><th>2 GB</th></tr></thead><tbody>
 <tr><td>10 Mbps</td><td>~7 min</td><td>~14 min</td><td>~28 min</td></tr>
 <tr><td>25 Mbps</td><td>~3 min</td><td>~5 min</td><td>~11 min</td></tr>
 <tr><td>50 Mbps</td><td>~1.5 min</td><td>~3 min</td><td>~5 min</td></tr>
 <tr><td>100 Mbps</td><td>~45 sec</td><td>~1.5 min</td><td>~3 min</td></tr>
 </tbody></table>
-<p>Wired beats gym Wi‑Fi. Pause Dropbox sync. Upload after class if the building’s crowded.</p>
-<h2>Stuck claiming “uploading” forever</h2>
-<p>Browser ate it mid-flight? Tell support@kaynos.net which session or class — we’ll kick the status back to sane.</p>
-<h2>Still no love</h2>
-<p>Mail support@kaynos.net: gym name, browser, file type + size, screenshot if you got one.</p>
+<p>A wired connection often beats crowded gym Wi‑Fi. Pause heavy sync tools. Upload during a quieter time if the network is busy.</p>
+<h2>Status stuck on “uploading”</h2>
+<p>Contact support@kaynos.net with the session or class so we can reset the status if the browser closed mid-upload.</p>
+<h2>Still failing</h2>
+<p>Email support@kaynos.net: school name, browser, file type and size, and a screenshot if you have one.</p>
 `},
 
       "playback-issues": {
@@ -1080,20 +1080,20 @@
         section: "Troubleshooting",
         content: `
 <h1>Video playback problems</h1>
-<p>Film session’s rolling and the screen’s black. Walk this list before you panic the room.</p>
-<h2>Dead player</h2>
-<p><strong>Black / no controls:</strong> normal refresh, then hard refresh / clear cache, then Chrome as sanity check. Make sure the upload actually finished (not still “uploading” / “failed”).</p>
-<p><strong>“Cannot be played”:</strong> codec slap fight. MKV inside Safari loves to misbehave. Chrome or Firefox, or re-export MP4 with H.264 video + AAC audio and sleep better.</p>
-<h2>Spinning wheel</h2>
+<p>If the player is blank or errors, work through these checks.</p>
+<h2>Player blank or broken controls</h2>
+<p><strong>Black screen / no controls:</strong> refresh, then hard refresh or clear cache, then try Chrome. Confirm the upload finished (not “uploading” or “failed”).</p>
+<p><strong>“Cannot be played”:</strong> often a codec or browser issue. MKV can fail in Safari; try Chrome or Firefox, or re-export to MP4 with H.264 video and AAC audio.</p>
+<h2>Buffering or long spinners</h2>
 <ul>
-<li>Bandwidth test. Your members might be fine, your coach hotspot might not.</li>
-<li>Close the four streaming tabs.</li>
-<li>If your source was ridiculous bitrate 4K, re-upload a 1080p cut once.</li>
+<li>Check bandwidth (upload and download can differ by network).</li>
+<li>Close other streaming tabs or heavy downloads.</li>
+<li>Very high-bitrate 4K sources may stutter; a 1080p export may play more reliably.</li>
 </ul>
-<h2>Sound but no picture (or opposite)</h2>
-<p>Mismatching codec stacks. Try another browser first; if it persists, re-export with boring standard codecs.</p>
-<h2>Didn’t remember where I paused</h2>
-<p>Resume writes after a short beat. Slam-closing the tab in one second sometimes skips it. Rare, but real.</p>
+<h2>Sound but no picture (or the reverse)</h2>
+<p>Often a codec mismatch. Try another browser; if it persists, re-export with standard H.264/AAC.</p>
+<h2>Resume position wrong</h2>
+<p>Progress saves shortly after pausing. Closing the tab immediately can occasionally skip the save.</p>
 `},
 
       "login-issues": {
@@ -1101,19 +1101,19 @@
         section: "Troubleshooting",
         content: `
 <h1>Login and access issues</h1>
-<p>Usually it’s the boring stuff: wrong email, Caps Lock, typos. Sometimes it’s us telling you to cool off after too many guesses.</p>
-<h2>Password fights back</h2>
+<p>Most issues are wrong email, typos, or Caps Lock. Repeated failures can trigger a short lockout.</p>
+<h2>Password problems</h2>
 <ul>
-<li>Exact email your admin invited?</li>
-<li>Caps Lock behaved? Paste once to kill stealth typos.</li>
-<li>Nuclear option: admin sends reset or support@kaynos.net.</li>
+<li>Use the same email the invite was sent to.</li>
+<li>Check Caps Lock; paste the password once to avoid hidden typos.</li>
+<li>Ask an admin for a reset or email support@kaynos.net.</li>
 </ul>
 <h2>“Too many attempts”</h2>
-<p>We rate-limit abusive login spray from one IP. Wait 15–30 minutes like a round timer, or email support if it’s urgent.</p>
-<h2>Blank page / “no access”</h2>
-<p>Either we removed the account or your browser cached a ghost session. Private/incognito: if that loads, clear cache for app.kaynos.net on normal mode.</p>
-<h2>Still can’t get in</h2>
-<p>support@kaynos.net with your name, academy, email. We’ll match you to the roster.</p>
+<p>Too many failed logins from one address are rate-limited. Wait 15–30 minutes or contact support if you need access sooner.</p>
+<h2>Blank page or “no access”</h2>
+<p>The account may have been removed, or the browser cached an old session. Try a private/incognito window. If that works, clear site data for app.kaynos.net in normal mode.</p>
+<h2>Still locked out</h2>
+<p>Email support@kaynos.net with your name, school, and email address.</p>
 `},
 
       "email-issues": {
@@ -1121,22 +1121,22 @@
         section: "Troubleshooting",
         content: `
 <h1>Email and notification issues</h1>
-<p>Half of gym ops is chasing inboxes. Treat this like checking if someone actually got the waiver.</p>
-<h2>Radio silence</h2>
+<p>Most delivery problems are spam filtering, typos, or disabled notification settings.</p>
+<h2>Not receiving messages</h2>
 <ol>
-<li>Spam / promotions tab. Gmail loves hiding us.</li>
-<li>Tell them to add the sender to contacts.</li>
-<li>Profile email correct, notifications toggled on.</li>
+<li>Check spam or promotions folders (Gmail often sorts automated mail here).</li>
+<li>Add the sender to contacts or safe senders.</li>
+<li>Confirm profile email and that notifications are enabled.</li>
 </ol>
-<h2>Invite vanished</h2>
+<h2>Invite missing</h2>
 <ul>
-<li>Spam again.</li>
-<li>Typo when you typed their .gmail vs .googlemail drama.</li>
-<li>Resend from <strong>Admin</strong> or hit Reset Password.</li>
-<li>Corporate mail servers: sometimes IT has to allowlist. Manual reset from an admin still works if email’s hostile.</li>
+<li>Check spam.</li>
+<li>Confirm the email address has no typo (for example .gmail vs .googlemail).</li>
+<li>Resend from <strong>Admin</strong> or use Reset Password.</li>
+<li>Corporate filters may require IT allowlisting; an admin can still issue a manual reset.</li>
 </ul>
-<h2>Blowing up their inbox</h2>
-<p><strong>Profile</strong> → kill class/session mail if they want quiet. Security letters still deliver.</p>
+<h2>Too many emails</h2>
+<p><strong>Profile</strong> → turn off class and session mail if the member prefers quiet. Security-related email may still send.</p>
 `},
 
       performance: {
@@ -1144,21 +1144,21 @@
         section: "Troubleshooting",
         content: `
 <h1>Performance and loading</h1>
-<p>Feels sluggish? Usually it’s the café Wi‑Fi or a browser extension throwing hands, not the whole platform dying.</p>
-<h2>Dragging</h2>
+<p>Slow loads are often local network, browser cache, or extensions rather than a full outage.</p>
+<h2>General slowness</h2>
 <ol>
-<li>~5 Mbps down stable is enough for normal use.</li>
-<li>Blow away cached junk for app.kaynos.net.</li>
-<li>Chrome or Firefox before you blame Safari if you’re debugging fast.</li>
-<li>Disable hyper-aggressive blockers once to test.</li>
-<li>Close the 40 tabs. Memory is real.</li>
+<li>About 5 Mbps down is enough for typical use.</li>
+<li>Clear cache and site data for app.kaynos.net.</li>
+<li>Try Chrome or Firefox if Safari misbehaves during troubleshooting.</li>
+<li>Temporarily disable strict ad or script blockers to test.</li>
+<li>Close excess tabs to free memory.</li>
 </ol>
-<h2>Looks like 1995 HTML</h2>
-<p>Half-loaded CSS. Hard refresh: <strong>Ctrl+Shift+R</strong> (Windows/Linux) or <strong>Cmd+Shift+R</strong> (Mac).</p>
-<h2>Random red error text</h2>
+<h2>Unstyled or broken layout</h2>
+<p>CSS may have failed to load. Hard refresh: <strong>Ctrl+Shift+R</strong> (Windows/Linux) or <strong>Cmd+Shift+R</strong> (Mac).</p>
+<h2>Red error messages</h2>
 <ul>
-<li>Refresh: half our “disasters” are a single failed request.</li>
-<li>Repeats: screenshot, tell us what button you hit, support@kaynos.net.</li>
+<li>Refresh once; a single failed request can show an error.</li>
+<li>If it repeats, screenshot it, note what you clicked, and email support@kaynos.net.</li>
 </ul>
 `},
 
@@ -1167,29 +1167,29 @@
         section: "Troubleshooting",
         content: `
 <h1>Mobile device tips</h1>
-<p>Parents film from the bleachers. Coaches review on the drive home. No App Store detour.</p>
-<h2>Browsers that behave</h2>
+<p>Kaynos runs in the mobile browser; you do not need a separate app install from a store.</p>
+<h2>Supported browsers</h2>
 <ul>
 <li>iPhone / iPad: Safari or Chrome</li>
 <li>Android: Chrome or Firefox</li>
 </ul>
-<h2>Upload from the phone</h2>
-<p>Tap the upload tile, pick camera roll. Keep the screen awake and stay in that tab. Mobile OS loves freezing background uploads to save battery.</p>
-<h2>Watching rolls</h2>
+<h2>Upload from a phone</h2>
+<p>Tap upload and choose from photos or files. Keep the screen on and stay on the tab; backgrounding the browser can pause uploads.</p>
+<h2>Watching video</h2>
 <ul>
-<li>Tap the picture for play/pause; HUD hides after a couple seconds.</li>
-<li>Rotate landscape so the mat reads human-sized.</li>
-<li>Speed changes, notes, markers: same toolkit as the desk machine.</li>
+<li>Tap the video for play/pause; on-screen controls may hide after a few seconds.</li>
+<li>Landscape often fits the frame better than portrait.</li>
+<li>Playback speed, notes, and markers match the desktop experience.</li>
 </ul>
-<h2>Pin Kaynos like an app</h2>
+<h2>Add to home screen</h2>
 <ul>
-<li>iOS: Share sheet → Add to Home Screen</li>
+<li>iOS: Share → Add to Home Screen</li>
 <li>Android: browser menu → Add to Home Screen</li>
 </ul>
-<h2>Reality checks</h2>
+<h2>Limits</h2>
 <ul>
-<li>Huge files + old phone = pain. Use a laptop for the 3 GB tournament day.</li>
-<li>Tiny screen + dense notes panel: landscape saves eyes.</li>
+<li>Very large files on older phones can be slow or unstable; a laptop may be easier.</li>
+<li>Landscape helps when the notes panel is open on a small display.</li>
 </ul>
 `},
 
@@ -1198,58 +1198,58 @@
         section: "FAQ",
         content: `
 <h1>Frequently asked questions</h1>
-<p>Straight answers from how we built Kaynos: you run the academy, your coaches teach on the mats, and your members train. The rest of the help center walks through setup and troubleshooting step by step.</p>
+<p>Kaynos is built for schools that use video review: instructors publish sessions and classes, add timestamped notes, and members watch on their own time. The rest of the help center covers setup and troubleshooting in detail.</p>
 
-<h2>What you’re signing up for</h2>
+<h2>What you are signing up for</h2>
 
 <h3>What is Kaynos, in plain language?</h3>
-<p>It’s the tool I wish we had when private lessons and comp prep meant texting clips that disappeared in the group chat. You put roll footage or instruction on a <strong>session</strong> (one student) or a <strong>class</strong> (everyone in the school), drop notes right on the timeline, and your people review when life lets them. No extra app store download, just the work.</p>
+<p>It replaces ad-hoc clip sharing in chat. You put instruction or sparring footage on a <strong>session</strong> (one student) or a <strong>class</strong> (everyone in the school), add notes on the timeline, and students review when they can. Everything runs in the browser, without a separate app install.</p>
 
 <h3>Do my students need to install something?</h3>
-<p>Nope. They hit <strong>app.kaynos.net</strong> in a normal phone or laptop browser. If they can watch YouTube on your gym Wi‑Fi, they can use Kaynos. Same for coaches on the front desk laptop.</p>
+<p>No. They open <strong>app.kaynos.net</strong> in a normal phone or laptop browser. If YouTube works on your network, Kaynos should too.</p>
 
 <h3>Is this only for BJJ?</h3>
-<p>We’re BJJ people first, but the workflow is the same anywhere video plus coaching notes matter: wrestling, judo, MMA, striking gyms, anywhere you’re breaking down film like you break down a roll.</p>
+<p>Kaynos started with Brazilian jiu-jitsu, but the same workflow fits any sport or gym where coaches annotate video: wrestling, judo, MMA, striking, and similar programs.</p>
 
 <hr>
 
 <h2>Running the school</h2>
 
 <h3>Do you cap how many students or coaches I can add?</h3>
-<p>Not in the software. Your school grows, you keep inviting. I’m not going to tell you to kick someone off the mat because a headcount limit lit up.</p>
+<p>No. The product does not enforce a member or coach limit.</p>
 
-<h3>Can my white belts watch each other’s private lessons?</h3>
-<p>That’s a <strong>no</strong>, by design. A <strong>session</strong> stays between that student, the coach who filmed it, and your admins. <strong>Classes</strong> are the room where everyone sees the same tape, like a big group class or an open mat recap.</p>
+<h3>Can students watch each other’s private lessons?</h3>
+<p><strong>No.</strong> A <strong>session</strong> is visible only to that student, staff who created or need it, and admins. <strong>Classes</strong> are shared with everyone in the school, like a group lesson recording.</p>
 
 <h3>Can families download my class video and pass it around?</h3>
-<p>There’s no download button. Playback runs through streaming links that expire. You still own your curriculum; we’re not trying to make it trivial for your content to walk out the door as a file.</p>
+<p>There is no download button for end users. Playback uses expiring streaming links. Your curriculum stays harder to copy out as a casual file share.</p>
 
 <hr>
 
-<h2>Trust, kids on camera, and the boring important stuff</h2>
+<h2>Trust, minors on camera, and policy</h2>
 
 <h3>How serious are you about security?</h3>
-<p>HTTPS end to end. Passwords hashed, not sitting in a spreadsheet somewhere. Video sits in real cloud storage behind a CDN (details in <a onclick="navigate('storage')">Video storage and retention</a>). You handle your culture; we handle not being careless with the pipe.</p>
+<p>HTTPS in transit, hashed passwords, and video in cloud storage behind a CDN. See <a onclick="navigate('storage')">Video storage and retention</a> for storage detail.</p>
 
 <h3>What about minors on the footage?</h3>
-<p>That’s on the academy. Get your waivers and parent consent in order the same way you would for any recording on the mats, follow your local rules, and read our Terms of Service. If you’re unsure, talk to someone who bills hourly. We’re coaches, not lawyers.</p>
+<p>Your school is responsible for waivers, parental consent, and local law, the same as for any training footage. Read the Terms of Service. For legal questions, consult qualified counsel; we cannot provide legal advice.</p>
 
 <hr>
 
-<h2>What works on the devices your guys actually use</h2>
+<h2>Devices and integrations</h2>
 
-<h3>Which browsers actually behave?</h3>
-<p>Current Chrome, Firefox, Safari, Edge. If someone’s upload or playback is acting weird, Chrome is usually the first place I tell them to try before we blame the platform.</p>
+<h3>Which browsers are supported?</h3>
+<p>Current Chrome, Firefox, Safari, and Edge. If upload or playback fails in one browser, trying Chrome is a reasonable first step.</p>
 
-<h3>Do you expose an API for my own tooling?</h3>
-<p>Yes. School admins can mint tokens and wire up schedules, reporting, whatever you’re scripting behind the scenes. Read <a onclick="navigate('developer-api')">Developer API</a> before you paste secrets into a repo, please.</p>
+<h3>Do you expose an API?</h3>
+<p>Yes. School admins can create API tokens for scripts and integrations. Read <a onclick="navigate('developer-api')">Developer API</a> and avoid committing secrets to source control.</p>
 
 <hr>
 
-<h2>When something breaks, talk to us</h2>
+<h2>Support</h2>
 
-<h3>How do I get a human?</h3>
-<p>Email <strong>support@kaynos.net</strong>: what happened, what you expected, gym name, browser. A screenshot or quick recording gets you fixed faster than a vague “it broke.” Logged in? There’s chat in the app too.</p>
+<h3>How do I contact you?</h3>
+<p>Email <strong>support@kaynos.net</strong> with what happened, what you expected, school name, and browser. A screenshot or short screen recording speeds up diagnosis. In-app chat is available when you are logged in.</p>
 `},
 
       "developer-api": {
@@ -1257,7 +1257,7 @@
         section: "Developers",
         content: `
 <h1>Developer API</h1>
-<p>Sometimes the gym outgrows clicking. Maybe you pipe schedules, maybe you script reports for belt promotions. This is your HTTPS hook into <em>your</em> school’s data, scoped tight.</p>
+<p>For schools that want automation beyond the web UI: schedules, exports, or custom reporting. The API is HTTPS-only and scoped to your school’s data.</p>
 
 <div class="hint hint-info"><span class="hint-icon" aria-hidden="true">📘</span><div><strong>Swagger first</strong><br>Sign in to the web app as a <strong>school admin</strong>, open in-app API docs. Same browser session means Try it out can use your cookies.<br><a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener noreferrer">Swagger (production)</a></div></div>
 
@@ -1314,11 +1314,11 @@
 <h2>When calls fail</h2>
 <p>JSON body with an <code>error</code> string. Typical: <code>401</code> missing/invalid token, <code>403</code> wrong scope or role, <code>404</code> thing not in your school, <code>400</code> bad payload.</p>
 
-<h2>Gym-owner common sense</h2>
+<h2>Operational practices</h2>
 <ul>
-<li>Rotate keys when a tech-savvy coach leaves staff.</li>
-<li>Default read-only until you have a reason to let code mutate member records.</li>
-<li>Never paste tokens into a React bundle kids can view-source. Server-side only.</li>
+<li>Rotate API keys when technical staff leave.</li>
+<li>Prefer read-only scopes until write access is clearly required.</li>
+<li>Never embed secrets in client-side code; keep tokens on the server.</li>
 </ul>
 
 <h2>Quick links</h2>
