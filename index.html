@@ -1190,58 +1190,58 @@
         section: "FAQ",
         content: `
 <h1>Frequently asked questions</h1>
-<p>Quick answers about Kaynos for school administrators, coaches, and members. For step-by-step help, use the sections in the sidebar or search above.</p>
+<p>Straight answers from how we built Kaynos: you run the academy, your coaches teach on the mats, and your members train. The rest of the help center walks through setup and troubleshooting step by step.</p>
 
-<h2>About the product</h2>
+<h2>What you’re signing up for</h2>
 
-<h3>What is Kaynos?</h3>
-<p>Kaynos is a video review and training operations platform built for martial arts schools and similar academies. Instructors upload session or class video (or link Vimeo), add timestamped notes, and assign work to students, who review on their own time in the browser.</p>
+<h3>What is Kaynos, in plain language?</h3>
+<p>It’s the tool I wish we had when private lessons and comp prep meant texting clips that disappeared in the group chat. You put roll footage or instruction on a <strong>session</strong> (one student) or a <strong>class</strong> (everyone in the school), drop notes right on the timeline, and your people review when life lets them. No extra app store download, just the work.</p>
 
-<h3>Do I need to install an app?</h3>
-<p>No. Kaynos runs as a responsive web application at <strong>app.kaynos.net</strong>. Use a current desktop or mobile browser. There is no separate mobile app to download.</p>
+<h3>Do my students need to install something?</h3>
+<p>Nope. They hit <strong>app.kaynos.net</strong> in a normal phone or laptop browser. If they can watch YouTube on your gym Wi‑Fi, they can use Kaynos. Same for coaches on the front desk laptop.</p>
 
-<h3>Which disciplines or sports does Kaynos support?</h3>
-<p>The product was designed with Brazilian Jiu-Jitsu workflows in mind, but it fits any coaching context where recorded training and structured review matter, including wrestling, judo, mixed martial arts, striking arts, and related programs.</p>
-
-<hr>
-
-<h2>Organization, roles, and content</h2>
-
-<h3>Is there a limit on instructors or students?</h3>
-<p>No. The platform does not enforce a fixed seat count. Add the roster your school needs.</p>
-
-<h3>Can one student see another student’s private session?</h3>
-<p>No. A <strong>session</strong> is visible only to the assigned student, the instructor who created it, and school administrators. <strong>Classes</strong> are visible to all members of the school so group instruction can be shared broadly.</p>
-
-<h3>Can students or parents download lesson video as a file?</h3>
-<p>No. Playback uses streaming with short-lived, presigned URLs. There is no end-user download control in the product; this reduces uncontrolled redistribution of school content.</p>
+<h3>Is this only for BJJ?</h3>
+<p>We’re BJJ people first, but the workflow is the same anywhere video plus coaching notes matter: wrestling, judo, MMA, striking gyms, anywhere you’re breaking down film like you break down a roll.</p>
 
 <hr>
 
-<h2>Security, privacy, and compliance</h2>
+<h2>Running the school</h2>
 
-<h3>How is data protected in transit and at rest?</h3>
-<p>Traffic between browsers and Kaynos uses HTTPS (TLS). Account passwords are stored using standard one-way hashing; they are never kept in plain text. Video is stored in cloud object storage and delivered through a CDN; see <a onclick="navigate('storage')">Video storage and retention</a> for where files live and how long they are kept.</p>
+<h3>Do you cap how many students or coaches I can add?</h3>
+<p>Not in the software. Your school grows, you keep inviting. I’m not going to tell you to kick someone off the mat because a headcount limit lit up.</p>
 
-<h3>What about filming athletes who are minors?</h3>
-<p>Each school is responsible for obtaining any required parental or guardian consent and for complying with applicable laws and internal policies before recording or uploading video of anyone under 18. Requirements are summarized in our Terms of Service; when in doubt, consult qualified legal counsel.</p>
+<h3>Can my white belts watch each other’s private lessons?</h3>
+<p>That’s a <strong>no</strong>, by design. A <strong>session</strong> stays between that student, the coach who filmed it, and your admins. <strong>Classes</strong> are the room where everyone sees the same tape, like a big group class or an open mat recap.</p>
 
-<hr>
-
-<h2>Technical requirements</h2>
-
-<h3>Which browsers are supported?</h3>
-<p>We support current versions of Google Chrome, Mozilla Firefox, Apple Safari, and Microsoft Edge. Chrome generally offers the most consistent experience for upload and playback. Keep the browser updated and allow JavaScript for <strong>app.kaynos.net</strong>.</p>
-
-<h3>Does Kaynos offer a public API?</h3>
-<p>Yes. School administrators can issue API tokens for integrations. See <a onclick="navigate('developer-api')">Developer API</a> for authentication, scopes, documentation links, and security practices.</p>
+<h3>Can families download my class video and pass it around?</h3>
+<p>There’s no download button. Playback runs through streaming links that expire. You still own your curriculum; we’re not trying to make it trivial for your content to walk out the door as a file.</p>
 
 <hr>
 
-<h2>Support and feedback</h2>
+<h2>Trust, kids on camera, and the boring important stuff</h2>
 
-<h3>How do I report a problem or request help?</h3>
-<p>Email <strong>support@kaynos.net</strong> with a short description of what occurred, what you expected, your school name, and the browser you used. Screenshots or screen recordings help us reproduce issues quickly. You can also use in-app chat when logged in.</p>
+<h3>How serious are you about security?</h3>
+<p>HTTPS end to end. Passwords hashed, not sitting in a spreadsheet somewhere. Video sits in real cloud storage behind a CDN (details in <a onclick="navigate('storage')">Video storage and retention</a>). You handle your culture; we handle not being careless with the pipe.</p>
+
+<h3>What about minors on the footage?</h3>
+<p>That’s on the academy. Get your waivers and parent consent in order the same way you would for any recording on the mats, follow your local rules, and read our Terms of Service. If you’re unsure, talk to someone who bills hourly. We’re coaches, not lawyers.</p>
+
+<hr>
+
+<h2>What works on the devices your guys actually use</h2>
+
+<h3>Which browsers actually behave?</h3>
+<p>Current Chrome, Firefox, Safari, Edge. If someone’s upload or playback is acting weird, Chrome is usually the first place I tell them to try before we blame the platform.</p>
+
+<h3>Do you expose an API for my own tooling?</h3>
+<p>Yes. School admins can mint tokens and wire up schedules, reporting, whatever you’re scripting behind the scenes. Read <a onclick="navigate('developer-api')">Developer API</a> before you paste secrets into a repo, please.</p>
+
+<hr>
+
+<h2>When something breaks, talk to us</h2>
+
+<h3>How do I get a human?</h3>
+<p>Email <strong>support@kaynos.net</strong>: what happened, what you expected, gym name, browser. A screenshot or quick recording gets you fixed faster than a vague “it broke.” Logged in? There’s chat in the app too.</p>
 `},
 
       "developer-api": {
