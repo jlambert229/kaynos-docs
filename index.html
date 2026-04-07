@@ -1,757 +1,633 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kaynos — Help Center</title>
   <meta name="theme-color" content="#060609" />
+  <meta name="description" content="Kaynos help center — setup, video upload, playback, troubleshooting, and developer API docs.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;500&display=swap">
   <style>
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* Design tokens aligned with Kaynos app (src/styles.css) */
     :root {
-      --bg: #060609;
-      --bg-elevated: #141418;
-      --bg-secondary: #1e1e24;
-      --bg-tertiary: #2a2a32;
-      --bg-glass: rgba(20, 20, 24, 0.82);
-      --bg-hover: rgba(245, 245, 247, 0.04);
-      --bg-active: rgba(245, 245, 247, 0.07);
-      --text-primary: #f0f0f4;
-      --text-secondary: rgba(240, 240, 244, 0.68);
-      --text-tertiary: rgba(240, 240, 244, 0.46);
-      --border: rgba(240, 240, 244, 0.08);
-      --border-strong: rgba(240, 240, 244, 0.15);
-      --accent: #3b9eff;
-      --accent-hover: #5aafff;
-      --accent-soft: rgba(59, 158, 255, 0.12);
-      --success: #32D74B;
-      --warning: #FF9F0A;
-      --danger: #FF453A;
-      --font-body: 'Inter', 'Helvetica Neue', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-      --sidebar-w: 280px;
-      --header-h: 56px;
-      --radius: 12px;
-      --radius-sm: 8px;
-      --shadow: 0 2px 20px rgba(0, 0, 0, 0.30), 0 0 1px rgba(255, 255, 255, 0.04);
-      --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.40), 0 0 1px rgba(255, 255, 255, 0.05);
-      --leading-normal: 1.5;
-      --leading-relaxed: 1.65;
-      --text-base: 0.875rem;
-      --text-3xl: 1.875rem;
-      --text-xl: 1.25rem;
-      --text-lg: 1.0625rem;
-      --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
-      --duration-fast: 0.15s;
-
-      /* Legacy names used in markup */
-      --text: var(--text-primary);
-      --bg-sidebar: var(--bg-elevated);
-      --bg-card: var(--bg-elevated);
-      --bg-code: var(--bg-secondary);
-      --border-light: var(--border);
-      --accent-light: var(--accent-soft);
-      --accent-dark: var(--accent-hover);
-
+      --bg:           #060609;
+      --bg-elevated:  #111115;
+      --bg-secondary: #1a1a20;
+      --bg-tertiary:  #252530;
+      --bg-glass:     rgba(6,6,9,0.88);
+      --bg-hover:     rgba(255,255,255,0.04);
+      --bg-active:    rgba(255,255,255,0.07);
+      --text-primary:   #f0f0f6;
+      --text-secondary: rgba(240,240,246,0.65);
+      --text-tertiary:  rgba(240,240,246,0.38);
+      --border:         rgba(255,255,255,0.07);
+      --border-strong:  rgba(255,255,255,0.12);
+      --accent:         #4dabf7;
+      --accent-hover:   #74c0fc;
+      --accent-soft:    rgba(77,171,247,0.10);
+      --accent-border:  rgba(77,171,247,0.25);
+      --success:        #40c057;
+      --success-soft:   rgba(64,192,87,0.10);
+      --warning:        #fd7e14;
+      --warning-soft:   rgba(253,126,20,0.10);
+      --danger:         #fa5252;
+      --danger-soft:    rgba(250,82,82,0.10);
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+      --sidebar-w: 268px;
+      --toc-w:     216px;
+      --header-h:  56px;
+      --radius:    10px;
+      --radius-sm: 7px;
+      --radius-xs: 4px;
+      --shadow:    0 1px 12px rgba(0,0,0,.35), 0 0 1px rgba(255,255,255,.04);
+      --shadow-lg: 0 8px 40px rgba(0,0,0,.50), 0 0 1px rgba(255,255,255,.05);
+      --ease: cubic-bezier(0.22,0.61,0.36,1);
+      --dur: 0.14s;
       color-scheme: dark;
     }
 
-    html {
-      font-size: 16px;
-      scroll-behavior: smooth;
-      text-size-adjust: 100%;
-    }
+    html { font-size: 16px; scroll-behavior: smooth; text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
 
     @media (prefers-reduced-motion: reduce) {
-
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-
-      html {
-        scroll-behavior: auto;
-      }
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      html { scroll-behavior: auto; }
     }
 
-    * {
-      scrollbar-width: thin;
-      scrollbar-color: var(--bg-tertiary) transparent;
-    }
+    * { scrollbar-width: thin; scrollbar-color: var(--bg-tertiary) transparent; }
+    *::-webkit-scrollbar { width: 5px; height: 5px; }
+    *::-webkit-scrollbar-track { background: transparent; }
+    *::-webkit-scrollbar-thumb { background: var(--bg-tertiary); border-radius: 9999px; }
 
-    *::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-
-    *::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    *::-webkit-scrollbar-thumb {
-      background: var(--bg-tertiary);
-      border-radius: 9999px;
-      border: 2px solid transparent;
-      background-clip: padding-box;
-    }
-
-    ::selection {
-      background: rgba(59, 158, 255, 0.30);
-      color: var(--text-primary);
-    }
+    ::selection { background: rgba(77,171,247,.28); color: var(--text-primary); }
 
     body {
       font-family: var(--font-body);
-      color: var(--text);
+      color: var(--text-primary);
       background: var(--bg);
-      line-height: var(--leading-normal);
-      font-size: var(--text-base);
+      line-height: 1.6;
+      font-size: .9375rem;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* HEADER */
+    /* ── READING PROGRESS ─── */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+      z-index: 200; transition: width .1s linear; pointer-events: none;
+    }
+
+    /* ── HEADER ─── */
     .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      position: fixed; top: 0; left: 0; right: 0;
       height: var(--header-h);
       background: var(--bg-glass);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
       border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      padding: 0 24px;
-      z-index: 100;
-      gap: 16px
+      display: flex; align-items: center;
+      padding: 0 20px; z-index: 100; gap: 12px;
     }
 
     .header-logo {
-      font-weight: 600;
-      font-size: 15px;
-      letter-spacing: -.02em;
-      color: var(--text);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 8px
+      font-weight: 600; font-size: 14.5px; letter-spacing: -.025em;
+      color: var(--text-primary); text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+      flex-shrink: 0; white-space: nowrap;
     }
-
-    .header-logo span {
-      opacity: .4;
-      font-weight: 400
+    .header-logo-icon {
+      width: 26px; height: 26px; background: #c62828;
+      border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
+    .header-logo-sep { color: var(--text-tertiary); font-weight: 400; margin: 0 1px; }
+    .header-logo-sub { color: var(--text-tertiary); font-weight: 400; font-size: 13px; }
 
-    .header-kaynos-link {
-      flex-shrink: 0;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--accent);
-      text-decoration: none;
-      white-space: nowrap;
-      padding: 6px 10px;
-      border-radius: var(--radius-sm);
-      transition: color var(--duration-fast) var(--ease-out),
-        background var(--duration-fast) var(--ease-out);
+    .header-search { flex: 1; max-width: 380px; position: relative; }
+    .header-search-icon {
+      position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+      color: var(--text-tertiary); pointer-events: none; display: flex;
     }
-
-    .header-kaynos-link:hover {
-      color: var(--accent-hover);
-      background: var(--accent-soft);
-      text-decoration: none;
-    }
-
-    .header-search {
-      flex: 1;
-      max-width: 400px;
-      position: relative
-    }
-
     .header-search input {
-      width: 100%;
-      height: 36px;
-      padding: 0 12px 0 36px;
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius-sm);
+      width: 100%; height: 34px;
+      padding: 0 72px 0 34px;
+      border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
       background: var(--bg-secondary);
-      font-family: var(--font-body);
-      font-size: var(--text-base);
-      color: var(--text);
-      outline: none;
-      transition: border-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+      font-family: var(--font-body); font-size: .875rem; color: var(--text-primary);
+      outline: none; transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
     }
-
     .header-search input:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 2px rgba(59, 158, 255, 0.12);
+      box-shadow: 0 0 0 3px rgba(77,171,247,.10);
     }
-
-    .header-search input::placeholder {
-      color: var(--text-tertiary)
+    .header-search input::placeholder { color: var(--text-tertiary); }
+    .search-kbd {
+      position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+      display: flex; gap: 2px; pointer-events: none;
     }
-
-    .header-search svg {
-      position: absolute;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-tertiary);
-      pointer-events: none
-    }
-
-    .menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text);
-      cursor: pointer;
-      padding: 4px
+    .search-kbd kbd {
+      font-family: var(--font-body); font-size: 10px;
+      color: var(--text-tertiary); border: 1px solid var(--border-strong);
+      border-radius: 3px; padding: 1px 4px; background: var(--bg-tertiary);
     }
 
     .search-results {
-      position: absolute;
-      top: calc(100% + 4px);
-      left: 0;
-      right: 0;
-      background: var(--bg-card);
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius-sm);
-      max-height: 360px;
-      overflow-y: auto;
-      display: none;
-      box-shadow: var(--shadow-lg);
+      position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+      background: var(--bg-elevated); border: 1px solid var(--border-strong);
+      border-radius: var(--radius); max-height: 400px; overflow-y: auto;
+      display: none; box-shadow: var(--shadow-lg); z-index: 110;
     }
-
-    .search-results.active {
-      display: block
-    }
-
+    .search-results.active { display: block; }
     .search-result {
-      padding: 10px 14px;
-      cursor: pointer;
-      border-bottom: 1px solid var(--border-light);
-      font-size: 14px
+      padding: 10px 14px; cursor: pointer;
+      border-bottom: 1px solid var(--border); font-size: .875rem;
+      transition: background var(--dur);
     }
+    .search-result:last-child { border-bottom: none; }
+    .search-result:hover, .search-result.focused { background: var(--bg-hover); }
+    .search-result .sr-title { font-weight: 500; margin-bottom: 2px; }
+    .search-result .sr-section { font-size: 11px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: .05em; }
+    .search-result .sr-snippet { font-size: .8125rem; color: var(--text-secondary); margin-top: 4px; line-height: 1.5; }
+    .search-result mark { background: rgba(77,171,247,.20); color: var(--accent-hover); border-radius: 2px; padding: 0 2px; }
+    .search-empty { padding: 24px 14px; text-align: center; color: var(--text-tertiary); font-size: .875rem; }
 
-    .search-result:last-child {
-      border-bottom: none
-    }
+    .header-spacer { flex: 1; }
 
-    .search-result:hover {
-      background: var(--bg-hover);
-    }
-
-    .search-result .sr-title {
-      font-weight: 500;
-      margin-bottom: 2px
-    }
-
-    .search-result .sr-section {
-      font-size: 12px;
-      color: var(--text-tertiary)
-    }
-
-    .search-result .sr-snippet {
-      font-size: 13px;
-      color: var(--text-secondary);
-      margin-top: 4px
-    }
-
-    .search-result mark {
-      background: var(--accent-soft);
-      color: var(--accent-hover);
-      border-radius: 2px;
-      padding: 0 2px;
-    }
-
-    .search-empty {
-      padding: 20px 14px;
-      text-align: center;
-      color: var(--text-tertiary);
-      font-size: 14px
-    }
-
-    /* SIDEBAR */
-    .sidebar {
-      position: fixed;
-      top: var(--header-h);
-      left: 0;
-      width: var(--sidebar-w);
-      height: calc(100vh - var(--header-h));
-      background: var(--bg-sidebar);
-      border-right: 1px solid var(--border);
-      overflow-y: auto;
-      padding: 20px 0;
-      z-index: 90;
-      transition: transform 0.25s var(--ease-out);
-      box-shadow: inset 0 1px 0 rgba(59, 158, 255, 0.12);
-    }
-
-    .sidebar-section {
-      margin-bottom: 8px
-    }
-
-    .sidebar-section-title {
-      padding: 6px 20px;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--text-tertiary)
-    }
-
-    .sidebar-link {
-      display: block;
-      padding: 6px 20px 6px 28px;
-      font-size: 14px;
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: color .1s, background .1s;
-      cursor: pointer;
-      border-left: 2px solid transparent
-    }
-
-    .sidebar-link:hover {
-      color: var(--text);
-      background: var(--bg-hover);
-    }
-
-    .sidebar-link.active {
-      color: var(--accent);
-      border-left-color: var(--accent);
-      font-weight: 600;
-      background: var(--accent-soft);
-    }
-
-    /* CONTENT */
-    .content {
-      margin-left: var(--sidebar-w);
-      margin-top: var(--header-h);
-      min-height: calc(100vh - var(--header-h))
-    }
-
-    .content-inner {
-      max-width: 740px;
-      margin: 0 auto;
-      padding: 40px 48px 80px
-    }
-
-    /* TYPOGRAPHY */
-    .content-inner h1 {
-      font-size: var(--text-3xl);
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-      line-height: 1.2;
-    }
-
-    .content-inner h2 {
-      font-size: var(--text-xl);
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      margin-top: 40px;
-      margin-bottom: 12px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border);
-      line-height: 1.3;
-    }
-
-    .content-inner h2:first-of-type {
-      border-top: none;
-      padding-top: 0
-    }
-
-    .content-inner h3 {
-      font-size: var(--text-lg);
-      font-weight: 600;
-      margin-top: 28px;
-      margin-bottom: 8px;
-    }
-
-    .content-inner p {
-      margin-bottom: 16px;
-      color: var(--text)
-    }
-
-    .content-inner ul,
-    .content-inner ol {
-      margin-bottom: 16px;
-      padding-left: 24px
-    }
-
-    .content-inner li {
-      margin-bottom: 6px;
-      color: var(--text)
-    }
-
-    .content-inner strong {
-      font-weight: 600
-    }
-
-    .content-inner code {
-      font-family: var(--font-mono);
-      font-size: 0.8125rem;
-      background: var(--bg-code);
-      padding: 2px 6px;
-      border-radius: var(--radius-sm);
-      color: var(--accent-hover);
-    }
-
-    .content-inner a {
-      color: var(--accent);
-      text-decoration: none;
-      transition: color var(--duration-fast) var(--ease-out);
-    }
-
-    .content-inner a:hover {
-      color: var(--accent-hover);
-      text-decoration: underline;
-    }
-
-    .content-inner hr {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 32px 0
-    }
-
-    /* TABLES */
-    .content-inner table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-      font-size: 14px
-    }
-
-    .content-inner th {
-      text-align: left;
-      padding: 10px 14px;
-      background: var(--bg-code);
-      font-weight: 600;
-      font-size: 13px;
-      border: 1px solid var(--border)
-    }
-
-    .content-inner td {
-      padding: 10px 14px;
-      border: 1px solid var(--border);
-      vertical-align: top
-    }
-
-    /* HINTS */
-    .hint {
-      padding: 14px 16px;
-      border-radius: var(--radius-sm);
-      margin-bottom: 16px;
-      font-size: var(--text-base);
-      display: flex;
-      gap: 10px;
-      line-height: var(--leading-relaxed);
-    }
-
-    .hint-warning {
-      background: rgba(255, 159, 10, 0.12);
-      border: 1px solid rgba(255, 159, 10, 0.35);
-      color: var(--text-primary);
-    }
-
-    .hint-info {
-      background: var(--accent-soft);
-      border: 1px solid rgba(59, 158, 255, 0.35);
-      color: var(--text-primary);
-    }
-
-    .hint-info a,
-    .hint-warning a,
-    .hint-tip a,
-    .hint-danger a {
-      color: var(--accent-hover);
-      font-weight: 500;
-    }
-
-    .hint-tip {
-      background: rgba(50, 215, 75, 0.10);
-      border: 1px solid rgba(50, 215, 75, 0.32);
-      color: var(--text-primary);
-    }
-
-    .hint-danger {
-      background: rgba(255, 69, 58, 0.12);
-      border: 1px solid rgba(255, 69, 58, 0.38);
-      color: var(--text-primary);
-    }
-
-    /* QUICK LINKS */
-    .quick-links {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 24px
-    }
-
-    .quick-link {
-      padding: 14px 16px;
-      background: var(--bg-card);
+    .header-app-link {
+      flex-shrink: 0; font-size: .875rem; font-weight: 500;
+      color: var(--text-secondary); text-decoration: none;
+      white-space: nowrap; padding: 5px 10px; border-radius: var(--radius-sm);
       border: 1px solid var(--border-strong);
-      border-radius: var(--radius-sm);
-      text-decoration: none;
-      color: var(--text);
-      transition: border-color var(--duration-fast) var(--ease-out),
-        box-shadow var(--duration-fast) var(--ease-out),
-        background var(--duration-fast) var(--ease-out);
-      cursor: pointer;
-      font-size: var(--text-base);
+      transition: all var(--dur) var(--ease);
+      display: flex; align-items: center; gap: 5px;
+    }
+    .header-app-link:hover {
+      color: var(--text-primary); border-color: var(--accent);
+      background: var(--accent-soft); text-decoration: none;
     }
 
+    .menu-btn {
+      display: none; background: none; border: none;
+      color: var(--text-secondary); cursor: pointer;
+      padding: 6px; border-radius: var(--radius-sm);
+      transition: color var(--dur), background var(--dur); flex-shrink: 0;
+    }
+    .menu-btn:hover { color: var(--text-primary); background: var(--bg-hover); }
+
+    /* ── LAYOUT ─── */
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      margin-top: var(--header-h);
+      min-height: calc(100vh - var(--header-h));
+    }
+
+    /* ── SIDEBAR ─── */
+    .sidebar {
+      position: fixed; top: var(--header-h); left: 0;
+      width: var(--sidebar-w); height: calc(100vh - var(--header-h));
+      background: var(--bg-elevated); border-right: 1px solid var(--border);
+      overflow-y: auto; padding: 16px 0 32px; z-index: 90;
+      transition: transform .22s var(--ease);
+    }
+    .sidebar-section { margin-bottom: 4px; }
+    .sidebar-section-title {
+      padding: 10px 16px 4px; font-size: 10.5px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .09em; color: var(--text-tertiary);
+    }
+    .sidebar-link {
+      display: block; padding: 6px 16px 6px 20px;
+      font-size: .875rem; color: var(--text-secondary);
+      text-decoration: none; transition: color var(--dur), background var(--dur);
+      cursor: pointer; border-left: 2px solid transparent;
+      margin: 1px 0;
+    }
+    .sidebar-link:hover { color: var(--text-primary); background: var(--bg-hover); }
+    .sidebar-link.active {
+      color: var(--accent); border-left-color: var(--accent);
+      font-weight: 500; background: var(--accent-soft);
+    }
+
+    /* ── CONTENT ─── */
+    .content { min-width: 0; display: flex; justify-content: center; }
+    .content-with-toc {
+      width: 100%; display: flex; justify-content: center;
+      padding: 40px 48px 96px;
+    }
+    .content-wrap { width: 100%; max-width: 720px; display: flex; flex-direction: column; }
+
+    /* ── PAGE TRANSITION ─── */
+    .content-inner { animation: fadeUp .18s var(--ease); }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── TYPOGRAPHY ─── */
+    .content-inner h1 {
+      font-size: 2rem; font-weight: 700; letter-spacing: -.035em;
+      line-height: 1.15; margin-bottom: 10px; color: var(--text-primary);
+    }
+    .content-inner h2 {
+      font-size: 1.1875rem; font-weight: 600; letter-spacing: -.015em;
+      margin-top: 44px; margin-bottom: 14px;
+      padding-top: 28px; border-top: 1px solid var(--border);
+      line-height: 1.3; scroll-margin-top: calc(var(--header-h) + 16px);
+    }
+    .content-inner h2:first-of-type { border-top: none; padding-top: 0; margin-top: 28px; }
+    .content-inner h3 {
+      font-size: 1rem; font-weight: 600; margin-top: 28px; margin-bottom: 10px;
+      color: var(--text-primary); scroll-margin-top: calc(var(--header-h) + 16px);
+    }
+    .content-inner p { margin-bottom: 16px; color: var(--text-secondary); line-height: 1.7; }
+    .content-inner ul, .content-inner ol { margin-bottom: 16px; padding-left: 22px; }
+    .content-inner li { margin-bottom: 7px; color: var(--text-secondary); line-height: 1.65; }
+    .content-inner strong { font-weight: 600; color: var(--text-primary); }
+    .content-inner code {
+      font-family: var(--font-mono); font-size: .8125rem;
+      background: var(--bg-secondary); padding: 2px 6px;
+      border-radius: var(--radius-xs); color: var(--accent-hover);
+      border: 1px solid var(--border);
+    }
+    .content-inner a { color: var(--accent); text-decoration: none; transition: color var(--dur); }
+    .content-inner a:hover { color: var(--accent-hover); text-decoration: underline; text-decoration-color: rgba(77,171,247,.4); }
+    .content-inner hr { border: none; border-top: 1px solid var(--border); margin: 36px 0; }
+
+    /* ── CODE BLOCKS ─── */
+    .code-block-wrap { position: relative; margin-bottom: 20px; }
+    .content-inner pre {
+      background: var(--bg-secondary); padding: 16px 18px;
+      border-radius: var(--radius-sm); font-family: var(--font-mono);
+      font-size: .8125rem; overflow-x: auto;
+      border: 1px solid var(--border); line-height: 1.65;
+      color: var(--text-secondary); margin-bottom: 0;
+    }
+    .copy-btn {
+      position: absolute; top: 8px; right: 8px;
+      padding: 4px 9px; background: var(--bg-tertiary);
+      border: 1px solid var(--border-strong); border-radius: var(--radius-xs);
+      color: var(--text-tertiary); font-size: 11px; font-family: var(--font-body);
+      cursor: pointer; transition: all var(--dur); opacity: 0;
+    }
+    .code-block-wrap:hover .copy-btn { opacity: 1; }
+    .copy-btn:hover { color: var(--text-primary); background: var(--bg-active); }
+    .copy-btn.copied { color: var(--success); border-color: rgba(64,192,87,.4); }
+
+    /* ── TABLES ─── */
+    .table-wrap { overflow-x: auto; margin-bottom: 24px; border-radius: var(--radius-sm); border: 1px solid var(--border); }
+    .content-inner table { width: 100%; border-collapse: collapse; font-size: .875rem; }
+    .content-inner th {
+      text-align: left; padding: 10px 14px;
+      background: var(--bg-secondary); font-weight: 600;
+      font-size: .8125rem; color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-strong); white-space: nowrap;
+    }
+    .content-inner td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; color: var(--text-secondary); }
+    .content-inner tr:last-child td { border-bottom: none; }
+    .content-inner tr:hover td { background: var(--bg-hover); }
+
+    /* ── HINTS ─── */
+    .hint {
+      padding: 13px 16px; border-radius: var(--radius-sm);
+      margin-bottom: 20px; font-size: .875rem;
+      display: flex; gap: 10px; line-height: 1.65;
+    }
+    .hint-icon { flex-shrink: 0; font-size: 15px; margin-top: 1px; line-height: 1.4; }
+    .hint-warning  { background: var(--warning-soft); border: 1px solid rgba(253,126,20,.28); }
+    .hint-info     { background: var(--accent-soft);  border: 1px solid var(--accent-border); }
+    .hint-tip      { background: var(--success-soft); border: 1px solid rgba(64,192,87,.28); }
+    .hint-danger   { background: var(--danger-soft);  border: 1px solid rgba(250,82,82,.28); }
+    .hint-info a, .hint-warning a, .hint-tip a, .hint-danger a { color: var(--accent); font-weight: 500; }
+    .hint > div:last-child { flex: 1; }
+
+    /* ── QUICK LINKS ─── */
+    .quick-links { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px; }
+    .quick-link {
+      padding: 14px 16px; background: var(--bg-elevated);
+      border: 1px solid var(--border-strong); border-radius: var(--radius);
+      text-decoration: none; color: var(--text-primary);
+      transition: border-color var(--dur), box-shadow var(--dur), background var(--dur), transform var(--dur);
+      cursor: pointer; font-size: .875rem; display: flex; flex-direction: column; gap: 3px;
+    }
     .quick-link:hover {
-      border-color: var(--accent);
-      background: var(--bg-secondary);
-      box-shadow: var(--shadow);
-      text-decoration: none;
+      border-color: var(--accent); background: var(--bg-secondary);
+      box-shadow: 0 0 0 1px rgba(77,171,247,.12), var(--shadow);
+      text-decoration: none; transform: translateY(-1px);
     }
+    .quick-link .ql-icon { font-size: 18px; margin-bottom: 6px; line-height: 1; }
+    .quick-link .ql-title { font-weight: 500; color: var(--text-primary); }
+    .quick-link .ql-desc { font-size: .8125rem; color: var(--text-secondary); line-height: 1.4; }
 
-    .quick-link .ql-title {
-      font-weight: 500;
-      margin-bottom: 2px
-    }
-
-    .quick-link .ql-desc {
-      font-size: 0.8125rem;
-      color: var(--text-secondary);
-    }
-
-    /* BREADCRUMB */
+    /* ── BREADCRUMB ─── */
     .breadcrumb {
-      font-size: 0.8125rem;
-      color: var(--text-tertiary);
-      margin-bottom: 16px;
+      font-size: .8125rem; color: var(--text-tertiary);
+      margin-bottom: 20px; display: flex; align-items: center; gap: 6px;
     }
+    .breadcrumb a { color: var(--text-tertiary); text-decoration: none; transition: color var(--dur); cursor: pointer; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb-sep { opacity: .4; }
+    .breadcrumb-current { color: var(--text-secondary); }
 
-    .breadcrumb a {
-      color: var(--text-tertiary);
-      text-decoration: none
-    }
-
-    .breadcrumb a:hover {
-      color: var(--accent-hover);
-    }
-
-    .breadcrumb span {
-      margin: 0 6px
-    }
-
-    /* FOOTER NAV */
+    /* ── FOOTER NAV ─── */
     .footer-nav {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 48px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border)
+      display: flex; justify-content: space-between;
+      margin-top: 56px; padding-top: 24px;
+      border-top: 1px solid var(--border); gap: 12px;
+    }
+    .footer-nav-btn {
+      text-decoration: none; padding: 12px 16px;
+      border-radius: var(--radius-sm); border: 1px solid var(--border-strong);
+      background: var(--bg-elevated); transition: all var(--dur);
+      display: flex; flex-direction: column; gap: 3px;
+      min-width: 0; flex: 1; max-width: 240px; cursor: pointer;
+    }
+    .footer-nav-btn.next { align-items: flex-end; margin-left: auto; }
+    .footer-nav-btn:hover { border-color: var(--accent); background: var(--bg-secondary); }
+    .fn-label { font-size: 11px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: .05em; }
+    .fn-title { font-size: .875rem; font-weight: 500; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    /* ── ON-PAGE TOC ─── */
+    .toc {
+      display: none; position: sticky;
+      top: calc(var(--header-h) + 24px); width: var(--toc-w);
+      max-height: calc(100vh - var(--header-h) - 48px);
+      overflow-y: auto; flex-shrink: 0; padding: 0 0 24px;
+      align-self: flex-start; margin-left: 40px;
+    }
+    .toc-title { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .09em; color: var(--text-tertiary); margin-bottom: 10px; }
+    .toc-link {
+      display: block; padding: 4px 0 4px 12px;
+      font-size: .8125rem; color: var(--text-tertiary);
+      text-decoration: none; border-left: 2px solid transparent;
+      transition: color var(--dur), border-color var(--dur); line-height: 1.45;
+    }
+    .toc-link:hover { color: var(--text-secondary); text-decoration: none; }
+    .toc-link.active { color: var(--accent); border-left-color: var(--accent); }
+    .toc-link.toc-h3 { padding-left: 20px; font-size: .75rem; }
+
+    @media (min-width: 1200px) {
+      .toc { display: block; }
     }
 
-    .footer-nav a {
-      text-decoration: none;
-      color: var(--text-secondary);
-      font-size: var(--text-base);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: color var(--duration-fast) var(--ease-out);
+    /* ── BACK TO TOP ─── */
+    #back-top {
+      position: fixed; bottom: 28px; right: 28px;
+      width: 38px; height: 38px; background: var(--bg-elevated);
+      border: 1px solid var(--border-strong); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-secondary); cursor: pointer; box-shadow: var(--shadow);
+      transition: all var(--dur) var(--ease);
+      opacity: 0; pointer-events: none; z-index: 50;
+    }
+    #back-top.visible { opacity: 1; pointer-events: auto; }
+    #back-top:hover { color: var(--text-primary); border-color: var(--accent); background: var(--bg-secondary); }
+
+    /* ── TOAST ─── */
+    #toast {
+      position: fixed; bottom: 24px; left: 50%;
+      transform: translateX(-50%) translateY(12px);
+      background: var(--bg-elevated); border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm); padding: 8px 16px;
+      font-size: .875rem; color: var(--text-primary);
+      box-shadow: var(--shadow-lg); z-index: 150;
+      opacity: 0; transition: all .2s var(--ease); pointer-events: none; white-space: nowrap;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ── OVERLAY ─── */
+    .overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.60); z-index: 85;
+      backdrop-filter: blur(2px);
+    }
+    .overlay.active { display: block; }
+
+    /* ── WELCOME HERO ─── */
+    .hero { padding: 32px 0 36px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 500; color: var(--accent);
+      background: var(--accent-soft); border: 1px solid var(--accent-border);
+      border-radius: 9999px; padding: 3px 10px; margin-bottom: 18px;
+      text-transform: uppercase; letter-spacing: .07em;
+    }
+    .hero h1 {
+      font-size: 2.375rem !important; font-weight: 700;
+      letter-spacing: -.04em !important; line-height: 1.1;
+      margin-bottom: 14px !important;
+    }
+    .hero p { font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.65; max-width: 520px; margin-bottom: 0; }
+
+    /* ── SUPPORT CARD ─── */
+    .support-card {
+      padding: 18px 20px; background: var(--bg-elevated);
+      border: 1px solid var(--border-strong); border-radius: var(--radius);
+      margin-top: 4px; display: flex; flex-direction: column; gap: 10px;
+    }
+    .support-item { display: flex; align-items: flex-start; gap: 10px; font-size: .875rem; color: var(--text-secondary); }
+    .support-item-icon {
+      width: 28px; height: 28px; background: var(--bg-secondary);
+      border-radius: var(--radius-sm); display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0; color: var(--accent); font-size: 13px;
+    }
+    .support-item strong { color: var(--text-primary); font-weight: 500; }
+    .support-item a { color: var(--accent); font-weight: 500; }
+
+    /* ── MOBILE ─── */
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); z-index: 95; }
+      .sidebar.open { transform: translateX(0); }
+      .layout { grid-template-columns: 1fr; }
+      .content-with-toc { padding: 24px 20px 80px; }
+      .quick-links { grid-template-columns: 1fr; }
+      .menu-btn { display: flex; }
+      .header-search { max-width: none; }
+      .header-app-link span { display: none; }
+      .footer-nav { flex-direction: column; }
+      .footer-nav-btn { max-width: none; }
+      .footer-nav-btn.next { align-items: flex-start; }
+      .hero h1 { font-size: 1.75rem !important; }
     }
 
-    .footer-nav a:hover {
-      color: var(--accent-hover);
-    }
-
-    .footer-nav .fn-label {
-      font-size: 12px;
-      color: var(--text-tertiary)
-    }
-
-    .footer-nav .fn-title {
-      font-weight: 500;
-      color: var(--text)
-    }
-
-    .footer-nav a:hover .fn-title {
-      color: var(--accent-hover);
-    }
-
-    /* MOBILE */
-    @media(max-width:768px) {
-      .sidebar {
-        transform: translateX(-100%)
-      }
-
-      .sidebar.open {
-        transform: translateX(0)
-      }
-
-      .content {
-        margin-left: 0
-      }
-
-      .content-inner {
-        padding: 24px 20px 60px
-      }
-
-      .menu-btn {
-        display: block
-      }
-
-      .header-search {
-        max-width: none
-      }
-
-      .quick-links {
-        grid-template-columns: 1fr
-      }
-
-      .overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.55);
-        z-index: 85
-      }
-
-      .overlay.active {
-        display: block;
-      }
-    }
-
-    .menu-btn:focus-visible,
-    .header-search input:focus-visible,
-    .sidebar-link:focus-visible,
-    .quick-link:focus-visible,
-    .header-logo:focus-visible,
-    .header-kaynos-link:focus-visible,
-    .footer-nav a:focus-visible {
-      outline: none;
-      box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px rgba(59, 158, 255, 0.55);
+    :focus-visible { outline: 2px solid rgba(77,171,247,.6); outline-offset: 2px; }
+    .sidebar-link:focus-visible, .quick-link:focus-visible, .header-logo:focus-visible {
+      outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px rgba(77,171,247,.55);
     }
   </style>
 </head>
-
 <body>
 
+  <div id="progress-bar"></div>
+
   <header class="header">
-    <button class="menu-btn" onclick="toggleSidebar()" aria-label="Menu">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
-        <line x1="3" y1="5" x2="17" y2="5" />
-        <line x1="3" y1="10" x2="17" y2="10" />
-        <line x1="3" y1="15" x2="17" y2="15" />
+    <button class="menu-btn" onclick="toggleSidebar()" aria-label="Open menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+        <line x1="2" y1="4.5" x2="16" y2="4.5"/>
+        <line x1="2" y1="9" x2="16" y2="9"/>
+        <line x1="2" y1="13.5" x2="16" y2="13.5"/>
       </svg>
     </button>
-    <a href="#" class="header-logo" onclick="navigate('welcome');return false"><svg width="30" height="4"
-        viewBox="0 0 30 4" fill="none" style="display:inline-block;vertical-align:middle">
-        <rect x="0" y="0" width="30" height="4" fill="#1a1a1a" />
-        <rect x="20" y="0" width="4" height="4" fill="#c62828" />
-        <rect x="0" y="0" width="30" height="4" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.5" />
-      </svg> kaynos <span>docs</span></a>
-    <a href="https://www.kaynos.net/" class="header-kaynos-link" target="_blank" rel="noopener noreferrer">Kaynos</a>
+
+    <a href="#" class="header-logo" onclick="navigate('welcome');return false">
+      <div class="header-logo-icon">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <rect x="1" y="1" width="12" height="12" rx="2.5" fill="white" fill-opacity=".9"/>
+          <rect x="4" y="4" width="6" height="6" rx="1" fill="#c62828"/>
+        </svg>
+      </div>
+      <span>kaynos</span><span class="header-logo-sep">/</span><span class="header-logo-sub">docs</span>
+    </a>
+
     <div class="header-search">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-        <circle cx="7" cy="7" r="4.5" />
-        <line x1="10.5" y1="10.5" x2="14" y2="14" />
-      </svg>
-      <input type="text" id="searchInput" placeholder="Search docs..." oninput="handleSearch(this.value)"
-        onfocus="handleSearch(this.value)" autocomplete="off">
-      <div class="search-results" id="searchResults"></div>
+      <div class="header-search-icon">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6">
+          <circle cx="6.5" cy="6.5" r="4.5"/>
+          <line x1="10" y1="10" x2="13.5" y2="13.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <input type="text" id="searchInput" placeholder="Search docs…"
+        oninput="handleSearch(this.value)" onfocus="handleSearch(this.value)"
+        autocomplete="off" aria-label="Search documentation" role="combobox"
+        aria-expanded="false" aria-controls="searchResults">
+      <div class="search-kbd"><kbd>⌘</kbd><kbd>K</kbd></div>
+      <div class="search-results" id="searchResults" role="listbox"></div>
     </div>
+
+    <div class="header-spacer"></div>
+
+    <a href="https://www.kaynos.net/" class="header-app-link" target="_blank" rel="noopener noreferrer">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 2H2a1 1 0 00-1 1v8a1 1 0 001 1h8a1 1 0 001-1V8"/>
+        <path d="M8 1h4v4M12 1L6.5 6.5"/>
+      </svg>
+      <span>Open App</span>
+    </a>
   </header>
 
   <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
-  <nav class="sidebar" id="sidebar"></nav>
+  <div class="layout">
+    <nav class="sidebar" id="sidebar" aria-label="Documentation navigation"></nav>
 
-  <main class="content">
-    <div class="content-inner" id="pageContent"></div>
-  </main>
+    <main class="content">
+      <div class="content-with-toc">
+        <div class="content-wrap">
+          <div class="content-inner" id="pageContent"></div>
+          <nav class="footer-nav" id="footerNav" aria-label="Page navigation"></nav>
+        </div>
+        <aside class="toc" id="toc" aria-label="On this page"></aside>
+      </div>
+    </main>
+  </div>
+
+  <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+      <path d="M7 11V3M3 7l4-4 4 4"/>
+    </svg>
+  </button>
+
+  <div id="toast" role="status" aria-live="polite"></div>
 
   <script>
-    const PAGES = {
-      welcome: {
-        title: "Welcome to Kaynos",
-        section: "",
-        content: `
-<h1>Welcome to Kaynos</h1>
-<p>Kaynos is video review for coaches: publish sessions and classes, add timestamped notes, and members watch when it fits their schedule. The product lives at <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>.</p>
-<p>Use the sidebar for topics or search when you know the page you need.</p>
-<div class="hint hint-info"><div><strong>This is the help center</strong><br>You are reading the documentation site. Sign in to the app to upload video, manage your account, and use in-app chat support.</div></div>
+  /* ── PAGE DATA ─────────────────────────────────────────────── */
+  const PAGES = {
+    welcome: {
+      title: "Welcome to Kaynos", section: "",
+      content: `
+<div class="hero">
+  <div class="hero-badge">Help Center</div>
+  <h1>Welcome to Kaynos</h1>
+  <p>Video review for coaches — publish sessions and classes, add timestamped notes, and members watch when it fits their schedule.</p>
+</div>
+<div class="hint hint-info">
+  <div class="hint-icon">ℹ️</div>
+  <div><strong>You're reading the help center.</strong> Sign in to the app at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> to upload video, manage your account, and use in-app support.</div>
+</div>
 <h2>Jump in</h2>
 <div class="quick-links">
-<a class="quick-link" onclick="navigate('setup')"><div class="ql-title">Setting up your account</div><div class="ql-desc">First login, password, Admin area</div></a>
-<a class="quick-link" onclick="navigate('first-upload')"><div class="ql-title">Your first video upload</div><div class="ql-desc">From phone or computer to a session or class</div></a>
-<a class="quick-link" onclick="navigate('upload-issues')"><div class="ql-title">Video upload problems</div><div class="ql-desc">Stuck progress, errors, slow networks</div></a>
-<a class="quick-link" onclick="navigate('playback-issues')"><div class="ql-title">Video playback problems</div><div class="ql-desc">Black screen, buffering, codec issues</div></a>
-<a class="quick-link" onclick="navigate('inviting-members')"><div class="ql-title">Inviting your team</div><div class="ql-desc">Invites, roles, roster basics</div></a>
-<a class="quick-link" onclick="navigate('faq')"><div class="ql-title">FAQ</div><div class="ql-desc">Common questions from owners and coaches</div></a>
+  <a class="quick-link" onclick="navigate('setup')">
+    <div class="ql-icon">🚀</div>
+    <div class="ql-title">Setting up your account</div>
+    <div class="ql-desc">First login, password, Admin area</div>
+  </a>
+  <a class="quick-link" onclick="navigate('first-upload')">
+    <div class="ql-icon">📹</div>
+    <div class="ql-title">Your first video upload</div>
+    <div class="ql-desc">From phone or computer to a session or class</div>
+  </a>
+  <a class="quick-link" onclick="navigate('upload-issues')">
+    <div class="ql-icon">⚠️</div>
+    <div class="ql-title">Video upload problems</div>
+    <div class="ql-desc">Stuck progress, errors, slow networks</div>
+  </a>
+  <a class="quick-link" onclick="navigate('playback-issues')">
+    <div class="ql-icon">▶️</div>
+    <div class="ql-title">Video playback problems</div>
+    <div class="ql-desc">Black screen, buffering, codec issues</div>
+  </a>
+  <a class="quick-link" onclick="navigate('inviting-members')">
+    <div class="ql-icon">👥</div>
+    <div class="ql-title">Inviting your team</div>
+    <div class="ql-desc">Invites, roles, roster basics</div>
+  </a>
+  <a class="quick-link" onclick="navigate('faq')">
+    <div class="ql-icon">💬</div>
+    <div class="ql-title">FAQ</div>
+    <div class="ql-desc">Common questions from owners and coaches</div>
+  </a>
 </div>
-<h2>Need a hand?</h2>
-<ul>
-<li><strong>Email:</strong> <a href="mailto:support@kaynos.net">support@kaynos.net</a></li>
-<li><strong>Chat:</strong> Bottom-right in <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">the app</a> when you are logged in</li>
-<li><strong>Expect:</strong> Usually same day on business days if you give us detail</li>
-</ul>
-`},
+<h2>Get in touch</h2>
+<div class="support-card">
+  <div class="support-item">
+    <div class="support-item-icon">✉️</div>
+    <div><strong>Email:</strong> <a href="mailto:support@kaynos.net">support@kaynos.net</a> — usually same day on business days</div>
+  </div>
+  <div class="support-item">
+    <div class="support-item-icon">💬</div>
+    <div><strong>Chat:</strong> Bottom-right corner in <a href="https://app.kaynos.net" target="_blank" rel="noopener">the app</a> when logged in</div>
+  </div>
+</div>`},
 
-      setup: {
-        title: "Setting up your account",
-        section: "Getting Started",
-        content: `
+    setup: {
+      title: "Setting up your account", section: "Getting Started",
+      content: `
 <h1>Setting up your account</h1>
-<p>After signup, login details go to the email you used. Change the temporary password as soon as you are in.</p>
-<div class="hint hint-tip"><div>Open the product at <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>. Next steps for invites and roles: <a onclick="navigate('inviting-members')">Inviting your team</a> and <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>
+<p>After signup, login details go to the email you used. Change the temporary password as soon as you're in.</p>
+<div class="hint hint-tip"><div class="hint-icon">💡</div><div>Open the product at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>. Next steps: <a onclick="navigate('inviting-members')">Inviting your team</a> and <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>
 <h2>First login</h2>
 <ol>
-<li>Use the welcome email link or go to <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>.</li>
-<li>Same email, temp password from the mail.</li>
-<li>You land on the <strong>Coach Dashboard</strong>. That’s home base.</li>
+<li>Use the welcome email link or go to <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</li>
+<li>Enter the same email and the temporary password from the invite.</li>
+<li>You land on the <strong>Coach Dashboard</strong> — that's home base.</li>
 </ol>
 <h2>Set a new password</h2>
 <p>Before inviting your full roster, secure your own account.</p>
 <ol>
-<li>Your name in the sidebar (hamburger on phone) → <strong>Profile</strong>.</li>
-<li><strong>Change Password</strong>: current, new, confirm.</li>
-<li><strong>Update Password</strong>. Done.</li>
+<li>Click your name in the sidebar (hamburger on mobile) → <strong>Profile</strong>.</li>
+<li><strong>Change Password</strong>: enter current, new, then confirm.</li>
+<li>Hit <strong>Update Password</strong>. Done.</li>
 </ol>
-<h2>Admin</h2>
-<p>Admins: use <strong>Admin</strong> in the sidebar for roster, invites, roles, and a account-wide view of activity. It helps to explore those screens before sending a large batch of invites.</p>
-`},
+<h2>Admin area</h2>
+<p>Admins: use <strong>Admin</strong> in the sidebar for roster management, invites, role changes, and an account-wide view of activity. Explore those screens before sending a large batch of invites.</p>`},
 
-      "inviting-members": {
-        title: "Inviting your team",
-        section: "Getting Started",
-        content: `
+    "inviting-members": {
+      title: "Inviting your team", section: "Getting Started",
+      content: `
 <h1>Inviting your team</h1>
-<p>Members join by email with a temporary password. Admins may invite coaches or clients; coaches may invite clients only. That keeps roster control with staff. All of this happens in the app at <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a> under <strong>Admin</strong> or <strong>Clients</strong>.</p>
-<div class="hint hint-info"><div>Role capabilities are summarized on <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>
+<p>Members join by email with a temporary password. Admins may invite coaches or clients; coaches may invite clients only. Everything happens in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> under <strong>Admin</strong> or <strong>Clients</strong>.</p>
+<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>Role capabilities are summarized on <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>
 <h2>Send an invite</h2>
 <ol>
-<li><strong>Admin</strong> (for full roster control) or <strong>Clients</strong> (coaches adding a client).</li>
-<li><strong>Add Member</strong> / <strong>Add Client</strong>.</li>
-<li>Name, real email, and role if you’re admin (coach vs member).</li>
-<li><strong>Send Invite</strong>.</li>
+<li>Go to <strong>Admin</strong> (full roster control) or <strong>Clients</strong> (coaches adding a client).</li>
+<li>Click <strong>Add Member</strong> / <strong>Add Client</strong>.</li>
+<li>Enter name, email address, and role (admin can also set coach vs member).</li>
+<li>Click <strong>Send Invite</strong>.</li>
 </ol>
-<p>Delivery is usually quick. If nothing arrives, check spam and the address for typos.</p>
-<div class="hint hint-warning"><div>Still missing mail? See <a onclick="navigate('email-issues')">Email and notification issues</a> or contact <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</div></div>
+<p>Delivery is usually quick. If nothing arrives, check spam and verify the address for typos.</p>
+<div class="hint hint-warning"><div class="hint-icon">⚠️</div><div>Still missing mail? See <a onclick="navigate('email-issues')">Email and notification issues</a> or contact <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</div></div>
 <h2>Who can invite</h2>
 <table><thead><tr><th>Your role</th><th>Can add</th></tr></thead><tbody>
 <tr><td><strong>Admin</strong></td><td>Coaches and clients</td></tr>
@@ -760,62 +636,58 @@
 </tbody></table>
 <h2>What each role can do</h2>
 <table><thead><tr><th>Role</th><th>What they can do</th></tr></thead><tbody>
-<tr><td><strong>Admin</strong></td><td>Everything a coach can do, plus roster, invites, and settings.</td></tr>
+<tr><td><strong>Admin</strong></td><td>Everything a coach can do, plus roster management, invites, and settings.</td></tr>
 <tr><td><strong>Coach</strong></td><td>Sessions, classes, video upload, notes, tags, and client progress.</td></tr>
-<tr><td><strong>Client</strong></td><td>Private sessions assigned to them, all published classes, notes, progress. No uploads; cannot view other clients’ private sessions.</td></tr>
+<tr><td><strong>Client</strong></td><td>Private sessions assigned to them, all published classes, notes, progress tracking. No uploads; cannot view other clients' private sessions.</td></tr>
 </tbody></table>
 <h2>Resend or reset</h2>
-<p><strong>Admin</strong> → find them in the roster → <strong>Reset Password</strong>. Fresh temp password, new mail.</p>
+<p><strong>Admin</strong> → find them in the roster → <strong>Reset Password</strong>. A fresh temp password is emailed to them.</p>
 <h2>Tips</h2>
 <ul>
-<li>Onboard coaches before adding a large client wave when you can.</li>
-<li>Use an email address people check; it becomes their login.</li>
-<li>No fixed seat limit in the product.</li>
-</ul>
-`},
+<li>Onboard coaches before adding a large client wave when possible.</li>
+<li>Use an email address people actually check — it becomes their login.</li>
+<li>There is no fixed seat limit in the product.</li>
+</ul>`},
 
-      "first-upload": {
-        title: "Your first video upload",
-        section: "Getting Started",
-        content: `
+    "first-upload": {
+      title: "Your first video upload", section: "Getting Started",
+      content: `
 <h1>Your first video upload</h1>
-<p>A <strong>session</strong> is for one assigned client (private lesson, individual review). A <strong>class</strong> is for everyone in your account (group session, shared recording). Upload a file or link Vimeo in either case. Create them in the app after you <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">sign in</a>.</p>
-<div class="hint hint-tip"><div>New to the flow? Read <a onclick="navigate('creating-sessions')">Creating a session</a> and <a onclick="navigate('creating-classes')">Creating a class</a>. Limits and codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
+<p>A <strong>session</strong> is for one assigned client (private lesson, individual review). A <strong>class</strong> is for everyone in your account (group session, shared recording). Upload a file or link Vimeo in either case — create them after you <a href="https://app.kaynos.net" target="_blank" rel="noopener">sign in</a>.</p>
+<div class="hint hint-tip"><div class="hint-icon">💡</div><div>New to the flow? Read <a onclick="navigate('creating-sessions')">Creating a session</a> and <a onclick="navigate('creating-classes')">Creating a class</a>. Limits and codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 <h2>Upload a file</h2>
 <ol>
-<li>New session or class, pick <strong>Upload</strong> for the video source.</li>
-<li>Drag onto the box or click to choose a file in Finder / Files.</li>
-<li>Use the progress bar for speed and ETA.</li>
-<li>Green check, then finish title / date / client and hit save.</li>
+<li>Create a new session or class, then pick <strong>Upload</strong> for the video source.</li>
+<li>Drag your file onto the box, or click to choose from Finder / Files.</li>
+<li>Watch the progress bar for speed and estimated time remaining.</li>
+<li>Green check appears when done — then fill in title, date, client, and save.</li>
 </ol>
 <h2>Upload behavior</h2>
 <ul>
-<li>Smaller files (roughly under 100 MB) often upload in one request.</li>
+<li>Files under ~100 MB often upload in a single request.</li>
 <li>Larger files use chunked parallel upload with automatic retries (up to three) on network errors.</li>
-<li>You can cancel an in-progress upload.</li>
+<li>You can cancel an in-progress upload at any time.</li>
 </ul>
 <h2>Supported formats</h2>
 <table><thead><tr><th>Format</th><th>Extension</th><th>Notes</th></tr></thead><tbody>
-<tr><td>MP4</td><td>.mp4</td><td>Recommended default</td></tr>
-<tr><td>MOV</td><td>.mov</td><td>Common on iPhone and GoPro</td></tr>
-<tr><td>WebM</td><td>.webm</td><td>Screen and browser capture</td></tr>
-<tr><td>MKV</td><td>.mkv</td><td>Supported; less common</td></tr>
+<tr><td>MP4</td><td><code>.mp4</code></td><td>Recommended default</td></tr>
+<tr><td>MOV</td><td><code>.mov</code></td><td>Common on iPhone and GoPro</td></tr>
+<tr><td>WebM</td><td><code>.webm</code></td><td>Screen and browser capture</td></tr>
+<tr><td>MKV</td><td><code>.mkv</code></td><td>Supported; less common</td></tr>
 </tbody></table>
-<p>Maximum file size <strong>5 GB</strong>. Very large files may take a long time depending on upload speed. Full table: <a onclick="navigate('formats')">Supported formats and limits</a>.</p>
+<p>Maximum file size is <strong>5 GB</strong>. Full details: <a onclick="navigate('formats')">Supported formats and limits</a>.</p>
 <h2>Vimeo</h2>
-<p>Use the <strong>Vimeo</strong> source and paste the URL or video ID to embed video you already host on <a href="https://vimeo.com" target="_blank" rel="noopener noreferrer">Vimeo</a>. See Vimeo’s <a href="https://help.vimeo.com/hc/en-us" target="_blank" rel="noopener noreferrer">Help Center</a> for sharing links and privacy.</p>
+<p>Use the <strong>Vimeo</strong> source option and paste the URL or video ID to embed video already hosted on <a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a>.</p>
 <h2>Recording tips</h2>
 <ul>
-<li>Landscape. Your TV and your phone both want it.</li>
-<li>Camera slightly high so the full training area is visible, not only lower legs.</li>
-<li>Even lighting makes small details easier to see on review.</li>
-</ul>
-`},
+<li><strong>Landscape orientation.</strong> Your TV and your phone both want it.</li>
+<li><strong>Camera slightly high</strong> so the full training area is visible, not only lower legs.</li>
+<li><strong>Even lighting</strong> makes small details easier to see on review.</li>
+</ul>`},
 
-      roles: {
-        title: "Understanding user roles",
-        section: "Getting Started",
-        content: `
+    roles: {
+      title: "Understanding user roles", section: "Getting Started",
+      content: `
 <h1>Understanding user roles</h1>
 <p>Each person has one of three roles. Assign them so permissions match how your team runs.</p>
 <h2>Admin</h2>
@@ -823,21 +695,19 @@
 <h2>Coach</h2>
 <p>Coaches run sessions and classes, upload video, add notes and tags, and view client progress.</p>
 <h2>Client</h2>
-<p>Clients access their assigned sessions and all classes, watch video, add notes, and track viewing progress. They cannot upload video or view other clients’ private sessions.</p>
+<p>Clients access their assigned sessions and all classes, watch video, add notes, and track viewing progress. They cannot upload video or view other clients' private sessions.</p>
 <h2>Change a role</h2>
-<p>Admins only: <strong>Admin</strong> → member → role dropdown → save.</p>
-<div class="hint hint-warning"><div>Downgrading a coach to a client removes the ability to create sessions or upload video. Existing content remains available. For invite rules, see <a onclick="navigate('inviting-members')">Inviting your team</a>.</div></div>
-`},
+<p>Admins only: <strong>Admin</strong> → select the member → role dropdown → save.</p>
+<div class="hint hint-warning"><div class="hint-icon">⚠️</div><div>Downgrading a coach to a client removes the ability to create sessions or upload video. Existing content remains available. For invite rules, see <a onclick="navigate('inviting-members')">Inviting your team</a>.</div></div>`},
 
-      uploading: {
-        title: "Uploading videos",
-        section: "Video",
-        content: `
+    uploading: {
+      title: "Uploading videos", section: "Video",
+      content: `
 <h1>Uploading videos</h1>
-<p>Each session or class uses one source: <strong>Upload</strong> (file from your device), <strong>Vimeo</strong> (embedded link), or <strong>Notes Only</strong> (no video). Upload from <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a> when creating or editing a session or class.</p>
-<div class="hint hint-info"><div>Format and size caps: <a onclick="navigate('formats')">Supported formats and limits</a>. Stuck? <a onclick="navigate('upload-issues')">Video upload problems</a>.</div></div>
+<p>Each session or class uses one source: <strong>Upload</strong> (file from your device), <strong>Vimeo</strong> (embedded link), or <strong>Notes Only</strong> (no video). Upload from <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> when creating or editing.</p>
+<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>Format and size limits: <a onclick="navigate('formats')">Supported formats and limits</a>. Stuck? <a onclick="navigate('upload-issues')">Video upload problems</a>.</div></div>
 <h2>Large files</h2>
-<p>Big uploads are split into chunks and sent with parallel connections. Failed parts retry automatically (up to three times) with backoff.</p>
+<p>Big uploads are split into chunks and sent with parallel connections. Failed parts retry automatically (up to three times) with exponential backoff.</p>
 <h2>Requirements</h2>
 <ul>
 <li>Formats: MP4, MOV, WebM, MKV (convert others before uploading).</li>
@@ -845,168 +715,159 @@
 <li>Only admins and coaches may upload.</li>
 </ul>
 <h2>During upload</h2>
-<p>The UI shows percent complete, speed, time remaining, and <strong>Cancel</strong> if you need to stop.</p>
+<p>The UI shows percent complete, current speed, time remaining, and a <strong>Cancel</strong> button if you need to stop.</p>
 <h2>Replace a video</h2>
-<p>Open the session or class, remove the current video with <strong>X</strong>, then upload a replacement. The previous file is removed from storage.</p>
-<div class="hint hint-danger"><div><strong>Replacing video is destructive</strong><br>The old file is deleted from storage. There is no undo. Download or archive a copy elsewhere first if you might need it later.</div></div>
-`},
+<p>Open the session or class, remove the current video with <strong>×</strong>, then upload a replacement. The previous file is deleted from storage.</p>
+<div class="hint hint-danger"><div class="hint-icon">🚫</div><div><strong>Replacing video is destructive.</strong> The old file is deleted from storage with no undo. Archive a copy elsewhere first if you might need it later.</div></div>`},
 
-      playback: {
-        title: "Watching and reviewing",
-        section: "Video",
-        content: `
+    playback: {
+      title: "Watching and reviewing", section: "Video",
+      content: `
 <h1>Watching and reviewing</h1>
-<p>Playback runs in the browser. No separate app install. Open recordings at <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a> (same place you upload).</p>
-<div class="hint hint-tip"><div>Problems playing video? Try <a onclick="navigate('playback-issues')">Video playback problems</a>.</div></div>
-<h2>Speed</h2>
-<p>Use <strong>0.5x</strong> through <strong>2x</strong> for slow analysis or faster skim.</p>
-<h2>Timeline</h2>
-<p>Markers on the timeline are notes. Hover to preview text, click to jump to that time.</p>
+<p>Playback runs entirely in the browser — no separate app install needed. Open recordings at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
+<div class="hint hint-tip"><div class="hint-icon">💡</div><div>Problems playing video? Try <a onclick="navigate('playback-issues')">Video playback problems</a>.</div></div>
+<h2>Playback speed</h2>
+<p>Use <strong>0.5×</strong> through <strong>2×</strong> for slow-motion analysis or faster skimming.</p>
+<h2>Timeline markers</h2>
+<p>Markers on the timeline are notes. Hover to preview the text, click to jump to that exact moment.</p>
 <h2>Add a note while watching</h2>
 <ol>
-<li>Pause (shortcut <strong>N</strong>).</li>
-<li><strong>Add Note</strong>, enter text, <strong>Save</strong>.</li>
+<li>Pause (or press <strong>N</strong>).</li>
+<li>Click <strong>Add Note</strong>, enter your text, then <strong>Save</strong>.</li>
 </ol>
-<p>The note is tied to the current playhead. Shortcuts: <strong>Space</strong> / <strong>K</strong> play-pause, <strong>J</strong> / <strong>L</strong> skip, <strong>F</strong> fullscreen.</p>
-<h2>Progress</h2>
-<p>Playback position is saved for resume. Coaches can see completion and last-viewed time without heavy analytics.</p>
-`},
+<p>The note is tied to the current playhead position.</p>
+<h2>Keyboard shortcuts</h2>
+<table><thead><tr><th>Key</th><th>Action</th></tr></thead><tbody>
+<tr><td><code>Space</code> / <code>K</code></td><td>Play / Pause</td></tr>
+<tr><td><code>J</code> / <code>L</code></td><td>Skip back / forward</td></tr>
+<tr><td><code>N</code></td><td>Pause and add note</td></tr>
+<tr><td><code>F</code></td><td>Toggle fullscreen</td></tr>
+</tbody></table>
+<h2>Progress tracking</h2>
+<p>Playback position is saved for resume. Coaches can see completion percentage and last-viewed time without heavy analytics.</p>`},
 
-      formats: {
-        title: "Supported formats and limits",
-        section: "Video",
-        content: `
+    formats: {
+      title: "Supported formats and limits", section: "Video",
+      content: `
 <h1>Supported formats and limits</h1>
-<p>Use common codecs your devices and browsers handle well. When unsure, export to MP4 (H.264 + AAC). Free converters: <a href="https://handbrake.fr" target="_blank" rel="noopener noreferrer">HandBrake</a>, <a href="https://www.videolan.org/vlc/" target="_blank" rel="noopener noreferrer">VLC</a>.</p>
-<div class="hint hint-info"><div>Where files live and how long they are kept: <a onclick="navigate('storage')">Video storage and retention</a>.</div></div>
+<p>Use common codecs your devices and browsers handle well. When unsure, export to MP4 (H.264 + AAC). Free converters: <a href="https://handbrake.fr" target="_blank" rel="noopener">HandBrake</a>, <a href="https://www.videolan.org/vlc/" target="_blank" rel="noopener">VLC</a>.</p>
+<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>Where files live and how long they're kept: <a onclick="navigate('storage')">Video storage and retention</a>.</div></div>
 <table><thead><tr><th>Format</th><th>Extension</th><th>Support level</th></tr></thead><tbody>
-<tr><td>MP4</td><td>.mp4</td><td>Recommended default</td></tr>
-<tr><td>MOV</td><td>.mov</td><td>Supported</td></tr>
-<tr><td>WebM</td><td>.webm</td><td>Supported</td></tr>
-<tr><td>MKV</td><td>.mkv</td><td>Supported</td></tr>
+<tr><td>MP4</td><td><code>.mp4</code></td><td>✅ Recommended default</td></tr>
+<tr><td>MOV</td><td><code>.mov</code></td><td>✅ Supported</td></tr>
+<tr><td>WebM</td><td><code>.webm</code></td><td>✅ Supported</td></tr>
+<tr><td>MKV</td><td><code>.mkv</code></td><td>✅ Supported</td></tr>
 </tbody></table>
 <p><strong>MP4</strong> is the most predictable for uploads and playback. MOV from iPhone usually works well.</p>
-<h2>Size</h2>
+<h2>File size</h2>
 <ul>
 <li>Maximum <strong>5 GB</strong> per file.</li>
-<li>Files under about <strong>2 GB</strong> upload faster on typical home or your Wi‑Fi.</li>
+<li>Files under about <strong>2 GB</strong> upload faster on typical home or gym Wi-Fi.</li>
 </ul>
 <h2>Smaller files, same teaching value</h2>
 <ul>
-<li><strong>1080p</strong> is enough for most instruction; very high bitrates slow uploads without much benefit.</li>
-<li>Prefer <strong>H.264</strong> video and <strong>AAC</strong> audio when your export tool offers it.</li>
+<li><strong>1080p</strong> is enough for most instruction — very high bitrates slow uploads without much visible benefit.</li>
+<li>Prefer <strong>H.264</strong> video and <strong>AAC</strong> audio when your export tool offers a choice.</li>
 <li>Trim dead air at the start or end of clips before uploading.</li>
-</ul>
-`},
+</ul>`},
 
-      storage: {
-        title: "Video storage and retention",
-        section: "Video",
-        content: `
+    storage: {
+      title: "Video storage and retention", section: "Video",
+      content: `
 <h1>Video storage and retention</h1>
 <h2>Where video is stored</h2>
-<p>Videos are stored in <a href="https://www.backblaze.com/b2/cloud-storage.html" target="_blank" rel="noopener noreferrer">Backblaze B2</a>, delivered through <a href="https://www.cloudflare.com/application-services/products/cdn/" target="_blank" rel="noopener noreferrer">Cloudflare</a> CDN. Infrastructure is US-hosted.</p>
+<p>Videos are stored in <a href="https://www.backblaze.com/b2/cloud-storage.html" target="_blank" rel="noopener">Backblaze B2</a>, delivered through <a href="https://www.cloudflare.com/application-services/products/cdn/" target="_blank" rel="noopener">Cloudflare</a> CDN. Infrastructure is US-hosted.</p>
 <h2>Retention</h2>
 <p>Video remains available while your account is active. We do not apply an automatic 90-day deletion policy.</p>
-<div class="hint hint-tip"><div>Upload limits and codecs are on <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
+<div class="hint hint-tip"><div class="hint-icon">💡</div><div>Upload limits and codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 <h2>Security</h2>
 <ul>
-<li>HTTPS for data in transit.</li>
-<li>Account data is isolated; your files are not mixed with other organizations’ storage.</li>
-<li>Playback URLs are time-limited. Share access inside Kaynos (<a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>) rather than relying on long-lived direct links.</li>
-</ul>
-`},
+<li>HTTPS for all data in transit.</li>
+<li>Account data is isolated — your files are not mixed with other organizations' storage.</li>
+<li>Playback URLs are time-limited. Share access inside Kaynos rather than relying on long-lived direct links.</li>
+</ul>`},
 
-      "creating-sessions": {
-        title: "Creating a session",
-        section: "Sessions & Classes",
-        content: `
+    "creating-sessions": {
+      title: "Creating a session", section: "Sessions & Classes",
+      content: `
 <h1>Creating a session</h1>
-<p>A <strong>session</strong> is one-on-one content: private lessons, individual review, or competition footage for a single client. Only that client and staff who need access should see it.</p>
+<p>A <strong>session</strong> is one-on-one content: private lessons, individual review, or competition footage for a single client. Only that client and staff who need access will see it.</p>
 <h2>Workflow</h2>
 <ol>
-<li><strong>Sessions</strong> → <strong>New Session</strong>.</li>
-<li>Video source: <strong>Upload</strong>, <strong>Vimeo</strong>, or <strong>Notes Only</strong>.</li>
-<li>Title, date, assign the client from your roster, optional tags.</li>
-<li><strong>Create Session</strong>.</li>
+<li>Go to <strong>Sessions</strong> → <strong>New Session</strong>.</li>
+<li>Choose your video source: <strong>Upload</strong>, <strong>Vimeo</strong>, or <strong>Notes Only</strong>.</li>
+<li>Fill in title, date, assign the client from your roster, and add optional tags.</li>
+<li>Click <strong>Create Session</strong>.</li>
 </ol>
 <h2>Who sees it</h2>
-<p>The assigned client, the creator, and admins. Other clients cannot open someone else’s private session.</p>
-<div class="hint hint-info"><div>First upload walkthrough: <a onclick="navigate('first-upload')">Your first video upload</a>. Visibility model: <a onclick="navigate('faq')">FAQ</a> (sessions vs classes).</div></div>
-`},
+<p>The assigned client, the creator, and admins. Other clients cannot open someone else's private session.</p>
+<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>First upload walkthrough: <a onclick="navigate('first-upload')">Your first video upload</a>. Visibility model: <a onclick="navigate('faq')">FAQ</a>.</div></div>`},
 
-      "creating-classes": {
-        title: "Creating a class",
-        section: "Sessions & Classes",
-        content: `
+    "creating-classes": {
+      title: "Creating a class", section: "Sessions & Classes",
+      content: `
 <h1>Creating a class</h1>
 <p>A <strong>class</strong> is account-wide: group sessions, workshops, or any recording meant for all clients.</p>
 <h2>Workflow</h2>
 <ol>
-<li><strong>Classes</strong> → <strong>New Class</strong>.</li>
-<li>Same video options: <strong>Upload</strong>, <strong>Vimeo</strong>, <strong>Notes Only</strong>.</li>
-<li>Title, date, optional description, optional tags for filtering.</li>
-<li><strong>Create Class</strong>.</li>
+<li>Go to <strong>Classes</strong> → <strong>New Class</strong>.</li>
+<li>Choose your video source: <strong>Upload</strong>, <strong>Vimeo</strong>, or <strong>Notes Only</strong>.</li>
+<li>Fill in title, date, optional description, and tags for filtering.</li>
+<li>Click <strong>Create Class</strong>.</li>
 </ol>
 <h2>Who sees it</h2>
-<p>All members, coaches, and admins in your account. This visibility is intentional and differs from a private session.</p>
-<div class="hint hint-info"><div>Upload options and limits: <a onclick="navigate('uploading')">Uploading videos</a> and <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
-`},
+<p>All members, coaches, and admins in your account. This broad visibility is intentional and differs from a private session.</p>
+<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>Upload options and limits: <a onclick="navigate('uploading')">Uploading videos</a> and <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>`},
 
-      notes: {
-        title: "Notes and timestamps",
-        section: "Sessions & Classes",
-        content: `
+    notes: {
+      title: "Notes and timestamps", section: "Sessions & Classes",
+      content: `
 <h1>Notes and timestamps</h1>
-<p>Attach short notes to exact moments on the timeline so everyone lands on the same frame.</p>
-<h2>From the player</h2>
+<p>Attach short notes to exact moments on the timeline so everyone lands on the same frame during review.</p>
+<h2>Adding a note from the player</h2>
 <ol>
-<li>Pause (shortcut <strong>N</strong>).</li>
-<li><strong>Add Note</strong>, type the text, <strong>Save</strong>.</li>
+<li>Pause the video (shortcut: <strong>N</strong>).</li>
+<li>Click <strong>Add Note</strong>, type your text, then <strong>Save</strong>.</li>
 </ol>
-<p>The note is saved at the current time. Markers appear on the scrub bar; click to jump.</p>
+<p>The note is saved at the current playhead position. Markers appear on the scrub bar; click any to jump.</p>
 <h2>Filters</h2>
-<p><strong>All</strong> shows every note; <strong>Coach</strong> shows coach notes only; <strong>Mine</strong> shows only the signed-in client’s notes.</p>
+<p><strong>All</strong> shows every note; <strong>Coach</strong> shows coach notes only; <strong>Mine</strong> shows only the signed-in client's notes.</p>
 <h2>Who can edit</h2>
 <p>Coaches may edit any note. Clients may edit only notes they created.</p>
 <h2>Tips</h2>
 <ul>
-<li>Short, specific lines (for example a technique and timestamp) are easier to scan later.</li>
-<li>Clients can leave questions on their own sessions for follow-up.</li>
-<li>Use the coach filter to review coach notes across several recordings.</li>
+<li>Short, specific lines (a technique name + brief observation) are easier to scan later than long paragraphs.</li>
+<li>Clients can leave questions on their own sessions for coach follow-up.</li>
+<li>Use the coach filter to quickly review your notes across several recordings.</li>
 </ul>
-<div class="hint hint-tip"><div>Playback shortcuts and the note workflow also appear under <a onclick="navigate('playback')">Watching and reviewing</a>.</div></div>
-`},
+<div class="hint hint-tip"><div class="hint-icon">💡</div><div>Playback shortcuts and the full note workflow: <a onclick="navigate('playback')">Watching and reviewing</a>.</div></div>`},
 
-      tags: {
-        title: "Tags and organization",
-        section: "Sessions & Classes",
-        content: `
+    tags: {
+      title: "Tags and organization", section: "Sessions & Classes",
+      content: `
 <h1>Tags and organization</h1>
 <p>Tags group related sessions and classes so lists stay easy to filter as your library grows.</p>
 <h2>Tag ideas</h2>
 <ul>
-<li>Topic: <code>form-review</code>, <code>conditioning</code>, …</li>
-<li>Format: <code>private</code>, <code>group</code>, <code>workshop</code>, …</li>
-<li>Level: <code>fundamentals</code>, <code>advanced</code>, …</li>
+<li>Topic: <code>form-review</code>, <code>conditioning</code>, <code>competition</code></li>
+<li>Format: <code>private</code>, <code>group</code>, <code>workshop</code></li>
+<li>Level: <code>fundamentals</code>, <code>advanced</code>, <code>beginner</code></li>
 </ul>
 <h2>Adding tags</h2>
-<p>In the session or class form, type a tag and press Enter. Repeat for additional tags.</p>
+<p>In the session or class form, type a tag and press <strong>Enter</strong>. Repeat for additional tags.</p>
 <h2>Finding content</h2>
-<p>List views can filter by tag, for example everything tagged <code>milestone</code> for a training block.</p>
-<h2>Consistency</h2>
+<p>List views let you filter by tag — for example, everything tagged <code>milestone</code> for a specific training block.</p>
+<h2>Consistency tips</h2>
 <ul>
-<li>Use one spelling and style per concept (avoid <code>review</code>, <code>Review</code>, and <code>form-review</code> for the same topic).</li>
-<li>Agree on a small shared vocabulary so your whole team uses the same tags.</li>
+<li>Use one spelling and style per concept (avoid <code>review</code>, <code>Review</code>, and <code>form-review</code> for the same thing).</li>
+<li>Agree on a shared vocabulary so your whole team uses consistent tags.</li>
 <li>Tags are shared across the account, not private to one person.</li>
 </ul>
-<div class="hint hint-info"><div>Filter lists in the app by tag after you <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">sign in</a>.</div></div>
-`},
+<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>Filter your lists by tag in the app after you <a href="https://app.kaynos.net" target="_blank" rel="noopener">sign in</a>.</div></div>`},
 
-      progress: {
-        title: "Progress tracking",
-        section: "Sessions & Classes",
-        content: `
+    progress: {
+      title: "Progress tracking", section: "Sessions & Classes",
+      content: `
 <h1>Progress tracking</h1>
 <p>Progress is simple on purpose: enough to see whether someone finished a recording and when they last opened it.</p>
 <h2>What we store</h2>
@@ -1019,57 +880,51 @@
 <p>They resume where they left off. Overviews show items that still need a full watch versus completed items.</p>
 <h2>For coaches and owners</h2>
 <p>Coach and admin views show completion and recency. We do not track fine-grained analytics or viewer heatmaps.</p>
-<h2>What we avoid</h2>
-<p>No invasive watch analytics or third-party ad-style tracking. The product stores only what it needs for resume and high-level completion.</p>
-<div class="hint hint-info"><div>Roster and access control: <a onclick="navigate('managing-members')">Managing members</a>.</div></div>
-`},
+<h2>What we intentionally avoid</h2>
+<p>No invasive watch analytics or third-party ad-style tracking. The product stores only what it needs for resume and high-level completion tracking.</p>
+<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>Roster and access control: <a onclick="navigate('managing-members')">Managing members</a>.</div></div>`},
 
-      "managing-members": {
-        title: "Managing members",
-        section: "Account Management",
-        content: `
+    "managing-members": {
+      title: "Managing members", section: "Account Management",
+      content: `
 <h1>Managing members</h1>
-<p>Admins use <strong>Admin</strong> for the full roster. Coaches can use <strong>Clients</strong> to manage client invites on their side. Work in <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>.</p>
+<p>Admins use <strong>Admin</strong> for the full roster. Coaches can use <strong>Clients</strong> to manage client invites on their side. Everything happens in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
 <h2>Add someone</h2>
-<p>See <a onclick="navigate('inviting-members')">Inviting your team</a> for step-by-step invite flow.</p>
+<p>See <a onclick="navigate('inviting-members')">Inviting your team</a> for the step-by-step invite flow.</p>
 <h2>Change roles</h2>
 <p><strong>Admin</strong> → select the member → role dropdown → save. Changes apply immediately. Details: <a onclick="navigate('roles')">Understanding user roles</a>.</p>
 <h2>Remove access</h2>
-<p><strong>Remove Member</strong> ends their access. Notes they already created remain for history.</p>
-<div class="hint hint-warning"><div>Removal is immediate. The person loses login access to your account on <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>.</div></div>
+<p><strong>Remove Member</strong> ends their access immediately. Notes they already created remain for history.</p>
+<div class="hint hint-warning"><div class="hint-icon">⚠️</div><div>Removal is immediate — the person loses login access to your account on <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> right away.</div></div>
 <h2>Common questions</h2>
 <p><strong>One person, two accounts?</strong> Use a different email address per account. Each account is completely separate.</p>
 <p><strong>Member limits?</strong> The product does not enforce a headcount cap.</p>
-<p><strong>Client-to-client invites?</strong> Only staff roles can invite; clients cannot invite other clients.</p>
-`},
+<p><strong>Client-to-client invites?</strong> Only staff roles can invite; clients cannot invite other clients.</p>`},
 
-      profile: {
-        title: "Profile and password",
-        section: "Account Management",
-        content: `
+    profile: {
+      title: "Profile and password", section: "Account Management",
+      content: `
 <h1>Profile and password</h1>
 <h2>Open your profile</h2>
-<p>Desktop: your name in the sidebar. Mobile: open the menu, then your name.</p>
+<p>Desktop: click your name in the sidebar. Mobile: open the menu, then tap your name.</p>
 <h2>Name and details</h2>
-<p>Update display name or other profile fields, then <strong>Save Changes</strong>.</p>
+<p>Update your display name or other profile fields, then click <strong>Save Changes</strong>.</p>
 <h2>Change password</h2>
 <ol>
-<li><strong>Change Password</strong>.</li>
-<li>Enter current password.</li>
-<li>New password and confirmation.</li>
-<li><strong>Update Password</strong>.</li>
+<li>Click <strong>Change Password</strong>.</li>
+<li>Enter your current password.</li>
+<li>Enter your new password and confirmation.</li>
+<li>Click <strong>Update Password</strong>.</li>
 </ol>
-<p>Locked out? Ask an admin for a reset or email <a href="mailto:support@kaynos.net">support@kaynos.net</a>. Login help: <a onclick="navigate('login-issues')">Login and access issues</a>.</p>
-<div class="hint hint-info"><div>Profile lives in the app: <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a> → your name in the sidebar (or menu on mobile).</div></div>
-`},
+<p>Locked out? Ask an admin for a reset, or email <a href="mailto:support@kaynos.net">support@kaynos.net</a>. Login help: <a onclick="navigate('login-issues')">Login and access issues</a>.</p>
+<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>Profile lives in the app: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> → your name in the sidebar (or menu on mobile).</div></div>`},
 
-      notifications: {
-        title: "Email notifications",
-        section: "Account Management",
-        content: `
+    notifications: {
+      title: "Email notifications", section: "Account Management",
+      content: `
 <h1>Email notifications</h1>
-<p>Email covers new sessions and classes plus onboarding (invites and temporary passwords), not billing. Toggle preferences under <strong>Profile</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>.</p>
-<div class="hint hint-tip"><div>Delivery problems: <a onclick="navigate('email-issues')">Email and notification issues</a>.</div></div>
+<p>Email covers new sessions, classes, and onboarding (invites and temporary passwords), but not billing. Toggle preferences under <strong>Profile</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
+<div class="hint hint-tip"><div class="hint-icon">💡</div><div>Delivery problems? See <a onclick="navigate('email-issues')">Email and notification issues</a>.</div></div>
 <h2>Typical messages</h2>
 <ul>
 <li>New session assigned (clients)</li>
@@ -1077,406 +932,534 @@
 <li>Invites and temporary passwords (onboarding)</li>
 </ul>
 <h2>Turning notifications off</h2>
-<p><strong>Profile</strong> → <strong>Email Notifications</strong>. Security-related messages (for example password reset) may still be sent.</p>
+<p><strong>Profile</strong> → <strong>Email Notifications</strong>. Security-related messages (such as password resets) may still send.</p>
 <h2>Not receiving mail</h2>
 <ol>
 <li>Check spam or promotions folders.</li>
 <li>Confirm the profile email address is correct.</li>
-<li>Confirm notifications are enabled in the profile.</li>
-<li>If it still fails, contact <a href="mailto:support@kaynos.net">support@kaynos.net</a> with the expected address.</li>
-</ol>
-`},
+<li>Confirm notifications are enabled in your profile settings.</li>
+<li>If it still fails, contact <a href="mailto:support@kaynos.net">support@kaynos.net</a> with your expected address.</li>
+</ol>`},
 
-      "upload-issues": {
-        title: "Video upload problems",
-        section: "Troubleshooting",
-        content: `
+    "upload-issues": {
+      title: "Video upload problems", section: "Troubleshooting",
+      content: `
 <h1>Video upload problems</h1>
-<p>Large uploads depend on stable internet and a supported format. Check the items below before assuming an app bug.</p>
-<div class="hint hint-info"><div>Reference: <a onclick="navigate('formats')">Supported formats and limits</a>, <a onclick="navigate('uploading')">Uploading videos</a>. Product URL: <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>.</div></div>
-<h2>Fails right away</h2>
-<p><strong>“Please select a video file”</strong>: the file may not be MP4, MOV, WebM, or MKV. Convert to MP4 with <a href="https://handbrake.fr" target="_blank" rel="noopener noreferrer">HandBrake</a> or <a href="https://www.videolan.org/vlc/" target="_blank" rel="noopener noreferrer">VLC</a>, then try again.</p>
-<p><strong>Too big</strong>: the limit is 5 GB. Trim the clip or export at 1080p; HandBrake’s “Fast 1080p30” preset is a common choice.</p>
+<p>Large uploads depend on stable internet and a supported format. Work through the checks below before assuming an app bug.</p>
+<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>Reference: <a onclick="navigate('formats')">Supported formats and limits</a>, <a onclick="navigate('uploading')">Uploading videos</a>.</div></div>
+<h2>Fails immediately</h2>
+<p><strong>"Please select a video file":</strong> the file may not be MP4, MOV, WebM, or MKV. Convert to MP4 with <a href="https://handbrake.fr" target="_blank" rel="noopener">HandBrake</a> or <a href="https://www.videolan.org/vlc/" target="_blank" rel="noopener">VLC</a>, then try again.</p>
+<p><strong>File too big:</strong> the limit is 5 GB. Trim the clip or export at 1080p — HandBrake's "Fast 1080p30" preset is a common choice.</p>
 <h2>Progress appears stuck</h2>
 <ol>
-<li>Large files can pause between chunks for roughly 30–60 seconds.</li>
+<li>Large files can pause between chunks for roughly 30–60 seconds — this is normal.</li>
 <li>Confirm the network works (open another site).</li>
-<li>Cancel the upload and start again if it does not advance.</li>
+<li>Cancel the upload and start again if it doesn't advance after 2 minutes.</li>
 </ol>
-<h2>Fails partway</h2>
+<h2>Fails partway through</h2>
 <ul>
-<li><strong>Network error during part upload</strong>: reconnect and retry.</li>
-<li><strong>Part upload failed: 403</strong>: on very long uploads the session can expire. Cancel and upload again.</li>
-<li><strong>500</strong>: server-side error. Wait briefly and retry; if it persists, email <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</li>
+<li><strong>Network error during part upload:</strong> reconnect and retry.</li>
+<li><strong>Part upload failed: 403:</strong> on very long uploads the session can expire. Cancel and upload again.</li>
+<li><strong>500 server error:</strong> wait briefly and retry; if it persists, email <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</li>
 </ul>
 <h2>Slow uploads</h2>
-<p>Measure <strong>upload</strong> speed, not download. <a href="https://fast.com" target="_blank" rel="noopener noreferrer">fast.com</a> shows upload after the first result.</p>
+<p>Measure your <strong>upload</strong> speed, not download. <a href="https://fast.com" target="_blank" rel="noopener">fast.com</a> shows upload after the initial result.</p>
 <table><thead><tr><th>Upload speed</th><th>500 MB</th><th>1 GB</th><th>2 GB</th></tr></thead><tbody>
 <tr><td>10 Mbps</td><td>~7 min</td><td>~14 min</td><td>~28 min</td></tr>
 <tr><td>25 Mbps</td><td>~3 min</td><td>~5 min</td><td>~11 min</td></tr>
 <tr><td>50 Mbps</td><td>~1.5 min</td><td>~3 min</td><td>~5 min</td></tr>
 <tr><td>100 Mbps</td><td>~45 sec</td><td>~1.5 min</td><td>~3 min</td></tr>
 </tbody></table>
-<p>A wired connection often beats crowded your Wi‑Fi. Pause heavy sync tools. Upload during a quieter time if the network is busy.</p>
-<h2>Status stuck on “uploading”</h2>
-<p>Contact <a href="mailto:support@kaynos.net">support@kaynos.net</a> with the session or class so we can reset the status if the browser closed mid-upload.</p>
+<p>A wired connection often beats crowded Wi-Fi. Pause heavy sync tools (Dropbox, Google Drive) and upload during a quieter time.</p>
+<h2>Status stuck on "uploading"</h2>
+<p>Contact <a href="mailto:support@kaynos.net">support@kaynos.net</a> with the session or class name so we can reset the status if the browser closed mid-upload.</p>
 <h2>Still failing</h2>
-<p>Email <a href="mailto:support@kaynos.net">support@kaynos.net</a>: account name, browser, file type and size, and a screenshot if you have one.</p>
-`},
+<p>Email <a href="mailto:support@kaynos.net">support@kaynos.net</a> with: account name, browser, file type and size, and a screenshot if you have one.</p>`},
 
-      "playback-issues": {
-        title: "Video playback problems",
-        section: "Troubleshooting",
-        content: `
+    "playback-issues": {
+      title: "Video playback problems", section: "Troubleshooting",
+      content: `
 <h1>Video playback problems</h1>
-<p>If the player is blank or errors, work through these checks.</p>
-<div class="hint hint-info"><div>General playback behavior: <a onclick="navigate('playback')">Watching and reviewing</a>. Codecs: <a onclick="navigate('formats')">Supported formats and limits</a>. App: <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>.</div></div>
+<p>If the player is blank or showing errors, work through these checks.</p>
+<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>General playback: <a onclick="navigate('playback')">Watching and reviewing</a>. Codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 <h2>Player blank or broken controls</h2>
-<p><strong>Black screen / no controls:</strong> refresh, then hard refresh or clear cache, then try <a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer">Chrome</a>. Confirm the upload finished (not “uploading” or “failed”).</p>
-<p><strong>“Cannot be played”:</strong> often a codec or browser issue. MKV can fail in Safari; try <a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer">Chrome</a> or <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener noreferrer">Firefox</a>, or re-export to MP4 with H.264 video and AAC audio.</p>
+<p><strong>Black screen / no controls:</strong> refresh, then hard refresh or clear cache, then try <a href="https://www.google.com/chrome/" target="_blank" rel="noopener">Chrome</a>. Confirm the upload finished (not stuck on "uploading" or showing "failed").</p>
+<p><strong>"Cannot be played":</strong> often a codec or browser issue. MKV can fail in Safari — try <a href="https://www.google.com/chrome/" target="_blank" rel="noopener">Chrome</a> or <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener">Firefox</a>, or re-export to MP4 with H.264 video and AAC audio.</p>
 <h2>Buffering or long spinners</h2>
 <ul>
-<li>Check bandwidth (upload and download can differ by network).</li>
+<li>Check your bandwidth (upload and download can differ dramatically by network).</li>
 <li>Close other streaming tabs or heavy downloads.</li>
-<li>Very high-bitrate 4K sources may stutter; a 1080p export may play more reliably.</li>
+<li>Very high-bitrate 4K sources may stutter — a 1080p export often plays more reliably.</li>
 </ul>
 <h2>Sound but no picture (or the reverse)</h2>
-<p>Often a codec mismatch. Try another browser; if it persists, re-export with standard H.264/AAC.</p>
+<p>Usually a codec mismatch. Try another browser; if it persists, re-export with standard H.264/AAC.</p>
 <h2>Resume position wrong</h2>
-<p>Progress saves shortly after pausing. Closing the tab immediately can occasionally skip the save.</p>
-`},
+<p>Progress saves shortly after pausing. Closing the tab immediately can occasionally skip the save.</p>`},
 
-      "login-issues": {
-        title: "Login and access issues",
-        section: "Troubleshooting",
-        content: `
+    "login-issues": {
+      title: "Login and access issues", section: "Troubleshooting",
+      content: `
 <h1>Login and access issues</h1>
-<p>Most issues are wrong email, typos, or Caps Lock. Repeated failures can trigger a short lockout. Sign in at <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>.</p>
+<p>Most issues stem from the wrong email, typos, or Caps Lock. Repeated failures can trigger a short lockout. Sign in at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
 <h2>Password problems</h2>
 <ul>
 <li>Use the same email the invite was sent to.</li>
 <li>Check Caps Lock; paste the password once to avoid hidden typos.</li>
 <li>Ask an admin for a reset or email <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</li>
 </ul>
-<h2>“Too many attempts”</h2>
-<p>Too many failed logins from one address are rate-limited. Wait 15–30 minutes or contact <a href="mailto:support@kaynos.net">support@kaynos.net</a> if you need access sooner.</p>
-<h2>Blank page or “no access”</h2>
-<p>The account may have been removed, or the browser cached an old session. Try a private/incognito window. If that works, clear site data for <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a> in normal mode.</p>
+<h2>"Too many attempts"</h2>
+<p>Too many failed logins from one IP are rate-limited. Wait 15–30 minutes, or contact <a href="mailto:support@kaynos.net">support@kaynos.net</a> if you need access sooner.</p>
+<h2>Blank page or "no access"</h2>
+<p>The account may have been removed, or the browser cached an old session. Try a private/incognito window. If that works, clear site data for <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> in normal mode.</p>
 <h2>Still locked out</h2>
-<p>Email <a href="mailto:support@kaynos.net">support@kaynos.net</a> with your name, account, and email address.</p>
-<div class="hint hint-tip"><div>Profile and password changes: <a onclick="navigate('profile')">Profile and password</a>.</div></div>
-`},
+<p>Email <a href="mailto:support@kaynos.net">support@kaynos.net</a> with your name, account name, and email address.</p>
+<div class="hint hint-tip"><div class="hint-icon">💡</div><div>Profile and password changes: <a onclick="navigate('profile')">Profile and password</a>.</div></div>`},
 
-      "email-issues": {
-        title: "Email and notification issues",
-        section: "Troubleshooting",
-        content: `
+    "email-issues": {
+      title: "Email and notification issues", section: "Troubleshooting",
+      content: `
 <h1>Email and notification issues</h1>
-<p>Most delivery problems are spam filtering, typos, or disabled notification settings. Preferences are under <strong>Profile</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>.</p>
-<div class="hint hint-info"><div>What we send: <a onclick="navigate('notifications')">Email notifications</a>. Invites: <a onclick="navigate('inviting-members')">Inviting your team</a>.</div></div>
+<p>Most delivery problems come from spam filtering, address typos, or disabled notification settings. Preferences are under <strong>Profile</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
+<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>What we send: <a onclick="navigate('notifications')">Email notifications</a>. Invites: <a onclick="navigate('inviting-members')">Inviting your team</a>.</div></div>
 <h2>Not receiving messages</h2>
 <ol>
 <li>Check spam or promotions folders (Gmail often sorts automated mail here).</li>
-<li>Add the sender to contacts or safe senders.</li>
-<li>Confirm profile email and that notifications are enabled.</li>
+<li>Add the sender to your contacts or safe senders list.</li>
+<li>Confirm the profile email address is correct and notifications are enabled.</li>
 </ol>
 <h2>Invite missing</h2>
 <ul>
-<li>Check spam.</li>
-<li>Confirm the email address has no typo (for example .gmail vs .googlemail).</li>
+<li>Check spam first.</li>
+<li>Confirm the email address has no typo (e.g., .gmail vs .googlemail).</li>
 <li>Resend from <strong>Admin</strong> or use Reset Password.</li>
-<li>Corporate filters may require IT allowlisting; an admin can still issue a manual reset.</li>
+<li>Corporate filters may require IT allowlisting; an admin can still issue a manual password reset in the meantime.</li>
 </ul>
 <h2>Too many emails</h2>
-<p><strong>Profile</strong> → turn off class and session mail if the member prefers quiet. Security-related email may still send.</p>
-`},
+<p><strong>Profile</strong> → turn off class and session notifications if the member prefers quiet. Security-related email (password resets) may still send.</p>`},
 
-      performance: {
-        title: "Performance and loading",
-        section: "Troubleshooting",
-        content: `
+    performance: {
+      title: "Performance and loading", section: "Troubleshooting",
+      content: `
 <h1>Performance and loading</h1>
-<p>Slow loads are often local network, browser cache, or extensions rather than a full outage.</p>
+<p>Slow loads are usually caused by local network conditions, browser cache, or extensions — not necessarily a full outage.</p>
 <h2>General slowness</h2>
 <ol>
 <li>About 5 Mbps down is enough for typical use.</li>
-<li>Clear cache and site data for <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>.</li>
+<li>Clear cache and site data for <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</li>
 <li>Try Chrome or Firefox if Safari misbehaves during troubleshooting.</li>
 <li>Temporarily disable strict ad or script blockers to test.</li>
-<li>Close excess tabs to free memory.</li>
+<li>Close excess tabs to free up memory.</li>
 </ol>
 <h2>Unstyled or broken layout</h2>
 <p>CSS may have failed to load. Hard refresh: <strong>Ctrl+Shift+R</strong> (Windows/Linux) or <strong>Cmd+Shift+R</strong> (Mac).</p>
 <h2>Red error messages</h2>
 <ul>
-<li>Refresh once; a single failed request can show an error.</li>
-<li>If it repeats, screenshot it, note what you clicked, and email <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</li>
-</ul>
-`},
+<li>Refresh once — a single failed request can trigger an error.</li>
+<li>If it repeats, take a screenshot, note what you clicked, and email <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</li>
+</ul>`},
 
-      mobile: {
-        title: "Mobile device tips",
-        section: "Troubleshooting",
-        content: `
+    mobile: {
+      title: "Mobile device tips", section: "Troubleshooting",
+      content: `
 <h1>Mobile device tips</h1>
-<p>Kaynos runs in the mobile browser; you do not need a separate app install from a store. Open <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a> in your phone’s browser.</p>
-<div class="hint hint-info"><div>Upload troubleshooting: <a onclick="navigate('upload-issues')">Video upload problems</a>.</div></div>
+<p>Kaynos runs in the mobile browser — no app store install needed. Open <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> in your phone's browser.</p>
+<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>Upload troubleshooting: <a onclick="navigate('upload-issues')">Video upload problems</a>.</div></div>
 <h2>Supported browsers</h2>
 <ul>
 <li>iPhone / iPad: Safari or Chrome</li>
 <li>Android: Chrome or Firefox</li>
 </ul>
 <h2>Upload from a phone</h2>
-<p>Tap upload and choose from photos or files. Keep the screen on and stay on the tab; backgrounding the browser can pause uploads.</p>
+<p>Tap upload and choose from Photos or Files. Keep the screen on and stay on the tab — backgrounding the browser can pause uploads.</p>
 <h2>Watching video</h2>
 <ul>
 <li>Tap the video for play/pause; on-screen controls may hide after a few seconds.</li>
-<li>Landscape often fits the frame better than portrait.</li>
-<li>Playback speed, notes, and markers match the desktop experience.</li>
+<li>Landscape orientation often fits the frame better than portrait.</li>
+<li>Playback speed, notes, and timeline markers match the desktop experience.</li>
 </ul>
 <h2>Add to home screen</h2>
 <ul>
-<li>iOS: Share → Add to Home Screen</li>
-<li>Android: browser menu → Add to Home Screen</li>
+<li><strong>iOS:</strong> Share button → Add to Home Screen</li>
+<li><strong>Android:</strong> browser menu → Add to Home Screen</li>
 </ul>
 <h2>Limits</h2>
 <ul>
-<li>Very large files on older phones can be slow or unstable; a laptop may be easier.</li>
+<li>Very large files on older phones can be slow or unstable — a laptop may be more reliable.</li>
 <li>Landscape helps when the notes panel is open on a small display.</li>
-</ul>
-`},
+</ul>`},
 
-      faq: {
-        title: "Frequently asked questions",
-        section: "FAQ",
-        content: `
+    faq: {
+      title: "Frequently asked questions", section: "FAQ",
+      content: `
 <h1>Frequently asked questions</h1>
-<p>Kaynos is built for coaches who use video review: publish sessions and classes, add timestamped notes, and members watch on their own time. The rest of this help center covers setup and troubleshooting in detail.</p>
-<div class="hint hint-info"><div><strong>Quick links</strong><br>App: <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a> · Support: <a href="mailto:support@kaynos.net">support@kaynos.net</a> · Setup: <a onclick="navigate('setup')">Setting up your account</a></div></div>
-
-<h2>What you are signing up for</h2>
-
+<p>Kaynos is built for coaches who use video review: publish sessions and classes, add timestamped notes, and members watch on their own time.</p>
+<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div><strong>Quick links:</strong> App: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> · Support: <a href="mailto:support@kaynos.net">support@kaynos.net</a> · Setup: <a onclick="navigate('setup')">Setting up your account</a></div></div>
+<h2>What you're signing up for</h2>
 <h3>What is Kaynos, in plain language?</h3>
-<p>It replaces ad-hoc clip sharing in chat. You put session footage on a <strong>session</strong> (one client) or a <strong>class</strong> (everyone in your account), add notes on the timeline, and clients review when they can. Everything runs in the browser at <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>, without a separate app install.</p>
-
+<p>It replaces ad-hoc clip sharing in chat. You put session footage on a <strong>session</strong> (one client) or a <strong>class</strong> (everyone in your account), add notes on the timeline, and clients review when they can. Everything runs in the browser at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> — no separate app install.</p>
 <h3>Do my clients need to install something?</h3>
-<p>No. They open <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a> in a normal phone or laptop browser. If YouTube works on your network, Kaynos should too.</p>
-
+<p>No. They open <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> in a normal phone or laptop browser. If YouTube works on your network, Kaynos should too.</p>
 <h3>What types of coaching does this work for?</h3>
 <p>Kaynos works for any coaching practice where reviewing video helps clients improve: personal training, sports coaching, music lessons, dance instruction, or any skill-based teaching.</p>
-
 <hr>
-
 <h2>Running your account</h2>
-
 <h3>Do you cap how many clients or coaches I can add?</h3>
 <p>No. The product does not enforce a member or coach limit.</p>
-
-<h3>Can clients watch each other’s private lessons?</h3>
-<p><strong>No.</strong> A <strong>session</strong> is visible only to that client, staff who created or need it, and admins. <strong>Classes</strong> are shared with everyone in your account, like a group recording.</p>
-
-<h3>Can families download my class video and pass it around?</h3>
-<p>There is no download button for end users. Playback uses expiring streaming links. Your curriculum stays harder to copy out as a casual file share.</p>
-
+<h3>Can clients watch each other's private lessons?</h3>
+<p><strong>No.</strong> A <strong>session</strong> is visible only to that client, the staff who created or need it, and admins. <strong>Classes</strong> are shared with everyone in your account.</p>
+<h3>Can people download my class video?</h3>
+<p>There is no download button for end users. Playback uses expiring streaming links, keeping your curriculum harder to copy as a casual file share.</p>
 <hr>
-
 <h2>Trust, minors on camera, and policy</h2>
-
 <h3>How serious are you about security?</h3>
-<p>HTTPS in transit, hashed passwords, and video in cloud storage behind a CDN. See <a onclick="navigate('storage')">Video storage and retention</a> for storage detail.</p>
-
+<p>HTTPS in transit, hashed passwords, and video in cloud storage behind a CDN. See <a onclick="navigate('storage')">Video storage and retention</a> for details.</p>
 <h3>What about minors on the footage?</h3>
-<p>You are responsible for waivers, parental consent, and local law, the same as for any training footage. Read the <a href="https://app.kaynos.net/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a> in the app. For legal questions, consult qualified counsel; we cannot provide legal advice.</p>
-
+<p>You are responsible for waivers, parental consent, and local law — the same as for any training footage. Read the <a href="https://app.kaynos.net/terms" target="_blank" rel="noopener">Terms of Service</a> in the app. For legal questions, consult qualified counsel.</p>
 <hr>
-
 <h2>Devices and integrations</h2>
-
 <h3>Which browsers are supported?</h3>
 <p>Current Chrome, Firefox, Safari, and Edge. If upload or playback fails in one browser, trying Chrome is a reasonable first step.</p>
-
 <h3>Do you expose an API?</h3>
 <p>Yes. Admins can create API tokens for scripts and integrations. Read <a onclick="navigate('developer-api')">Developer API</a> and avoid committing secrets to source control.</p>
-
 <hr>
-
 <h2>Support</h2>
-
 <h3>How do I contact you?</h3>
-<p>Email <a href="mailto:support@kaynos.net">support@kaynos.net</a> with what happened, what you expected, account name, and browser. A screenshot or short screen recording speeds up diagnosis. In-app chat is available when you are logged in to <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a>.</p>
-`},
+<p>Email <a href="mailto:support@kaynos.net">support@kaynos.net</a> with what happened, what you expected, your account name, and your browser. A screenshot or short screen recording speeds up diagnosis. In-app chat is available when logged in to <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>`},
 
-      "developer-api": {
-        title: "Developer API",
-        section: "Developers",
-        content: `
+    "developer-api": {
+      title: "Developer API", section: "Developers",
+      content: `
 <h1>Developer API</h1>
-<p>For accounts that want automation beyond the web UI: schedules, exports, or custom reporting. The API is HTTPS-only and scoped to your account’s data. Create and manage tokens under <strong>Admin → Developer API</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer">app.kaynos.net</a> (admin role required).</p>
-
-<div class="hint hint-info"><div><strong>Swagger first</strong><br>Sign in as an <strong>admin</strong>, then open the in-app docs. The same browser session lets <em>Try it out</em> use your cookies.<br><a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener noreferrer">Swagger UI (production)</a></div></div>
-
-<div class="hint hint-danger"><div><strong>Secrets</strong><br>API tokens are as sensitive as passwords. Store them in a secret manager or env vars; never commit them to git or expose them in frontend code.</div></div>
-
-<p>OpenAPI YAML: <a href="https://app.kaynos.net/openapi.yaml" target="_blank" rel="noopener noreferrer">app.kaynos.net/openapi.yaml</a> and mirror <a href="https://raw.githubusercontent.com/jlambert229/kaynos/main/public/openapi.yaml" target="_blank" rel="noopener noreferrer">GitHub raw</a>.</p>
-<div class="hint hint-warning"><div>If the app URL returns HTML instead of YAML, use the GitHub raw link (some caches or routing edge cases).</div></div>
-
-<h2>Two doors in</h2>
+<p>For accounts that want automation beyond the web UI: schedules, exports, or custom reporting. The API is HTTPS-only and scoped to your account's data. Create and manage tokens under <strong>Admin → Developer API</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> (admin role required).</p>
+<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div><strong>Swagger first.</strong> Sign in as an admin, then open the in-app docs. The same browser session lets <em>Try it out</em> use your cookies — <a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener">Swagger UI (production)</a>.</div></div>
+<div class="hint hint-danger"><div class="hint-icon">🚫</div><div><strong>Protect your secrets.</strong> API tokens are as sensitive as passwords. Store them in a secret manager or env vars — never commit them to git or expose them in frontend code.</div></div>
+<p>OpenAPI YAML: <a href="https://app.kaynos.net/openapi.yaml" target="_blank" rel="noopener">app.kaynos.net/openapi.yaml</a> · Mirror: <a href="https://raw.githubusercontent.com/jlambert229/kaynos/main/public/openapi.yaml" target="_blank" rel="noopener">GitHub raw</a></p>
+<div class="hint hint-warning"><div class="hint-icon">⚠️</div><div>If the app URL returns HTML instead of YAML, use the GitHub raw link.</div></div>
+<h2>Two authentication doors</h2>
 <ul>
-<li><strong><code>/api/v1/...</code></strong> for scripts and integrations: Bearer token minted under <strong>Admin → Developer API</strong>.</li>
-<li><strong><code>/api/integrations/...</code></strong> while you’re logged into the browser: create/list/revoke tokens via session cookie (Swagger “Try it out”).</li>
-<li>In-app route <strong><code>/admin/api-docs</code></strong> is Swagger; admin hat required.</li>
+<li><strong><code>/api/v1/…</code></strong> — for scripts and integrations: Bearer token minted under <strong>Admin → Developer API</strong>.</li>
+<li><strong><code>/api/integrations/…</code></strong> — while logged in to the browser: create/list/revoke tokens via session cookie (Swagger "Try it out").</li>
+<li>In-app route <strong><code>/admin/api-docs</code></strong> is Swagger UI; admin role required.</li>
 </ul>
-
-<h2>Where to point the curl</h2>
-<table>
-<thead><tr><th>Where</th><th>Host</th><th>API prefix</th></tr></thead>
-<tbody>
-<tr><td>Production</td><td><a href="https://app.kaynos.net" target="_blank" rel="noopener noreferrer"><code>https://app.kaynos.net</code></a></td><td><code>/api/v1</code></td></tr>
-<tr><td>Local Netlify dev</td><td><code>http://localhost:8888</code> (typical)</td><td><code>/api/v1</code></td></tr>
-</tbody>
-</table>
+<h2>Base URLs</h2>
+<table><thead><tr><th>Environment</th><th>Host</th><th>API prefix</th></tr></thead><tbody>
+<tr><td>Production</td><td><a href="https://app.kaynos.net" target="_blank" rel="noopener"><code>https://app.kaynos.net</code></a></td><td><code>/api/v1</code></td></tr>
+<tr><td>Local Netlify dev</td><td><code>http://localhost:8888</code></td><td><code>/api/v1</code></td></tr>
+</tbody></table>
 <p>Quick discovery: <code>GET /api/v1</code> lists routes, no token needed.</p>
-
 <h2>Bearer header</h2>
-<pre style="background:var(--bg-code);padding:14px 16px;border-radius:var(--radius-sm);font-family:var(--font-mono);font-size:0.8125rem;overflow-x:auto;margin-bottom:16px;border:1px solid var(--border)">Authorization: Bearer kn_&lt;your-secret&gt;</pre>
-<p>We show the secret exactly once when you mint it. Treat it like a Stripe key: password manager or env var, never committed.</p>
-
-<h3>Scopes (keep it tight)</h3>
-<table>
-<thead><tr><th>Scope</th><th>Does</th></tr></thead>
-<tbody>
-<tr><td><code>read</code></td><td>GETs for sessions, classes, members, etc.</td></tr>
-<tr><td><code>write</code></td><td>Creates/updates/deletes plus reads.</td></tr>
-</tbody>
-</table>
-
-<h3>Whose permissions?</h3>
-<p>The token inherits the admin (or whoever created it) as far as the product is concerned. They can’t do it in the UI, API returns <code>403</code>. No backdoors.</p>
-
-<h2>What v1 covers (Swagger = truth for fields)</h2>
+<pre>Authorization: Bearer kn_&lt;your-secret&gt;</pre>
+<p>We show the secret exactly once when you mint it. Treat it like a Stripe key — password manager or env var, never committed.</p>
+<h2>Scopes</h2>
+<table><thead><tr><th>Scope</th><th>Does</th></tr></thead><tbody>
+<tr><td><code>read</code></td><td>GET requests for sessions, classes, members, etc.</td></tr>
+<tr><td><code>write</code></td><td>Creates, updates, deletes — plus all reads.</td></tr>
+</tbody></table>
+<p>The token inherits the permissions of the admin who created it. If they can't do it in the UI, the API returns <code>403</code>. No backdoors.</p>
+<h2>What v1 covers</h2>
 <ul>
-<li>Sessions and classes (life cycle + progress reads)</li>
+<li>Sessions and classes (lifecycle + progress reads)</li>
 <li>Members / roster where the product allows automation</li>
 <li>Notes pinned to sessions and classes</li>
 </ul>
-
 <h2>Managing tokens while logged in</h2>
 <ol>
-<li><code>GET /api/integrations/tokens</code> to inspect metadata</li>
-<li><code>POST /api/integrations/tokens</code> with body like <code>{"name":"nightly-export","scopes":["read"]}</code> (add <code>write</code> only if you mean it); plaintext secret returns once</li>
-<li><code>DELETE /api/integrations/tokens/{id}</code> to burn a compromised key</li>
+<li><code>GET /api/integrations/tokens</code> — inspect token metadata</li>
+<li><code>POST /api/integrations/tokens</code> — create a token (plaintext secret returned once)</li>
+<li><code>DELETE /api/integrations/tokens/{id}</code> — revoke a compromised key</li>
 </ol>
-
-<h2>When calls fail</h2>
-<p>JSON body with an <code>error</code> string. Typical: <code>401</code> missing/invalid token, <code>403</code> wrong scope or role, <code>404</code> thing not in your account, <code>400</code> bad payload.</p>
-
+<h3>Example create body</h3>
+<pre>{"name":"nightly-export","scopes":["read"]}</pre>
+<p>Add <code>"write"</code> to scopes only when you actually need it.</p>
+<h2>Error responses</h2>
+<table><thead><tr><th>Code</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>401</code></td><td>Missing or invalid token</td></tr>
+<tr><td><code>403</code></td><td>Wrong scope or role</td></tr>
+<tr><td><code>404</code></td><td>Resource not in your account</td></tr>
+<tr><td><code>400</code></td><td>Bad request payload</td></tr>
+</tbody></table>
 <h2>Operational practices</h2>
 <ul>
 <li>Rotate API keys when technical staff leave.</li>
 <li>Prefer read-only scopes until write access is clearly required.</li>
-<li>Never embed secrets in client-side code; keep tokens on the server.</li>
+<li>Never embed secrets in client-side code — keep tokens server-side.</li>
 </ul>
-
 <h2>Quick links</h2>
 <ul>
-<li><a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener noreferrer">Swagger</a></li>
-<li><a href="https://app.kaynos.net/openapi.yaml" target="_blank" rel="noopener noreferrer">OpenAPI (app host)</a></li>
-<li><a href="https://raw.githubusercontent.com/jlambert229/kaynos/main/public/openapi.yaml" target="_blank" rel="noopener noreferrer">OpenAPI (GitHub raw)</a></li>
-</ul>
-`}
-    };
+<li><a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener">Swagger UI</a></li>
+<li><a href="https://app.kaynos.net/openapi.yaml" target="_blank" rel="noopener">OpenAPI YAML (app host)</a></li>
+<li><a href="https://raw.githubusercontent.com/jlambert229/kaynos/main/public/openapi.yaml" target="_blank" rel="noopener">OpenAPI YAML (GitHub raw)</a></li>
+</ul>`}
+  };
 
-    const NAV = [
-      { section: "", pages: ["welcome"] },
-      { section: "Getting Started", pages: ["setup", "inviting-members", "first-upload", "roles"] },
-      { section: "Video", pages: ["uploading", "playback", "formats", "storage"] },
-      { section: "Sessions & Classes", pages: ["creating-sessions", "creating-classes", "notes", "tags", "progress"] },
-      { section: "Account Management", pages: ["managing-members", "profile", "notifications"] },
-      { section: "Developers", pages: ["developer-api"] },
-      { section: "Troubleshooting", pages: ["upload-issues", "playback-issues", "login-issues", "email-issues", "performance", "mobile"] },
-      { section: "FAQ", pages: ["faq"] }
-    ];
+  const NAV = [
+    { section: "", pages: ["welcome"] },
+    { section: "Getting Started", pages: ["setup", "inviting-members", "first-upload", "roles"] },
+    { section: "Video", pages: ["uploading", "playback", "formats", "storage"] },
+    { section: "Sessions & Classes", pages: ["creating-sessions", "creating-classes", "notes", "tags", "progress"] },
+    { section: "Account Management", pages: ["managing-members", "profile", "notifications"] },
+    { section: "Developers", pages: ["developer-api"] },
+    { section: "Troubleshooting", pages: ["upload-issues", "playback-issues", "login-issues", "email-issues", "performance", "mobile"] },
+    { section: "FAQ", pages: ["faq"] }
+  ];
 
-    const allPageKeys = NAV.flatMap(g => g.pages);
+  const allPageKeys = NAV.flatMap(g => g.pages);
 
-    function buildSidebar() {
-      const sb = document.getElementById('sidebar');
-      let html = '';
-      NAV.forEach(g => {
-        if (g.section) html += `<div class="sidebar-section"><div class="sidebar-section-title">${g.section}</div>`;
-        else html += `<div class="sidebar-section">`;
-        g.pages.forEach(p => {
-          html += `<a class="sidebar-link" data-page="${p}" onclick="navigate('${p}')">${PAGES[p].title}</a>`;
-        });
-        html += '</div>';
+  /* ── SIDEBAR ─────────────────────────────────────────── */
+  function buildSidebar() {
+    const sb = document.getElementById('sidebar');
+    let html = '';
+    NAV.forEach(g => {
+      html += '<div class="sidebar-section">';
+      if (g.section) html += `<div class="sidebar-section-title">${g.section}</div>`;
+      g.pages.forEach(p => {
+        html += `<a class="sidebar-link" tabindex="0" data-page="${p}" onclick="navigate('${p}')" onkeydown="if(event.key==='Enter')navigate('${p}')">${PAGES[p].title}</a>`;
       });
-      sb.innerHTML = html;
+      html += '</div>';
+    });
+    sb.innerHTML = html;
+  }
+
+  /* ── NAVIGATE ───────────────────────────────────────── */
+  function navigate(pageId) {
+    const page = PAGES[pageId];
+    if (!page) return;
+
+    const pc = document.getElementById('pageContent');
+    // Retrigger animation
+    pc.style.animation = 'none';
+    void pc.offsetHeight;
+    pc.style.animation = '';
+    pc.innerHTML = page.content;
+
+    // Wrap tables
+    pc.querySelectorAll('table').forEach(t => {
+      if (!t.closest('.table-wrap')) {
+        const w = document.createElement('div');
+        w.className = 'table-wrap';
+        t.parentNode.insertBefore(w, t);
+        w.appendChild(t);
+      }
+    });
+
+    // Wrap pre blocks with copy button
+    pc.querySelectorAll('pre').forEach(pre => {
+      if (!pre.closest('.code-block-wrap')) {
+        const w = document.createElement('div');
+        w.className = 'code-block-wrap';
+        pre.parentNode.insertBefore(w, pre);
+        w.appendChild(pre);
+        const btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.textContent = 'Copy';
+        btn.onclick = () => copyCode(btn, pre.textContent);
+        w.appendChild(btn);
+      }
+    });
+
+    // Sidebar active
+    document.querySelectorAll('.sidebar-link').forEach(l =>
+      l.classList.toggle('active', l.dataset.page === pageId));
+
+    // Breadcrumb
+    if (page.section) {
+      const bc = document.createElement('div');
+      bc.className = 'breadcrumb';
+      bc.innerHTML = `<a onclick="navigate('welcome')">Help Center</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">${page.section}</span>`;
+      pc.prepend(bc);
     }
 
-    function navigate(pageId) {
-      const page = PAGES[pageId];
-      if (!page) return;
-      document.getElementById('pageContent').innerHTML = page.content;
-      document.querySelectorAll('.sidebar-link').forEach(l => l.classList.toggle('active', l.dataset.page === pageId));
-      window.scrollTo(0, 0);
-      history.pushState({ page: pageId }, '', '#' + pageId);
-      document.title = page.title + ' — Kaynos Docs';
-      closeSidebar();
-      document.getElementById('searchInput').value = '';
-      document.getElementById('searchResults').classList.remove('active');
-    }
+    // Footer nav
+    renderFooterNav(pageId);
 
-    function toggleSidebar() {
-      document.getElementById('sidebar').classList.toggle('open');
-      document.getElementById('overlay').classList.toggle('active');
-    }
-    function closeSidebar() {
-      document.getElementById('sidebar').classList.remove('open');
-      document.getElementById('overlay').classList.remove('active');
-    }
+    // TOC
+    renderToc(pc);
 
-    function handleSearch(q) {
-      const sr = document.getElementById('searchResults');
-      if (!q || q.length < 2) { sr.classList.remove('active'); sr.innerHTML = ''; return }
-      const lower = q.toLowerCase();
-      const results = [];
-      for (const [id, page] of Object.entries(PAGES)) {
-        const text = page.content.replace(/<[^>]+>/g, ' ').toLowerCase();
-        const idx = text.indexOf(lower);
-        if (idx !== -1 || page.title.toLowerCase().includes(lower)) {
-          let snippet = '';
-          if (idx !== -1) {
-            const start = Math.max(0, idx - 40);
-            const end = Math.min(text.length, idx + q.length + 60);
-            snippet = (start > 0 ? '...' : '') + text.slice(start, end).replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), m => `<mark>${m}</mark>`) + (end < text.length ? '...' : '');
-          }
-          results.push({ id, title: page.title, section: page.section, snippet });
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    history.pushState({ page: pageId }, '', '#' + pageId);
+    document.title = pageId === 'welcome' ? 'Kaynos — Help Center' : `${page.title} — Kaynos Docs`;
+    closeSidebar();
+    document.getElementById('searchInput').value = '';
+    document.getElementById('searchResults').classList.remove('active');
+
+    // Scroll active link into view
+    const active = document.querySelector('.sidebar-link.active');
+    if (active) active.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
+
+  /* ── FOOTER NAV ─────────────────────────────────────── */
+  function renderFooterNav(pageId) {
+    const idx = allPageKeys.indexOf(pageId);
+    const fn = document.getElementById('footerNav');
+    fn.innerHTML = '';
+    if (idx > 0) {
+      const id = allPageKeys[idx - 1];
+      const a = document.createElement('a');
+      a.className = 'footer-nav-btn prev';
+      a.onclick = () => navigate(id);
+      a.innerHTML = `<span class="fn-label">← Previous</span><span class="fn-title">${PAGES[id].title}</span>`;
+      fn.appendChild(a);
+    }
+    if (idx < allPageKeys.length - 1) {
+      const id = allPageKeys[idx + 1];
+      const a = document.createElement('a');
+      a.className = 'footer-nav-btn next';
+      a.onclick = () => navigate(id);
+      a.innerHTML = `<span class="fn-label">Next →</span><span class="fn-title">${PAGES[id].title}</span>`;
+      fn.appendChild(a);
+    }
+  }
+
+  /* ── ON-PAGE TOC ────────────────────────────────────── */
+  function renderToc(container) {
+    const toc = document.getElementById('toc');
+    const headings = container.querySelectorAll('h2, h3');
+    if (headings.length < 2) { toc.innerHTML = ''; return; }
+
+    let html = '<div class="toc-title">On this page</div>';
+    headings.forEach((h, i) => {
+      const id = 'h-' + i;
+      h.id = id;
+      const cls = h.tagName === 'H3' ? 'toc-link toc-h3' : 'toc-link';
+      html += `<a class="${cls}" href="#${id}" onclick="tocJump(event,'${id}')">${h.textContent}</a>`;
+    });
+    toc.innerHTML = html;
+
+    if (window._tocObs) window._tocObs.disconnect();
+    window._tocObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        const link = toc.querySelector(`[href="#${e.target.id}"]`);
+        if (link) link.classList.toggle('active', e.isIntersecting);
+      });
+    }, { rootMargin: `-${56}px 0px -65% 0px`, threshold: 0 });
+    headings.forEach(h => window._tocObs.observe(h));
+  }
+
+  function tocJump(e, id) {
+    e.preventDefault();
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  /* ── COPY ───────────────────────────────────────────── */
+  function copyCode(btn, text) {
+    navigator.clipboard.writeText(text.trim()).then(() => {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      showToast('Copied to clipboard');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(window._toast);
+    window._toast = setTimeout(() => t.classList.remove('show'), 2000);
+  }
+
+  /* ── SEARCH ─────────────────────────────────────────── */
+  let srIdx = -1;
+
+  function handleSearch(q) {
+    const sr = document.getElementById('searchResults');
+    srIdx = -1;
+    if (!q || q.length < 2) { sr.classList.remove('active'); sr.innerHTML = ''; return; }
+    const lower = q.toLowerCase();
+    const results = [];
+    for (const [id, page] of Object.entries(PAGES)) {
+      const text = page.content.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').toLowerCase();
+      const titleMatch = page.title.toLowerCase().includes(lower);
+      const idx = text.indexOf(lower);
+      if (titleMatch || idx !== -1) {
+        let snippet = '';
+        if (idx !== -1) {
+          const s = Math.max(0, idx - 45), e = Math.min(text.length, idx + q.length + 70);
+          const raw = (s > 0 ? '…' : '') + text.slice(s, e) + (e < text.length ? '…' : '');
+          snippet = raw.replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), m => `<mark>${m}</mark>`);
         }
+        results.push({ id, title: page.title, section: page.section, snippet, titleMatch });
       }
-      if (results.length === 0) {
-        sr.innerHTML = '<div class="search-empty">No results found</div>';
-      } else {
-        sr.innerHTML = results.slice(0, 8).map(r => `<div class="search-result" onclick="navigate('${r.id}')"><div class="sr-title">${r.title}</div>${r.section ? `<div class="sr-section">${r.section}</div>` : ''}${r.snippet ? `<div class="sr-snippet">${r.snippet}</div>` : ''}</div>`).join('');
-      }
-      sr.classList.add('active');
     }
+    results.sort((a, b) => (b.titleMatch ? 1 : 0) - (a.titleMatch ? 1 : 0));
+    sr.innerHTML = results.length === 0
+      ? '<div class="search-empty">No results found</div>'
+      : results.slice(0, 8).map(r =>
+          `<div class="search-result" data-page="${r.id}" onclick="navigate('${r.id}')">
+            <div class="sr-title">${r.title}</div>
+            ${r.section ? `<div class="sr-section">${r.section}</div>` : ''}
+            ${r.snippet ? `<div class="sr-snippet">${r.snippet}</div>` : ''}
+          </div>`
+        ).join('');
+    sr.classList.add('active');
+    document.getElementById('searchInput').setAttribute('aria-expanded', 'true');
+  }
 
-    document.addEventListener('click', e => {
-      if (!e.target.closest('.header-search')) document.getElementById('searchResults').classList.remove('active');
-    });
-    document.addEventListener('keydown', e => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); document.getElementById('searchInput').focus() }
-    });
+  document.getElementById('searchInput').addEventListener('keydown', e => {
+    const sr = document.getElementById('searchResults');
+    const items = sr.querySelectorAll('.search-result');
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      srIdx = Math.min(srIdx + 1, items.length - 1);
+      items.forEach((el, i) => el.classList.toggle('focused', i === srIdx));
+      if (items[srIdx]) items[srIdx].scrollIntoView({ block: 'nearest' });
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      srIdx = Math.max(srIdx - 1, -1);
+      items.forEach((el, i) => el.classList.toggle('focused', i === srIdx));
+    } else if (e.key === 'Enter' && srIdx >= 0 && items[srIdx]) {
+      navigate(items[srIdx].dataset.page);
+    } else if (e.key === 'Escape') {
+      sr.classList.remove('active');
+      srIdx = -1;
+      document.getElementById('searchInput').blur();
+    }
+  });
 
-    window.addEventListener('popstate', e => {
-      if (e.state && e.state.page) navigate(e.state.page);
-      else navigate('welcome');
-    });
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.header-search')) {
+      document.getElementById('searchResults').classList.remove('active');
+      srIdx = -1;
+    }
+  });
 
-    buildSidebar();
-    const hash = location.hash.slice(1);
-    navigate(hash && PAGES[hash] ? hash : 'welcome');
+  document.addEventListener('keydown', e => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      const inp = document.getElementById('searchInput');
+      inp.focus(); inp.select();
+    }
+  });
+
+  /* ── SIDEBAR TOGGLE ─────────────────────────────────── */
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('overlay').classList.toggle('active');
+  }
+  function closeSidebar() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('active');
+  }
+
+  /* ── SCROLL EFFECTS ─────────────────────────────────── */
+  window.addEventListener('scroll', () => {
+    const d = document.documentElement;
+    const pct = d.scrollHeight > d.clientHeight
+      ? (d.scrollTop / (d.scrollHeight - d.clientHeight)) * 100 : 0;
+    document.getElementById('progress-bar').style.width = pct + '%';
+    document.getElementById('back-top').classList.toggle('visible', d.scrollTop > 400);
+  }, { passive: true });
+
+  /* ── POPSTATE ───────────────────────────────────────── */
+  window.addEventListener('popstate', e => {
+    navigate(e.state?.page || 'welcome');
+  });
+
+  /* ── INIT ───────────────────────────────────────────── */
+  buildSidebar();
+  const hash = location.hash.slice(1);
+  navigate(hash && PAGES[hash] ? hash : 'welcome');
   </script>
 </body>
-
 </html>
