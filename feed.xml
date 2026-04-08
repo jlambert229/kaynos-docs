@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kaynos Help Center — What's New</title>
+    <link>https://docs.kaynos.net/#whats-new</link>
+    <description>Updates and improvements to Kaynos — video review for coaches.</description>
+    <language>en-us</language>
+    <atom:link href="https://docs.kaynos.net/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>April 2026 — Help center refresh</title>
+      <link>https://docs.kaynos.net/#whats-new</link>
+      <description>Improved search, keyboard shortcuts, print styles, accessibility improvements, Developer API docs, and interactive troubleshooting tools.</description>
+      <pubDate>Tue, 07 Apr 2026 00:00:00 GMT</pubDate>
+      <guid>https://docs.kaynos.net/#whats-new-2026-04</guid>
+    </item>
+    <item>
+      <title>March 2026 — Video playback and upload improvements</title>
+      <link>https://docs.kaynos.net/#whats-new</link>
+      <description>Keyboard shortcuts during playback, timeline note markers, playback speed controls, chunked parallel upload with retry, real-time upload speed display.</description>
+      <pubDate>Sun, 01 Mar 2026 00:00:00 GMT</pubDate>
+      <guid>https://docs.kaynos.net/#whats-new-2026-03</guid>
+    </item>
+  </channel>
+</rss>
