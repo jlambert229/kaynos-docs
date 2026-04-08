@@ -179,9 +179,8 @@
 
     /* ── LAYOUT ─── */
     .layout {
-      display: grid;
-      grid-template-columns: var(--sidebar-w) 1fr;
       margin-top: var(--header-h);
+      margin-left: var(--sidebar-w);
       min-height: calc(100vh - var(--header-h));
     }
 
@@ -440,7 +439,7 @@
     @media (max-width: 768px) {
       .sidebar { transform: translateX(-100%); z-index: 95; }
       .sidebar.open { transform: translateX(0); }
-      .layout { grid-template-columns: 1fr; }
+      .layout { margin-left: 0; }
       .content-with-toc { padding: 24px 20px 80px; }
       .quick-links { grid-template-columns: 1fr; }
       .menu-btn { display: flex; }
