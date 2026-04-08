@@ -654,6 +654,63 @@
     .related-card-title { font-size: .875rem; font-weight: 500; color: var(--text-primary); }
     .related-card-section { font-size: .75rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: .04em; }
 
+    /* ── SIDEBAR READ INDICATOR ─── */
+    .sidebar-link .read-dot {
+      display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--success); margin-left: 6px; vertical-align: middle; flex-shrink: 0;
+    }
+    .sidebar-link { display: flex; align-items: center; }
+    .sidebar-link .sl-text { flex: 1; }
+
+    /* ── SIDEBAR PROGRESS BAR ─── */
+    .sidebar-progress {
+      padding: 14px 16px; border-top: 1px solid var(--border);
+      font-size: .75rem; color: var(--text-tertiary);
+    }
+    .sidebar-progress-bar {
+      height: 3px; background: var(--bg-tertiary); border-radius: 2px;
+      margin-top: 6px; overflow: hidden;
+    }
+    .sidebar-progress-fill {
+      height: 100%; background: var(--success); border-radius: 2px;
+      transition: width .3s var(--ease);
+    }
+
+    /* ── SIDEBAR BOOKMARKS / RECENT ─── */
+    .sidebar-dynamic { border-bottom: 1px solid var(--border); padding-bottom: 4px; margin-bottom: 4px; }
+    .sidebar-dynamic:empty { display: none; border: none; padding: 0; margin: 0; }
+    .sidebar-dynamic .sidebar-section-title { cursor: default; }
+    .sidebar-dynamic .sidebar-link { font-size: .8125rem; }
+
+    /* ── BOOKMARK BUTTON ─── */
+    .bookmark-btn {
+      background: none; border: 1px solid var(--border-strong);
+      color: var(--text-tertiary); padding: 4px 10px;
+      border-radius: var(--radius-sm); font-size: .75rem;
+      cursor: pointer; transition: all var(--dur);
+      display: inline-flex; align-items: center; gap: 4px;
+      margin-left: 12px; vertical-align: middle;
+    }
+    .bookmark-btn:hover { color: var(--accent); border-color: var(--accent); }
+    .bookmark-btn.bookmarked { color: var(--warning); border-color: rgba(253,126,20,.4); background: var(--warning-soft); }
+    .bookmark-btn svg { width: 12px; height: 12px; }
+
+    /* ── GLOSSARY ─── */
+    .glossary-term {
+      padding: 14px 0; border-bottom: 1px solid var(--border);
+    }
+    .glossary-term:last-child { border-bottom: none; }
+    .glossary-term dt {
+      font-weight: 600; font-size: .9375rem; color: var(--text-primary);
+      margin-bottom: 4px; display: flex; align-items: center; gap: 8px;
+    }
+    .glossary-term dt code {
+      font-family: var(--font-mono); font-size: .75rem; background: var(--bg-secondary);
+      padding: 1px 6px; border-radius: var(--radius-xs); color: var(--accent);
+      border: 1px solid var(--border); font-weight: 400;
+    }
+    .glossary-term dd { color: var(--text-secondary); line-height: 1.65; font-size: .875rem; }
+
     /* ── FAQ ACCORDION ─── */
     .faq-item { border-bottom: 1px solid var(--border); }
     .faq-question {
@@ -831,6 +888,10 @@
     wrench:   '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2a4 4 0 00-3.8 5.2L2 11.5V14h2.5l4.3-4.2A4 4 0 1010 2z"/></svg>',
     mail:     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="3" width="13" height="10" rx="1.5"/><path d="M1.5 4.5L8 9l6.5-4.5"/></svg>',
     check:    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3.5,8.5 6.5,11.5 12.5,4.5"/></svg>',
+    bookmark: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2h10a1 1 0 011 1v12l-5-3-5 3V3a1 1 0 011-1z"/></svg>',
+    bookmarkFill: '<svg viewBox="0 0 16 16" fill="currentColor" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2h10a1 1 0 011 1v12l-5-3-5 3V3a1 1 0 011-1z"/></svg>',
+    clock:    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="8" cy="8" r="6.5"/><polyline points="8,4.5 8,8 11,9.5"/></svg>',
+    book:     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2.5h4.5a1.5 1.5 0 011.5 1.5v10S6.5 13 4.25 13 2 14 2 14V2.5zM14 2.5H9.5A1.5 1.5 0 008 4v10s1.5-1 3.75-1S14 14 14 14V2.5z"/></svg>',
   };
 
   /* ── PAGE DATA ─────────────────────────────────────────────── */
@@ -1502,6 +1563,26 @@
 <li><a href="https://raw.githubusercontent.com/jlambert229/kaynos/main/public/openapi.yaml" target="_blank" rel="noopener">OpenAPI YAML (GitHub raw)</a></li>
 </ul>`},
 
+    glossary: {
+      title: "Glossary", section: "Getting Started",
+      content: `
+<h1>Glossary</h1>
+<p>Key terms used throughout Kaynos and this help center.</p>
+<dl>
+<div class="glossary-term"><dt>Session</dt><dd>A one-on-one recording assigned to a single client — private lessons, individual review, or competition footage. Only the assigned client, the creator, and admins can see it.</dd></div>
+<div class="glossary-term"><dt>Class</dt><dd>An account-wide recording visible to everyone — group sessions, workshops, or shared recordings. All members, coaches, and admins can view classes.</dd></div>
+<div class="glossary-term"><dt>Admin</dt><dd>The highest-permission role. Admins can do everything coaches can, plus manage the roster, send invites, change roles, and access the Admin area.</dd></div>
+<div class="glossary-term"><dt>Coach</dt><dd>A staff role that can create sessions and classes, upload video, add notes and tags, and view client progress. Coaches can invite clients but not other coaches.</dd></div>
+<div class="glossary-term"><dt>Client <code>member</code></dt><dd>An end user who watches assigned sessions and all published classes, adds notes, and tracks their own progress. Clients cannot upload video or view other clients' private sessions.</dd></div>
+<div class="glossary-term"><dt>Note</dt><dd>A short text annotation pinned to a specific timestamp on the video timeline. Coaches and clients can both create notes; coaches can edit any note.</dd></div>
+<div class="glossary-term"><dt>Tag</dt><dd>A label attached to sessions or classes for organization and filtering. Tags are shared across the account — examples: <code>form-review</code>, <code>competition</code>, <code>fundamentals</code>.</dd></div>
+<div class="glossary-term"><dt>Progress</dt><dd>A lightweight tracker that records playback position (for resume), completion status, and last-viewed time. Coaches see completion across their clients; no invasive analytics.</dd></div>
+<div class="glossary-term"><dt>API Token <code>kn_...</code></dt><dd>A secret key minted under Admin → Developer API. Used to authenticate scripts and integrations against the <code>/api/v1</code> endpoints. Treat like a password.</dd></div>
+<div class="glossary-term"><dt>Vimeo Source</dt><dd>An alternative to uploading a file — paste a Vimeo URL or video ID to embed video already hosted on Vimeo into a session or class.</dd></div>
+<div class="glossary-term"><dt>CDN</dt><dd>Content Delivery Network — Kaynos uses Cloudflare to deliver video quickly from edge servers close to the viewer, reducing buffering.</dd></div>
+</dl>
+<div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div>For role details see <a onclick="navigate('roles')">Understanding user roles</a>. For API tokens see <a onclick="navigate('developer-api')">Developer API</a>.</div></div>`},
+
     "whats-new": {
       title: "What's new", section: "",
       content: `
@@ -1537,7 +1618,7 @@
 
   const NAV = [
     { section: "", pages: ["welcome", "whats-new"] },
-    { section: "Getting Started", pages: ["setup", "inviting-members", "first-upload", "roles"] },
+    { section: "Getting Started", pages: ["setup", "inviting-members", "first-upload", "roles", "glossary"] },
     { section: "Video", pages: ["uploading", "playback", "formats", "storage"] },
     { section: "Sessions & Classes", pages: ["creating-sessions", "creating-classes", "notes", "tags", "progress"] },
     { section: "Account Management", pages: ["managing-members", "profile", "notifications"] },
@@ -1549,20 +1630,56 @@
   const allPageKeys = NAV.flatMap(g => g.pages);
 
   /* ── SIDEBAR ─────────────────────────────────────────── */
+  function getReadPages() { return JSON.parse(localStorage.getItem('read-pages') || '[]'); }
+  function getBookmarks() { return JSON.parse(localStorage.getItem('bookmarks') || '[]'); }
+  function getRecent() { return JSON.parse(localStorage.getItem('recent-pages') || '[]'); }
+
   function buildSidebar() {
     const sb = document.getElementById('sidebar');
     const collapsed = JSON.parse(localStorage.getItem('sb-collapsed') || '{}');
+    const readPages = getReadPages();
+    const bookmarks = getBookmarks();
+    const recent = getRecent();
     let html = '';
+
+    // Dynamic sections: Bookmarks + Recent
+    if (bookmarks.length || recent.length) {
+      html += '<div class="sidebar-dynamic">';
+      if (bookmarks.length) {
+        html += '<div class="sidebar-section"><div class="sidebar-section-title">' + IC.bookmark + ' Bookmarks</div><div class="sidebar-links">';
+        bookmarks.forEach(p => {
+          if (PAGES[p]) html += `<a class="sidebar-link" tabindex="0" data-page="${p}" onclick="navigate('${p}')" onkeydown="if(event.key==='Enter')navigate('${p}')"><span class="sl-text">${PAGES[p].title}</span></a>`;
+        });
+        html += '</div></div>';
+      }
+      if (recent.length) {
+        html += '<div class="sidebar-section"><div class="sidebar-section-title">' + IC.clock + ' Recent</div><div class="sidebar-links">';
+        recent.slice(0, 5).forEach(p => {
+          if (PAGES[p]) html += `<a class="sidebar-link" tabindex="0" data-page="${p}" onclick="navigate('${p}')" onkeydown="if(event.key==='Enter')navigate('${p}')"><span class="sl-text">${PAGES[p].title}</span></a>`;
+        });
+        html += '</div></div>';
+      }
+      html += '</div>';
+    }
+
     NAV.forEach((g, i) => {
       const isCollapsed = g.section && collapsed[g.section];
       html += `<div class="sidebar-section${isCollapsed ? ' collapsed' : ''}" data-section="${g.section || ''}">`;
       if (g.section) html += `<div class="sidebar-section-title" onclick="toggleSection(this)">${g.section}<span class="chevron">▼</span></div>`;
       html += '<div class="sidebar-links">';
       g.pages.forEach(p => {
-        html += `<a class="sidebar-link" tabindex="0" data-page="${p}" onclick="navigate('${p}')" onkeydown="if(event.key==='Enter')navigate('${p}')">${PAGES[p].title}</a>`;
+        const isRead = readPages.includes(p);
+        html += `<a class="sidebar-link" tabindex="0" data-page="${p}" onclick="navigate('${p}')" onkeydown="if(event.key==='Enter')navigate('${p}')"><span class="sl-text">${PAGES[p].title}</span>${isRead ? '<span class="read-dot" title="Read"></span>' : ''}</a>`;
       });
       html += '</div></div>';
     });
+
+    // Progress bar
+    const total = allPageKeys.filter(k => k !== 'welcome').length;
+    const read = readPages.filter(k => k !== 'welcome' && allPageKeys.includes(k)).length;
+    const pct = total > 0 ? Math.round((read / total) * 100) : 0;
+    html += `<div class="sidebar-progress"><span>${read} of ${total} articles read · ${pct}%</span><div class="sidebar-progress-bar"><div class="sidebar-progress-fill" style="width:${pct}%"></div></div></div>`;
+
     sb.innerHTML = html;
   }
 
@@ -1908,6 +2025,59 @@
     btn.parentElement.querySelectorAll('.feedback-btn:not(.selected)').forEach(b => b.style.display = 'none');
   }
 
+  /* ── READING PROGRESS & BOOKMARKS ────────────────────── */
+  function markAsRead(pageId) {
+    if (pageId === 'welcome') return;
+    const read = getReadPages();
+    if (!read.includes(pageId)) {
+      read.push(pageId);
+      localStorage.setItem('read-pages', JSON.stringify(read));
+    }
+  }
+
+  function addToRecent(pageId) {
+    if (pageId === 'welcome') return;
+    let recent = getRecent();
+    recent = recent.filter(p => p !== pageId);
+    recent.unshift(pageId);
+    if (recent.length > 5) recent = recent.slice(0, 5);
+    localStorage.setItem('recent-pages', JSON.stringify(recent));
+  }
+
+  function toggleBookmark(pageId) {
+    let bm = getBookmarks();
+    if (bm.includes(pageId)) bm = bm.filter(p => p !== pageId);
+    else bm.push(pageId);
+    localStorage.setItem('bookmarks', JSON.stringify(bm));
+    buildSidebar();
+    updateBookmarkBtn(pageId);
+    // Re-set active state
+    document.querySelectorAll('.sidebar-link').forEach(l => {
+      l.classList.toggle('active', l.dataset.page === pageId);
+    });
+  }
+
+  function renderBookmarkBtn(container, pageId) {
+    if (pageId === 'welcome') return;
+    const h1 = container.querySelector('h1');
+    if (!h1) return;
+    const isBookmarked = getBookmarks().includes(pageId);
+    const btn = document.createElement('button');
+    btn.className = 'bookmark-btn' + (isBookmarked ? ' bookmarked' : '');
+    btn.id = 'bookmarkBtn';
+    btn.onclick = () => toggleBookmark(pageId);
+    btn.innerHTML = (isBookmarked ? IC.bookmarkFill : IC.bookmark) + (isBookmarked ? ' Saved' : ' Save');
+    h1.appendChild(btn);
+  }
+
+  function updateBookmarkBtn(pageId) {
+    const btn = document.getElementById('bookmarkBtn');
+    if (!btn) return;
+    const isBookmarked = getBookmarks().includes(pageId);
+    btn.className = 'bookmark-btn' + (isBookmarked ? ' bookmarked' : '');
+    btn.innerHTML = (isBookmarked ? IC.bookmarkFill : IC.bookmark) + (isBookmarked ? ' Saved' : ' Save');
+  }
+
   /* ── FAQ ACCORDION ──────────────────────────────────── */
   function renderFaqAccordion(container, pageId) {
     if (pageId !== 'faq') return;
@@ -1969,10 +2139,21 @@
   navigate = function(pageId) {
     _origNavigate(pageId);
     const pc = document.getElementById('pageContent');
+    renderBookmarkBtn(pc, pageId);
     renderArticleMeta(pc, pageId);
     renderFaqAccordion(pc, pageId);
     renderRelated(pc, pageId);
     renderFeedback(pc);
+    markAsRead(pageId);
+    addToRecent(pageId);
+    buildSidebar();
+    // Restore active state after sidebar rebuild
+    document.querySelectorAll('.sidebar-link').forEach(l => {
+      const isActive = l.dataset.page === pageId;
+      l.classList.toggle('active', isActive);
+      if (isActive) l.setAttribute('aria-current', 'page');
+      else l.removeAttribute('aria-current');
+    });
   };
 
   /* ── THEME TOGGLE ───────────────────────────────────── */
