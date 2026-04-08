@@ -90,6 +90,35 @@
       color-scheme: dark;
     }
 
+    /* ── LIGHT MODE ─── */
+    :root.light {
+      --bg:           #ffffff;
+      --bg-elevated:  #f8f9fa;
+      --bg-secondary: #f1f3f5;
+      --bg-tertiary:  #e9ecef;
+      --bg-glass:     rgba(255,255,255,0.92);
+      --bg-hover:     rgba(0,0,0,0.03);
+      --bg-active:    rgba(0,0,0,0.06);
+      --text-primary:   #1a1a2e;
+      --text-secondary: rgba(26,26,46,0.72);
+      --text-tertiary:  rgba(26,26,46,0.45);
+      --border:         rgba(0,0,0,0.08);
+      --border-strong:  rgba(0,0,0,0.14);
+      --accent:         #1971c2;
+      --accent-hover:   #1864ab;
+      --accent-soft:    rgba(25,113,194,0.08);
+      --accent-border:  rgba(25,113,194,0.22);
+      --success:        #2b8a3e;
+      --success-soft:   rgba(43,138,62,0.08);
+      --warning:        #e8590c;
+      --warning-soft:   rgba(232,89,12,0.08);
+      --danger:         #e03131;
+      --danger-soft:    rgba(224,49,49,0.08);
+      --shadow:    0 1px 8px rgba(0,0,0,.08), 0 0 1px rgba(0,0,0,.12);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,.12), 0 0 1px rgba(0,0,0,.08);
+      color-scheme: light;
+    }
+
     html { font-size: 16px; scroll-behavior: smooth; text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
 
     @media (prefers-reduced-motion: reduce) {
@@ -217,6 +246,15 @@
     }
     .menu-btn:hover { color: var(--text-primary); background: var(--bg-hover); }
 
+    .theme-toggle {
+      background: none; border: 1px solid var(--border-strong);
+      color: var(--text-secondary); cursor: pointer;
+      padding: 5px 8px; border-radius: var(--radius-sm);
+      transition: all var(--dur); display: flex; align-items: center;
+      flex-shrink: 0; font-size: 14px; line-height: 1;
+    }
+    .theme-toggle:hover { color: var(--text-primary); border-color: var(--accent); background: var(--accent-soft); }
+
     /* ── LAYOUT ─── */
     .layout {
       margin-top: var(--header-h);
@@ -236,7 +274,15 @@
     .sidebar-section-title {
       padding: 10px 16px 4px; font-size: 10.5px; font-weight: 600;
       text-transform: uppercase; letter-spacing: .09em; color: var(--text-tertiary);
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer; user-select: none; transition: color var(--dur);
     }
+    .sidebar-section-title:hover { color: var(--text-secondary); }
+    .sidebar-section-title .chevron {
+      transition: transform .18s var(--ease); font-size: 9px; opacity: .5;
+    }
+    .sidebar-section.collapsed .chevron { transform: rotate(-90deg); }
+    .sidebar-section.collapsed .sidebar-links { display: none; }
     .sidebar-link {
       display: block; padding: 6px 16px 6px 20px;
       font-size: .875rem; color: var(--text-secondary);
@@ -268,8 +314,13 @@
     /* ── TYPOGRAPHY ─── */
     .content-inner h1 {
       font-size: 2rem; font-weight: 700; letter-spacing: -.035em;
-      line-height: 1.15; margin-bottom: 10px; color: var(--text-primary);
+      line-height: 1.15; margin-bottom: 6px; color: var(--text-primary);
     }
+    .article-meta {
+      font-size: .8125rem; color: var(--text-tertiary); margin-bottom: 18px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .article-meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-tertiary); }
     .content-inner h2 {
       font-size: 1.1875rem; font-weight: 600; letter-spacing: -.015em;
       margin-top: 44px; margin-bottom: 14px;
@@ -277,6 +328,15 @@
       line-height: 1.3; scroll-margin-top: calc(var(--header-h) + 16px);
     }
     .content-inner h2:first-of-type { border-top: none; padding-top: 0; margin-top: 28px; }
+    .heading-anchor {
+      opacity: 0; margin-left: 6px; color: var(--text-tertiary);
+      text-decoration: none; font-weight: 400; transition: opacity var(--dur), color var(--dur);
+      cursor: pointer; font-size: .85em;
+    }
+    .content-inner h2:hover .heading-anchor,
+    .content-inner h3:hover .heading-anchor,
+    .heading-anchor:focus { opacity: 1; }
+    .heading-anchor:hover { color: var(--accent); }
     .content-inner h3 {
       font-size: 1rem; font-weight: 600; margin-top: 28px; margin-bottom: 10px;
       color: var(--text-primary); scroll-margin-top: calc(var(--header-h) + 16px);
@@ -572,6 +632,67 @@
     .feedback-btn:hover { border-color: var(--accent); color: var(--text-primary); background: var(--bg-secondary); }
     .feedback-btn.selected { border-color: var(--success); color: var(--success); background: var(--success-soft); pointer-events: none; }
     .feedback-thanks { font-size: .8125rem; color: var(--success); display: none; }
+
+    /* ── RELATED ARTICLES ─── */
+    .related-articles { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--border); }
+    .related-title {
+      font-size: 10.5px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .09em; color: var(--text-tertiary); margin-bottom: 12px;
+    }
+    .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+    .related-card {
+      padding: 12px 14px; background: var(--bg-elevated);
+      border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
+      text-decoration: none; transition: all var(--dur); cursor: pointer;
+      display: flex; flex-direction: column; gap: 3px;
+    }
+    .related-card:hover { border-color: var(--accent); background: var(--bg-secondary); text-decoration: none; transform: translateY(-1px); }
+    .related-card-title { font-size: .875rem; font-weight: 500; color: var(--text-primary); }
+    .related-card-section { font-size: .75rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: .04em; }
+
+    /* ── FAQ ACCORDION ─── */
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-question {
+      padding: 14px 0; font-size: .9375rem; font-weight: 600; color: var(--text-primary);
+      cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+      user-select: none; transition: color var(--dur);
+    }
+    .faq-question:hover { color: var(--accent); }
+    .faq-chevron {
+      font-size: 10px; color: var(--text-tertiary); transition: transform .18s var(--ease);
+      flex-shrink: 0; margin-left: 12px;
+    }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+    .faq-answer {
+      max-height: 0; overflow: hidden; transition: max-height .25s var(--ease), padding .25s var(--ease);
+      padding: 0 0 0 0;
+    }
+    .faq-item.open .faq-answer { max-height: 500px; padding-bottom: 16px; }
+    .faq-answer p, .faq-answer ul, .faq-answer li { color: var(--text-secondary); }
+    .faq-answer p { margin-bottom: 8px; line-height: 1.65; }
+
+    /* ── MOBILE BOTTOM NAV ─── */
+    .mobile-nav {
+      display: none; position: fixed; bottom: 0; left: 0; right: 0;
+      height: 52px; background: var(--bg-glass);
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      border-top: 1px solid var(--border);
+      z-index: 80; justify-content: space-around; align-items: center;
+    }
+    .mobile-nav-btn {
+      background: none; border: none; color: var(--text-tertiary);
+      font-size: 10px; display: flex; flex-direction: column;
+      align-items: center; gap: 2px; cursor: pointer; padding: 6px 12px;
+      transition: color var(--dur); text-decoration: none;
+    }
+    .mobile-nav-btn:hover, .mobile-nav-btn:active { color: var(--accent); }
+    .mobile-nav-btn svg { width: 20px; height: 20px; }
+    @media (max-width: 768px) {
+      .mobile-nav { display: flex; }
+      .content-with-toc { padding-bottom: 100px !important; }
+      #back-top { bottom: 68px; }
+    }
   </style>
 </head>
 <body>
@@ -615,6 +736,8 @@
 
     <div class="header-spacer"></div>
 
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode" id="themeToggle" title="Toggle theme">🌙</button>
+
     <a href="https://www.kaynos.net/" class="header-app-link" target="_blank" rel="noopener noreferrer">
       <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
         <path d="M5 2H2a1 1 0 00-1 1v8a1 1 0 001 1h8a1 1 0 001-1V8"/>
@@ -645,6 +768,26 @@
       <path d="M7 11V3M3 7l4-4 4 4"/>
     </svg>
   </button>
+
+  <!-- Mobile Bottom Nav -->
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <a class="mobile-nav-btn" onclick="navigate('welcome')">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l7-7 7 7"/><path d="M5 8v8a1 1 0 001 1h3v-4h2v4h3a1 1 0 001-1V8"/></svg>
+      <span>Home</span>
+    </a>
+    <a class="mobile-nav-btn" onclick="document.getElementById('searchInput').focus()">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="9" r="5.5"/><line x1="13" y1="13" x2="17" y2="17" stroke-linecap="round"/></svg>
+      <span>Search</span>
+    </a>
+    <a class="mobile-nav-btn" onclick="toggleSidebar()">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/></svg>
+      <span>Menu</span>
+    </a>
+    <a class="mobile-nav-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 15V5M6 9l4-4 4 4"/></svg>
+      <span>Top</span>
+    </a>
+  </nav>
 
   <div id="toast" role="status" aria-live="polite"></div>
 
@@ -1381,16 +1524,29 @@
   /* ── SIDEBAR ─────────────────────────────────────────── */
   function buildSidebar() {
     const sb = document.getElementById('sidebar');
+    const collapsed = JSON.parse(localStorage.getItem('sb-collapsed') || '{}');
     let html = '';
-    NAV.forEach(g => {
-      html += '<div class="sidebar-section">';
-      if (g.section) html += `<div class="sidebar-section-title">${g.section}</div>`;
+    NAV.forEach((g, i) => {
+      const isCollapsed = g.section && collapsed[g.section];
+      html += `<div class="sidebar-section${isCollapsed ? ' collapsed' : ''}" data-section="${g.section || ''}">`;
+      if (g.section) html += `<div class="sidebar-section-title" onclick="toggleSection(this)">${g.section}<span class="chevron">▼</span></div>`;
+      html += '<div class="sidebar-links">';
       g.pages.forEach(p => {
         html += `<a class="sidebar-link" tabindex="0" data-page="${p}" onclick="navigate('${p}')" onkeydown="if(event.key==='Enter')navigate('${p}')">${PAGES[p].title}</a>`;
       });
-      html += '</div>';
+      html += '</div></div>';
     });
     sb.innerHTML = html;
+  }
+
+  function toggleSection(el) {
+    const section = el.closest('.sidebar-section');
+    section.classList.toggle('collapsed');
+    const collapsed = JSON.parse(localStorage.getItem('sb-collapsed') || '{}');
+    const name = section.dataset.section;
+    if (section.classList.contains('collapsed')) collapsed[name] = true;
+    else delete collapsed[name];
+    localStorage.setItem('sb-collapsed', JSON.stringify(collapsed));
   }
 
   /* ── NAVIGATE ───────────────────────────────────────── */
@@ -1451,6 +1607,21 @@
 
     // TOC
     renderToc(pc);
+
+    // Anchor links on headings
+    pc.querySelectorAll('h2[id], h3[id]').forEach(h => {
+      const a = document.createElement('a');
+      a.className = 'heading-anchor';
+      a.href = '#' + pageId + ':' + h.id;
+      a.textContent = '#';
+      a.title = 'Copy link to section';
+      a.onclick = (e) => {
+        e.preventDefault();
+        const url = location.origin + location.pathname + '#' + pageId + ':' + h.id;
+        navigator.clipboard.writeText(url).then(() => showToast('Link copied'));
+      };
+      h.appendChild(a);
+    });
 
     window.scrollTo({ top: 0, behavior: 'instant' });
     history.pushState({ page: pageId }, '', '#' + pageId);
@@ -1710,17 +1881,102 @@
     btn.parentElement.querySelectorAll('.feedback-btn:not(.selected)').forEach(b => b.style.display = 'none');
   }
 
-  /* ── ENHANCED NAVIGATE (patch to add feedback) ─────── */
+  /* ── FAQ ACCORDION ──────────────────────────────────── */
+  function renderFaqAccordion(container, pageId) {
+    if (pageId !== 'faq') return;
+    const h3s = container.querySelectorAll('h3');
+    h3s.forEach(h3 => {
+      const item = document.createElement('div');
+      item.className = 'faq-item';
+      const question = document.createElement('div');
+      question.className = 'faq-question';
+      question.innerHTML = `<span>${h3.textContent}</span><span class="faq-chevron">▼</span>`;
+      question.onclick = () => item.classList.toggle('open');
+      const answer = document.createElement('div');
+      answer.className = 'faq-answer';
+      // Collect siblings until next h3, h2, or hr
+      let sib = h3.nextElementSibling;
+      const siblings = [];
+      while (sib && sib.tagName !== 'H3' && sib.tagName !== 'H2' && sib.tagName !== 'HR') {
+        siblings.push(sib);
+        sib = sib.nextElementSibling;
+      }
+      siblings.forEach(s => answer.appendChild(s));
+      item.appendChild(question);
+      item.appendChild(answer);
+      h3.replaceWith(item);
+    });
+  }
+
+  /* ── READING TIME ───────────────────────────────────── */
+  function renderArticleMeta(container, pageId) {
+    if (pageId === 'welcome') return;
+    const text = container.textContent || '';
+    const words = text.trim().split(/\s+/).length;
+    const mins = Math.max(1, Math.round(words / 200));
+    const h1 = container.querySelector('h1');
+    if (!h1) return;
+    const meta = document.createElement('div');
+    meta.className = 'article-meta';
+    meta.innerHTML = `<span>${mins} min read</span><span class="article-meta-dot"></span><span>${words} words</span>`;
+    h1.insertAdjacentElement('afterend', meta);
+  }
+
+  /* ── RELATED ARTICLES ──────────────────────────────── */
+  function renderRelated(container, pageId) {
+    const page = PAGES[pageId];
+    if (!page || !page.section || pageId === 'welcome') return;
+    const sameSection = allPageKeys.filter(k => PAGES[k].section === page.section && k !== pageId);
+    if (!sameSection.length) return;
+    const picks = sameSection.sort(() => .5 - Math.random()).slice(0, 3);
+    const div = document.createElement('div');
+    div.className = 'related-articles';
+    div.innerHTML = '<div class="related-title">Related articles</div><div class="related-grid">' +
+      picks.map(k => `<a class="related-card" href="#${k}" onclick="navigate('${k}');return false"><span class="related-card-title">${PAGES[k].title}</span><span class="related-card-section">${PAGES[k].section}</span></a>`).join('') +
+      '</div>';
+    container.appendChild(div);
+  }
+
+  /* ── ENHANCED NAVIGATE (patch to add extras) ───────── */
   const _origNavigate = navigate;
   navigate = function(pageId) {
     _origNavigate(pageId);
-    renderFeedback(document.getElementById('pageContent'));
+    const pc = document.getElementById('pageContent');
+    renderArticleMeta(pc, pageId);
+    renderFaqAccordion(pc, pageId);
+    renderRelated(pc, pageId);
+    renderFeedback(pc);
   };
+
+  /* ── THEME TOGGLE ───────────────────────────────────── */
+  function applyTheme(mode) {
+    document.documentElement.classList.toggle('light', mode === 'light');
+    document.getElementById('themeToggle').textContent = mode === 'light' ? '☀️' : '🌙';
+    document.querySelector('meta[name="theme-color"]').content = mode === 'light' ? '#ffffff' : '#060609';
+  }
+  function toggleTheme() {
+    const isLight = document.documentElement.classList.contains('light');
+    const next = isLight ? 'dark' : 'light';
+    localStorage.setItem('theme', next);
+    applyTheme(next);
+  }
+  (function initTheme() {
+    const stored = localStorage.getItem('theme');
+    const pref = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    applyTheme(stored || pref);
+  })();
 
   /* ── INIT ───────────────────────────────────────────── */
   buildSidebar();
   const hash = location.hash.slice(1);
-  navigate(hash && PAGES[hash] ? hash : 'welcome');
+  const [initPage, initSection] = hash.split(':');
+  navigate(initPage && PAGES[initPage] ? initPage : 'welcome');
+  if (initSection) {
+    requestAnimationFrame(() => {
+      const el = document.getElementById(initSection);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
   </script>
 </body>
 </html>
