@@ -1113,6 +1113,95 @@
       padding: 2px 7px; background: var(--bg-tertiary);
     }
 
+    /* ── WIZARD ESCALATION ─── */
+    .wizard-feedback { display: flex; align-items: center; gap: 10px; margin-top: 12px; font-size: .8125rem; color: var(--text-tertiary); }
+    .wizard-fb-btn {
+      padding: 4px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border-strong); background: var(--bg-elevated);
+      color: var(--text-secondary); font-size: .8125rem; cursor: pointer; transition: all var(--dur);
+    }
+    .wizard-fb-btn:hover { border-color: var(--accent); color: var(--text-primary); }
+    .wizard-fb-btn.selected { border-color: var(--success); color: var(--success); background: var(--success-soft); pointer-events: none; }
+    .wizard-escalate {
+      margin-top: 10px; padding: 12px 14px; background: var(--warning-soft);
+      border: 1px solid rgba(253,126,20,.28); border-radius: var(--radius-sm);
+      font-size: .8125rem; color: var(--text-secondary); display: none;
+    }
+    .wizard-escalate.show { display: block; }
+    .wizard-escalate a { color: var(--accent); font-weight: 500; }
+
+    /* ── WHATS NEW BADGE ─── */
+    .new-badge {
+      display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent); margin-left: 6px; vertical-align: middle;
+      animation: pulse-ring 2s ease-out infinite;
+    }
+
+    /* ── PRINT BUTTON ─── */
+    .print-btn {
+      background: none; border: 1px solid var(--border-strong);
+      color: var(--text-tertiary); padding: 4px 10px;
+      border-radius: var(--radius-sm); font-size: .75rem;
+      cursor: pointer; transition: all var(--dur);
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+    .print-btn:hover { color: var(--accent); border-color: var(--accent); }
+    .print-btn svg { width: 12px; height: 12px; }
+    @media print { .print-btn { display: none !important; } }
+
+    /* ── LANGUAGE TOGGLE ─── */
+    .lang-toggle {
+      background: none; border: 1px solid var(--border-strong);
+      color: var(--text-secondary); padding: 4px 8px;
+      border-radius: var(--radius-sm); font-size: .75rem; font-weight: 600;
+      cursor: pointer; transition: all var(--dur); flex-shrink: 0;
+    }
+    .lang-toggle:hover { color: var(--text-primary); border-color: var(--accent); }
+
+    /* ── STEP TIPS ─── */
+    .step-tips { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
+    .step-tip {
+      display: flex; gap: 14px; padding: 16px;
+      background: var(--bg-elevated); border: 1px solid var(--border-strong);
+      border-radius: var(--radius); transition: all var(--dur);
+    }
+    .step-tip:hover { border-color: var(--accent-border); }
+    .step-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--accent); color: #fff; font-weight: 700;
+      font-size: .875rem; display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0;
+    }
+    .step-body { flex: 1; }
+    .step-body h4 { font-size: .9375rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+    .step-body p { font-size: .8125rem; color: var(--text-secondary); line-height: 1.55; margin: 0; }
+
+    /* ── TIMELINE ─── */
+    .timeline { position: relative; padding-left: 28px; margin-bottom: 28px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 11px; top: 0; bottom: 0;
+      width: 2px; background: var(--border-strong);
+    }
+    .timeline-item { position: relative; margin-bottom: 24px; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-dot {
+      position: absolute; left: -28px; top: 2px;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--bg-elevated); border: 2px solid var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1;
+    }
+    .timeline-dot svg { width: 10px; height: 10px; color: var(--accent); }
+    .timeline-week {
+      font-size: .6875rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--accent); margin-bottom: 4px;
+    }
+    .timeline-title { font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 6px; }
+    .timeline-body { font-size: .8125rem; color: var(--text-secondary); line-height: 1.6; }
+    .timeline-body ul { padding-left: 18px; margin: 6px 0 0; }
+    .timeline-body li { margin-bottom: 3px; }
+    .timeline-body a { color: var(--accent); font-weight: 500; cursor: pointer; }
+
     @keyframes pulse-ring {
       0% { box-shadow: 0 0 0 0 rgba(33,132,243,.4); }
       70% { box-shadow: 0 0 0 8px rgba(33,132,243,0); }
@@ -1208,6 +1297,8 @@
     </div>
 
     <div class="header-spacer"></div>
+
+    <button class="lang-toggle" id="langToggle" onclick="toggleLang()" title="Switch language">EN</button>
 
     <div class="text-size-controls">
       <button class="text-size-btn" onclick="adjustTextSize(-1)" title="Decrease text size" aria-label="Decrease text size">A-</button>
@@ -1338,6 +1429,8 @@
     send:     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 1.5l-6 13-2.5-5.5L1.5 6.5z"/><path d="M14.5 1.5L6 9"/></svg>',
     share:    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8v5a1 1 0 001 1h6a1 1 0 001-1V8"/><polyline points="5,5 8,2 11,5"/><line x1="8" y1="2" x2="8" y2="10"/></svg>',
     x:        '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg>',
+    print:    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="8" height="4" rx="1"/><path d="M4 12H2.5A1.5 1.5 0 011 10.5v-4A1.5 1.5 0 012.5 5h11A1.5 1.5 0 0115 6.5v4a1.5 1.5 0 01-1.5 1.5H12"/><path d="M4 5V2h8v3"/></svg>',
+    link:     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 9.5a3.5 3.5 0 005 0l2-2a3.5 3.5 0 00-5-5l-1 1"/><path d="M9.5 6.5a3.5 3.5 0 00-5 0l-2 2a3.5 3.5 0 005 5l1-1"/></svg>',
     headset:  '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8a6 6 0 0112 0"/><path d="M2 8v4a1 1 0 001 1h1a1 1 0 001-1V9a1 1 0 00-1-1H2zM14 8v4a1 1 0 01-1 1h-1a1 1 0 01-1-1V9a1 1 0 011-1h2z"/></svg>',
   };
 
@@ -2183,6 +2276,96 @@
 </div>
 <div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div>Full playback guide: <a onclick="navigate('playback')">Watching and reviewing</a></div></div>`},
 
+    "quick-tips": {
+      title: "Quick tips", section: "Getting Started",
+      content: `
+<h1>Quick tips</h1>
+<p>Visual step-by-step guides for the most common tasks in Kaynos.</p>
+<h2>Upload a video</h2>
+<div class="step-tips">
+  <div class="step-tip"><div class="step-num">1</div><div class="step-body"><h4>Create a session or class</h4><p>Go to <strong>Sessions</strong> or <strong>Classes</strong> and click the <strong>New</strong> button.</p></div></div>
+  <div class="step-tip"><div class="step-num">2</div><div class="step-body"><h4>Choose "Upload" as source</h4><p>Select <strong>Upload</strong> (not Vimeo or Notes Only) when prompted for the video source.</p></div></div>
+  <div class="step-tip"><div class="step-num">3</div><div class="step-body"><h4>Drag or select your file</h4><p>Drop the video onto the upload area, or click to browse. MP4 is recommended.</p></div></div>
+  <div class="step-tip"><div class="step-num">4</div><div class="step-body"><h4>Wait for the green check</h4><p>The progress bar shows speed and ETA. Green check = done. Then fill in title, date, and save.</p></div></div>
+</div>
+<h2>Add a timestamped note</h2>
+<div class="step-tips">
+  <div class="step-tip"><div class="step-num">1</div><div class="step-body"><h4>Open the session or class</h4><p>Navigate to the recording you want to annotate.</p></div></div>
+  <div class="step-tip"><div class="step-num">2</div><div class="step-body"><h4>Play to the right moment</h4><p>Use <kbd>J</kbd>/<kbd>L</kbd> to skip, or click the timeline to jump.</p></div></div>
+  <div class="step-tip"><div class="step-num">3</div><div class="step-body"><h4>Press N or click Add Note</h4><p>The video pauses automatically. Type your observation.</p></div></div>
+  <div class="step-tip"><div class="step-num">4</div><div class="step-body"><h4>Save</h4><p>The note appears as a marker on the timeline. Hover to preview, click to jump back.</p></div></div>
+</div>
+<h2>Invite a client</h2>
+<div class="step-tips">
+  <div class="step-tip"><div class="step-num">1</div><div class="step-body"><h4>Go to Admin or Clients</h4><p>Admins use <strong>Admin</strong> for full control. Coaches use <strong>Clients</strong>.</p></div></div>
+  <div class="step-tip"><div class="step-num">2</div><div class="step-body"><h4>Click Add Member / Add Client</h4><p>Enter their name, email, and role.</p></div></div>
+  <div class="step-tip"><div class="step-num">3</div><div class="step-body"><h4>Send the invite</h4><p>They receive an email with a temporary password. Delivery is usually quick.</p></div></div>
+</div>
+<div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div>Full guides: <a onclick="navigate('first-upload')">Your first video upload</a> · <a onclick="navigate('notes')">Notes and timestamps</a> · <a onclick="navigate('inviting-members')">Inviting your team</a></div></div>`},
+
+    "onboarding-timeline": {
+      title: "Coach onboarding timeline", section: "Getting Started",
+      content: `
+<h1>Coach onboarding timeline</h1>
+<p>A suggested four-week plan for gym owners and head coaches getting started with Kaynos.</p>
+<div class="timeline">
+  <div class="timeline-item">
+    <div class="timeline-dot">\${IC.rocket}</div>
+    <div class="timeline-week">Week 1</div>
+    <div class="timeline-title">Set up your account</div>
+    <div class="timeline-body">
+      <ul>
+        <li><a onclick="navigate('setup')">Log in and change your password</a></li>
+        <li><a onclick="navigate('roles')">Understand the three roles</a> (admin, coach, client)</li>
+        <li><a onclick="navigate('profile')">Update your profile</a></li>
+        <li>Explore the dashboard — click around before adding others</li>
+      </ul>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-dot">\${IC.video}</div>
+    <div class="timeline-week">Week 2</div>
+    <div class="timeline-title">Upload your first content</div>
+    <div class="timeline-body">
+      <ul>
+        <li><a onclick="navigate('upload-checklist')">Run the pre-flight checklist</a></li>
+        <li><a onclick="navigate('first-upload')">Upload your first video</a></li>
+        <li><a onclick="navigate('session-vs-class')">Decide: session or class?</a></li>
+        <li><a onclick="navigate('notes')">Add timestamped notes</a> to your recording</li>
+        <li><a onclick="navigate('tags')">Tag content</a> for easy filtering later</li>
+      </ul>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-dot">\${IC.users}</div>
+    <div class="timeline-week">Week 3</div>
+    <div class="timeline-title">Bring your team on board</div>
+    <div class="timeline-body">
+      <ul>
+        <li><a onclick="navigate('inviting-members')">Invite 2-3 coaches first</a> — let them get comfortable</li>
+        <li>Invite a small wave of clients (5-10) as a pilot</li>
+        <li>Ask for feedback — what's confusing? What's working?</li>
+        <li><a onclick="navigate('notifications')">Configure email notifications</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-dot">\${IC.check}</div>
+    <div class="timeline-week">Week 4</div>
+    <div class="timeline-title">Optimize and scale</div>
+    <div class="timeline-body">
+      <ul>
+        <li>Invite the rest of your roster</li>
+        <li><a onclick="navigate('tags')">Standardize your tag vocabulary</a> with the team</li>
+        <li><a onclick="navigate('progress')">Review progress tracking</a> — see who's watching</li>
+        <li><a onclick="navigate('formats')">Optimize video settings</a> — 1080p H.264 for best results</li>
+        <li>Developers: <a onclick="navigate('developer-api')">explore the API</a> for automation</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="hint hint-info"><div class="hint-icon">\${IC.info}</div><div>This is a suggested pace — move faster or slower based on your team's comfort. The important thing is that you (the admin) are confident before adding a large wave of clients.</div></div>`},
+
     "whats-new": {
       title: "What's new", section: "",
       content: `
@@ -2218,7 +2401,7 @@
 
   const NAV = [
     { section: "", pages: ["welcome", "whats-new"] },
-    { section: "Getting Started", pages: ["setup", "inviting-members", "first-upload", "roles", "glossary"] },
+    { section: "Getting Started", pages: ["setup", "inviting-members", "first-upload", "roles", "glossary", "quick-tips", "onboarding-timeline"] },
     { section: "Video", pages: ["uploading", "playback", "player-shortcuts", "formats", "upload-checklist", "speed-calculator", "storage"] },
     { section: "Sessions & Classes", pages: ["session-vs-class", "creating-sessions", "creating-classes", "notes", "tags", "progress"] },
     { section: "Account Management", pages: ["managing-members", "profile", "notifications"] },
@@ -2270,7 +2453,8 @@
       html += '<div class="sidebar-links">';
       g.pages.forEach(p => {
         const isRead = readPages.includes(p);
-        html += `<a class="sidebar-link" tabindex="0" data-page="${p}" onclick="navigate('${p}')" onkeydown="if(event.key==='Enter')navigate('${p}')"><span class="sl-text">${PAGES[p].title}</span>${isRead ? '<span class="read-dot" title="Read"></span>' : ''}</a>`;
+        const badge = (p === 'whats-new' && hasNewUpdates()) ? '<span class="new-badge" title="New updates"></span>' : '';
+        html += `<a class="sidebar-link" tabindex="0" data-page="${p}" onclick="navigate('${p}')" onkeydown="if(event.key==='Enter')navigate('${p}')"><span class="sl-text">${PAGES[p].title}${badge}</span>${isRead ? '<span class="read-dot" title="Read"></span>' : ''}</a>`;
       });
       html += '</div></div>';
     });
@@ -2296,8 +2480,10 @@
 
   /* ── NAVIGATE ───────────────────────────────────────── */
   function navigate(pageId) {
-    const page = PAGES[pageId];
+    const page = getPageContent(pageId);
     if (!page) { navigate('welcome'); return; }
+
+    if (pageId === 'whats-new') markWhatsNewSeen();
 
     const pc = document.getElementById('pageContent');
     // Retrigger animation
@@ -2773,6 +2959,7 @@
     const pc = document.getElementById('pageContent');
     renderBookmarkBtn(pc, pageId);
     renderShareBtn(pc, pageId);
+    renderPrintBtn(pc, pageId);
     renderArticleMeta(pc, pageId);
     if (pageId === 'welcome') renderChecklist(pc);
     if (pageId === 'troubleshoot') renderWizard('start');
@@ -3047,12 +3234,15 @@
     div.className = 'wizard-step';
 
     if (step.result) {
+      const shareUrl = getWizardShareLink(stepId);
       div.innerHTML = `<div class="wizard-result">
         <p><strong>${step.title}</strong></p>
         <p>${step.body}</p>
         <p><a style="color:var(--accent);font-weight:500;cursor:pointer" onclick="navigate('${step.page}')">Read full guide: ${PAGES[step.page].title} →</a></p>
-      </div>
-      <button class="wizard-restart" onclick="renderWizard('start')">← Start over</button>`;
+        <p style="margin-top:8px"><a style="color:var(--text-tertiary);font-size:.75rem;cursor:pointer" onclick="navigator.clipboard.writeText('${shareUrl}').then(()=>showToast('Link copied'))">${IC.link} Copy shareable link</a></p>
+      </div>`;
+      addWizardEscalation(div, stepId);
+      div.innerHTML += `<button class="wizard-restart" onclick="renderWizard('start')">← Start over</button>`;
     } else {
       let html = `<div class="wizard-question">${step.q}</div><div class="wizard-options">`;
       step.opts.forEach(o => {
@@ -3166,6 +3356,127 @@
       if (after) parent.insertBefore(document.createTextNode(after), node);
       parent.removeChild(node);
     });
+  }
+
+  /* ── SCROLL POSITION MEMORY ─────────────────────────── */
+  function saveScrollPos() {
+    const cur = (location.hash.slice(1).split(':')[0]) || 'welcome';
+    if (cur !== 'welcome') {
+      const positions = JSON.parse(localStorage.getItem('scroll-pos') || '{}');
+      positions[cur] = window.scrollY;
+      localStorage.setItem('scroll-pos', JSON.stringify(positions));
+    }
+  }
+  function restoreScrollPos(pageId) {
+    if (pageId === 'welcome') return;
+    const positions = JSON.parse(localStorage.getItem('scroll-pos') || '{}');
+    if (positions[pageId]) {
+      requestAnimationFrame(() => window.scrollTo({ top: positions[pageId], behavior: 'instant' }));
+    }
+  }
+  window.addEventListener('scroll', () => { clearTimeout(window._scrollSave); window._scrollSave = setTimeout(saveScrollPos, 300); }, { passive: true });
+
+  /* ── WHATS NEW BADGE ───────────────────────────────── */
+  const WHATS_NEW_VERSION = '2026-04';
+  function hasNewUpdates() {
+    return localStorage.getItem('whats-new-seen') !== WHATS_NEW_VERSION;
+  }
+  function markWhatsNewSeen() {
+    localStorage.setItem('whats-new-seen', WHATS_NEW_VERSION);
+    const badge = document.querySelector('.new-badge');
+    if (badge) badge.remove();
+  }
+
+  /* ── LANGUAGE TOGGLE ───────────────────────────────── */
+  let currentLang = localStorage.getItem('lang') || 'en';
+
+  const ES_TRANSLATIONS = {
+    welcome: { title: 'Bienvenido a Kaynos', content: `
+<div class="hero">
+  <div class="hero-badge">Centro de Ayuda</div>
+  <h1>Bienvenido a Kaynos</h1>
+  <p>Todo lo que necesitas para empezar con Kaynos — subir video, gestionar tu equipo y solucionar problemas comunes.</p>
+  <p style="margin-top:12px;font-size:.8125rem"><a style="cursor:pointer;color:var(--accent)" onclick="startTour()">Hacer el tour guiado</a></p>
+</div>
+<div class="hint hint-info"><div class="hint-icon">\${IC.info}</div><div><strong>Estás leyendo el centro de ayuda.</strong> Inicia sesión en <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> para subir video y gestionar tu cuenta.</div></div>
+<h2>Empezar</h2>
+<div class="quick-links">
+  <a class="quick-link featured" href="#setup" onclick="navigate('setup');return false"><div class="ql-icon">\${IC.rocket}</div><div class="ql-title">Configurar tu cuenta</div><div class="ql-desc">Primer inicio de sesión y contraseña</div></a>
+  <a class="quick-link featured" href="#first-upload" onclick="navigate('first-upload');return false"><div class="ql-icon">\${IC.video}</div><div class="ql-title">Tu primera subida</div><div class="ql-desc">Sube video desde tu móvil o computadora</div></a>
+  <a class="quick-link featured" href="#troubleshoot" onclick="navigate('troubleshoot');return false"><div class="ql-icon">\${IC.alert}</div><div class="ql-title">Solucionar un problema</div><div class="ql-desc">Asistente de diagnóstico paso a paso</div></a>
+  <a class="quick-link" href="#inviting-members" onclick="navigate('inviting-members');return false"><div class="ql-icon">\${IC.users}</div><div class="ql-title">Invitar a tu equipo</div><div class="ql-desc">Invitaciones, roles y lista</div></a>
+  <a class="quick-link" href="#playback" onclick="navigate('playback');return false"><div class="ql-icon">\${IC.play}</div><div class="ql-title">Ver y revisar</div><div class="ql-desc">Reproducción, notas y atajos</div></a>
+  <a class="quick-link" href="#faq" onclick="navigate('faq');return false"><div class="ql-icon">\${IC.chat}</div><div class="ql-title">Preguntas frecuentes</div><div class="ql-desc">Respuestas a dudas comunes</div></a>
+</div>
+<h2>Contacto</h2>
+<div class="support-card">
+  <div class="support-item"><div class="support-item-icon">\${IC.mail}</div><div><strong>Email:</strong> <a href="mailto:support@kaynos.net">support@kaynos.net</a></div></div>
+  <div class="support-item"><div class="support-item-icon">\${IC.chat}</div><div><strong>Chat:</strong> Esquina inferior derecha en <a href="https://app.kaynos.net" target="_blank" rel="noopener">la app</a></div></div>
+</div>` },
+    setup: { title: 'Configurar tu cuenta', content: `
+<h1>Configurar tu cuenta</h1>
+<p>Después de registrarte, los datos de acceso llegan al email que usaste. Cambia la contraseña temporal en cuanto entres.</p>
+<div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div>Abre la app en <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</div></div>
+<h2>Primer inicio de sesión</h2>
+<ol><li>Usa el enlace del email de bienvenida o ve a <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</li><li>Ingresa tu email y la contraseña temporal de la invitación.</li><li>Llegarás al <strong>Panel del Coach</strong> — esa es tu base.</li></ol>
+<h2>Cambiar contraseña</h2>
+<ol><li>Haz clic en tu nombre en la barra lateral → <strong>Perfil</strong>.</li><li><strong>Cambiar Contraseña</strong>: ingresa la actual, la nueva y confirma.</li><li>Haz clic en <strong>Actualizar Contraseña</strong>.</li></ol>
+<h2>Área de administración</h2>
+<p>Los administradores pueden usar <strong>Admin</strong> en la barra lateral para gestionar la lista, invitaciones y cambios de rol.</p>` },
+  };
+
+  function toggleLang() {
+    currentLang = currentLang === 'en' ? 'es' : 'en';
+    localStorage.setItem('lang', currentLang);
+    document.getElementById('langToggle').textContent = currentLang.toUpperCase();
+    const cur = (location.hash.slice(1).split(':')[0]) || 'welcome';
+    navigate(cur);
+  }
+
+  function getPageContent(pageId) {
+    if (currentLang === 'es' && ES_TRANSLATIONS[pageId]) {
+      return { ...PAGES[pageId], ...ES_TRANSLATIONS[pageId] };
+    }
+    return PAGES[pageId];
+  }
+
+  /* ── WIZARD ESCALATION ─────────────────────────────── */
+  function addWizardEscalation(container, stepId) {
+    const step = WIZARD[stepId];
+    if (!step || !step.result) return;
+    const div = document.createElement('div');
+    div.className = 'wizard-feedback';
+    div.innerHTML = `<span>Did this fix your problem?</span>
+      <button class="wizard-fb-btn" onclick="wizardFixed(this)">Yes</button>
+      <button class="wizard-fb-btn" onclick="wizardNotFixed(this,'${stepId}')">No</button>`;
+    const esc = document.createElement('div');
+    esc.className = 'wizard-escalate';
+    esc.id = 'wizardEscalate';
+    esc.innerHTML = `Still stuck? <a href="mailto:support@kaynos.net?subject=${encodeURIComponent('Help: ' + step.title)}&body=${encodeURIComponent('I tried the suggestion for "' + step.title + '" but it didn\'t work.\n\nBrowser: ' + navigator.userAgent.split(' ').slice(-2).join(' ') + '\n\nWhat happened:\n')}">Email support with this issue pre-filled →</a>`;
+    container.appendChild(div);
+    container.appendChild(esc);
+  }
+  function wizardFixed(btn) { btn.classList.add('selected'); showToast('Glad it helped!'); }
+  function wizardNotFixed(btn, stepId) {
+    btn.classList.add('selected');
+    document.getElementById('wizardEscalate').classList.add('show');
+  }
+
+  /* ── SHAREABLE WIZARD LINKS ────────────────────────── */
+  function getWizardShareLink(stepId) {
+    return location.origin + location.pathname + '#troubleshoot:wizard-' + stepId;
+  }
+
+  /* ── PRINT / EXPORT ────────────────────────────────── */
+  function renderPrintBtn(container, pageId) {
+    if (pageId === 'welcome') return;
+    const bar = container.querySelector('.article-actions');
+    if (!bar) return;
+    const btn = document.createElement('button');
+    btn.className = 'print-btn';
+    btn.innerHTML = IC.print + ' Print';
+    btn.onclick = () => window.print();
+    bar.appendChild(btn);
   }
 
   /* ── UPLOAD TIME CALCULATOR ─────────────────────────── */
@@ -3402,11 +3713,18 @@
   const [initPage, initSection] = hash.split(':');
   navigate(initPage && PAGES[initPage] ? initPage : 'welcome');
   if (initSection) {
-    requestAnimationFrame(() => {
-      const el = document.getElementById(initSection);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+    if (initSection.startsWith('wizard-')) {
+      requestAnimationFrame(() => renderWizard(initSection.replace('wizard-', '')));
+    } else {
+      requestAnimationFrame(() => {
+        const el = document.getElementById(initSection);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
   }
+  // Language init
+  document.getElementById('langToggle').textContent = currentLang.toUpperCase();
+
   // First-time onboarding
   if (isFirstVisit()) {
     setTimeout(startTour, 600);
