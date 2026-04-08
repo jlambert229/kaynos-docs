@@ -280,8 +280,9 @@
       padding: 10px 16px 4px; font-size: 10.5px; font-weight: 600;
       text-transform: uppercase; letter-spacing: .09em; color: var(--text-tertiary);
       display: flex; align-items: center; justify-content: space-between;
-      cursor: pointer; user-select: none; transition: color var(--dur);
+      cursor: pointer; user-select: none; transition: color var(--dur); gap: 6px;
     }
+    .sidebar-section-title svg { width: 12px; height: 12px; flex-shrink: 0; opacity: .6; }
     .sidebar-section-title:hover { color: var(--text-secondary); }
     .sidebar-section-title .chevron {
       transition: transform .18s var(--ease); font-size: 9px; opacity: .5;
@@ -409,7 +410,10 @@
     .hint > div:last-child { flex: 1; }
 
     /* ── QUICK LINKS ─── */
-    .quick-links { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-bottom: 28px; }
+    .quick-links { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px; }
+    @media (min-width: 640px) { .quick-links { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); } }
+    .quick-link.featured { border-color: var(--accent-border); background: var(--accent-soft); }
+    .quick-link.featured:hover { border-color: var(--accent); background: var(--bg-secondary); }
     .quick-link {
       padding: 14px 16px; background: var(--bg-elevated);
       border: 1px solid var(--border-strong); border-radius: var(--radius);
@@ -553,6 +557,7 @@
       .menu-btn { display: flex; }
       .header-search { max-width: none; }
       .header-app-link span { display: none; }
+      .text-size-controls { display: none; }
       .footer-nav { flex-direction: column; }
       .footer-nav-btn { max-width: none; }
       .footer-nav-btn.next { align-items: flex-start; }
@@ -687,6 +692,11 @@
     .sidebar-dynamic .sidebar-section-title svg { width: 12px; height: 12px; flex-shrink: 0; }
     .sidebar-dynamic .sidebar-link { font-size: .8125rem; }
 
+    /* ── ARTICLE ACTIONS BAR ─── */
+    .article-actions {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 20px;
+    }
+
     /* ── BOOKMARK BUTTON ─── */
     .bookmark-btn {
       background: none; border: 1px solid var(--border-strong);
@@ -694,7 +704,6 @@
       border-radius: var(--radius-sm); font-size: .75rem;
       cursor: pointer; transition: all var(--dur);
       display: inline-flex; align-items: center; gap: 4px;
-      margin-left: 12px; vertical-align: middle;
     }
     .bookmark-btn:hover { color: var(--accent); border-color: var(--accent); }
     .bookmark-btn.bookmarked { color: var(--warning); border-color: rgba(253,126,20,.4); background: var(--warning-soft); }
@@ -726,7 +735,7 @@
     }
     .chatbot-fab:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(0,0,0,.4); }
     .chatbot-fab svg { width: 20px; height: 20px; }
-    @media (max-width: 768px) { .chatbot-fab { bottom: 68px; right: 16px; } }
+    @media (max-width: 768px) { .chatbot-fab { bottom: 68px; right: 16px; } #back-top { right: 68px; } }
 
     .chatbot-panel {
       position: fixed; bottom: 84px; right: 28px; z-index: 95;
@@ -808,7 +817,6 @@
       border-radius: var(--radius-sm); font-size: .75rem;
       cursor: pointer; transition: all var(--dur);
       display: inline-flex; align-items: center; gap: 4px;
-      margin-left: 6px; vertical-align: middle;
     }
     .share-btn:hover { color: var(--accent); border-color: var(--accent); }
     .share-btn svg { width: 12px; height: 12px; }
@@ -1248,7 +1256,7 @@
 <div class="hero">
   <div class="hero-badge">Help Center</div>
   <h1>Welcome to Kaynos</h1>
-  <p>Video review for coaches — publish sessions and classes, add timestamped notes, and members watch when it fits their schedule.</p>
+  <p>Everything you need to get started with Kaynos — uploading video, managing your team, and troubleshooting common issues.</p>
   <p style="margin-top:12px;font-size:.8125rem"><a style="cursor:pointer;color:var(--accent)" onclick="startTour()">Take the guided tour</a></p>
 </div>
 <div class="hint hint-info">
@@ -1257,45 +1265,35 @@
 </div>
 <h2>Jump in</h2>
 <div class="quick-links">
-  <a class="quick-link" href="#setup" onclick="navigate('setup');return false">
+  <a class="quick-link featured" href="#setup" onclick="navigate('setup');return false">
     <div class="ql-icon">${IC.rocket}</div>
     <div class="ql-title">Setting up your account</div>
-    <div class="ql-desc">First login, password, Admin area</div>
+    <div class="ql-desc">Start here — first login, password, and basics</div>
   </a>
-  <a class="quick-link" href="#first-upload" onclick="navigate('first-upload');return false">
+  <a class="quick-link featured" href="#first-upload" onclick="navigate('first-upload');return false">
     <div class="ql-icon">${IC.video}</div>
     <div class="ql-title">Your first video upload</div>
-    <div class="ql-desc">From phone or computer to a session or class</div>
+    <div class="ql-desc">Upload from phone or computer in minutes</div>
   </a>
-  <a class="quick-link" href="#upload-issues" onclick="navigate('upload-issues');return false">
+  <a class="quick-link featured" href="#troubleshoot" onclick="navigate('troubleshoot');return false">
     <div class="ql-icon">${IC.alert}</div>
-    <div class="ql-title">Video upload problems</div>
-    <div class="ql-desc">Stuck progress, errors, slow networks</div>
-  </a>
-  <a class="quick-link" href="#playback-issues" onclick="navigate('playback-issues');return false">
-    <div class="ql-icon">${IC.play}</div>
-    <div class="ql-title">Video playback problems</div>
-    <div class="ql-desc">Black screen, buffering, codec issues</div>
+    <div class="ql-title">Fix a problem</div>
+    <div class="ql-desc">Step-by-step troubleshooting wizard</div>
   </a>
   <a class="quick-link" href="#inviting-members" onclick="navigate('inviting-members');return false">
     <div class="ql-icon">${IC.users}</div>
     <div class="ql-title">Inviting your team</div>
     <div class="ql-desc">Invites, roles, roster basics</div>
   </a>
+  <a class="quick-link" href="#playback" onclick="navigate('playback');return false">
+    <div class="ql-icon">${IC.play}</div>
+    <div class="ql-title">Watching and reviewing</div>
+    <div class="ql-desc">Playback, notes, and keyboard shortcuts</div>
+  </a>
   <a class="quick-link" href="#faq" onclick="navigate('faq');return false">
     <div class="ql-icon">${IC.chat}</div>
     <div class="ql-title">FAQ</div>
     <div class="ql-desc">Common questions from owners and coaches</div>
-  </a>
-  <a class="quick-link" href="#whats-new" onclick="navigate('whats-new');return false">
-    <div class="ql-icon">${IC.sparkle}</div>
-    <div class="ql-title">What's new</div>
-    <div class="ql-desc">Recent updates and improvements</div>
-  </a>
-  <a class="quick-link" href="#developer-api" onclick="navigate('developer-api');return false">
-    <div class="ql-icon">${IC.wrench}</div>
-    <div class="ql-title">Developer API</div>
-    <div class="ql-desc">Tokens, scopes, and automation</div>
   </a>
 </div>
 <h2>Get in touch</h2>
@@ -2055,7 +2053,8 @@
     NAV.forEach((g, i) => {
       const isCollapsed = g.section && collapsed[g.section];
       html += `<div class="sidebar-section${isCollapsed ? ' collapsed' : ''}" data-section="${g.section || ''}">`;
-      if (g.section) html += `<div class="sidebar-section-title" onclick="toggleSection(this)">${g.section}<span class="chevron">▼</span></div>`;
+      const sectionIcons = { 'Getting Started': IC.rocket, 'Video': IC.video, 'Sessions & Classes': IC.play, 'Account Management': IC.users, 'Developers': IC.wrench, 'Troubleshooting': IC.alert, 'FAQ': IC.chat };
+      if (g.section) html += `<div class="sidebar-section-title" onclick="toggleSection(this)">${sectionIcons[g.section] || ''}${g.section}<span class="chevron" style="margin-left:auto">▼</span></div>`;
       html += '<div class="sidebar-links">';
       g.pages.forEach(p => {
         const isRead = readPages.includes(p);
@@ -2068,7 +2067,7 @@
     const total = allPageKeys.filter(k => k !== 'welcome').length;
     const read = readPages.filter(k => k !== 'welcome' && allPageKeys.includes(k)).length;
     const pct = total > 0 ? Math.round((read / total) * 100) : 0;
-    html += `<div class="sidebar-progress"><span>${read} of ${total} articles read · ${pct}%</span><div class="sidebar-progress-bar"><div class="sidebar-progress-fill" style="width:${pct}%"></div></div></div>`;
+    if (read > 0) html += `<div class="sidebar-progress"><span>${read}/${total} read</span><div class="sidebar-progress-bar"><div class="sidebar-progress-fill" style="width:${pct}%"></div></div></div>`;
 
     sb.innerHTML = html;
   }
@@ -2471,15 +2470,24 @@
 
   function renderBookmarkBtn(container, pageId) {
     if (pageId === 'welcome') return;
-    const h1 = container.querySelector('h1');
-    if (!h1) return;
+    let bar = container.querySelector('.article-actions');
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.className = 'article-actions';
+      const meta = container.querySelector('.article-meta');
+      if (meta) meta.insertAdjacentElement('afterend', bar);
+      else {
+        const h1 = container.querySelector('h1');
+        if (h1) h1.insertAdjacentElement('afterend', bar);
+      }
+    }
     const isBookmarked = getBookmarks().includes(pageId);
     const btn = document.createElement('button');
     btn.className = 'bookmark-btn' + (isBookmarked ? ' bookmarked' : '');
     btn.id = 'bookmarkBtn';
     btn.onclick = () => toggleBookmark(pageId);
     btn.innerHTML = (isBookmarked ? IC.bookmarkFill : IC.bookmark) + (isBookmarked ? ' Saved' : ' Save');
-    h1.appendChild(btn);
+    bar.appendChild(btn);
   }
 
   function updateBookmarkBtn(pageId) {
@@ -3048,8 +3056,8 @@
   /* ── SHARE BUTTON ──────────────────────────────────── */
   function renderShareBtn(container, pageId) {
     if (pageId === 'welcome') return;
-    const h1 = container.querySelector('h1');
-    if (!h1) return;
+    let bar = container.querySelector('.article-actions');
+    if (!bar) return;
     const btn = document.createElement('button');
     btn.className = 'share-btn';
     btn.innerHTML = IC.share + ' Share';
@@ -3061,7 +3069,7 @@
         navigator.clipboard.writeText(url).then(() => showToast('Link copied'));
       }
     };
-    h1.appendChild(btn);
+    bar.appendChild(btn);
   }
 
   /* ── OFFLINE DETECTION ─────────────────────────────── */
