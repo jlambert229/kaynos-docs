@@ -222,6 +222,10 @@
     .search-result .sr-section { font-size: 11px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: .05em; }
     .search-result .sr-snippet { font-size: .8125rem; color: var(--text-secondary); margin-top: 4px; line-height: 1.5; }
     .search-result mark { background: rgba(33,132,243,.20); color: var(--accent-hover); border-radius: 2px; padding: 0 2px; }
+    .sr-badge { display: inline-flex; margin-left: 6px; vertical-align: middle; }
+    .sr-badge svg { width: 11px; height: 11px; }
+    .sr-bookmarked { color: var(--warning); }
+    .sr-read { color: var(--success); }
     .search-empty { padding: 24px 14px; text-align: center; color: var(--text-tertiary); font-size: .875rem; }
 
     .header-spacer { flex: 1; }
@@ -397,15 +401,15 @@
     }
     .hint-icon { flex-shrink: 0; margin-top: 2px; line-height: 1; display: flex; align-items: center; }
     .hint-icon svg { width: 16px; height: 16px; }
-    .hint-warning  { background: var(--warning-soft); border: 1px solid rgba(253,126,20,.28); }
-    .hint-info     { background: var(--accent-soft);  border: 1px solid var(--accent-border); }
-    .hint-tip      { background: var(--success-soft); border: 1px solid rgba(64,192,87,.28); }
-    .hint-danger   { background: var(--danger-soft);  border: 1px solid rgba(250,82,82,.28); }
+    .hint-warning  { background: var(--warning-soft); border: 1px solid rgba(253,126,20,.28); border-left: 3px solid var(--warning); }
+    .hint-info     { background: var(--accent-soft);  border: 1px solid var(--accent-border); border-left: 3px solid var(--accent); }
+    .hint-tip      { background: var(--success-soft); border: 1px solid rgba(64,192,87,.28); border-left: 3px solid var(--success); }
+    .hint-danger   { background: var(--danger-soft);  border: 1px solid rgba(250,82,82,.28); border-left: 3px solid var(--danger); }
     .hint-info a, .hint-warning a, .hint-tip a, .hint-danger a { color: var(--accent); font-weight: 500; }
     .hint > div:last-child { flex: 1; }
 
     /* ── QUICK LINKS ─── */
-    .quick-links { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px; }
+    .quick-links { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-bottom: 28px; }
     .quick-link {
       padding: 14px 16px; background: var(--bg-elevated);
       border: 1px solid var(--border-strong); border-radius: var(--radius);
@@ -679,7 +683,8 @@
     /* ── SIDEBAR BOOKMARKS / RECENT ─── */
     .sidebar-dynamic { border-bottom: 1px solid var(--border); padding-bottom: 4px; margin-bottom: 4px; }
     .sidebar-dynamic:empty { display: none; border: none; padding: 0; margin: 0; }
-    .sidebar-dynamic .sidebar-section-title { cursor: default; }
+    .sidebar-dynamic .sidebar-section-title { cursor: default; display: flex; align-items: center; gap: 6px; }
+    .sidebar-dynamic .sidebar-section-title svg { width: 12px; height: 12px; flex-shrink: 0; }
     .sidebar-dynamic .sidebar-link { font-size: .8125rem; }
 
     /* ── BOOKMARK BUTTON ─── */
@@ -866,6 +871,7 @@
       <div class="kbd-row"><span>Next page</span><kbd>→</kbd></div>
       <div class="kbd-row"><span>Back to top</span><kbd>T</kbd></div>
       <div class="kbd-row"><span>Home</span><kbd>H</kbd></div>
+      <div class="kbd-row"><span>Bookmark page</span><kbd>B</kbd></div>
       <div class="kbd-row"><span>Show shortcuts</span><kbd>?</kbd></div>
       <button class="kbd-modal-close" onclick="closeKbd()">Close <kbd>Esc</kbd></button>
     </div>
@@ -1740,9 +1746,11 @@
 
     // Breadcrumb
     if (page.section) {
+      const sectionGroup = NAV.find(g => g.section === page.section);
+      const sectionFirst = sectionGroup ? sectionGroup.pages[0] : 'welcome';
       const bc = document.createElement('div');
       bc.className = 'breadcrumb';
-      bc.innerHTML = `<a onclick="navigate('welcome')">Help Center</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">${page.section}</span>`;
+      bc.innerHTML = `<a onclick="navigate('welcome')">Help Center</a><span class="breadcrumb-sep">›</span><a onclick="navigate('${sectionFirst}')">${page.section}</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">${page.title}</span>`;
       pc.prepend(bc);
     }
 
@@ -1789,7 +1797,8 @@
       const id = allPageKeys[idx - 1];
       const a = document.createElement('a');
       a.className = 'footer-nav-btn prev';
-      a.onclick = () => navigate(id);
+      a.href = '#' + id;
+      a.onclick = (e) => { e.preventDefault(); navigate(id); };
       a.innerHTML = `<span class="fn-label">← Previous</span><span class="fn-title">${PAGES[id].title}</span>`;
       fn.appendChild(a);
     }
@@ -1797,7 +1806,8 @@
       const id = allPageKeys[idx + 1];
       const a = document.createElement('a');
       a.className = 'footer-nav-btn next';
-      a.onclick = () => navigate(id);
+      a.href = '#' + id;
+      a.onclick = (e) => { e.preventDefault(); navigate(id); };
       a.innerHTML = `<span class="fn-label">Next →</span><span class="fn-title">${PAGES[id].title}</span>`;
       fn.appendChild(a);
     }
@@ -1814,7 +1824,8 @@
       const id = 'h-' + i;
       h.id = id;
       const cls = h.tagName === 'H3' ? 'toc-link toc-h3' : 'toc-link';
-      html += `<a class="${cls}" href="#${id}" onclick="tocJump(event,'${id}')">${h.textContent}</a>`;
+      const label = h.childNodes[0]?.textContent || h.textContent;
+      html += `<a class="${cls}" href="#${id}" onclick="tocJump(event,'${id}')">${label.trim()}</a>`;
     });
     toc.innerHTML = html;
 
@@ -1857,32 +1868,45 @@
   /* ── SEARCH ─────────────────────────────────────────── */
   let srIdx = -1;
 
+  function fuzzyMatch(text, query) {
+    // Simple word-based fuzzy: all query words must appear in text
+    const words = query.toLowerCase().split(/\s+/).filter(w => w.length > 1);
+    const lower = text.toLowerCase();
+    return words.every(w => lower.includes(w));
+  }
+
   function handleSearch(q) {
     const sr = document.getElementById('searchResults');
     srIdx = -1;
     if (!q || q.length < 2) { sr.classList.remove('active'); sr.innerHTML = ''; document.getElementById('searchInput').setAttribute('aria-expanded', 'false'); return; }
     const lower = q.toLowerCase();
+    const readPages = getReadPages();
+    const bookmarks = getBookmarks();
     const results = [];
     for (const [id, page] of Object.entries(PAGES)) {
-      const text = page.content.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').toLowerCase();
+      const text = page.content.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
+      const textLower = text.toLowerCase();
       const titleMatch = page.title.toLowerCase().includes(lower);
-      const idx = text.indexOf(lower);
-      if (titleMatch || idx !== -1) {
+      const exactIdx = textLower.indexOf(lower);
+      const fuzzy = !titleMatch && exactIdx === -1 && fuzzyMatch(page.title + ' ' + text, q);
+      if (titleMatch || exactIdx !== -1 || fuzzy) {
         let snippet = '';
+        const idx = exactIdx !== -1 ? exactIdx : textLower.indexOf(lower.split(/\s+/)[0]);
         if (idx !== -1) {
-          const s = Math.max(0, idx - 45), e = Math.min(text.length, idx + q.length + 70);
-          const raw = (s > 0 ? '…' : '') + text.slice(s, e) + (e < text.length ? '…' : '');
-          snippet = raw.replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), m => `<mark>${m}</mark>`);
+          const s = Math.max(0, idx - 45), e = Math.min(textLower.length, idx + q.length + 70);
+          const raw = (s > 0 ? '…' : '') + text.slice(s, e) + (e < textLower.length ? '…' : '');
+          snippet = raw.replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').split(/\s+/).join('|'), 'gi'), m => `<mark>${m}</mark>`);
         }
-        results.push({ id, title: page.title, section: page.section, snippet, titleMatch });
+        const score = (titleMatch ? 10 : 0) + (exactIdx !== -1 ? 5 : 0) + (bookmarks.includes(id) ? 2 : 0) + (fuzzy ? 1 : 0);
+        results.push({ id, title: page.title, section: page.section, snippet, score, isRead: readPages.includes(id), isBookmarked: bookmarks.includes(id) });
       }
     }
-    results.sort((a, b) => (b.titleMatch ? 1 : 0) - (a.titleMatch ? 1 : 0));
+    results.sort((a, b) => b.score - a.score);
     sr.innerHTML = results.length === 0
       ? '<div class="search-empty">No results found</div>'
       : results.slice(0, 8).map((r, i) =>
           `<div class="search-result" role="option" id="sr-${i}" data-page="${r.id}" onclick="navigate('${r.id}')">
-            <div class="sr-title">${r.title}</div>
+            <div class="sr-title">${r.title}${r.isBookmarked ? '<span class="sr-badge sr-bookmarked" title="Bookmarked">' + IC.bookmarkFill + '</span>' : ''}${r.isRead ? '<span class="sr-badge sr-read" title="Read">' + IC.check + '</span>' : ''}</div>
             ${r.section ? `<div class="sr-section">${r.section}</div>` : ''}
             ${r.snippet ? `<div class="sr-snippet">${r.snippet}</div>` : ''}
           </div>`
@@ -2001,6 +2025,10 @@
     }
     if (e.key === 't' || e.key === 'T') window.scrollTo({ top: 0, behavior: 'smooth' });
     if (e.key === 'h' || e.key === 'H') navigate('welcome');
+    if (e.key === 'b' || e.key === 'B') {
+      const cur = location.hash.slice(1).split(':')[0] || 'welcome';
+      if (cur !== 'welcome') { toggleBookmark(cur); showToast(getBookmarks().includes(cur) ? 'Page bookmarked' : 'Bookmark removed'); }
+    }
   });
 
   /* ── FEEDBACK WIDGET ───────────────────────────────── */
