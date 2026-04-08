@@ -546,7 +546,9 @@ test.describe('Feature requests', () => {
     await page.goto('/#feature-requests');
     await page.waitForSelector('.poll-item');
     const countBefore = await page.locator('.poll-item').count();
-    await page.fill('#pollInput', 'Dark mode per-session');
+    const input = page.locator('#pollInput');
+    await input.scrollIntoViewIfNeeded();
+    await input.fill('Dark mode per-session');
     await page.locator('.poll-submit-btn').click();
     const countAfter = await page.locator('.poll-item').count();
     expect(countAfter).toBe(countBefore + 1);
@@ -554,10 +556,12 @@ test.describe('Feature requests', () => {
 
   test('submit rejects short ideas', async ({ page }) => {
     await page.goto('/#feature-requests');
-    await page.fill('#pollInput', 'Hi');
+    const input = page.locator('#pollInput');
+    await input.scrollIntoViewIfNeeded();
+    await input.fill('Hi');
     await page.locator('.poll-submit-btn').click();
     // Should show toast, not add item
-    await expect(page.locator('#toast')).toHaveClass(/show/);
+    await expect(page.locator('#toast')).toHaveClass(/show/, { timeout: 5000 });
   });
 
   test('total votes counter updates', async ({ page }) => {
