@@ -587,7 +587,10 @@
       .kbd-modal-overlay, .offline-banner, .page-feedback,
       .article-actions, .bookmark-btn, .share-btn, .print-btn,
       .heading-anchor, .wizard-feedback, .wizard-escalate,
-      .wizard-restart, .checklist { display: none !important; }
+      .wizard-restart, .checklist, .related-articles,
+      .role-picker, .step-tips, .preflight, .calc-wrap,
+      .breadcrumb, .error-lookup, .lang-toggle,
+      .text-size-controls, .theme-toggle, .search-kbd { display: none !important; }
       .layout { margin-left: 0 !important; }
       .content-with-toc { padding: 0 !important; }
       body { background: #fff; color: #111; font-size: 12pt; }
@@ -1250,8 +1253,10 @@
     .mobile-nav-btn {
       background: none; border: none; color: var(--text-tertiary);
       font-size: 10px; display: flex; flex-direction: column;
-      align-items: center; gap: 2px; cursor: pointer; padding: 6px 12px;
+      align-items: center; gap: 2px; cursor: pointer;
+      padding: 8px 14px; min-width: 44px; min-height: 44px;
       transition: color var(--dur); text-decoration: none;
+      justify-content: center;
     }
     .mobile-nav-btn:hover, .mobile-nav-btn:active { color: var(--accent); }
     .mobile-nav-btn svg { width: 20px; height: 20px; }
@@ -2968,7 +2973,7 @@
   /* ── ENHANCED NAVIGATE (patch to add extras) ───────── */
   const _origNavigate = navigate;
   navigate = function(pageId) {
-    _origNavigate(pageId);
+    try { _origNavigate(pageId); } catch(e) { console.error('Navigate error:', e); return; }
     const pc = document.getElementById('pageContent');
     renderBookmarkBtn(pc, pageId);
     renderShareBtn(pc, pageId);
@@ -3037,22 +3042,22 @@
     let roleHtml = '';
     if (step.roleSelect) {
       roleHtml = `<div class="role-picker">
-        <div class="role-card${selectedRole === 'admin' ? ' selected' : ''}" onclick="selectRole('admin')">
+        <div class="role-card${selectedRole === 'admin' ? ' selected' : ''}" role="button" tabindex="0" onclick="selectRole('admin')" onkeydown="if(event.key==='Enter')selectRole('admin')">
           <div class="role-card-icon">${IC.wrench}</div>
           <div class="role-card-title">Admin / Owner</div>
           <div class="role-card-desc">Roster, invites, settings</div>
         </div>
-        <div class="role-card${selectedRole === 'coach' ? ' selected' : ''}" onclick="selectRole('coach')">
+        <div class="role-card${selectedRole === 'coach' ? ' selected' : ''}" role="button" tabindex="0" onclick="selectRole('coach')" onkeydown="if(event.key==='Enter')selectRole('coach')">
           <div class="role-card-icon">${IC.video}</div>
           <div class="role-card-title">Coach</div>
           <div class="role-card-desc">Sessions, uploads, notes</div>
         </div>
-        <div class="role-card${selectedRole === 'client' ? ' selected' : ''}" onclick="selectRole('client')">
+        <div class="role-card${selectedRole === 'client' ? ' selected' : ''}" role="button" tabindex="0" onclick="selectRole('client')" onkeydown="if(event.key==='Enter')selectRole('client')">
           <div class="role-card-icon">${IC.play}</div>
           <div class="role-card-title">Client / Member</div>
           <div class="role-card-desc">Watch, review, progress</div>
         </div>
-        <div class="role-card${selectedRole === 'developer' ? ' selected' : ''}" onclick="selectRole('developer')">
+        <div class="role-card${selectedRole === 'developer' ? ' selected' : ''}" role="button" tabindex="0" onclick="selectRole('developer')" onkeydown="if(event.key==='Enter')selectRole('developer')">
           <div class="role-card-icon">${IC.wrench}</div>
           <div class="role-card-title">Developer</div>
           <div class="role-card-desc">API, tokens, integrations</div>
@@ -3169,7 +3174,7 @@
       const isDone = done.includes(item.id);
       const el = document.createElement('div');
       el.className = 'checklist-item' + (isDone ? ' done' : '');
-      el.innerHTML = `<div class="checklist-check">${isDone ? IC.check : ''}</div><div class="cl-text">${item.text} · <a class="cl-link" onclick="navigate('${item.page}')">${PAGES[item.page].title}</a></div>`;
+      el.innerHTML = `<div class="checklist-check">${isDone ? IC.check : ''}</div><div class="cl-text">${item.text} · <a class="cl-link" href="#${item.page}" onclick="navigate('${item.page}');return false">${PAGES[item.page].title}</a></div>`;
       el.onclick = (e) => {
         if (e.target.closest('.cl-link')) return;
         toggleCheckItem(item.id);
@@ -3262,7 +3267,7 @@
     } else {
       let html = `<div class="wizard-question">${step.q}</div><div class="wizard-options">`;
       step.opts.forEach(o => {
-        html += `<div class="wizard-option" onclick="renderWizard('${o.next}')">${o.icon || ''}<span>${o.text}</span></div>`;
+        html += `<div class="wizard-option" role="button" tabindex="0" onclick="renderWizard('${o.next}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();renderWizard('${o.next}')}">${o.icon || ''}<span>${o.text}</span></div>`;
       });
       html += '</div>';
       if (stepId !== 'start') html += `<button class="wizard-restart" onclick="renderWizard('start')">← Start over</button>`;
@@ -3474,7 +3479,9 @@
     const esc = document.createElement('div');
     esc.className = 'wizard-escalate';
     esc.id = 'wizardEscalate';
-    esc.innerHTML = `Still stuck? <a href="mailto:support@kaynos.net?subject=${encodeURIComponent('Help: ' + step.title)}&body=${encodeURIComponent('I tried the suggestion for "' + step.title + '" but it didn\'t work.\n\nBrowser: ' + navigator.userAgent.split(' ').slice(-2).join(' ') + '\n\nWhat happened:\n')}">Email support with this issue pre-filled →</a>`;
+    const escSubject = encodeURIComponent('Help: ' + step.title);
+    const escBody = encodeURIComponent('I tried the suggestion for "' + step.title + '" but it didn\'t work.\n\nBrowser: ' + navigator.userAgent.split(' ').slice(-2).join(' ') + '\n\nWhat happened:\n');
+    esc.innerHTML = `Still stuck? <a href="mailto:support@kaynos.net?subject=${escSubject}&body=${escBody}">Email support with this issue pre-filled →</a>`;
     container.appendChild(div);
     container.appendChild(esc);
   }
