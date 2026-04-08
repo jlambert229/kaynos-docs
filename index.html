@@ -15,11 +15,15 @@
   <meta property="og:description" content="Video review for coaches — setup, video upload, playback, troubleshooting, and developer API docs." />
   <meta property="og:url" content="https://docs.kaynos.net/" />
   <meta property="og:image" content="https://docs.kaynos.net/og-image.png" />
+  <meta property="og:image:alt" content="Kaynos Help Center" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Kaynos — Help Center" />
   <meta name="twitter:description" content="Video review for coaches — setup guides, troubleshooting, and API docs." />
+  <meta name="twitter:image" content="https://docs.kaynos.net/og-image.png" />
 
   <!-- Favicon (Kaynos logo) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23050508'/%3E%3Cg transform='translate(4.5,4) scale(0.124)'%3E%3Cpath d='M 64 151 L 102 189 L 178 190 L 102 114 Z' fill='%232184f3' fill-rule='evenodd'/%3E%3Cpath d='M 184 1 L 116 1 L 1 115 L 0 185 Z' fill='%232184f3' fill-rule='evenodd'/%3E%3Cpath d='M 58 0 L 3 0 L 0 3 L 0 91 L 57 34 Z' fill='%232184f3' fill-rule='evenodd'/%3E%3C/g%3E%3C/svg%3E" />
@@ -164,7 +168,7 @@
     }
 
     .header-logo {
-      font-weight: 600; font-size: 14.5px; letter-spacing: -.025em;
+      font-weight: 600; font-size: .9063rem; letter-spacing: -.025em;
       color: var(--text-primary); text-decoration: none;
       display: flex; align-items: center; gap: 8px;
       flex-shrink: 0; white-space: nowrap;
@@ -278,7 +282,7 @@
     }
     .sidebar-section { margin-bottom: 4px; }
     .sidebar-section-title {
-      padding: 10px 16px 4px; font-size: 10.5px; font-weight: 600;
+      padding: 10px 16px 4px; font-size: .6563rem; font-weight: 600;
       text-transform: uppercase; letter-spacing: .09em; color: var(--text-tertiary);
       display: flex; align-items: center; justify-content: space-between;
       cursor: pointer; user-select: none; transition: color var(--dur); gap: 6px;
@@ -859,7 +863,7 @@
       color: var(--text-secondary); width: 28px; height: 28px;
       border-radius: var(--radius-xs); cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 600; transition: all var(--dur);
+      font-size: .75rem; font-weight: 600; transition: all var(--dur);
       font-family: var(--font-body);
     }
     .text-size-btn:hover { color: var(--text-primary); border-color: var(--accent); }
@@ -1357,13 +1361,13 @@
     }
     .faq-question:hover { color: var(--accent); }
     .faq-chevron {
-      font-size: 10px; color: var(--text-tertiary); transition: transform .18s var(--ease);
+      font-size: .625rem; color: var(--text-tertiary); transition: transform .18s var(--ease);
       flex-shrink: 0; margin-left: 12px;
     }
     .faq-item.open .faq-chevron { transform: rotate(180deg); }
     .faq-answer {
-      max-height: 0; overflow: hidden; transition: max-height .25s var(--ease), padding .25s var(--ease);
-      padding: 0 0 0 0;
+      max-height: 0; overflow: hidden; transition: max-height .25s var(--ease), padding-bottom .25s var(--ease);
+      padding: 0;
     }
     .faq-item.open .faq-answer { max-height: 500px; padding-bottom: 16px; }
     .faq-answer p, .faq-answer ul, .faq-answer li { color: var(--text-secondary); }
@@ -2652,7 +2656,7 @@
   /* ── NAVIGATE ───────────────────────────────────────── */
   function navigate(pageId) {
     const page = getPageContent(pageId);
-    if (!page) { navigate('welcome'); return; }
+    if (!page) { if (pageId !== 'welcome') navigate('welcome'); return; }
 
     if (pageId === 'whats-new') markWhatsNewSeen();
 
@@ -2945,12 +2949,22 @@
   }
 
   /* ── SCROLL EFFECTS ─────────────────────────────────── */
+  let _scrollTick = false;
   window.addEventListener('scroll', () => {
-    const d = document.documentElement;
-    const pct = d.scrollHeight > d.clientHeight
-      ? (d.scrollTop / (d.scrollHeight - d.clientHeight)) * 100 : 0;
-    document.getElementById('progress-bar').style.width = pct + '%';
-    document.getElementById('back-top').classList.toggle('visible', d.scrollTop > 400);
+    if (!_scrollTick) {
+      requestAnimationFrame(() => {
+        const d = document.documentElement;
+        const pct = d.scrollHeight > d.clientHeight
+          ? (d.scrollTop / (d.scrollHeight - d.clientHeight)) * 100 : 0;
+        document.getElementById('progress-bar').style.width = pct + '%';
+        document.getElementById('back-top').classList.toggle('visible', d.scrollTop > 400);
+        _scrollTick = false;
+      });
+      _scrollTick = true;
+    }
+    // Debounced scroll position save
+    clearTimeout(window._scrollSave);
+    window._scrollSave = setTimeout(saveScrollPos, 300);
   }, { passive: true });
 
   /* ── POPSTATE ───────────────────────────────────────── */
@@ -3114,8 +3128,9 @@
   /* ── READING TIME ───────────────────────────────────── */
   function renderArticleMeta(container, pageId) {
     if (pageId === 'welcome') return;
-    const text = container.textContent || '';
-    const words = text.trim().split(/\s+/).length;
+    // Use raw page content to avoid counting UI chrome (buttons, tooltips)
+    const raw = (PAGES[pageId]?.content || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    const words = raw ? raw.split(/\s+/).length : 0;
     const mins = Math.max(1, Math.round(words / 200));
     const h1 = container.querySelector('h1');
     if (!h1) return;
@@ -3131,7 +3146,13 @@
     if (!page || !page.section || pageId === 'welcome') return;
     const sameSection = allPageKeys.filter(k => PAGES[k].section === page.section && k !== pageId);
     if (!sameSection.length) return;
-    const picks = sameSection.sort(() => .5 - Math.random()).slice(0, 3);
+    // Fisher-Yates shuffle for unbiased selection
+    const shuffled = [...sameSection];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    const picks = shuffled.slice(0, 3);
     const div = document.createElement('div');
     div.className = 'related-articles';
     div.innerHTML = '<div class="related-title">Related articles</div><div class="related-grid">' +
@@ -3145,12 +3166,13 @@
   navigate = function(pageId) {
     try { _origNavigate(pageId); } catch(e) { console.error('Navigate error:', e); return; }
     const pc = document.getElementById('pageContent');
+    if (!pc || !pc.innerHTML) return;
+    renderArticleMeta(pc, pageId);
+    renderLastUpdated(pc, pageId);
     renderBookmarkBtn(pc, pageId);
     renderShareBtn(pc, pageId);
     renderPrintBtn(pc, pageId);
     renderCopyArticleBtn(pc, pageId);
-    renderArticleMeta(pc, pageId);
-    renderLastUpdated(pc, pageId);
     if (pageId === 'welcome') renderWelcomeBack(pc);
     if (pageId === 'welcome') renderChecklist(pc);
     if (pageId === 'troubleshoot') renderWizard('start');
@@ -3556,7 +3578,8 @@
         }
       }
     }
-    replacements.forEach(({ node, term, def, index }) => {
+    // Process in reverse to avoid node index shifting
+    replacements.reverse().forEach(({ node, term, def, index }) => {
       const before = node.textContent.slice(0, index);
       const after = node.textContent.slice(index + term.length);
       const span = document.createElement('span');
@@ -3830,7 +3853,7 @@
       requestAnimationFrame(() => window.scrollTo({ top: positions[pageId], behavior: 'instant' }));
     }
   }
-  window.addEventListener('scroll', () => { clearTimeout(window._scrollSave); window._scrollSave = setTimeout(saveScrollPos, 300); }, { passive: true });
+  // Scroll save is now handled in the consolidated scroll listener above
 
   /* ── WHATS NEW BADGE ───────────────────────────────── */
   const WHATS_NEW_VERSION = '2026-04';
@@ -3951,7 +3974,7 @@
     const sizeMB = parseFloat(document.getElementById('calcSize')?.value);
     const speedMbps = parseFloat(document.getElementById('calcSpeed')?.value);
     const el = document.getElementById('calcResult');
-    if (!el || !sizeMB || !speedMbps || sizeMB <= 0 || speedMbps <= 0) {
+    if (!el || !sizeMB || !speedMbps || sizeMB <= 0 || speedMbps <= 0 || sizeMB > 100000 || speedMbps > 10000) {
       if (el) el.classList.remove('show');
       return;
     }
@@ -4009,12 +4032,14 @@
     const el = document.getElementById('browserResult');
     if (!el) return;
     const ua = navigator.userAgent;
+    const isIOS = /iPad|iPhone|iPod/.test(ua);
     let browser = 'Unknown';
     let status = 'warn';
     let msg = '';
-    if (ua.includes('Chrome') && !ua.includes('Edg')) { browser = 'Chrome'; status = 'good'; msg = 'Full support — recommended browser.'; }
-    else if (ua.includes('Firefox')) { browser = 'Firefox'; status = 'good'; msg = 'Full support — great choice.'; }
+    if (isIOS) { browser = 'Safari (iOS)'; status = 'warn'; msg = 'Good support. All iOS browsers use WebKit — MKV may not play, use MP4 instead.'; }
     else if (ua.includes('Edg')) { browser = 'Edge'; status = 'good'; msg = 'Full support.'; }
+    else if (ua.includes('Chrome')) { browser = 'Chrome'; status = 'good'; msg = 'Full support — recommended browser.'; }
+    else if (ua.includes('Firefox')) { browser = 'Firefox'; status = 'good'; msg = 'Full support — great choice.'; }
     else if (ua.includes('Safari')) { browser = 'Safari'; status = 'warn'; msg = 'Good support. MKV files may not play — use MP4 instead.'; }
     else { msg = 'Unknown browser. If you run into issues, try Chrome.'; }
     el.className = 'browser-result ' + status;
