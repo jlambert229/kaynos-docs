@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://docs.kaynos.net/</loc><priority>1.0</priority></url>
+  <url><loc>https://docs.kaynos.net/#setup</loc><priority>0.8</priority></url>
+  <url><loc>https://docs.kaynos.net/#inviting-members</loc><priority>0.8</priority></url>
+  <url><loc>https://docs.kaynos.net/#first-upload</loc><priority>0.8</priority></url>
+  <url><loc>https://docs.kaynos.net/#roles</loc><priority>0.7</priority></url>
+  <url><loc>https://docs.kaynos.net/#uploading</loc><priority>0.7</priority></url>
+  <url><loc>https://docs.kaynos.net/#playback</loc><priority>0.7</priority></url>
+  <url><loc>https://docs.kaynos.net/#formats</loc><priority>0.6</priority></url>
+  <url><loc>https://docs.kaynos.net/#storage</loc><priority>0.6</priority></url>
+  <url><loc>https://docs.kaynos.net/#creating-sessions</loc><priority>0.7</priority></url>
+  <url><loc>https://docs.kaynos.net/#creating-classes</loc><priority>0.7</priority></url>
+  <url><loc>https://docs.kaynos.net/#notes</loc><priority>0.7</priority></url>
+  <url><loc>https://docs.kaynos.net/#tags</loc><priority>0.6</priority></url>
+  <url><loc>https://docs.kaynos.net/#progress</loc><priority>0.6</priority></url>
+  <url><loc>https://docs.kaynos.net/#managing-members</loc><priority>0.7</priority></url>
+  <url><loc>https://docs.kaynos.net/#profile</loc><priority>0.6</priority></url>
+  <url><loc>https://docs.kaynos.net/#notifications</loc><priority>0.6</priority></url>
+  <url><loc>https://docs.kaynos.net/#developer-api</loc><priority>0.8</priority></url>
+  <url><loc>https://docs.kaynos.net/#upload-issues</loc><priority>0.7</priority></url>
+  <url><loc>https://docs.kaynos.net/#playback-issues</loc><priority>0.7</priority></url>
+  <url><loc>https://docs.kaynos.net/#login-issues</loc><priority>0.7</priority></url>
+  <url><loc>https://docs.kaynos.net/#email-issues</loc><priority>0.6</priority></url>
+  <url><loc>https://docs.kaynos.net/#performance</loc><priority>0.5</priority></url>
+  <url><loc>https://docs.kaynos.net/#mobile</loc><priority>0.6</priority></url>
+  <url><loc>https://docs.kaynos.net/#faq</loc><priority>0.8</priority></url>
+</urlset>

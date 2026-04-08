@@ -6,9 +6,49 @@
   <title>Kaynos — Help Center</title>
   <meta name="theme-color" content="#060609" />
   <meta name="description" content="Kaynos help center — setup, video upload, playback, troubleshooting, and developer API docs.">
+  <link rel="canonical" href="https://docs.kaynos.net/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Kaynos Help Center" />
+  <meta property="og:title" content="Kaynos — Help Center" />
+  <meta property="og:description" content="Video review for coaches — setup, video upload, playback, troubleshooting, and developer API docs." />
+  <meta property="og:url" content="https://docs.kaynos.net/" />
+  <meta property="og:image" content="https://docs.kaynos.net/og-image.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Kaynos — Help Center" />
+  <meta name="twitter:description" content="Video review for coaches — setup guides, troubleshooting, and API docs." />
+
+  <!-- Favicon (inline SVG) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23c62828'/%3E%3Crect x='8' y='8' width='16' height='16' rx='3' fill='white' fill-opacity='.9'/%3E%3Crect x='12' y='12' width='8' height='8' rx='2' fill='%23c62828'/%3E%3C/svg%3E" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Kaynos Help Center",
+    "url": "https://docs.kaynos.net/",
+    "description": "Help center for Kaynos — video review platform for coaches.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Kaynos",
+      "url": "https://www.kaynos.net/"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://docs.kaynos.net/#search={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="dns-prefetch" href="https://app.kaynos.net" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -455,13 +495,91 @@
     .sidebar-link:focus-visible, .quick-link:focus-visible, .header-logo:focus-visible {
       outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px rgba(77,171,247,.55);
     }
+
+    /* ── SKIP LINK ─── */
+    .skip-link {
+      position: fixed; top: -100%; left: 16px; z-index: 999;
+      background: var(--accent); color: #fff; padding: 8px 16px;
+      border-radius: var(--radius-sm); font-size: .875rem; font-weight: 500;
+      text-decoration: none; transition: top .15s var(--ease);
+    }
+    .skip-link:focus { top: 8px; }
+
+    /* ── PRINT STYLES ─── */
+    @media print {
+      .header, .sidebar, .toc, #back-top, #toast, #progress-bar,
+      .footer-nav, .skip-link, .overlay, .menu-btn, .copy-btn { display: none !important; }
+      .layout { margin-left: 0 !important; }
+      .content-with-toc { padding: 0 !important; }
+      body { background: #fff; color: #111; font-size: 12pt; }
+      .content-inner h1 { color: #111; }
+      .content-inner h2, .content-inner h3 { color: #222; border-color: #ccc; }
+      .content-inner p, .content-inner li { color: #333; }
+      .content-inner a { color: #111; text-decoration: underline; }
+      .content-inner a[href]::after { content: " (" attr(href) ")"; font-size: 9pt; color: #666; }
+      .content-inner a[onclick]::after { content: none; }
+      .hint { border: 1px solid #ccc; background: #f5f5f5 !important; }
+      .quick-link { border: 1px solid #ccc; background: #f9f9f9 !important; }
+      .content-inner pre { border: 1px solid #ccc; background: #f5f5f5 !important; }
+      .content-inner code { background: #f0f0f0 !important; border-color: #ccc; color: #333; }
+      .table-wrap { border-color: #ccc; }
+      .content-inner th { background: #eee !important; color: #222; border-color: #ccc; }
+      .content-inner td { color: #333; border-color: #ddd; }
+    }
+
+    /* ── KEYBOARD SHORTCUTS MODAL ─── */
+    .kbd-modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 300;
+      background: rgba(0,0,0,.65); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center;
+    }
+    .kbd-modal-overlay.active { display: flex; }
+    .kbd-modal {
+      background: var(--bg-elevated); border: 1px solid var(--border-strong);
+      border-radius: var(--radius); padding: 24px 28px;
+      max-width: 400px; width: 90%; box-shadow: var(--shadow-lg);
+    }
+    .kbd-modal h3 { margin: 0 0 16px; font-size: 1rem; font-weight: 600; color: var(--text-primary); }
+    .kbd-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; }
+    .kbd-row span { font-size: .875rem; color: var(--text-secondary); }
+    .kbd-row kbd {
+      font-family: var(--font-body); font-size: 11px; color: var(--text-tertiary);
+      border: 1px solid var(--border-strong); border-radius: 4px;
+      padding: 2px 7px; background: var(--bg-tertiary); min-width: 24px; text-align: center;
+    }
+    .kbd-modal-close {
+      margin-top: 16px; width: 100%; padding: 8px;
+      background: var(--bg-secondary); border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm); color: var(--text-secondary);
+      font-size: .8125rem; cursor: pointer; transition: all var(--dur);
+    }
+    .kbd-modal-close:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+
+    /* ── FEEDBACK WIDGET ─── */
+    .page-feedback {
+      margin-top: 40px; padding: 20px 0;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; gap: 12px;
+      font-size: .875rem; color: var(--text-tertiary);
+    }
+    .page-feedback span { white-space: nowrap; }
+    .feedback-btn {
+      padding: 5px 14px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border-strong); background: var(--bg-elevated);
+      color: var(--text-secondary); font-size: .8125rem; cursor: pointer;
+      transition: all var(--dur);
+    }
+    .feedback-btn:hover { border-color: var(--accent); color: var(--text-primary); background: var(--bg-secondary); }
+    .feedback-btn.selected { border-color: var(--success); color: var(--success); background: var(--success-soft); pointer-events: none; }
+    .feedback-thanks { font-size: .8125rem; color: var(--success); display: none; }
   </style>
 </head>
 <body>
 
-  <div id="progress-bar"></div>
+  <a href="#pageContent" class="skip-link">Skip to content</a>
+  <div id="progress-bar" role="progressbar" aria-hidden="true"></div>
 
-  <header class="header">
+  <header class="header" role="banner">
     <button class="menu-btn" onclick="toggleSidebar()" aria-label="Open menu">
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
         <line x1="2" y1="4.5" x2="16" y2="4.5"/>
@@ -530,6 +648,20 @@
 
   <div id="toast" role="status" aria-live="polite"></div>
 
+  <!-- Keyboard Shortcuts Modal -->
+  <div class="kbd-modal-overlay" id="kbdModal" onclick="if(event.target===this)closeKbd()">
+    <div class="kbd-modal" role="dialog" aria-label="Keyboard shortcuts">
+      <h3>Keyboard shortcuts</h3>
+      <div class="kbd-row"><span>Search</span><div><kbd>⌘</kbd> <kbd>K</kbd></div></div>
+      <div class="kbd-row"><span>Previous page</span><kbd>←</kbd></div>
+      <div class="kbd-row"><span>Next page</span><kbd>→</kbd></div>
+      <div class="kbd-row"><span>Back to top</span><kbd>T</kbd></div>
+      <div class="kbd-row"><span>Home</span><kbd>H</kbd></div>
+      <div class="kbd-row"><span>Show shortcuts</span><kbd>?</kbd></div>
+      <button class="kbd-modal-close" onclick="closeKbd()">Close <kbd>Esc</kbd></button>
+    </div>
+  </div>
+
   <script>
   /* ── PAGE DATA ─────────────────────────────────────────────── */
   const PAGES = {
@@ -547,35 +679,45 @@
 </div>
 <h2>Jump in</h2>
 <div class="quick-links">
-  <a class="quick-link" onclick="navigate('setup')">
+  <a class="quick-link" href="#setup" onclick="navigate('setup');return false">
     <div class="ql-icon">🚀</div>
     <div class="ql-title">Setting up your account</div>
     <div class="ql-desc">First login, password, Admin area</div>
   </a>
-  <a class="quick-link" onclick="navigate('first-upload')">
+  <a class="quick-link" href="#first-upload" onclick="navigate('first-upload');return false">
     <div class="ql-icon">📹</div>
     <div class="ql-title">Your first video upload</div>
     <div class="ql-desc">From phone or computer to a session or class</div>
   </a>
-  <a class="quick-link" onclick="navigate('upload-issues')">
+  <a class="quick-link" href="#upload-issues" onclick="navigate('upload-issues');return false">
     <div class="ql-icon">⚠️</div>
     <div class="ql-title">Video upload problems</div>
     <div class="ql-desc">Stuck progress, errors, slow networks</div>
   </a>
-  <a class="quick-link" onclick="navigate('playback-issues')">
+  <a class="quick-link" href="#playback-issues" onclick="navigate('playback-issues');return false">
     <div class="ql-icon">▶️</div>
     <div class="ql-title">Video playback problems</div>
     <div class="ql-desc">Black screen, buffering, codec issues</div>
   </a>
-  <a class="quick-link" onclick="navigate('inviting-members')">
+  <a class="quick-link" href="#inviting-members" onclick="navigate('inviting-members');return false">
     <div class="ql-icon">👥</div>
     <div class="ql-title">Inviting your team</div>
     <div class="ql-desc">Invites, roles, roster basics</div>
   </a>
-  <a class="quick-link" onclick="navigate('faq')">
+  <a class="quick-link" href="#faq" onclick="navigate('faq');return false">
     <div class="ql-icon">💬</div>
     <div class="ql-title">FAQ</div>
     <div class="ql-desc">Common questions from owners and coaches</div>
+  </a>
+  <a class="quick-link" href="#whats-new" onclick="navigate('whats-new');return false">
+    <div class="ql-icon">✨</div>
+    <div class="ql-title">What's new</div>
+    <div class="ql-desc">Recent updates and improvements</div>
+  </a>
+  <a class="quick-link" href="#developer-api" onclick="navigate('developer-api');return false">
+    <div class="ql-icon">🔧</div>
+    <div class="ql-title">Developer API</div>
+    <div class="ql-desc">Tokens, scopes, and automation</div>
   </a>
 </div>
 <h2>Get in touch</h2>
@@ -1188,11 +1330,43 @@
 <li><a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener">Swagger UI</a></li>
 <li><a href="https://app.kaynos.net/openapi.yaml" target="_blank" rel="noopener">OpenAPI YAML (app host)</a></li>
 <li><a href="https://raw.githubusercontent.com/jlambert229/kaynos/main/public/openapi.yaml" target="_blank" rel="noopener">OpenAPI YAML (GitHub raw)</a></li>
-</ul>`}
+</ul>`},
+
+    "whats-new": {
+      title: "What's new", section: "",
+      content: `
+<h1>What's new</h1>
+<p>Recent updates and improvements to Kaynos.</p>
+<h2>April 2026</h2>
+<h3>Help center refresh</h3>
+<ul>
+<li>Improved search with highlighted snippets and keyboard navigation.</li>
+<li>Added keyboard shortcuts for faster navigation — press <kbd>?</kbd> to see them all.</li>
+<li>Print-friendly styles for saving pages offline.</li>
+<li>Better accessibility: skip-to-content, improved ARIA labels, focus management.</li>
+</ul>
+<h3>Developer API docs</h3>
+<ul>
+<li>Full API reference with Swagger UI link, scopes, and token management.</li>
+<li>OpenAPI spec available on GitHub.</li>
+</ul>
+<h2>March 2026</h2>
+<h3>Video playback</h3>
+<ul>
+<li>Keyboard shortcuts during playback: <strong>Space/K</strong> (play/pause), <strong>J/L</strong> (skip), <strong>N</strong> (note), <strong>F</strong> (fullscreen).</li>
+<li>Timeline note markers with hover preview.</li>
+<li>Playback speed controls from 0.5x to 2x.</li>
+</ul>
+<h3>Upload improvements</h3>
+<ul>
+<li>Chunked parallel upload for files over 100 MB with automatic retry.</li>
+<li>Real-time speed and ETA display during upload.</li>
+</ul>
+<div class="hint hint-tip"><div class="hint-icon">💡</div><div>Have a feature request? Email <a href="mailto:support@kaynos.net">support@kaynos.net</a> — we read every message.</div></div>`}
   };
 
   const NAV = [
-    { section: "", pages: ["welcome"] },
+    { section: "", pages: ["welcome", "whats-new"] },
     { section: "Getting Started", pages: ["setup", "inviting-members", "first-upload", "roles"] },
     { section: "Video", pages: ["uploading", "playback", "formats", "storage"] },
     { section: "Sessions & Classes", pages: ["creating-sessions", "creating-classes", "notes", "tags", "progress"] },
@@ -1222,7 +1396,7 @@
   /* ── NAVIGATE ───────────────────────────────────────── */
   function navigate(pageId) {
     const page = PAGES[pageId];
-    if (!page) return;
+    if (!page) { navigate('welcome'); return; }
 
     const pc = document.getElementById('pageContent');
     // Retrigger animation
@@ -1391,8 +1565,8 @@
     results.sort((a, b) => (b.titleMatch ? 1 : 0) - (a.titleMatch ? 1 : 0));
     sr.innerHTML = results.length === 0
       ? '<div class="search-empty">No results found</div>'
-      : results.slice(0, 8).map(r =>
-          `<div class="search-result" data-page="${r.id}" onclick="navigate('${r.id}')">
+      : results.slice(0, 8).map((r, i) =>
+          `<div class="search-result" role="option" id="sr-${i}" data-page="${r.id}" onclick="navigate('${r.id}')">
             <div class="sr-title">${r.title}</div>
             ${r.section ? `<div class="sr-section">${r.section}</div>` : ''}
             ${r.snippet ? `<div class="sr-snippet">${r.snippet}</div>` : ''}
@@ -1442,12 +1616,40 @@
 
   /* ── SIDEBAR TOGGLE ─────────────────────────────────── */
   function toggleSidebar() {
-    document.getElementById('sidebar').classList.toggle('open');
-    document.getElementById('overlay').classList.toggle('active');
+    const sb = document.getElementById('sidebar');
+    const ov = document.getElementById('overlay');
+    const isOpen = sb.classList.toggle('open');
+    ov.classList.toggle('active', isOpen);
+    if (isOpen) {
+      sb.setAttribute('aria-modal', 'true');
+      sb.setAttribute('role', 'dialog');
+      const first = sb.querySelector('.sidebar-link');
+      if (first) first.focus();
+      sb.addEventListener('keydown', trapFocus);
+    } else {
+      sb.removeAttribute('aria-modal');
+      sb.removeAttribute('role');
+      sb.removeEventListener('keydown', trapFocus);
+      document.querySelector('.menu-btn').focus();
+    }
   }
   function closeSidebar() {
-    document.getElementById('sidebar').classList.remove('open');
+    const sb = document.getElementById('sidebar');
+    sb.classList.remove('open');
     document.getElementById('overlay').classList.remove('active');
+    sb.removeAttribute('aria-modal');
+    sb.removeAttribute('role');
+    sb.removeEventListener('keydown', trapFocus);
+  }
+  function trapFocus(e) {
+    if (e.key === 'Escape') { closeSidebar(); document.querySelector('.menu-btn').focus(); return; }
+    if (e.key !== 'Tab') return;
+    const sb = document.getElementById('sidebar');
+    const focusable = sb.querySelectorAll('.sidebar-link');
+    if (!focusable.length) return;
+    const first = focusable[0], last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   }
 
   /* ── SCROLL EFFECTS ─────────────────────────────────── */
@@ -1463,6 +1665,57 @@
   window.addEventListener('popstate', e => {
     navigate(e.state?.page || 'welcome');
   });
+
+  /* ── KEYBOARD SHORTCUTS ─────────────────────────────── */
+  function openKbd() { document.getElementById('kbdModal').classList.add('active'); }
+  function closeKbd() { document.getElementById('kbdModal').classList.remove('active'); }
+
+  document.addEventListener('keydown', e => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
+    if (document.getElementById('kbdModal').classList.contains('active')) {
+      if (e.key === 'Escape') closeKbd();
+      return;
+    }
+    if (e.key === '?') { e.preventDefault(); openKbd(); return; }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      const cur = location.hash.slice(1) || 'welcome';
+      const idx = allPageKeys.indexOf(cur);
+      if (idx === -1) return;
+      if (e.key === 'ArrowLeft' && idx > 0) navigate(allPageKeys[idx - 1]);
+      if (e.key === 'ArrowRight' && idx < allPageKeys.length - 1) navigate(allPageKeys[idx + 1]);
+    }
+    if (e.key === 't' || e.key === 'T') window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (e.key === 'h' || e.key === 'H') navigate('welcome');
+  });
+
+  /* ── FEEDBACK WIDGET ───────────────────────────────── */
+  function renderFeedback(container) {
+    const existing = container.querySelector('.page-feedback');
+    if (existing) existing.remove();
+    const cur = location.hash.slice(1) || 'welcome';
+    if (cur === 'welcome') return;
+    const div = document.createElement('div');
+    div.className = 'page-feedback';
+    div.innerHTML = `<span>Was this helpful?</span>
+      <button class="feedback-btn" onclick="sendFeedback(this,'yes')">Yes</button>
+      <button class="feedback-btn" onclick="sendFeedback(this,'no')">No</button>
+      <span class="feedback-thanks">Thanks for your feedback!</span>`;
+    container.appendChild(div);
+  }
+
+  function sendFeedback(btn, value) {
+    btn.classList.add('selected');
+    const thanks = btn.parentElement.querySelector('.feedback-thanks');
+    thanks.style.display = 'inline';
+    btn.parentElement.querySelectorAll('.feedback-btn:not(.selected)').forEach(b => b.style.display = 'none');
+  }
+
+  /* ── ENHANCED NAVIGATE (patch to add feedback) ─────── */
+  const _origNavigate = navigate;
+  navigate = function(pageId) {
+    _origNavigate(pageId);
+    renderFeedback(document.getElementById('pageContent'));
+  };
 
   /* ── INIT ───────────────────────────────────────────── */
   buildSidebar();
