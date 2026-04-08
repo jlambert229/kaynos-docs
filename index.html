@@ -838,6 +838,99 @@
     }
     .offline-banner.show { display: block; }
 
+    /* ── ONBOARDING TOUR ─── */
+    .tour-overlay {
+      position: fixed; inset: 0; z-index: 400;
+      background: rgba(0,0,0,.70); backdrop-filter: blur(3px);
+      display: none; align-items: center; justify-content: center;
+    }
+    .tour-overlay.active { display: flex; }
+
+    .tour-card {
+      background: var(--bg-elevated); border: 1px solid var(--border-strong);
+      border-radius: var(--radius); padding: 28px 32px;
+      max-width: 420px; width: 90%; box-shadow: var(--shadow-lg);
+      text-align: center; animation: fadeUp .2s var(--ease);
+    }
+    .tour-card h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary); letter-spacing: -.02em; }
+    .tour-card p { font-size: .875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; }
+    .tour-icon { margin-bottom: 16px; color: var(--accent); }
+    .tour-icon svg { width: 40px; height: 40px; }
+
+    .tour-steps { display: flex; gap: 6px; justify-content: center; margin-bottom: 20px; }
+    .tour-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--bg-tertiary); transition: all .2s;
+    }
+    .tour-dot.active { background: var(--accent); width: 20px; border-radius: 4px; }
+
+    .tour-actions { display: flex; gap: 10px; justify-content: center; }
+    .tour-btn {
+      padding: 8px 20px; border-radius: var(--radius-sm);
+      font-size: .875rem; font-weight: 500; cursor: pointer;
+      transition: all var(--dur); border: none;
+    }
+    .tour-btn-primary { background: var(--accent); color: #fff; }
+    .tour-btn-primary:hover { background: var(--accent-hover); }
+    .tour-btn-ghost {
+      background: transparent; color: var(--text-tertiary);
+      border: 1px solid var(--border-strong);
+    }
+    .tour-btn-ghost:hover { color: var(--text-primary); border-color: var(--text-tertiary); }
+
+    /* ── ROLE PICKER ─── */
+    .role-picker { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+    .role-card {
+      padding: 16px; background: var(--bg-secondary);
+      border: 2px solid var(--border-strong); border-radius: var(--radius);
+      cursor: pointer; transition: all var(--dur); text-align: left;
+    }
+    .role-card:hover { border-color: var(--accent); background: var(--accent-soft); }
+    .role-card.selected { border-color: var(--accent); background: var(--accent-soft); box-shadow: 0 0 0 2px rgba(33,132,243,.2); }
+    .role-card-icon { font-size: .875rem; margin-bottom: 6px; color: var(--accent); display: flex; }
+    .role-card-icon svg { width: 20px; height: 20px; }
+    .role-card-title { font-weight: 600; font-size: .875rem; color: var(--text-primary); }
+    .role-card-desc { font-size: .75rem; color: var(--text-tertiary); margin-top: 2px; }
+
+    /* ── GETTING STARTED CHECKLIST ─── */
+    .checklist { margin-bottom: 28px; }
+    .checklist-title {
+      font-size: .875rem; font-weight: 600; color: var(--text-primary);
+      margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+    }
+    .checklist-progress {
+      font-size: .75rem; color: var(--text-tertiary); font-weight: 400;
+    }
+    .checklist-item {
+      display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px;
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      margin-bottom: 6px; cursor: pointer; transition: all var(--dur);
+      font-size: .875rem; color: var(--text-secondary);
+    }
+    .checklist-item:hover { border-color: var(--accent); background: var(--bg-hover); }
+    .checklist-item.done { opacity: .55; }
+    .checklist-item.done .cl-text { text-decoration: line-through; }
+    .checklist-check {
+      width: 18px; height: 18px; border-radius: 50%;
+      border: 2px solid var(--border-strong); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px; transition: all var(--dur);
+    }
+    .checklist-item.done .checklist-check {
+      background: var(--success); border-color: var(--success); color: #fff;
+    }
+    .checklist-item.done .checklist-check svg { width: 10px; height: 10px; }
+    .cl-text { flex: 1; }
+    .cl-link { color: var(--accent); font-weight: 500; }
+
+    /* ── PULSE HINT ─── */
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 0 0 0 rgba(33,132,243,.4); }
+      70% { box-shadow: 0 0 0 8px rgba(33,132,243,0); }
+      100% { box-shadow: 0 0 0 0 rgba(33,132,243,0); }
+    }
+    .pulse-hint { animation: pulse-ring 2s ease-out 3; }
+
     /* ── FAQ ACCORDION ─── */
     .faq-item { border-bottom: 1px solid var(--border); }
     .faq-question {
@@ -1010,6 +1103,11 @@
     </a>
   </nav>
 
+  <!-- Onboarding Tour -->
+  <div class="tour-overlay" id="tourOverlay">
+    <div class="tour-card" id="tourCard"></div>
+  </div>
+
   <div id="toast" role="status" aria-live="polite"></div>
 
   <!-- Keyboard Shortcuts Modal -->
@@ -1063,6 +1161,7 @@
   <div class="hero-badge">Help Center</div>
   <h1>Welcome to Kaynos</h1>
   <p>Video review for coaches — publish sessions and classes, add timestamped notes, and members watch when it fits their schedule.</p>
+  <p style="margin-top:12px;font-size:.8125rem"><a style="cursor:pointer;color:var(--accent)" onclick="startTour()">Take the guided tour</a></p>
 </div>
 <div class="hint hint-info">
   <div class="hint-icon">${IC.info}</div>
@@ -2324,6 +2423,7 @@
     renderBookmarkBtn(pc, pageId);
     renderShareBtn(pc, pageId);
     renderArticleMeta(pc, pageId);
+    if (pageId === 'welcome') renderChecklist(pc);
     renderFaqAccordion(pc, pageId);
     renderRelated(pc, pageId);
     renderFeedback(pc);
@@ -2339,6 +2439,194 @@
       else l.removeAttribute('aria-current');
     });
   };
+
+  /* ── ONBOARDING TOUR ────────────────────────────────── */
+  const TOUR_STEPS = [
+    {
+      icon: IC.book,
+      title: 'Welcome to Kaynos Docs',
+      body: 'This help center has everything you need to get started with Kaynos — from uploading your first video to managing your whole team.'
+    },
+    {
+      icon: IC.rocket,
+      title: 'What\'s your role?',
+      body: 'Pick your role so we can show you the most relevant content first.',
+      roleSelect: true
+    },
+    {
+      icon: IC.chat,
+      title: 'Need help? Just ask',
+      body: 'Use the <strong>search bar</strong> at the top or click the <strong>chat bubble</strong> in the bottom-right to find answers fast. Press <kbd>⌘K</kbd> for quick search.'
+    },
+    {
+      icon: IC.check,
+      title: 'You\'re all set!',
+      body: 'Start exploring — we\'ve personalized your homepage based on your role. You can always come back here from the sidebar.'
+    }
+  ];
+
+  let tourStep = 0;
+  let selectedRole = null;
+
+  function isFirstVisit() {
+    return !localStorage.getItem('onboarded');
+  }
+
+  function renderTourStep() {
+    const step = TOUR_STEPS[tourStep];
+    const card = document.getElementById('tourCard');
+    const dots = TOUR_STEPS.map((_, i) =>
+      `<div class="tour-dot${i === tourStep ? ' active' : ''}"></div>`
+    ).join('');
+
+    let roleHtml = '';
+    if (step.roleSelect) {
+      roleHtml = `<div class="role-picker">
+        <div class="role-card${selectedRole === 'admin' ? ' selected' : ''}" onclick="selectRole('admin')">
+          <div class="role-card-icon">${IC.wrench}</div>
+          <div class="role-card-title">Admin / Owner</div>
+          <div class="role-card-desc">Roster, invites, settings</div>
+        </div>
+        <div class="role-card${selectedRole === 'coach' ? ' selected' : ''}" onclick="selectRole('coach')">
+          <div class="role-card-icon">${IC.video}</div>
+          <div class="role-card-title">Coach</div>
+          <div class="role-card-desc">Sessions, uploads, notes</div>
+        </div>
+        <div class="role-card${selectedRole === 'client' ? ' selected' : ''}" onclick="selectRole('client')">
+          <div class="role-card-icon">${IC.play}</div>
+          <div class="role-card-title">Client / Member</div>
+          <div class="role-card-desc">Watch, review, progress</div>
+        </div>
+        <div class="role-card${selectedRole === 'developer' ? ' selected' : ''}" onclick="selectRole('developer')">
+          <div class="role-card-icon">${IC.wrench}</div>
+          <div class="role-card-title">Developer</div>
+          <div class="role-card-desc">API, tokens, integrations</div>
+        </div>
+      </div>`;
+    }
+
+    card.innerHTML = `
+      <div class="tour-icon">${step.icon}</div>
+      <h2>${step.title}</h2>
+      <p>${step.body}</p>
+      ${roleHtml}
+      <div class="tour-steps">${dots}</div>
+      <div class="tour-actions">
+        ${tourStep > 0 ? '<button class="tour-btn tour-btn-ghost" onclick="prevTour()">Back</button>' : '<button class="tour-btn tour-btn-ghost" onclick="skipTour()">Skip</button>'}
+        <button class="tour-btn tour-btn-primary" onclick="nextTour()">${tourStep === TOUR_STEPS.length - 1 ? 'Get Started' : 'Next'}</button>
+      </div>`;
+  }
+
+  function selectRole(role) {
+    selectedRole = role;
+    localStorage.setItem('user-role', role);
+    renderTourStep();
+  }
+
+  function nextTour() {
+    if (tourStep < TOUR_STEPS.length - 1) {
+      tourStep++;
+      renderTourStep();
+    } else {
+      finishTour();
+    }
+  }
+
+  function prevTour() {
+    if (tourStep > 0) { tourStep--; renderTourStep(); }
+  }
+
+  function skipTour() { finishTour(); }
+
+  function finishTour() {
+    localStorage.setItem('onboarded', 'true');
+    document.getElementById('tourOverlay').classList.remove('active');
+    // Pulse hints on key elements
+    document.getElementById('searchInput').classList.add('pulse-hint');
+    document.getElementById('chatFab').classList.add('pulse-hint');
+    setTimeout(() => {
+      document.getElementById('searchInput').classList.remove('pulse-hint');
+      document.getElementById('chatFab').classList.remove('pulse-hint');
+    }, 6000);
+    // Rebuild welcome page with role-aware content
+    navigate('welcome');
+  }
+
+  function startTour() {
+    tourStep = 0;
+    selectedRole = localStorage.getItem('user-role') || null;
+    document.getElementById('tourOverlay').classList.add('active');
+    renderTourStep();
+  }
+
+  /* ── GETTING STARTED CHECKLIST ─────────────────────── */
+  const CHECKLIST_ITEMS = {
+    admin: [
+      { id: 'cl-login', text: 'Log in to the app', page: 'setup' },
+      { id: 'cl-password', text: 'Set a new password', page: 'profile' },
+      { id: 'cl-invite', text: 'Invite your coaches', page: 'inviting-members' },
+      { id: 'cl-upload', text: 'Upload your first video', page: 'first-upload' },
+      { id: 'cl-roles', text: 'Understand user roles', page: 'roles' },
+    ],
+    coach: [
+      { id: 'cl-login', text: 'Log in to the app', page: 'setup' },
+      { id: 'cl-password', text: 'Set a new password', page: 'profile' },
+      { id: 'cl-upload', text: 'Upload your first video', page: 'first-upload' },
+      { id: 'cl-session', text: 'Create a session', page: 'creating-sessions' },
+      { id: 'cl-notes', text: 'Add timestamped notes', page: 'notes' },
+    ],
+    client: [
+      { id: 'cl-login', text: 'Log in to the app', page: 'setup' },
+      { id: 'cl-password', text: 'Set a new password', page: 'profile' },
+      { id: 'cl-playback', text: 'Watch a session', page: 'playback' },
+      { id: 'cl-notes', text: 'Leave a note for your coach', page: 'notes' },
+      { id: 'cl-mobile', text: 'Try it on your phone', page: 'mobile' },
+    ],
+    developer: [
+      { id: 'cl-login', text: 'Log in as admin', page: 'setup' },
+      { id: 'cl-api', text: 'Read the API docs', page: 'developer-api' },
+      { id: 'cl-glossary', text: 'Review the glossary', page: 'glossary' },
+      { id: 'cl-formats', text: 'Check supported formats', page: 'formats' },
+      { id: 'cl-faq', text: 'Browse the FAQ', page: 'faq' },
+    ]
+  };
+
+  function getChecklist() { return JSON.parse(localStorage.getItem('checklist-done') || '[]'); }
+
+  function toggleCheckItem(id) {
+    let done = getChecklist();
+    if (done.includes(id)) done = done.filter(x => x !== id);
+    else done.push(id);
+    localStorage.setItem('checklist-done', JSON.stringify(done));
+  }
+
+  function renderChecklist(container) {
+    const role = localStorage.getItem('user-role');
+    if (!role || !CHECKLIST_ITEMS[role]) return;
+    const items = CHECKLIST_ITEMS[role];
+    const done = getChecklist();
+    const doneCount = items.filter(i => done.includes(i.id)).length;
+
+    const div = document.createElement('div');
+    div.className = 'checklist';
+    div.innerHTML = `<div class="checklist-title">Getting started <span class="checklist-progress">${doneCount}/${items.length} complete</span></div>`;
+    items.forEach(item => {
+      const isDone = done.includes(item.id);
+      const el = document.createElement('div');
+      el.className = 'checklist-item' + (isDone ? ' done' : '');
+      el.innerHTML = `<div class="checklist-check">${isDone ? IC.check : ''}</div><div class="cl-text">${item.text} · <a class="cl-link" onclick="navigate('${item.page}')">${PAGES[item.page].title}</a></div>`;
+      el.onclick = (e) => {
+        if (e.target.closest('.cl-link')) return;
+        toggleCheckItem(item.id);
+        navigate('welcome');
+      };
+      div.appendChild(el);
+    });
+    // Insert after quick-links
+    const ql = container.querySelector('.quick-links');
+    if (ql) ql.insertAdjacentElement('afterend', div);
+    else container.appendChild(div);
+  }
 
   /* ── SUPPORT CHATBOT ────────────────────────────────── */
   let chatOpen = false;
@@ -2503,6 +2791,10 @@
       const el = document.getElementById(initSection);
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
+  }
+  // First-time onboarding
+  if (isFirstVisit()) {
+    setTimeout(startTour, 600);
   }
   </script>
 </body>
