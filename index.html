@@ -102,7 +102,7 @@
       --bg-active:    rgba(0,0,0,0.06);
       --text-primary:   #1a1a2e;
       --text-secondary: rgba(26,26,46,0.72);
-      --text-tertiary:  rgba(26,26,46,0.45);
+      --text-tertiary:  rgba(26,26,46,0.55);
       --border:         rgba(0,0,0,0.08);
       --border-strong:  rgba(0,0,0,0.14);
       --accent:         #1a6fdb;
@@ -479,6 +479,13 @@
     .toc-link.active { color: var(--accent); border-left-color: var(--accent); }
     .toc-link.toc-h3 { padding-left: 20px; font-size: .75rem; }
 
+    /* ── TABLET ─── */
+    @media (min-width: 769px) and (max-width: 1199px) {
+      .content-with-toc { padding: 32px 28px 80px; }
+      .sidebar { width: 220px; }
+      .layout { margin-left: 220px; }
+    }
+
     @media (min-width: 1200px) {
       .toc { display: block; }
     }
@@ -563,10 +570,20 @@
       .footer-nav-btn { max-width: none; }
       .footer-nav-btn.next { align-items: flex-start; }
       .hero h1 { font-size: 1.75rem !important; }
+      .feedback-btn, .bookmark-btn, .share-btn, .print-btn,
+      .copy-article-btn, .wizard-option, .checklist-item,
+      .preflight-item { min-height: 44px; display: inline-flex; align-items: center; }
     }
 
     :focus-visible { outline: 2px solid rgba(33,132,243,.6); outline-offset: 2px; }
     .sidebar-link:focus-visible, .quick-link:focus-visible, .header-logo:focus-visible {
+      outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px rgba(33,132,243,.55);
+    }
+    .menu-btn:focus-visible, .theme-toggle:focus-visible, .lang-toggle:focus-visible,
+    .feedback-btn:focus-visible, .bookmark-btn:focus-visible, .share-btn:focus-visible,
+    .print-btn:focus-visible, .copy-article-btn:focus-visible, .chatbot-fab:focus-visible,
+    .text-size-btn:focus-visible, .tour-btn:focus-visible, .wizard-option:focus-visible,
+    .mobile-nav-btn:focus-visible, .header-app-link:focus-visible {
       outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px rgba(33,132,243,.55);
     }
 
@@ -1244,7 +1261,7 @@
 
     /* ── NUDGE PROMPT ─── */
     .nudge-prompt {
-      position: fixed; bottom: 84px; right: 80px; z-index: 85;
+      position: fixed; bottom: 84px; right: 80px; z-index: 88;
       background: var(--bg-elevated); border: 1px solid var(--border-strong);
       border-radius: var(--radius); padding: 12px 16px; max-width: 240px;
       box-shadow: var(--shadow-lg); font-size: .8125rem; color: var(--text-secondary);
@@ -1282,11 +1299,13 @@
     .highlight-tooltip {
       display: none; position: absolute; bottom: calc(100% + 6px); left: 0;
       background: var(--bg-elevated); border: 1px solid var(--border-strong);
-      border-radius: var(--radius-xs); padding: 6px 10px;
+      border-radius: var(--radius-xs); padding: 4px 6px;
       font-size: .75rem; color: var(--text-secondary);
       box-shadow: var(--shadow); white-space: nowrap; z-index: 50;
+      cursor: pointer; transition: color var(--dur), border-color var(--dur);
     }
-    .user-highlight:hover .highlight-tooltip { display: block; }
+    .highlight-tooltip:hover { color: var(--danger); border-color: var(--danger); }
+    .user-highlight:hover .highlight-tooltip { display: flex; align-items: center; gap: 4px; }
 
     /* ── COMMAND PALETTE ─── */
     .palette-overlay {
@@ -1333,6 +1352,8 @@
       padding: 14px 0; font-size: .9375rem; font-weight: 600; color: var(--text-primary);
       cursor: pointer; display: flex; justify-content: space-between; align-items: center;
       user-select: none; transition: color var(--dur);
+      background: none; border: none; width: 100%; text-align: left;
+      font-family: var(--font-body);
     }
     .faq-question:hover { color: var(--accent); }
     .faq-chevron {
@@ -1371,6 +1392,8 @@
       .mobile-nav { display: flex; }
       .content-with-toc { padding-bottom: 100px !important; }
       #back-top { bottom: 68px; }
+      #toast { bottom: 68px; }
+      .nudge-prompt { bottom: 68px; }
     }
   </style>
 </head>
@@ -1412,7 +1435,7 @@
         oninput="handleSearch(this.value)" onfocus="showSearchHistory()"
         autocomplete="off" aria-label="Search documentation" role="combobox"
         aria-expanded="false" aria-controls="searchResults">
-      <div class="search-kbd"><kbd>⌘</kbd><kbd>K</kbd></div>
+      <div class="search-kbd" id="searchKbd"><kbd>⌘</kbd><kbd>K</kbd></div>
       <div class="search-results" id="searchResults" role="listbox"></div>
     </div>
 
@@ -1485,22 +1508,22 @@
 
   <!-- Mobile Bottom Nav -->
   <nav class="mobile-nav" aria-label="Mobile navigation">
-    <a class="mobile-nav-btn" onclick="navigate('welcome')">
+    <button class="mobile-nav-btn" onclick="navigate('welcome')" aria-label="Home">
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l7-7 7 7"/><path d="M5 8v8a1 1 0 001 1h3v-4h2v4h3a1 1 0 001-1V8"/></svg>
       <span>Home</span>
-    </a>
-    <a class="mobile-nav-btn" onclick="document.getElementById('searchInput').focus()">
+    </button>
+    <button class="mobile-nav-btn" onclick="document.getElementById('searchInput').focus()" aria-label="Search">
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="9" r="5.5"/><line x1="13" y1="13" x2="17" y2="17" stroke-linecap="round"/></svg>
       <span>Search</span>
-    </a>
-    <a class="mobile-nav-btn" onclick="toggleSidebar()">
+    </button>
+    <button class="mobile-nav-btn" onclick="toggleSidebar()" aria-label="Menu">
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/></svg>
       <span>Menu</span>
-    </a>
-    <a class="mobile-nav-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    </button>
+    <button class="mobile-nav-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 15V5M6 9l4-4 4 4"/></svg>
       <span>Top</span>
-    </a>
+    </button>
   </nav>
 
   <!-- Nudge Prompt -->
@@ -1528,7 +1551,7 @@
   <div class="kbd-modal-overlay" id="kbdModal" onclick="if(event.target===this)closeKbd()">
     <div class="kbd-modal" role="dialog" aria-label="Keyboard shortcuts">
       <h3>Keyboard shortcuts</h3>
-      <div class="kbd-row"><span>Search</span><div><kbd>⌘</kbd> <kbd>K</kbd></div></div>
+      <div class="kbd-row"><span>Search</span><div><kbd class="mod-key">⌘</kbd> <kbd>K</kbd></div></div>
       <div class="kbd-row"><span>Previous page</span><kbd>←</kbd></div>
       <div class="kbd-row"><span>Next page</span><kbd>→</kbd></div>
       <div class="kbd-row"><span>Back to top</span><kbd>T</kbd></div>
@@ -2246,7 +2269,7 @@
 <div class="glossary-term"><dt>Vimeo Source</dt><dd>An alternative to uploading a file — paste a Vimeo URL or video ID to embed video already hosted on Vimeo into a session or class.</dd></div>
 <div class="glossary-term"><dt>CDN</dt><dd>Content Delivery Network — Kaynos uses Cloudflare to deliver video quickly from edge servers close to the viewer, reducing buffering.</dd></div>
 </dl>
-<div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div>For role details see <a onclick="navigate('roles')">Understanding user roles</a>. For API tokens see <a onclick="navigate('developer-api')">Developer API</a>.</div></div>`},
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>For role details see <a onclick="navigate('roles')">Understanding user roles</a>. For API tokens see <a onclick="navigate('developer-api')">Developer API</a>.</div></div>`},
 
     troubleshoot: {
       title: "Troubleshooting wizard", section: "Troubleshooting",
@@ -2264,7 +2287,7 @@
   <input class="error-input" id="errorInput" placeholder="e.g. 403, cannot be played, black screen..." oninput="lookupError(this.value)" autocomplete="off" aria-label="Paste error message or describe issue">
   <div class="error-results" id="errorResults"></div>
 </div>
-<div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div>Can't find your error? Email <a href="mailto:support@kaynos.net">support@kaynos.net</a> with a screenshot and we'll help.</div></div>`},
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Can't find your error? Email <a href="mailto:support@kaynos.net">support@kaynos.net</a> with a screenshot and we'll help.</div></div>`},
 
     contact: {
       title: "Contact support", section: "FAQ",
@@ -2282,15 +2305,15 @@
   <textarea class="contact-field" id="cfBody" rows="5" placeholder="Describe what happened, what you expected, and any error messages you saw..." aria-label="Description"></textarea>
   <button class="contact-submit" onclick="submitContact()">Copy to clipboard &amp; open email</button>
 </div>
-<div class="hint hint-info"><div class="hint-icon">\${IC.info}</div><div><strong>Response time:</strong> Usually same day on business days. Include your account name and browser for faster diagnosis.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Response time:</strong> Usually same day on business days. Include your account name and browser for faster diagnosis.</div></div>
 <h2>Other ways to reach us</h2>
 <div class="support-card">
   <div class="support-item">
-    <div class="support-item-icon">\${IC.mail}</div>
+    <div class="support-item-icon">${IC.mail}</div>
     <div><strong>Email:</strong> <a href="mailto:support@kaynos.net">support@kaynos.net</a></div>
   </div>
   <div class="support-item">
-    <div class="support-item-icon">\${IC.chat}</div>
+    <div class="support-item-icon">${IC.chat}</div>
     <div><strong>In-app chat:</strong> Bottom-right in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> when logged in</div>
   </div>
 </div>`},
@@ -2329,7 +2352,7 @@
 <li><strong>Is this for one person?</strong> → Create a <strong>session</strong></li>
 <li><strong>Should everyone see it?</strong> → Create a <strong>class</strong></li>
 </ul>
-<div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div>Step-by-step guides: <a onclick="navigate('creating-sessions')">Creating a session</a> · <a onclick="navigate('creating-classes')">Creating a class</a></div></div>`},
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Step-by-step guides: <a onclick="navigate('creating-sessions')">Creating a session</a> · <a onclick="navigate('creating-classes')">Creating a class</a></div></div>`},
 
     "upload-checklist": {
       title: "Upload pre-flight checklist", section: "Video",
@@ -2337,7 +2360,7 @@
 <h1>Upload pre-flight checklist</h1>
 <p>Run through this before uploading to avoid common issues.</p>
 <div class="preflight" id="preflightList"></div>
-<div class="hint hint-info"><div class="hint-icon">\${IC.info}</div><div>Full format details: <a onclick="navigate('formats')">Supported formats and limits</a>. Problems? <a onclick="navigate('upload-issues')">Video upload problems</a>.</div></div>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Full format details: <a onclick="navigate('formats')">Supported formats and limits</a>. Problems? <a onclick="navigate('upload-issues')">Video upload problems</a>.</div></div>`},
 
     "speed-calculator": {
       title: "Upload time calculator", section: "Video",
@@ -2357,7 +2380,7 @@
   </div>
   <div class="calc-result" id="calcResult"></div>
 </div>
-<div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div>Don't know your upload speed? Go to <a href="https://fast.com" target="_blank" rel="noopener">fast.com</a> — after the download test, click <strong>Show more info</strong> to see your upload speed.</div></div>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Don't know your upload speed? Go to <a href="https://fast.com" target="_blank" rel="noopener">fast.com</a> — after the download test, click <strong>Show more info</strong> to see your upload speed.</div></div>
 <h2>Tips for faster uploads</h2>
 <ul>
 <li>Use a <strong>wired connection</strong> instead of Wi-Fi when possible</li>
@@ -2386,7 +2409,7 @@
 <li>Clear site data for app.kaynos.net in your browser settings</li>
 <li>Disable ad blockers or strict privacy extensions temporarily</li>
 </ol>
-<div class="hint hint-info"><div class="hint-icon">\${IC.info}</div><div>More troubleshooting: <a onclick="navigate('performance')">Performance and loading</a> · <a onclick="navigate('playback-issues')">Video playback problems</a></div></div>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>More troubleshooting: <a onclick="navigate('performance')">Performance and loading</a> · <a onclick="navigate('playback-issues')">Video playback problems</a></div></div>`},
 
     "player-shortcuts": {
       title: "Video player shortcuts", section: "Video",
@@ -2412,7 +2435,7 @@
   <div class="shortcut-card"><span>Go home</span><kbd>H</kbd></div>
   <div class="shortcut-card"><span>All shortcuts</span><kbd>?</kbd></div>
 </div>
-<div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div>Full playback guide: <a onclick="navigate('playback')">Watching and reviewing</a></div></div>`},
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Full playback guide: <a onclick="navigate('playback')">Watching and reviewing</a></div></div>`},
 
     "quick-tips": {
       title: "Quick tips", section: "Getting Started",
@@ -2439,7 +2462,7 @@
   <div class="step-tip"><div class="step-num">2</div><div class="step-body"><h4>Click Add Member / Add Client</h4><p>Enter their name, email, and role.</p></div></div>
   <div class="step-tip"><div class="step-num">3</div><div class="step-body"><h4>Send the invite</h4><p>They receive an email with a temporary password. Delivery is usually quick.</p></div></div>
 </div>
-<div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div>Full guides: <a onclick="navigate('first-upload')">Your first video upload</a> · <a onclick="navigate('notes')">Notes and timestamps</a> · <a onclick="navigate('inviting-members')">Inviting your team</a></div></div>`},
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Full guides: <a onclick="navigate('first-upload')">Your first video upload</a> · <a onclick="navigate('notes')">Notes and timestamps</a> · <a onclick="navigate('inviting-members')">Inviting your team</a></div></div>`},
 
     "onboarding-timeline": {
       title: "Coach onboarding timeline", section: "Getting Started",
@@ -2448,7 +2471,7 @@
 <p>A suggested four-week plan for gym owners and head coaches getting started with Kaynos.</p>
 <div class="timeline">
   <div class="timeline-item">
-    <div class="timeline-dot">\${IC.rocket}</div>
+    <div class="timeline-dot">${IC.rocket}</div>
     <div class="timeline-week">Week 1</div>
     <div class="timeline-title">Set up your account</div>
     <div class="timeline-body">
@@ -2461,7 +2484,7 @@
     </div>
   </div>
   <div class="timeline-item">
-    <div class="timeline-dot">\${IC.video}</div>
+    <div class="timeline-dot">${IC.video}</div>
     <div class="timeline-week">Week 2</div>
     <div class="timeline-title">Upload your first content</div>
     <div class="timeline-body">
@@ -2475,7 +2498,7 @@
     </div>
   </div>
   <div class="timeline-item">
-    <div class="timeline-dot">\${IC.users}</div>
+    <div class="timeline-dot">${IC.users}</div>
     <div class="timeline-week">Week 3</div>
     <div class="timeline-title">Bring your team on board</div>
     <div class="timeline-body">
@@ -2488,7 +2511,7 @@
     </div>
   </div>
   <div class="timeline-item">
-    <div class="timeline-dot">\${IC.check}</div>
+    <div class="timeline-dot">${IC.check}</div>
     <div class="timeline-week">Week 4</div>
     <div class="timeline-title">Optimize and scale</div>
     <div class="timeline-body">
@@ -2502,7 +2525,7 @@
     </div>
   </div>
 </div>
-<div class="hint hint-info"><div class="hint-icon">\${IC.info}</div><div>This is a suggested pace — move faster or slower based on your team's comfort. The important thing is that you (the admin) are confident before adding a large wave of clients.</div></div>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>This is a suggested pace — move faster or slower based on your team's comfort. The important thing is that you (the admin) are confident before adding a large wave of clients.</div></div>`},
 
     "whats-new": {
       title: "What's new", section: "",
@@ -2550,10 +2573,20 @@
 
   const allPageKeys = NAV.flatMap(g => g.pages);
 
+  /* ── SAFE STORAGE ────────────────────────────────────── */
+  function safeGet(key, fallback) {
+    try { return JSON.parse(localStorage.getItem(key)) || fallback; }
+    catch { return fallback; }
+  }
+  function safeSet(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); }
+    catch { /* private browsing or quota exceeded */ }
+  }
+
   /* ── SIDEBAR ─────────────────────────────────────────── */
-  function getReadPages() { return JSON.parse(localStorage.getItem('read-pages') || '[]'); }
-  function getBookmarks() { return JSON.parse(localStorage.getItem('bookmarks') || '[]'); }
-  function getRecent() { return JSON.parse(localStorage.getItem('recent-pages') || '[]'); }
+  function getReadPages() { return safeGet('read-pages', []); }
+  function getBookmarks() { return safeGet('bookmarks', []); }
+  function getRecent() { return safeGet('recent-pages', []); }
 
   function buildSidebar() {
     const sb = document.getElementById('sidebar');
@@ -2694,8 +2727,8 @@
       h.appendChild(a);
     });
 
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    history.pushState({ page: pageId }, '', '#' + pageId);
+    if (!window._isPopstate) window.scrollTo({ top: 0, behavior: 'instant' });
+    if (!window._isPopstate) history.pushState({ page: pageId }, '', '#' + pageId);
     document.title = pageId === 'welcome' ? 'Kaynos — Help Center' : `${page.title} — Kaynos Docs`;
     closeSidebar();
     document.getElementById('searchInput').value = '';
@@ -2824,7 +2857,7 @@
     sr.innerHTML = results.length === 0
       ? '<div class="search-empty">No results found</div>'
       : results.slice(0, 8).map((r, i) =>
-          `<div class="search-result" role="option" id="sr-${i}" data-page="${r.id}" onclick="navigate('${r.id}')">
+          `<div class="search-result" role="option" id="sr-${i}" data-page="${r.id}" onclick="addSearchHistory(document.getElementById('searchInput').value.trim());navigate('${r.id}')">
             <div class="sr-title">${r.title}${r.isBookmarked ? '<span class="sr-badge sr-bookmarked" title="Bookmarked">' + IC.bookmarkFill + '</span>' : ''}${r.isRead ? '<span class="sr-badge sr-read" title="Read">' + IC.check + '</span>' : ''}</div>
             ${r.section ? `<div class="sr-section">${r.section}</div>` : ''}
             ${r.snippet ? `<div class="sr-snippet">${r.snippet}</div>` : ''}
@@ -2922,7 +2955,11 @@
 
   /* ── POPSTATE ───────────────────────────────────────── */
   window.addEventListener('popstate', e => {
-    navigate(e.state?.page || 'welcome');
+    const pageId = e.state?.page || 'welcome';
+    window._isPopstate = true;
+    navigate(pageId);
+    window._isPopstate = false;
+    restoreScrollPos(pageId);
   });
 
   /* ── KEYBOARD SHORTCUTS ─────────────────────────────── */
@@ -2935,6 +2972,8 @@
       if (e.key === 'Escape') closeKbd();
       return;
     }
+    if (document.getElementById('paletteOverlay').classList.contains('active')) return;
+    if (document.getElementById('tourOverlay').classList.contains('active')) return;
     if (e.key === '?') { e.preventDefault(); openKbd(); return; }
     if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
       const cur = location.hash.slice(1) || 'welcome';
@@ -3039,15 +3078,25 @@
   function renderFaqAccordion(container, pageId) {
     if (pageId !== 'faq') return;
     const h3s = container.querySelectorAll('h3');
-    h3s.forEach(h3 => {
+    h3s.forEach((h3, i) => {
       const item = document.createElement('div');
       item.className = 'faq-item';
-      const question = document.createElement('div');
+      const question = document.createElement('button');
       question.className = 'faq-question';
-      question.innerHTML = `<span>${h3.textContent}</span><span class="faq-chevron">▼</span>`;
-      question.onclick = () => item.classList.toggle('open');
+      question.type = 'button';
+      question.setAttribute('aria-expanded', 'false');
+      question.setAttribute('aria-controls', `faq-answer-${i}`);
+      question.innerHTML = `<span>${h3.textContent}</span><span class="faq-chevron" aria-hidden="true">▼</span>`;
+      question.onclick = () => {
+        const isOpen = item.classList.toggle('open');
+        question.setAttribute('aria-expanded', isOpen);
+      };
       const answer = document.createElement('div');
       answer.className = 'faq-answer';
+      answer.id = `faq-answer-${i}`;
+      answer.setAttribute('role', 'region');
+      answer.setAttribute('aria-labelledby', `faq-q-${i}`);
+      question.id = `faq-q-${i}`;
       // Collect siblings until next h3, h2, or hr
       let sib = h3.nextElementSibling;
       const siblings = [];
@@ -3226,7 +3275,9 @@
 
   function finishTour() {
     localStorage.setItem('onboarded', 'true');
-    document.getElementById('tourOverlay').classList.remove('active');
+    const overlay = document.getElementById('tourOverlay');
+    overlay.classList.remove('active');
+    overlay.removeEventListener('keydown', trapTourFocus);
     // Pulse hints on key elements
     document.getElementById('searchInput').classList.add('pulse-hint');
     document.getElementById('chatFab').classList.add('pulse-hint');
@@ -3241,8 +3292,27 @@
   function startTour() {
     tourStep = 0;
     selectedRole = localStorage.getItem('user-role') || null;
-    document.getElementById('tourOverlay').classList.add('active');
+    const overlay = document.getElementById('tourOverlay');
+    overlay.classList.add('active');
     renderTourStep();
+    // Focus first button in tour card
+    requestAnimationFrame(() => {
+      const firstBtn = overlay.querySelector('.tour-btn, .role-card');
+      if (firstBtn) firstBtn.focus();
+    });
+    // Trap focus within tour
+    overlay.addEventListener('keydown', trapTourFocus);
+  }
+
+  function trapTourFocus(e) {
+    if (e.key === 'Escape') { skipTour(); return; }
+    if (e.key !== 'Tab') return;
+    const overlay = document.getElementById('tourOverlay');
+    const focusable = overlay.querySelectorAll('button, [role="button"][tabindex="0"]');
+    if (!focusable.length) return;
+    const first = focusable[0], last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   }
 
   /* ── GETTING STARTED CHECKLIST ─────────────────────── */
@@ -3527,15 +3597,33 @@
     if (h.length > 8) h = h.slice(0, 8);
     localStorage.setItem('search-history', JSON.stringify(h));
   }
+  function escapeHtml(str) {
+    const d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
+  }
+
   function showSearchHistory() {
     const sr = document.getElementById('searchResults');
     const input = document.getElementById('searchInput');
     if (input.value.length > 0) return;
     const history = getSearchHistory();
     if (history.length === 0) return;
-    sr.innerHTML = '<div class="search-history"><div class="search-history-title">Recent searches</div>' +
-      history.map(q => `<div class="search-history-item" onclick="document.getElementById('searchInput').value='${q.replace(/'/g,"\\'")}';handleSearch('${q.replace(/'/g,"\\'")}')"><span>${IC.clock}</span><span>${q}</span></div>`).join('') +
-      '</div>';
+    const wrapper = document.createElement('div');
+    wrapper.className = 'search-history';
+    wrapper.innerHTML = '<div class="search-history-title">Recent searches</div>';
+    history.forEach(q => {
+      const item = document.createElement('div');
+      item.className = 'search-history-item';
+      item.innerHTML = `<span>${IC.clock}</span>`;
+      const label = document.createElement('span');
+      label.textContent = q;
+      item.appendChild(label);
+      item.onclick = () => { input.value = q; handleSearch(q); };
+      wrapper.appendChild(item);
+    });
+    sr.innerHTML = '';
+    sr.appendChild(wrapper);
     sr.classList.add('active');
     input.setAttribute('aria-expanded', 'true');
   }
@@ -3643,14 +3731,18 @@
         const span = document.createElement('span');
         span.className = 'user-highlight';
         span.textContent = h.text;
-        span.onclick = () => {
-          if (confirm('Remove this highlight?')) {
-            const hl = getHighlights();
-            hl[pageId] = hl[pageId].filter(x => x.text !== h.text);
-            localStorage.setItem('highlights', JSON.stringify(hl));
-            navigate(pageId);
-          }
+        const tooltip = document.createElement('span');
+        tooltip.className = 'highlight-tooltip';
+        tooltip.innerHTML = IC.x + ' Remove';
+        tooltip.onclick = (e) => {
+          e.stopPropagation();
+          const hl = getHighlights();
+          hl[pageId] = hl[pageId].filter(x => x.text !== h.text);
+          localStorage.setItem('highlights', JSON.stringify(hl));
+          showToast('Highlight removed');
+          navigate(pageId);
         };
+        span.appendChild(tooltip);
         const parent = node.parentNode;
         if (before) parent.insertBefore(document.createTextNode(before), node);
         parent.insertBefore(span, node);
@@ -3762,25 +3854,25 @@
   <p>Todo lo que necesitas para empezar con Kaynos — subir video, gestionar tu equipo y solucionar problemas comunes.</p>
   <p style="margin-top:12px;font-size:.8125rem"><a style="cursor:pointer;color:var(--accent)" onclick="startTour()">Hacer el tour guiado</a></p>
 </div>
-<div class="hint hint-info"><div class="hint-icon">\${IC.info}</div><div><strong>Estás leyendo el centro de ayuda.</strong> Inicia sesión en <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> para subir video y gestionar tu cuenta.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Estás leyendo el centro de ayuda.</strong> Inicia sesión en <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> para subir video y gestionar tu cuenta.</div></div>
 <h2>Empezar</h2>
 <div class="quick-links">
-  <a class="quick-link featured" href="#setup" onclick="navigate('setup');return false"><div class="ql-icon">\${IC.rocket}</div><div class="ql-title">Configurar tu cuenta</div><div class="ql-desc">Primer inicio de sesión y contraseña</div></a>
-  <a class="quick-link featured" href="#first-upload" onclick="navigate('first-upload');return false"><div class="ql-icon">\${IC.video}</div><div class="ql-title">Tu primera subida</div><div class="ql-desc">Sube video desde tu móvil o computadora</div></a>
-  <a class="quick-link featured" href="#troubleshoot" onclick="navigate('troubleshoot');return false"><div class="ql-icon">\${IC.alert}</div><div class="ql-title">Solucionar un problema</div><div class="ql-desc">Asistente de diagnóstico paso a paso</div></a>
-  <a class="quick-link" href="#inviting-members" onclick="navigate('inviting-members');return false"><div class="ql-icon">\${IC.users}</div><div class="ql-title">Invitar a tu equipo</div><div class="ql-desc">Invitaciones, roles y lista</div></a>
-  <a class="quick-link" href="#playback" onclick="navigate('playback');return false"><div class="ql-icon">\${IC.play}</div><div class="ql-title">Ver y revisar</div><div class="ql-desc">Reproducción, notas y atajos</div></a>
-  <a class="quick-link" href="#faq" onclick="navigate('faq');return false"><div class="ql-icon">\${IC.chat}</div><div class="ql-title">Preguntas frecuentes</div><div class="ql-desc">Respuestas a dudas comunes</div></a>
+  <a class="quick-link featured" href="#setup" onclick="navigate('setup');return false"><div class="ql-icon">${IC.rocket}</div><div class="ql-title">Configurar tu cuenta</div><div class="ql-desc">Primer inicio de sesión y contraseña</div></a>
+  <a class="quick-link featured" href="#first-upload" onclick="navigate('first-upload');return false"><div class="ql-icon">${IC.video}</div><div class="ql-title">Tu primera subida</div><div class="ql-desc">Sube video desde tu móvil o computadora</div></a>
+  <a class="quick-link featured" href="#troubleshoot" onclick="navigate('troubleshoot');return false"><div class="ql-icon">${IC.alert}</div><div class="ql-title">Solucionar un problema</div><div class="ql-desc">Asistente de diagnóstico paso a paso</div></a>
+  <a class="quick-link" href="#inviting-members" onclick="navigate('inviting-members');return false"><div class="ql-icon">${IC.users}</div><div class="ql-title">Invitar a tu equipo</div><div class="ql-desc">Invitaciones, roles y lista</div></a>
+  <a class="quick-link" href="#playback" onclick="navigate('playback');return false"><div class="ql-icon">${IC.play}</div><div class="ql-title">Ver y revisar</div><div class="ql-desc">Reproducción, notas y atajos</div></a>
+  <a class="quick-link" href="#faq" onclick="navigate('faq');return false"><div class="ql-icon">${IC.chat}</div><div class="ql-title">Preguntas frecuentes</div><div class="ql-desc">Respuestas a dudas comunes</div></a>
 </div>
 <h2>Contacto</h2>
 <div class="support-card">
-  <div class="support-item"><div class="support-item-icon">\${IC.mail}</div><div><strong>Email:</strong> <a href="mailto:support@kaynos.net">support@kaynos.net</a></div></div>
-  <div class="support-item"><div class="support-item-icon">\${IC.chat}</div><div><strong>Chat:</strong> Esquina inferior derecha en <a href="https://app.kaynos.net" target="_blank" rel="noopener">la app</a></div></div>
+  <div class="support-item"><div class="support-item-icon">${IC.mail}</div><div><strong>Email:</strong> <a href="mailto:support@kaynos.net">support@kaynos.net</a></div></div>
+  <div class="support-item"><div class="support-item-icon">${IC.chat}</div><div><strong>Chat:</strong> Esquina inferior derecha en <a href="https://app.kaynos.net" target="_blank" rel="noopener">la app</a></div></div>
 </div>` },
     setup: { title: 'Configurar tu cuenta', content: `
 <h1>Configurar tu cuenta</h1>
 <p>Después de registrarte, los datos de acceso llegan al email que usaste. Cambia la contraseña temporal en cuanto entres.</p>
-<div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div>Abre la app en <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</div></div>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Abre la app en <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</div></div>
 <h2>Primer inicio de sesión</h2>
 <ol><li>Usa el enlace del email de bienvenida o ve a <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</li><li>Ingresa tu email y la contraseña temporal de la invitación.</li><li>Llegarás al <strong>Panel del Coach</strong> — esa es tu base.</li></ol>
 <h2>Cambiar contraseña</h2>
@@ -3931,18 +4023,20 @@
 
   /* ── SUPPORT CHATBOT ────────────────────────────────── */
   let chatOpen = false;
+  let chatInitialized = false;
   function toggleChat() {
     chatOpen = !chatOpen;
     document.getElementById('chatPanel').classList.toggle('open', chatOpen);
-    if (chatOpen && !document.getElementById('chatMessages').children.length) {
+    if (chatOpen && !chatInitialized) {
+      chatInitialized = true;
       addBotMsg("Hi! I can help you find answers in the docs. Try asking about uploads, playback, roles, or anything else.", [
         "How do I upload video?",
         "What are the user roles?",
         "Video won't play",
         "How do I use the API?"
       ]);
-      document.getElementById('chatInput').focus();
     }
+    if (chatOpen) document.getElementById('chatInput').focus();
   }
 
   function addBotMsg(text, suggestions) {
@@ -4081,6 +4175,14 @@
     const pref = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
     applyTheme(stored || pref);
   })();
+
+  /* ── PLATFORM-AWARE MODIFIER KEY ─────────────────────── */
+  const isMac = /Mac|iPhone|iPad|iPod/.test(navigator.platform || navigator.userAgent);
+  if (!isMac) {
+    const modKey = document.getElementById('searchKbd')?.querySelector('kbd');
+    if (modKey) modKey.textContent = 'Ctrl';
+    document.querySelectorAll('.mod-key').forEach(el => { el.textContent = 'Ctrl'; });
+  }
 
   /* ── INIT ───────────────────────────────────────────── */
   buildSidebar();
