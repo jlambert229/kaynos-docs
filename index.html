@@ -924,6 +924,94 @@
     .cl-link { color: var(--accent); font-weight: 500; }
 
     /* ── PULSE HINT ─── */
+    /* ── TROUBLESHOOT WIZARD ─── */
+    .wizard-step { animation: fadeUp .18s var(--ease); }
+    .wizard-question {
+      font-size: 1.0625rem; font-weight: 600; color: var(--text-primary);
+      margin-bottom: 16px; line-height: 1.4;
+    }
+    .wizard-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+    .wizard-option {
+      padding: 12px 16px; background: var(--bg-elevated);
+      border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
+      cursor: pointer; transition: all var(--dur); font-size: .875rem;
+      color: var(--text-secondary); display: flex; align-items: center; gap: 10px;
+    }
+    .wizard-option:hover { border-color: var(--accent); color: var(--text-primary); background: var(--accent-soft); }
+    .wizard-option svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
+    .wizard-restart {
+      font-size: .8125rem; color: var(--text-tertiary); cursor: pointer;
+      background: none; border: none; padding: 0; margin-top: 8px;
+      transition: color var(--dur);
+    }
+    .wizard-restart:hover { color: var(--accent); }
+    .wizard-result {
+      padding: 16px; background: var(--bg-elevated);
+      border: 1px solid var(--border-strong); border-radius: var(--radius);
+      margin-bottom: 16px;
+    }
+    .wizard-result p { margin-bottom: 8px; }
+
+    /* ── ERROR LOOKUP ─── */
+    .error-lookup { margin-bottom: 24px; }
+    .error-input {
+      width: 100%; padding: 10px 14px;
+      border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
+      background: var(--bg-secondary); color: var(--text-primary);
+      font-family: var(--font-mono); font-size: .8125rem;
+      outline: none; transition: border-color var(--dur); margin-bottom: 10px;
+    }
+    .error-input:focus { border-color: var(--accent); }
+    .error-input::placeholder { color: var(--text-tertiary); font-family: var(--font-body); }
+    .error-results { display: flex; flex-direction: column; gap: 8px; }
+    .error-match {
+      padding: 10px 14px; background: var(--bg-elevated);
+      border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
+      cursor: pointer; transition: all var(--dur); font-size: .8125rem;
+    }
+    .error-match:hover { border-color: var(--accent); background: var(--accent-soft); }
+    .error-match-title { font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+    .error-match-hint { color: var(--text-secondary); font-size: .75rem; }
+
+    /* ── GLOSSARY TOOLTIP ─── */
+    .term-tooltip {
+      border-bottom: 1px dotted var(--accent); cursor: help;
+      position: relative; color: var(--accent);
+    }
+    .term-tooltip-popup {
+      display: none; position: absolute; bottom: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%); width: 260px; padding: 10px 12px;
+      background: var(--bg-elevated); border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm); box-shadow: var(--shadow-lg);
+      font-size: .8125rem; color: var(--text-secondary); line-height: 1.5;
+      z-index: 200; pointer-events: none;
+    }
+    .term-tooltip:hover .term-tooltip-popup,
+    .term-tooltip:focus .term-tooltip-popup { display: block; }
+    .term-tooltip-popup::after {
+      content: ''; position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%); border: 6px solid transparent;
+      border-top-color: var(--border-strong);
+    }
+
+    /* ── CONTACT FORM ─── */
+    .contact-form { margin-top: 16px; }
+    .contact-field {
+      width: 100%; padding: 8px 12px; margin-bottom: 8px;
+      border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
+      background: var(--bg-secondary); color: var(--text-primary);
+      font-family: var(--font-body); font-size: .8125rem; outline: none;
+      transition: border-color var(--dur); resize: vertical;
+    }
+    .contact-field:focus { border-color: var(--accent); }
+    .contact-field::placeholder { color: var(--text-tertiary); }
+    .contact-submit {
+      padding: 8px 20px; background: var(--accent); color: #fff;
+      border: none; border-radius: var(--radius-sm); cursor: pointer;
+      font-size: .8125rem; font-weight: 500; transition: background var(--dur);
+    }
+    .contact-submit:hover { background: var(--accent-hover); }
+
     @keyframes pulse-ring {
       0% { box-shadow: 0 0 0 0 rgba(33,132,243,.4); }
       70% { box-shadow: 0 0 0 8px rgba(33,132,243,0); }
@@ -1842,6 +1930,49 @@
 </dl>
 <div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div>For role details see <a onclick="navigate('roles')">Understanding user roles</a>. For API tokens see <a onclick="navigate('developer-api')">Developer API</a>.</div></div>`},
 
+    troubleshoot: {
+      title: "Troubleshooting wizard", section: "Troubleshooting",
+      content: `
+<h1>Troubleshooting wizard</h1>
+<p>Answer a few questions and we'll point you to the right fix.</p>
+<div id="wizardContainer"></div>`},
+
+    "error-lookup": {
+      title: "Error message lookup", section: "Troubleshooting",
+      content: `
+<h1>Error message lookup</h1>
+<p>Paste the error message or describe what you see, and we'll find the relevant help.</p>
+<div class="error-lookup">
+  <input class="error-input" id="errorInput" placeholder="e.g. 403, cannot be played, black screen..." oninput="lookupError(this.value)" autocomplete="off">
+  <div class="error-results" id="errorResults"></div>
+</div>
+<div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div>Can't find your error? Email <a href="mailto:support@kaynos.net">support@kaynos.net</a> with a screenshot and we'll help.</div></div>`},
+
+    contact: {
+      title: "Contact support", section: "FAQ",
+      content: `
+<h1>Contact support</h1>
+<p>Fill out the form below and we'll copy a formatted message for you to send to <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</p>
+<div class="contact-form" id="contactForm">
+  <input class="contact-field" id="cfName" placeholder="Your name">
+  <input class="contact-field" id="cfEmail" placeholder="Email address on your account">
+  <input class="contact-field" id="cfSubject" placeholder="Subject (e.g. Upload stuck, Can't log in)">
+  <textarea class="contact-field" id="cfBody" rows="5" placeholder="Describe what happened, what you expected, and any error messages you saw..."></textarea>
+  <button class="contact-submit" onclick="submitContact()">Copy to clipboard &amp; open email</button>
+</div>
+<div class="hint hint-info"><div class="hint-icon">\${IC.info}</div><div><strong>Response time:</strong> Usually same day on business days. Include your account name and browser for faster diagnosis.</div></div>
+<h2>Other ways to reach us</h2>
+<div class="support-card">
+  <div class="support-item">
+    <div class="support-item-icon">\${IC.mail}</div>
+    <div><strong>Email:</strong> <a href="mailto:support@kaynos.net">support@kaynos.net</a></div>
+  </div>
+  <div class="support-item">
+    <div class="support-item-icon">\${IC.chat}</div>
+    <div><strong>In-app chat:</strong> Bottom-right in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> when logged in</div>
+  </div>
+</div>`},
+
     "whats-new": {
       title: "What's new", section: "",
       content: `
@@ -1882,8 +2013,8 @@
     { section: "Sessions & Classes", pages: ["creating-sessions", "creating-classes", "notes", "tags", "progress"] },
     { section: "Account Management", pages: ["managing-members", "profile", "notifications"] },
     { section: "Developers", pages: ["developer-api"] },
-    { section: "Troubleshooting", pages: ["upload-issues", "playback-issues", "login-issues", "email-issues", "performance", "mobile"] },
-    { section: "FAQ", pages: ["faq"] }
+    { section: "Troubleshooting", pages: ["troubleshoot", "error-lookup", "upload-issues", "playback-issues", "login-issues", "email-issues", "performance", "mobile"] },
+    { section: "FAQ", pages: ["faq", "contact"] }
   ];
 
   const allPageKeys = NAV.flatMap(g => g.pages);
@@ -2424,7 +2555,9 @@
     renderShareBtn(pc, pageId);
     renderArticleMeta(pc, pageId);
     if (pageId === 'welcome') renderChecklist(pc);
+    if (pageId === 'troubleshoot') renderWizard('start');
     renderFaqAccordion(pc, pageId);
+    addGlossaryTooltips(pc);
     renderRelated(pc, pageId);
     renderFeedback(pc);
     markAsRead(pageId);
@@ -2626,6 +2759,191 @@
     const ql = container.querySelector('.quick-links');
     if (ql) ql.insertAdjacentElement('afterend', div);
     else container.appendChild(div);
+  }
+
+  /* ── TROUBLESHOOTING WIZARD ─────────────────────────── */
+  const WIZARD = {
+    start: {
+      q: 'What kind of problem are you experiencing?',
+      opts: [
+        { text: 'Video upload issue', icon: IC.video, next: 'upload' },
+        { text: 'Video playback issue', icon: IC.play, next: 'playback' },
+        { text: 'Login or access issue', icon: IC.users, next: 'login' },
+        { text: 'Email or notification issue', icon: IC.mail, next: 'email' },
+        { text: 'App is slow or broken', icon: IC.alert, next: 'performance' },
+        { text: 'Something else', icon: IC.chat, next: 'other' },
+      ]
+    },
+    upload: {
+      q: 'When does the upload fail?',
+      opts: [
+        { text: 'Immediately — file rejected', next: 'upload-reject' },
+        { text: 'Progress bar gets stuck', next: 'upload-stuck' },
+        { text: 'Fails partway through', next: 'upload-partial' },
+        { text: 'Very slow but no error', next: 'upload-slow' },
+      ]
+    },
+    'upload-reject': { result: true, title: 'File rejected at start', body: 'Check your file format (MP4, MOV, WebM, MKV) and size (max 5 GB).', page: 'upload-issues' },
+    'upload-stuck': { result: true, title: 'Progress bar stuck', body: 'Large files pause between chunks — wait 60 seconds. If no progress after 2 minutes, cancel and retry.', page: 'upload-issues' },
+    'upload-partial': { result: true, title: 'Fails partway through', body: 'Network error or session expired. Reconnect and retry. A 403 means the upload session expired — start over.', page: 'upload-issues' },
+    'upload-slow': { result: true, title: 'Slow upload', body: 'Check your upload speed (not download) at fast.com. Wired connection helps. Pause other sync tools.', page: 'upload-issues' },
+    playback: {
+      q: 'What do you see?',
+      opts: [
+        { text: 'Black screen or no video', next: 'play-black' },
+        { text: 'Buffering / spinning', next: 'play-buffer' },
+        { text: '"Cannot be played" error', next: 'play-codec' },
+        { text: 'Sound but no picture', next: 'play-codec' },
+      ]
+    },
+    'play-black': { result: true, title: 'Black screen', body: 'Hard refresh (Ctrl+Shift+R). Confirm upload completed. Try Chrome.', page: 'playback-issues' },
+    'play-buffer': { result: true, title: 'Buffering', body: 'Check bandwidth, close other streaming tabs, try a 1080p export instead of 4K.', page: 'playback-issues' },
+    'play-codec': { result: true, title: 'Codec issue', body: 'Re-export to MP4 (H.264 + AAC). MKV may fail in Safari — try Chrome or Firefox.', page: 'playback-issues' },
+    login: {
+      q: 'What\'s happening?',
+      opts: [
+        { text: 'Wrong password / can\'t log in', next: 'login-pw' },
+        { text: '"Too many attempts" message', next: 'login-rate' },
+        { text: 'Blank page after login', next: 'login-blank' },
+      ]
+    },
+    'login-pw': { result: true, title: 'Password issue', body: 'Check Caps Lock, use the same email from the invite. Ask an admin for a reset.', page: 'login-issues' },
+    'login-rate': { result: true, title: 'Rate limited', body: 'Wait 15-30 minutes, or contact support for faster access.', page: 'login-issues' },
+    'login-blank': { result: true, title: 'Blank page', body: 'Try incognito/private window. If that works, clear site data for app.kaynos.net.', page: 'login-issues' },
+    email: { result: true, title: 'Email issues', body: 'Check spam, confirm address in profile, verify notifications are enabled.', page: 'email-issues' },
+    performance: { result: true, title: 'Performance issues', body: 'Clear cache, try Chrome, disable ad blockers temporarily, close extra tabs.', page: 'performance' },
+    other: { result: true, title: 'Need more help?', body: 'Email support@kaynos.net with your account name, browser, and what happened.', page: 'faq' },
+  };
+
+  function renderWizard(stepId) {
+    const container = document.getElementById('wizardContainer');
+    if (!container) return;
+    const step = WIZARD[stepId || 'start'];
+    if (!step) return;
+    container.innerHTML = '';
+    const div = document.createElement('div');
+    div.className = 'wizard-step';
+
+    if (step.result) {
+      div.innerHTML = `<div class="wizard-result">
+        <p><strong>${step.title}</strong></p>
+        <p>${step.body}</p>
+        <p><a style="color:var(--accent);font-weight:500;cursor:pointer" onclick="navigate('${step.page}')">Read full guide: ${PAGES[step.page].title} →</a></p>
+      </div>
+      <button class="wizard-restart" onclick="renderWizard('start')">← Start over</button>`;
+    } else {
+      let html = `<div class="wizard-question">${step.q}</div><div class="wizard-options">`;
+      step.opts.forEach(o => {
+        html += `<div class="wizard-option" onclick="renderWizard('${o.next}')">${o.icon || ''}<span>${o.text}</span></div>`;
+      });
+      html += '</div>';
+      if (stepId !== 'start') html += `<button class="wizard-restart" onclick="renderWizard('start')">← Start over</button>`;
+      div.innerHTML = html;
+    }
+    container.appendChild(div);
+  }
+
+  /* ── ERROR MESSAGE LOOKUP ──────────────────────────── */
+  const ERROR_DB = [
+    { patterns: ['please select a video', 'file type', 'unsupported'], title: 'Unsupported file format', hint: 'Convert to MP4 (H.264 + AAC)', page: 'upload-issues' },
+    { patterns: ['file too big', 'too large', '5 gb', 'size limit'], title: 'File too large', hint: 'Maximum is 5 GB — trim or compress', page: 'formats' },
+    { patterns: ['403', 'forbidden', 'session expire'], title: 'Upload session expired (403)', hint: 'Long uploads can expire — cancel and restart', page: 'upload-issues' },
+    { patterns: ['500', 'server error', 'internal'], title: 'Server error (500)', hint: 'Wait a moment and retry — contact support if it persists', page: 'upload-issues' },
+    { patterns: ['network error', 'failed to fetch', 'connection'], title: 'Network error', hint: 'Check your internet — reconnect and retry', page: 'upload-issues' },
+    { patterns: ['cannot be played', 'not supported', 'codec'], title: 'Codec / playback error', hint: 'Re-export to MP4 with H.264 video + AAC audio', page: 'playback-issues' },
+    { patterns: ['black screen', 'no video', 'blank player'], title: 'Black screen / no video', hint: 'Hard refresh, check upload status, try Chrome', page: 'playback-issues' },
+    { patterns: ['too many attempts', 'rate limit', 'locked out'], title: 'Login rate limited', hint: 'Wait 15-30 minutes or contact support', page: 'login-issues' },
+    { patterns: ['wrong password', 'incorrect', 'invalid credentials'], title: 'Wrong password', hint: 'Check Caps Lock, paste from invite email, ask admin for reset', page: 'login-issues' },
+    { patterns: ['no access', 'permission', 'denied', 'unauthorized'], title: 'Access denied', hint: 'Check your role or ask an admin to verify your access', page: 'roles' },
+    { patterns: ['buffering', 'loading', 'spinner', 'slow playback'], title: 'Buffering / slow playback', hint: 'Check bandwidth, close other tabs, try 1080p', page: 'playback-issues' },
+    { patterns: ['email', 'notification', 'invite', 'not receiving'], title: 'Email / notification issue', hint: 'Check spam, verify address in profile', page: 'email-issues' },
+  ];
+
+  function lookupError(q) {
+    const container = document.getElementById('errorResults');
+    if (!container) return;
+    if (!q || q.length < 2) { container.innerHTML = ''; return; }
+    const lower = q.toLowerCase();
+    const matches = ERROR_DB.filter(e => e.patterns.some(p => lower.includes(p)));
+    if (matches.length === 0 && q.length > 3) {
+      // Fuzzy fallback — match any word
+      const words = lower.split(/\s+/).filter(w => w.length > 2);
+      ERROR_DB.forEach(e => {
+        if (words.some(w => e.patterns.some(p => p.includes(w)) || e.title.toLowerCase().includes(w))) {
+          if (!matches.includes(e)) matches.push(e);
+        }
+      });
+    }
+    container.innerHTML = matches.slice(0, 4).map(m =>
+      `<div class="error-match" onclick="navigate('${m.page}')">
+        <div class="error-match-title">${m.title}</div>
+        <div class="error-match-hint">${m.hint} → ${PAGES[m.page].title}</div>
+      </div>`
+    ).join('') || (q.length > 3 ? '<div style="font-size:.8125rem;color:var(--text-tertiary);padding:8px 0">No matches — try different keywords or <a href="mailto:support@kaynos.net" style="color:var(--accent)">email support</a></div>' : '');
+  }
+
+  /* ── CONTACT FORM ──────────────────────────────────── */
+  function submitContact() {
+    const name = document.getElementById('cfName').value.trim();
+    const email = document.getElementById('cfEmail').value.trim();
+    const subject = document.getElementById('cfSubject').value.trim();
+    const body = document.getElementById('cfBody').value.trim();
+    if (!subject && !body) { showToast('Please describe your issue'); return; }
+    const msg = `Name: ${name || '(not provided)'}\nEmail: ${email || '(not provided)'}\nSubject: ${subject}\n\n${body}\n\n---\nSent from Kaynos Help Center\nBrowser: ${navigator.userAgent.split(' ').slice(-2).join(' ')}`;
+    navigator.clipboard.writeText(msg).then(() => {
+      showToast('Copied — opening email');
+      setTimeout(() => {
+        window.open(`mailto:support@kaynos.net?subject=${encodeURIComponent(subject || 'Support request')}&body=${encodeURIComponent(msg)}`, '_blank');
+      }, 500);
+    }).catch(() => {
+      window.open(`mailto:support@kaynos.net?subject=${encodeURIComponent(subject || 'Support request')}&body=${encodeURIComponent(msg)}`, '_blank');
+    });
+  }
+
+  /* ── GLOSSARY TOOLTIPS ─────────────────────────────── */
+  const GLOSSARY_TERMS = {
+    'session': 'A one-on-one recording assigned to a single client — only they, the creator, and admins can see it.',
+    'class': 'An account-wide recording visible to all members, coaches, and admins.',
+    'admin': 'The highest-permission role — manages roster, invites, roles, and settings.',
+    'coach': 'Staff role that creates sessions/classes, uploads video, and adds notes.',
+    'client': 'End user who watches sessions and classes, adds notes, and tracks progress.',
+    'note': 'A text annotation pinned to a specific timestamp on the video timeline.',
+    'tag': 'A label for organizing sessions and classes (e.g. form-review, competition).',
+    'api token': 'A secret key (kn_...) for authenticating scripts against the API.',
+  };
+
+  function addGlossaryTooltips(container) {
+    const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+    const replacements = [];
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      if (node.parentElement.closest('.glossary-term, .hint, h1, h2, h3, a, code, pre, .term-tooltip')) continue;
+      for (const [term, def] of Object.entries(GLOSSARY_TERMS)) {
+        const re = new RegExp(`\\b(${term})\\b`, 'i');
+        const match = node.textContent.match(re);
+        if (match) {
+          replacements.push({ node, term: match[1], def, index: match.index });
+          break; // One tooltip per text node
+        }
+      }
+    }
+    replacements.forEach(({ node, term, def, index }) => {
+      const before = node.textContent.slice(0, index);
+      const after = node.textContent.slice(index + term.length);
+      const span = document.createElement('span');
+      span.className = 'term-tooltip';
+      span.tabIndex = 0;
+      span.textContent = term;
+      const popup = document.createElement('span');
+      popup.className = 'term-tooltip-popup';
+      popup.textContent = def;
+      span.appendChild(popup);
+      const parent = node.parentNode;
+      if (before) parent.insertBefore(document.createTextNode(before), node);
+      parent.insertBefore(span, node);
+      if (after) parent.insertBefore(document.createTextNode(after), node);
+      parent.removeChild(node);
+    });
   }
 
   /* ── SUPPORT CHATBOT ────────────────────────────────── */
