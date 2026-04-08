@@ -577,11 +577,17 @@
       text-decoration: none; transition: top .15s var(--ease);
     }
     .skip-link:focus { top: 8px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
 
     /* ── PRINT STYLES ─── */
     @media print {
       .header, .sidebar, .toc, #back-top, #toast, #progress-bar,
-      .footer-nav, .skip-link, .overlay, .menu-btn, .copy-btn { display: none !important; }
+      .footer-nav, .skip-link, .overlay, .menu-btn, .copy-btn,
+      .chatbot-fab, .chatbot-panel, .mobile-nav, .tour-overlay,
+      .kbd-modal-overlay, .offline-banner, .page-feedback,
+      .article-actions, .bookmark-btn, .share-btn, .print-btn,
+      .heading-anchor, .wizard-feedback, .wizard-escalate,
+      .wizard-restart, .checklist { display: none !important; }
       .layout { margin-left: 0 !important; }
       .content-with-toc { padding: 0 !important; }
       body { background: #fff; color: #111; font-size: 12pt; }
@@ -1155,8 +1161,10 @@
       color: var(--text-secondary); padding: 4px 8px;
       border-radius: var(--radius-sm); font-size: .75rem; font-weight: 600;
       cursor: pointer; transition: all var(--dur); flex-shrink: 0;
+      min-width: 32px; text-align: center;
     }
     .lang-toggle:hover { color: var(--text-primary); border-color: var(--accent); }
+    .lang-toggle.es { background: var(--accent-soft); border-color: var(--accent-border); color: var(--accent); }
 
     /* ── STEP TIPS ─── */
     .step-tips { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
@@ -2127,7 +2135,7 @@
 <h1>Error message lookup</h1>
 <p>Paste the error message or describe what you see, and we'll find the relevant help.</p>
 <div class="error-lookup">
-  <input class="error-input" id="errorInput" placeholder="e.g. 403, cannot be played, black screen..." oninput="lookupError(this.value)" autocomplete="off">
+  <input class="error-input" id="errorInput" placeholder="e.g. 403, cannot be played, black screen..." oninput="lookupError(this.value)" autocomplete="off" aria-label="Paste error message or describe issue">
   <div class="error-results" id="errorResults"></div>
 </div>
 <div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div>Can't find your error? Email <a href="mailto:support@kaynos.net">support@kaynos.net</a> with a screenshot and we'll help.</div></div>`},
@@ -2138,10 +2146,14 @@
 <h1>Contact support</h1>
 <p>Fill out the form below and we'll copy a formatted message for you to send to <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</p>
 <div class="contact-form" id="contactForm">
-  <input class="contact-field" id="cfName" placeholder="Your name">
-  <input class="contact-field" id="cfEmail" placeholder="Email address on your account">
-  <input class="contact-field" id="cfSubject" placeholder="Subject (e.g. Upload stuck, Can't log in)">
-  <textarea class="contact-field" id="cfBody" rows="5" placeholder="Describe what happened, what you expected, and any error messages you saw..."></textarea>
+  <label for="cfName" class="sr-only">Your name</label>
+  <input class="contact-field" id="cfName" placeholder="Your name" aria-label="Your name">
+  <label for="cfEmail" class="sr-only">Email</label>
+  <input class="contact-field" id="cfEmail" placeholder="Email address on your account" type="email" aria-label="Email address">
+  <label for="cfSubject" class="sr-only">Subject</label>
+  <input class="contact-field" id="cfSubject" placeholder="Subject (e.g. Upload stuck, Can't log in)" aria-label="Subject">
+  <label for="cfBody" class="sr-only">Description</label>
+  <textarea class="contact-field" id="cfBody" rows="5" placeholder="Describe what happened, what you expected, and any error messages you saw..." aria-label="Description"></textarea>
   <button class="contact-submit" onclick="submitContact()">Copy to clipboard &amp; open email</button>
 </div>
 <div class="hint hint-info"><div class="hint-icon">\${IC.info}</div><div><strong>Response time:</strong> Usually same day on business days. Include your account name and browser for faster diagnosis.</div></div>
@@ -2209,12 +2221,12 @@
 <div class="calc-wrap">
   <div class="calc-row">
     <span class="calc-label">File size</span>
-    <input class="calc-input" id="calcSize" type="number" placeholder="500" min="1" oninput="calcUpload()">
+    <input class="calc-input" id="calcSize" type="number" placeholder="500" min="1" oninput="calcUpload()" aria-label="File size in MB">
     <span class="calc-unit">MB</span>
   </div>
   <div class="calc-row">
     <span class="calc-label">Upload speed</span>
-    <input class="calc-input" id="calcSpeed" type="number" placeholder="25" min="1" oninput="calcUpload()">
+    <input class="calc-input" id="calcSpeed" type="number" placeholder="25" min="1" oninput="calcUpload()" aria-label="Upload speed in Mbps">
     <span class="calc-unit">Mbps</span>
   </div>
   <div class="calc-result" id="calcResult"></div>
@@ -2431,14 +2443,14 @@
       if (bookmarks.length) {
         html += '<div class="sidebar-section"><div class="sidebar-section-title">' + IC.bookmark + ' Bookmarks</div><div class="sidebar-links">';
         bookmarks.forEach(p => {
-          if (PAGES[p]) html += `<a class="sidebar-link" tabindex="0" data-page="${p}" onclick="navigate('${p}')" onkeydown="if(event.key==='Enter')navigate('${p}')"><span class="sl-text">${PAGES[p].title}</span></a>`;
+          if (PAGES[p]) html += `<a class="sidebar-link" href="#${p}" tabindex="0" data-page="${p}" onclick="navigate('${p}');return false" onkeydown="if(event.key==='Enter'){navigate('${p}');return false}"><span class="sl-text">${PAGES[p].title}</span></a>`;
         });
         html += '</div></div>';
       }
       if (recent.length) {
         html += '<div class="sidebar-section"><div class="sidebar-section-title">' + IC.clock + ' Recent</div><div class="sidebar-links">';
         recent.slice(0, 5).forEach(p => {
-          if (PAGES[p]) html += `<a class="sidebar-link" tabindex="0" data-page="${p}" onclick="navigate('${p}')" onkeydown="if(event.key==='Enter')navigate('${p}')"><span class="sl-text">${PAGES[p].title}</span></a>`;
+          if (PAGES[p]) html += `<a class="sidebar-link" href="#${p}" tabindex="0" data-page="${p}" onclick="navigate('${p}');return false" onkeydown="if(event.key==='Enter'){navigate('${p}');return false}"><span class="sl-text">${PAGES[p].title}</span></a>`;
         });
         html += '</div></div>';
       }
@@ -2454,7 +2466,7 @@
       g.pages.forEach(p => {
         const isRead = readPages.includes(p);
         const badge = (p === 'whats-new' && hasNewUpdates()) ? '<span class="new-badge" title="New updates"></span>' : '';
-        html += `<a class="sidebar-link" tabindex="0" data-page="${p}" onclick="navigate('${p}')" onkeydown="if(event.key==='Enter')navigate('${p}')"><span class="sl-text">${PAGES[p].title}${badge}</span>${isRead ? '<span class="read-dot" title="Read"></span>' : ''}</a>`;
+        html += `<a class="sidebar-link" href="#${p}" tabindex="0" data-page="${p}" onclick="navigate('${p}');return false" onkeydown="if(event.key==='Enter'){navigate('${p}');return false}"><span class="sl-text">${PAGES[p].title}${badge}</span>${isRead ? '<span class="read-dot" title="Read"></span>' : ''}</a>`;
       });
       html += '</div></div>';
     });
@@ -2531,7 +2543,7 @@
       const sectionFirst = sectionGroup ? sectionGroup.pages[0] : 'welcome';
       const bc = document.createElement('div');
       bc.className = 'breadcrumb';
-      bc.innerHTML = `<a onclick="navigate('welcome')">Help Center</a><span class="breadcrumb-sep">›</span><a onclick="navigate('${sectionFirst}')">${page.section}</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">${page.title}</span>`;
+      bc.innerHTML = `<a href="#welcome" onclick="navigate('welcome');return false">Help Center</a><span class="breadcrumb-sep">›</span><a href="#${sectionFirst}" onclick="navigate('${sectionFirst}');return false">${page.section}</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">${page.title}</span>`;
       pc.prepend(bc);
     }
 
@@ -2703,11 +2715,12 @@
       e.preventDefault();
       srIdx = Math.min(srIdx + 1, items.length - 1);
       items.forEach((el, i) => el.classList.toggle('focused', i === srIdx));
-      if (items[srIdx]) items[srIdx].scrollIntoView({ block: 'nearest' });
+      if (items[srIdx]) { items[srIdx].scrollIntoView({ block: 'nearest' }); document.getElementById('searchInput').setAttribute('aria-activedescendant', 'sr-' + srIdx); }
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
       srIdx = Math.max(srIdx - 1, -1);
       items.forEach((el, i) => el.classList.toggle('focused', i === srIdx));
+      document.getElementById('searchInput').setAttribute('aria-activedescendant', srIdx >= 0 ? 'sr-' + srIdx : '');
     } else if (e.key === 'Enter' && srIdx >= 0 && items[srIdx]) {
       navigate(items[srIdx].dataset.page);
     } else if (e.key === 'Escape') {
@@ -3234,15 +3247,18 @@
     div.className = 'wizard-step';
 
     if (step.result) {
-      const shareUrl = getWizardShareLink(stepId);
       div.innerHTML = `<div class="wizard-result">
         <p><strong>${step.title}</strong></p>
         <p>${step.body}</p>
         <p><a style="color:var(--accent);font-weight:500;cursor:pointer" onclick="navigate('${step.page}')">Read full guide: ${PAGES[step.page].title} →</a></p>
-        <p style="margin-top:8px"><a style="color:var(--text-tertiary);font-size:.75rem;cursor:pointer" onclick="navigator.clipboard.writeText('${shareUrl}').then(()=>showToast('Link copied'))">${IC.link} Copy shareable link</a></p>
+        <p style="margin-top:8px"><a style="color:var(--text-tertiary);font-size:.75rem;cursor:pointer" onclick="copyWizardLink('${stepId}')">${IC.link} Copy shareable link</a></p>
       </div>`;
+      const restartBtn = document.createElement('button');
+      restartBtn.className = 'wizard-restart';
+      restartBtn.textContent = '← Start over';
+      restartBtn.onclick = () => renderWizard('start');
+      div.appendChild(restartBtn);
       addWizardEscalation(div, stepId);
-      div.innerHTML += `<button class="wizard-restart" onclick="renderWizard('start')">← Start over</button>`;
     } else {
       let html = `<div class="wizard-question">${step.q}</div><div class="wizard-options">`;
       step.opts.forEach(o => {
@@ -3428,7 +3444,9 @@
   function toggleLang() {
     currentLang = currentLang === 'en' ? 'es' : 'en';
     localStorage.setItem('lang', currentLang);
-    document.getElementById('langToggle').textContent = currentLang.toUpperCase();
+    const lt = document.getElementById('langToggle');
+    lt.textContent = currentLang.toUpperCase();
+    lt.classList.toggle('es', currentLang === 'es');
     const cur = (location.hash.slice(1).split(':')[0]) || 'welcome';
     navigate(cur);
   }
@@ -3436,6 +3454,10 @@
   function getPageContent(pageId) {
     if (currentLang === 'es' && ES_TRANSLATIONS[pageId]) {
       return { ...PAGES[pageId], ...ES_TRANSLATIONS[pageId] };
+    }
+    if (currentLang === 'es' && !ES_TRANSLATIONS[pageId] && PAGES[pageId]) {
+      // Untranslated page — show English with note
+      return PAGES[pageId];
     }
     return PAGES[pageId];
   }
@@ -3465,6 +3487,9 @@
   /* ── SHAREABLE WIZARD LINKS ────────────────────────── */
   function getWizardShareLink(stepId) {
     return location.origin + location.pathname + '#troubleshoot:wizard-' + stepId;
+  }
+  function copyWizardLink(stepId) {
+    navigator.clipboard.writeText(getWizardShareLink(stepId)).then(() => showToast('Link copied'));
   }
 
   /* ── PRINT / EXPORT ────────────────────────────────── */
@@ -3724,6 +3749,7 @@
   }
   // Language init
   document.getElementById('langToggle').textContent = currentLang.toUpperCase();
+  document.getElementById('langToggle').classList.toggle('es', currentLang === 'es');
 
   // First-time onboarding
   if (isFirstVisit()) {
