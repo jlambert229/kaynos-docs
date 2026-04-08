@@ -1020,6 +1020,99 @@
     }
     .contact-submit:hover { background: var(--accent-hover); }
 
+    /* ── SPEED CALCULATOR ─── */
+    .calc-wrap { margin-bottom: 24px; }
+    .calc-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+    .calc-label { font-size: .8125rem; color: var(--text-secondary); min-width: 80px; }
+    .calc-input {
+      width: 120px; padding: 7px 12px;
+      border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
+      background: var(--bg-secondary); color: var(--text-primary);
+      font-family: var(--font-body); font-size: .875rem; outline: none;
+      transition: border-color var(--dur);
+    }
+    .calc-input:focus { border-color: var(--accent); }
+    .calc-unit { font-size: .8125rem; color: var(--text-tertiary); }
+    .calc-result {
+      padding: 14px 16px; background: var(--accent-soft);
+      border: 1px solid var(--accent-border); border-radius: var(--radius-sm);
+      font-size: .9375rem; font-weight: 600; color: var(--text-primary);
+      display: none;
+    }
+    .calc-result.show { display: block; }
+
+    /* ── COMPARISON TABLE ─── */
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+    @media (max-width: 520px) { .compare-grid { grid-template-columns: 1fr; } }
+    .compare-card {
+      padding: 18px; background: var(--bg-elevated);
+      border: 1px solid var(--border-strong); border-radius: var(--radius);
+    }
+    .compare-card h3 { font-size: 1rem; margin-bottom: 8px; color: var(--text-primary); }
+    .compare-card p { font-size: .8125rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px; }
+    .compare-card ul { padding-left: 18px; margin: 0; }
+    .compare-card li { font-size: .8125rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 4px; }
+    .compare-label {
+      display: inline-block; font-size: .6875rem; font-weight: 600;
+      padding: 2px 8px; border-radius: 9999px; margin-bottom: 10px;
+      text-transform: uppercase; letter-spacing: .05em;
+    }
+    .compare-label.private { background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent-border); }
+    .compare-label.shared { background: var(--success-soft); color: var(--success); border: 1px solid rgba(64,192,87,.28); }
+
+    /* ── PREFLIGHT CHECKLIST ─── */
+    .preflight { margin-bottom: 24px; }
+    .preflight-item {
+      display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      margin-bottom: 6px; font-size: .875rem; color: var(--text-secondary);
+      cursor: pointer; transition: all var(--dur); user-select: none;
+    }
+    .preflight-item:hover { border-color: var(--accent); background: var(--bg-hover); }
+    .preflight-item.checked { color: var(--text-tertiary); }
+    .preflight-item.checked .pf-text { text-decoration: line-through; }
+    .preflight-box {
+      width: 18px; height: 18px; border-radius: 4px;
+      border: 2px solid var(--border-strong); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: all var(--dur);
+    }
+    .preflight-item.checked .preflight-box {
+      background: var(--success); border-color: var(--success); color: #fff;
+    }
+    .preflight-item.checked .preflight-box svg { width: 10px; height: 10px; }
+    .preflight-status {
+      padding: 12px 16px; border-radius: var(--radius-sm);
+      font-size: .875rem; font-weight: 500; margin-top: 8px; display: none;
+    }
+    .preflight-status.ready { display: block; background: var(--success-soft); color: var(--success); border: 1px solid rgba(64,192,87,.28); }
+
+    /* ── BROWSER CHECK ─── */
+    .browser-result {
+      padding: 14px 16px; border-radius: var(--radius-sm);
+      font-size: .875rem; margin-bottom: 20px; display: flex;
+      align-items: center; gap: 10px;
+    }
+    .browser-result svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .browser-result.good { background: var(--success-soft); color: var(--success); border: 1px solid rgba(64,192,87,.28); }
+    .browser-result.warn { background: var(--warning-soft); color: var(--warning); border: 1px solid rgba(253,126,20,.28); }
+
+    /* ── SHORTCUT CARD ─── */
+    .shortcut-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 24px; }
+    @media (max-width: 520px) { .shortcut-grid { grid-template-columns: 1fr; } }
+    .shortcut-card {
+      padding: 10px 14px; background: var(--bg-elevated);
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: .8125rem;
+    }
+    .shortcut-card span { color: var(--text-secondary); }
+    .shortcut-card kbd {
+      font-family: var(--font-mono); font-size: .75rem; color: var(--text-tertiary);
+      border: 1px solid var(--border-strong); border-radius: 4px;
+      padding: 2px 7px; background: var(--bg-tertiary);
+    }
+
     @keyframes pulse-ring {
       0% { box-shadow: 0 0 0 0 rgba(33,132,243,.4); }
       70% { box-shadow: 0 0 0 8px rgba(33,132,243,0); }
@@ -1971,6 +2064,125 @@
   </div>
 </div>`},
 
+    "session-vs-class": {
+      title: "Session vs Class", section: "Sessions & Classes",
+      content: `
+<h1>Session vs Class</h1>
+<p>The most common question new users have: when do I create a session, and when do I create a class?</p>
+<div class="compare-grid">
+  <div class="compare-card">
+    <div class="compare-label private">Private</div>
+    <h3>Session</h3>
+    <p>One-on-one content for a single client.</p>
+    <ul>
+      <li>Assigned to one specific client</li>
+      <li>Only that client, the creator, and admins can see it</li>
+      <li>Private lessons, individual feedback, competition footage</li>
+      <li>Notes stay between coach and client</li>
+    </ul>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label shared">Shared</div>
+    <h3>Class</h3>
+    <p>Account-wide content for everyone.</p>
+    <ul>
+      <li>Visible to all members, coaches, and admins</li>
+      <li>Group sessions, workshops, technique breakdowns</li>
+      <li>Great for shared curriculum and team training</li>
+      <li>Everyone can leave notes</li>
+    </ul>
+  </div>
+</div>
+<h2>Quick decision</h2>
+<ul>
+<li><strong>Is this for one person?</strong> → Create a <strong>session</strong></li>
+<li><strong>Should everyone see it?</strong> → Create a <strong>class</strong></li>
+</ul>
+<div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div>Step-by-step guides: <a onclick="navigate('creating-sessions')">Creating a session</a> · <a onclick="navigate('creating-classes')">Creating a class</a></div></div>`},
+
+    "upload-checklist": {
+      title: "Upload pre-flight checklist", section: "Video",
+      content: `
+<h1>Upload pre-flight checklist</h1>
+<p>Run through this before uploading to avoid common issues.</p>
+<div class="preflight" id="preflightList"></div>
+<div class="hint hint-info"><div class="hint-icon">\${IC.info}</div><div>Full format details: <a onclick="navigate('formats')">Supported formats and limits</a>. Problems? <a onclick="navigate('upload-issues')">Video upload problems</a>.</div></div>`},
+
+    "speed-calculator": {
+      title: "Upload time calculator", section: "Video",
+      content: `
+<h1>Upload time calculator</h1>
+<p>Estimate how long your video will take to upload based on file size and internet speed.</p>
+<div class="calc-wrap">
+  <div class="calc-row">
+    <span class="calc-label">File size</span>
+    <input class="calc-input" id="calcSize" type="number" placeholder="500" min="1" oninput="calcUpload()">
+    <span class="calc-unit">MB</span>
+  </div>
+  <div class="calc-row">
+    <span class="calc-label">Upload speed</span>
+    <input class="calc-input" id="calcSpeed" type="number" placeholder="25" min="1" oninput="calcUpload()">
+    <span class="calc-unit">Mbps</span>
+  </div>
+  <div class="calc-result" id="calcResult"></div>
+</div>
+<div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div>Don't know your upload speed? Go to <a href="https://fast.com" target="_blank" rel="noopener">fast.com</a> — after the download test, click <strong>Show more info</strong> to see your upload speed.</div></div>
+<h2>Tips for faster uploads</h2>
+<ul>
+<li>Use a <strong>wired connection</strong> instead of Wi-Fi when possible</li>
+<li>Pause cloud sync tools (Dropbox, Google Drive, iCloud)</li>
+<li>Upload during off-peak hours for your network</li>
+<li><strong>1080p</strong> is usually enough — 4K files are much larger with little benefit for coaching review</li>
+</ul>`},
+
+    "browser-check": {
+      title: "Browser compatibility", section: "Troubleshooting",
+      content: `
+<h1>Browser compatibility</h1>
+<p>Kaynos works in any modern browser. Here's what yours looks like:</p>
+<div id="browserResult"></div>
+<h2>Recommended browsers</h2>
+<div class="shortcut-grid">
+  <div class="shortcut-card"><span>Chrome (recommended)</span><span style="color:var(--success)">Full support</span></div>
+  <div class="shortcut-card"><span>Firefox</span><span style="color:var(--success)">Full support</span></div>
+  <div class="shortcut-card"><span>Safari</span><span style="color:var(--warning)">Good (MKV may fail)</span></div>
+  <div class="shortcut-card"><span>Edge</span><span style="color:var(--success)">Full support</span></div>
+</div>
+<h2>If something doesn't work</h2>
+<ol>
+<li>Try Chrome — it has the broadest codec and feature support</li>
+<li>Hard refresh: <kbd>Ctrl+Shift+R</kbd> (Windows/Linux) or <kbd>Cmd+Shift+R</kbd> (Mac)</li>
+<li>Clear site data for app.kaynos.net in your browser settings</li>
+<li>Disable ad blockers or strict privacy extensions temporarily</li>
+</ol>
+<div class="hint hint-info"><div class="hint-icon">\${IC.info}</div><div>More troubleshooting: <a onclick="navigate('performance')">Performance and loading</a> · <a onclick="navigate('playback-issues')">Video playback problems</a></div></div>`},
+
+    "player-shortcuts": {
+      title: "Video player shortcuts", section: "Video",
+      content: `
+<h1>Video player shortcuts</h1>
+<p>Use these keyboard shortcuts while watching video in the Kaynos player.</p>
+<h2>Playback</h2>
+<div class="shortcut-grid">
+  <div class="shortcut-card"><span>Play / Pause</span><kbd>Space</kbd></div>
+  <div class="shortcut-card"><span>Play / Pause</span><kbd>K</kbd></div>
+  <div class="shortcut-card"><span>Skip back</span><kbd>J</kbd></div>
+  <div class="shortcut-card"><span>Skip forward</span><kbd>L</kbd></div>
+  <div class="shortcut-card"><span>Fullscreen</span><kbd>F</kbd></div>
+  <div class="shortcut-card"><span>Pause + add note</span><kbd>N</kbd></div>
+</div>
+<h2>Help center shortcuts</h2>
+<div class="shortcut-grid">
+  <div class="shortcut-card"><span>Search docs</span><div><kbd>⌘</kbd> <kbd>K</kbd></div></div>
+  <div class="shortcut-card"><span>Previous page</span><kbd>←</kbd></div>
+  <div class="shortcut-card"><span>Next page</span><kbd>→</kbd></div>
+  <div class="shortcut-card"><span>Bookmark page</span><kbd>B</kbd></div>
+  <div class="shortcut-card"><span>Back to top</span><kbd>T</kbd></div>
+  <div class="shortcut-card"><span>Go home</span><kbd>H</kbd></div>
+  <div class="shortcut-card"><span>All shortcuts</span><kbd>?</kbd></div>
+</div>
+<div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div>Full playback guide: <a onclick="navigate('playback')">Watching and reviewing</a></div></div>`},
+
     "whats-new": {
       title: "What's new", section: "",
       content: `
@@ -2007,11 +2219,11 @@
   const NAV = [
     { section: "", pages: ["welcome", "whats-new"] },
     { section: "Getting Started", pages: ["setup", "inviting-members", "first-upload", "roles", "glossary"] },
-    { section: "Video", pages: ["uploading", "playback", "formats", "storage"] },
-    { section: "Sessions & Classes", pages: ["creating-sessions", "creating-classes", "notes", "tags", "progress"] },
+    { section: "Video", pages: ["uploading", "playback", "player-shortcuts", "formats", "upload-checklist", "speed-calculator", "storage"] },
+    { section: "Sessions & Classes", pages: ["session-vs-class", "creating-sessions", "creating-classes", "notes", "tags", "progress"] },
     { section: "Account Management", pages: ["managing-members", "profile", "notifications"] },
     { section: "Developers", pages: ["developer-api"] },
-    { section: "Troubleshooting", pages: ["troubleshoot", "error-lookup", "upload-issues", "playback-issues", "login-issues", "email-issues", "performance", "mobile"] },
+    { section: "Troubleshooting", pages: ["troubleshoot", "error-lookup", "browser-check", "upload-issues", "playback-issues", "login-issues", "email-issues", "performance", "mobile"] },
     { section: "FAQ", pages: ["faq", "contact"] }
   ];
 
@@ -2564,6 +2776,8 @@
     renderArticleMeta(pc, pageId);
     if (pageId === 'welcome') renderChecklist(pc);
     if (pageId === 'troubleshoot') renderWizard('start');
+    if (pageId === 'upload-checklist') renderPreflight();
+    if (pageId === 'browser-check') checkBrowser();
     renderFaqAccordion(pc, pageId);
     addGlossaryTooltips(pc);
     renderRelated(pc, pageId);
@@ -2952,6 +3166,81 @@
       if (after) parent.insertBefore(document.createTextNode(after), node);
       parent.removeChild(node);
     });
+  }
+
+  /* ── UPLOAD TIME CALCULATOR ─────────────────────────── */
+  function calcUpload() {
+    const sizeMB = parseFloat(document.getElementById('calcSize')?.value);
+    const speedMbps = parseFloat(document.getElementById('calcSpeed')?.value);
+    const el = document.getElementById('calcResult');
+    if (!el || !sizeMB || !speedMbps || sizeMB <= 0 || speedMbps <= 0) {
+      if (el) el.classList.remove('show');
+      return;
+    }
+    const seconds = (sizeMB * 8) / speedMbps;
+    let timeStr;
+    if (seconds < 60) timeStr = Math.round(seconds) + ' seconds';
+    else if (seconds < 3600) timeStr = Math.round(seconds / 60) + ' minutes';
+    else timeStr = (seconds / 3600).toFixed(1) + ' hours';
+    el.textContent = `Estimated upload time: ~${timeStr}`;
+    el.classList.add('show');
+  }
+
+  /* ── UPLOAD PREFLIGHT CHECKLIST ────────────────────── */
+  const PREFLIGHT = [
+    { id: 'pf-format', text: 'File is MP4, MOV, WebM, or MKV' },
+    { id: 'pf-size', text: 'File is under 5 GB' },
+    { id: 'pf-landscape', text: 'Recorded in landscape orientation' },
+    { id: 'pf-1080', text: 'Resolution is 1080p or lower (recommended)' },
+    { id: 'pf-codec', text: 'Video codec is H.264 with AAC audio (if you had a choice)' },
+    { id: 'pf-trim', text: 'Trimmed dead air at start and end' },
+    { id: 'pf-wifi', text: 'Connected to stable Wi-Fi or wired internet' },
+    { id: 'pf-sync', text: 'Paused heavy sync tools (Dropbox, Google Drive)' },
+  ];
+
+  function renderPreflight() {
+    const container = document.getElementById('preflightList');
+    if (!container) return;
+    const checked = JSON.parse(sessionStorage.getItem('preflight') || '[]');
+    container.innerHTML = '';
+    PREFLIGHT.forEach(item => {
+      const isDone = checked.includes(item.id);
+      const el = document.createElement('div');
+      el.className = 'preflight-item' + (isDone ? ' checked' : '');
+      el.innerHTML = `<div class="preflight-box">${isDone ? IC.check : ''}</div><span class="pf-text">${item.text}</span>`;
+      el.onclick = () => {
+        let c = JSON.parse(sessionStorage.getItem('preflight') || '[]');
+        if (c.includes(item.id)) c = c.filter(x => x !== item.id);
+        else c.push(item.id);
+        sessionStorage.setItem('preflight', JSON.stringify(c));
+        renderPreflight();
+      };
+      container.appendChild(el);
+    });
+    // Ready status
+    if (checked.length === PREFLIGHT.length) {
+      const status = document.createElement('div');
+      status.className = 'preflight-status ready';
+      status.textContent = 'All checks passed — you\'re ready to upload!';
+      container.appendChild(status);
+    }
+  }
+
+  /* ── BROWSER CHECK ─────────────────────────────────── */
+  function checkBrowser() {
+    const el = document.getElementById('browserResult');
+    if (!el) return;
+    const ua = navigator.userAgent;
+    let browser = 'Unknown';
+    let status = 'warn';
+    let msg = '';
+    if (ua.includes('Chrome') && !ua.includes('Edg')) { browser = 'Chrome'; status = 'good'; msg = 'Full support — recommended browser.'; }
+    else if (ua.includes('Firefox')) { browser = 'Firefox'; status = 'good'; msg = 'Full support — great choice.'; }
+    else if (ua.includes('Edg')) { browser = 'Edge'; status = 'good'; msg = 'Full support.'; }
+    else if (ua.includes('Safari')) { browser = 'Safari'; status = 'warn'; msg = 'Good support. MKV files may not play — use MP4 instead.'; }
+    else { msg = 'Unknown browser. If you run into issues, try Chrome.'; }
+    el.className = 'browser-result ' + status;
+    el.innerHTML = `${status === 'good' ? IC.check : IC.warn} <div><strong>You're using ${browser}.</strong> ${msg}</div>`;
   }
 
   /* ── SUPPORT CHATBOT ────────────────────────────────── */
