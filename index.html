@@ -395,7 +395,8 @@
       margin-bottom: 20px; font-size: .875rem;
       display: flex; gap: 10px; line-height: 1.65;
     }
-    .hint-icon { flex-shrink: 0; font-size: 15px; margin-top: 1px; line-height: 1.4; }
+    .hint-icon { flex-shrink: 0; margin-top: 2px; line-height: 1; display: flex; align-items: center; }
+    .hint-icon svg { width: 16px; height: 16px; }
     .hint-warning  { background: var(--warning-soft); border: 1px solid rgba(253,126,20,.28); }
     .hint-info     { background: var(--accent-soft);  border: 1px solid var(--accent-border); }
     .hint-tip      { background: var(--success-soft); border: 1px solid rgba(64,192,87,.28); }
@@ -417,7 +418,8 @@
       box-shadow: 0 0 0 1px rgba(33,132,243,.12), var(--shadow);
       text-decoration: none; transform: translateY(-1px);
     }
-    .quick-link .ql-icon { font-size: 18px; margin-bottom: 6px; line-height: 1; }
+    .quick-link .ql-icon { margin-bottom: 6px; line-height: 1; display: flex; color: var(--accent); }
+    .quick-link .ql-icon svg { width: 22px; height: 22px; }
     .quick-link .ql-title { font-weight: 500; color: var(--text-primary); }
     .quick-link .ql-desc { font-size: .8125rem; color: var(--text-secondary); line-height: 1.4; }
 
@@ -531,8 +533,9 @@
     .support-item-icon {
       width: 28px; height: 28px; background: var(--bg-secondary);
       border-radius: var(--radius-sm); display: flex; align-items: center;
-      justify-content: center; flex-shrink: 0; color: var(--accent); font-size: 13px;
+      justify-content: center; flex-shrink: 0; color: var(--accent);
     }
+    .support-item-icon svg { width: 14px; height: 14px; }
     .support-item strong { color: var(--text-primary); font-weight: 500; }
     .support-item a { color: var(--accent); font-weight: 500; }
 
@@ -740,7 +743,9 @@
 
     <div class="header-spacer"></div>
 
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode" id="themeToggle" title="Toggle theme">🌙</button>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode" id="themeToggle" title="Toggle theme">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" id="themeIcon"><path d="M8 1v1M8 14v1M1 8h1M14 8h1M3.1 3.1l.7.7M12.2 12.2l.7.7M12.9 3.1l-.7.7M3.8 12.2l-.7.7"/><circle cx="8" cy="8" r="3"/></svg>
+    </button>
 
     <a href="https://www.kaynos.net/" class="header-app-link" target="_blank" rel="noopener noreferrer">
       <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -810,6 +815,24 @@
   </div>
 
   <script>
+  /* ── SVG ICONS ────────────────────────────────────────────── */
+  const IC = {
+    info:     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6.5"/><line x1="8" y1="7" x2="8" y2="11"/><circle cx="8" cy="5" r=".5" fill="currentColor" stroke="none"/></svg>',
+    tip:      '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 13h4M6.5 14.5h3M8 1.5a4.5 4.5 0 012.5 8.2V11h-5V9.7A4.5 4.5 0 018 1.5z"/></svg>',
+    warn:     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 1.5L1 14h14L8 1.5z"/><line x1="8" y1="6" x2="8" y2="10"/><circle cx="8" cy="12" r=".5" fill="currentColor" stroke="none"/></svg>',
+    danger:   '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6.5"/><line x1="5.5" y1="5.5" x2="10.5" y2="10.5"/><line x1="10.5" y1="5.5" x2="5.5" y2="10.5"/></svg>',
+    rocket:   '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14s-2-2-2-5c0-3 2-7 2-7s2 4 2 7-2 5-2 5z"/><path d="M5.5 10.5L3 12l1-3"/><path d="M10.5 10.5L13 12l-1-3"/><circle cx="8" cy="7" r="1"/></svg>',
+    video:    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="3.5" width="9" height="9" rx="1.5"/><path d="M10.5 6.5L14.5 4v8l-4-2.5"/></svg>',
+    alert:    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M8 1.5L1 14h14L8 1.5z"/><line x1="8" y1="6" x2="8" y2="10"/><circle cx="8" cy="12" r=".5" fill="currentColor" stroke="none"/></svg>',
+    play:     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.5"/><polygon points="6.5,5 11.5,8 6.5,11" fill="currentColor" stroke="none"/></svg>',
+    users:    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="5" r="2.5"/><path d="M1.5 14.5c0-2.5 2-4.5 4.5-4.5s4.5 2 4.5 4.5"/><circle cx="11" cy="5.5" r="2"/><path d="M11 9c2 0 3.5 1.5 3.5 3.5"/></svg>',
+    chat:     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2.5h12a.5.5 0 01.5.5v7a.5.5 0 01-.5.5H5L2 13V3a.5.5 0 01.5-.5z"/></svg>',
+    sparkle:  '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1v3M8 12v3M1 8h3M12 8h3M3.5 3.5l2 2M10.5 10.5l2 2M12.5 3.5l-2 2M5.5 10.5l-2 2"/></svg>',
+    wrench:   '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2a4 4 0 00-3.8 5.2L2 11.5V14h2.5l4.3-4.2A4 4 0 1010 2z"/></svg>',
+    mail:     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="3" width="13" height="10" rx="1.5"/><path d="M1.5 4.5L8 9l6.5-4.5"/></svg>',
+    check:    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3.5,8.5 6.5,11.5 12.5,4.5"/></svg>',
+  };
+
   /* ── PAGE DATA ─────────────────────────────────────────────── */
   const PAGES = {
     welcome: {
@@ -821,48 +844,48 @@
   <p>Video review for coaches — publish sessions and classes, add timestamped notes, and members watch when it fits their schedule.</p>
 </div>
 <div class="hint hint-info">
-  <div class="hint-icon">ℹ️</div>
+  <div class="hint-icon">${IC.info}</div>
   <div><strong>You're reading the help center.</strong> Sign in to the app at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> to upload video, manage your account, and use in-app support.</div>
 </div>
 <h2>Jump in</h2>
 <div class="quick-links">
   <a class="quick-link" href="#setup" onclick="navigate('setup');return false">
-    <div class="ql-icon">🚀</div>
+    <div class="ql-icon">${IC.rocket}</div>
     <div class="ql-title">Setting up your account</div>
     <div class="ql-desc">First login, password, Admin area</div>
   </a>
   <a class="quick-link" href="#first-upload" onclick="navigate('first-upload');return false">
-    <div class="ql-icon">📹</div>
+    <div class="ql-icon">${IC.video}</div>
     <div class="ql-title">Your first video upload</div>
     <div class="ql-desc">From phone or computer to a session or class</div>
   </a>
   <a class="quick-link" href="#upload-issues" onclick="navigate('upload-issues');return false">
-    <div class="ql-icon">⚠️</div>
+    <div class="ql-icon">${IC.alert}</div>
     <div class="ql-title">Video upload problems</div>
     <div class="ql-desc">Stuck progress, errors, slow networks</div>
   </a>
   <a class="quick-link" href="#playback-issues" onclick="navigate('playback-issues');return false">
-    <div class="ql-icon">▶️</div>
+    <div class="ql-icon">${IC.play}</div>
     <div class="ql-title">Video playback problems</div>
     <div class="ql-desc">Black screen, buffering, codec issues</div>
   </a>
   <a class="quick-link" href="#inviting-members" onclick="navigate('inviting-members');return false">
-    <div class="ql-icon">👥</div>
+    <div class="ql-icon">${IC.users}</div>
     <div class="ql-title">Inviting your team</div>
     <div class="ql-desc">Invites, roles, roster basics</div>
   </a>
   <a class="quick-link" href="#faq" onclick="navigate('faq');return false">
-    <div class="ql-icon">💬</div>
+    <div class="ql-icon">${IC.chat}</div>
     <div class="ql-title">FAQ</div>
     <div class="ql-desc">Common questions from owners and coaches</div>
   </a>
   <a class="quick-link" href="#whats-new" onclick="navigate('whats-new');return false">
-    <div class="ql-icon">✨</div>
+    <div class="ql-icon">${IC.sparkle}</div>
     <div class="ql-title">What's new</div>
     <div class="ql-desc">Recent updates and improvements</div>
   </a>
   <a class="quick-link" href="#developer-api" onclick="navigate('developer-api');return false">
-    <div class="ql-icon">🔧</div>
+    <div class="ql-icon">${IC.wrench}</div>
     <div class="ql-title">Developer API</div>
     <div class="ql-desc">Tokens, scopes, and automation</div>
   </a>
@@ -870,11 +893,11 @@
 <h2>Get in touch</h2>
 <div class="support-card">
   <div class="support-item">
-    <div class="support-item-icon">✉️</div>
+    <div class="support-item-icon">${IC.mail}</div>
     <div><strong>Email:</strong> <a href="mailto:support@kaynos.net">support@kaynos.net</a> — usually same day on business days</div>
   </div>
   <div class="support-item">
-    <div class="support-item-icon">💬</div>
+    <div class="support-item-icon">${IC.chat}</div>
     <div><strong>Chat:</strong> Bottom-right corner in <a href="https://app.kaynos.net" target="_blank" rel="noopener">the app</a> when logged in</div>
   </div>
 </div>`},
@@ -884,7 +907,7 @@
       content: `
 <h1>Setting up your account</h1>
 <p>After signup, login details go to the email you used. Change the temporary password as soon as you're in.</p>
-<div class="hint hint-tip"><div class="hint-icon">💡</div><div>Open the product at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>. Next steps: <a onclick="navigate('inviting-members')">Inviting your team</a> and <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Open the product at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>. Next steps: <a onclick="navigate('inviting-members')">Inviting your team</a> and <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>
 <h2>First login</h2>
 <ol>
 <li>Use the welcome email link or go to <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</li>
@@ -906,7 +929,7 @@
       content: `
 <h1>Inviting your team</h1>
 <p>Members join by email with a temporary password. Admins may invite coaches or clients; coaches may invite clients only. Everything happens in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> under <strong>Admin</strong> or <strong>Clients</strong>.</p>
-<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>Role capabilities are summarized on <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Role capabilities are summarized on <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>
 <h2>Send an invite</h2>
 <ol>
 <li>Go to <strong>Admin</strong> (full roster control) or <strong>Clients</strong> (coaches adding a client).</li>
@@ -915,7 +938,7 @@
 <li>Click <strong>Send Invite</strong>.</li>
 </ol>
 <p>Delivery is usually quick. If nothing arrives, check spam and verify the address for typos.</p>
-<div class="hint hint-warning"><div class="hint-icon">⚠️</div><div>Still missing mail? See <a onclick="navigate('email-issues')">Email and notification issues</a> or contact <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</div></div>
+<div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>Still missing mail? See <a onclick="navigate('email-issues')">Email and notification issues</a> or contact <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</div></div>
 <h2>Who can invite</h2>
 <table><thead><tr><th>Your role</th><th>Can add</th></tr></thead><tbody>
 <tr><td><strong>Admin</strong></td><td>Coaches and clients</td></tr>
@@ -942,7 +965,7 @@
       content: `
 <h1>Your first video upload</h1>
 <p>A <strong>session</strong> is for one assigned client (private lesson, individual review). A <strong>class</strong> is for everyone in your account (group session, shared recording). Upload a file or link Vimeo in either case — create them after you <a href="https://app.kaynos.net" target="_blank" rel="noopener">sign in</a>.</p>
-<div class="hint hint-tip"><div class="hint-icon">💡</div><div>New to the flow? Read <a onclick="navigate('creating-sessions')">Creating a session</a> and <a onclick="navigate('creating-classes')">Creating a class</a>. Limits and codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>New to the flow? Read <a onclick="navigate('creating-sessions')">Creating a session</a> and <a onclick="navigate('creating-classes')">Creating a class</a>. Limits and codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 <h2>Upload a file</h2>
 <ol>
 <li>Create a new session or class, then pick <strong>Upload</strong> for the video source.</li>
@@ -986,14 +1009,14 @@
 <p>Clients access their assigned sessions and all classes, watch video, add notes, and track viewing progress. They cannot upload video or view other clients' private sessions.</p>
 <h2>Change a role</h2>
 <p>Admins only: <strong>Admin</strong> → select the member → role dropdown → save.</p>
-<div class="hint hint-warning"><div class="hint-icon">⚠️</div><div>Downgrading a coach to a client removes the ability to create sessions or upload video. Existing content remains available. For invite rules, see <a onclick="navigate('inviting-members')">Inviting your team</a>.</div></div>`},
+<div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>Downgrading a coach to a client removes the ability to create sessions or upload video. Existing content remains available. For invite rules, see <a onclick="navigate('inviting-members')">Inviting your team</a>.</div></div>`},
 
     uploading: {
       title: "Uploading videos", section: "Video",
       content: `
 <h1>Uploading videos</h1>
 <p>Each session or class uses one source: <strong>Upload</strong> (file from your device), <strong>Vimeo</strong> (embedded link), or <strong>Notes Only</strong> (no video). Upload from <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> when creating or editing.</p>
-<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>Format and size limits: <a onclick="navigate('formats')">Supported formats and limits</a>. Stuck? <a onclick="navigate('upload-issues')">Video upload problems</a>.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Format and size limits: <a onclick="navigate('formats')">Supported formats and limits</a>. Stuck? <a onclick="navigate('upload-issues')">Video upload problems</a>.</div></div>
 <h2>Large files</h2>
 <p>Big uploads are split into chunks and sent with parallel connections. Failed parts retry automatically (up to three times) with exponential backoff.</p>
 <h2>Requirements</h2>
@@ -1006,14 +1029,14 @@
 <p>The UI shows percent complete, current speed, time remaining, and a <strong>Cancel</strong> button if you need to stop.</p>
 <h2>Replace a video</h2>
 <p>Open the session or class, remove the current video with <strong>×</strong>, then upload a replacement. The previous file is deleted from storage.</p>
-<div class="hint hint-danger"><div class="hint-icon">🚫</div><div><strong>Replacing video is destructive.</strong> The old file is deleted from storage with no undo. Archive a copy elsewhere first if you might need it later.</div></div>`},
+<div class="hint hint-danger"><div class="hint-icon">${IC.danger}</div><div><strong>Replacing video is destructive.</strong> The old file is deleted from storage with no undo. Archive a copy elsewhere first if you might need it later.</div></div>`},
 
     playback: {
       title: "Watching and reviewing", section: "Video",
       content: `
 <h1>Watching and reviewing</h1>
 <p>Playback runs entirely in the browser — no separate app install needed. Open recordings at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
-<div class="hint hint-tip"><div class="hint-icon">💡</div><div>Problems playing video? Try <a onclick="navigate('playback-issues')">Video playback problems</a>.</div></div>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Problems playing video? Try <a onclick="navigate('playback-issues')">Video playback problems</a>.</div></div>
 <h2>Playback speed</h2>
 <p>Use <strong>0.5×</strong> through <strong>2×</strong> for slow-motion analysis or faster skimming.</p>
 <h2>Timeline markers</h2>
@@ -1039,12 +1062,12 @@
       content: `
 <h1>Supported formats and limits</h1>
 <p>Use common codecs your devices and browsers handle well. When unsure, export to MP4 (H.264 + AAC). Free converters: <a href="https://handbrake.fr" target="_blank" rel="noopener">HandBrake</a>, <a href="https://www.videolan.org/vlc/" target="_blank" rel="noopener">VLC</a>.</p>
-<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>Where files live and how long they're kept: <a onclick="navigate('storage')">Video storage and retention</a>.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Where files live and how long they're kept: <a onclick="navigate('storage')">Video storage and retention</a>.</div></div>
 <table><thead><tr><th>Format</th><th>Extension</th><th>Support level</th></tr></thead><tbody>
-<tr><td>MP4</td><td><code>.mp4</code></td><td>✅ Recommended default</td></tr>
-<tr><td>MOV</td><td><code>.mov</code></td><td>✅ Supported</td></tr>
-<tr><td>WebM</td><td><code>.webm</code></td><td>✅ Supported</td></tr>
-<tr><td>MKV</td><td><code>.mkv</code></td><td>✅ Supported</td></tr>
+<tr><td>MP4</td><td><code>.mp4</code></td><td>Recommended default</td></tr>
+<tr><td>MOV</td><td><code>.mov</code></td><td>Supported</td></tr>
+<tr><td>WebM</td><td><code>.webm</code></td><td>Supported</td></tr>
+<tr><td>MKV</td><td><code>.mkv</code></td><td>Supported</td></tr>
 </tbody></table>
 <p><strong>MP4</strong> is the most predictable for uploads and playback. MOV from iPhone usually works well.</p>
 <h2>File size</h2>
@@ -1067,7 +1090,7 @@
 <p>Videos are stored in <a href="https://www.backblaze.com/b2/cloud-storage.html" target="_blank" rel="noopener">Backblaze B2</a>, delivered through <a href="https://www.cloudflare.com/application-services/products/cdn/" target="_blank" rel="noopener">Cloudflare</a> CDN. Infrastructure is US-hosted.</p>
 <h2>Retention</h2>
 <p>Video remains available while your account is active. We do not apply an automatic 90-day deletion policy.</p>
-<div class="hint hint-tip"><div class="hint-icon">💡</div><div>Upload limits and codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Upload limits and codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 <h2>Security</h2>
 <ul>
 <li>HTTPS for all data in transit.</li>
@@ -1089,7 +1112,7 @@
 </ol>
 <h2>Who sees it</h2>
 <p>The assigned client, the creator, and admins. Other clients cannot open someone else's private session.</p>
-<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>First upload walkthrough: <a onclick="navigate('first-upload')">Your first video upload</a>. Visibility model: <a onclick="navigate('faq')">FAQ</a>.</div></div>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>First upload walkthrough: <a onclick="navigate('first-upload')">Your first video upload</a>. Visibility model: <a onclick="navigate('faq')">FAQ</a>.</div></div>`},
 
     "creating-classes": {
       title: "Creating a class", section: "Sessions & Classes",
@@ -1105,7 +1128,7 @@
 </ol>
 <h2>Who sees it</h2>
 <p>All members, coaches, and admins in your account. This broad visibility is intentional and differs from a private session.</p>
-<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>Upload options and limits: <a onclick="navigate('uploading')">Uploading videos</a> and <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Upload options and limits: <a onclick="navigate('uploading')">Uploading videos</a> and <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>`},
 
     notes: {
       title: "Notes and timestamps", section: "Sessions & Classes",
@@ -1128,7 +1151,7 @@
 <li>Clients can leave questions on their own sessions for coach follow-up.</li>
 <li>Use the coach filter to quickly review your notes across several recordings.</li>
 </ul>
-<div class="hint hint-tip"><div class="hint-icon">💡</div><div>Playback shortcuts and the full note workflow: <a onclick="navigate('playback')">Watching and reviewing</a>.</div></div>`},
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Playback shortcuts and the full note workflow: <a onclick="navigate('playback')">Watching and reviewing</a>.</div></div>`},
 
     tags: {
       title: "Tags and organization", section: "Sessions & Classes",
@@ -1151,7 +1174,7 @@
 <li>Agree on a shared vocabulary so your whole team uses consistent tags.</li>
 <li>Tags are shared across the account, not private to one person.</li>
 </ul>
-<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>Filter your lists by tag in the app after you <a href="https://app.kaynos.net" target="_blank" rel="noopener">sign in</a>.</div></div>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Filter your lists by tag in the app after you <a href="https://app.kaynos.net" target="_blank" rel="noopener">sign in</a>.</div></div>`},
 
     progress: {
       title: "Progress tracking", section: "Sessions & Classes",
@@ -1170,7 +1193,7 @@
 <p>Coach and admin views show completion and recency. We do not track fine-grained analytics or viewer heatmaps.</p>
 <h2>What we intentionally avoid</h2>
 <p>No invasive watch analytics or third-party ad-style tracking. The product stores only what it needs for resume and high-level completion tracking.</p>
-<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>Roster and access control: <a onclick="navigate('managing-members')">Managing members</a>.</div></div>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Roster and access control: <a onclick="navigate('managing-members')">Managing members</a>.</div></div>`},
 
     "managing-members": {
       title: "Managing members", section: "Account Management",
@@ -1183,7 +1206,7 @@
 <p><strong>Admin</strong> → select the member → role dropdown → save. Changes apply immediately. Details: <a onclick="navigate('roles')">Understanding user roles</a>.</p>
 <h2>Remove access</h2>
 <p><strong>Remove Member</strong> ends their access immediately. Notes they already created remain for history.</p>
-<div class="hint hint-warning"><div class="hint-icon">⚠️</div><div>Removal is immediate — the person loses login access to your account on <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> right away.</div></div>
+<div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>Removal is immediate — the person loses login access to your account on <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> right away.</div></div>
 <h2>Common questions</h2>
 <p><strong>One person, two accounts?</strong> Use a different email address per account. Each account is completely separate.</p>
 <p><strong>Member limits?</strong> The product does not enforce a headcount cap.</p>
@@ -1205,14 +1228,14 @@
 <li>Click <strong>Update Password</strong>.</li>
 </ol>
 <p>Locked out? Ask an admin for a reset, or email <a href="mailto:support@kaynos.net">support@kaynos.net</a>. Login help: <a onclick="navigate('login-issues')">Login and access issues</a>.</p>
-<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>Profile lives in the app: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> → your name in the sidebar (or menu on mobile).</div></div>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Profile lives in the app: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> → your name in the sidebar (or menu on mobile).</div></div>`},
 
     notifications: {
       title: "Email notifications", section: "Account Management",
       content: `
 <h1>Email notifications</h1>
 <p>Email covers new sessions, classes, and onboarding (invites and temporary passwords), but not billing. Toggle preferences under <strong>Profile</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
-<div class="hint hint-tip"><div class="hint-icon">💡</div><div>Delivery problems? See <a onclick="navigate('email-issues')">Email and notification issues</a>.</div></div>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Delivery problems? See <a onclick="navigate('email-issues')">Email and notification issues</a>.</div></div>
 <h2>Typical messages</h2>
 <ul>
 <li>New session assigned (clients)</li>
@@ -1234,7 +1257,7 @@
       content: `
 <h1>Video upload problems</h1>
 <p>Large uploads depend on stable internet and a supported format. Work through the checks below before assuming an app bug.</p>
-<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>Reference: <a onclick="navigate('formats')">Supported formats and limits</a>, <a onclick="navigate('uploading')">Uploading videos</a>.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Reference: <a onclick="navigate('formats')">Supported formats and limits</a>, <a onclick="navigate('uploading')">Uploading videos</a>.</div></div>
 <h2>Fails immediately</h2>
 <p><strong>"Please select a video file":</strong> the file may not be MP4, MOV, WebM, or MKV. Convert to MP4 with <a href="https://handbrake.fr" target="_blank" rel="noopener">HandBrake</a> or <a href="https://www.videolan.org/vlc/" target="_blank" rel="noopener">VLC</a>, then try again.</p>
 <p><strong>File too big:</strong> the limit is 5 GB. Trim the clip or export at 1080p — HandBrake's "Fast 1080p30" preset is a common choice.</p>
@@ -1269,7 +1292,7 @@
       content: `
 <h1>Video playback problems</h1>
 <p>If the player is blank or showing errors, work through these checks.</p>
-<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>General playback: <a onclick="navigate('playback')">Watching and reviewing</a>. Codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>General playback: <a onclick="navigate('playback')">Watching and reviewing</a>. Codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 <h2>Player blank or broken controls</h2>
 <p><strong>Black screen / no controls:</strong> refresh, then hard refresh or clear cache, then try <a href="https://www.google.com/chrome/" target="_blank" rel="noopener">Chrome</a>. Confirm the upload finished (not stuck on "uploading" or showing "failed").</p>
 <p><strong>"Cannot be played":</strong> often a codec or browser issue. MKV can fail in Safari — try <a href="https://www.google.com/chrome/" target="_blank" rel="noopener">Chrome</a> or <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener">Firefox</a>, or re-export to MP4 with H.264 video and AAC audio.</p>
@@ -1301,14 +1324,14 @@
 <p>The account may have been removed, or the browser cached an old session. Try a private/incognito window. If that works, clear site data for <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> in normal mode.</p>
 <h2>Still locked out</h2>
 <p>Email <a href="mailto:support@kaynos.net">support@kaynos.net</a> with your name, account name, and email address.</p>
-<div class="hint hint-tip"><div class="hint-icon">💡</div><div>Profile and password changes: <a onclick="navigate('profile')">Profile and password</a>.</div></div>`},
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Profile and password changes: <a onclick="navigate('profile')">Profile and password</a>.</div></div>`},
 
     "email-issues": {
       title: "Email and notification issues", section: "Troubleshooting",
       content: `
 <h1>Email and notification issues</h1>
 <p>Most delivery problems come from spam filtering, address typos, or disabled notification settings. Preferences are under <strong>Profile</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
-<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>What we send: <a onclick="navigate('notifications')">Email notifications</a>. Invites: <a onclick="navigate('inviting-members')">Inviting your team</a>.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>What we send: <a onclick="navigate('notifications')">Email notifications</a>. Invites: <a onclick="navigate('inviting-members')">Inviting your team</a>.</div></div>
 <h2>Not receiving messages</h2>
 <ol>
 <li>Check spam or promotions folders (Gmail often sorts automated mail here).</li>
@@ -1351,7 +1374,7 @@
       content: `
 <h1>Mobile device tips</h1>
 <p>Kaynos runs in the mobile browser — no app store install needed. Open <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> in your phone's browser.</p>
-<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div>Upload troubleshooting: <a onclick="navigate('upload-issues')">Video upload problems</a>.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Upload troubleshooting: <a onclick="navigate('upload-issues')">Video upload problems</a>.</div></div>
 <h2>Supported browsers</h2>
 <ul>
 <li>iPhone / iPad: Safari or Chrome</li>
@@ -1381,7 +1404,7 @@
       content: `
 <h1>Frequently asked questions</h1>
 <p>Kaynos is built for coaches who use video review: publish sessions and classes, add timestamped notes, and members watch on their own time.</p>
-<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div><strong>Quick links:</strong> App: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> · Support: <a href="mailto:support@kaynos.net">support@kaynos.net</a> · Setup: <a onclick="navigate('setup')">Setting up your account</a></div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Quick links:</strong> App: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> · Support: <a href="mailto:support@kaynos.net">support@kaynos.net</a> · Setup: <a onclick="navigate('setup')">Setting up your account</a></div></div>
 <h2>What you're signing up for</h2>
 <h3>What is Kaynos, in plain language?</h3>
 <p>It replaces ad-hoc clip sharing in chat. You put session footage on a <strong>session</strong> (one client) or a <strong>class</strong> (everyone in your account), add notes on the timeline, and clients review when they can. Everything runs in the browser at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> — no separate app install.</p>
@@ -1419,10 +1442,10 @@
       content: `
 <h1>Developer API</h1>
 <p>For accounts that want automation beyond the web UI: schedules, exports, or custom reporting. The API is HTTPS-only and scoped to your account's data. Create and manage tokens under <strong>Admin → Developer API</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> (admin role required).</p>
-<div class="hint hint-info"><div class="hint-icon">ℹ️</div><div><strong>Swagger first.</strong> Sign in as an admin, then open the in-app docs. The same browser session lets <em>Try it out</em> use your cookies — <a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener">Swagger UI (production)</a>.</div></div>
-<div class="hint hint-danger"><div class="hint-icon">🚫</div><div><strong>Protect your secrets.</strong> API tokens are as sensitive as passwords. Store them in a secret manager or env vars — never commit them to git or expose them in frontend code.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Swagger first.</strong> Sign in as an admin, then open the in-app docs. The same browser session lets <em>Try it out</em> use your cookies — <a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener">Swagger UI (production)</a>.</div></div>
+<div class="hint hint-danger"><div class="hint-icon">${IC.danger}</div><div><strong>Protect your secrets.</strong> API tokens are as sensitive as passwords. Store them in a secret manager or env vars — never commit them to git or expose them in frontend code.</div></div>
 <p>OpenAPI YAML: <a href="https://app.kaynos.net/openapi.yaml" target="_blank" rel="noopener">app.kaynos.net/openapi.yaml</a> · Mirror: <a href="https://raw.githubusercontent.com/jlambert229/kaynos/main/public/openapi.yaml" target="_blank" rel="noopener">GitHub raw</a></p>
-<div class="hint hint-warning"><div class="hint-icon">⚠️</div><div>If the app URL returns HTML instead of YAML, use the GitHub raw link.</div></div>
+<div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>If the app URL returns HTML instead of YAML, use the GitHub raw link.</div></div>
 <h2>Two authentication doors</h2>
 <ul>
 <li><strong><code>/api/v1/…</code></strong> — for scripts and integrations: Bearer token minted under <strong>Admin → Developer API</strong>.</li>
@@ -1509,7 +1532,7 @@
 <li>Chunked parallel upload for files over 100 MB with automatic retry.</li>
 <li>Real-time speed and ETA display during upload.</li>
 </ul>
-<div class="hint hint-tip"><div class="hint-icon">💡</div><div>Have a feature request? Email <a href="mailto:support@kaynos.net">support@kaynos.net</a> — we read every message.</div></div>`}
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Have a feature request? Email <a href="mailto:support@kaynos.net">support@kaynos.net</a> — we read every message.</div></div>`}
   };
 
   const NAV = [
@@ -1955,7 +1978,9 @@
   /* ── THEME TOGGLE ───────────────────────────────────── */
   function applyTheme(mode) {
     document.documentElement.classList.toggle('light', mode === 'light');
-    document.getElementById('themeToggle').textContent = mode === 'light' ? '☀️' : '🌙';
+    document.getElementById('themeIcon').innerHTML = mode === 'light'
+      ? '<path d="M8 1v1M8 14v1M1 8h1M14 8h1M3.1 3.1l.7.7M12.2 12.2l.7.7M12.9 3.1l-.7.7M3.8 12.2l-.7.7"/><circle cx="8" cy="8" r="3"/>'
+      : '<path d="M13.5 8a5.5 5.5 0 01-7.4 5.2A6.5 6.5 0 008.3 1 5.5 5.5 0 0113.5 8z"/>';
     document.querySelector('meta[name="theme-color"]').content = mode === 'light' ? '#ffffff' : '#060609';
   }
   function toggleTheme() {
