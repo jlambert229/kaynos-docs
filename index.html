@@ -1257,8 +1257,12 @@
     });
 
     // Sidebar active
-    document.querySelectorAll('.sidebar-link').forEach(l =>
-      l.classList.toggle('active', l.dataset.page === pageId));
+    document.querySelectorAll('.sidebar-link').forEach(l => {
+      const isActive = l.dataset.page === pageId;
+      l.classList.toggle('active', isActive);
+      if (isActive) l.setAttribute('aria-current', 'page');
+      else l.removeAttribute('aria-current');
+    });
 
     // Breadcrumb
     if (page.section) {
@@ -1280,6 +1284,7 @@
     closeSidebar();
     document.getElementById('searchInput').value = '';
     document.getElementById('searchResults').classList.remove('active');
+    document.getElementById('searchInput').setAttribute('aria-expanded', 'false');
 
     // Scroll active link into view
     const active = document.querySelector('.sidebar-link.active');
@@ -1347,6 +1352,8 @@
       btn.classList.add('copied');
       showToast('Copied to clipboard');
       setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    }).catch(() => {
+      showToast('Copy failed — try selecting manually');
     });
   }
 
@@ -1364,7 +1371,7 @@
   function handleSearch(q) {
     const sr = document.getElementById('searchResults');
     srIdx = -1;
-    if (!q || q.length < 2) { sr.classList.remove('active'); sr.innerHTML = ''; return; }
+    if (!q || q.length < 2) { sr.classList.remove('active'); sr.innerHTML = ''; document.getElementById('searchInput').setAttribute('aria-expanded', 'false'); return; }
     const lower = q.toLowerCase();
     const results = [];
     for (const [id, page] of Object.entries(PAGES)) {
@@ -1412,6 +1419,7 @@
     } else if (e.key === 'Escape') {
       sr.classList.remove('active');
       srIdx = -1;
+      document.getElementById('searchInput').setAttribute('aria-expanded', 'false');
       document.getElementById('searchInput').blur();
     }
   });
@@ -1419,6 +1427,7 @@
   document.addEventListener('click', e => {
     if (!e.target.closest('.header-search')) {
       document.getElementById('searchResults').classList.remove('active');
+      document.getElementById('searchInput').setAttribute('aria-expanded', 'false');
       srIdx = -1;
     }
   });
