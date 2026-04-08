@@ -21,8 +21,8 @@
   <meta name="twitter:title" content="Kaynos — Help Center" />
   <meta name="twitter:description" content="Video review for coaches — setup guides, troubleshooting, and API docs." />
 
-  <!-- Favicon (inline SVG) -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23c62828'/%3E%3Crect x='8' y='8' width='16' height='16' rx='3' fill='white' fill-opacity='.9'/%3E%3Crect x='12' y='12' width='8' height='8' rx='2' fill='%23c62828'/%3E%3C/svg%3E" />
+  <!-- Favicon (Kaynos logo) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23050508'/%3E%3Cg transform='translate(4.5,4) scale(0.124)'%3E%3Cpath d='M 64 151 L 102 189 L 178 190 L 102 114 Z' fill='%232184f3' fill-rule='evenodd'/%3E%3Cpath d='M 184 1 L 116 1 L 1 115 L 0 185 Z' fill='%232184f3' fill-rule='evenodd'/%3E%3Cpath d='M 58 0 L 3 0 L 0 3 L 0 91 L 57 34 Z' fill='%232184f3' fill-rule='evenodd'/%3E%3C/g%3E%3C/svg%3E" />
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -65,10 +65,10 @@
       --text-tertiary:  rgba(240,240,246,0.38);
       --border:         rgba(255,255,255,0.07);
       --border-strong:  rgba(255,255,255,0.12);
-      --accent:         #4dabf7;
-      --accent-hover:   #74c0fc;
-      --accent-soft:    rgba(77,171,247,0.10);
-      --accent-border:  rgba(77,171,247,0.25);
+      --accent:         #2184f3;
+      --accent-hover:   #4da3f7;
+      --accent-soft:    rgba(33,132,243,0.10);
+      --accent-border:  rgba(33,132,243,0.25);
       --success:        #40c057;
       --success-soft:   rgba(64,192,87,0.10);
       --warning:        #fd7e14;
@@ -104,10 +104,10 @@
       --text-tertiary:  rgba(26,26,46,0.45);
       --border:         rgba(0,0,0,0.08);
       --border-strong:  rgba(0,0,0,0.14);
-      --accent:         #1971c2;
-      --accent-hover:   #1864ab;
-      --accent-soft:    rgba(25,113,194,0.08);
-      --accent-border:  rgba(25,113,194,0.22);
+      --accent:         #1a6fdb;
+      --accent-hover:   #1560c2;
+      --accent-soft:    rgba(26,111,219,0.08);
+      --accent-border:  rgba(26,111,219,0.22);
       --success:        #2b8a3e;
       --success-soft:   rgba(43,138,62,0.08);
       --warning:        #e8590c;
@@ -131,7 +131,7 @@
     *::-webkit-scrollbar-track { background: transparent; }
     *::-webkit-scrollbar-thumb { background: var(--bg-tertiary); border-radius: 9999px; }
 
-    ::selection { background: rgba(77,171,247,.28); color: var(--text-primary); }
+    ::selection { background: rgba(33,132,243,.28); color: var(--text-primary); }
 
     body {
       font-family: var(--font-body);
@@ -169,8 +169,9 @@
       flex-shrink: 0; white-space: nowrap;
     }
     .header-logo-icon {
-      width: 26px; height: 26px; background: #c62828;
+      width: 26px; height: 26px; background: #050508;
       border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      border: 1px solid var(--border);
     }
     .header-logo-sep { color: var(--text-tertiary); font-weight: 400; margin: 0 1px; }
     .header-logo-sub { color: var(--text-tertiary); font-weight: 400; font-size: 13px; }
@@ -190,7 +191,7 @@
     }
     .header-search input:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(77,171,247,.10);
+      box-shadow: 0 0 0 3px rgba(33,132,243,.10);
     }
     .header-search input::placeholder { color: var(--text-tertiary); }
     .search-kbd {
@@ -220,7 +221,7 @@
     .search-result .sr-title { font-weight: 500; margin-bottom: 2px; }
     .search-result .sr-section { font-size: 11px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: .05em; }
     .search-result .sr-snippet { font-size: .8125rem; color: var(--text-secondary); margin-top: 4px; line-height: 1.5; }
-    .search-result mark { background: rgba(77,171,247,.20); color: var(--accent-hover); border-radius: 2px; padding: 0 2px; }
+    .search-result mark { background: rgba(33,132,243,.20); color: var(--accent-hover); border-radius: 2px; padding: 0 2px; }
     .search-empty { padding: 24px 14px; text-align: center; color: var(--text-tertiary); font-size: .875rem; }
 
     .header-spacer { flex: 1; }
@@ -352,7 +353,7 @@
       border: 1px solid var(--border);
     }
     .content-inner a { color: var(--accent); text-decoration: none; transition: color var(--dur); }
-    .content-inner a:hover { color: var(--accent-hover); text-decoration: underline; text-decoration-color: rgba(77,171,247,.4); }
+    .content-inner a:hover { color: var(--accent-hover); text-decoration: underline; text-decoration-color: rgba(33,132,243,.4); }
     .content-inner hr { border: none; border-top: 1px solid var(--border); margin: 36px 0; }
 
     /* ── CODE BLOCKS ─── */
@@ -413,7 +414,7 @@
     }
     .quick-link:hover {
       border-color: var(--accent); background: var(--bg-secondary);
-      box-shadow: 0 0 0 1px rgba(77,171,247,.12), var(--shadow);
+      box-shadow: 0 0 0 1px rgba(33,132,243,.12), var(--shadow);
       text-decoration: none; transform: translateY(-1px);
     }
     .quick-link .ql-icon { font-size: 18px; margin-bottom: 6px; line-height: 1; }
@@ -551,9 +552,9 @@
       .hero h1 { font-size: 1.75rem !important; }
     }
 
-    :focus-visible { outline: 2px solid rgba(77,171,247,.6); outline-offset: 2px; }
+    :focus-visible { outline: 2px solid rgba(33,132,243,.6); outline-offset: 2px; }
     .sidebar-link:focus-visible, .quick-link:focus-visible, .header-logo:focus-visible {
-      outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px rgba(77,171,247,.55);
+      outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px rgba(33,132,243,.55);
     }
 
     /* ── SKIP LINK ─── */
@@ -711,9 +712,12 @@
 
     <a href="#" class="header-logo" onclick="navigate('welcome');return false">
       <div class="header-logo-icon">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <rect x="1" y="1" width="12" height="12" rx="2.5" fill="white" fill-opacity=".9"/>
-          <rect x="4" y="4" width="6" height="6" rx="1" fill="#c62828"/>
+        <svg width="16" height="16" viewBox="0 0 32 32" fill="none">
+          <g transform="translate(4.5,4) scale(0.124)">
+            <path d="M 64 151 L 102 189 L 178 190 L 102 114 Z" fill="#2184f3" fill-rule="evenodd"/>
+            <path d="M 184 1 L 116 1 L 1 115 L 0 185 Z" fill="#2184f3" fill-rule="evenodd"/>
+            <path d="M 58 0 L 3 0 L 0 3 L 0 91 L 57 34 Z" fill="#2184f3" fill-rule="evenodd"/>
+          </g>
         </svg>
       </div>
       <span>kaynos</span><span class="header-logo-sep">/</span><span class="header-logo-sub">docs</span>
