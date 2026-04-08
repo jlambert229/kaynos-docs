@@ -405,7 +405,7 @@
       margin-bottom: 20px; font-size: .875rem;
       display: flex; gap: 10px; line-height: 1.65;
     }
-    .hint-icon { flex-shrink: 0; margin-top: 2px; line-height: 1; display: flex; align-items: center; }
+    .hint-icon { flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; }
     .hint-icon svg { width: 16px; height: 16px; }
     .hint-warning  { background: var(--warning-soft); border: 1px solid rgba(253,126,20,.28); border-left: 3px solid var(--warning); }
     .hint-info     { background: var(--accent-soft);  border: 1px solid var(--accent-border); border-left: 3px solid var(--accent); }
@@ -431,7 +431,7 @@
       box-shadow: 0 0 0 1px rgba(33,132,243,.12), var(--shadow);
       text-decoration: none; transform: translateY(-1px);
     }
-    .quick-link .ql-icon { margin-bottom: 6px; line-height: 1; display: flex; color: var(--accent); }
+    .quick-link .ql-icon { margin-bottom: 6px; display: flex; color: var(--accent); }
     .quick-link .ql-icon svg { width: 22px; height: 22px; }
     .quick-link .ql-title { font-weight: 500; color: var(--text-primary); }
     .quick-link .ql-desc { font-size: .8125rem; color: var(--text-secondary); line-height: 1.4; }
@@ -1404,6 +1404,7 @@
 <body>
 
   <a href="#pageContent" class="skip-link">Skip to content</a>
+  <noscript><h1>Kaynos Help Center</h1><p>This help center requires JavaScript. Please enable it or visit <a href="https://app.kaynos.net">app.kaynos.net</a>.</p></noscript>
   <div id="progress-bar" role="progressbar" aria-hidden="true"></div>
 
   <header class="header" role="banner">
@@ -1435,6 +1436,7 @@
           <line x1="10" y1="10" x2="13.5" y2="13.5" stroke-linecap="round"/>
         </svg>
       </div>
+      <label for="searchInput" class="sr-only">Search documentation</label>
       <input type="text" id="searchInput" placeholder="Search docs…"
         oninput="handleSearch(this.value)" onfocus="showSearchHistory()"
         autocomplete="off" aria-label="Search documentation" role="combobox"
@@ -1502,6 +1504,7 @@
     </div>
     <div class="chatbot-messages" id="chatMessages"></div>
     <div class="chatbot-input-wrap">
+      <label for="chatInput" class="sr-only">Ask a question</label>
       <input class="chatbot-input" id="chatInput" placeholder="Ask a question..." autocomplete="off"
         onkeydown="if(event.key==='Enter')sendChat()">
       <button class="chatbot-send" onclick="sendChat()" aria-label="Send">
@@ -1539,6 +1542,7 @@
   <!-- Command Palette -->
   <div class="palette-overlay" id="paletteOverlay" onclick="if(event.target===this)closePalette()">
     <div class="palette-box">
+      <label for="paletteInput" class="sr-only">Search pages or run a command</label>
       <input class="palette-input" id="paletteInput" placeholder="Search pages or run a command..." oninput="filterPalette(this.value)" onkeydown="handlePaletteKey(event)" autocomplete="off">
       <div class="palette-results" id="paletteResults"></div>
     </div>
