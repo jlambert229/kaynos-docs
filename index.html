@@ -156,10 +156,11 @@
     }
 
     /* ── READING PROGRESS ─── */
-    #progress-bar {
-      position: fixed; top: 0; left: 0; height: 2px; width: 0%;
-      background: linear-gradient(90deg, var(--accent), var(--accent-hover));
-      z-index: 200; transition: width .1s linear; pointer-events: none;
+    #progress-bar,
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+      background: var(--accent);
+      z-index: 9999; transition: width .1s linear; pointer-events: none;
     }
 
     /* ── HEADER ─── */
@@ -353,6 +354,11 @@
       display: flex; align-items: center; gap: 12px;
     }
     .article-meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-tertiary); }
+    .read-time {
+      font-size: .75rem;
+      color: var(--text-tertiary);
+      white-space: nowrap;
+    }
     .content-inner h2 {
       font-size: 1.1875rem; font-weight: 600; letter-spacing: -.015em;
       margin-top: 44px; margin-bottom: 14px;
@@ -406,6 +412,42 @@
     .code-block-wrap:hover .copy-btn { opacity: 1; }
     .copy-btn:hover { color: var(--text-primary); background: var(--bg-active); }
     .copy-btn.copied { color: var(--success); border-color: rgba(64,192,87,.4); }
+
+    pre, .code-block { position: relative; }
+    .copy-code-btn {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      padding: 4px 8px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text-tertiary);
+      font-size: .7rem;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity .15s;
+    }
+    pre:hover .copy-code-btn, .code-block:hover .copy-code-btn { opacity: 1; }
+    .copy-code-btn:hover { color: var(--accent); border-color: var(--accent); }
+    .copy-code-btn.copied { color: var(--success); border-color: var(--success); }
+
+    .open-in-app {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: .8125rem;
+      font-weight: 600;
+      margin: 8px 0 16px;
+      transition: background .15s;
+    }
+    .open-in-app:hover { background: var(--accent-hover); color: #fff; }
+    .open-in-app svg { width: 14px; height: 14px; }
 
     /* ── TABLES ─── */
     .table-wrap { overflow-x: auto; margin-bottom: 24px; border-radius: var(--radius-sm); border: 1px solid var(--border); }
@@ -469,6 +511,18 @@
     .quick-link .ql-icon svg { width: 22px; height: 22px; }
     .quick-link .ql-title { font-weight: 500; color: var(--text-primary); }
     .quick-link .ql-desc { font-size: .8125rem; color: var(--text-secondary); line-height: 1.4; }
+
+    /* ── FEATURE OVERVIEW ─── */
+    .feature-overview { margin: 16px 0 24px; }
+    .feature-overview summary { cursor: pointer; font-size: .9375rem; color: var(--text-secondary); padding: 10px 0; }
+    .feature-overview summary:hover { color: var(--accent); }
+    .feature-overview[open] summary { margin-bottom: 12px; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+    .feature-card { background: var(--bg-secondary); border-radius: 10px; padding: 16px; border: 1px solid var(--border); }
+    .feature-card h4 { margin: 8px 0 6px; font-size: .875rem; color: var(--text-primary); }
+    .feature-card p { font-size: .8125rem; color: var(--text-secondary); line-height: 1.5; margin: 0; }
+    .feature-icon { width: 28px; height: 28px; color: var(--accent); }
+    .feature-icon svg { width: 100%; height: 100%; }
 
     /* ── BREADCRUMB ─── */
     .breadcrumb {
@@ -729,6 +783,13 @@
     .related-card:hover { border-color: var(--accent); background: var(--bg-secondary); text-decoration: none; transform: translateY(-1px); }
     .related-card-title { font-size: .875rem; font-weight: 500; color: var(--text-primary); }
     .related-card-section { font-size: .75rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: .04em; }
+    .next-steps { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); }
+    .next-steps-title { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--text-tertiary); margin-bottom: 10px; }
+    .next-steps-nav { display: flex; justify-content: space-between; gap: 12px; }
+    .next-step { padding: 10px 16px; border-radius: 8px; background: var(--bg-secondary); color: var(--text-primary); text-decoration: none; font-size: .875rem; font-weight: 500; transition: background .15s; }
+    .next-step:hover { background: var(--accent-soft, rgba(99,102,241,.12)); color: var(--accent); }
+    .next-step.prev { text-align: left; }
+    .next-step.next { text-align: right; margin-left: auto; }
 
     /* ── SIDEBAR READ INDICATOR ─── */
     .sidebar-link .read-dot {
@@ -1563,7 +1624,7 @@
 
   <a href="#pageContent" class="skip-link">Skip to content</a>
   <noscript><h1>Kaynos Help Center</h1><p>This help center requires JavaScript. Please enable it or visit <a href="https://app.kaynos.net">app.kaynos.net</a>.</p></noscript>
-  <div id="progress-bar" role="progressbar" aria-hidden="true"></div>
+  <div id="progress-bar" class="scroll-progress" role="progressbar" aria-hidden="true"></div>
 
   <header class="header" role="banner">
     <button class="menu-btn" onclick="toggleSidebar()" aria-label="Open menu">
@@ -1793,6 +1854,41 @@
   <div class="hint-icon">${IC.info}</div>
   <div><strong>You're reading the help center.</strong> Sign in to the app at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> to upload video, manage your account, and use in-app support.</div>
 </div>
+<details class="feature-overview">
+<summary><strong>What can Kaynos do?</strong> — quick feature overview</summary>
+<div class="feature-grid">
+  <div class="feature-card">
+    <div class="feature-icon">${IC.video}</div>
+    <h4>Video upload & playback</h4>
+    <p>Upload MP4, MOV, WebM, or AVI (up to 5 GB). Chunked uploads with auto-retry for large files. Playback with speed controls (0.5×–2×) and resume.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">${IC.book}</div>
+    <h4>Timestamped coaching notes</h4>
+    <p>Pin notes to exact moments on the timeline. Draw annotations on frames. Voice dictation for hands-free feedback. Reactions, replies, and note types (key moment, drill, question).</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">${IC.users}</div>
+    <h4>Team & role management</h4>
+    <p>Three roles: admin, coach, student. Invite by email, manage permissions, track who watched what. No seat limits.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">${IC.rocket}</div>
+    <h4>Sessions & scheduling</h4>
+    <p>Private sessions (one student) or shared classes (everyone). Calendar view with recurrence and conflict detection. Clips for sharing highlights.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">${IC.check}</div>
+    <h4>Security & compliance</h4>
+    <p>Two-factor authentication (TOTP). US-hosted storage (Backblaze B2 + Cloudflare CDN). Data export for GDPR. HTTPS everywhere.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">${IC.info}</div>
+    <h4>Integrations & API</h4>
+    <p>REST API with token auth. Webhooks for real-time events. Stripe billing ($49/mo or $490/yr, 14-day free trial).</p>
+  </div>
+</div>
+</details>
 <h2>Jump in</h2>
 <div class="quick-links">
   <a class="quick-link featured" href="#setup" onclick="navigate('setup');return false">
@@ -3033,6 +3129,24 @@
       }
     });
 
+    // Add copy buttons to code blocks
+    pc.querySelectorAll('pre').forEach(pre => {
+      if (pre.querySelector('.copy-code-btn')) return;
+      const btn = document.createElement('button');
+      btn.className = 'copy-code-btn';
+      btn.textContent = 'Copy';
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        navigator.clipboard.writeText(pre.textContent.replace('Copy', '').trim()).then(() => {
+          btn.textContent = 'Copied!';
+          btn.classList.add('copied');
+          setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1500);
+        });
+      };
+      pre.style.position = 'relative';
+      pre.appendChild(btn);
+    });
+
     // Sidebar active
     document.querySelectorAll('.sidebar-link').forEach(l => {
       const isActive = l.dataset.page === pageId;
@@ -3504,12 +3618,39 @@
     if (!h1) return;
     const meta = document.createElement('div');
     meta.className = 'article-meta';
-    meta.innerHTML = `<span>${mins} min read</span><span class="article-meta-dot"></span><span>${words} words</span>`;
+    meta.innerHTML = `<span class="read-time">${mins} min read</span><span class="article-meta-dot"></span><span>${words} words</span>`;
     h1.insertAdjacentElement('afterend', meta);
   }
 
+  /* ── ROLE-AWARE NEXT STEPS ─────────────────────────── */
+  const ROLE_PATHS = {
+    admin: ['setup', 'roles', 'inviting-members', 'first-upload', 'managing-members', 'uploading', 'creating-sessions', 'notes', 'progress', 'developer-api'],
+    coach: ['setup', 'first-upload', 'creating-sessions', 'notes', 'uploading', 'playback', 'formats', 'progress', 'faq'],
+    client: ['setup', 'playback', 'notes', 'progress', 'creating-sessions', 'faq', 'troubleshoot', 'performance'],
+    developer: ['setup', 'developer-api', 'formats', 'glossary', 'faq', 'storage'],
+  };
+
   /* ── RELATED ARTICLES ──────────────────────────────── */
   function renderRelated(container, pageId) {
+    const role = localStorage.getItem('user-role');
+    if (role && ROLE_PATHS[role]) {
+      const path = ROLE_PATHS[role];
+      const idx = path.indexOf(pageId);
+      if (idx !== -1) {
+        const prev = idx > 0 ? path[idx - 1] : null;
+        const next = idx < path.length - 1 ? path[idx + 1] : null;
+        if (prev || next) {
+          const nav = document.createElement('div');
+          nav.className = 'next-steps';
+          nav.innerHTML = '<div class="next-steps-title">Next steps</div><div class="next-steps-nav">' +
+            (prev ? `<a class="next-step prev" href="#${prev}" onclick="navigate('${prev}');return false">← ${PAGES[prev].title}</a>` : '<span></span>') +
+            (next ? `<a class="next-step next" href="#${next}" onclick="navigate('${next}');return false">${PAGES[next].title} →</a>` : '<span></span>') +
+            '</div>';
+          container.appendChild(nav);
+          return; // skip random related articles when we have a path
+        }
+      }
+    }
     const page = PAGES[pageId];
     if (!page || !page.section || pageId === 'welcome') return;
     const sameSection = allPageKeys.filter(k => PAGES[k].section === page.section && k !== pageId);
@@ -3529,6 +3670,37 @@
     container.appendChild(div);
   }
 
+  /* ── OPEN IN APP ─────────────────────────────────────── */
+  function renderOpenInApp(container, pageId) {
+    const APP_LINKS = {
+      'setup': 'https://app.kaynos.net',
+      'profile': 'https://app.kaynos.net/profile',
+      'managing-members': 'https://app.kaynos.net/admin',
+      'creating-sessions': 'https://app.kaynos.net/sessions/new',
+      'creating-classes': 'https://app.kaynos.net/classes/new',
+      'playback': 'https://app.kaynos.net/sessions',
+      'notes': 'https://app.kaynos.net/sessions',
+      'progress': 'https://app.kaynos.net/dashboard',
+      'developer-api': 'https://app.kaynos.net/admin/api-docs',
+    };
+    const url = APP_LINKS[pageId];
+    if (!url) return;
+    const existing = container.querySelector('.open-in-app');
+    if (existing) return;
+    const link = document.createElement('a');
+    link.className = 'open-in-app';
+    link.href = url;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.innerHTML = 'Open in app <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 3h7v7"/><path d="M13 3L6 10"/></svg>';
+    // Insert after h1 and tldr if present
+    const tldr = container.querySelector('.tldr');
+    const h1 = container.querySelector('h1');
+    if (tldr) tldr.insertAdjacentElement('afterend', link);
+    else if (h1) h1.insertAdjacentElement('afterend', link);
+    else container.prepend(link);
+  }
+
   /* ── ENHANCED NAVIGATE (patch to add extras) ───────── */
   const _origNavigate = navigate;
   navigate = function(pageId) {
@@ -3541,6 +3713,7 @@
     renderShareBtn(pc, pageId);
     renderPrintBtn(pc, pageId);
     renderCopyArticleBtn(pc, pageId);
+    renderOpenInApp(pc, pageId);
     if (pageId === 'welcome') renderWelcomeBack(pc);
     if (pageId === 'welcome') renderChecklist(pc);
     if (pageId === 'welcome') personalizeWelcome(pc);
