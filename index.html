@@ -758,7 +758,7 @@
     }
     .glossary-term dd { color: var(--text-secondary); line-height: 1.65; font-size: .875rem; }
 
-    /* ── SUPPORT CHATBOT ─── */
+    /* ── DOC SEARCH (FAB + panel) ─── */
     .chatbot-fab {
       position: fixed; bottom: 28px; right: 80px; z-index: 90;
       width: 44px; height: 44px; border-radius: 50%;
@@ -1609,20 +1609,20 @@
   <!-- Offline Banner -->
   <div class="offline-banner" id="offlineBanner">You're offline — some features may not work</div>
 
-  <!-- Support Chatbot -->
-  <button class="chatbot-fab" onclick="toggleChat()" aria-label="Open support chat" id="chatFab">
-    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2.5h12a.5.5 0 01.5.5v7a.5.5 0 01-.5.5H5L2 13V3a.5.5 0 01.5-.5z"/><line x1="5" y1="5.5" x2="11" y2="5.5"/><line x1="5" y1="8" x2="9" y2="8"/></svg>
+  <!-- Doc Search -->
+  <button class="chatbot-fab" onclick="toggleChat()" aria-label="Search docs" id="chatFab">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><line x1="10.2" y1="10.2" x2="14" y2="14"/></svg>
   </button>
 
   <div class="chatbot-panel" id="chatPanel">
     <div class="chatbot-header">
-      <div class="chatbot-header-title"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8a6 6 0 0112 0"/><path d="M2 8v4a1 1 0 001 1h1a1 1 0 001-1V9a1 1 0 00-1-1H2zM14 8v4a1 1 0 01-1 1h-1a1 1 0 01-1-1V9a1 1 0 011-1h2z"/></svg> Help Assistant</div>
+      <div class="chatbot-header-title"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><line x1="10.2" y1="10.2" x2="14" y2="14"/></svg> Doc Search</div>
       <button class="chatbot-close" onclick="toggleChat()" aria-label="Close chat"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></button>
     </div>
     <div class="chatbot-messages" id="chatMessages"></div>
     <div class="chatbot-input-wrap">
       <label for="chatInput" class="sr-only">Ask a question</label>
-      <input class="chatbot-input" id="chatInput" placeholder="Ask a question..." autocomplete="off"
+      <input class="chatbot-input" id="chatInput" placeholder="Search the docs..." autocomplete="off"
         onkeydown="if(event.key==='Enter')sendChat()">
       <button class="chatbot-send" onclick="sendChat()" aria-label="Send">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 1.5l-6 13-2.5-5.5L1.5 6.5z"/><path d="M14.5 1.5L6 9"/></svg>
@@ -1653,7 +1653,7 @@
   <!-- Nudge Prompt -->
   <div class="nudge-prompt" id="nudgePrompt">
     <button class="nudge-close" onclick="dismissNudge()">&times;</button>
-    Still looking? Try the <a onclick="navigate('troubleshoot');dismissNudge()">troubleshooting wizard</a> or <a onclick="toggleChat();dismissNudge()">ask the chatbot</a>.
+    Still looking? Try the <a onclick="navigate('troubleshoot');dismissNudge()">troubleshooting wizard</a> or <a onclick="toggleChat();dismissNudge()">search the docs</a>.
   </div>
 
   <!-- Command Palette -->
@@ -2707,7 +2707,7 @@
       title: "Feature requests", section: "",
       content: `
 <h1>Feature requests</h1>
-<p>Vote on the features you want most. Your votes directly influence our roadmap.</p>
+<p>Vote on the features you want most. Votes are saved on this device only and are not sent to Kaynos.</p>
 <div class="poll-total" id="pollTotal"></div>
 <div class="poll-sort" id="pollSort"></div>
 <div class="poll-list" id="pollList"></div>
@@ -3161,27 +3161,9 @@
     }
   });
 
-  /* ── FEEDBACK WIDGET ───────────────────────────────── */
-  function renderFeedback(container) {
-    const existing = container.querySelector('.page-feedback');
-    if (existing) existing.remove();
-    const cur = location.hash.slice(1) || 'welcome';
-    if (cur === 'welcome') return;
-    const div = document.createElement('div');
-    div.className = 'page-feedback';
-    div.innerHTML = `<span>Was this helpful?</span>
-      <button class="feedback-btn" onclick="sendFeedback(this,'yes')">Yes</button>
-      <button class="feedback-btn" onclick="sendFeedback(this,'no')">No</button>
-      <span class="feedback-thanks">Thanks for your feedback!</span>`;
-    container.appendChild(div);
-  }
-
-  function sendFeedback(btn, value) {
-    btn.classList.add('selected');
-    const thanks = btn.parentElement.querySelector('.feedback-thanks');
-    thanks.style.display = 'inline';
-    btn.parentElement.querySelectorAll('.feedback-btn:not(.selected)').forEach(b => b.style.display = 'none');
-  }
+  /* ── FEEDBACK WIDGET (removed — was non-functional, see KAY-198) ── */
+  function renderFeedback() {}
+  function sendFeedback() {}
 
   /* ── READING PROGRESS & BOOKMARKS ────────────────────── */
   function markAsRead(pageId) {
@@ -3941,7 +3923,7 @@
     { title: 'Toggle dark/light mode', icon: IC.tip, action: () => toggleTheme(), type: 'Action' },
     { title: 'Open troubleshooting wizard', icon: IC.alert, action: () => navigate('troubleshoot'), type: 'Action' },
     { title: 'Print this page', icon: IC.print, action: () => window.print(), type: 'Action' },
-    { title: 'Open chatbot', icon: IC.chat, action: () => { closePalette(); toggleChat(); }, type: 'Action' },
+    { title: 'Search docs', icon: IC.chat, action: () => { closePalette(); toggleChat(); }, type: 'Action' },
     { title: 'Show keyboard shortcuts', icon: IC.info, action: () => { closePalette(); openKbd(); }, type: 'Action' },
     { title: 'Toggle language (EN/ES)', icon: IC.book, action: () => toggleLang(), type: 'Action' },
   ];
@@ -4039,7 +4021,7 @@
         { type: 'fixed', text: '26 broken SVG icons across glossary, contact, timeline, and 8 other pages' },
         { type: 'fixed', text: 'Toast and nudge prompts no longer hidden behind mobile bottom nav' },
         { type: 'fixed', text: 'FAQ accordion now uses proper ARIA attributes for screen readers' },
-        { type: 'fixed', text: 'Chatbot greeting no longer duplicates on rapid open/close' },
+        { type: 'fixed', text: 'Doc search greeting no longer duplicates on rapid open/close' },
       ]
     },
     {
@@ -4422,7 +4404,7 @@
     el.innerHTML = `${status === 'good' ? IC.check : IC.warn} <div><strong>You're using ${browser}.</strong> ${msg}</div>`;
   }
 
-  /* ── SUPPORT CHATBOT ────────────────────────────────── */
+  /* ── DOC SEARCH ─────────────────────────────────────── */
   let chatOpen = false;
   let chatInitialized = false;
   function toggleChat() {
@@ -4430,7 +4412,7 @@
     document.getElementById('chatPanel').classList.toggle('open', chatOpen);
     if (chatOpen && !chatInitialized) {
       chatInitialized = true;
-      addBotMsg("Hi! I can help you find answers in the docs. Try asking about uploads, playback, roles, or anything else.", [
+      addBotMsg("Search the docs by keyword. This is a local search tool — no messages are sent or stored.", [
         "How do I upload video?",
         "What are the user roles?",
         "Video won't play",
