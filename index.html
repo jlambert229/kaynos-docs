@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kaynos — Help Center</title>
   <meta name="theme-color" content="#060609" />
+  <meta name="fragment" content="!" />
   <meta name="description" content="Kaynos help center — setup, video upload, playback, troubleshooting, and developer API docs.">
   <link rel="canonical" href="https://docs.kaynos.net/" />
 
@@ -24,6 +25,14 @@
   <meta name="twitter:title" content="Kaynos — Help Center" />
   <meta name="twitter:description" content="Video review for coaches — setup guides, troubleshooting, and API docs." />
   <meta name="twitter:image" content="https://docs.kaynos.net/og-image.png" />
+
+  <!-- Prevent theme flicker on first paint (KAY-206) -->
+  <script>
+    try {
+      var t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      if (t === 'light') document.documentElement.classList.add('light');
+    } catch(e) {}
+  </script>
 
   <!-- Favicon (Kaynos logo) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23050508'/%3E%3Cg transform='translate(4.5,4) scale(0.124)'%3E%3Cpath d='M 64 151 L 102 189 L 178 190 L 102 114 Z' fill='%232184f3' fill-rule='evenodd'/%3E%3Cpath d='M 184 1 L 116 1 L 1 115 L 0 185 Z' fill='%232184f3' fill-rule='evenodd'/%3E%3Cpath d='M 58 0 L 3 0 L 0 3 L 0 91 L 57 34 Z' fill='%232184f3' fill-rule='evenodd'/%3E%3C/g%3E%3C/svg%3E" />
@@ -49,9 +58,7 @@
   }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/fonts/fonts.css">
   <link rel="dns-prefetch" href="https://app.kaynos.net" />
   <link rel="alternate" type="application/rss+xml" title="Kaynos What's New" href="/feed.xml" />
   <style>
@@ -1516,6 +1523,13 @@
       #toast { bottom: 68px; }
       .nudge-prompt { bottom: 68px; }
     }
+
+    /* ── SITE FOOTER ─── */
+    .site-footer { background: var(--bg-elevated); border-top: 1px solid var(--border); padding: 20px 24px; margin-top: auto; }
+    .footer-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; font-size: .75rem; color: var(--text-secondary); }
+    .footer-links { display: flex; gap: 14px; }
+    .footer-links a { color: var(--text-secondary); text-decoration: none; cursor: pointer; transition: color var(--dur) var(--ease); }
+    .footer-links a:hover { color: var(--accent); }
   </style>
 </head>
 <body>
@@ -1555,7 +1569,7 @@
       </div>
       <label for="searchInput" class="sr-only">Search documentation</label>
       <input type="text" id="searchInput" placeholder="Search docs…"
-        oninput="handleSearch(this.value)" onfocus="showSearchHistory()"
+        oninput="debouncedSearch(this.value)" onfocus="showSearchHistory()"
         autocomplete="off" aria-label="Search documentation" role="combobox"
         aria-expanded="false" aria-controls="searchResults">
       <div class="search-kbd" id="searchKbd"><kbd>⌘</kbd><kbd>K</kbd></div>
@@ -1564,7 +1578,8 @@
 
     <div class="header-spacer"></div>
 
-    <button class="lang-toggle" id="langToggle" onclick="toggleLang()" title="Switch language">EN</button>
+    <!-- Language toggle hidden until ES translations cover >90% of pages (KAY-201) -->
+    <button class="lang-toggle" id="langToggle" onclick="toggleLang()" title="Switch language" hidden style="display:none">EN</button>
 
     <div class="text-size-controls">
       <button class="text-size-btn" onclick="adjustTextSize(-1)" title="Decrease text size" aria-label="Decrease text size">A-</button>
@@ -1592,12 +1607,22 @@
     <main class="content">
       <div class="content-with-toc">
         <div class="content-wrap">
-          <div class="content-inner" id="pageContent"></div>
+          <main class="content-inner" id="pageContent"></main>
           <nav class="footer-nav" id="footerNav" aria-label="Page navigation"></nav>
         </div>
         <aside class="toc" id="toc" aria-label="On this page"></aside>
       </div>
     </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <span>&copy; 2024–2026 Kaynos. All rights reserved.</span>
+        <nav class="footer-links">
+          <a href="https://app.kaynos.net/terms" target="_blank" rel="noopener">Terms</a>
+          <a href="https://app.kaynos.net/privacy" target="_blank" rel="noopener">Privacy</a>
+          <a onclick="navigate('privacy-on-this-site')">Site Privacy</a>
+        </nav>
+      </div>
+    </footer>
   </div>
 
   <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
@@ -1688,6 +1713,16 @@
   </div>
 
   <script>
+  /* ── EMAIL OBFUSCATION ────────────────────────────────────── */
+  function mailLink(text) {
+    var u = 'support', d = 'kaynos.net';
+    return '<a href="mai' + 'lto:' + u + '@' + d + '">' + (text || (u + '@' + d)) + '</a>';
+  }
+  function mailHref(params) {
+    var u = 'support', d = 'kaynos.net';
+    return 'mai' + 'lto:' + u + '@' + d + (params || '');
+  }
+
   /* ── SVG ICONS ────────────────────────────────────────────── */
   const IC = {
     info:     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6.5"/><line x1="8" y1="7" x2="8" y2="11"/><circle cx="8" cy="5" r=".5" fill="currentColor" stroke="none"/></svg>',
@@ -1778,7 +1813,7 @@
 <div class="support-card">
   <div class="support-item">
     <div class="support-item-icon">${IC.mail}</div>
-    <div><strong>Email:</strong> <a href="mailto:support@kaynos.net">support@kaynos.net</a> — usually same day on business days</div>
+    <div><strong>Email:</strong> ${mailLink()} — usually same day on business days</div>
   </div>
   <div class="support-item">
     <div class="support-item-icon">${IC.chat}</div>
@@ -1822,7 +1857,7 @@
 <li>Click <strong>Send Invite</strong>.</li>
 </ol>
 <p>Delivery is usually quick. If nothing arrives, check spam and verify the address for typos.</p>
-<div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>Still missing mail? See <a onclick="navigate('email-issues')">Email and notification issues</a> or contact <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</div></div>
+<div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>Still missing mail? See <a onclick="navigate('email-issues')">Email and notification issues</a> or contact ${mailLink()}.</div></div>
 <h2>Who can invite</h2>
 <table><thead><tr><th>Your role</th><th>Can add</th></tr></thead><tbody>
 <tr><td><strong>Admin</strong></td><td>Coaches and clients</td></tr>
@@ -1872,7 +1907,7 @@
 </tbody></table>
 <p>Maximum file size is <strong>5 GB</strong>. Full details: <a onclick="navigate('formats')">Supported formats and limits</a>.</p>
 <h2>Vimeo</h2>
-<p>Use the <strong>Vimeo</strong> source option and paste the URL or video ID to embed video already hosted on <a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a>.</p>
+<p>Use the <strong>Vimeo</strong> source option and paste the URL or video ID to embed video already hosted on <a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a>. If using a Vimeo video source, your use is also subject to <a href="https://vimeo.com/terms" target="_blank" rel="noopener">Vimeo's Terms of Service</a>.</p>
 <h2>Recording tips</h2>
 <ul>
 <li><strong>Landscape orientation.</strong> Your TV and your phone both want it.</li>
@@ -1980,7 +2015,9 @@
 <li>HTTPS for all data in transit.</li>
 <li>Account data is isolated — your files are not mixed with other organizations' storage.</li>
 <li>Playback URLs are time-limited. Share access inside Kaynos rather than relying on long-lived direct links.</li>
-</ul>`},
+</ul>
+<h2>Data residency</h2>
+<p>Videos are stored in Backblaze B2 (US). Content is delivered globally via Cloudflare CDN. For EU customers: both Backblaze and Cloudflare offer Standard Contractual Clauses (SCCs) in their Data Processing Agreements. Contact <a href="https://app.kaynos.net/terms" target="_blank">support</a> for SCC documentation.</p>`},
 
     "creating-sessions": {
       title: "Creating a session", section: "Sessions & Classes",
@@ -2111,7 +2148,7 @@
 <li>Enter your new password and confirmation.</li>
 <li>Click <strong>Update Password</strong>.</li>
 </ol>
-<p>Locked out? Ask an admin for a reset, or email <a href="mailto:support@kaynos.net">support@kaynos.net</a>. Login help: <a onclick="navigate('login-issues')">Login and access issues</a>.</p>
+<p>Locked out? Ask an admin for a reset, or email ${mailLink()}. Login help: <a onclick="navigate('login-issues')">Login and access issues</a>.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Profile lives in the app: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> → your name in the sidebar (or menu on mobile).</div></div>`},
 
     notifications: {
@@ -2133,7 +2170,7 @@
 <li>Check spam or promotions folders.</li>
 <li>Confirm the profile email address is correct.</li>
 <li>Confirm notifications are enabled in your profile settings.</li>
-<li>If it still fails, contact <a href="mailto:support@kaynos.net">support@kaynos.net</a> with your expected address.</li>
+<li>If it still fails, contact ${mailLink()} with your expected address.</li>
 </ol>`},
 
     "upload-issues": {
@@ -2155,7 +2192,7 @@
 <ul>
 <li><strong>Network error during part upload:</strong> reconnect and retry.</li>
 <li><strong>Part upload failed: 403:</strong> on very long uploads the session can expire. Cancel and upload again.</li>
-<li><strong>500 server error:</strong> wait briefly and retry; if it persists, email <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</li>
+<li><strong>500 server error:</strong> wait briefly and retry; if it persists, email ${mailLink()}.</li>
 </ul>
 <h2>Slow uploads</h2>
 <p>Measure your <strong>upload</strong> speed, not download. <a href="https://fast.com" target="_blank" rel="noopener">fast.com</a> shows upload after the initial result.</p>
@@ -2167,9 +2204,9 @@
 </tbody></table>
 <p>A wired connection often beats crowded Wi-Fi. Pause heavy sync tools (Dropbox, Google Drive) and upload during a quieter time.</p>
 <h2>Status stuck on "uploading"</h2>
-<p>Contact <a href="mailto:support@kaynos.net">support@kaynos.net</a> with the session or class name so we can reset the status if the browser closed mid-upload.</p>
+<p>Contact ${mailLink()} with the session or class name so we can reset the status if the browser closed mid-upload.</p>
 <h2>Still failing</h2>
-<p>Email <a href="mailto:support@kaynos.net">support@kaynos.net</a> with: account name, browser, file type and size, and a screenshot if you have one.</p>`},
+<p>Email ${mailLink()} with: account name, browser, file type and size, and a screenshot if you have one.</p>`},
 
     "playback-issues": {
       title: "Video playback problems", section: "Troubleshooting",
@@ -2200,14 +2237,14 @@
 <ul>
 <li>Use the same email the invite was sent to.</li>
 <li>Check Caps Lock; paste the password once to avoid hidden typos.</li>
-<li>Ask an admin for a reset or email <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</li>
+<li>Ask an admin for a reset or email ${mailLink()}.</li>
 </ul>
 <h2>"Too many attempts"</h2>
-<p>Too many failed logins from one IP are rate-limited. Wait 15–30 minutes, or contact <a href="mailto:support@kaynos.net">support@kaynos.net</a> if you need access sooner.</p>
+<p>Too many failed logins from one IP are rate-limited. Wait and try again later, or reset your password. If you still need help, contact ${mailLink()}.</p>
 <h2>Blank page or "no access"</h2>
 <p>The account may have been removed, or the browser cached an old session. Try a private/incognito window. If that works, clear site data for <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> in normal mode.</p>
 <h2>Still locked out</h2>
-<p>Email <a href="mailto:support@kaynos.net">support@kaynos.net</a> with your name, account name, and email address.</p>
+<p>Email ${mailLink()} with your name, account name, and email address.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Profile and password changes: <a onclick="navigate('profile')">Profile and password</a>.</div></div>`},
 
     "email-issues": {
@@ -2250,7 +2287,7 @@
 <h2>Red error messages</h2>
 <ul>
 <li>Refresh once — a single failed request can trigger an error.</li>
-<li>If it repeats, take a screenshot, note what you clicked, and email <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</li>
+<li>If it repeats, take a screenshot, note what you clicked, and email ${mailLink()}.</li>
 </ul>`},
 
     mobile: {
@@ -2288,7 +2325,7 @@
       content: `
 <h1>Frequently asked questions</h1>
 <p>Kaynos is built for coaches who use video review: publish sessions and classes, add timestamped notes, and members watch on their own time.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Quick links:</strong> App: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> · Support: <a href="mailto:support@kaynos.net">support@kaynos.net</a> · Setup: <a onclick="navigate('setup')">Setting up your account</a></div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Quick links:</strong> App: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> · Support: ${mailLink()} · Setup: <a onclick="navigate('setup')">Setting up your account</a></div></div>
 <h2>What you're signing up for</h2>
 <h3>What is Kaynos, in plain language?</h3>
 <p>It replaces ad-hoc clip sharing in chat. You put session footage on a <strong>session</strong> (one client) or a <strong>class</strong> (everyone in your account), add notes on the timeline, and clients review when they can. Everything runs in the browser at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> — no separate app install.</p>
@@ -2309,7 +2346,8 @@
 <h3>How serious are you about security?</h3>
 <p>HTTPS in transit, hashed passwords, and video in cloud storage behind a CDN. See <a onclick="navigate('storage')">Video storage and retention</a> for details.</p>
 <h3>What about minors on the footage?</h3>
-<p>You are responsible for waivers, parental consent, and local law — the same as for any training footage. Read the <a href="https://app.kaynos.net/terms" target="_blank" rel="noopener">Terms of Service</a> in the app. For legal questions, consult qualified counsel.</p>
+<p>Kaynos is not currently designed for users under 13 (COPPA) or under 16 in the EU (GDPR Article 8). Organizations using Kaynos with minors are responsible for obtaining appropriate parental or guardian consent. Schools using Kaynos for student records should contact us about FERPA-compliant data processing agreements.</p>
+<p>Read the <a href="https://app.kaynos.net/terms" target="_blank" rel="noopener">Terms of Service</a> in the app. For legal questions, consult qualified counsel.</p>
 <hr>
 <h2>Devices and integrations</h2>
 <h3>Which browsers are supported?</h3>
@@ -2319,7 +2357,7 @@
 <hr>
 <h2>Support</h2>
 <h3>How do I contact you?</h3>
-<p>Email <a href="mailto:support@kaynos.net">support@kaynos.net</a> with what happened, what you expected, your account name, and your browser. A screenshot or short screen recording speeds up diagnosis. In-app chat is available when logged in to <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>`},
+<p>Email ${mailLink()} with what happened, what you expected, your account name, and your browser. A screenshot or short screen recording speeds up diagnosis. In-app chat is available when logged in to <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>`},
 
     "developer-api": {
       title: "Developer API", section: "Developers",
@@ -2328,8 +2366,7 @@
 <p>For accounts that want automation beyond the web UI: schedules, exports, or custom reporting. The API is HTTPS-only and scoped to your account's data. Create and manage tokens under <strong>Admin → Developer API</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> (admin role required).</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Swagger first.</strong> Sign in as an admin, then open the in-app docs. The same browser session lets <em>Try it out</em> use your cookies — <a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener">Swagger UI (production)</a>.</div></div>
 <div class="hint hint-danger"><div class="hint-icon">${IC.danger}</div><div><strong>Protect your secrets.</strong> API tokens are as sensitive as passwords. Store them in a secret manager or env vars — never commit them to git or expose them in frontend code.</div></div>
-<p>OpenAPI YAML: <a href="https://app.kaynos.net/openapi.yaml" target="_blank" rel="noopener">app.kaynos.net/openapi.yaml</a> · Mirror: <a href="https://raw.githubusercontent.com/jlambert229/kaynos/main/public/openapi.yaml" target="_blank" rel="noopener">GitHub raw</a></p>
-<div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>If the app URL returns HTML instead of YAML, use the GitHub raw link.</div></div>
+<p>Contact support for API documentation access.</p>
 <h2>Two authentication doors</h2>
 <ul>
 <li><strong><code>/api/v1/…</code></strong> — for scripts and integrations: Bearer token minted under <strong>Admin → Developer API</strong>.</li>
@@ -2341,9 +2378,9 @@
 <tr><td>Production</td><td><a href="https://app.kaynos.net" target="_blank" rel="noopener"><code>https://app.kaynos.net</code></a></td><td><code>/api/v1</code></td></tr>
 <tr><td>Local Netlify dev</td><td><code>http://localhost:8888</code></td><td><code>/api/v1</code></td></tr>
 </tbody></table>
-<p>Quick discovery: <code>GET /api/v1</code> lists routes, no token needed.</p>
+<p>See the API reference (requires authentication) for available endpoints.</p>
 <h2>Bearer header</h2>
-<pre>Authorization: Bearer kn_&lt;your-secret&gt;</pre>
+<pre>Authorization: Bearer &lt;your-api-token&gt;</pre>
 <p>We show the secret exactly once when you mint it. Treat it like a Stripe key — password manager or env var, never committed.</p>
 <h2>Scopes</h2>
 <table><thead><tr><th>Scope</th><th>Does</th></tr></thead><tbody>
@@ -2382,8 +2419,7 @@
 <h2>Quick links</h2>
 <ul>
 <li><a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener">Swagger UI</a></li>
-<li><a href="https://app.kaynos.net/openapi.yaml" target="_blank" rel="noopener">OpenAPI YAML (app host)</a></li>
-<li><a href="https://raw.githubusercontent.com/jlambert229/kaynos/main/public/openapi.yaml" target="_blank" rel="noopener">OpenAPI YAML (GitHub raw)</a></li>
+<li>Contact support for API documentation access</li>
 </ul>`},
 
     glossary: {
@@ -2422,13 +2458,13 @@
   <input class="error-input" id="errorInput" placeholder="e.g. 403, cannot be played, black screen..." oninput="lookupError(this.value)" autocomplete="off" aria-label="Paste error message or describe issue">
   <div class="error-results" id="errorResults"></div>
 </div>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Can't find your error? Email <a href="mailto:support@kaynos.net">support@kaynos.net</a> with a screenshot and we'll help.</div></div>`},
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Can't find your error? Email ${mailLink()} with a screenshot and we'll help.</div></div>`},
 
     contact: {
       title: "Contact support", section: "FAQ",
       content: `
 <h1>Contact support</h1>
-<p>Fill out the form below and we'll copy a formatted message for you to send to <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</p>
+<p>Fill out the form below and we'll copy a formatted message for you to send to ${mailLink()}.</p>
 <div class="contact-form" id="contactForm">
   <label for="cfName" class="sr-only">Your name</label>
   <input class="contact-field" id="cfName" placeholder="Your name" aria-label="Your name">
@@ -2445,7 +2481,7 @@
 <div class="support-card">
   <div class="support-item">
     <div class="support-item-icon">${IC.mail}</div>
-    <div><strong>Email:</strong> <a href="mailto:support@kaynos.net">support@kaynos.net</a></div>
+    <div><strong>Email:</strong> ${mailLink()}</div>
   </div>
   <div class="support-item">
     <div class="support-item-icon">${IC.chat}</div>
@@ -2692,7 +2728,7 @@
 <li>Chunked parallel upload for files over 100 MB with automatic retry.</li>
 <li>Real-time speed and ETA display during upload.</li>
 </ul>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Have a feature request? <a onclick="navigate('feature-requests')">Vote on what we build next</a> or email <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</div></div>`},
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Have a feature request? <a onclick="navigate('feature-requests')">Vote on what we build next</a> or email ${mailLink()}.</div></div>`},
 
     "release-notes": {
       title: "Release notes", section: "",
@@ -2701,7 +2737,7 @@
 <p>Detailed changelog of everything shipped, in progress, and planned for Kaynos.</p>
 <div class="release-filter" id="releaseFilter"></div>
 <div id="releaseList"></div>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Want to influence what we build? <a onclick="navigate('feature-requests')">Vote on feature requests</a> or email <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</div></div>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Want to influence what we build? <a onclick="navigate('feature-requests')">Vote on feature requests</a> or email ${mailLink()}.</div></div>`},
 
     "feature-requests": {
       title: "Feature requests", section: "",
@@ -2718,7 +2754,43 @@
     <button class="poll-submit-btn" onclick="submitPollIdea()">Submit</button>
   </div>
 </div>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Votes are saved in your browser. For detailed requests, email <a href="mailto:support@kaynos.net">support@kaynos.net</a> with specifics.</div></div>`}
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Votes are saved in your browser. For detailed requests, email ${mailLink()} with specifics.</div></div>`},
+
+    "privacy-on-this-site": {
+      title: "Privacy on this site", section: "Legal",
+      content: `
+<h1>Privacy on this site</h1>
+<p>This help center is a static site hosted on Netlify. It does not require login and does not track you across sessions.</p>
+
+<h2>What stays in your browser</h2>
+<p>We use <code>localStorage</code> and <code>sessionStorage</code> to remember your preferences. This data never leaves your device.</p>
+<table class="comparison-table">
+<thead><tr><th>Key</th><th>Purpose</th><th>Storage</th></tr></thead>
+<tbody>
+<tr><td>theme</td><td>Dark/light mode preference</td><td>localStorage</td></tr>
+<tr><td>text-size</td><td>Font size preference</td><td>localStorage</td></tr>
+<tr><td>lang</td><td>Language preference (EN/ES)</td><td>localStorage</td></tr>
+<tr><td>bookmarks</td><td>Bookmarked help pages</td><td>localStorage</td></tr>
+<tr><td>read-pages</td><td>Pages you've visited</td><td>localStorage</td></tr>
+<tr><td>recent-pages</td><td>Recently viewed pages</td><td>localStorage</td></tr>
+<tr><td>search-history</td><td>Recent search terms</td><td>localStorage</td></tr>
+<tr><td>poll-votes, poll-voted, poll-custom</td><td>Feature poll votes</td><td>localStorage</td></tr>
+<tr><td>highlights</td><td>Text highlights you've made</td><td>localStorage</td></tr>
+<tr><td>scroll-pos</td><td>Scroll position per page</td><td>localStorage</td></tr>
+<tr><td>onboarded, checklist-done</td><td>Onboarding progress</td><td>localStorage</td></tr>
+<tr><td>nudge-dismissed</td><td>Whether you dismissed the help nudge</td><td>sessionStorage</td></tr>
+<tr><td>sb-collapsed</td><td>Sidebar collapsed state</td><td>localStorage</td></tr>
+</tbody>
+</table>
+
+<h2>What is sent externally</h2>
+<p>No analytics, tracking pixels, or cookies are used. The "Contact Support" form composes a <code>mailto:</code> link — your email client sends the message, not this site.</p>
+
+<h2>Third-party resources</h2>
+<p>This site loads fonts from your browser's cache (self-hosted). No external requests are made after the initial page load, except when clicking external links.</p>
+
+<p>For the Kaynos application privacy policy, see <a href="https://app.kaynos.net/privacy" target="_blank" rel="noopener">app.kaynos.net/privacy</a>.</p>
+<div class="hint hint-info"><div class="hint-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.5"/><line x1="8" y1="7" x2="8" y2="11"/><circle cx="8" cy="5" r=".5" fill="currentColor"/></svg></div><div>This page describes only the help center at docs.kaynos.net. The Kaynos application has its own privacy policy.</div></div>`}
   };
 
   const NAV = [
@@ -2729,7 +2801,8 @@
     { section: "Account Management", pages: ["managing-members", "profile", "notifications"] },
     { section: "Developers", pages: ["developer-api"] },
     { section: "Troubleshooting", pages: ["troubleshoot", "error-lookup", "browser-check", "upload-issues", "playback-issues", "login-issues", "email-issues", "performance", "mobile"] },
-    { section: "FAQ", pages: ["faq", "contact"] }
+    { section: "FAQ", pages: ["faq", "contact"] },
+    { section: "Legal", pages: ["privacy-on-this-site"] }
   ];
 
   const allPageKeys = NAV.flatMap(g => g.pages);
@@ -2891,6 +2964,27 @@
     if (!window._isPopstate) window.scrollTo({ top: 0, behavior: 'instant' });
     if (!window._isPopstate) history.pushState({ page: pageId }, '', '#' + pageId);
     document.title = pageId === 'welcome' ? 'Kaynos — Help Center' : `${page.title} — Kaynos Docs`;
+
+    // Dynamic meta description from page content (first ~160 chars, stripped of HTML)
+    const descEl = document.querySelector('meta[name="description"]');
+    if (descEl) {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = page.content;
+      const plainText = (tmp.textContent || tmp.innerText || '').replace(/\s+/g, ' ').trim();
+      descEl.setAttribute('content', plainText.slice(0, 160) + (plainText.length > 160 ? '…' : ''));
+    }
+
+    // Dynamic canonical URL
+    let canonEl = document.querySelector('link[rel="canonical"]');
+    if (!canonEl) {
+      canonEl = document.createElement('link');
+      canonEl.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonEl);
+    }
+    canonEl.setAttribute('href', pageId === 'welcome'
+      ? 'https://docs.kaynos.net/'
+      : 'https://docs.kaynos.net/#' + pageId);
+
     closeSidebar();
     document.getElementById('searchInput').value = '';
     document.getElementById('searchResults').classList.remove('active');
@@ -2979,6 +3073,11 @@
   }
 
   /* ── SEARCH ─────────────────────────────────────────── */
+  function debounce(fn, ms) {
+    let t;
+    return function(...args) { clearTimeout(t); t = setTimeout(() => fn.apply(this, args), ms); };
+  }
+  const debouncedSearch = debounce(handleSearch, 150);
   let srIdx = -1;
 
   function fuzzyMatch(text, query) {
@@ -3008,7 +3107,7 @@
         if (idx !== -1) {
           const s = Math.max(0, idx - 45), e = Math.min(textLower.length, idx + q.length + 70);
           const raw = (s > 0 ? '…' : '') + text.slice(s, e) + (e < textLower.length ? '…' : '');
-          snippet = raw.replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').split(/\s+/).join('|'), 'gi'), m => `<mark>${m}</mark>`);
+          snippet = escapeHtml(raw).replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').split(/\s+/).join('|'), 'gi'), m => `<mark>${escapeHtml(m)}</mark>`);
         }
         const score = (titleMatch ? 10 : 0) + (exactIdx !== -1 ? 5 : 0) + (bookmarks.includes(id) ? 2 : 0) + (fuzzy ? 1 : 0);
         results.push({ id, title: page.title, section: page.section, snippet, score, isRead: readPages.includes(id), isBookmarked: bookmarks.includes(id) });
@@ -3019,8 +3118,8 @@
       ? '<div class="search-empty">No results found</div>'
       : results.slice(0, 8).map((r, i) =>
           `<div class="search-result" role="option" id="sr-${i}" data-page="${r.id}" onclick="addSearchHistory(document.getElementById('searchInput').value.trim());navigate('${r.id}')">
-            <div class="sr-title">${r.title}${r.isBookmarked ? '<span class="sr-badge sr-bookmarked" title="Bookmarked">' + IC.bookmarkFill + '</span>' : ''}${r.isRead ? '<span class="sr-badge sr-read" title="Read">' + IC.check + '</span>' : ''}</div>
-            ${r.section ? `<div class="sr-section">${r.section}</div>` : ''}
+            <div class="sr-title">${escapeHtml(r.title)}${r.isBookmarked ? '<span class="sr-badge sr-bookmarked" title="Bookmarked">' + IC.bookmarkFill + '</span>' : ''}${r.isRead ? '<span class="sr-badge sr-read" title="Read">' + IC.check + '</span>' : ''}</div>
+            ${r.section ? `<div class="sr-section">${escapeHtml(r.section)}</div>` : ''}
             ${r.snippet ? `<div class="sr-snippet">${r.snippet}</div>` : ''}
           </div>`
         ).join('');
@@ -3134,8 +3233,27 @@
   });
 
   /* ── KEYBOARD SHORTCUTS ─────────────────────────────── */
-  function openKbd() { document.getElementById('kbdModal').classList.add('active'); }
-  function closeKbd() { document.getElementById('kbdModal').classList.remove('active'); }
+  /* Focus-trap helper (KAY-202) */
+  let _savedFocus = null;
+  function trapFocus(overlay) {
+    const focusable = overlay.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (!focusable.length) return;
+    focusable[0].focus();
+    overlay._trapHandler = function(e) {
+      if (e.key !== 'Tab') return;
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey) { if (document.activeElement === first) { e.preventDefault(); last.focus(); } }
+      else { if (document.activeElement === last) { e.preventDefault(); first.focus(); } }
+    };
+    overlay.addEventListener('keydown', overlay._trapHandler);
+  }
+  function releaseFocus(overlay) {
+    if (overlay._trapHandler) { overlay.removeEventListener('keydown', overlay._trapHandler); overlay._trapHandler = null; }
+    if (_savedFocus) { try { _savedFocus.focus(); } catch(e){} _savedFocus = null; }
+  }
+
+  function openKbd() { _savedFocus = document.activeElement; var m = document.getElementById('kbdModal'); m.classList.add('active'); trapFocus(m); }
+  function closeKbd() { var m = document.getElementById('kbdModal'); m.classList.remove('active'); releaseFocus(m); }
 
   document.addEventListener('keydown', e => {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
@@ -3594,7 +3712,7 @@
       ]
     },
     'login-pw': { result: true, title: 'Password issue', body: 'Check Caps Lock, use the same email from the invite. Ask an admin for a reset.', page: 'login-issues' },
-    'login-rate': { result: true, title: 'Rate limited', body: 'Wait 15-30 minutes, or contact support for faster access.', page: 'login-issues' },
+    'login-rate': { result: true, title: 'Rate limited', body: 'Wait and try again later, or reset your password.', page: 'login-issues' },
     'login-blank': { result: true, title: 'Blank page', body: 'Try incognito/private window. If that works, clear site data for app.kaynos.net.', page: 'login-issues' },
     email: { result: true, title: 'Email issues', body: 'Check spam, confirm address in profile, verify notifications are enabled.', page: 'email-issues' },
     performance: { result: true, title: 'Performance issues', body: 'Clear cache, try Chrome, disable ad blockers temporarily, close extra tabs.', page: 'performance' },
@@ -3644,7 +3762,7 @@
     { patterns: ['network error', 'failed to fetch', 'connection'], title: 'Network error', hint: 'Check your internet — reconnect and retry', page: 'upload-issues' },
     { patterns: ['cannot be played', 'not supported', 'codec'], title: 'Codec / playback error', hint: 'Re-export to MP4 with H.264 video + AAC audio', page: 'playback-issues' },
     { patterns: ['black screen', 'no video', 'blank player'], title: 'Black screen / no video', hint: 'Hard refresh, check upload status, try Chrome', page: 'playback-issues' },
-    { patterns: ['too many attempts', 'rate limit', 'locked out'], title: 'Login rate limited', hint: 'Wait 15-30 minutes or contact support', page: 'login-issues' },
+    { patterns: ['too many attempts', 'rate limit', 'locked out'], title: 'Login rate limited', hint: 'Wait and try again later, or reset your password', page: 'login-issues' },
     { patterns: ['wrong password', 'incorrect', 'invalid credentials'], title: 'Wrong password', hint: 'Check Caps Lock, paste from invite email, ask admin for reset', page: 'login-issues' },
     { patterns: ['no access', 'permission', 'denied', 'unauthorized'], title: 'Access denied', hint: 'Check your role or ask an admin to verify your access', page: 'roles' },
     { patterns: ['buffering', 'loading', 'spinner', 'slow playback'], title: 'Buffering / slow playback', hint: 'Check bandwidth, close other tabs, try 1080p', page: 'playback-issues' },
@@ -3671,7 +3789,7 @@
         <div class="error-match-title">${m.title}</div>
         <div class="error-match-hint">${m.hint} → ${PAGES[m.page].title}</div>
       </div>`
-    ).join('') || (q.length > 3 ? '<div style="font-size:.8125rem;color:var(--text-tertiary);padding:8px 0">No matches — try different keywords or <a href="mailto:support@kaynos.net" style="color:var(--accent)">email support</a></div>' : '');
+    ).join('') || (q.length > 3 ? '<div style="font-size:.8125rem;color:var(--text-tertiary);padding:8px 0">No matches — try different keywords or <a href="' + mailHref() + '" style="color:var(--accent)">email support</a></div>' : '');
   }
 
   /* ── CONTACT FORM ──────────────────────────────────── */
@@ -3685,10 +3803,10 @@
     navigator.clipboard.writeText(msg).then(() => {
       showToast('Copied — opening email');
       setTimeout(() => {
-        window.open(`mailto:support@kaynos.net?subject=${encodeURIComponent(subject || 'Support request')}&body=${encodeURIComponent(msg)}`, '_blank');
+        window.open(mailHref('?subject=' + encodeURIComponent(subject || 'Support request') + '&body=' + encodeURIComponent(msg)), '_blank');
       }, 500);
     }).catch(() => {
-      window.open(`mailto:support@kaynos.net?subject=${encodeURIComponent(subject || 'Support request')}&body=${encodeURIComponent(msg)}`, '_blank');
+      window.open(mailHref('?subject=' + encodeURIComponent(subject || 'Support request') + '&body=' + encodeURIComponent(msg)), '_blank');
     });
   }
 
@@ -3720,6 +3838,7 @@
       }
     }
     // Process in reverse to avoid node index shifting
+    let glossaryUid = 0;
     replacements.reverse().forEach(({ node, term, def, index }) => {
       const before = node.textContent.slice(0, index);
       const after = node.textContent.slice(index + term.length);
@@ -3729,7 +3848,11 @@
       span.textContent = term;
       const popup = document.createElement('span');
       popup.className = 'term-tooltip-popup';
+      const tipId = 'glossary-tip-' + (glossaryUid++);
+      popup.id = tipId;
+      popup.setAttribute('role', 'tooltip');
       popup.textContent = def;
+      span.setAttribute('aria-describedby', tipId);
       span.appendChild(popup);
       const parent = node.parentNode;
       if (before) parent.insertBefore(document.createTextNode(before), node);
@@ -3925,20 +4048,25 @@
     { title: 'Print this page', icon: IC.print, action: () => window.print(), type: 'Action' },
     { title: 'Search docs', icon: IC.chat, action: () => { closePalette(); toggleChat(); }, type: 'Action' },
     { title: 'Show keyboard shortcuts', icon: IC.info, action: () => { closePalette(); openKbd(); }, type: 'Action' },
-    { title: 'Toggle language (EN/ES)', icon: IC.book, action: () => toggleLang(), type: 'Action' },
+    // { title: 'Toggle language (EN/ES)', icon: IC.book, action: () => toggleLang(), type: 'Action' }, // Hidden until ES translations cover >90% (KAY-201)
   ];
 
   function openPalette() {
-    document.getElementById('paletteOverlay').classList.add('active');
+    _savedFocus = document.activeElement;
+    var ov = document.getElementById('paletteOverlay');
+    ov.classList.add('active');
     const input = document.getElementById('paletteInput');
     input.value = '';
     input.focus();
     paletteIdx = -1;
     filterPalette('');
+    trapFocus(ov);
   }
   function closePalette() {
-    document.getElementById('paletteOverlay').classList.remove('active');
+    var ov = document.getElementById('paletteOverlay');
+    ov.classList.remove('active');
     paletteIdx = -1;
+    releaseFocus(ov);
   }
   function filterPalette(q) {
     const lower = (q || '').toLowerCase();
@@ -4247,7 +4375,7 @@
 </div>
 <h2>Contacto</h2>
 <div class="support-card">
-  <div class="support-item"><div class="support-item-icon">${IC.mail}</div><div><strong>Email:</strong> <a href="mailto:support@kaynos.net">support@kaynos.net</a></div></div>
+  <div class="support-item"><div class="support-item-icon">${IC.mail}</div><div><strong>Email:</strong> ${mailLink()}</div></div>
   <div class="support-item"><div class="support-item-icon">${IC.chat}</div><div><strong>Chat:</strong> Esquina inferior derecha en <a href="https://app.kaynos.net" target="_blank" rel="noopener">la app</a></div></div>
 </div>` },
     setup: { title: 'Configurar tu cuenta', content: `
@@ -4265,6 +4393,7 @@
   function toggleLang() {
     currentLang = currentLang === 'en' ? 'es' : 'en';
     localStorage.setItem('lang', currentLang);
+    document.documentElement.lang = currentLang;
     const lt = document.getElementById('langToggle');
     lt.textContent = currentLang.toUpperCase();
     lt.classList.toggle('es', currentLang === 'es');
@@ -4297,7 +4426,7 @@
     esc.id = 'wizardEscalate';
     const escSubject = encodeURIComponent('Help: ' + step.title);
     const escBody = encodeURIComponent('I tried the suggestion for "' + step.title + '" but it didn\'t work.\n\nBrowser: ' + navigator.userAgent.split(' ').slice(-2).join(' ') + '\n\nWhat happened:\n');
-    esc.innerHTML = `Still stuck? <a href="mailto:support@kaynos.net?subject=${escSubject}&body=${escBody}">Email support with this issue pre-filled →</a>`;
+    esc.innerHTML = 'Still stuck? <a href="' + mailHref('?subject=' + escSubject + '&body=' + escBody) + '">Email support with this issue pre-filled \u2192</a>';
     container.appendChild(div);
     container.appendChild(esc);
   }
@@ -4478,7 +4607,7 @@
     const top = scored.slice(0, 3);
 
     if (top.length === 0) {
-      addBotMsg("I couldn't find docs matching that. Try different keywords, or email <a href='mailto:support@kaynos.net'>support@kaynos.net</a> for direct help.", [
+      addBotMsg("I couldn't find docs matching that. Try different keywords, or " + mailLink('email support') + " for direct help.", [
         "Upload problems",
         "Login issues",
         "Video formats"
@@ -4586,10 +4715,7 @@
   document.getElementById('langToggle').textContent = currentLang.toUpperCase();
   document.getElementById('langToggle').classList.toggle('es', currentLang === 'es');
 
-  // First-time onboarding
-  if (isFirstVisit()) {
-    setTimeout(startTour, 600);
-  }
+  // First-time onboarding — auto-tour removed (KAY-202); welcome page "Take the tour" link suffices
   </script>
 </body>
 </html>

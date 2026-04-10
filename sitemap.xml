@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Kaynos Docs is a single-page application (SPA) — all content is served from
+  index.html and individual "pages" are accessed via hash fragments (e.g. /#setup).
+  Search-engine crawlers may ignore the fragment portion of URLs. These hash-based
+  entries are listed here for completeness; a future content split (see KAY-182)
+  will introduce true path-based routes with server-side rendering.
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://docs.kaynos.net/</loc><lastmod>2026-04-08</lastmod><priority>1.0</priority></url>
   <url><loc>https://docs.kaynos.net/#whats-new</loc><lastmod>2026-04-08</lastmod><priority>0.6</priority></url>

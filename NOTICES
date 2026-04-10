@@ -1,0 +1,22 @@
+Third-party software and fonts used in this project
+====================================================
+
+Inter
+-----
+Copyright 2020 The Inter Project Authors (https://github.com/rsms/inter)
+License: SIL Open Font License 1.1
+Author: Rasmus Andersson
+https://rsms.me/inter/
+
+JetBrains Mono
+--------------
+Copyright 2020 The JetBrains Mono Project Authors
+License: SIL Open Font License 1.1
+Author: JetBrains
+https://www.jetbrains.com/lp/mono/
+
+Playwright
+----------
+Copyright (c) Microsoft Corporation
+License: Apache License 2.0
+https://github.com/microsoft/playwright
