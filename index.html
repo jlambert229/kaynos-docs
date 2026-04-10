@@ -2163,6 +2163,14 @@
   <div class="shortcut-card"><span>Go home</span><kbd>H</kbd></div>
   <div class="shortcut-card"><span>All shortcuts</span><kbd>?</kbd></div>
 </div>
+<h2>Clips</h2>
+<p>Create a clip from any session or class to highlight a specific moment.</p>
+<ol>
+<li>While watching, set the start and end time for your clip.</li>
+<li>Click <strong>Create Clip</strong>. The clip is saved to your clips list.</li>
+<li>Toggle <strong>Share</strong> to generate a shareable link anyone can view — no login required.</li>
+</ol>
+<p>Manage clips from the session or class detail page. Disable sharing at any time to revoke the link.</p>
 </details>`},
 
     formats: {
@@ -2285,7 +2293,17 @@
 </ol>
 <h2>Who sees it</h2>
 <p>The assigned student, the creator, and admins. Other students cannot open someone else's private session.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>First upload walkthrough: <a onclick="navigate('first-upload')">Your first video upload</a>. Visibility model: <a onclick="navigate('faq')">FAQ</a>.</div></div>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>First upload walkthrough: <a onclick="navigate('first-upload')">Your first video upload</a>. Visibility model: <a onclick="navigate('faq')">FAQ</a>.</div></div>
+<h2>Scheduling</h2>
+<p>Schedule sessions in advance from the calendar view.</p>
+<ol>
+<li>Go to <strong>Schedule</strong> in the sidebar.</li>
+<li>Click a time slot or use <strong>New</strong> to create a scheduled session.</li>
+<li>Set title, student (or class), date, time, and duration (default: 60 minutes).</li>
+<li>Optional: enable <strong>recurrence</strong> — choose days of the week and an end date.</li>
+<li>The system checks for conflicts with your other sessions automatically.</li>
+</ol>
+<p>Edit or delete a single occurrence, all future occurrences, or the entire series. Students and coaches see scheduled sessions on their dashboard.</p>`},
 
     "creating-classes": {
       title: "Creating a class", section: "Sessions & Classes",
@@ -2326,6 +2344,15 @@
 <li>Use the coach filter to quickly review your notes across several recordings.</li>
 </ul>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Playback shortcuts and the full note workflow: <a onclick="navigate('playback')">Watching and reviewing</a>.</div></div>
+<h2>Note types</h2>
+<p>When creating a note, choose a type to categorize it:</p>
+<ul>
+<li><strong>Note</strong> — general observation (default)</li>
+<li><strong>Key moment</strong> — marks an important technique or breakthrough</li>
+<li><strong>Drill</strong> — a drill or exercise to practice</li>
+<li><strong>Question</strong> — something to discuss next session</li>
+<li><strong>Highlight</strong> — marks a time range (start and end) on the timeline</li>
+</ul>
 <h2>Tags</h2>
 <p>Tags group related sessions and classes so lists stay easy to filter as your library grows.</p>
 <h3>Tag ideas</h3>
@@ -2344,7 +2371,17 @@
 <li>Agree on a shared vocabulary so your whole team uses consistent tags.</li>
 <li>Tags are shared across the account, not private to one person.</li>
 </ul>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Filter your lists by tag in the app after you <a href="https://app.kaynos.net" target="_blank" rel="noopener">sign in</a>.</div></div>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Filter your lists by tag in the app after you <a href="https://app.kaynos.net" target="_blank" rel="noopener">sign in</a>.</div></div>
+<h2>Annotations</h2>
+<p>Draw directly on a video frame to highlight technique details.</p>
+<ol>
+<li>Pause the video at the moment you want to annotate.</li>
+<li>Press <kbd>A</kbd> or click the annotation tool.</li>
+<li>Draw arrows, circles, or freehand on the frozen frame.</li>
+<li>Save — the annotation is attached to that timestamp and appears during playback.</li>
+</ol>
+<h2>Reactions</h2>
+<p>React to any note with an emoji: 👍 ❤️ 🔥 👀 ✅ 👏. Click the reaction button under a note to add yours.</p>`},
 
     progress: {
       title: "Progress tracking", section: "Sessions & Classes",
@@ -2380,7 +2417,9 @@
 <h2>Common questions</h2>
 <p><strong>One person, two accounts?</strong> Use a different email address per account. Each account is completely separate.</p>
 <p><strong>Member limits?</strong> The product does not enforce a headcount cap.</p>
-<p><strong>Student-to-student invites?</strong> Only staff roles can invite; students cannot invite other students.</p>`},
+<p><strong>Student-to-student invites?</strong> Only staff roles can invite; students cannot invite other students.</p>
+<h2>Branding</h2>
+<p>Admins can customize the look of their account under <strong>Admin → Branding</strong>. Set a custom logo, accent color, and welcome text that members see when they log in.</p>`},
 
     profile: {
       title: "Profile and password", section: "Account Management",
@@ -2399,6 +2438,15 @@
 </ol>
 <p>Locked out? Ask an admin for a reset, or email ${mailLink()}. Login help: <a onclick="navigate('login-issues')">Login and access issues</a>.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Profile lives in the app: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> → your name in the sidebar (or menu on mobile).</div></div>
+<h2>Two-factor authentication (2FA)</h2>
+<p>Add an extra layer of security with time-based one-time passwords (TOTP).</p>
+<ol>
+<li>Go to <strong>Profile → Security</strong>.</li>
+<li>Click <strong>Set up 2FA</strong>. Scan the QR code with an authenticator app (Google Authenticator, Authy, 1Password, etc.).</li>
+<li>Enter the 6-digit code from your app to verify.</li>
+<li>2FA is now active. You'll need the code each time you log in.</li>
+</ol>
+<p>To disable: <strong>Profile → Security → Disable 2FA</strong>. Requires your password and a current 6-digit code.</p>
 <h2>Notifications</h2>
 <p>Email covers new sessions, classes, and onboarding (invites and temporary passwords), but not billing. Toggle preferences under <strong>Profile</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Delivery problems? See <a onclick="navigate('email-issues')">Email and notification issues</a>.</div></div>
@@ -2410,6 +2458,8 @@
 </ul>
 <h3>Turning notifications off</h3>
 <p><strong>Profile</strong> → <strong>Email Notifications</strong>. Security-related messages (such as password resets) may still send.</p>
+<h2>In-app notifications</h2>
+<p>The bell icon in the header shows unread notifications: mentions, replies, new sessions, new classes, and schedule reminders. Click to view, or mark all as read.</p>
 <h3>Not receiving mail</h3>
 <ol>
 <li>Check spam or promotions folders.</li>
@@ -2543,7 +2593,9 @@
 <hr>
 <h2>Support</h2>
 <h3>How do I contact you?</h3>
-<p>Email ${mailLink()} with what happened, what you expected, your account name, and your browser. A screenshot or short screen recording speeds up diagnosis. In-app chat is available when logged in to <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>`},
+<p>Email ${mailLink()} with what happened, what you expected, your account name, and your browser. A screenshot or short screen recording speeds up diagnosis. In-app chat is available when logged in to <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
+<h3>Can I delete my account?</h3>
+<p>Yes. Users can delete their own account from <strong>Profile → Delete Account</strong>. Admins can schedule school deletion from <strong>Admin → Delete School</strong> — there's a 30-day grace period during which you can cancel. After 30 days, all data is permanently removed.</p>`},
 
     "developer-api": {
       title: "Developer API", section: "Developers",
@@ -2606,7 +2658,15 @@
 <ul>
 <li><a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener">Swagger UI</a></li>
 <li>Contact support for API documentation access</li>
-</ul>`},
+</ul>
+<h2>Webhooks</h2>
+<p>Receive real-time HTTP callbacks when events happen in your account.</p>
+<ol>
+<li>Go to <strong>Admin → Webhooks</strong>.</li>
+<li>Add an endpoint URL. Choose which events to subscribe to (e.g., session.created, class.created).</li>
+<li>Kaynos sends a POST request to your URL with the event payload.</li>
+</ol>
+<p>View delivery history and retry failed deliveries from the webhooks panel.</p>`},
 
     glossary: {
       title: "Glossary", section: "Getting Started",
