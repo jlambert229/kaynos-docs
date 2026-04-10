@@ -289,23 +289,23 @@ test.describe('Theme', () => {
   });
 });
 
-// ── Chatbot ──────────────────────────────────────────────────
+// ── Doc Search ──────────────────────────────────────────────
 
-test.describe('Chatbot', () => {
-  test('chatbot fab opens panel', async ({ page }) => {
+test.describe('Doc Search', () => {
+  test('doc search fab opens panel', async ({ page }) => {
     await page.goto('/');
     await page.locator('.chatbot-fab').click();
     await expect(page.locator('.chatbot-panel')).toHaveClass(/open/);
   });
 
-  test('chatbot shows greeting on first open', async ({ page }) => {
+  test('doc search shows greeting on first open', async ({ page }) => {
     await page.goto('/');
     await page.locator('.chatbot-fab').click();
     await expect(page.locator('.chat-msg.bot')).toBeVisible();
-    await expect(page.locator('.chat-msg.bot')).toContainText('help you find answers');
+    await expect(page.locator('.chat-msg.bot')).toContainText('local search tool');
   });
 
-  test('chatbot close button works', async ({ page }) => {
+  test('doc search close button works', async ({ page }) => {
     await page.goto('/');
     await page.locator('.chatbot-fab').click();
     await expect(page.locator('.chatbot-panel')).toHaveClass(/open/);
@@ -313,7 +313,7 @@ test.describe('Chatbot', () => {
     await expect(page.locator('.chatbot-panel')).not.toHaveClass(/open/);
   });
 
-  test('chatbot suggestion buttons work', async ({ page }) => {
+  test('doc search suggestion buttons work', async ({ page }) => {
     await page.goto('/');
     await page.locator('.chatbot-fab').click();
     await page.locator('.chat-suggestion').first().click();
@@ -322,21 +322,21 @@ test.describe('Chatbot', () => {
     expect(await msgs.count()).toBeGreaterThanOrEqual(3);
   });
 
-  test('chatbot does not double-init on rapid toggle', async ({ page }) => {
+  test('doc search does not double-init on rapid toggle', async ({ page }) => {
     await page.goto('/');
     await page.locator('.chatbot-fab').click();
     await page.locator('.chatbot-close').click();
     await page.locator('.chatbot-fab').click();
     const greetings = page.locator('.chat-msg.bot');
     // Should still only have 1 greeting
-    await expect(greetings.first()).toContainText('help you find answers');
+    await expect(greetings.first()).toContainText('local search tool');
     expect(await greetings.count()).toBe(1);
   });
 });
 
-// ── Bookmark & feedback ──────────────────────────────────────
+// ── Bookmark ─────────────────────────────────────────────────
 
-test.describe('Bookmark & feedback', () => {
+test.describe('Bookmark', () => {
   test('bookmark button toggles', async ({ page }) => {
     await page.goto('/#setup');
     await page.waitForSelector('#bookmarkBtn');
@@ -347,24 +347,7 @@ test.describe('Bookmark & feedback', () => {
     await expect(btn).not.toHaveClass(/bookmarked/);
   });
 
-  test('feedback widget renders on article pages', async ({ page }) => {
-    await page.goto('/#setup');
-    await expect(page.locator('.page-feedback')).toBeVisible();
-    await expect(page.locator('.feedback-btn')).toHaveCount(2);
-  });
-
-  test('feedback widget does not render on welcome', async ({ page }) => {
-    await page.goto('/');
-    await expect(page.locator('.page-feedback')).not.toBeVisible();
-  });
-
-  test('feedback yes button shows thanks', async ({ page }) => {
-    await page.goto('/#setup');
-    const btn = page.locator('.feedback-btn').first();
-    await btn.scrollIntoViewIfNeeded();
-    await btn.click();
-    await expect(page.locator('.feedback-thanks')).toBeVisible();
-  });
+  // Feedback widget removed (KAY-198) — was non-functional
 });
 
 // ── Touch targets ────────────────────────────────────────────
