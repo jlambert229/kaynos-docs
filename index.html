@@ -57,9 +57,7 @@
   }
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/fonts/fonts.css">
   <link rel="dns-prefetch" href="https://app.kaynos.net" />
   <link rel="alternate" type="application/rss+xml" title="Kaynos What's New" href="/feed.xml" />
   <style>
@@ -1563,7 +1561,7 @@
       </div>
       <label for="searchInput" class="sr-only">Search documentation</label>
       <input type="text" id="searchInput" placeholder="Search docs…"
-        oninput="handleSearch(this.value)" onfocus="showSearchHistory()"
+        oninput="debouncedSearch(this.value)" onfocus="showSearchHistory()"
         autocomplete="off" aria-label="Search documentation" role="combobox"
         aria-expanded="false" aria-controls="searchResults">
       <div class="search-kbd" id="searchKbd"><kbd>⌘</kbd><kbd>K</kbd></div>
@@ -2996,6 +2994,11 @@
   }
 
   /* ── SEARCH ─────────────────────────────────────────── */
+  function debounce(fn, ms) {
+    let t;
+    return function(...args) { clearTimeout(t); t = setTimeout(() => fn.apply(this, args), ms); };
+  }
+  const debouncedSearch = debounce(handleSearch, 150);
   let srIdx = -1;
 
   function fuzzyMatch(text, query) {
@@ -3025,7 +3028,7 @@
         if (idx !== -1) {
           const s = Math.max(0, idx - 45), e = Math.min(textLower.length, idx + q.length + 70);
           const raw = (s > 0 ? '…' : '') + text.slice(s, e) + (e < textLower.length ? '…' : '');
-          snippet = raw.replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').split(/\s+/).join('|'), 'gi'), m => `<mark>${m}</mark>`);
+          snippet = escapeHtml(raw).replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').split(/\s+/).join('|'), 'gi'), m => `<mark>${escapeHtml(m)}</mark>`);
         }
         const score = (titleMatch ? 10 : 0) + (exactIdx !== -1 ? 5 : 0) + (bookmarks.includes(id) ? 2 : 0) + (fuzzy ? 1 : 0);
         results.push({ id, title: page.title, section: page.section, snippet, score, isRead: readPages.includes(id), isBookmarked: bookmarks.includes(id) });
@@ -3036,8 +3039,8 @@
       ? '<div class="search-empty">No results found</div>'
       : results.slice(0, 8).map((r, i) =>
           `<div class="search-result" role="option" id="sr-${i}" data-page="${r.id}" onclick="addSearchHistory(document.getElementById('searchInput').value.trim());navigate('${r.id}')">
-            <div class="sr-title">${r.title}${r.isBookmarked ? '<span class="sr-badge sr-bookmarked" title="Bookmarked">' + IC.bookmarkFill + '</span>' : ''}${r.isRead ? '<span class="sr-badge sr-read" title="Read">' + IC.check + '</span>' : ''}</div>
-            ${r.section ? `<div class="sr-section">${r.section}</div>` : ''}
+            <div class="sr-title">${escapeHtml(r.title)}${r.isBookmarked ? '<span class="sr-badge sr-bookmarked" title="Bookmarked">' + IC.bookmarkFill + '</span>' : ''}${r.isRead ? '<span class="sr-badge sr-read" title="Read">' + IC.check + '</span>' : ''}</div>
+            ${r.section ? `<div class="sr-section">${escapeHtml(r.section)}</div>` : ''}
             ${r.snippet ? `<div class="sr-snippet">${r.snippet}</div>` : ''}
           </div>`
         ).join('');
