@@ -1803,11 +1803,6 @@
     <div class="ql-title">Release notes</div>
     <div class="ql-desc">Changelog, roadmap, and what's coming</div>
   </a>
-  <a class="quick-link" href="#feature-requests" onclick="navigate('feature-requests');return false">
-    <div class="ql-icon">${IC.check}</div>
-    <div class="ql-title">Feature requests</div>
-    <div class="ql-desc">Vote on what we build next</div>
-  </a>
 </div>
 <h2>Get in touch</h2>
 <div class="support-card">
@@ -1841,7 +1836,91 @@
 <li>Hit <strong>Update Password</strong>. Done.</li>
 </ol>
 <h2>Admin area</h2>
-<p>Admins: use <strong>Admin</strong> in the sidebar for roster management, invites, role changes, and an account-wide view of activity. Explore those screens before sending a large batch of invites.</p>`},
+<p>Admins: use <strong>Admin</strong> in the sidebar for roster management, invites, role changes, and an account-wide view of activity. Explore those screens before sending a large batch of invites.</p>
+<details><summary>Quick tips</summary>
+<p>Visual step-by-step guides for the most common tasks in Kaynos.</p>
+<h3>Upload a video</h3>
+<div class="step-tips">
+  <div class="step-tip"><div class="step-num">1</div><div class="step-body"><h4>Create a session or class</h4><p>Go to <strong>Sessions</strong> or <strong>Classes</strong> and click the <strong>New</strong> button.</p></div></div>
+  <div class="step-tip"><div class="step-num">2</div><div class="step-body"><h4>Choose "Upload" as source</h4><p>Select <strong>Upload</strong> (not Vimeo or Notes Only) when prompted for the video source.</p></div></div>
+  <div class="step-tip"><div class="step-num">3</div><div class="step-body"><h4>Drag or select your file</h4><p>Drop the video onto the upload area, or click to browse. MP4 is recommended.</p></div></div>
+  <div class="step-tip"><div class="step-num">4</div><div class="step-body"><h4>Wait for the green check</h4><p>The progress bar shows speed and ETA. Green check = done. Then fill in title, date, and save.</p></div></div>
+</div>
+<h3>Add a timestamped note</h3>
+<div class="step-tips">
+  <div class="step-tip"><div class="step-num">1</div><div class="step-body"><h4>Open the session or class</h4><p>Navigate to the recording you want to annotate.</p></div></div>
+  <div class="step-tip"><div class="step-num">2</div><div class="step-body"><h4>Play to the right moment</h4><p>Use <kbd>J</kbd>/<kbd>L</kbd> to skip, or click the timeline to jump.</p></div></div>
+  <div class="step-tip"><div class="step-num">3</div><div class="step-body"><h4>Press N or click Add Note</h4><p>The video pauses automatically. Type your observation.</p></div></div>
+  <div class="step-tip"><div class="step-num">4</div><div class="step-body"><h4>Save</h4><p>The note appears as a marker on the timeline. Hover to preview, click to jump back.</p></div></div>
+</div>
+<h3>Invite a client</h3>
+<div class="step-tips">
+  <div class="step-tip"><div class="step-num">1</div><div class="step-body"><h4>Go to Admin or Clients</h4><p>Admins use <strong>Admin</strong> for full control. Coaches use <strong>Clients</strong>.</p></div></div>
+  <div class="step-tip"><div class="step-num">2</div><div class="step-body"><h4>Click Add Member / Add Client</h4><p>Enter their name, email, and role.</p></div></div>
+  <div class="step-tip"><div class="step-num">3</div><div class="step-body"><h4>Send the invite</h4><p>They receive an email with a temporary password. Delivery is usually quick.</p></div></div>
+</div>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Full guides: <a onclick="navigate('first-upload')">Your first video upload</a> · <a onclick="navigate('notes')">Notes and timestamps</a> · <a onclick="navigate('inviting-members')">Inviting your team</a></div></div>
+</details>
+<details><summary>Onboarding timeline</summary>
+<p>A suggested four-week plan for gym owners and head coaches getting started with Kaynos.</p>
+<div class="timeline">
+  <div class="timeline-item">
+    <div class="timeline-dot">${IC.rocket}</div>
+    <div class="timeline-week">Week 1</div>
+    <div class="timeline-title">Set up your account</div>
+    <div class="timeline-body">
+      <ul>
+        <li><a onclick="navigate('setup')">Log in and change your password</a></li>
+        <li><a onclick="navigate('roles')">Understand the three roles</a> (admin, coach, client)</li>
+        <li><a onclick="navigate('profile')">Update your profile</a></li>
+        <li>Explore the dashboard — click around before adding others</li>
+      </ul>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-dot">${IC.video}</div>
+    <div class="timeline-week">Week 2</div>
+    <div class="timeline-title">Upload your first content</div>
+    <div class="timeline-body">
+      <ul>
+        <li><a onclick="navigate('upload-checklist')">Run the pre-flight checklist</a></li>
+        <li><a onclick="navigate('first-upload')">Upload your first video</a></li>
+        <li><a onclick="navigate('session-vs-class')">Decide: session or class?</a></li>
+        <li><a onclick="navigate('notes')">Add timestamped notes</a> to your recording</li>
+        <li><a onclick="navigate('tags')">Tag content</a> for easy filtering later</li>
+      </ul>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-dot">${IC.users}</div>
+    <div class="timeline-week">Week 3</div>
+    <div class="timeline-title">Bring your team on board</div>
+    <div class="timeline-body">
+      <ul>
+        <li><a onclick="navigate('inviting-members')">Invite 2-3 coaches first</a> — let them get comfortable</li>
+        <li>Invite a small wave of clients (5-10) as a pilot</li>
+        <li>Ask for feedback — what's confusing? What's working?</li>
+        <li><a onclick="navigate('profile')">Configure email notifications</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-dot">${IC.check}</div>
+    <div class="timeline-week">Week 4</div>
+    <div class="timeline-title">Optimize and scale</div>
+    <div class="timeline-body">
+      <ul>
+        <li>Invite the rest of your roster</li>
+        <li><a onclick="navigate('tags')">Standardize your tag vocabulary</a> with the team</li>
+        <li><a onclick="navigate('progress')">Review progress tracking</a> — see who's watching</li>
+        <li><a onclick="navigate('formats')">Optimize video settings</a> — 1080p H.264 for best results</li>
+        <li>Developers: <a onclick="navigate('developer-api')">explore the API</a> for automation</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>This is a suggested pace — move faster or slower based on your team's comfort. The important thing is that you (the admin) are confident before adding a large wave of clients.</div></div>
+</details>`},
 
     "inviting-members": {
       title: "Inviting your team", section: "Getting Started",
@@ -2281,23 +2360,19 @@
 <li>Click <strong>Update Password</strong>.</li>
 </ol>
 <p>Locked out? Ask an admin for a reset, or email ${mailLink()}. Login help: <a onclick="navigate('login-issues')">Login and access issues</a>.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Profile lives in the app: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> → your name in the sidebar (or menu on mobile).</div></div>`},
-
-    notifications: {
-      title: "Email notifications", section: "Account Management",
-      content: `
-<h1>Email notifications</h1>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Profile lives in the app: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> → your name in the sidebar (or menu on mobile).</div></div>
+<h2>Notifications</h2>
 <p>Email covers new sessions, classes, and onboarding (invites and temporary passwords), but not billing. Toggle preferences under <strong>Profile</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Delivery problems? See <a onclick="navigate('email-issues')">Email and notification issues</a>.</div></div>
-<h2>Typical messages</h2>
+<h3>Typical messages</h3>
 <ul>
 <li>New session assigned (clients)</li>
 <li>New class available (clients)</li>
 <li>Invites and temporary passwords (onboarding)</li>
 </ul>
-<h2>Turning notifications off</h2>
+<h3>Turning notifications off</h3>
 <p><strong>Profile</strong> → <strong>Email Notifications</strong>. Security-related messages (such as password resets) may still send.</p>
-<h2>Not receiving mail</h2>
+<h3>Not receiving mail</h3>
 <ol>
 <li>Check spam or promotions folders.</li>
 <li>Confirm the profile email address is correct.</li>
@@ -2329,7 +2404,7 @@
       content: `
 <h1>Email and notification issues</h1>
 <p>Most delivery problems come from spam filtering, address typos, or disabled notification settings. Preferences are under <strong>Profile</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>What we send: <a onclick="navigate('notifications')">Email notifications</a>. Invites: <a onclick="navigate('inviting-members')">Inviting your team</a>.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>What we send: <a onclick="navigate('profile')">Email notifications</a>. Invites: <a onclick="navigate('inviting-members')">Inviting your team</a>.</div></div>
 <h2>Not receiving messages</h2>
 <ol>
 <li>Check spam or promotions folders (Gmail often sorts automated mail here).</li>
@@ -2365,33 +2440,29 @@
 <ul>
 <li>Refresh once — a single failed request can trigger an error.</li>
 <li>If it repeats, take a screenshot, note what you clicked, and email ${mailLink()}.</li>
-</ul>`},
-
-    mobile: {
-      title: "Mobile device tips", section: "Troubleshooting",
-      content: `
-<h1>Mobile device tips</h1>
+</ul>
+<h2>Mobile tips</h2>
 <p>Kaynos runs in the mobile browser — no app store install needed. Open <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> in your phone's browser.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Upload troubleshooting: <a onclick="navigate('uploading')">Uploading videos</a>.</div></div>
-<h2>Supported browsers</h2>
+<h3>Supported mobile browsers</h3>
 <ul>
 <li>iPhone / iPad: Safari or Chrome</li>
 <li>Android: Chrome or Firefox</li>
 </ul>
-<h2>Upload from a phone</h2>
+<h3>Upload from a phone</h3>
 <p>Tap upload and choose from Photos or Files. Keep the screen on and stay on the tab — backgrounding the browser can pause uploads.</p>
-<h2>Watching video</h2>
+<h3>Watching video on mobile</h3>
 <ul>
 <li>Tap the video for play/pause; on-screen controls may hide after a few seconds.</li>
 <li>Landscape orientation often fits the frame better than portrait.</li>
 <li>Playback speed, notes, and timeline markers match the desktop experience.</li>
 </ul>
-<h2>Add to home screen</h2>
+<h3>Add to home screen</h3>
 <ul>
 <li><strong>iOS:</strong> Share button → Add to Home Screen</li>
 <li><strong>Android:</strong> browser menu → Add to Home Screen</li>
 </ul>
-<h2>Limits</h2>
+<h3>Mobile limits</h3>
 <ul>
 <li>Very large files on older phones can be slow or unstable — a laptop may be more reliable.</li>
 <li>Landscape helps when the notes panel is open on a small display.</li>
@@ -2524,18 +2595,34 @@
       content: `
 <h1>Troubleshooting wizard</h1>
 <p>Answer a few questions and we'll point you to the right fix.</p>
-<div id="wizardContainer"></div>`},
-
-    "error-lookup": {
-      title: "Error message lookup", section: "Troubleshooting",
-      content: `
-<h1>Error message lookup</h1>
+<div id="wizardContainer"></div>
+<details><summary>Error code lookup</summary>
 <p>Paste the error message or describe what you see, and we'll find the relevant help.</p>
 <div class="error-lookup">
   <input class="error-input" id="errorInput" placeholder="e.g. 403, cannot be played, black screen..." oninput="lookupError(this.value)" autocomplete="off" aria-label="Paste error message or describe issue">
   <div class="error-results" id="errorResults"></div>
 </div>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Can't find your error? Email ${mailLink()} with a screenshot and we'll help.</div></div>`},
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Can't find your error? Email ${mailLink()} with a screenshot and we'll help.</div></div>
+</details>
+<details><summary>Browser compatibility check</summary>
+<p>Kaynos works in any modern browser. Here's what yours looks like:</p>
+<div id="browserResult"></div>
+<h3>Recommended browsers</h3>
+<div class="shortcut-grid">
+  <div class="shortcut-card"><span>Chrome (recommended)</span><span style="color:var(--success)">Full support</span></div>
+  <div class="shortcut-card"><span>Firefox</span><span style="color:var(--success)">Full support</span></div>
+  <div class="shortcut-card"><span>Safari</span><span style="color:var(--warning)">Good (MKV may fail)</span></div>
+  <div class="shortcut-card"><span>Edge</span><span style="color:var(--success)">Full support</span></div>
+</div>
+<h3>If something doesn't work</h3>
+<ol>
+<li>Try Chrome — it has the broadest codec and feature support</li>
+<li>Hard refresh: <kbd>Ctrl+Shift+R</kbd> (Windows/Linux) or <kbd>Cmd+Shift+R</kbd> (Mac)</li>
+<li>Clear site data for app.kaynos.net in your browser settings</li>
+<li>Disable ad blockers or strict privacy extensions temporarily</li>
+</ol>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>More troubleshooting: <a onclick="navigate('performance')">Performance and loading</a></div></div>
+</details>`},
 
     contact: {
       title: "Contact support", section: "FAQ",
@@ -2567,175 +2654,32 @@
 </div>`},
 
 
-    "browser-check": {
-      title: "Browser compatibility", section: "Troubleshooting",
-      content: `
-<h1>Browser compatibility</h1>
-<p>Kaynos works in any modern browser. Here's what yours looks like:</p>
-<div id="browserResult"></div>
-<h2>Recommended browsers</h2>
-<div class="shortcut-grid">
-  <div class="shortcut-card"><span>Chrome (recommended)</span><span style="color:var(--success)">Full support</span></div>
-  <div class="shortcut-card"><span>Firefox</span><span style="color:var(--success)">Full support</span></div>
-  <div class="shortcut-card"><span>Safari</span><span style="color:var(--warning)">Good (MKV may fail)</span></div>
-  <div class="shortcut-card"><span>Edge</span><span style="color:var(--success)">Full support</span></div>
-</div>
-<h2>If something doesn't work</h2>
-<ol>
-<li>Try Chrome — it has the broadest codec and feature support</li>
-<li>Hard refresh: <kbd>Ctrl+Shift+R</kbd> (Windows/Linux) or <kbd>Cmd+Shift+R</kbd> (Mac)</li>
-<li>Clear site data for app.kaynos.net in your browser settings</li>
-<li>Disable ad blockers or strict privacy extensions temporarily</li>
-</ol>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>More troubleshooting: <a onclick="navigate('performance')">Performance and loading</a> · <a onclick="navigate('playback')">Watching and reviewing</a></div></div>`},
-
-    "quick-tips": {
-      title: "Quick tips", section: "Getting Started",
-      content: `
-<h1>Quick tips</h1>
-<p>Visual step-by-step guides for the most common tasks in Kaynos.</p>
-<h2>Upload a video</h2>
-<div class="step-tips">
-  <div class="step-tip"><div class="step-num">1</div><div class="step-body"><h4>Create a session or class</h4><p>Go to <strong>Sessions</strong> or <strong>Classes</strong> and click the <strong>New</strong> button.</p></div></div>
-  <div class="step-tip"><div class="step-num">2</div><div class="step-body"><h4>Choose "Upload" as source</h4><p>Select <strong>Upload</strong> (not Vimeo or Notes Only) when prompted for the video source.</p></div></div>
-  <div class="step-tip"><div class="step-num">3</div><div class="step-body"><h4>Drag or select your file</h4><p>Drop the video onto the upload area, or click to browse. MP4 is recommended.</p></div></div>
-  <div class="step-tip"><div class="step-num">4</div><div class="step-body"><h4>Wait for the green check</h4><p>The progress bar shows speed and ETA. Green check = done. Then fill in title, date, and save.</p></div></div>
-</div>
-<h2>Add a timestamped note</h2>
-<div class="step-tips">
-  <div class="step-tip"><div class="step-num">1</div><div class="step-body"><h4>Open the session or class</h4><p>Navigate to the recording you want to annotate.</p></div></div>
-  <div class="step-tip"><div class="step-num">2</div><div class="step-body"><h4>Play to the right moment</h4><p>Use <kbd>J</kbd>/<kbd>L</kbd> to skip, or click the timeline to jump.</p></div></div>
-  <div class="step-tip"><div class="step-num">3</div><div class="step-body"><h4>Press N or click Add Note</h4><p>The video pauses automatically. Type your observation.</p></div></div>
-  <div class="step-tip"><div class="step-num">4</div><div class="step-body"><h4>Save</h4><p>The note appears as a marker on the timeline. Hover to preview, click to jump back.</p></div></div>
-</div>
-<h2>Invite a client</h2>
-<div class="step-tips">
-  <div class="step-tip"><div class="step-num">1</div><div class="step-body"><h4>Go to Admin or Clients</h4><p>Admins use <strong>Admin</strong> for full control. Coaches use <strong>Clients</strong>.</p></div></div>
-  <div class="step-tip"><div class="step-num">2</div><div class="step-body"><h4>Click Add Member / Add Client</h4><p>Enter their name, email, and role.</p></div></div>
-  <div class="step-tip"><div class="step-num">3</div><div class="step-body"><h4>Send the invite</h4><p>They receive an email with a temporary password. Delivery is usually quick.</p></div></div>
-</div>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Full guides: <a onclick="navigate('first-upload')">Your first video upload</a> · <a onclick="navigate('notes')">Notes and timestamps</a> · <a onclick="navigate('inviting-members')">Inviting your team</a></div></div>`},
-
-    "onboarding-timeline": {
-      title: "Coach onboarding timeline", section: "Getting Started",
-      content: `
-<h1>Coach onboarding timeline</h1>
-<p>A suggested four-week plan for gym owners and head coaches getting started with Kaynos.</p>
-<div class="timeline">
-  <div class="timeline-item">
-    <div class="timeline-dot">${IC.rocket}</div>
-    <div class="timeline-week">Week 1</div>
-    <div class="timeline-title">Set up your account</div>
-    <div class="timeline-body">
-      <ul>
-        <li><a onclick="navigate('setup')">Log in and change your password</a></li>
-        <li><a onclick="navigate('roles')">Understand the three roles</a> (admin, coach, client)</li>
-        <li><a onclick="navigate('profile')">Update your profile</a></li>
-        <li>Explore the dashboard — click around before adding others</li>
-      </ul>
-    </div>
-  </div>
-  <div class="timeline-item">
-    <div class="timeline-dot">${IC.video}</div>
-    <div class="timeline-week">Week 2</div>
-    <div class="timeline-title">Upload your first content</div>
-    <div class="timeline-body">
-      <ul>
-        <li><a onclick="navigate('uploading')">Run the upload pre-flight checklist</a></li>
-        <li><a onclick="navigate('first-upload')">Upload your first video</a></li>
-        <li><a onclick="navigate('creating-sessions')">Decide: session or class?</a></li>
-        <li><a onclick="navigate('notes')">Add timestamped notes</a> to your recording</li>
-        <li><a onclick="navigate('notes')">Tag content</a> for easy filtering later</li>
-      </ul>
-    </div>
-  </div>
-  <div class="timeline-item">
-    <div class="timeline-dot">${IC.users}</div>
-    <div class="timeline-week">Week 3</div>
-    <div class="timeline-title">Bring your team on board</div>
-    <div class="timeline-body">
-      <ul>
-        <li><a onclick="navigate('inviting-members')">Invite 2-3 coaches first</a> — let them get comfortable</li>
-        <li>Invite a small wave of clients (5-10) as a pilot</li>
-        <li>Ask for feedback — what's confusing? What's working?</li>
-        <li><a onclick="navigate('notifications')">Configure email notifications</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="timeline-item">
-    <div class="timeline-dot">${IC.check}</div>
-    <div class="timeline-week">Week 4</div>
-    <div class="timeline-title">Optimize and scale</div>
-    <div class="timeline-body">
-      <ul>
-        <li>Invite the rest of your roster</li>
-        <li><a onclick="navigate('notes')">Standardize your tag vocabulary</a> with the team</li>
-        <li><a onclick="navigate('progress')">Review progress tracking</a> — see who's watching</li>
-        <li><a onclick="navigate('formats')">Optimize video settings</a> — 1080p H.264 for best results</li>
-        <li>Developers: <a onclick="navigate('developer-api')">explore the API</a> for automation</li>
-      </ul>
-    </div>
-  </div>
-</div>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>This is a suggested pace — move faster or slower based on your team's comfort. The important thing is that you (the admin) are confident before adding a large wave of clients.</div></div>`},
-
-    "whats-new": {
-      title: "What's new", section: "",
-      content: `
-<h1>What's new</h1>
-<p>Recent updates and improvements to Kaynos.</p>
-<h2>April 2026</h2>
-<h3>Help center refresh</h3>
-<ul>
-<li>Improved search with highlighted snippets and keyboard navigation.</li>
-<li>Added keyboard shortcuts for faster navigation — press <kbd>?</kbd> to see them all.</li>
-<li>Print-friendly styles for saving pages offline.</li>
-<li>Better accessibility: skip-to-content, improved ARIA labels, focus management.</li>
-</ul>
-<h3>Developer API docs</h3>
-<ul>
-<li>Full API reference with Swagger UI link, scopes, and token management.</li>
-<li>OpenAPI spec available on GitHub.</li>
-</ul>
-<h2>March 2026</h2>
-<h3>Video playback</h3>
-<ul>
-<li>Keyboard shortcuts during playback: <strong>Space/K</strong> (play/pause), <strong>J/L</strong> (skip), <strong>N</strong> (note), <strong>F</strong> (fullscreen).</li>
-<li>Timeline note markers with hover preview.</li>
-<li>Playback speed controls from 0.5x to 2x.</li>
-</ul>
-<h3>Upload improvements</h3>
-<ul>
-<li>Chunked parallel upload for files over 100 MB with automatic retry.</li>
-<li>Real-time speed and ETA display during upload.</li>
-</ul>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Have a feature request? <a onclick="navigate('feature-requests')">Vote on what we build next</a> or email ${mailLink()}.</div></div>`},
-
     "release-notes": {
       title: "Release notes", section: "",
       content: `
 <h1>Release notes</h1>
 <p>Detailed changelog of everything shipped, in progress, and planned for Kaynos.</p>
+<h2>Recent highlights</h2>
+<h3>April 2026</h3>
+<ul>
+<li>Help center refresh: improved search with highlighted snippets and keyboard navigation.</li>
+<li>Added keyboard shortcuts for faster navigation — press <kbd>?</kbd> to see them all.</li>
+<li>Print-friendly styles for saving pages offline.</li>
+<li>Better accessibility: skip-to-content, improved ARIA labels, focus management.</li>
+<li>Full API reference with Swagger UI link, scopes, and token management.</li>
+</ul>
+<h3>March 2026</h3>
+<ul>
+<li>Keyboard shortcuts during playback: <strong>Space/K</strong> (play/pause), <strong>J/L</strong> (skip), <strong>N</strong> (note), <strong>F</strong> (fullscreen).</li>
+<li>Timeline note markers with hover preview.</li>
+<li>Playback speed controls from 0.5x to 2x.</li>
+<li>Chunked parallel upload for files over 100 MB with automatic retry.</li>
+<li>Real-time speed and ETA display during upload.</li>
+</ul>
+<h2>Full changelog</h2>
 <div class="release-filter" id="releaseFilter"></div>
 <div id="releaseList"></div>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Want to influence what we build? <a onclick="navigate('feature-requests')">Vote on feature requests</a> or email ${mailLink()}.</div></div>`},
-
-    "feature-requests": {
-      title: "Feature requests", section: "",
-      content: `
-<h1>Feature requests</h1>
-<p>Vote on the features you want most. Votes are saved on this device only and are not sent to Kaynos.</p>
-<div class="poll-total" id="pollTotal"></div>
-<div class="poll-sort" id="pollSort"></div>
-<div class="poll-list" id="pollList"></div>
-<div class="poll-submit">
-  <div class="poll-submit-title">Suggest a feature</div>
-  <div class="poll-submit-row">
-    <input class="poll-submit-input" id="pollInput" placeholder="Describe your feature idea..." maxlength="140" aria-label="Feature suggestion" onkeydown="if(event.key==='Enter')submitPollIdea()">
-    <button class="poll-submit-btn" onclick="submitPollIdea()">Submit</button>
-  </div>
-</div>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Votes are saved in your browser. For detailed requests, email ${mailLink()} with specifics.</div></div>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Have feedback on what we should build? Email ${mailLink()}.</div></div>`},
 
     "privacy-on-this-site": {
       title: "Privacy on this site", section: "Legal",
@@ -2775,13 +2719,13 @@
   };
 
   const NAV = [
-    { section: "", pages: ["welcome", "whats-new", "release-notes", "feature-requests"] },
-    { section: "Getting Started", pages: ["setup", "inviting-members", "first-upload", "roles", "glossary", "quick-tips", "onboarding-timeline"] },
+    { section: "", pages: ["welcome", "release-notes"] },
+    { section: "Getting Started", pages: ["setup", "inviting-members", "first-upload", "roles", "glossary"] },
     { section: "Video", pages: ["uploading", "playback", "formats", "storage"] },
     { section: "Sessions & Classes", pages: ["creating-sessions", "creating-classes", "notes", "progress"] },
-    { section: "Account Management", pages: ["managing-members", "profile", "notifications"] },
+    { section: "Account Management", pages: ["managing-members", "profile"] },
     { section: "Developers", pages: ["developer-api"] },
-    { section: "Troubleshooting", pages: ["troubleshoot", "error-lookup", "browser-check", "login-issues", "email-issues", "performance", "mobile"] },
+    { section: "Troubleshooting", pages: ["troubleshoot", "login-issues", "email-issues", "performance"] },
     { section: "FAQ", pages: ["faq", "contact"] },
     { section: "Legal", pages: ["privacy-on-this-site"] }
   ];
