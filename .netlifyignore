@@ -1,0 +1,10 @@
+node_modules/
+package-lock.json
+tests/
+playwright.config.js
+playwright-report/
+test-results/
+.github/
+docs/
+CLAUDE.md
+.claude/
