@@ -3442,6 +3442,7 @@
     renderCopyArticleBtn(pc, pageId);
     if (pageId === 'welcome') renderWelcomeBack(pc);
     if (pageId === 'welcome') renderChecklist(pc);
+    if (pageId === 'welcome') personalizeWelcome(pc);
     if (pageId === 'troubleshoot') renderWizard('start');
     if (pageId === 'uploading') renderPreflight();
     if (pageId === 'release-notes') renderReleases();
@@ -3648,6 +3649,71 @@
     if (role && CHECKLIST_ITEMS[role] && done.length >= CHECKLIST_ITEMS[role].length) {
       const allDone = CHECKLIST_ITEMS[role].every(i => done.includes(i.id));
       if (allDone) showToast('Getting started complete — nice work!');
+    }
+  }
+
+  function personalizeWelcome(container) {
+    const role = localStorage.getItem('user-role');
+    if (!role) return; // keep generic links for first-time visitors
+
+    const ROLE_LINKS = {
+      admin: [
+        { href: 'setup', icon: IC.rocket, title: 'Set up your academy', desc: 'First login, password, and admin basics', featured: true },
+        { href: 'inviting-members', icon: IC.users, title: 'Invite your team', desc: 'Add coaches and students', featured: true },
+        { href: 'roles', icon: IC.book, title: 'Roles & permissions', desc: 'Who can do what', featured: true },
+        { href: 'uploading', icon: IC.video, title: 'Upload video', desc: 'Get your first recording in' },
+        { href: 'managing-members', icon: IC.users, title: 'Manage members', desc: 'Roster, passwords, and role changes' },
+        { href: 'troubleshoot', icon: IC.alert, title: 'Fix a problem', desc: 'Step-by-step troubleshooting' },
+      ],
+      coach: [
+        { href: 'first-upload', icon: IC.video, title: 'Your first upload', desc: 'Record and upload in minutes', featured: true },
+        { href: 'creating-sessions', icon: IC.rocket, title: 'Create a session', desc: 'Private lessons and group classes', featured: true },
+        { href: 'notes', icon: IC.book, title: 'Notes & tags', desc: 'Timestamped feedback for students', featured: true },
+        { href: 'playback', icon: IC.play, title: 'Playback & review', desc: 'Watch, annotate, and share' },
+        { href: 'uploading', icon: IC.video, title: 'Uploading guide', desc: 'Formats, limits, and troubleshooting' },
+        { href: 'faq', icon: IC.chat, title: 'FAQ', desc: 'Common questions answered' },
+      ],
+      client: [
+        { href: 'playback', icon: IC.play, title: 'Watch your sessions', desc: 'Playback, shortcuts, and notes', featured: true },
+        { href: 'notes', icon: IC.book, title: 'Notes & feedback', desc: 'Read coach notes, leave replies', featured: true },
+        { href: 'troubleshoot', icon: IC.alert, title: 'Fix a problem', desc: 'Step-by-step troubleshooting', featured: true },
+        { href: 'progress', icon: IC.check, title: 'Your progress', desc: 'Track what you\'ve watched' },
+        { href: 'faq', icon: IC.chat, title: 'FAQ', desc: 'Common questions' },
+        { href: 'performance', icon: IC.alert, title: 'Performance tips', desc: 'Speed up loading and playback' },
+      ],
+      developer: [
+        { href: 'developer-api', icon: IC.book, title: 'API reference', desc: 'Auth, endpoints, and schemas', featured: true },
+        { href: 'formats', icon: IC.video, title: 'Video formats', desc: 'Supported codecs and limits', featured: true },
+        { href: 'glossary', icon: IC.book, title: 'Glossary', desc: 'Platform terminology', featured: true },
+        { href: 'faq', icon: IC.chat, title: 'FAQ', desc: 'Common questions' },
+        { href: 'storage', icon: IC.info, title: 'Storage & limits', desc: 'Quotas and data residency' },
+        { href: 'troubleshoot', icon: IC.alert, title: 'Troubleshooting', desc: 'Debug common issues' },
+      ],
+    };
+
+    const links = ROLE_LINKS[role];
+    if (!links) return;
+
+    const ql = container.querySelector('.quick-links');
+    if (!ql) return;
+
+    ql.innerHTML = links.map(l =>
+      `<a class="quick-link${l.featured ? ' featured' : ''}" href="#${l.href}" onclick="navigate('${l.href}');return false">
+        <div class="ql-icon">${l.icon}</div>
+        <div class="ql-title">${l.title}</div>
+        <div class="ql-desc">${l.desc}</div>
+      </a>`
+    ).join('');
+
+    const heroP = container.querySelector('.hero p');
+    if (heroP) {
+      const ROLE_SUBTITLES = {
+        admin: 'Set up your academy, invite your team, and manage everything from one place.',
+        coach: 'Upload sessions, give timestamped feedback, and track student progress.',
+        client: 'Watch your sessions, read coach notes, and track your progress.',
+        developer: 'Integrate with the Kaynos API — auth, endpoints, and schemas.',
+      };
+      if (ROLE_SUBTITLES[role]) heroP.textContent = ROLE_SUBTITLES[role];
     }
   }
 
