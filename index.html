@@ -1447,6 +1447,33 @@
       white-space: nowrap;
     }
     .poll-submit-btn:hover { background: var(--accent-hover); }
+
+    /* ── FEATURE REQUEST FORM ─── */
+    .feature-form { max-width: 560px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: .8125rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+    .form-group .optional { font-weight: 400; color: var(--text-tertiary); }
+    .form-group .required { color: var(--danger, #e55); }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px;
+      background: var(--bg); color: var(--text-primary); font-size: .875rem; font-family: inherit;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--accent); outline: none; }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-group select { appearance: auto; }
+    .form-submit {
+      padding: 10px 24px; background: var(--accent); color: #fff; border: none; border-radius: 8px;
+      font-size: .875rem; font-weight: 600; cursor: pointer; transition: background .15s;
+    }
+    .form-submit:hover { background: var(--accent-hover); }
+    .form-submit:disabled { opacity: .5; cursor: not-allowed; }
+    .form-success { text-align: center; padding: 32px 0; }
+    .form-success .success-icon { width: 48px; height: 48px; color: var(--success); margin: 0 auto 12px; }
+    .form-success .success-icon svg { width: 100%; height: 100%; }
+    .form-success h3 { margin: 0 0 8px; color: var(--text-primary); }
+    .form-success p { color: var(--text-secondary); margin: 0 0 16px; }
+    .form-another { padding: 8px 16px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 6px; color: var(--text-primary); cursor: pointer; font-size: .8125rem; }
+    .form-another:hover { border-color: var(--accent); color: var(--accent); }
     .poll-total { font-size: .75rem; color: var(--text-tertiary); margin-bottom: 16px; }
 
     /* ── WELCOME BACK BAR ─── */
@@ -1719,6 +1746,16 @@
     </svg>
   </button>
 
+  <!-- Netlify Forms hidden detection form (must be in static HTML for Netlify to register it) -->
+  <form name="feature-request" netlify netlify-honeypot="bot-field" hidden>
+    <input name="bot-field">
+    <input name="name">
+    <input name="email">
+    <input name="title">
+    <textarea name="description"></textarea>
+    <input name="priority">
+  </form>
+
   <!-- Offline Banner -->
   <div class="offline-banner" id="offlineBanner">You're offline — some features may not work</div>
 
@@ -1925,6 +1962,11 @@
     <div class="ql-icon">${IC.sparkle}</div>
     <div class="ql-title">Release notes</div>
     <div class="ql-desc">Changelog, roadmap, and what's coming</div>
+  </a>
+  <a class="quick-link" href="#feature-requests" onclick="navigate('feature-requests');return false">
+    <div class="ql-icon">${IC.rocket}</div>
+    <div class="ql-title">Request a feature</div>
+    <div class="ql-desc">Tell us what to build next</div>
   </a>
 </div>
 <h2>Get in touch</h2>
@@ -2909,7 +2951,49 @@
 <h2>Full changelog</h2>
 <div class="release-filter" id="releaseFilter"></div>
 <div id="releaseList"></div>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Have feedback on what we should build? Email ${mailLink()}.</div></div>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Have an idea? <a onclick="navigate('feature-requests')">Submit a feature request</a> or email ${mailLink()}.</div></div>`},
+
+    "feature-requests": {
+      title: "Feature requests", section: "",
+      content: `
+<h1>Feature requests</h1>
+<div class="tldr"><strong>TL;DR:</strong> Tell us what you want Kaynos to do. Every submission is reviewed by the team.</div>
+<p>Your feedback directly shapes what we build. Describe the feature you'd like and we'll track it internally.</p>
+<form id="featureForm" class="feature-form" method="POST" data-netlify="true" name="feature-request" netlify-honeypot="bot-field">
+  <input type="hidden" name="form-name" value="feature-request">
+  <p class="hidden" style="display:none"><input name="bot-field"></p>
+  <div class="form-group">
+    <label for="fr-name">Your name <span class="optional">(optional)</span></label>
+    <input type="text" id="fr-name" name="name" placeholder="Jane Smith" autocomplete="name">
+  </div>
+  <div class="form-group">
+    <label for="fr-email">Email <span class="optional">(optional — only if you want a reply)</span></label>
+    <input type="email" id="fr-email" name="email" placeholder="you@example.com" autocomplete="email">
+  </div>
+  <div class="form-group">
+    <label for="fr-title">Feature title <span class="required">*</span></label>
+    <input type="text" id="fr-title" name="title" placeholder="e.g. Side-by-side video comparison" required>
+  </div>
+  <div class="form-group">
+    <label for="fr-desc">Description <span class="required">*</span></label>
+    <textarea id="fr-desc" name="description" rows="4" placeholder="What problem does this solve? How would you use it?" required></textarea>
+  </div>
+  <div class="form-group">
+    <label for="fr-priority">How important is this to you?</label>
+    <select id="fr-priority" name="priority">
+      <option value="nice-to-have">Nice to have</option>
+      <option value="important">Important — would use regularly</option>
+      <option value="critical">Critical — blocking my workflow</option>
+    </select>
+  </div>
+  <button type="submit" class="form-submit">Submit request</button>
+</form>
+<div id="featureSuccess" class="form-success" style="display:none">
+  <div class="success-icon">${IC.check}</div>
+  <h3>Thanks for your suggestion!</h3>
+  <p>We've received your feature request and will review it. If you left an email, we may follow up with questions.</p>
+  <button class="form-another" onclick="document.getElementById('featureForm').reset();document.getElementById('featureForm').style.display='';document.getElementById('featureSuccess').style.display='none'">Submit another</button>
+</div>`},
 
     "privacy-on-this-site": {
       title: "Privacy on this site", section: "Legal",
@@ -2949,7 +3033,7 @@
   };
 
   const NAV = [
-    { section: "", pages: ["welcome", "release-notes"] },
+    { section: "", pages: ["welcome", "release-notes", "feature-requests"] },
     { section: "Getting Started", pages: ["setup", "inviting-members", "first-upload", "roles", "glossary"] },
     { section: "Video", pages: ["uploading", "playback", "formats", "storage"] },
     { section: "Sessions & Classes", pages: ["creating-sessions", "creating-classes", "notes", "progress"] },
@@ -3073,7 +3157,6 @@
   /* ── REDIRECTS ──────────────────────────────────────── */
   const REDIRECTS = {
     'whats-new': 'release-notes',
-    'feature-requests': 'release-notes',
     'quick-tips': 'setup',
     'onboarding-timeline': 'setup',
     'upload-checklist': 'uploading',
@@ -4709,6 +4792,32 @@
     showToast('Idea submitted — vote for it!');
     renderPoll();
   }
+
+  /* ── FEATURE REQUEST FORM (Netlify Forms AJAX) ────── */
+  document.addEventListener('submit', function(e) {
+    if (e.target.id !== 'featureForm') return;
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('.form-submit');
+    if (btn) { btn.disabled = true; btn.textContent = 'Submitting...'; }
+    const data = new FormData(form);
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(data).toString(),
+    }).then(res => {
+      if (res.ok) {
+        form.style.display = 'none';
+        document.getElementById('featureSuccess').style.display = '';
+      } else {
+        showToast('Something went wrong — please try again or email support.');
+        if (btn) { btn.disabled = false; btn.textContent = 'Submit request'; }
+      }
+    }).catch(() => {
+      showToast('Network error — check your connection and try again.');
+      if (btn) { btn.disabled = false; btn.textContent = 'Submit request'; }
+    });
+  });
 
   /* ── LANGUAGE TOGGLE ───────────────────────────────── */
   let currentLang = localStorage.getItem('lang') || 'en';
