@@ -1523,6 +1523,13 @@
       #toast { bottom: 68px; }
       .nudge-prompt { bottom: 68px; }
     }
+
+    /* ── SITE FOOTER ─── */
+    .site-footer { background: var(--bg-elevated); border-top: 1px solid var(--border); padding: 20px 24px; margin-top: auto; }
+    .footer-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; font-size: .75rem; color: var(--text-secondary); }
+    .footer-links { display: flex; gap: 14px; }
+    .footer-links a { color: var(--text-secondary); text-decoration: none; cursor: pointer; transition: color var(--dur) var(--ease); }
+    .footer-links a:hover { color: var(--accent); }
   </style>
 </head>
 <body>
@@ -1606,6 +1613,16 @@
         <aside class="toc" id="toc" aria-label="On this page"></aside>
       </div>
     </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <span>&copy; 2024–2026 Kaynos. All rights reserved.</span>
+        <nav class="footer-links">
+          <a href="https://app.kaynos.net/terms" target="_blank" rel="noopener">Terms</a>
+          <a href="https://app.kaynos.net/privacy" target="_blank" rel="noopener">Privacy</a>
+          <a onclick="navigate('privacy-on-this-site')">Site Privacy</a>
+        </nav>
+      </div>
+    </footer>
   </div>
 
   <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
@@ -1890,7 +1907,7 @@
 </tbody></table>
 <p>Maximum file size is <strong>5 GB</strong>. Full details: <a onclick="navigate('formats')">Supported formats and limits</a>.</p>
 <h2>Vimeo</h2>
-<p>Use the <strong>Vimeo</strong> source option and paste the URL or video ID to embed video already hosted on <a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a>.</p>
+<p>Use the <strong>Vimeo</strong> source option and paste the URL or video ID to embed video already hosted on <a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a>. If using a Vimeo video source, your use is also subject to <a href="https://vimeo.com/terms" target="_blank" rel="noopener">Vimeo's Terms of Service</a>.</p>
 <h2>Recording tips</h2>
 <ul>
 <li><strong>Landscape orientation.</strong> Your TV and your phone both want it.</li>
@@ -1998,7 +2015,9 @@
 <li>HTTPS for all data in transit.</li>
 <li>Account data is isolated — your files are not mixed with other organizations' storage.</li>
 <li>Playback URLs are time-limited. Share access inside Kaynos rather than relying on long-lived direct links.</li>
-</ul>`},
+</ul>
+<h2>Data residency</h2>
+<p>Videos are stored in Backblaze B2 (US). Content is delivered globally via Cloudflare CDN. For EU customers: both Backblaze and Cloudflare offer Standard Contractual Clauses (SCCs) in their Data Processing Agreements. Contact <a href="https://app.kaynos.net/terms" target="_blank">support</a> for SCC documentation.</p>`},
 
     "creating-sessions": {
       title: "Creating a session", section: "Sessions & Classes",
@@ -2327,7 +2346,8 @@
 <h3>How serious are you about security?</h3>
 <p>HTTPS in transit, hashed passwords, and video in cloud storage behind a CDN. See <a onclick="navigate('storage')">Video storage and retention</a> for details.</p>
 <h3>What about minors on the footage?</h3>
-<p>You are responsible for waivers, parental consent, and local law — the same as for any training footage. Read the <a href="https://app.kaynos.net/terms" target="_blank" rel="noopener">Terms of Service</a> in the app. For legal questions, consult qualified counsel.</p>
+<p>Kaynos is not currently designed for users under 13 (COPPA) or under 16 in the EU (GDPR Article 8). Organizations using Kaynos with minors are responsible for obtaining appropriate parental or guardian consent. Schools using Kaynos for student records should contact us about FERPA-compliant data processing agreements.</p>
+<p>Read the <a href="https://app.kaynos.net/terms" target="_blank" rel="noopener">Terms of Service</a> in the app. For legal questions, consult qualified counsel.</p>
 <hr>
 <h2>Devices and integrations</h2>
 <h3>Which browsers are supported?</h3>
@@ -2734,7 +2754,43 @@
     <button class="poll-submit-btn" onclick="submitPollIdea()">Submit</button>
   </div>
 </div>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Votes are saved in your browser. For detailed requests, email ${mailLink()} with specifics.</div></div>`}
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Votes are saved in your browser. For detailed requests, email ${mailLink()} with specifics.</div></div>`},
+
+    "privacy-on-this-site": {
+      title: "Privacy on this site", section: "Legal",
+      content: `
+<h1>Privacy on this site</h1>
+<p>This help center is a static site hosted on Netlify. It does not require login and does not track you across sessions.</p>
+
+<h2>What stays in your browser</h2>
+<p>We use <code>localStorage</code> and <code>sessionStorage</code> to remember your preferences. This data never leaves your device.</p>
+<table class="comparison-table">
+<thead><tr><th>Key</th><th>Purpose</th><th>Storage</th></tr></thead>
+<tbody>
+<tr><td>theme</td><td>Dark/light mode preference</td><td>localStorage</td></tr>
+<tr><td>text-size</td><td>Font size preference</td><td>localStorage</td></tr>
+<tr><td>lang</td><td>Language preference (EN/ES)</td><td>localStorage</td></tr>
+<tr><td>bookmarks</td><td>Bookmarked help pages</td><td>localStorage</td></tr>
+<tr><td>read-pages</td><td>Pages you've visited</td><td>localStorage</td></tr>
+<tr><td>recent-pages</td><td>Recently viewed pages</td><td>localStorage</td></tr>
+<tr><td>search-history</td><td>Recent search terms</td><td>localStorage</td></tr>
+<tr><td>poll-votes, poll-voted, poll-custom</td><td>Feature poll votes</td><td>localStorage</td></tr>
+<tr><td>highlights</td><td>Text highlights you've made</td><td>localStorage</td></tr>
+<tr><td>scroll-pos</td><td>Scroll position per page</td><td>localStorage</td></tr>
+<tr><td>onboarded, checklist-done</td><td>Onboarding progress</td><td>localStorage</td></tr>
+<tr><td>nudge-dismissed</td><td>Whether you dismissed the help nudge</td><td>sessionStorage</td></tr>
+<tr><td>sb-collapsed</td><td>Sidebar collapsed state</td><td>localStorage</td></tr>
+</tbody>
+</table>
+
+<h2>What is sent externally</h2>
+<p>No analytics, tracking pixels, or cookies are used. The "Contact Support" form composes a <code>mailto:</code> link — your email client sends the message, not this site.</p>
+
+<h2>Third-party resources</h2>
+<p>This site loads fonts from your browser's cache (self-hosted). No external requests are made after the initial page load, except when clicking external links.</p>
+
+<p>For the Kaynos application privacy policy, see <a href="https://app.kaynos.net/privacy" target="_blank" rel="noopener">app.kaynos.net/privacy</a>.</p>
+<div class="hint hint-info"><div class="hint-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.5"/><line x1="8" y1="7" x2="8" y2="11"/><circle cx="8" cy="5" r=".5" fill="currentColor"/></svg></div><div>This page describes only the help center at docs.kaynos.net. The Kaynos application has its own privacy policy.</div></div>`}
   };
 
   const NAV = [
@@ -2745,7 +2801,8 @@
     { section: "Account Management", pages: ["managing-members", "profile", "notifications"] },
     { section: "Developers", pages: ["developer-api"] },
     { section: "Troubleshooting", pages: ["troubleshoot", "error-lookup", "browser-check", "upload-issues", "playback-issues", "login-issues", "email-issues", "performance", "mobile"] },
-    { section: "FAQ", pages: ["faq", "contact"] }
+    { section: "FAQ", pages: ["faq", "contact"] },
+    { section: "Legal", pages: ["privacy-on-this-site"] }
   ];
 
   const allPageKeys = NAV.flatMap(g => g.pages);
