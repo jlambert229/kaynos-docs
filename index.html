@@ -3635,6 +3635,12 @@
     if (done.includes(id)) done = done.filter(x => x !== id);
     else done.push(id);
     localStorage.setItem('checklist-done', JSON.stringify(done));
+    // Check if all items are now complete
+    const role = localStorage.getItem('user-role');
+    if (role && CHECKLIST_ITEMS[role] && done.length >= CHECKLIST_ITEMS[role].length) {
+      const allDone = CHECKLIST_ITEMS[role].every(i => done.includes(i.id));
+      if (allDone) showToast('Getting started complete — nice work!');
+    }
   }
 
   function renderChecklist(container) {
@@ -3643,6 +3649,9 @@
     const items = CHECKLIST_ITEMS[role];
     const done = getChecklist();
     const doneCount = items.filter(i => done.includes(i.id)).length;
+
+    // All items complete — don't render the checklist
+    if (doneCount === items.length) return;
 
     const div = document.createElement('div');
     div.className = 'checklist';
