@@ -188,7 +188,7 @@ test.describe('Icon rendering', () => {
   });
 
   test('onboarding timeline renders dot icons', async ({ page }) => {
-    await page.goto('/#onboarding-timeline');
+    await page.goto('/#setup');
     await page.waitForSelector('.content-inner h1');
     const dots = page.locator('.timeline-dot');
     expect(await dots.count()).toBe(4);
@@ -239,7 +239,7 @@ test.describe('Widgets', () => {
   });
 
   test('error lookup returns matches', async ({ page }) => {
-    await page.goto('/#error-lookup');
+    await page.goto('/#troubleshoot');
     await page.fill('#errorInput', '403');
     await expect(page.locator('.error-match')).toHaveCount(1);
   });
@@ -486,70 +486,25 @@ test.describe('Release notes', () => {
   });
 });
 
-// ── Feature requests ─────────────────────────────────────────
+// ── Redirects ───────────────────────────────────────────────
 
-test.describe('Feature requests', () => {
-  test('feature poll page loads with items', async ({ page }) => {
+test.describe('Redirects', () => {
+  test('old page IDs redirect to new targets', async ({ page }) => {
     await page.goto('/#feature-requests');
-    await expect(page.locator('.content-inner h1')).toContainText('Feature requests');
-    await expect(page.locator('.poll-item')).not.toHaveCount(0);
+    await page.waitForSelector('.content-inner h1');
+    await expect(page).toHaveURL(/#release-notes/);
+    await expect(page.locator('.content-inner h1')).toContainText('Release notes');
   });
 
-  test('poll items have vote button, title, and tag', async ({ page }) => {
-    await page.goto('/#feature-requests');
-    await page.waitForSelector('.poll-item');
-    const first = page.locator('.poll-item').first();
-    await expect(first.locator('.poll-vote-btn')).toBeVisible();
-    await expect(first.locator('.poll-item-title')).toBeVisible();
-    await expect(first.locator('.poll-item-tag')).toBeVisible();
+  test('whats-new redirects to release-notes', async ({ page }) => {
+    await page.goto('/#whats-new');
+    await page.waitForSelector('.content-inner h1');
+    await expect(page).toHaveURL(/#release-notes/);
   });
 
-  test('voting toggles vote state', async ({ page }) => {
-    await page.goto('/#feature-requests');
-    await page.waitForSelector('.poll-vote-btn');
-    const btn = page.locator('.poll-vote-btn').first();
-    const countBefore = await btn.locator('.poll-vote-count').textContent();
-    await btn.click();
-    await expect(btn).toHaveClass(/voted/);
-    const countAfter = await btn.locator('.poll-vote-count').textContent();
-    expect(parseInt(countAfter)).toBe(parseInt(countBefore) + 1);
-    // Unvote
-    await btn.click();
-    await expect(btn).not.toHaveClass(/voted/);
-  });
-
-  test('sort buttons work', async ({ page }) => {
-    await page.goto('/#feature-requests');
-    await page.waitForSelector('.poll-sort-btn');
-    await page.locator('.poll-sort-btn', { hasText: 'A–Z' }).click();
-    await expect(page.locator('.poll-sort-btn', { hasText: 'A–Z' })).toHaveClass(/active/);
-  });
-
-  test('submit idea adds to list', async ({ page }) => {
-    await page.goto('/#feature-requests');
-    await page.waitForSelector('.poll-item');
-    const countBefore = await page.locator('.poll-item').count();
-    const input = page.locator('#pollInput');
-    await input.scrollIntoViewIfNeeded();
-    await input.fill('Dark mode per-session');
-    await page.locator('.poll-submit-btn').click();
-    const countAfter = await page.locator('.poll-item').count();
-    expect(countAfter).toBe(countBefore + 1);
-  });
-
-  test('submit rejects short ideas', async ({ page }) => {
-    await page.goto('/#feature-requests');
-    const input = page.locator('#pollInput');
-    await input.scrollIntoViewIfNeeded();
-    await input.fill('Hi');
-    await page.locator('.poll-submit-btn').click();
-    // Should show toast, not add item
-    await expect(page.locator('#toast')).toHaveClass(/show/, { timeout: 5000 });
-  });
-
-  test('total votes counter updates', async ({ page }) => {
-    await page.goto('/#feature-requests');
-    await page.waitForSelector('.poll-total');
-    await expect(page.locator('.poll-total')).toBeVisible();
+  test('upload-checklist redirects to uploading', async ({ page }) => {
+    await page.goto('/#upload-checklist');
+    await page.waitForSelector('.content-inner h1');
+    await expect(page).toHaveURL(/#uploading/);
   });
 });

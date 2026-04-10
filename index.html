@@ -1883,11 +1883,11 @@
     <div class="timeline-title">Upload your first content</div>
     <div class="timeline-body">
       <ul>
-        <li><a onclick="navigate('upload-checklist')">Run the pre-flight checklist</a></li>
+        <li><a onclick="navigate('uploading')">Run the pre-flight checklist</a></li>
         <li><a onclick="navigate('first-upload')">Upload your first video</a></li>
-        <li><a onclick="navigate('session-vs-class')">Decide: session or class?</a></li>
+        <li><a onclick="navigate('creating-sessions')">Decide: session or class?</a></li>
         <li><a onclick="navigate('notes')">Add timestamped notes</a> to your recording</li>
-        <li><a onclick="navigate('tags')">Tag content</a> for easy filtering later</li>
+        <li><a onclick="navigate('notes')">Tag content</a> for easy filtering later</li>
       </ul>
     </div>
   </div>
@@ -1911,7 +1911,7 @@
     <div class="timeline-body">
       <ul>
         <li>Invite the rest of your roster</li>
-        <li><a onclick="navigate('tags')">Standardize your tag vocabulary</a> with the team</li>
+        <li><a onclick="navigate('notes')">Standardize your tag vocabulary</a> with the team</li>
         <li><a onclick="navigate('progress')">Review progress tracking</a> — see who's watching</li>
         <li><a onclick="navigate('formats')">Optimize video settings</a> — 1080p H.264 for best results</li>
         <li>Developers: <a onclick="navigate('developer-api')">explore the API</a> for automation</li>
@@ -2783,7 +2783,7 @@
       html += '<div class="sidebar-links">';
       g.pages.forEach(p => {
         const isRead = readPages.includes(p);
-        const badge = (p === 'whats-new' && hasNewUpdates()) ? '<span class="new-badge" title="New updates"></span>' : '';
+        const badge = (p === 'release-notes' && hasNewUpdates()) ? '<span class="new-badge" title="New updates"></span>' : '';
         html += `<a class="sidebar-link" href="#${p}" tabindex="0" data-page="${p}" onclick="navigate('${p}');return false" onkeydown="if(event.key==='Enter'){navigate('${p}');return false}"><span class="sl-text">${PAGES[p].title}${badge}</span>${isRead ? '<span class="read-dot" title="Read"></span>' : ''}</a>`;
       });
       html += '</div></div>';
@@ -2808,12 +2808,32 @@
     localStorage.setItem('sb-collapsed', JSON.stringify(collapsed));
   }
 
+  /* ── REDIRECTS ──────────────────────────────────────── */
+  const REDIRECTS = {
+    'whats-new': 'release-notes',
+    'feature-requests': 'release-notes',
+    'quick-tips': 'setup',
+    'onboarding-timeline': 'setup',
+    'upload-checklist': 'uploading',
+    'speed-calculator': 'formats',
+    'player-shortcuts': 'playback',
+    'session-vs-class': 'creating-sessions',
+    'tags': 'notes',
+    'notifications': 'profile',
+    'upload-issues': 'uploading',
+    'playback-issues': 'playback',
+    'error-lookup': 'troubleshoot',
+    'browser-check': 'troubleshoot',
+    'mobile': 'performance',
+  };
+
   /* ── NAVIGATE ───────────────────────────────────────── */
   function navigate(pageId) {
+    if (REDIRECTS[pageId]) { pageId = REDIRECTS[pageId]; location.hash = pageId; }
     const page = getPageContent(pageId);
     if (!page) { if (pageId !== 'welcome') navigate('welcome'); return; }
 
-    if (pageId === 'whats-new') markWhatsNewSeen();
+    if (pageId === 'release-notes') markWhatsNewSeen();
 
     const pc = document.getElementById('pageContent');
     // Retrigger animation
@@ -3359,9 +3379,7 @@
     if (pageId === 'welcome') renderChecklist(pc);
     if (pageId === 'troubleshoot') renderWizard('start');
     if (pageId === 'uploading') renderPreflight();
-    if (pageId === 'browser-check') checkBrowser();
     if (pageId === 'release-notes') renderReleases();
-    if (pageId === 'feature-requests') renderPoll();
     renderFaqAccordion(pc, pageId);
     addGlossaryTooltips(pc);
     renderRelated(pc, pageId);
@@ -3542,7 +3560,7 @@
       { id: 'cl-password', text: 'Set a new password', page: 'profile' },
       { id: 'cl-playback', text: 'Watch a session', page: 'playback' },
       { id: 'cl-notes', text: 'Leave a note for your coach', page: 'notes' },
-      { id: 'cl-mobile', text: 'Try it on your phone', page: 'mobile' },
+      { id: 'cl-mobile', text: 'Try it on your phone', page: 'performance' },
     ],
     developer: [
       { id: 'cl-login', text: 'Log in as admin', page: 'setup' },
@@ -4634,7 +4652,8 @@
   buildSidebar();
   const hash = location.hash.slice(1);
   const [initPage, initSection] = hash.split(':');
-  navigate(initPage && PAGES[initPage] ? initPage : 'welcome');
+  const resolvedPage = REDIRECTS[initPage] || initPage;
+  navigate(resolvedPage && PAGES[resolvedPage] ? resolvedPage : 'welcome');
   if (initSection) {
     if (initSection.startsWith('wizard-')) {
       requestAnimationFrame(() => renderWizard(initSection.replace('wizard-', '')));
