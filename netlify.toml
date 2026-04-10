@@ -1,6 +1,7 @@
 [build]
   command = "# static site — no build step"
   publish = "."
+  functions = "netlify/functions"
 
 [[headers]]
   for = "/*"
