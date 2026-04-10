@@ -156,10 +156,11 @@
     }
 
     /* ── READING PROGRESS ─── */
-    #progress-bar {
-      position: fixed; top: 0; left: 0; height: 2px; width: 0%;
-      background: linear-gradient(90deg, var(--accent), var(--accent-hover));
-      z-index: 200; transition: width .1s linear; pointer-events: none;
+    #progress-bar,
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+      background: var(--accent);
+      z-index: 9999; transition: width .1s linear; pointer-events: none;
     }
 
     /* ── HEADER ─── */
@@ -353,6 +354,11 @@
       display: flex; align-items: center; gap: 12px;
     }
     .article-meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-tertiary); }
+    .read-time {
+      font-size: .75rem;
+      color: var(--text-tertiary);
+      white-space: nowrap;
+    }
     .content-inner h2 {
       font-size: 1.1875rem; font-weight: 600; letter-spacing: -.015em;
       margin-top: 44px; margin-bottom: 14px;
@@ -1570,7 +1576,7 @@
 
   <a href="#pageContent" class="skip-link">Skip to content</a>
   <noscript><h1>Kaynos Help Center</h1><p>This help center requires JavaScript. Please enable it or visit <a href="https://app.kaynos.net">app.kaynos.net</a>.</p></noscript>
-  <div id="progress-bar" role="progressbar" aria-hidden="true"></div>
+  <div id="progress-bar" class="scroll-progress" role="progressbar" aria-hidden="true"></div>
 
   <header class="header" role="banner">
     <button class="menu-btn" onclick="toggleSidebar()" aria-label="Open menu">
@@ -3511,7 +3517,7 @@
     if (!h1) return;
     const meta = document.createElement('div');
     meta.className = 'article-meta';
-    meta.innerHTML = `<span>${mins} min read</span><span class="article-meta-dot"></span><span>${words} words</span>`;
+    meta.innerHTML = `<span class="read-time">${mins} min read</span><span class="article-meta-dot"></span><span>${words} words</span>`;
     h1.insertAdjacentElement('afterend', meta);
   }
 
