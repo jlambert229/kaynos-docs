@@ -692,6 +692,18 @@
     .mobile-nav-btn:focus-visible, .header-app-link:focus-visible {
       outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px rgba(33,132,243,.55);
     }
+    .open-in-app:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .next-step:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .feature-overview summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .form-submit:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .form-another:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .copy-code-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; opacity: 1; }
+    .sidebar-show-all:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    .open-in-app:active { transform: scale(0.98); }
+    .next-step:active { transform: scale(0.98); }
+    .form-submit:active { transform: scale(0.98); }
+    .feature-overview summary:active { opacity: 0.8; }
 
     /* ── SKIP LINK ─── */
     .skip-link {
@@ -716,7 +728,10 @@
       .breadcrumb, .error-lookup, .lang-toggle,
       .text-size-controls, .theme-toggle, .search-kbd,
       .palette-overlay, .nudge-prompt, .welcome-back,
-      .copy-article-btn, .user-highlight { display: none !important; }
+      .copy-article-btn, .user-highlight,
+      .feature-overview, .feature-form, .open-in-app, .next-steps,
+      .scroll-progress, .copy-code-btn, .sidebar-show-all,
+      .form-submit, .form-another { display: none !important; }
       .layout { margin-left: 0 !important; }
       .content-with-toc { padding: 0 !important; }
       body { background: #fff; color: #111; font-size: 12pt; }
@@ -4631,6 +4646,7 @@
       if (res.ok) {
         form.style.display = 'none';
         document.getElementById('featureSuccess').style.display = '';
+        document.getElementById('featureSuccess').setAttribute('role', 'alert');
       } else {
         showToast('Something went wrong — please try again or email support.');
         if (btn) { btn.disabled = false; btn.textContent = 'Submit request'; }
