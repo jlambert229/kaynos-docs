@@ -231,7 +231,7 @@ test.describe('Widgets', () => {
   });
 
   test('upload calculator computes result', async ({ page }) => {
-    await page.goto('/#speed-calculator');
+    await page.goto('/#formats');
     await page.fill('#calcSize', '500');
     await page.fill('#calcSpeed', '25');
     await expect(page.locator('#calcResult')).toBeVisible();
@@ -255,7 +255,7 @@ test.describe('Widgets', () => {
   });
 
   test('preflight checklist toggles items', async ({ page }) => {
-    await page.goto('/#upload-checklist');
+    await page.goto('/#uploading');
     await page.waitForSelector('.preflight-item');
     const item = page.locator('.preflight-item').first();
     await expect(item).not.toHaveClass(/checked/);
