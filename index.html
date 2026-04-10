@@ -301,6 +301,20 @@
     }
     .sidebar-section.collapsed .chevron { transform: rotate(-90deg); }
     .sidebar-section.collapsed .sidebar-links { display: none; }
+    .sidebar-section.dimmed { opacity: 0.5; }
+    .sidebar-section.dimmed:hover { opacity: 0.8; }
+    .sidebar-show-all {
+      display: block;
+      margin: 12px 16px;
+      padding: 0;
+      background: none;
+      border: none;
+      color: var(--text-tertiary);
+      font-size: .75rem;
+      cursor: pointer;
+      text-align: left;
+    }
+    .sidebar-show-all:hover { color: var(--accent); }
     .sidebar-link {
       display: block; padding: 6px 16px 6px 20px;
       font-size: .875rem; color: var(--text-secondary);
@@ -2815,6 +2829,38 @@
     if (read > 0) html += `<div class="sidebar-progress"><span>${read}/${total} read</span><div class="sidebar-progress-bar"><div class="sidebar-progress-fill" style="width:${pct}%"></div></div></div>`;
 
     sb.innerHTML = html;
+
+    // Role-aware section highlighting
+    const role = localStorage.getItem('user-role');
+    if (role) {
+      const ROLE_SECTIONS = {
+        admin: ['Getting Started', 'Video', 'Sessions & Classes', 'Account Management'],
+        coach: ['Video', 'Sessions & Classes', 'Getting Started'],
+        client: ['Video', 'Sessions & Classes', 'Troubleshooting', 'FAQ'],
+        developer: ['Developers', 'FAQ', 'Video'],
+      };
+      const highlighted = ROLE_SECTIONS[role] || [];
+      const sections = sb.querySelectorAll('.sidebar-section');
+      sections.forEach(sec => {
+        const title = sec.querySelector('.sidebar-section-title');
+        if (title && highlighted.length > 0 && !highlighted.includes(title.textContent.trim())) {
+          sec.classList.add('dimmed');
+        }
+      });
+
+      // Add "Show all" toggle
+      const existing = sb.querySelector('.sidebar-show-all');
+      if (!existing) {
+        const btn = document.createElement('button');
+        btn.className = 'sidebar-show-all';
+        btn.textContent = 'Show all sections';
+        btn.onclick = () => {
+          sb.querySelectorAll('.sidebar-section.dimmed').forEach(s => s.classList.remove('dimmed'));
+          btn.remove();
+        };
+        sb.appendChild(btn);
+      }
+    }
   }
 
   function toggleSection(el) {
