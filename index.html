@@ -1856,6 +1856,8 @@
 <li>Enter the same email and the temporary password from the invite.</li>
 <li>You land on the <strong>Coach Dashboard</strong> — that's home base.</li>
 </ol>
+<h3>Google login</h3>
+<p>If your account was created with Google, click <strong>Sign in with Google</strong> on the login page. No separate password needed — your Google account handles authentication.</p>
 <h2>Set a new password</h2>
 <p>Before inviting your full roster, secure your own account.</p>
 <ol>
@@ -2120,7 +2122,14 @@
 <tr><td><code>J</code> / <code>L</code></td><td>Skip back / forward</td></tr>
 <tr><td><code>N</code></td><td>Pause and add note</td></tr>
 <tr><td><code>F</code></td><td>Toggle fullscreen</td></tr>
+<tr><td><code>M</code></td><td>Mute / unmute</td></tr>
+<tr><td><code>↑</code> / <code>↓</code></td><td>Volume up / down</td></tr>
+<tr><td><code>H</code></td><td>Start / end highlight</td></tr>
+<tr><td><code>A</code></td><td>Draw annotation</td></tr>
+<tr><td><code>Cmd+Enter</code> / <code>Ctrl+Enter</code></td><td>Save note</td></tr>
+<tr><td><code>Esc</code></td><td>Cancel current action</td></tr>
 </tbody></table>
+<p><strong>Mobile:</strong> Double-tap the left half of the video to skip back 10 seconds, or the right half to skip forward.</p>
 <h2>Progress tracking</h2>
 <p>Playback position is saved for resume. Coaches can see completion percentage and last-viewed time without heavy analytics.</p>
 <details><summary>Playback troubleshooting</summary>
@@ -2152,6 +2161,12 @@
   <div class="shortcut-card"><span>Skip forward</span><kbd>L</kbd></div>
   <div class="shortcut-card"><span>Fullscreen</span><kbd>F</kbd></div>
   <div class="shortcut-card"><span>Pause + add note</span><kbd>N</kbd></div>
+  <div class="shortcut-card"><span>Mute / unmute</span><kbd>M</kbd></div>
+  <div class="shortcut-card"><span>Volume up / down</span><div><kbd>↑</kbd> <kbd>↓</kbd></div></div>
+  <div class="shortcut-card"><span>Start / end highlight</span><kbd>H</kbd></div>
+  <div class="shortcut-card"><span>Draw annotation</span><kbd>A</kbd></div>
+  <div class="shortcut-card"><span>Save note</span><div><kbd>⌘</kbd> <kbd>Enter</kbd></div></div>
+  <div class="shortcut-card"><span>Cancel current action</span><kbd>Esc</kbd></div>
 </div>
 <h3>Help center shortcuts</h3>
 <div class="shortcut-grid">
@@ -2353,6 +2368,14 @@
 <li><strong>Question</strong> — something to discuss next session</li>
 <li><strong>Highlight</strong> — marks a time range (start and end) on the timeline</li>
 </ul>
+<h2>Voice dictation</h2>
+<p>Coaches can dictate notes hands-free using speech-to-text (powered by Deepgram).</p>
+<ol>
+<li>The first time you use it, you'll be asked to grant microphone access and consent to audio processing.</li>
+<li>Click the microphone icon in the note editor, speak your observation, and the text appears in real time.</li>
+<li>Edit the transcription if needed, then save as usual.</li>
+</ol>
+<p>Voice dictation is opt-in per user. Your audio is processed in real time and not stored.</p>
 <h2>Tags</h2>
 <p>Tags group related sessions and classes so lists stay easy to filter as your library grows.</p>
 <h3>Tag ideas</h3>
@@ -2389,11 +2412,7 @@
 <h1>Progress tracking</h1>
 <p>Progress is simple on purpose: enough to see whether someone finished a recording and when they last opened it.</p>
 <h2>What we store</h2>
-<ul>
-<li>Last playback position (for resume)</li>
-<li>Whether the full video was completed</li>
-<li>Last opened time</li>
-</ul>
+<p>For each session and class, we track: last playback position (so you can resume), whether the full video was completed, and when it was last viewed. Coaches and admins can filter progress reports by student and date range (1 to 365 days).</p>
 <h2>For members</h2>
 <p>They resume where they left off. Overviews show items that still need a full watch versus completed items.</p>
 <h2>For coaches and owners</h2>
@@ -2419,7 +2438,9 @@
 <p><strong>Member limits?</strong> The product does not enforce a headcount cap.</p>
 <p><strong>Student-to-student invites?</strong> Only staff roles can invite; students cannot invite other students.</p>
 <h2>Branding</h2>
-<p>Admins can customize the look of their account under <strong>Admin → Branding</strong>. Set a custom logo, accent color, and welcome text that members see when they log in.</p>`},
+<p>Admins can customize the look of their account under <strong>Admin → Branding</strong>. Set a custom logo, accent color, and welcome text that members see when they log in.</p>
+<h2>School hours</h2>
+<p>Admins can set operating hours under <strong>Admin → Settings</strong>. Default hours are 6 AM to 9 PM. Scheduling outside these hours is allowed but flagged.</p>`},
 
     profile: {
       title: "Profile and password", section: "Account Management",
@@ -2595,7 +2616,21 @@
 <h3>How do I contact you?</h3>
 <p>Email ${mailLink()} with what happened, what you expected, your account name, and your browser. A screenshot or short screen recording speeds up diagnosis. In-app chat is available when logged in to <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
 <h3>Can I delete my account?</h3>
-<p>Yes. Users can delete their own account from <strong>Profile → Delete Account</strong>. Admins can schedule school deletion from <strong>Admin → Delete School</strong> — there's a 30-day grace period during which you can cancel. After 30 days, all data is permanently removed.</p>`},
+<p>Yes. Users can delete their own account from <strong>Profile → Delete Account</strong>. Admins can schedule school deletion from <strong>Admin → Delete School</strong> — there's a 30-day grace period during which you can cancel. After 30 days, all data is permanently removed.</p>
+<hr>
+<h2>Billing and pricing</h2>
+<h3>How much does Kaynos cost?</h3>
+<p><strong>$49/month</strong> or <strong>$490/year</strong> (saves 17% — two months free). Every new account starts with a <strong>14-day free trial</strong> — no charge until the trial ends. Manage billing, view invoices, and update your payment method from the Stripe billing portal (link in Admin).</p>
+<h3>What happens when my trial ends?</h3>
+<p>Your selected plan begins billing automatically. If you cancel before the trial ends, you won't be charged. All your data stays available while your subscription is active.</p>
+<hr>
+<h2>Search and navigation</h2>
+<h3>Is there a quick way to find things?</h3>
+<p>Press <kbd>Cmd+K</kbd> (Mac) or <kbd>Ctrl+K</kbd> (Windows) to open the search palette. Search across sessions, classes, and members instantly. Use arrow keys to navigate results and Enter to jump to one. Recent items appear automatically.</p>
+<hr>
+<h2>Data</h2>
+<h3>Can I export my data?</h3>
+<p>Admins can export all school data from <strong>Admin → Export</strong>. The export includes users, sessions, classes, notes, tags, and video metadata in a structured format suitable for backup or compliance (GDPR) purposes.</p>`},
 
     "developer-api": {
       title: "Developer API", section: "Developers",
