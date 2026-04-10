@@ -3582,7 +3582,8 @@
       question.type = 'button';
       question.setAttribute('aria-expanded', 'false');
       question.setAttribute('aria-controls', `faq-answer-${i}`);
-      question.innerHTML = `<span>${h3.textContent}</span><span class="faq-chevron" aria-hidden="true">▼</span>`;
+      const qText = h3.textContent.replace(/#\s*$/, '').trim();
+      question.innerHTML = `<span>${qText}</span><span class="faq-chevron" aria-hidden="true">▼</span>`;
       question.onclick = () => {
         const isOpen = item.classList.toggle('open');
         question.setAttribute('aria-expanded', isOpen);
@@ -4184,7 +4185,7 @@
     const replacements = [];
     while (walker.nextNode()) {
       const node = walker.currentNode;
-      if (node.parentElement.closest('.glossary-term, .hint, h1, h2, h3, a, code, pre, .term-tooltip')) continue;
+      if (node.parentElement.closest('.glossary-term, .hint, h1, h2, h3, a, code, pre, .term-tooltip, .faq-question, button, .tldr')) continue;
       for (const [term, def] of Object.entries(GLOSSARY_TERMS)) {
         const re = new RegExp(`\\b(${term})\\b`, 'i');
         const match = node.textContent.match(re);
