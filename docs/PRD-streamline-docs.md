@@ -16,7 +16,9 @@ Reduce the docs site to the essential pages each persona needs, consolidate redu
 
 ---
 
-## Personas (from kaynos/docs/personas.md)
+## Personas
+
+### Core app personas (from kaynos/docs/personas.md)
 
 ### Professor Marco — Academy Owner (Admin)
 - 42, BJJ black belt, runs Safety Harbor Jiu-Jitsu (130 members, 3 coaches)
@@ -39,6 +41,37 @@ Reduce the docs site to the essential pages each persona needs, consolidate redu
 ### Developer (API integrator)
 - Building on the Kaynos API
 - **Docs goal:** Auth, endpoints, rate limits, schemas
+
+### Docs-specific personas (non-app-users who visit the help center)
+
+### Evaluating Prospect — Decision Maker
+- Gym owner or program director comparing Kaynos to competitors before signing up
+- Browses the help center to gauge feature depth, ease of use, and support quality
+- Tech comfort: varies — judges the product by how professional the docs feel
+- **Docs goal:** Understand what Kaynos does, how hard it is, what happens when things break. Looks at: getting started flow (is it simple?), feature pages (does it do what I need?), troubleshooting (is there real support?). A confusing help center signals a confusing product.
+- **Key pages:** welcome, setup, uploading, creating-sessions, troubleshoot, faq, contact
+
+### Parent/Guardian — Minor's Representative
+- Parent of a student (likely minor) enrolled at an academy using Kaynos
+- Concerned about what data is collected, how video of their child is stored, and what rights they have
+- May land on the site via a link from the academy or a search for "Kaynos privacy"
+- Tech comfort: moderate — not evaluating the product technically, looking for trust signals
+- **Docs goal:** Find privacy policy, understand data handling, verify COPPA/FERPA compliance position. Needs clear, non-technical language.
+- **Key pages:** privacy-on-this-site, faq (compliance section), storage (data residency)
+
+### IT Admin / School Tech Coordinator
+- Works at a school, athletic program, or multi-location gym that is evaluating or onboarding Kaynos
+- Reviews the help center for integration capabilities, data residency, browser requirements, and security posture
+- Different from Developer (less code, more policy and infrastructure)
+- Tech comfort: high — reads CSP headers, checks SECURITY.md, wants to know about SSO and data export
+- **Docs goal:** Assess whether Kaynos meets organizational security and compliance requirements. Looks for: supported browsers, data storage locations, API auth model, export capabilities, vulnerability disclosure policy.
+- **Key pages:** developer-api, storage, faq, privacy-on-this-site, SECURITY.md (on GitHub)
+
+### Security Researcher
+- Lands on the GitHub repo or docs site looking for vulnerability disclosure info
+- May be doing authorized testing, bug bounty, or general reconnaissance
+- **Docs goal:** Find SECURITY.md, understand reporting channel, check scope and safe harbor terms
+- **Key pages:** SECURITY.md (docs/SECURITY.md on GitHub), developer-api (to understand API surface)
 
 ---
 
