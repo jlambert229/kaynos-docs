@@ -421,6 +421,19 @@
     .hint-info a, .hint-warning a, .hint-tip a, .hint-danger a { color: var(--accent); font-weight: 500; }
     .hint > div:last-child { flex: 1; }
 
+    /* ── TL;DR BOXES ─── */
+    .tldr {
+      background: var(--accent-soft, rgba(99,102,241,.08));
+      border-left: 3px solid var(--accent);
+      padding: 10px 14px;
+      margin: 12px 0 20px;
+      border-radius: 6px;
+      font-size: .875rem;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+    .tldr strong { color: var(--text-primary); }
+
     /* ── QUICK LINKS ─── */
     .quick-links { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px; }
     @media (min-width: 640px) { .quick-links { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); } }
@@ -1820,6 +1833,7 @@
       title: "Setting up your account", section: "Getting Started",
       content: `
 <h1>Setting up your account</h1>
+<div class="tldr"><strong>TL;DR:</strong> Log in at <a href="https://app.kaynos.net" target="_blank">app.kaynos.net</a> with your invite email. Change your temporary password first.</div>
 <p>After signup, login details go to the email you used. Change the temporary password as soon as you're in.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Open the product at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>. Next steps: <a onclick="navigate('inviting-members')">Inviting your team</a> and <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>
 <h2>First login</h2>
@@ -2013,6 +2027,7 @@
       title: "Uploading videos", section: "Video",
       content: `
 <h1>Uploading videos</h1>
+<div class="tldr"><strong>TL;DR:</strong> Drag a video onto the upload area. MP4 recommended, under 5 GB, 1080p is plenty for coaching review.</div>
 <p>Each session or class uses one source: <strong>Upload</strong> (file from your device), <strong>Vimeo</strong> (embedded link), or <strong>Notes Only</strong> (no video). Upload from <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> when creating or editing.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Format and size limits: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 <h2>Large files</h2>
@@ -2072,6 +2087,7 @@
       title: "Watching and reviewing", section: "Video",
       content: `
 <h1>Watching and reviewing</h1>
+<div class="tldr"><strong>TL;DR:</strong> Open a session or class, press play. Use <kbd>J</kbd>/<kbd>L</kbd> to skip, <kbd>N</kbd> to add a note, <kbd>Space</kbd> to pause.</div>
 <p>Playback runs entirely in the browser — no separate app install needed. Open recordings at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Problems playing video? See the troubleshooting section below.</div></div>
 <h2>Playback speed</h2>
@@ -2206,6 +2222,7 @@
     "creating-sessions": {
       title: "Creating a session", section: "Sessions & Classes",
       content: `
+<div class="tldr"><strong>TL;DR:</strong> Sessions are private (one student). Classes are shared (everyone). Create either from the dashboard after signing in.</div>
 <h2>Session vs Class</h2>
 <p>The most common question new users have: when do I create a session, and when do I create a class?</p>
 <div class="compare-grid">
@@ -2270,6 +2287,7 @@
       title: "Notes and timestamps", section: "Sessions & Classes",
       content: `
 <h1>Notes and timestamps</h1>
+<div class="tldr"><strong>TL;DR:</strong> Pause the video, press <kbd>N</kbd>, type your note. It saves with the timestamp. Add tags to organize by technique or topic.</div>
 <p>Attach short notes to exact moments on the timeline so everyone lands on the same frame during review.</p>
 <h2>Adding a note from the player</h2>
 <ol>
@@ -2594,6 +2612,7 @@
       title: "Troubleshooting wizard", section: "Troubleshooting",
       content: `
 <h1>Troubleshooting wizard</h1>
+<div class="tldr"><strong>TL;DR:</strong> Use the wizard below to diagnose your issue step by step. Or search for an error code.</div>
 <p>Answer a few questions and we'll point you to the right fix.</p>
 <div id="wizardContainer"></div>
 <details><summary>Error code lookup</summary>
