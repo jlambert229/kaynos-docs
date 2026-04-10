@@ -1697,6 +1697,16 @@
   </div>
 
   <script>
+  /* ── EMAIL OBFUSCATION ────────────────────────────────────── */
+  function mailLink(text) {
+    var u = 'support', d = 'kaynos.net';
+    return '<a href="mai' + 'lto:' + u + '@' + d + '">' + (text || (u + '@' + d)) + '</a>';
+  }
+  function mailHref(params) {
+    var u = 'support', d = 'kaynos.net';
+    return 'mai' + 'lto:' + u + '@' + d + (params || '');
+  }
+
   /* ── SVG ICONS ────────────────────────────────────────────── */
   const IC = {
     info:     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6.5"/><line x1="8" y1="7" x2="8" y2="11"/><circle cx="8" cy="5" r=".5" fill="currentColor" stroke="none"/></svg>',
@@ -1787,7 +1797,7 @@
 <div class="support-card">
   <div class="support-item">
     <div class="support-item-icon">${IC.mail}</div>
-    <div><strong>Email:</strong> <a href="mailto:support@kaynos.net">support@kaynos.net</a> — usually same day on business days</div>
+    <div><strong>Email:</strong> ${mailLink()} — usually same day on business days</div>
   </div>
   <div class="support-item">
     <div class="support-item-icon">${IC.chat}</div>
@@ -1831,7 +1841,7 @@
 <li>Click <strong>Send Invite</strong>.</li>
 </ol>
 <p>Delivery is usually quick. If nothing arrives, check spam and verify the address for typos.</p>
-<div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>Still missing mail? See <a onclick="navigate('email-issues')">Email and notification issues</a> or contact <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</div></div>
+<div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>Still missing mail? See <a onclick="navigate('email-issues')">Email and notification issues</a> or contact ${mailLink()}.</div></div>
 <h2>Who can invite</h2>
 <table><thead><tr><th>Your role</th><th>Can add</th></tr></thead><tbody>
 <tr><td><strong>Admin</strong></td><td>Coaches and clients</td></tr>
@@ -2120,7 +2130,7 @@
 <li>Enter your new password and confirmation.</li>
 <li>Click <strong>Update Password</strong>.</li>
 </ol>
-<p>Locked out? Ask an admin for a reset, or email <a href="mailto:support@kaynos.net">support@kaynos.net</a>. Login help: <a onclick="navigate('login-issues')">Login and access issues</a>.</p>
+<p>Locked out? Ask an admin for a reset, or email ${mailLink()}. Login help: <a onclick="navigate('login-issues')">Login and access issues</a>.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Profile lives in the app: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> → your name in the sidebar (or menu on mobile).</div></div>`},
 
     notifications: {
@@ -2142,7 +2152,7 @@
 <li>Check spam or promotions folders.</li>
 <li>Confirm the profile email address is correct.</li>
 <li>Confirm notifications are enabled in your profile settings.</li>
-<li>If it still fails, contact <a href="mailto:support@kaynos.net">support@kaynos.net</a> with your expected address.</li>
+<li>If it still fails, contact ${mailLink()} with your expected address.</li>
 </ol>`},
 
     "upload-issues": {
@@ -2164,7 +2174,7 @@
 <ul>
 <li><strong>Network error during part upload:</strong> reconnect and retry.</li>
 <li><strong>Part upload failed: 403:</strong> on very long uploads the session can expire. Cancel and upload again.</li>
-<li><strong>500 server error:</strong> wait briefly and retry; if it persists, email <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</li>
+<li><strong>500 server error:</strong> wait briefly and retry; if it persists, email ${mailLink()}.</li>
 </ul>
 <h2>Slow uploads</h2>
 <p>Measure your <strong>upload</strong> speed, not download. <a href="https://fast.com" target="_blank" rel="noopener">fast.com</a> shows upload after the initial result.</p>
@@ -2176,9 +2186,9 @@
 </tbody></table>
 <p>A wired connection often beats crowded Wi-Fi. Pause heavy sync tools (Dropbox, Google Drive) and upload during a quieter time.</p>
 <h2>Status stuck on "uploading"</h2>
-<p>Contact <a href="mailto:support@kaynos.net">support@kaynos.net</a> with the session or class name so we can reset the status if the browser closed mid-upload.</p>
+<p>Contact ${mailLink()} with the session or class name so we can reset the status if the browser closed mid-upload.</p>
 <h2>Still failing</h2>
-<p>Email <a href="mailto:support@kaynos.net">support@kaynos.net</a> with: account name, browser, file type and size, and a screenshot if you have one.</p>`},
+<p>Email ${mailLink()} with: account name, browser, file type and size, and a screenshot if you have one.</p>`},
 
     "playback-issues": {
       title: "Video playback problems", section: "Troubleshooting",
@@ -2209,14 +2219,14 @@
 <ul>
 <li>Use the same email the invite was sent to.</li>
 <li>Check Caps Lock; paste the password once to avoid hidden typos.</li>
-<li>Ask an admin for a reset or email <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</li>
+<li>Ask an admin for a reset or email ${mailLink()}.</li>
 </ul>
 <h2>"Too many attempts"</h2>
-<p>Too many failed logins from one IP are rate-limited. Wait 15–30 minutes, or contact <a href="mailto:support@kaynos.net">support@kaynos.net</a> if you need access sooner.</p>
+<p>Too many failed logins from one IP are rate-limited. Wait and try again later, or reset your password. If you still need help, contact ${mailLink()}.</p>
 <h2>Blank page or "no access"</h2>
 <p>The account may have been removed, or the browser cached an old session. Try a private/incognito window. If that works, clear site data for <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> in normal mode.</p>
 <h2>Still locked out</h2>
-<p>Email <a href="mailto:support@kaynos.net">support@kaynos.net</a> with your name, account name, and email address.</p>
+<p>Email ${mailLink()} with your name, account name, and email address.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Profile and password changes: <a onclick="navigate('profile')">Profile and password</a>.</div></div>`},
 
     "email-issues": {
@@ -2259,7 +2269,7 @@
 <h2>Red error messages</h2>
 <ul>
 <li>Refresh once — a single failed request can trigger an error.</li>
-<li>If it repeats, take a screenshot, note what you clicked, and email <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</li>
+<li>If it repeats, take a screenshot, note what you clicked, and email ${mailLink()}.</li>
 </ul>`},
 
     mobile: {
@@ -2297,7 +2307,7 @@
       content: `
 <h1>Frequently asked questions</h1>
 <p>Kaynos is built for coaches who use video review: publish sessions and classes, add timestamped notes, and members watch on their own time.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Quick links:</strong> App: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> · Support: <a href="mailto:support@kaynos.net">support@kaynos.net</a> · Setup: <a onclick="navigate('setup')">Setting up your account</a></div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Quick links:</strong> App: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> · Support: ${mailLink()} · Setup: <a onclick="navigate('setup')">Setting up your account</a></div></div>
 <h2>What you're signing up for</h2>
 <h3>What is Kaynos, in plain language?</h3>
 <p>It replaces ad-hoc clip sharing in chat. You put session footage on a <strong>session</strong> (one client) or a <strong>class</strong> (everyone in your account), add notes on the timeline, and clients review when they can. Everything runs in the browser at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> — no separate app install.</p>
@@ -2328,7 +2338,7 @@
 <hr>
 <h2>Support</h2>
 <h3>How do I contact you?</h3>
-<p>Email <a href="mailto:support@kaynos.net">support@kaynos.net</a> with what happened, what you expected, your account name, and your browser. A screenshot or short screen recording speeds up diagnosis. In-app chat is available when logged in to <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>`},
+<p>Email ${mailLink()} with what happened, what you expected, your account name, and your browser. A screenshot or short screen recording speeds up diagnosis. In-app chat is available when logged in to <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>`},
 
     "developer-api": {
       title: "Developer API", section: "Developers",
@@ -2337,8 +2347,7 @@
 <p>For accounts that want automation beyond the web UI: schedules, exports, or custom reporting. The API is HTTPS-only and scoped to your account's data. Create and manage tokens under <strong>Admin → Developer API</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> (admin role required).</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Swagger first.</strong> Sign in as an admin, then open the in-app docs. The same browser session lets <em>Try it out</em> use your cookies — <a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener">Swagger UI (production)</a>.</div></div>
 <div class="hint hint-danger"><div class="hint-icon">${IC.danger}</div><div><strong>Protect your secrets.</strong> API tokens are as sensitive as passwords. Store them in a secret manager or env vars — never commit them to git or expose them in frontend code.</div></div>
-<p>OpenAPI YAML: <a href="https://app.kaynos.net/openapi.yaml" target="_blank" rel="noopener">app.kaynos.net/openapi.yaml</a> · Mirror: <a href="https://raw.githubusercontent.com/jlambert229/kaynos/main/public/openapi.yaml" target="_blank" rel="noopener">GitHub raw</a></p>
-<div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>If the app URL returns HTML instead of YAML, use the GitHub raw link.</div></div>
+<p>Contact support for API documentation access.</p>
 <h2>Two authentication doors</h2>
 <ul>
 <li><strong><code>/api/v1/…</code></strong> — for scripts and integrations: Bearer token minted under <strong>Admin → Developer API</strong>.</li>
@@ -2350,9 +2359,9 @@
 <tr><td>Production</td><td><a href="https://app.kaynos.net" target="_blank" rel="noopener"><code>https://app.kaynos.net</code></a></td><td><code>/api/v1</code></td></tr>
 <tr><td>Local Netlify dev</td><td><code>http://localhost:8888</code></td><td><code>/api/v1</code></td></tr>
 </tbody></table>
-<p>Quick discovery: <code>GET /api/v1</code> lists routes, no token needed.</p>
+<p>See the API reference (requires authentication) for available endpoints.</p>
 <h2>Bearer header</h2>
-<pre>Authorization: Bearer kn_&lt;your-secret&gt;</pre>
+<pre>Authorization: Bearer &lt;your-api-token&gt;</pre>
 <p>We show the secret exactly once when you mint it. Treat it like a Stripe key — password manager or env var, never committed.</p>
 <h2>Scopes</h2>
 <table><thead><tr><th>Scope</th><th>Does</th></tr></thead><tbody>
@@ -2391,8 +2400,7 @@
 <h2>Quick links</h2>
 <ul>
 <li><a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener">Swagger UI</a></li>
-<li><a href="https://app.kaynos.net/openapi.yaml" target="_blank" rel="noopener">OpenAPI YAML (app host)</a></li>
-<li><a href="https://raw.githubusercontent.com/jlambert229/kaynos/main/public/openapi.yaml" target="_blank" rel="noopener">OpenAPI YAML (GitHub raw)</a></li>
+<li>Contact support for API documentation access</li>
 </ul>`},
 
     glossary: {
@@ -2431,13 +2439,13 @@
   <input class="error-input" id="errorInput" placeholder="e.g. 403, cannot be played, black screen..." oninput="lookupError(this.value)" autocomplete="off" aria-label="Paste error message or describe issue">
   <div class="error-results" id="errorResults"></div>
 </div>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Can't find your error? Email <a href="mailto:support@kaynos.net">support@kaynos.net</a> with a screenshot and we'll help.</div></div>`},
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Can't find your error? Email ${mailLink()} with a screenshot and we'll help.</div></div>`},
 
     contact: {
       title: "Contact support", section: "FAQ",
       content: `
 <h1>Contact support</h1>
-<p>Fill out the form below and we'll copy a formatted message for you to send to <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</p>
+<p>Fill out the form below and we'll copy a formatted message for you to send to ${mailLink()}.</p>
 <div class="contact-form" id="contactForm">
   <label for="cfName" class="sr-only">Your name</label>
   <input class="contact-field" id="cfName" placeholder="Your name" aria-label="Your name">
@@ -2454,7 +2462,7 @@
 <div class="support-card">
   <div class="support-item">
     <div class="support-item-icon">${IC.mail}</div>
-    <div><strong>Email:</strong> <a href="mailto:support@kaynos.net">support@kaynos.net</a></div>
+    <div><strong>Email:</strong> ${mailLink()}</div>
   </div>
   <div class="support-item">
     <div class="support-item-icon">${IC.chat}</div>
@@ -2701,7 +2709,7 @@
 <li>Chunked parallel upload for files over 100 MB with automatic retry.</li>
 <li>Real-time speed and ETA display during upload.</li>
 </ul>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Have a feature request? <a onclick="navigate('feature-requests')">Vote on what we build next</a> or email <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</div></div>`},
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Have a feature request? <a onclick="navigate('feature-requests')">Vote on what we build next</a> or email ${mailLink()}.</div></div>`},
 
     "release-notes": {
       title: "Release notes", section: "",
@@ -2710,7 +2718,7 @@
 <p>Detailed changelog of everything shipped, in progress, and planned for Kaynos.</p>
 <div class="release-filter" id="releaseFilter"></div>
 <div id="releaseList"></div>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Want to influence what we build? <a onclick="navigate('feature-requests')">Vote on feature requests</a> or email <a href="mailto:support@kaynos.net">support@kaynos.net</a>.</div></div>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Want to influence what we build? <a onclick="navigate('feature-requests')">Vote on feature requests</a> or email ${mailLink()}.</div></div>`},
 
     "feature-requests": {
       title: "Feature requests", section: "",
@@ -2727,7 +2735,7 @@
     <button class="poll-submit-btn" onclick="submitPollIdea()">Submit</button>
   </div>
 </div>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Votes are saved in your browser. For detailed requests, email <a href="mailto:support@kaynos.net">support@kaynos.net</a> with specifics.</div></div>`}
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Votes are saved in your browser. For detailed requests, email ${mailLink()} with specifics.</div></div>`}
   };
 
   const NAV = [
@@ -3622,7 +3630,7 @@
       ]
     },
     'login-pw': { result: true, title: 'Password issue', body: 'Check Caps Lock, use the same email from the invite. Ask an admin for a reset.', page: 'login-issues' },
-    'login-rate': { result: true, title: 'Rate limited', body: 'Wait 15-30 minutes, or contact support for faster access.', page: 'login-issues' },
+    'login-rate': { result: true, title: 'Rate limited', body: 'Wait and try again later, or reset your password.', page: 'login-issues' },
     'login-blank': { result: true, title: 'Blank page', body: 'Try incognito/private window. If that works, clear site data for app.kaynos.net.', page: 'login-issues' },
     email: { result: true, title: 'Email issues', body: 'Check spam, confirm address in profile, verify notifications are enabled.', page: 'email-issues' },
     performance: { result: true, title: 'Performance issues', body: 'Clear cache, try Chrome, disable ad blockers temporarily, close extra tabs.', page: 'performance' },
@@ -3672,7 +3680,7 @@
     { patterns: ['network error', 'failed to fetch', 'connection'], title: 'Network error', hint: 'Check your internet — reconnect and retry', page: 'upload-issues' },
     { patterns: ['cannot be played', 'not supported', 'codec'], title: 'Codec / playback error', hint: 'Re-export to MP4 with H.264 video + AAC audio', page: 'playback-issues' },
     { patterns: ['black screen', 'no video', 'blank player'], title: 'Black screen / no video', hint: 'Hard refresh, check upload status, try Chrome', page: 'playback-issues' },
-    { patterns: ['too many attempts', 'rate limit', 'locked out'], title: 'Login rate limited', hint: 'Wait 15-30 minutes or contact support', page: 'login-issues' },
+    { patterns: ['too many attempts', 'rate limit', 'locked out'], title: 'Login rate limited', hint: 'Wait and try again later, or reset your password', page: 'login-issues' },
     { patterns: ['wrong password', 'incorrect', 'invalid credentials'], title: 'Wrong password', hint: 'Check Caps Lock, paste from invite email, ask admin for reset', page: 'login-issues' },
     { patterns: ['no access', 'permission', 'denied', 'unauthorized'], title: 'Access denied', hint: 'Check your role or ask an admin to verify your access', page: 'roles' },
     { patterns: ['buffering', 'loading', 'spinner', 'slow playback'], title: 'Buffering / slow playback', hint: 'Check bandwidth, close other tabs, try 1080p', page: 'playback-issues' },
@@ -3699,7 +3707,7 @@
         <div class="error-match-title">${m.title}</div>
         <div class="error-match-hint">${m.hint} → ${PAGES[m.page].title}</div>
       </div>`
-    ).join('') || (q.length > 3 ? '<div style="font-size:.8125rem;color:var(--text-tertiary);padding:8px 0">No matches — try different keywords or <a href="mailto:support@kaynos.net" style="color:var(--accent)">email support</a></div>' : '');
+    ).join('') || (q.length > 3 ? '<div style="font-size:.8125rem;color:var(--text-tertiary);padding:8px 0">No matches — try different keywords or <a href="' + mailHref() + '" style="color:var(--accent)">email support</a></div>' : '');
   }
 
   /* ── CONTACT FORM ──────────────────────────────────── */
@@ -3713,10 +3721,10 @@
     navigator.clipboard.writeText(msg).then(() => {
       showToast('Copied — opening email');
       setTimeout(() => {
-        window.open(`mailto:support@kaynos.net?subject=${encodeURIComponent(subject || 'Support request')}&body=${encodeURIComponent(msg)}`, '_blank');
+        window.open(mailHref('?subject=' + encodeURIComponent(subject || 'Support request') + '&body=' + encodeURIComponent(msg)), '_blank');
       }, 500);
     }).catch(() => {
-      window.open(`mailto:support@kaynos.net?subject=${encodeURIComponent(subject || 'Support request')}&body=${encodeURIComponent(msg)}`, '_blank');
+      window.open(mailHref('?subject=' + encodeURIComponent(subject || 'Support request') + '&body=' + encodeURIComponent(msg)), '_blank');
     });
   }
 
@@ -4285,7 +4293,7 @@
 </div>
 <h2>Contacto</h2>
 <div class="support-card">
-  <div class="support-item"><div class="support-item-icon">${IC.mail}</div><div><strong>Email:</strong> <a href="mailto:support@kaynos.net">support@kaynos.net</a></div></div>
+  <div class="support-item"><div class="support-item-icon">${IC.mail}</div><div><strong>Email:</strong> ${mailLink()}</div></div>
   <div class="support-item"><div class="support-item-icon">${IC.chat}</div><div><strong>Chat:</strong> Esquina inferior derecha en <a href="https://app.kaynos.net" target="_blank" rel="noopener">la app</a></div></div>
 </div>` },
     setup: { title: 'Configurar tu cuenta', content: `
@@ -4336,7 +4344,7 @@
     esc.id = 'wizardEscalate';
     const escSubject = encodeURIComponent('Help: ' + step.title);
     const escBody = encodeURIComponent('I tried the suggestion for "' + step.title + '" but it didn\'t work.\n\nBrowser: ' + navigator.userAgent.split(' ').slice(-2).join(' ') + '\n\nWhat happened:\n');
-    esc.innerHTML = `Still stuck? <a href="mailto:support@kaynos.net?subject=${escSubject}&body=${escBody}">Email support with this issue pre-filled →</a>`;
+    esc.innerHTML = 'Still stuck? <a href="' + mailHref('?subject=' + escSubject + '&body=' + escBody) + '">Email support with this issue pre-filled \u2192</a>';
     container.appendChild(div);
     container.appendChild(esc);
   }
@@ -4517,7 +4525,7 @@
     const top = scored.slice(0, 3);
 
     if (top.length === 0) {
-      addBotMsg("I couldn't find docs matching that. Try different keywords, or email <a href='mailto:support@kaynos.net'>support@kaynos.net</a> for direct help.", [
+      addBotMsg("I couldn't find docs matching that. Try different keywords, or " + mailLink('email support') + " for direct help.", [
         "Upload problems",
         "Login issues",
         "Video formats"
