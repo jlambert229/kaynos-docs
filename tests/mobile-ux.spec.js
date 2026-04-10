@@ -197,8 +197,8 @@ test.describe('Icon rendering', () => {
     }
   });
 
-  test('session-vs-class page renders hint icons', async ({ page }) => {
-    await page.goto('/#session-vs-class');
+  test('creating-sessions page renders hint icons', async ({ page }) => {
+    await page.goto('/#creating-sessions');
     await page.waitForSelector('.content-inner h1');
     const hintIcon = page.locator('.hint-icon').first();
     await expect(hintIcon.locator('svg')).toHaveCount(1);

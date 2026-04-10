@@ -2127,6 +2127,37 @@
     "creating-sessions": {
       title: "Creating a session", section: "Sessions & Classes",
       content: `
+<h2>Session vs Class</h2>
+<p>The most common question new users have: when do I create a session, and when do I create a class?</p>
+<div class="compare-grid">
+  <div class="compare-card">
+    <div class="compare-label private">Private</div>
+    <h3>Session</h3>
+    <p>One-on-one content for a single client.</p>
+    <ul>
+      <li>Assigned to one specific client</li>
+      <li>Only that client, the creator, and admins can see it</li>
+      <li>Private lessons, individual feedback, competition footage</li>
+      <li>Notes stay between coach and client</li>
+    </ul>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label shared">Shared</div>
+    <h3>Class</h3>
+    <p>Account-wide content for everyone.</p>
+    <ul>
+      <li>Visible to all members, coaches, and admins</li>
+      <li>Group sessions, workshops, technique breakdowns</li>
+      <li>Great for shared curriculum and team training</li>
+      <li>Everyone can leave notes</li>
+    </ul>
+  </div>
+</div>
+<h3>Quick decision</h3>
+<ul>
+<li><strong>Is this for one person?</strong> → Create a <strong>session</strong></li>
+<li><strong>Should everyone see it?</strong> → Create a <strong>class</strong></li>
+</ul>
 <h1>Creating a session</h1>
 <p>A <strong>session</strong> is one-on-one content: private lessons, individual review, or competition footage for a single client. Only that client and staff who need access will see it.</p>
 <h2>Workflow</h2>
@@ -2177,24 +2208,20 @@
 <li>Clients can leave questions on their own sessions for coach follow-up.</li>
 <li>Use the coach filter to quickly review your notes across several recordings.</li>
 </ul>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Playback shortcuts and the full note workflow: <a onclick="navigate('playback')">Watching and reviewing</a>.</div></div>`},
-
-    tags: {
-      title: "Tags and organization", section: "Sessions & Classes",
-      content: `
-<h1>Tags and organization</h1>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Playback shortcuts and the full note workflow: <a onclick="navigate('playback')">Watching and reviewing</a>.</div></div>
+<h2>Tags</h2>
 <p>Tags group related sessions and classes so lists stay easy to filter as your library grows.</p>
-<h2>Tag ideas</h2>
+<h3>Tag ideas</h3>
 <ul>
 <li>Topic: <code>form-review</code>, <code>conditioning</code>, <code>competition</code></li>
 <li>Format: <code>private</code>, <code>group</code>, <code>workshop</code></li>
 <li>Level: <code>fundamentals</code>, <code>advanced</code>, <code>beginner</code></li>
 </ul>
-<h2>Adding tags</h2>
+<h3>Adding tags</h3>
 <p>In the session or class form, type a tag and press <strong>Enter</strong>. Repeat for additional tags.</p>
-<h2>Finding content</h2>
+<h3>Finding content</h3>
 <p>List views let you filter by tag — for example, everything tagged <code>milestone</code> for a specific training block.</p>
-<h2>Consistency tips</h2>
+<h3>Consistency tips</h3>
 <ul>
 <li>Use one spelling and style per concept (avoid <code>review</code>, <code>Review</code>, and <code>form-review</code> for the same thing).</li>
 <li>Agree on a shared vocabulary so your whole team uses consistent tags.</li>
@@ -2539,41 +2566,6 @@
   </div>
 </div>`},
 
-    "session-vs-class": {
-      title: "Session vs Class", section: "Sessions & Classes",
-      content: `
-<h1>Session vs Class</h1>
-<p>The most common question new users have: when do I create a session, and when do I create a class?</p>
-<div class="compare-grid">
-  <div class="compare-card">
-    <div class="compare-label private">Private</div>
-    <h3>Session</h3>
-    <p>One-on-one content for a single client.</p>
-    <ul>
-      <li>Assigned to one specific client</li>
-      <li>Only that client, the creator, and admins can see it</li>
-      <li>Private lessons, individual feedback, competition footage</li>
-      <li>Notes stay between coach and client</li>
-    </ul>
-  </div>
-  <div class="compare-card">
-    <div class="compare-label shared">Shared</div>
-    <h3>Class</h3>
-    <p>Account-wide content for everyone.</p>
-    <ul>
-      <li>Visible to all members, coaches, and admins</li>
-      <li>Group sessions, workshops, technique breakdowns</li>
-      <li>Great for shared curriculum and team training</li>
-      <li>Everyone can leave notes</li>
-    </ul>
-  </div>
-</div>
-<h2>Quick decision</h2>
-<ul>
-<li><strong>Is this for one person?</strong> → Create a <strong>session</strong></li>
-<li><strong>Should everyone see it?</strong> → Create a <strong>class</strong></li>
-</ul>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Step-by-step guides: <a onclick="navigate('creating-sessions')">Creating a session</a> · <a onclick="navigate('creating-classes')">Creating a class</a></div></div>`},
 
     "browser-check": {
       title: "Browser compatibility", section: "Troubleshooting",
@@ -2651,9 +2643,9 @@
       <ul>
         <li><a onclick="navigate('uploading')">Run the upload pre-flight checklist</a></li>
         <li><a onclick="navigate('first-upload')">Upload your first video</a></li>
-        <li><a onclick="navigate('session-vs-class')">Decide: session or class?</a></li>
+        <li><a onclick="navigate('creating-sessions')">Decide: session or class?</a></li>
         <li><a onclick="navigate('notes')">Add timestamped notes</a> to your recording</li>
-        <li><a onclick="navigate('tags')">Tag content</a> for easy filtering later</li>
+        <li><a onclick="navigate('notes')">Tag content</a> for easy filtering later</li>
       </ul>
     </div>
   </div>
@@ -2677,7 +2669,7 @@
     <div class="timeline-body">
       <ul>
         <li>Invite the rest of your roster</li>
-        <li><a onclick="navigate('tags')">Standardize your tag vocabulary</a> with the team</li>
+        <li><a onclick="navigate('notes')">Standardize your tag vocabulary</a> with the team</li>
         <li><a onclick="navigate('progress')">Review progress tracking</a> — see who's watching</li>
         <li><a onclick="navigate('formats')">Optimize video settings</a> — 1080p H.264 for best results</li>
         <li>Developers: <a onclick="navigate('developer-api')">explore the API</a> for automation</li>
@@ -2786,7 +2778,7 @@
     { section: "", pages: ["welcome", "whats-new", "release-notes", "feature-requests"] },
     { section: "Getting Started", pages: ["setup", "inviting-members", "first-upload", "roles", "glossary", "quick-tips", "onboarding-timeline"] },
     { section: "Video", pages: ["uploading", "playback", "formats", "storage"] },
-    { section: "Sessions & Classes", pages: ["session-vs-class", "creating-sessions", "creating-classes", "notes", "tags", "progress"] },
+    { section: "Sessions & Classes", pages: ["creating-sessions", "creating-classes", "notes", "progress"] },
     { section: "Account Management", pages: ["managing-members", "profile", "notifications"] },
     { section: "Developers", pages: ["developer-api"] },
     { section: "Troubleshooting", pages: ["troubleshoot", "error-lookup", "browser-check", "login-issues", "email-issues", "performance", "mobile"] },
