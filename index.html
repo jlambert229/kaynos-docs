@@ -58,6 +58,7 @@
   }
   </script>
 
+  <link rel="preload" href="/fonts/fonts.css" as="style">
   <link rel="stylesheet" href="/fonts/fonts.css">
   <link rel="dns-prefetch" href="https://app.kaynos.net" />
   <link rel="alternate" type="application/rss+xml" title="Kaynos What's New" href="/feed.xml" />
@@ -439,12 +440,12 @@
       padding: 8px 16px;
       background: var(--accent);
       color: #fff;
-      border-radius: 8px;
+      border-radius: var(--radius);
       text-decoration: none;
       font-size: .8125rem;
       font-weight: 600;
       margin: 8px 0 16px;
-      transition: background .15s;
+      transition: background var(--dur) var(--ease);
     }
     .open-in-app:hover { background: var(--accent-hover); color: #fff; }
     .open-in-app svg { width: 14px; height: 14px; }
@@ -479,16 +480,17 @@
 
     /* ── TL;DR BOXES ─── */
     .tldr {
-      background: var(--accent-soft, rgba(99,102,241,.08));
+      background: var(--accent-soft, rgba(33,132,243,.08));
       border-left: 3px solid var(--accent);
       padding: 10px 14px;
       margin: 12px 0 20px;
-      border-radius: 6px;
+      border-radius: var(--radius-sm);
       font-size: .875rem;
       line-height: 1.5;
       color: var(--text-secondary);
     }
     .tldr strong { color: var(--text-primary); }
+    .light .tldr { background: rgba(33,132,243,.06); }
 
     /* ── QUICK LINKS ─── */
     .quick-links { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px; }
@@ -518,7 +520,8 @@
     .feature-overview summary:hover { color: var(--accent); }
     .feature-overview[open] summary { margin-bottom: 12px; }
     .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
-    .feature-card { background: var(--bg-secondary); border-radius: 10px; padding: 16px; border: 1px solid var(--border); }
+    .feature-card { background: var(--bg-secondary); border-radius: var(--radius); padding: 16px; border: 1px solid var(--border); transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease); }
+    .feature-card:hover { border-color: var(--accent); transform: translateY(-1px); }
     .feature-card h4 { margin: 8px 0 6px; font-size: .875rem; color: var(--text-primary); }
     .feature-card p { font-size: .8125rem; color: var(--text-secondary); line-height: 1.5; margin: 0; }
     .feature-icon { width: 28px; height: 28px; color: var(--accent); }
@@ -662,9 +665,20 @@
       .footer-nav-btn { max-width: none; }
       .footer-nav-btn.next { align-items: flex-start; }
       .hero h1 { font-size: 1.75rem !important; }
-      .feedback-btn, .bookmark-btn, .share-btn, .print-btn,
+      .bookmark-btn, .share-btn, .print-btn,
       .copy-article-btn, .wizard-option, .checklist-item,
       .preflight-item { min-height: 44px; display: inline-flex; align-items: center; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .next-steps-nav { flex-direction: column; gap: 8px; }
+      .next-step { text-align: center; }
+      .feature-form { max-width: 100%; }
+      .open-in-app { padding: 12px 20px; font-size: .875rem; }
+      .tldr { font-size: .8125rem; padding: 8px 12px; }
+    }
+
+    @media (max-width: 480px) {
+      .feature-card { padding: 12px; }
+      .feature-icon { width: 22px; height: 22px; }
     }
 
     :focus-visible { outline: 2px solid rgba(33,132,243,.6); outline-offset: 2px; }
@@ -672,12 +686,24 @@
       outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px rgba(33,132,243,.55);
     }
     .menu-btn:focus-visible, .theme-toggle:focus-visible, .lang-toggle:focus-visible,
-    .feedback-btn:focus-visible, .bookmark-btn:focus-visible, .share-btn:focus-visible,
+    .bookmark-btn:focus-visible, .share-btn:focus-visible,
     .print-btn:focus-visible, .copy-article-btn:focus-visible, .chatbot-fab:focus-visible,
     .text-size-btn:focus-visible, .tour-btn:focus-visible, .wizard-option:focus-visible,
     .mobile-nav-btn:focus-visible, .header-app-link:focus-visible {
       outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px rgba(33,132,243,.55);
     }
+    .open-in-app:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .next-step:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .feature-overview summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .form-submit:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .form-another:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .copy-code-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; opacity: 1; }
+    .sidebar-show-all:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    .open-in-app:active { transform: scale(0.98); }
+    .next-step:active { transform: scale(0.98); }
+    .form-submit:active { transform: scale(0.98); }
+    .feature-overview summary:active { opacity: 0.8; }
 
     /* ── SKIP LINK ─── */
     .skip-link {
@@ -694,7 +720,7 @@
       .header, .sidebar, .toc, #back-top, #toast, #progress-bar,
       .footer-nav, .skip-link, .overlay, .menu-btn, .copy-btn,
       .chatbot-fab, .chatbot-panel, .mobile-nav, .tour-overlay,
-      .kbd-modal-overlay, .offline-banner, .page-feedback,
+      .kbd-modal-overlay, .offline-banner,
       .article-actions, .bookmark-btn, .share-btn, .print-btn,
       .heading-anchor, .wizard-feedback, .wizard-escalate,
       .wizard-restart, .checklist, .related-articles,
@@ -702,7 +728,10 @@
       .breadcrumb, .error-lookup, .lang-toggle,
       .text-size-controls, .theme-toggle, .search-kbd,
       .palette-overlay, .nudge-prompt, .welcome-back,
-      .copy-article-btn, .user-highlight { display: none !important; }
+      .copy-article-btn, .user-highlight,
+      .feature-overview, .feature-form, .open-in-app, .next-steps,
+      .scroll-progress, .copy-code-btn, .sidebar-show-all,
+      .form-submit, .form-another { display: none !important; }
       .layout { margin-left: 0 !important; }
       .content-with-toc { padding: 0 !important; }
       body { background: #fff; color: #111; font-size: 12pt; }
@@ -749,24 +778,6 @@
     }
     .kbd-modal-close:hover { color: var(--text-primary); background: var(--bg-tertiary); }
 
-    /* ── FEEDBACK WIDGET ─── */
-    .page-feedback {
-      margin-top: 40px; padding: 20px 0;
-      border-top: 1px solid var(--border);
-      display: flex; align-items: center; gap: 12px;
-      font-size: .875rem; color: var(--text-tertiary);
-    }
-    .page-feedback span { white-space: nowrap; }
-    .feedback-btn {
-      padding: 5px 14px; border-radius: var(--radius-sm);
-      border: 1px solid var(--border-strong); background: var(--bg-elevated);
-      color: var(--text-secondary); font-size: .8125rem; cursor: pointer;
-      transition: all var(--dur);
-    }
-    .feedback-btn:hover { border-color: var(--accent); color: var(--text-primary); background: var(--bg-secondary); }
-    .feedback-btn.selected { border-color: var(--success); color: var(--success); background: var(--success-soft); pointer-events: none; }
-    .feedback-thanks { font-size: .8125rem; color: var(--success); display: none; }
-
     /* ── RELATED ARTICLES ─── */
     .related-articles { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--border); }
     .related-title {
@@ -786,8 +797,8 @@
     .next-steps { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); }
     .next-steps-title { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--text-tertiary); margin-bottom: 10px; }
     .next-steps-nav { display: flex; justify-content: space-between; gap: 12px; }
-    .next-step { padding: 10px 16px; border-radius: 8px; background: var(--bg-secondary); color: var(--text-primary); text-decoration: none; font-size: .875rem; font-weight: 500; transition: background .15s; }
-    .next-step:hover { background: var(--accent-soft, rgba(99,102,241,.12)); color: var(--accent); }
+    .next-step { padding: 10px 16px; border-radius: var(--radius); background: var(--bg-secondary); color: var(--text-primary); text-decoration: none; font-size: .875rem; font-weight: 500; transition: background var(--dur) var(--ease), transform var(--dur) var(--ease); }
+    .next-step:hover { background: var(--accent-soft, rgba(33,132,243,.12)); color: var(--accent); transform: translateY(-1px); }
     .next-step.prev { text-align: left; }
     .next-step.next { text-align: right; margin-left: auto; }
 
@@ -1379,75 +1390,6 @@
     .release-filter-btn:hover { border-color: var(--accent); color: var(--text-primary); }
     .release-filter-btn.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
 
-    /* ── FEATURE POLL ─── */
-    .poll-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
-    .poll-item {
-      display: flex; align-items: center; gap: 12px; padding: 14px 16px;
-      background: var(--bg-elevated); border: 1px solid var(--border-strong);
-      border-radius: var(--radius-sm); transition: all var(--dur);
-    }
-    .poll-item:hover { border-color: var(--accent-border); }
-    .poll-vote-btn {
-      display: flex; flex-direction: column; align-items: center; gap: 2px;
-      background: none; border: 1px solid var(--border-strong);
-      border-radius: var(--radius-sm); padding: 6px 10px; cursor: pointer;
-      transition: all var(--dur); flex-shrink: 0; min-width: 48px;
-    }
-    .poll-vote-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
-    .poll-vote-btn.voted { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
-    .poll-vote-btn svg { width: 14px; height: 14px; }
-    .poll-vote-count {
-      font-size: .8125rem; font-weight: 700; color: var(--text-primary);
-      font-family: var(--font-mono);
-    }
-    .poll-item-body { flex: 1; }
-    .poll-item-title { font-size: .9375rem; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
-    .poll-item-desc { font-size: .8125rem; color: var(--text-secondary); line-height: 1.5; }
-    .poll-item-tag {
-      display: inline-flex; font-size: .625rem; font-weight: 600;
-      padding: 1px 6px; border-radius: 3px; text-transform: uppercase;
-      letter-spacing: .04em; margin-top: 4px;
-    }
-    .poll-item-tag.video { background: var(--accent-soft); color: var(--accent); }
-    .poll-item-tag.workflow { background: var(--success-soft); color: var(--success); }
-    .poll-item-tag.integrations { background: var(--warning-soft); color: var(--warning); }
-    .poll-item-tag.mobile { background: var(--danger-soft); color: var(--danger); }
-    .poll-item-tag.analytics { background: rgba(156,39,176,.10); color: #ab47bc; }
-    :root.light .poll-item-tag.analytics { color: #7b1fa2; }
-    .poll-sort {
-      display: flex; gap: 6px; margin-bottom: 16px; align-items: center;
-      font-size: .75rem; color: var(--text-tertiary);
-    }
-    .poll-sort-btn {
-      padding: 3px 10px; border-radius: 9999px; font-size: .75rem;
-      border: 1px solid var(--border-strong); background: var(--bg-elevated);
-      color: var(--text-secondary); cursor: pointer; transition: all var(--dur);
-    }
-    .poll-sort-btn:hover { border-color: var(--accent); }
-    .poll-sort-btn.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
-    .poll-submit {
-      padding: 16px; background: var(--bg-elevated);
-      border: 1px solid var(--border-strong); border-radius: var(--radius);
-      margin-top: 8px;
-    }
-    .poll-submit-title { font-size: .875rem; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
-    .poll-submit-row { display: flex; gap: 8px; }
-    .poll-submit-input {
-      flex: 1; padding: 8px 12px; border: 1px solid var(--border-strong);
-      border-radius: var(--radius-sm); background: var(--bg-secondary);
-      color: var(--text-primary); font-family: var(--font-body); font-size: .8125rem;
-      outline: none; transition: border-color var(--dur);
-    }
-    .poll-submit-input:focus { border-color: var(--accent); }
-    .poll-submit-input::placeholder { color: var(--text-tertiary); }
-    .poll-submit-btn {
-      padding: 8px 16px; background: var(--accent); color: #fff;
-      border: none; border-radius: var(--radius-sm); cursor: pointer;
-      font-size: .8125rem; font-weight: 500; transition: background var(--dur);
-      white-space: nowrap;
-    }
-    .poll-submit-btn:hover { background: var(--accent-hover); }
-
     /* ── FEATURE REQUEST FORM ─── */
     .feature-form { max-width: 560px; }
     .form-group { margin-bottom: 16px; }
@@ -1455,15 +1397,15 @@
     .form-group .optional { font-weight: 400; color: var(--text-tertiary); }
     .form-group .required { color: var(--danger, #e55); }
     .form-group input, .form-group textarea, .form-group select {
-      width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px;
+      width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm);
       background: var(--bg); color: var(--text-primary); font-size: .875rem; font-family: inherit;
     }
-    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--accent); outline: none; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(33,132,243,.1); }
     .form-group textarea { resize: vertical; min-height: 80px; }
     .form-group select { appearance: auto; }
     .form-submit {
-      padding: 10px 24px; background: var(--accent); color: #fff; border: none; border-radius: 8px;
-      font-size: .875rem; font-weight: 600; cursor: pointer; transition: background .15s;
+      padding: 10px 24px; background: var(--accent); color: #fff; border: none; border-radius: var(--radius);
+      font-size: .875rem; font-weight: 600; cursor: pointer; transition: background var(--dur) var(--ease);
     }
     .form-submit:hover { background: var(--accent-hover); }
     .form-submit:disabled { opacity: .5; cursor: not-allowed; }
@@ -1472,10 +1414,8 @@
     .form-success .success-icon svg { width: 100%; height: 100%; }
     .form-success h3 { margin: 0 0 8px; color: var(--text-primary); }
     .form-success p { color: var(--text-secondary); margin: 0 0 16px; }
-    .form-another { padding: 8px 16px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 6px; color: var(--text-primary); cursor: pointer; font-size: .8125rem; }
+    .form-another { padding: 8px 16px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary); cursor: pointer; font-size: .8125rem; }
     .form-another:hover { border-color: var(--accent); color: var(--accent); }
-    .poll-total { font-size: .75rem; color: var(--text-tertiary); margin-bottom: 16px; }
-
     /* ── WELCOME BACK BAR ─── */
     .welcome-back {
       padding: 10px 16px; background: var(--accent-soft);
@@ -4690,109 +4630,6 @@
     renderReleases();
   }
 
-  /* ── FEATURE REQUEST POLL ──────────────────────────── */
-  const POLL_FEATURES = [
-    { id: 'clip-trim', title: 'Clip trimming & sharing', desc: 'Select a time range from any video and share just that segment with a link.', tag: 'video' },
-    { id: 'mobile-app', title: 'Native mobile app', desc: 'Dedicated iOS and Android app with offline video downloads and push notifications.', tag: 'mobile' },
-    { id: 'webhooks', title: 'Webhook notifications', desc: 'Send HTTP callbacks when sessions are created, videos uploaded, or members join.', tag: 'integrations' },
-    { id: 'bulk-upload', title: 'Bulk video import', desc: 'Upload an entire folder of videos at once, auto-creating sessions or classes for each.', tag: 'workflow' },
-    { id: 'annotation-draw', title: 'Drawing on video frames', desc: 'Pause and draw arrows, circles, or freehand on a frame — saved as a note attachment.', tag: 'video' },
-    { id: 'client-portal', title: 'Branded student portal', desc: 'Custom subdomain with your logo and colors so students see your brand, not Kaynos.', tag: 'workflow' },
-    { id: 'analytics-dash', title: 'Engagement analytics', desc: 'See who watched what, how far they got, and which notes they viewed — beyond basic completion.', tag: 'analytics' },
-    { id: 'calendar-sync', title: 'Calendar integration', desc: 'Sync sessions with Google Calendar or Apple Calendar so students get reminders.', tag: 'integrations' },
-    { id: 'slow-motion', title: 'Slow motion playback', desc: 'Frame-by-frame stepping and 0.25x playback for detailed technique review.', tag: 'video' },
-    { id: 'team-templates', title: 'Session templates', desc: 'Create reusable templates with preset tags, note prompts, and assigned coaches.', tag: 'workflow' },
-    { id: 'side-by-side', title: 'Side-by-side comparison', desc: 'Compare two videos from different dates to show student progress over time.', tag: 'video' },
-    { id: 'zapier', title: 'Zapier / Make integration', desc: 'Connect Kaynos to 5000+ apps — auto-create sessions from form submissions, notify Slack, etc.', tag: 'integrations' },
-  ];
-
-  function getPollVotes() { return safeGet('poll-votes', {}); }
-
-  let pollSort = 'votes';
-
-  function renderPoll() {
-    const container = document.getElementById('pollList');
-    const totalEl = document.getElementById('pollTotal');
-    const sortEl = document.getElementById('pollSort');
-    if (!container) return;
-
-    const votes = getPollVotes();
-    const totalVotes = Object.values(votes).reduce((a, b) => a + b, 0);
-
-    if (totalEl) totalEl.textContent = totalVotes > 0 ? `${totalVotes} vote${totalVotes !== 1 ? 's' : ''} cast` : 'No votes yet — be the first!';
-
-    if (sortEl) {
-      sortEl.innerHTML = `<span>Sort by</span>
-        <button class="poll-sort-btn${pollSort === 'votes' ? ' active' : ''}" onclick="setPollSort('votes')">Most voted</button>
-        <button class="poll-sort-btn${pollSort === 'recent' ? ' active' : ''}" onclick="setPollSort('recent')">Newest</button>
-        <button class="poll-sort-btn${pollSort === 'alpha' ? ' active' : ''}" onclick="setPollSort('alpha')">A–Z</button>`;
-    }
-
-    // Add user-submitted ideas
-    const custom = safeGet('poll-custom', []);
-    const allFeatures = [...POLL_FEATURES, ...custom.map(c => ({ id: 'custom-' + c.id, title: c.title, desc: '', tag: 'workflow' }))];
-
-    // Sort
-    const sorted = [...allFeatures];
-    if (pollSort === 'votes') sorted.sort((a, b) => (votes[b.id] || 0) - (votes[a.id] || 0));
-    else if (pollSort === 'alpha') sorted.sort((a, b) => a.title.localeCompare(b.title));
-    // 'recent' keeps default order (newest custom at top)
-
-    const voted = safeGet('poll-voted', []);
-
-    container.innerHTML = sorted.map(f => {
-      const count = votes[f.id] || 0;
-      const hasVoted = voted.includes(f.id);
-      return `<div class="poll-item">
-        <button class="poll-vote-btn${hasVoted ? ' voted' : ''}" onclick="togglePollVote('${f.id}')" aria-label="Vote for ${escapeHtml(f.title)}">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 12V4M4 8l4-4 4 4"/></svg>
-          <span class="poll-vote-count">${count}</span>
-        </button>
-        <div class="poll-item-body">
-          <div class="poll-item-title">${escapeHtml(f.title)}</div>
-          ${f.desc ? `<div class="poll-item-desc">${escapeHtml(f.desc)}</div>` : ''}
-          <span class="poll-item-tag ${f.tag}">${f.tag}</span>
-        </div>
-      </div>`;
-    }).join('');
-  }
-
-  function togglePollVote(featureId) {
-    const votes = getPollVotes();
-    const voted = safeGet('poll-voted', []);
-    if (voted.includes(featureId)) {
-      // Unvote
-      votes[featureId] = Math.max(0, (votes[featureId] || 0) - 1);
-      safeSet('poll-voted', voted.filter(v => v !== featureId));
-    } else {
-      // Vote
-      votes[featureId] = (votes[featureId] || 0) + 1;
-      voted.push(featureId);
-      safeSet('poll-voted', voted);
-    }
-    safeSet('poll-votes', votes);
-    renderPoll();
-  }
-
-  function setPollSort(s) {
-    pollSort = s;
-    renderPoll();
-  }
-
-  function submitPollIdea() {
-    const input = document.getElementById('pollInput');
-    if (!input) return;
-    const title = input.value.trim();
-    if (!title || title.length < 5) { showToast('Please describe your idea (5+ characters)'); return; }
-    const custom = safeGet('poll-custom', []);
-    if (custom.some(c => c.title.toLowerCase() === title.toLowerCase())) { showToast('This idea already exists'); return; }
-    custom.push({ id: Date.now(), title });
-    safeSet('poll-custom', custom);
-    input.value = '';
-    showToast('Idea submitted — vote for it!');
-    renderPoll();
-  }
-
   /* ── FEATURE REQUEST FORM (Netlify Forms AJAX) ────── */
   document.addEventListener('submit', function(e) {
     if (e.target.id !== 'featureForm') return;
@@ -4809,6 +4646,7 @@
       if (res.ok) {
         form.style.display = 'none';
         document.getElementById('featureSuccess').style.display = '';
+        document.getElementById('featureSuccess').setAttribute('role', 'alert');
       } else {
         showToast('Something went wrong — please try again or email support.');
         if (btn) { btn.disabled = false; btn.textContent = 'Submit request'; }
