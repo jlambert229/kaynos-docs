@@ -2953,7 +2953,7 @@
 <tr><td>read-pages</td><td>Pages you've visited</td><td>localStorage</td></tr>
 <tr><td>recent-pages</td><td>Recently viewed pages</td><td>localStorage</td></tr>
 <tr><td>search-history</td><td>Recent search terms</td><td>localStorage</td></tr>
-<tr><td>poll-votes, poll-voted, poll-custom</td><td>Feature poll votes</td><td>localStorage</td></tr>
+<tr><td>poll-votes, poll-voted, poll-custom</td><td>Feature poll votes (legacy, no longer used)</td><td>localStorage</td></tr>
 <tr><td>highlights</td><td>Text highlights you've made</td><td>localStorage</td></tr>
 <tr><td>scroll-pos</td><td>Scroll position per page</td><td>localStorage</td></tr>
 <tr><td>onboarded, checklist-done</td><td>Onboarding progress</td><td>localStorage</td></tr>
@@ -4097,7 +4097,7 @@
     'login-blank': { result: true, title: 'Blank page', body: 'Try incognito/private window. If that works, clear site data for app.kaynos.net.', page: 'login-issues' },
     email: { result: true, title: 'Email issues', body: 'Check spam, confirm address in profile, verify notifications are enabled.', page: 'email-issues' },
     performance: { result: true, title: 'Performance issues', body: 'Clear cache, try Chrome, disable ad blockers temporarily, close extra tabs.', page: 'performance' },
-    other: { result: true, title: 'Need more help?', body: 'Email support@kaynos.net with your account name, browser, and what happened.', page: 'faq' },
+    other: { result: true, title: 'Need more help?', body: 'Email support with your account name, browser, and what happened.', page: 'contact' },
   };
 
   function renderWizard(stepId) {
@@ -4197,7 +4197,7 @@
     'class': 'An account-wide recording visible to all members, coaches, and admins.',
     'admin': 'The highest-permission role — manages roster, invites, roles, and settings.',
     'coach': 'Staff role that creates sessions/classes, uploads video, and adds notes.',
-    'client': 'End user (student) who watches sessions and classes, adds notes, and tracks progress.',
+    'student': 'End user who watches sessions and classes, adds notes, and tracks progress.',
     'note': 'A text annotation pinned to a specific timestamp on the video timeline.',
     'tag': 'A label for organizing sessions and classes (e.g. form-review, competition).',
     'api token': 'A secret key for authenticating scripts against the API.',
@@ -4523,7 +4523,7 @@
       items: [
         { type: 'new', text: 'Help center UX overhaul — 35+ fixes for accessibility, mobile, icons, and keyboard navigation' },
         { type: 'new', text: 'Release notes page with filterable changelog and status badges' },
-        { type: 'new', text: 'Feature request poll — vote on what gets built next' },
+        { type: 'new', text: 'Feature request form — tell us what to build next' },
         { type: 'improved', text: 'Search now saves history on result click, not just keyboard Enter' },
         { type: 'improved', text: 'Platform-aware keyboard shortcut hints — Ctrl+K on Windows/Linux, ⌘K on Mac' },
         { type: 'improved', text: 'Scroll position remembered on browser back/forward' },
