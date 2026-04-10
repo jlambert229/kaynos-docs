@@ -476,6 +476,18 @@
     .quick-link .ql-title { font-weight: 500; color: var(--text-primary); }
     .quick-link .ql-desc { font-size: .8125rem; color: var(--text-secondary); line-height: 1.4; }
 
+    /* ── FEATURE OVERVIEW ─── */
+    .feature-overview { margin: 16px 0 24px; }
+    .feature-overview summary { cursor: pointer; font-size: .9375rem; color: var(--text-secondary); padding: 10px 0; }
+    .feature-overview summary:hover { color: var(--accent); }
+    .feature-overview[open] summary { margin-bottom: 12px; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+    .feature-card { background: var(--bg-secondary); border-radius: 10px; padding: 16px; border: 1px solid var(--border); }
+    .feature-card h4 { margin: 8px 0 6px; font-size: .875rem; color: var(--text-primary); }
+    .feature-card p { font-size: .8125rem; color: var(--text-secondary); line-height: 1.5; margin: 0; }
+    .feature-icon { width: 28px; height: 28px; color: var(--accent); }
+    .feature-icon svg { width: 100%; height: 100%; }
+
     /* ── BREADCRUMB ─── */
     .breadcrumb {
       font-size: .8125rem; color: var(--text-tertiary);
@@ -1806,6 +1818,41 @@
   <div class="hint-icon">${IC.info}</div>
   <div><strong>You're reading the help center.</strong> Sign in to the app at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> to upload video, manage your account, and use in-app support.</div>
 </div>
+<details class="feature-overview">
+<summary><strong>What can Kaynos do?</strong> — quick feature overview</summary>
+<div class="feature-grid">
+  <div class="feature-card">
+    <div class="feature-icon">${IC.video}</div>
+    <h4>Video upload & playback</h4>
+    <p>Upload MP4, MOV, WebM, or AVI (up to 5 GB). Chunked uploads with auto-retry for large files. Playback with speed controls (0.5×–2×) and resume.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">${IC.book}</div>
+    <h4>Timestamped coaching notes</h4>
+    <p>Pin notes to exact moments on the timeline. Draw annotations on frames. Voice dictation for hands-free feedback. Reactions, replies, and note types (key moment, drill, question).</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">${IC.users}</div>
+    <h4>Team & role management</h4>
+    <p>Three roles: admin, coach, student. Invite by email, manage permissions, track who watched what. No seat limits.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">${IC.rocket}</div>
+    <h4>Sessions & scheduling</h4>
+    <p>Private sessions (one student) or shared classes (everyone). Calendar view with recurrence and conflict detection. Clips for sharing highlights.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">${IC.check}</div>
+    <h4>Security & compliance</h4>
+    <p>Two-factor authentication (TOTP). US-hosted storage (Backblaze B2 + Cloudflare CDN). Data export for GDPR. HTTPS everywhere.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">${IC.info}</div>
+    <h4>Integrations & API</h4>
+    <p>REST API with token auth. Webhooks for real-time events. Stripe billing ($49/mo or $490/yr, 14-day free trial).</p>
+  </div>
+</div>
+</details>
 <h2>Jump in</h2>
 <div class="quick-links">
   <a class="quick-link featured" href="#setup" onclick="navigate('setup');return false">
