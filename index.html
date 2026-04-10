@@ -668,6 +668,17 @@
       .bookmark-btn, .share-btn, .print-btn,
       .copy-article-btn, .wizard-option, .checklist-item,
       .preflight-item { min-height: 44px; display: inline-flex; align-items: center; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .next-steps-nav { flex-direction: column; gap: 8px; }
+      .next-step { text-align: center; }
+      .feature-form { max-width: 100%; }
+      .open-in-app { padding: 12px 20px; font-size: .875rem; }
+      .tldr { font-size: .8125rem; padding: 8px 12px; }
+    }
+
+    @media (max-width: 480px) {
+      .feature-card { padding: 12px; }
+      .feature-icon { width: 22px; height: 22px; }
     }
 
     :focus-visible { outline: 2px solid rgba(33,132,243,.6); outline-offset: 2px; }
