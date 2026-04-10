@@ -25,6 +25,14 @@
   <meta name="twitter:description" content="Video review for coaches — setup guides, troubleshooting, and API docs." />
   <meta name="twitter:image" content="https://docs.kaynos.net/og-image.png" />
 
+  <!-- Prevent theme flicker on first paint (KAY-206) -->
+  <script>
+    try {
+      var t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      if (t === 'light') document.documentElement.classList.add('light');
+    } catch(e) {}
+  </script>
+
   <!-- Favicon (Kaynos logo) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23050508'/%3E%3Cg transform='translate(4.5,4) scale(0.124)'%3E%3Cpath d='M 64 151 L 102 189 L 178 190 L 102 114 Z' fill='%232184f3' fill-rule='evenodd'/%3E%3Cpath d='M 184 1 L 116 1 L 1 115 L 0 185 Z' fill='%232184f3' fill-rule='evenodd'/%3E%3Cpath d='M 58 0 L 3 0 L 0 3 L 0 91 L 57 34 Z' fill='%232184f3' fill-rule='evenodd'/%3E%3C/g%3E%3C/svg%3E" />
 
@@ -1564,7 +1572,8 @@
 
     <div class="header-spacer"></div>
 
-    <button class="lang-toggle" id="langToggle" onclick="toggleLang()" title="Switch language">EN</button>
+    <!-- Language toggle hidden until ES translations cover >90% of pages (KAY-201) -->
+    <button class="lang-toggle" id="langToggle" onclick="toggleLang()" title="Switch language" hidden style="display:none">EN</button>
 
     <div class="text-size-controls">
       <button class="text-size-btn" onclick="adjustTextSize(-1)" title="Decrease text size" aria-label="Decrease text size">A-</button>
@@ -1592,7 +1601,7 @@
     <main class="content">
       <div class="content-with-toc">
         <div class="content-wrap">
-          <div class="content-inner" id="pageContent"></div>
+          <main class="content-inner" id="pageContent"></main>
           <nav class="footer-nav" id="footerNav" aria-label="Page navigation"></nav>
         </div>
         <aside class="toc" id="toc" aria-label="On this page"></aside>
@@ -3134,8 +3143,27 @@
   });
 
   /* ── KEYBOARD SHORTCUTS ─────────────────────────────── */
-  function openKbd() { document.getElementById('kbdModal').classList.add('active'); }
-  function closeKbd() { document.getElementById('kbdModal').classList.remove('active'); }
+  /* Focus-trap helper (KAY-202) */
+  let _savedFocus = null;
+  function trapFocus(overlay) {
+    const focusable = overlay.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (!focusable.length) return;
+    focusable[0].focus();
+    overlay._trapHandler = function(e) {
+      if (e.key !== 'Tab') return;
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey) { if (document.activeElement === first) { e.preventDefault(); last.focus(); } }
+      else { if (document.activeElement === last) { e.preventDefault(); first.focus(); } }
+    };
+    overlay.addEventListener('keydown', overlay._trapHandler);
+  }
+  function releaseFocus(overlay) {
+    if (overlay._trapHandler) { overlay.removeEventListener('keydown', overlay._trapHandler); overlay._trapHandler = null; }
+    if (_savedFocus) { try { _savedFocus.focus(); } catch(e){} _savedFocus = null; }
+  }
+
+  function openKbd() { _savedFocus = document.activeElement; var m = document.getElementById('kbdModal'); m.classList.add('active'); trapFocus(m); }
+  function closeKbd() { var m = document.getElementById('kbdModal'); m.classList.remove('active'); releaseFocus(m); }
 
   document.addEventListener('keydown', e => {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
@@ -3720,6 +3748,7 @@
       }
     }
     // Process in reverse to avoid node index shifting
+    let glossaryUid = 0;
     replacements.reverse().forEach(({ node, term, def, index }) => {
       const before = node.textContent.slice(0, index);
       const after = node.textContent.slice(index + term.length);
@@ -3729,7 +3758,11 @@
       span.textContent = term;
       const popup = document.createElement('span');
       popup.className = 'term-tooltip-popup';
+      const tipId = 'glossary-tip-' + (glossaryUid++);
+      popup.id = tipId;
+      popup.setAttribute('role', 'tooltip');
       popup.textContent = def;
+      span.setAttribute('aria-describedby', tipId);
       span.appendChild(popup);
       const parent = node.parentNode;
       if (before) parent.insertBefore(document.createTextNode(before), node);
@@ -3925,20 +3958,25 @@
     { title: 'Print this page', icon: IC.print, action: () => window.print(), type: 'Action' },
     { title: 'Search docs', icon: IC.chat, action: () => { closePalette(); toggleChat(); }, type: 'Action' },
     { title: 'Show keyboard shortcuts', icon: IC.info, action: () => { closePalette(); openKbd(); }, type: 'Action' },
-    { title: 'Toggle language (EN/ES)', icon: IC.book, action: () => toggleLang(), type: 'Action' },
+    // { title: 'Toggle language (EN/ES)', icon: IC.book, action: () => toggleLang(), type: 'Action' }, // Hidden until ES translations cover >90% (KAY-201)
   ];
 
   function openPalette() {
-    document.getElementById('paletteOverlay').classList.add('active');
+    _savedFocus = document.activeElement;
+    var ov = document.getElementById('paletteOverlay');
+    ov.classList.add('active');
     const input = document.getElementById('paletteInput');
     input.value = '';
     input.focus();
     paletteIdx = -1;
     filterPalette('');
+    trapFocus(ov);
   }
   function closePalette() {
-    document.getElementById('paletteOverlay').classList.remove('active');
+    var ov = document.getElementById('paletteOverlay');
+    ov.classList.remove('active');
     paletteIdx = -1;
+    releaseFocus(ov);
   }
   function filterPalette(q) {
     const lower = (q || '').toLowerCase();
@@ -4265,6 +4303,7 @@
   function toggleLang() {
     currentLang = currentLang === 'en' ? 'es' : 'en';
     localStorage.setItem('lang', currentLang);
+    document.documentElement.lang = currentLang;
     const lt = document.getElementById('langToggle');
     lt.textContent = currentLang.toUpperCase();
     lt.classList.toggle('es', currentLang === 'es');
@@ -4586,10 +4625,7 @@
   document.getElementById('langToggle').textContent = currentLang.toUpperCase();
   document.getElementById('langToggle').classList.toggle('es', currentLang === 'es');
 
-  // First-time onboarding
-  if (isFirstVisit()) {
-    setTimeout(startTour, 600);
-  }
+  // First-time onboarding — auto-tour removed (KAY-202); welcome page "Take the tour" link suffices
   </script>
 </body>
 </html>
