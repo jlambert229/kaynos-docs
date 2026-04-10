@@ -1856,6 +1856,8 @@
 <li>Enter the same email and the temporary password from the invite.</li>
 <li>You land on the <strong>Coach Dashboard</strong> — that's home base.</li>
 </ol>
+<h3>Google login</h3>
+<p>If your account was created with Google, click <strong>Sign in with Google</strong> on the login page. No separate password needed — your Google account handles authentication.</p>
 <h2>Set a new password</h2>
 <p>Before inviting your full roster, secure your own account.</p>
 <ol>
@@ -2002,7 +2004,7 @@
 <h2>Upload behavior</h2>
 <ul>
 <li>Files under ~100 MB often upload in a single request.</li>
-<li>Larger files use chunked parallel upload with automatic retries (up to three) on network errors.</li>
+<li>Files over 100 MB use chunked multipart upload (20 MB per chunk) with up to 3 retries per chunk and exponential backoff.</li>
 <li>You can cancel an in-progress upload at any time.</li>
 </ul>
 <h2>Supported formats</h2>
@@ -2010,7 +2012,7 @@
 <tr><td>MP4</td><td><code>.mp4</code></td><td>Recommended default</td></tr>
 <tr><td>MOV</td><td><code>.mov</code></td><td>Common on iPhone and GoPro</td></tr>
 <tr><td>WebM</td><td><code>.webm</code></td><td>Screen and browser capture</td></tr>
-<tr><td>MKV</td><td><code>.mkv</code></td><td>Supported; less common</td></tr>
+<tr><td>AVI</td><td><code>.avi</code></td><td>Supported; limited browser playback</td></tr>
 </tbody></table>
 <p>Maximum file size is <strong>5 GB</strong>. Full details: <a onclick="navigate('formats')">Supported formats and limits</a>.</p>
 <h2>Vimeo</h2>
@@ -2045,10 +2047,10 @@
 <p>Each session or class uses one source: <strong>Upload</strong> (file from your device), <strong>Vimeo</strong> (embedded link), or <strong>Notes Only</strong> (no video). Upload from <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> when creating or editing.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Format and size limits: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 <h2>Large files</h2>
-<p>Big uploads are split into chunks and sent with parallel connections. Failed parts retry automatically (up to three times) with exponential backoff.</p>
+<p>Files over <strong>100 MB</strong> use chunked multipart upload (<strong>20 MB</strong> per chunk) with parallel connections. Failed parts retry automatically (up to <strong>3 attempts</strong> per chunk) with exponential backoff.</p>
 <h2>Requirements</h2>
 <ul>
-<li>Formats: MP4, MOV, WebM, MKV (convert others before uploading).</li>
+<li>Formats: MP4, MOV, WebM, AVI (convert others before uploading).</li>
 <li>Maximum 5 GB per video.</li>
 <li>Only admins and coaches may upload.</li>
 </ul>
@@ -2062,7 +2064,7 @@
 <p>Large uploads depend on stable internet and a supported format. Work through the checks below before assuming an app bug.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Reference: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 <h3>Fails immediately</h3>
-<p><strong>"Please select a video file":</strong> the file may not be MP4, MOV, WebM, or MKV. Convert to MP4 with <a href="https://handbrake.fr" target="_blank" rel="noopener">HandBrake</a> or <a href="https://www.videolan.org/vlc/" target="_blank" rel="noopener">VLC</a>, then try again.</p>
+<p><strong>"Please select a video file":</strong> the file may not be MP4, MOV, WebM, or AVI. Convert to MP4 with <a href="https://handbrake.fr" target="_blank" rel="noopener">HandBrake</a> or <a href="https://www.videolan.org/vlc/" target="_blank" rel="noopener">VLC</a>, then try again.</p>
 <p><strong>File too big:</strong> the limit is 5 GB. Trim the clip or export at 1080p — HandBrake's "Fast 1080p30" preset is a common choice.</p>
 <h3>Progress appears stuck</h3>
 <ol>
@@ -2120,7 +2122,14 @@
 <tr><td><code>J</code> / <code>L</code></td><td>Skip back / forward</td></tr>
 <tr><td><code>N</code></td><td>Pause and add note</td></tr>
 <tr><td><code>F</code></td><td>Toggle fullscreen</td></tr>
+<tr><td><code>M</code></td><td>Mute / unmute</td></tr>
+<tr><td><code>↑</code> / <code>↓</code></td><td>Volume up / down</td></tr>
+<tr><td><code>H</code></td><td>Start / end highlight</td></tr>
+<tr><td><code>A</code></td><td>Draw annotation</td></tr>
+<tr><td><code>Cmd+Enter</code> / <code>Ctrl+Enter</code></td><td>Save note</td></tr>
+<tr><td><code>Esc</code></td><td>Cancel current action</td></tr>
 </tbody></table>
+<p><strong>Mobile:</strong> Double-tap the left half of the video to skip back 10 seconds, or the right half to skip forward.</p>
 <h2>Progress tracking</h2>
 <p>Playback position is saved for resume. Coaches can see completion percentage and last-viewed time without heavy analytics.</p>
 <details><summary>Playback troubleshooting</summary>
@@ -2129,7 +2138,7 @@
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 <h3>Player blank or broken controls</h3>
 <p><strong>Black screen / no controls:</strong> refresh, then hard refresh or clear cache, then try <a href="https://www.google.com/chrome/" target="_blank" rel="noopener">Chrome</a>. Confirm the upload finished (not stuck on "uploading" or showing "failed").</p>
-<p><strong>"Cannot be played":</strong> often a codec or browser issue. MKV can fail in Safari — try <a href="https://www.google.com/chrome/" target="_blank" rel="noopener">Chrome</a> or <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener">Firefox</a>, or re-export to MP4 with H.264 video and AAC audio.</p>
+<p><strong>"Cannot be played":</strong> often a codec or browser issue. AVI may have limited browser support — try <a href="https://www.google.com/chrome/" target="_blank" rel="noopener">Chrome</a> or <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener">Firefox</a>, or re-export to MP4 with H.264 video and AAC audio.</p>
 <h3>Buffering or long spinners</h3>
 <ul>
 <li>Check your bandwidth (upload and download can differ dramatically by network).</li>
@@ -2152,6 +2161,12 @@
   <div class="shortcut-card"><span>Skip forward</span><kbd>L</kbd></div>
   <div class="shortcut-card"><span>Fullscreen</span><kbd>F</kbd></div>
   <div class="shortcut-card"><span>Pause + add note</span><kbd>N</kbd></div>
+  <div class="shortcut-card"><span>Mute / unmute</span><kbd>M</kbd></div>
+  <div class="shortcut-card"><span>Volume up / down</span><div><kbd>↑</kbd> <kbd>↓</kbd></div></div>
+  <div class="shortcut-card"><span>Start / end highlight</span><kbd>H</kbd></div>
+  <div class="shortcut-card"><span>Draw annotation</span><kbd>A</kbd></div>
+  <div class="shortcut-card"><span>Save note</span><div><kbd>⌘</kbd> <kbd>Enter</kbd></div></div>
+  <div class="shortcut-card"><span>Cancel current action</span><kbd>Esc</kbd></div>
 </div>
 <h3>Help center shortcuts</h3>
 <div class="shortcut-grid">
@@ -2163,6 +2178,14 @@
   <div class="shortcut-card"><span>Go home</span><kbd>H</kbd></div>
   <div class="shortcut-card"><span>All shortcuts</span><kbd>?</kbd></div>
 </div>
+<h2>Clips</h2>
+<p>Create a clip from any session or class to highlight a specific moment.</p>
+<ol>
+<li>While watching, set the start and end time for your clip.</li>
+<li>Click <strong>Create Clip</strong>. The clip is saved to your clips list.</li>
+<li>Toggle <strong>Share</strong> to generate a shareable link anyone can view — no login required.</li>
+</ol>
+<p>Manage clips from the session or class detail page. Disable sharing at any time to revoke the link.</p>
 </details>`},
 
     formats: {
@@ -2175,7 +2198,7 @@
 <tr><td>MP4</td><td><code>.mp4</code></td><td>Recommended default</td></tr>
 <tr><td>MOV</td><td><code>.mov</code></td><td>Supported</td></tr>
 <tr><td>WebM</td><td><code>.webm</code></td><td>Supported</td></tr>
-<tr><td>MKV</td><td><code>.mkv</code></td><td>Supported</td></tr>
+<tr><td>AVI</td><td><code>.avi</code></td><td>Supported; limited browser playback</td></tr>
 </tbody></table>
 <p><strong>MP4</strong> is the most predictable for uploads and playback. MOV from iPhone usually works well.</p>
 <h2>File size</h2>
@@ -2222,8 +2245,14 @@
 <h2>Where video is stored</h2>
 <p>Videos are stored in <a href="https://www.backblaze.com/b2/cloud-storage.html" target="_blank" rel="noopener">Backblaze B2</a>, delivered through <a href="https://www.cloudflare.com/application-services/products/cdn/" target="_blank" rel="noopener">Cloudflare</a> CDN. Infrastructure is US-hosted.</p>
 <h2>Retention</h2>
-<p>Video remains available while your account is active. We do not apply an automatic 90-day deletion policy.</p>
+<p>Default retention is <strong>6 months per school</strong>, configurable by an admin. Videos flagged as expiring are surfaced one month before the retention limit. There is a <strong>30-day grace period</strong> before actual deletion. Admins can view expiring videos from the Admin panel and request retention-limit increases.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Upload limits and codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
+<h2>Default quotas</h2>
+<ul>
+<li><strong>100 videos</strong> per school.</li>
+<li><strong>50 GB storage</strong> per school.</li>
+<li>Admins can request increases via the Admin panel.</li>
+</ul>
 <h2>Security</h2>
 <ul>
 <li>HTTPS for all data in transit.</li>
@@ -2279,7 +2308,17 @@
 </ol>
 <h2>Who sees it</h2>
 <p>The assigned student, the creator, and admins. Other students cannot open someone else's private session.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>First upload walkthrough: <a onclick="navigate('first-upload')">Your first video upload</a>. Visibility model: <a onclick="navigate('faq')">FAQ</a>.</div></div>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>First upload walkthrough: <a onclick="navigate('first-upload')">Your first video upload</a>. Visibility model: <a onclick="navigate('faq')">FAQ</a>.</div></div>
+<h2>Scheduling</h2>
+<p>Schedule sessions in advance from the calendar view.</p>
+<ol>
+<li>Go to <strong>Schedule</strong> in the sidebar.</li>
+<li>Click a time slot or use <strong>New</strong> to create a scheduled session.</li>
+<li>Set title, student (or class), date, time, and duration (default: 60 minutes).</li>
+<li>Optional: enable <strong>recurrence</strong> — choose days of the week and an end date.</li>
+<li>The system checks for conflicts with your other sessions automatically.</li>
+</ol>
+<p>Edit or delete a single occurrence, all future occurrences, or the entire series. Students and coaches see scheduled sessions on their dashboard.</p>`},
 
     "creating-classes": {
       title: "Creating a class", section: "Sessions & Classes",
@@ -2320,6 +2359,23 @@
 <li>Use the coach filter to quickly review your notes across several recordings.</li>
 </ul>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Playback shortcuts and the full note workflow: <a onclick="navigate('playback')">Watching and reviewing</a>.</div></div>
+<h2>Note types</h2>
+<p>When creating a note, choose a type to categorize it:</p>
+<ul>
+<li><strong>Note</strong> — general observation (default)</li>
+<li><strong>Key moment</strong> — marks an important technique or breakthrough</li>
+<li><strong>Drill</strong> — a drill or exercise to practice</li>
+<li><strong>Question</strong> — something to discuss next session</li>
+<li><strong>Highlight</strong> — marks a time range (start and end) on the timeline</li>
+</ul>
+<h2>Voice dictation</h2>
+<p>Coaches can dictate notes hands-free using speech-to-text (powered by Deepgram).</p>
+<ol>
+<li>The first time you use it, you'll be asked to grant microphone access and consent to audio processing.</li>
+<li>Click the microphone icon in the note editor, speak your observation, and the text appears in real time.</li>
+<li>Edit the transcription if needed, then save as usual.</li>
+</ol>
+<p>Voice dictation is opt-in per user. Your audio is processed in real time and not stored.</p>
 <h2>Tags</h2>
 <p>Tags group related sessions and classes so lists stay easy to filter as your library grows.</p>
 <h3>Tag ideas</h3>
@@ -2338,7 +2394,17 @@
 <li>Agree on a shared vocabulary so your whole team uses consistent tags.</li>
 <li>Tags are shared across the account, not private to one person.</li>
 </ul>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Filter your lists by tag in the app after you <a href="https://app.kaynos.net" target="_blank" rel="noopener">sign in</a>.</div></div>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Filter your lists by tag in the app after you <a href="https://app.kaynos.net" target="_blank" rel="noopener">sign in</a>.</div></div>
+<h2>Annotations</h2>
+<p>Draw directly on a video frame to highlight technique details.</p>
+<ol>
+<li>Pause the video at the moment you want to annotate.</li>
+<li>Press <kbd>A</kbd> or click the annotation tool.</li>
+<li>Draw arrows, circles, or freehand on the frozen frame.</li>
+<li>Save — the annotation is attached to that timestamp and appears during playback.</li>
+</ol>
+<h2>Reactions</h2>
+<p>React to any note with an emoji: 👍 ❤️ 🔥 👀 ✅ 👏. Click the reaction button under a note to add yours.</p>`},
 
     progress: {
       title: "Progress tracking", section: "Sessions & Classes",
@@ -2346,11 +2412,7 @@
 <h1>Progress tracking</h1>
 <p>Progress is simple on purpose: enough to see whether someone finished a recording and when they last opened it.</p>
 <h2>What we store</h2>
-<ul>
-<li>Last playback position (for resume)</li>
-<li>Whether the full video was completed</li>
-<li>Last opened time</li>
-</ul>
+<p>For each session and class, we track: last playback position (so you can resume), whether the full video was completed, and when it was last viewed. Coaches and admins can filter progress reports by student and date range (1 to 365 days).</p>
 <h2>For members</h2>
 <p>They resume where they left off. Overviews show items that still need a full watch versus completed items.</p>
 <h2>For coaches and owners</h2>
@@ -2374,7 +2436,11 @@
 <h2>Common questions</h2>
 <p><strong>One person, two accounts?</strong> Use a different email address per account. Each account is completely separate.</p>
 <p><strong>Member limits?</strong> The product does not enforce a headcount cap.</p>
-<p><strong>Student-to-student invites?</strong> Only staff roles can invite; students cannot invite other students.</p>`},
+<p><strong>Student-to-student invites?</strong> Only staff roles can invite; students cannot invite other students.</p>
+<h2>Branding</h2>
+<p>Admins can customize the look of their account under <strong>Admin → Branding</strong>. Set a custom logo, accent color, and welcome text that members see when they log in.</p>
+<h2>School hours</h2>
+<p>Admins can set operating hours under <strong>Admin → Settings</strong>. Default hours are 6 AM to 9 PM. Scheduling outside these hours is allowed but flagged.</p>`},
 
     profile: {
       title: "Profile and password", section: "Account Management",
@@ -2393,6 +2459,15 @@
 </ol>
 <p>Locked out? Ask an admin for a reset, or email ${mailLink()}. Login help: <a onclick="navigate('login-issues')">Login and access issues</a>.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Profile lives in the app: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> → your name in the sidebar (or menu on mobile).</div></div>
+<h2>Two-factor authentication (2FA)</h2>
+<p>Add an extra layer of security with time-based one-time passwords (TOTP).</p>
+<ol>
+<li>Go to <strong>Profile → Security</strong>.</li>
+<li>Click <strong>Set up 2FA</strong>. Scan the QR code with an authenticator app (Google Authenticator, Authy, 1Password, etc.).</li>
+<li>Enter the 6-digit code from your app to verify.</li>
+<li>2FA is now active. You'll need the code each time you log in.</li>
+</ol>
+<p>To disable: <strong>Profile → Security → Disable 2FA</strong>. Requires your password and a current 6-digit code.</p>
 <h2>Notifications</h2>
 <p>Email covers new sessions, classes, and onboarding (invites and temporary passwords), but not billing. Toggle preferences under <strong>Profile</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Delivery problems? See <a onclick="navigate('email-issues')">Email and notification issues</a>.</div></div>
@@ -2404,6 +2479,8 @@
 </ul>
 <h3>Turning notifications off</h3>
 <p><strong>Profile</strong> → <strong>Email Notifications</strong>. Security-related messages (such as password resets) may still send.</p>
+<h2>In-app notifications</h2>
+<p>The bell icon in the header shows unread notifications: mentions, replies, new sessions, new classes, and schedule reminders. Click to view, or mark all as read.</p>
 <h3>Not receiving mail</h3>
 <ol>
 <li>Check spam or promotions folders.</li>
@@ -2416,7 +2493,7 @@
       title: "Login and access issues", section: "Troubleshooting",
       content: `
 <h1>Login and access issues</h1>
-<p>Most issues stem from the wrong email, typos, or Caps Lock. Repeated failures can trigger a short lockout. Sign in at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
+<p>Most issues stem from the wrong email, typos, or Caps Lock. <strong>5 failed login attempts</strong> lock the account for <strong>15 minutes</strong>. Sign in at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
 <h2>Password problems</h2>
 <ul>
 <li>Use the same email the invite was sent to.</li>
@@ -2424,7 +2501,7 @@
 <li>Ask an admin for a reset or email ${mailLink()}.</li>
 </ul>
 <h2>"Too many attempts"</h2>
-<p>Too many failed logins from one IP are rate-limited. Wait and try again later, or reset your password. If you still need help, contact ${mailLink()}.</p>
+<p><strong>25 failed attempts</strong> from a single IP trigger rate limiting (HTTP 429). Wait 15 minutes and try again, or reset your password. If you still need help, contact ${mailLink()}.</p>
 <h2>Blank page or "no access"</h2>
 <p>The account may have been removed, or the browser cached an old session. Try a private/incognito window. If that works, clear site data for <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> in normal mode.</p>
 <h2>Still locked out</h2>
@@ -2537,7 +2614,23 @@
 <hr>
 <h2>Support</h2>
 <h3>How do I contact you?</h3>
-<p>Email ${mailLink()} with what happened, what you expected, your account name, and your browser. A screenshot or short screen recording speeds up diagnosis. In-app chat is available when logged in to <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>`},
+<p>Email ${mailLink()} with what happened, what you expected, your account name, and your browser. A screenshot or short screen recording speeds up diagnosis. In-app chat is available when logged in to <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
+<h3>Can I delete my account?</h3>
+<p>Yes. Users can delete their own account from <strong>Profile → Delete Account</strong>. Admins can schedule school deletion from <strong>Admin → Delete School</strong> — there's a 30-day grace period during which you can cancel. After 30 days, all data is permanently removed.</p>
+<hr>
+<h2>Billing and pricing</h2>
+<h3>How much does Kaynos cost?</h3>
+<p><strong>$49/month</strong> or <strong>$490/year</strong> (saves 17% — two months free). Every new account starts with a <strong>14-day free trial</strong> — no charge until the trial ends. Manage billing, view invoices, and update your payment method from the Stripe billing portal (link in Admin).</p>
+<h3>What happens when my trial ends?</h3>
+<p>Your selected plan begins billing automatically. If you cancel before the trial ends, you won't be charged. All your data stays available while your subscription is active.</p>
+<hr>
+<h2>Search and navigation</h2>
+<h3>Is there a quick way to find things?</h3>
+<p>Press <kbd>Cmd+K</kbd> (Mac) or <kbd>Ctrl+K</kbd> (Windows) to open the search palette. Search across sessions, classes, and members instantly. Use arrow keys to navigate results and Enter to jump to one. Recent items appear automatically.</p>
+<hr>
+<h2>Data</h2>
+<h3>Can I export my data?</h3>
+<p>Admins can export all school data from <strong>Admin → Export</strong>. The export includes users, sessions, classes, notes, tags, and video metadata in a structured format suitable for backup or compliance (GDPR) purposes.</p>`},
 
     "developer-api": {
       title: "Developer API", section: "Developers",
@@ -2600,7 +2693,15 @@
 <ul>
 <li><a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener">Swagger UI</a></li>
 <li>Contact support for API documentation access</li>
-</ul>`},
+</ul>
+<h2>Webhooks</h2>
+<p>Receive real-time HTTP callbacks when events happen in your account.</p>
+<ol>
+<li>Go to <strong>Admin → Webhooks</strong>.</li>
+<li>Add an endpoint URL. Choose which events to subscribe to (e.g., session.created, class.created).</li>
+<li>Kaynos sends a POST request to your URL with the event payload.</li>
+</ol>
+<p>View delivery history and retry failed deliveries from the webhooks panel.</p>`},
 
     glossary: {
       title: "Glossary", section: "Getting Started",
@@ -2616,7 +2717,7 @@
 <div class="glossary-term"><dt>Note</dt><dd>A short text annotation pinned to a specific timestamp on the video timeline. Coaches and students can both create notes; coaches can edit any note.</dd></div>
 <div class="glossary-term"><dt>Tag</dt><dd>A label attached to sessions or classes for organization and filtering. Tags are shared across the account — examples: <code>form-review</code>, <code>competition</code>, <code>fundamentals</code>.</dd></div>
 <div class="glossary-term"><dt>Progress</dt><dd>A lightweight tracker that records playback position (for resume), completion status, and last-viewed time. Coaches see completion across their students; no invasive analytics.</dd></div>
-<div class="glossary-term"><dt>API Token <code>kn_...</code></dt><dd>A secret key minted under Admin → Developer API. Used to authenticate scripts and integrations against the <code>/api/v1</code> endpoints. Treat like a password.</dd></div>
+<div class="glossary-term"><dt>API Token</dt><dd>A secret key minted under Admin → Developer API. Used to authenticate scripts and integrations against the <code>/api/v1</code> endpoints. Treat like a password.</dd></div>
 <div class="glossary-term"><dt>Vimeo Source</dt><dd>An alternative to uploading a file — paste a Vimeo URL or video ID to embed video already hosted on Vimeo into a session or class.</dd></div>
 <div class="glossary-term"><dt>CDN</dt><dd>Content Delivery Network — Kaynos uses Cloudflare to deliver video quickly from edge servers close to the viewer, reducing buffering.</dd></div>
 </dl>
@@ -2644,7 +2745,7 @@
 <div class="shortcut-grid">
   <div class="shortcut-card"><span>Chrome (recommended)</span><span style="color:var(--success)">Full support</span></div>
   <div class="shortcut-card"><span>Firefox</span><span style="color:var(--success)">Full support</span></div>
-  <div class="shortcut-card"><span>Safari</span><span style="color:var(--warning)">Good (MKV may fail)</span></div>
+  <div class="shortcut-card"><span>Safari</span><span style="color:var(--warning)">Good (AVI may have limited support)</span></div>
   <div class="shortcut-card"><span>Edge</span><span style="color:var(--success)">Full support</span></div>
 </div>
 <h3>If something doesn't work</h3>
@@ -3770,7 +3871,7 @@
         { text: 'Very slow but no error', next: 'upload-slow' },
       ]
     },
-    'upload-reject': { result: true, title: 'File rejected at start', body: 'Check your file format (MP4, MOV, WebM, MKV) and size (max 5 GB).', page: 'uploading' },
+    'upload-reject': { result: true, title: 'File rejected at start', body: 'Check your file format (MP4, MOV, WebM, AVI) and size (max 5 GB).', page: 'uploading' },
     'upload-stuck': { result: true, title: 'Progress bar stuck', body: 'Large files pause between chunks — wait 60 seconds. If no progress after 2 minutes, cancel and retry.', page: 'uploading' },
     'upload-partial': { result: true, title: 'Fails partway through', body: 'Network error or session expired. Reconnect and retry. A 403 means the upload session expired — start over.', page: 'uploading' },
     'upload-slow': { result: true, title: 'Slow upload', body: 'Check your upload speed (not download) at fast.com. Wired connection helps. Pause other sync tools.', page: 'uploading' },
@@ -3785,7 +3886,7 @@
     },
     'play-black': { result: true, title: 'Black screen', body: 'Hard refresh (Ctrl+Shift+R). Confirm upload completed. Try Chrome.', page: 'playback' },
     'play-buffer': { result: true, title: 'Buffering', body: 'Check bandwidth, close other streaming tabs, try a 1080p export instead of 4K.', page: 'playback' },
-    'play-codec': { result: true, title: 'Codec issue', body: 'Re-export to MP4 (H.264 + AAC). MKV may fail in Safari — try Chrome or Firefox.', page: 'playback' },
+    'play-codec': { result: true, title: 'Codec issue', body: 'Re-export to MP4 (H.264 + AAC). AVI may have limited browser support — try Chrome or Firefox.', page: 'playback' },
     login: {
       q: 'What\'s happening?',
       opts: [
@@ -3902,7 +4003,7 @@
     'client': 'End user (student) who watches sessions and classes, adds notes, and tracks progress.',
     'note': 'A text annotation pinned to a specific timestamp on the video timeline.',
     'tag': 'A label for organizing sessions and classes (e.g. form-review, competition).',
-    'api token': 'A secret key (kn_...) for authenticating scripts against the API.',
+    'api token': 'A secret key for authenticating scripts against the API.',
   };
 
   function addGlossaryTooltips(container) {
@@ -4559,7 +4660,7 @@
 
   /* ── UPLOAD PREFLIGHT CHECKLIST ────────────────────── */
   const PREFLIGHT = [
-    { id: 'pf-format', text: 'File is MP4, MOV, WebM, or MKV' },
+    { id: 'pf-format', text: 'File is MP4, MOV, WebM, or AVI' },
     { id: 'pf-size', text: 'File is under 5 GB' },
     { id: 'pf-landscape', text: 'Recorded in landscape orientation' },
     { id: 'pf-1080', text: 'Resolution is 1080p or lower (recommended)' },
@@ -4606,11 +4707,11 @@
     let browser = 'Unknown';
     let status = 'warn';
     let msg = '';
-    if (isIOS) { browser = 'Safari (iOS)'; status = 'warn'; msg = 'Good support. All iOS browsers use WebKit — MKV may not play, use MP4 instead.'; }
+    if (isIOS) { browser = 'Safari (iOS)'; status = 'warn'; msg = 'Good support. All iOS browsers use WebKit — AVI may have limited support, use MP4 instead.'; }
     else if (ua.includes('Edg')) { browser = 'Edge'; status = 'good'; msg = 'Full support.'; }
     else if (ua.includes('Chrome')) { browser = 'Chrome'; status = 'good'; msg = 'Full support — recommended browser.'; }
     else if (ua.includes('Firefox')) { browser = 'Firefox'; status = 'good'; msg = 'Full support — great choice.'; }
-    else if (ua.includes('Safari')) { browser = 'Safari'; status = 'warn'; msg = 'Good support. MKV files may not play — use MP4 instead.'; }
+    else if (ua.includes('Safari')) { browser = 'Safari'; status = 'warn'; msg = 'Good support. AVI files may have limited support — use MP4 instead.'; }
     else { msg = 'Unknown browser. If you run into issues, try Chrome.'; }
     el.className = 'browser-result ' + status;
     el.innerHTML = `${status === 'good' ? IC.check : IC.warn} <div><strong>You're using ${browser}.</strong> ${msg}</div>`;
