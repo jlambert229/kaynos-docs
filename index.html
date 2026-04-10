@@ -1853,10 +1853,10 @@
   <div class="step-tip"><div class="step-num">3</div><div class="step-body"><h4>Press N or click Add Note</h4><p>The video pauses automatically. Type your observation.</p></div></div>
   <div class="step-tip"><div class="step-num">4</div><div class="step-body"><h4>Save</h4><p>The note appears as a marker on the timeline. Hover to preview, click to jump back.</p></div></div>
 </div>
-<h3>Invite a client</h3>
+<h3>Invite a student</h3>
 <div class="step-tips">
-  <div class="step-tip"><div class="step-num">1</div><div class="step-body"><h4>Go to Admin or Clients</h4><p>Admins use <strong>Admin</strong> for full control. Coaches use <strong>Clients</strong>.</p></div></div>
-  <div class="step-tip"><div class="step-num">2</div><div class="step-body"><h4>Click Add Member / Add Client</h4><p>Enter their name, email, and role.</p></div></div>
+  <div class="step-tip"><div class="step-num">1</div><div class="step-body"><h4>Go to Admin or Students</h4><p>Admins use <strong>Admin</strong> for full control. Coaches use <strong>Students</strong>.</p></div></div>
+  <div class="step-tip"><div class="step-num">2</div><div class="step-body"><h4>Click Add Member / Add Student</h4><p>Enter their name, email, and role.</p></div></div>
   <div class="step-tip"><div class="step-num">3</div><div class="step-body"><h4>Send the invite</h4><p>They receive an email with a temporary password. Delivery is usually quick.</p></div></div>
 </div>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Full guides: <a onclick="navigate('first-upload')">Your first video upload</a> · <a onclick="navigate('notes')">Notes and timestamps</a> · <a onclick="navigate('inviting-members')">Inviting your team</a></div></div>
@@ -1871,7 +1871,7 @@
     <div class="timeline-body">
       <ul>
         <li><a onclick="navigate('setup')">Log in and change your password</a></li>
-        <li><a onclick="navigate('roles')">Understand the three roles</a> (admin, coach, client)</li>
+        <li><a onclick="navigate('roles')">Understand the three roles</a> (admin, coach, student)</li>
         <li><a onclick="navigate('profile')">Update your profile</a></li>
         <li>Explore the dashboard — click around before adding others</li>
       </ul>
@@ -1898,7 +1898,7 @@
     <div class="timeline-body">
       <ul>
         <li><a onclick="navigate('inviting-members')">Invite 2-3 coaches first</a> — let them get comfortable</li>
-        <li>Invite a small wave of clients (5-10) as a pilot</li>
+        <li>Invite a small wave of students (5-10) as a pilot</li>
         <li>Ask for feedback — what's confusing? What's working?</li>
         <li><a onclick="navigate('profile')">Configure email notifications</a></li>
       </ul>
@@ -1919,19 +1919,19 @@
     </div>
   </div>
 </div>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>This is a suggested pace — move faster or slower based on your team's comfort. The important thing is that you (the admin) are confident before adding a large wave of clients.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>This is a suggested pace — move faster or slower based on your team's comfort. The important thing is that you (the admin) are confident before adding a large wave of students.</div></div>
 </details>`},
 
     "inviting-members": {
       title: "Inviting your team", section: "Getting Started",
       content: `
 <h1>Inviting your team</h1>
-<p>Members join by email with a temporary password. Admins may invite coaches or clients; coaches may invite clients only. Everything happens in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> under <strong>Admin</strong> or <strong>Clients</strong>.</p>
+<p>Members join by email with a temporary password. Admins may invite coaches or students; coaches may invite students only. Everything happens in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> under <strong>Admin</strong> or <strong>Students</strong>.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Role capabilities are summarized on <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>
 <h2>Send an invite</h2>
 <ol>
-<li>Go to <strong>Admin</strong> (full roster control) or <strong>Clients</strong> (coaches adding a client).</li>
-<li>Click <strong>Add Member</strong> / <strong>Add Client</strong>.</li>
+<li>Go to <strong>Admin</strong> (full roster control) or <strong>Students</strong> (coaches adding a student).</li>
+<li>Click <strong>Add Member</strong> / <strong>Add Student</strong>.</li>
 <li>Enter name, email address, and role (admin can also set coach vs member).</li>
 <li>Click <strong>Send Invite</strong>.</li>
 </ol>
@@ -1939,21 +1939,21 @@
 <div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>Still missing mail? See <a onclick="navigate('email-issues')">Email and notification issues</a> or contact ${mailLink()}.</div></div>
 <h2>Who can invite</h2>
 <table><thead><tr><th>Your role</th><th>Can add</th></tr></thead><tbody>
-<tr><td><strong>Admin</strong></td><td>Coaches and clients</td></tr>
-<tr><td><strong>Coach</strong></td><td>Clients only</td></tr>
-<tr><td><strong>Client</strong></td><td>Nobody</td></tr>
+<tr><td><strong>Admin</strong></td><td>Coaches and students</td></tr>
+<tr><td><strong>Coach</strong></td><td>Students only</td></tr>
+<tr><td><strong>Student</strong></td><td>Nobody</td></tr>
 </tbody></table>
 <h2>What each role can do</h2>
 <table><thead><tr><th>Role</th><th>What they can do</th></tr></thead><tbody>
 <tr><td><strong>Admin</strong></td><td>Everything a coach can do, plus roster management, invites, and settings.</td></tr>
-<tr><td><strong>Coach</strong></td><td>Sessions, classes, video upload, notes, tags, and client progress.</td></tr>
-<tr><td><strong>Client</strong></td><td>Private sessions assigned to them, all published classes, notes, progress tracking. No uploads; cannot view other clients' private sessions.</td></tr>
+<tr><td><strong>Coach</strong></td><td>Sessions, classes, video upload, notes, tags, and student progress.</td></tr>
+<tr><td><strong>Student</strong></td><td>Private sessions assigned to them, all published classes, notes, progress tracking. No uploads; cannot view other students' private sessions.</td></tr>
 </tbody></table>
 <h2>Resend or reset</h2>
 <p><strong>Admin</strong> → find them in the roster → <strong>Reset Password</strong>. A fresh temp password is emailed to them.</p>
 <h2>Tips</h2>
 <ul>
-<li>Onboard coaches before adding a large client wave when possible.</li>
+<li>Onboard coaches before adding a large student wave when possible.</li>
 <li>Use an email address people actually check — it becomes their login.</li>
 <li>There is no fixed seat limit in the product.</li>
 </ul>`},
@@ -1962,14 +1962,14 @@
       title: "Your first video upload", section: "Getting Started",
       content: `
 <h1>Your first video upload</h1>
-<p>A <strong>session</strong> is for one assigned client (private lesson, individual review). A <strong>class</strong> is for everyone in your account (group session, shared recording). Upload a file or link Vimeo in either case — create them after you <a href="https://app.kaynos.net" target="_blank" rel="noopener">sign in</a>.</p>
+<p>A <strong>session</strong> is for one assigned student (private lesson, individual review). A <strong>class</strong> is for everyone in your account (group session, shared recording). Upload a file or link Vimeo in either case — create them after you <a href="https://app.kaynos.net" target="_blank" rel="noopener">sign in</a>.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>New to the flow? Read <a onclick="navigate('creating-sessions')">Creating a session</a> and <a onclick="navigate('creating-classes')">Creating a class</a>. Limits and codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 <h2>Upload a file</h2>
 <ol>
 <li>Create a new session or class, then pick <strong>Upload</strong> for the video source.</li>
 <li>Drag your file onto the box, or click to choose from Finder / Files.</li>
 <li>Watch the progress bar for speed and estimated time remaining.</li>
-<li>Green check appears when done — then fill in title, date, client, and save.</li>
+<li>Green check appears when done — then fill in title, date, student, and save.</li>
 </ol>
 <h2>Upload behavior</h2>
 <ul>
@@ -2002,12 +2002,12 @@
 <h2>Admin</h2>
 <p>Typically the owner or head coach. Same capabilities as coaches, plus roster management, invites, role changes, and the <strong>Admin</strong> area for account-wide visibility.</p>
 <h2>Coach</h2>
-<p>Coaches run sessions and classes, upload video, add notes and tags, and view client progress.</p>
-<h2>Client</h2>
-<p>Clients access their assigned sessions and all classes, watch video, add notes, and track viewing progress. They cannot upload video or view other clients' private sessions.</p>
+<p>Coaches run sessions and classes, upload video, add notes and tags, and view student progress.</p>
+<h2>Student</h2>
+<p>Students access their assigned sessions and all classes, watch video, add notes, and track viewing progress. They cannot upload video or view other students' private sessions.</p>
 <h2>Change a role</h2>
 <p>Admins only: <strong>Admin</strong> → select the member → role dropdown → save.</p>
-<div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>Downgrading a coach to a client removes the ability to create sessions or upload video. Existing content remains available. For invite rules, see <a onclick="navigate('inviting-members')">Inviting your team</a>.</div></div>`},
+<div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>Downgrading a coach to a student removes the ability to create sessions or upload video. Existing content remains available. For invite rules, see <a onclick="navigate('inviting-members')">Inviting your team</a>.</div></div>`},
 
     uploading: {
       title: "Uploading videos", section: "Video",
@@ -2212,12 +2212,12 @@
   <div class="compare-card">
     <div class="compare-label private">Private</div>
     <h3>Session</h3>
-    <p>One-on-one content for a single client.</p>
+    <p>One-on-one content for a single student.</p>
     <ul>
-      <li>Assigned to one specific client</li>
-      <li>Only that client, the creator, and admins can see it</li>
+      <li>Assigned to one specific student</li>
+      <li>Only that student, the creator, and admins can see it</li>
       <li>Private lessons, individual feedback, competition footage</li>
-      <li>Notes stay between coach and client</li>
+      <li>Notes stay between coach and student</li>
     </ul>
   </div>
   <div class="compare-card">
@@ -2238,23 +2238,23 @@
 <li><strong>Should everyone see it?</strong> → Create a <strong>class</strong></li>
 </ul>
 <h1>Creating a session</h1>
-<p>A <strong>session</strong> is one-on-one content: private lessons, individual review, or competition footage for a single client. Only that client and staff who need access will see it.</p>
+<p>A <strong>session</strong> is one-on-one content: private lessons, individual review, or competition footage for a single student. Only that student and staff who need access will see it.</p>
 <h2>Workflow</h2>
 <ol>
 <li>Go to <strong>Sessions</strong> → <strong>New Session</strong>.</li>
 <li>Choose your video source: <strong>Upload</strong>, <strong>Vimeo</strong>, or <strong>Notes Only</strong>.</li>
-<li>Fill in title, date, assign the client from your roster, and add optional tags.</li>
+<li>Fill in title, date, assign the student from your roster, and add optional tags.</li>
 <li>Click <strong>Create Session</strong>.</li>
 </ol>
 <h2>Who sees it</h2>
-<p>The assigned client, the creator, and admins. Other clients cannot open someone else's private session.</p>
+<p>The assigned student, the creator, and admins. Other students cannot open someone else's private session.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>First upload walkthrough: <a onclick="navigate('first-upload')">Your first video upload</a>. Visibility model: <a onclick="navigate('faq')">FAQ</a>.</div></div>`},
 
     "creating-classes": {
       title: "Creating a class", section: "Sessions & Classes",
       content: `
 <h1>Creating a class</h1>
-<p>A <strong>class</strong> is account-wide: group sessions, workshops, or any recording meant for all clients.</p>
+<p>A <strong>class</strong> is account-wide: group sessions, workshops, or any recording meant for all students.</p>
 <h2>Workflow</h2>
 <ol>
 <li>Go to <strong>Classes</strong> → <strong>New Class</strong>.</li>
@@ -2278,13 +2278,13 @@
 </ol>
 <p>The note is saved at the current playhead position. Markers appear on the scrub bar; click any to jump.</p>
 <h2>Filters</h2>
-<p><strong>All</strong> shows every note; <strong>Coach</strong> shows coach notes only; <strong>Mine</strong> shows only the signed-in client's notes.</p>
+<p><strong>All</strong> shows every note; <strong>Coach</strong> shows coach notes only; <strong>Mine</strong> shows only the signed-in student's notes.</p>
 <h2>Who can edit</h2>
-<p>Coaches may edit any note. Clients may edit only notes they created.</p>
+<p>Coaches may edit any note. Students may edit only notes they created.</p>
 <h2>Tips</h2>
 <ul>
 <li>Short, specific lines (a technique name + brief observation) are easier to scan later than long paragraphs.</li>
-<li>Clients can leave questions on their own sessions for coach follow-up.</li>
+<li>Students can leave questions on their own sessions for coach follow-up.</li>
 <li>Use the coach filter to quickly review your notes across several recordings.</li>
 </ul>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Playback shortcuts and the full note workflow: <a onclick="navigate('playback')">Watching and reviewing</a>.</div></div>
@@ -2331,7 +2331,7 @@
       title: "Managing members", section: "Account Management",
       content: `
 <h1>Managing members</h1>
-<p>Admins use <strong>Admin</strong> for the full roster. Coaches can use <strong>Clients</strong> to manage client invites on their side. Everything happens in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
+<p>Admins use <strong>Admin</strong> for the full roster. Coaches can use <strong>Students</strong> to manage student invites on their side. Everything happens in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
 <h2>Add someone</h2>
 <p>See <a onclick="navigate('inviting-members')">Inviting your team</a> for the step-by-step invite flow.</p>
 <h2>Change roles</h2>
@@ -2342,7 +2342,7 @@
 <h2>Common questions</h2>
 <p><strong>One person, two accounts?</strong> Use a different email address per account. Each account is completely separate.</p>
 <p><strong>Member limits?</strong> The product does not enforce a headcount cap.</p>
-<p><strong>Client-to-client invites?</strong> Only staff roles can invite; clients cannot invite other clients.</p>`},
+<p><strong>Student-to-student invites?</strong> Only staff roles can invite; students cannot invite other students.</p>`},
 
     profile: {
       title: "Profile and password", section: "Account Management",
@@ -2366,8 +2366,8 @@
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Delivery problems? See <a onclick="navigate('email-issues')">Email and notification issues</a>.</div></div>
 <h3>Typical messages</h3>
 <ul>
-<li>New session assigned (clients)</li>
-<li>New class available (clients)</li>
+<li>New session assigned (students)</li>
+<li>New class available (students)</li>
 <li>Invites and temporary passwords (onboarding)</li>
 </ul>
 <h3>Turning notifications off</h3>
@@ -2476,17 +2476,17 @@
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Quick links:</strong> App: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> · Support: ${mailLink()} · Setup: <a onclick="navigate('setup')">Setting up your account</a></div></div>
 <h2>What you're signing up for</h2>
 <h3>What is Kaynos, in plain language?</h3>
-<p>It replaces ad-hoc clip sharing in chat. You put session footage on a <strong>session</strong> (one client) or a <strong>class</strong> (everyone in your account), add notes on the timeline, and clients review when they can. Everything runs in the browser at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> — no separate app install.</p>
-<h3>Do my clients need to install something?</h3>
+<p>It replaces ad-hoc clip sharing in chat. You put session footage on a <strong>session</strong> (one student) or a <strong>class</strong> (everyone in your account), add notes on the timeline, and students review when they can. Everything runs in the browser at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> — no separate app install.</p>
+<h3>Do my students need to install something?</h3>
 <p>No. They open <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> in a normal phone or laptop browser. If YouTube works on your network, Kaynos should too.</p>
 <h3>What types of coaching does this work for?</h3>
-<p>Kaynos works for any coaching practice where reviewing video helps clients improve: personal training, sports coaching, music lessons, dance instruction, or any skill-based teaching.</p>
+<p>Kaynos works for any coaching practice where reviewing video helps students improve: personal training, sports coaching, music lessons, dance instruction, or any skill-based teaching.</p>
 <hr>
 <h2>Running your account</h2>
-<h3>Do you cap how many clients or coaches I can add?</h3>
+<h3>Do you cap how many students or coaches I can add?</h3>
 <p>No. The product does not enforce a member or coach limit.</p>
-<h3>Can clients watch each other's private lessons?</h3>
-<p><strong>No.</strong> A <strong>session</strong> is visible only to that client, the staff who created or need it, and admins. <strong>Classes</strong> are shared with everyone in your account.</p>
+<h3>Can students watch each other's private lessons?</h3>
+<p><strong>No.</strong> A <strong>session</strong> is visible only to that student, the staff who created or need it, and admins. <strong>Classes</strong> are shared with everyone in your account.</p>
 <h3>Can people download my class video?</h3>
 <p>There is no download button for end users. Playback uses expiring streaming links, keeping your curriculum harder to copy as a casual file share.</p>
 <hr>
@@ -2576,14 +2576,14 @@
 <h1>Glossary</h1>
 <p>Key terms used throughout Kaynos and this help center.</p>
 <dl>
-<div class="glossary-term"><dt>Session</dt><dd>A one-on-one recording assigned to a single client — private lessons, individual review, or competition footage. Only the assigned client, the creator, and admins can see it.</dd></div>
+<div class="glossary-term"><dt>Session</dt><dd>A one-on-one recording assigned to a single student — private lessons, individual review, or competition footage. Only the assigned student, the creator, and admins can see it.</dd></div>
 <div class="glossary-term"><dt>Class</dt><dd>An account-wide recording visible to everyone — group sessions, workshops, or shared recordings. All members, coaches, and admins can view classes.</dd></div>
 <div class="glossary-term"><dt>Admin</dt><dd>The highest-permission role. Admins can do everything coaches can, plus manage the roster, send invites, change roles, and access the Admin area.</dd></div>
-<div class="glossary-term"><dt>Coach</dt><dd>A staff role that can create sessions and classes, upload video, add notes and tags, and view client progress. Coaches can invite clients but not other coaches.</dd></div>
-<div class="glossary-term"><dt>Client <code>member</code></dt><dd>An end user who watches assigned sessions and all published classes, adds notes, and tracks their own progress. Clients cannot upload video or view other clients' private sessions.</dd></div>
-<div class="glossary-term"><dt>Note</dt><dd>A short text annotation pinned to a specific timestamp on the video timeline. Coaches and clients can both create notes; coaches can edit any note.</dd></div>
+<div class="glossary-term"><dt>Coach</dt><dd>A staff role that can create sessions and classes, upload video, add notes and tags, and view student progress. Coaches can invite students but not other coaches.</dd></div>
+<div class="glossary-term"><dt>Student <code>member</code></dt><dd>An end user who watches assigned sessions and all published classes, adds notes, and tracks their own progress. Students cannot upload video or view other students' private sessions.</dd></div>
+<div class="glossary-term"><dt>Note</dt><dd>A short text annotation pinned to a specific timestamp on the video timeline. Coaches and students can both create notes; coaches can edit any note.</dd></div>
 <div class="glossary-term"><dt>Tag</dt><dd>A label attached to sessions or classes for organization and filtering. Tags are shared across the account — examples: <code>form-review</code>, <code>competition</code>, <code>fundamentals</code>.</dd></div>
-<div class="glossary-term"><dt>Progress</dt><dd>A lightweight tracker that records playback position (for resume), completion status, and last-viewed time. Coaches see completion across their clients; no invasive analytics.</dd></div>
+<div class="glossary-term"><dt>Progress</dt><dd>A lightweight tracker that records playback position (for resume), completion status, and last-viewed time. Coaches see completion across their students; no invasive analytics.</dd></div>
 <div class="glossary-term"><dt>API Token <code>kn_...</code></dt><dd>A secret key minted under Admin → Developer API. Used to authenticate scripts and integrations against the <code>/api/v1</code> endpoints. Treat like a password.</dd></div>
 <div class="glossary-term"><dt>Vimeo Source</dt><dd>An alternative to uploading a file — paste a Vimeo URL or video ID to embed video already hosted on Vimeo into a session or class.</dd></div>
 <div class="glossary-term"><dt>CDN</dt><dd>Content Delivery Network — Kaynos uses Cloudflare to deliver video quickly from edge servers close to the viewer, reducing buffering.</dd></div>
@@ -3453,7 +3453,7 @@
         </div>
         <div class="role-card${selectedRole === 'client' ? ' selected' : ''}" role="button" tabindex="0" onclick="selectRole('client')" onkeydown="if(event.key==='Enter')selectRole('client')">
           <div class="role-card-icon">${IC.play}</div>
-          <div class="role-card-title">Client / Member</div>
+          <div class="role-card-title">Student / Member</div>
           <div class="role-card-desc">Watch, review, progress</div>
         </div>
         <div class="role-card${selectedRole === 'developer' ? ' selected' : ''}" role="button" tabindex="0" onclick="selectRole('developer')" onkeydown="if(event.key==='Enter')selectRole('developer')">
@@ -3764,11 +3764,11 @@
 
   /* ── GLOSSARY TOOLTIPS ─────────────────────────────── */
   const GLOSSARY_TERMS = {
-    'session': 'A one-on-one recording assigned to a single client — only they, the creator, and admins can see it.',
+    'session': 'A one-on-one recording assigned to a single student — only they, the creator, and admins can see it.',
     'class': 'An account-wide recording visible to all members, coaches, and admins.',
     'admin': 'The highest-permission role — manages roster, invites, roles, and settings.',
     'coach': 'Staff role that creates sessions/classes, uploads video, and adds notes.',
-    'client': 'End user who watches sessions and classes, adds notes, and tracks progress.',
+    'client': 'End user (student) who watches sessions and classes, adds notes, and tracks progress.',
     'note': 'A text annotation pinned to a specific timestamp on the video timeline.',
     'tag': 'A label for organizing sessions and classes (e.g. form-review, competition).',
     'api token': 'A secret key (kn_...) for authenticating scripts against the API.',
@@ -4149,8 +4149,8 @@
       version: 'v2.5', date: 'Q2 2026', status: 'in-progress',
       items: [
         { type: 'new', text: 'Clip trimming — select a time range and share just that segment' },
-        { type: 'new', text: 'Coach-to-coach handoff — transfer a client session to another coach' },
-        { type: 'improved', text: 'Notification preferences — per-client and per-class granularity' },
+        { type: 'new', text: 'Coach-to-coach handoff — transfer a student session to another coach' },
+        { type: 'improved', text: 'Notification preferences — per-student and per-class granularity' },
       ]
     },
     {
@@ -4208,12 +4208,12 @@
     { id: 'webhooks', title: 'Webhook notifications', desc: 'Send HTTP callbacks when sessions are created, videos uploaded, or members join.', tag: 'integrations' },
     { id: 'bulk-upload', title: 'Bulk video import', desc: 'Upload an entire folder of videos at once, auto-creating sessions or classes for each.', tag: 'workflow' },
     { id: 'annotation-draw', title: 'Drawing on video frames', desc: 'Pause and draw arrows, circles, or freehand on a frame — saved as a note attachment.', tag: 'video' },
-    { id: 'client-portal', title: 'Branded client portal', desc: 'Custom subdomain with your logo and colors so clients see your brand, not Kaynos.', tag: 'workflow' },
+    { id: 'client-portal', title: 'Branded student portal', desc: 'Custom subdomain with your logo and colors so students see your brand, not Kaynos.', tag: 'workflow' },
     { id: 'analytics-dash', title: 'Engagement analytics', desc: 'See who watched what, how far they got, and which notes they viewed — beyond basic completion.', tag: 'analytics' },
-    { id: 'calendar-sync', title: 'Calendar integration', desc: 'Sync sessions with Google Calendar or Apple Calendar so clients get reminders.', tag: 'integrations' },
+    { id: 'calendar-sync', title: 'Calendar integration', desc: 'Sync sessions with Google Calendar or Apple Calendar so students get reminders.', tag: 'integrations' },
     { id: 'slow-motion', title: 'Slow motion playback', desc: 'Frame-by-frame stepping and 0.25x playback for detailed technique review.', tag: 'video' },
     { id: 'team-templates', title: 'Session templates', desc: 'Create reusable templates with preset tags, note prompts, and assigned coaches.', tag: 'workflow' },
-    { id: 'side-by-side', title: 'Side-by-side comparison', desc: 'Compare two videos from different dates to show client progress over time.', tag: 'video' },
+    { id: 'side-by-side', title: 'Side-by-side comparison', desc: 'Compare two videos from different dates to show student progress over time.', tag: 'video' },
     { id: 'zapier', title: 'Zapier / Make integration', desc: 'Connect Kaynos to 5000+ apps — auto-create sessions from form submissions, notify Slack, etc.', tag: 'integrations' },
   ];
 
