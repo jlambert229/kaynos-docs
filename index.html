@@ -1803,11 +1803,6 @@
     <div class="ql-title">Release notes</div>
     <div class="ql-desc">Changelog, roadmap, and what's coming</div>
   </a>
-  <a class="quick-link" href="#feature-requests" onclick="navigate('feature-requests');return false">
-    <div class="ql-icon">${IC.check}</div>
-    <div class="ql-title">Feature requests</div>
-    <div class="ql-desc">Vote on what we build next</div>
-  </a>
 </div>
 <h2>Get in touch</h2>
 <div class="support-card">
@@ -1841,7 +1836,91 @@
 <li>Hit <strong>Update Password</strong>. Done.</li>
 </ol>
 <h2>Admin area</h2>
-<p>Admins: use <strong>Admin</strong> in the sidebar for roster management, invites, role changes, and an account-wide view of activity. Explore those screens before sending a large batch of invites.</p>`},
+<p>Admins: use <strong>Admin</strong> in the sidebar for roster management, invites, role changes, and an account-wide view of activity. Explore those screens before sending a large batch of invites.</p>
+<details><summary>Quick tips</summary>
+<p>Visual step-by-step guides for the most common tasks in Kaynos.</p>
+<h3>Upload a video</h3>
+<div class="step-tips">
+  <div class="step-tip"><div class="step-num">1</div><div class="step-body"><h4>Create a session or class</h4><p>Go to <strong>Sessions</strong> or <strong>Classes</strong> and click the <strong>New</strong> button.</p></div></div>
+  <div class="step-tip"><div class="step-num">2</div><div class="step-body"><h4>Choose "Upload" as source</h4><p>Select <strong>Upload</strong> (not Vimeo or Notes Only) when prompted for the video source.</p></div></div>
+  <div class="step-tip"><div class="step-num">3</div><div class="step-body"><h4>Drag or select your file</h4><p>Drop the video onto the upload area, or click to browse. MP4 is recommended.</p></div></div>
+  <div class="step-tip"><div class="step-num">4</div><div class="step-body"><h4>Wait for the green check</h4><p>The progress bar shows speed and ETA. Green check = done. Then fill in title, date, and save.</p></div></div>
+</div>
+<h3>Add a timestamped note</h3>
+<div class="step-tips">
+  <div class="step-tip"><div class="step-num">1</div><div class="step-body"><h4>Open the session or class</h4><p>Navigate to the recording you want to annotate.</p></div></div>
+  <div class="step-tip"><div class="step-num">2</div><div class="step-body"><h4>Play to the right moment</h4><p>Use <kbd>J</kbd>/<kbd>L</kbd> to skip, or click the timeline to jump.</p></div></div>
+  <div class="step-tip"><div class="step-num">3</div><div class="step-body"><h4>Press N or click Add Note</h4><p>The video pauses automatically. Type your observation.</p></div></div>
+  <div class="step-tip"><div class="step-num">4</div><div class="step-body"><h4>Save</h4><p>The note appears as a marker on the timeline. Hover to preview, click to jump back.</p></div></div>
+</div>
+<h3>Invite a client</h3>
+<div class="step-tips">
+  <div class="step-tip"><div class="step-num">1</div><div class="step-body"><h4>Go to Admin or Clients</h4><p>Admins use <strong>Admin</strong> for full control. Coaches use <strong>Clients</strong>.</p></div></div>
+  <div class="step-tip"><div class="step-num">2</div><div class="step-body"><h4>Click Add Member / Add Client</h4><p>Enter their name, email, and role.</p></div></div>
+  <div class="step-tip"><div class="step-num">3</div><div class="step-body"><h4>Send the invite</h4><p>They receive an email with a temporary password. Delivery is usually quick.</p></div></div>
+</div>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Full guides: <a onclick="navigate('first-upload')">Your first video upload</a> · <a onclick="navigate('notes')">Notes and timestamps</a> · <a onclick="navigate('inviting-members')">Inviting your team</a></div></div>
+</details>
+<details><summary>Onboarding timeline</summary>
+<p>A suggested four-week plan for gym owners and head coaches getting started with Kaynos.</p>
+<div class="timeline">
+  <div class="timeline-item">
+    <div class="timeline-dot">${IC.rocket}</div>
+    <div class="timeline-week">Week 1</div>
+    <div class="timeline-title">Set up your account</div>
+    <div class="timeline-body">
+      <ul>
+        <li><a onclick="navigate('setup')">Log in and change your password</a></li>
+        <li><a onclick="navigate('roles')">Understand the three roles</a> (admin, coach, client)</li>
+        <li><a onclick="navigate('profile')">Update your profile</a></li>
+        <li>Explore the dashboard — click around before adding others</li>
+      </ul>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-dot">${IC.video}</div>
+    <div class="timeline-week">Week 2</div>
+    <div class="timeline-title">Upload your first content</div>
+    <div class="timeline-body">
+      <ul>
+        <li><a onclick="navigate('uploading')">Run the pre-flight checklist</a></li>
+        <li><a onclick="navigate('first-upload')">Upload your first video</a></li>
+        <li><a onclick="navigate('creating-sessions')">Decide: session or class?</a></li>
+        <li><a onclick="navigate('notes')">Add timestamped notes</a> to your recording</li>
+        <li><a onclick="navigate('notes')">Tag content</a> for easy filtering later</li>
+      </ul>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-dot">${IC.users}</div>
+    <div class="timeline-week">Week 3</div>
+    <div class="timeline-title">Bring your team on board</div>
+    <div class="timeline-body">
+      <ul>
+        <li><a onclick="navigate('inviting-members')">Invite 2-3 coaches first</a> — let them get comfortable</li>
+        <li>Invite a small wave of clients (5-10) as a pilot</li>
+        <li>Ask for feedback — what's confusing? What's working?</li>
+        <li><a onclick="navigate('profile')">Configure email notifications</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-dot">${IC.check}</div>
+    <div class="timeline-week">Week 4</div>
+    <div class="timeline-title">Optimize and scale</div>
+    <div class="timeline-body">
+      <ul>
+        <li>Invite the rest of your roster</li>
+        <li><a onclick="navigate('notes')">Standardize your tag vocabulary</a> with the team</li>
+        <li><a onclick="navigate('progress')">Review progress tracking</a> — see who's watching</li>
+        <li><a onclick="navigate('formats')">Optimize video settings</a> — 1080p H.264 for best results</li>
+        <li>Developers: <a onclick="navigate('developer-api')">explore the API</a> for automation</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>This is a suggested pace — move faster or slower based on your team's comfort. The important thing is that you (the admin) are confident before adding a large wave of clients.</div></div>
+</details>`},
 
     "inviting-members": {
       title: "Inviting your team", section: "Getting Started",
@@ -1935,7 +2014,7 @@
       content: `
 <h1>Uploading videos</h1>
 <p>Each session or class uses one source: <strong>Upload</strong> (file from your device), <strong>Vimeo</strong> (embedded link), or <strong>Notes Only</strong> (no video). Upload from <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> when creating or editing.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Format and size limits: <a onclick="navigate('formats')">Supported formats and limits</a>. Stuck? <a onclick="navigate('upload-issues')">Video upload problems</a>.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Format and size limits: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 <h2>Large files</h2>
 <p>Big uploads are split into chunks and sent with parallel connections. Failed parts retry automatically (up to three times) with exponential backoff.</p>
 <h2>Requirements</h2>
@@ -1948,14 +2027,53 @@
 <p>The UI shows percent complete, current speed, time remaining, and a <strong>Cancel</strong> button if you need to stop.</p>
 <h2>Replace a video</h2>
 <p>Open the session or class, remove the current video with <strong>×</strong>, then upload a replacement. The previous file is deleted from storage.</p>
-<div class="hint hint-danger"><div class="hint-icon">${IC.danger}</div><div><strong>Replacing video is destructive.</strong> The old file is deleted from storage with no undo. Archive a copy elsewhere first if you might need it later.</div></div>`},
+<div class="hint hint-danger"><div class="hint-icon">${IC.danger}</div><div><strong>Replacing video is destructive.</strong> The old file is deleted from storage with no undo. Archive a copy elsewhere first if you might need it later.</div></div>
+<details><summary>Upload troubleshooting</summary>
+<h2>Video upload problems</h2>
+<p>Large uploads depend on stable internet and a supported format. Work through the checks below before assuming an app bug.</p>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Reference: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
+<h3>Fails immediately</h3>
+<p><strong>"Please select a video file":</strong> the file may not be MP4, MOV, WebM, or MKV. Convert to MP4 with <a href="https://handbrake.fr" target="_blank" rel="noopener">HandBrake</a> or <a href="https://www.videolan.org/vlc/" target="_blank" rel="noopener">VLC</a>, then try again.</p>
+<p><strong>File too big:</strong> the limit is 5 GB. Trim the clip or export at 1080p — HandBrake's "Fast 1080p30" preset is a common choice.</p>
+<h3>Progress appears stuck</h3>
+<ol>
+<li>Large files can pause between chunks for roughly 30–60 seconds — this is normal.</li>
+<li>Confirm the network works (open another site).</li>
+<li>Cancel the upload and start again if it doesn't advance after 2 minutes.</li>
+</ol>
+<h3>Fails partway through</h3>
+<ul>
+<li><strong>Network error during part upload:</strong> reconnect and retry.</li>
+<li><strong>Part upload failed: 403:</strong> on very long uploads the session can expire. Cancel and upload again.</li>
+<li><strong>500 server error:</strong> wait briefly and retry; if it persists, email ${mailLink()}.</li>
+</ul>
+<h3>Slow uploads</h3>
+<p>Measure your <strong>upload</strong> speed, not download. <a href="https://fast.com" target="_blank" rel="noopener">fast.com</a> shows upload after the initial result.</p>
+<table><thead><tr><th>Upload speed</th><th>500 MB</th><th>1 GB</th><th>2 GB</th></tr></thead><tbody>
+<tr><td>10 Mbps</td><td>~7 min</td><td>~14 min</td><td>~28 min</td></tr>
+<tr><td>25 Mbps</td><td>~3 min</td><td>~5 min</td><td>~11 min</td></tr>
+<tr><td>50 Mbps</td><td>~1.5 min</td><td>~3 min</td><td>~5 min</td></tr>
+<tr><td>100 Mbps</td><td>~45 sec</td><td>~1.5 min</td><td>~3 min</td></tr>
+</tbody></table>
+<p>A wired connection often beats crowded Wi-Fi. Pause heavy sync tools (Dropbox, Google Drive) and upload during a quieter time.</p>
+<h3>Status stuck on "uploading"</h3>
+<p>Contact ${mailLink()} with the session or class name so we can reset the status if the browser closed mid-upload.</p>
+<h3>Still failing</h3>
+<p>Email ${mailLink()} with: account name, browser, file type and size, and a screenshot if you have one.</p>
+</details>
+<details><summary>Upload preflight checklist</summary>
+<h2>Upload pre-flight checklist</h2>
+<p>Run through this before uploading to avoid common issues.</p>
+<div class="preflight" id="preflightList"></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Full format details: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
+</details>`},
 
     playback: {
       title: "Watching and reviewing", section: "Video",
       content: `
 <h1>Watching and reviewing</h1>
 <p>Playback runs entirely in the browser — no separate app install needed. Open recordings at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Problems playing video? Try <a onclick="navigate('playback-issues')">Video playback problems</a>.</div></div>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Problems playing video? See the troubleshooting section below.</div></div>
 <h2>Playback speed</h2>
 <p>Use <strong>0.5×</strong> through <strong>2×</strong> for slow-motion analysis or faster skimming.</p>
 <h2>Timeline markers</h2>
@@ -1974,7 +2092,48 @@
 <tr><td><code>F</code></td><td>Toggle fullscreen</td></tr>
 </tbody></table>
 <h2>Progress tracking</h2>
-<p>Playback position is saved for resume. Coaches can see completion percentage and last-viewed time without heavy analytics.</p>`},
+<p>Playback position is saved for resume. Coaches can see completion percentage and last-viewed time without heavy analytics.</p>
+<details><summary>Playback troubleshooting</summary>
+<h2>Video playback problems</h2>
+<p>If the player is blank or showing errors, work through these checks.</p>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
+<h3>Player blank or broken controls</h3>
+<p><strong>Black screen / no controls:</strong> refresh, then hard refresh or clear cache, then try <a href="https://www.google.com/chrome/" target="_blank" rel="noopener">Chrome</a>. Confirm the upload finished (not stuck on "uploading" or showing "failed").</p>
+<p><strong>"Cannot be played":</strong> often a codec or browser issue. MKV can fail in Safari — try <a href="https://www.google.com/chrome/" target="_blank" rel="noopener">Chrome</a> or <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener">Firefox</a>, or re-export to MP4 with H.264 video and AAC audio.</p>
+<h3>Buffering or long spinners</h3>
+<ul>
+<li>Check your bandwidth (upload and download can differ dramatically by network).</li>
+<li>Close other streaming tabs or heavy downloads.</li>
+<li>Very high-bitrate 4K sources may stutter — a 1080p export often plays more reliably.</li>
+</ul>
+<h3>Sound but no picture (or the reverse)</h3>
+<p>Usually a codec mismatch. Try another browser; if it persists, re-export with standard H.264/AAC.</p>
+<h3>Resume position wrong</h3>
+<p>Progress saves shortly after pausing. Closing the tab immediately can occasionally skip the save.</p>
+</details>
+<details><summary>Keyboard shortcuts</summary>
+<h2>Video player shortcuts</h2>
+<p>Use these keyboard shortcuts while watching video in the Kaynos player.</p>
+<h3>Playback</h3>
+<div class="shortcut-grid">
+  <div class="shortcut-card"><span>Play / Pause</span><kbd>Space</kbd></div>
+  <div class="shortcut-card"><span>Play / Pause</span><kbd>K</kbd></div>
+  <div class="shortcut-card"><span>Skip back</span><kbd>J</kbd></div>
+  <div class="shortcut-card"><span>Skip forward</span><kbd>L</kbd></div>
+  <div class="shortcut-card"><span>Fullscreen</span><kbd>F</kbd></div>
+  <div class="shortcut-card"><span>Pause + add note</span><kbd>N</kbd></div>
+</div>
+<h3>Help center shortcuts</h3>
+<div class="shortcut-grid">
+  <div class="shortcut-card"><span>Search docs</span><div><kbd>⌘</kbd> <kbd>K</kbd></div></div>
+  <div class="shortcut-card"><span>Previous page</span><kbd>←</kbd></div>
+  <div class="shortcut-card"><span>Next page</span><kbd>→</kbd></div>
+  <div class="shortcut-card"><span>Bookmark page</span><kbd>B</kbd></div>
+  <div class="shortcut-card"><span>Back to top</span><kbd>T</kbd></div>
+  <div class="shortcut-card"><span>Go home</span><kbd>H</kbd></div>
+  <div class="shortcut-card"><span>All shortcuts</span><kbd>?</kbd></div>
+</div>
+</details>`},
 
     formats: {
       title: "Supported formats and limits", section: "Video",
@@ -1999,7 +2158,32 @@
 <li><strong>1080p</strong> is enough for most instruction — very high bitrates slow uploads without much visible benefit.</li>
 <li>Prefer <strong>H.264</strong> video and <strong>AAC</strong> audio when your export tool offers a choice.</li>
 <li>Trim dead air at the start or end of clips before uploading.</li>
-</ul>`},
+</ul>
+<details><summary>Upload time calculator</summary>
+<h2>Upload time calculator</h2>
+<p>Estimate how long your video will take to upload based on file size and internet speed.</p>
+<div class="calc-wrap">
+  <div class="calc-row">
+    <span class="calc-label">File size</span>
+    <input class="calc-input" id="calcSize" type="number" placeholder="500" min="1" oninput="calcUpload()" aria-label="File size in MB">
+    <span class="calc-unit">MB</span>
+  </div>
+  <div class="calc-row">
+    <span class="calc-label">Upload speed</span>
+    <input class="calc-input" id="calcSpeed" type="number" placeholder="25" min="1" oninput="calcUpload()" aria-label="Upload speed in Mbps">
+    <span class="calc-unit">Mbps</span>
+  </div>
+  <div class="calc-result" id="calcResult"></div>
+</div>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Don't know your upload speed? Go to <a href="https://fast.com" target="_blank" rel="noopener">fast.com</a> — after the download test, click <strong>Show more info</strong> to see your upload speed.</div></div>
+<h3>Tips for faster uploads</h3>
+<ul>
+<li>Use a <strong>wired connection</strong> instead of Wi-Fi when possible</li>
+<li>Pause cloud sync tools (Dropbox, Google Drive, iCloud)</li>
+<li>Upload during off-peak hours for your network</li>
+<li><strong>1080p</strong> is usually enough — 4K files are much larger with little benefit for coaching review</li>
+</ul>
+</details>`},
 
     storage: {
       title: "Video storage and retention", section: "Video",
@@ -2022,6 +2206,37 @@
     "creating-sessions": {
       title: "Creating a session", section: "Sessions & Classes",
       content: `
+<h2>Session vs Class</h2>
+<p>The most common question new users have: when do I create a session, and when do I create a class?</p>
+<div class="compare-grid">
+  <div class="compare-card">
+    <div class="compare-label private">Private</div>
+    <h3>Session</h3>
+    <p>One-on-one content for a single client.</p>
+    <ul>
+      <li>Assigned to one specific client</li>
+      <li>Only that client, the creator, and admins can see it</li>
+      <li>Private lessons, individual feedback, competition footage</li>
+      <li>Notes stay between coach and client</li>
+    </ul>
+  </div>
+  <div class="compare-card">
+    <div class="compare-label shared">Shared</div>
+    <h3>Class</h3>
+    <p>Account-wide content for everyone.</p>
+    <ul>
+      <li>Visible to all members, coaches, and admins</li>
+      <li>Group sessions, workshops, technique breakdowns</li>
+      <li>Great for shared curriculum and team training</li>
+      <li>Everyone can leave notes</li>
+    </ul>
+  </div>
+</div>
+<h3>Quick decision</h3>
+<ul>
+<li><strong>Is this for one person?</strong> → Create a <strong>session</strong></li>
+<li><strong>Should everyone see it?</strong> → Create a <strong>class</strong></li>
+</ul>
 <h1>Creating a session</h1>
 <p>A <strong>session</strong> is one-on-one content: private lessons, individual review, or competition footage for a single client. Only that client and staff who need access will see it.</p>
 <h2>Workflow</h2>
@@ -2072,24 +2287,20 @@
 <li>Clients can leave questions on their own sessions for coach follow-up.</li>
 <li>Use the coach filter to quickly review your notes across several recordings.</li>
 </ul>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Playback shortcuts and the full note workflow: <a onclick="navigate('playback')">Watching and reviewing</a>.</div></div>`},
-
-    tags: {
-      title: "Tags and organization", section: "Sessions & Classes",
-      content: `
-<h1>Tags and organization</h1>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Playback shortcuts and the full note workflow: <a onclick="navigate('playback')">Watching and reviewing</a>.</div></div>
+<h2>Tags</h2>
 <p>Tags group related sessions and classes so lists stay easy to filter as your library grows.</p>
-<h2>Tag ideas</h2>
+<h3>Tag ideas</h3>
 <ul>
 <li>Topic: <code>form-review</code>, <code>conditioning</code>, <code>competition</code></li>
 <li>Format: <code>private</code>, <code>group</code>, <code>workshop</code></li>
 <li>Level: <code>fundamentals</code>, <code>advanced</code>, <code>beginner</code></li>
 </ul>
-<h2>Adding tags</h2>
+<h3>Adding tags</h3>
 <p>In the session or class form, type a tag and press <strong>Enter</strong>. Repeat for additional tags.</p>
-<h2>Finding content</h2>
+<h3>Finding content</h3>
 <p>List views let you filter by tag — for example, everything tagged <code>milestone</code> for a specific training block.</p>
-<h2>Consistency tips</h2>
+<h3>Consistency tips</h3>
 <ul>
 <li>Use one spelling and style per concept (avoid <code>review</code>, <code>Review</code>, and <code>form-review</code> for the same thing).</li>
 <li>Agree on a shared vocabulary so your whole team uses consistent tags.</li>
@@ -2149,84 +2360,25 @@
 <li>Click <strong>Update Password</strong>.</li>
 </ol>
 <p>Locked out? Ask an admin for a reset, or email ${mailLink()}. Login help: <a onclick="navigate('login-issues')">Login and access issues</a>.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Profile lives in the app: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> → your name in the sidebar (or menu on mobile).</div></div>`},
-
-    notifications: {
-      title: "Email notifications", section: "Account Management",
-      content: `
-<h1>Email notifications</h1>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Profile lives in the app: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> → your name in the sidebar (or menu on mobile).</div></div>
+<h2>Notifications</h2>
 <p>Email covers new sessions, classes, and onboarding (invites and temporary passwords), but not billing. Toggle preferences under <strong>Profile</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Delivery problems? See <a onclick="navigate('email-issues')">Email and notification issues</a>.</div></div>
-<h2>Typical messages</h2>
+<h3>Typical messages</h3>
 <ul>
 <li>New session assigned (clients)</li>
 <li>New class available (clients)</li>
 <li>Invites and temporary passwords (onboarding)</li>
 </ul>
-<h2>Turning notifications off</h2>
+<h3>Turning notifications off</h3>
 <p><strong>Profile</strong> → <strong>Email Notifications</strong>. Security-related messages (such as password resets) may still send.</p>
-<h2>Not receiving mail</h2>
+<h3>Not receiving mail</h3>
 <ol>
 <li>Check spam or promotions folders.</li>
 <li>Confirm the profile email address is correct.</li>
 <li>Confirm notifications are enabled in your profile settings.</li>
 <li>If it still fails, contact ${mailLink()} with your expected address.</li>
 </ol>`},
-
-    "upload-issues": {
-      title: "Video upload problems", section: "Troubleshooting",
-      content: `
-<h1>Video upload problems</h1>
-<p>Large uploads depend on stable internet and a supported format. Work through the checks below before assuming an app bug.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Reference: <a onclick="navigate('formats')">Supported formats and limits</a>, <a onclick="navigate('uploading')">Uploading videos</a>.</div></div>
-<h2>Fails immediately</h2>
-<p><strong>"Please select a video file":</strong> the file may not be MP4, MOV, WebM, or MKV. Convert to MP4 with <a href="https://handbrake.fr" target="_blank" rel="noopener">HandBrake</a> or <a href="https://www.videolan.org/vlc/" target="_blank" rel="noopener">VLC</a>, then try again.</p>
-<p><strong>File too big:</strong> the limit is 5 GB. Trim the clip or export at 1080p — HandBrake's "Fast 1080p30" preset is a common choice.</p>
-<h2>Progress appears stuck</h2>
-<ol>
-<li>Large files can pause between chunks for roughly 30–60 seconds — this is normal.</li>
-<li>Confirm the network works (open another site).</li>
-<li>Cancel the upload and start again if it doesn't advance after 2 minutes.</li>
-</ol>
-<h2>Fails partway through</h2>
-<ul>
-<li><strong>Network error during part upload:</strong> reconnect and retry.</li>
-<li><strong>Part upload failed: 403:</strong> on very long uploads the session can expire. Cancel and upload again.</li>
-<li><strong>500 server error:</strong> wait briefly and retry; if it persists, email ${mailLink()}.</li>
-</ul>
-<h2>Slow uploads</h2>
-<p>Measure your <strong>upload</strong> speed, not download. <a href="https://fast.com" target="_blank" rel="noopener">fast.com</a> shows upload after the initial result.</p>
-<table><thead><tr><th>Upload speed</th><th>500 MB</th><th>1 GB</th><th>2 GB</th></tr></thead><tbody>
-<tr><td>10 Mbps</td><td>~7 min</td><td>~14 min</td><td>~28 min</td></tr>
-<tr><td>25 Mbps</td><td>~3 min</td><td>~5 min</td><td>~11 min</td></tr>
-<tr><td>50 Mbps</td><td>~1.5 min</td><td>~3 min</td><td>~5 min</td></tr>
-<tr><td>100 Mbps</td><td>~45 sec</td><td>~1.5 min</td><td>~3 min</td></tr>
-</tbody></table>
-<p>A wired connection often beats crowded Wi-Fi. Pause heavy sync tools (Dropbox, Google Drive) and upload during a quieter time.</p>
-<h2>Status stuck on "uploading"</h2>
-<p>Contact ${mailLink()} with the session or class name so we can reset the status if the browser closed mid-upload.</p>
-<h2>Still failing</h2>
-<p>Email ${mailLink()} with: account name, browser, file type and size, and a screenshot if you have one.</p>`},
-
-    "playback-issues": {
-      title: "Video playback problems", section: "Troubleshooting",
-      content: `
-<h1>Video playback problems</h1>
-<p>If the player is blank or showing errors, work through these checks.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>General playback: <a onclick="navigate('playback')">Watching and reviewing</a>. Codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
-<h2>Player blank or broken controls</h2>
-<p><strong>Black screen / no controls:</strong> refresh, then hard refresh or clear cache, then try <a href="https://www.google.com/chrome/" target="_blank" rel="noopener">Chrome</a>. Confirm the upload finished (not stuck on "uploading" or showing "failed").</p>
-<p><strong>"Cannot be played":</strong> often a codec or browser issue. MKV can fail in Safari — try <a href="https://www.google.com/chrome/" target="_blank" rel="noopener">Chrome</a> or <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener">Firefox</a>, or re-export to MP4 with H.264 video and AAC audio.</p>
-<h2>Buffering or long spinners</h2>
-<ul>
-<li>Check your bandwidth (upload and download can differ dramatically by network).</li>
-<li>Close other streaming tabs or heavy downloads.</li>
-<li>Very high-bitrate 4K sources may stutter — a 1080p export often plays more reliably.</li>
-</ul>
-<h2>Sound but no picture (or the reverse)</h2>
-<p>Usually a codec mismatch. Try another browser; if it persists, re-export with standard H.264/AAC.</p>
-<h2>Resume position wrong</h2>
-<p>Progress saves shortly after pausing. Closing the tab immediately can occasionally skip the save.</p>`},
 
     "login-issues": {
       title: "Login and access issues", section: "Troubleshooting",
@@ -2252,7 +2404,7 @@
       content: `
 <h1>Email and notification issues</h1>
 <p>Most delivery problems come from spam filtering, address typos, or disabled notification settings. Preferences are under <strong>Profile</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>What we send: <a onclick="navigate('notifications')">Email notifications</a>. Invites: <a onclick="navigate('inviting-members')">Inviting your team</a>.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>What we send: <a onclick="navigate('profile')">Email notifications</a>. Invites: <a onclick="navigate('inviting-members')">Inviting your team</a>.</div></div>
 <h2>Not receiving messages</h2>
 <ol>
 <li>Check spam or promotions folders (Gmail often sorts automated mail here).</li>
@@ -2288,33 +2440,29 @@
 <ul>
 <li>Refresh once — a single failed request can trigger an error.</li>
 <li>If it repeats, take a screenshot, note what you clicked, and email ${mailLink()}.</li>
-</ul>`},
-
-    mobile: {
-      title: "Mobile device tips", section: "Troubleshooting",
-      content: `
-<h1>Mobile device tips</h1>
+</ul>
+<h2>Mobile tips</h2>
 <p>Kaynos runs in the mobile browser — no app store install needed. Open <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> in your phone's browser.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Upload troubleshooting: <a onclick="navigate('upload-issues')">Video upload problems</a>.</div></div>
-<h2>Supported browsers</h2>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Upload troubleshooting: <a onclick="navigate('uploading')">Uploading videos</a>.</div></div>
+<h3>Supported mobile browsers</h3>
 <ul>
 <li>iPhone / iPad: Safari or Chrome</li>
 <li>Android: Chrome or Firefox</li>
 </ul>
-<h2>Upload from a phone</h2>
+<h3>Upload from a phone</h3>
 <p>Tap upload and choose from Photos or Files. Keep the screen on and stay on the tab — backgrounding the browser can pause uploads.</p>
-<h2>Watching video</h2>
+<h3>Watching video on mobile</h3>
 <ul>
 <li>Tap the video for play/pause; on-screen controls may hide after a few seconds.</li>
 <li>Landscape orientation often fits the frame better than portrait.</li>
 <li>Playback speed, notes, and timeline markers match the desktop experience.</li>
 </ul>
-<h2>Add to home screen</h2>
+<h3>Add to home screen</h3>
 <ul>
 <li><strong>iOS:</strong> Share button → Add to Home Screen</li>
 <li><strong>Android:</strong> browser menu → Add to Home Screen</li>
 </ul>
-<h2>Limits</h2>
+<h3>Mobile limits</h3>
 <ul>
 <li>Very large files on older phones can be slow or unstable — a laptop may be more reliable.</li>
 <li>Landscape helps when the notes panel is open on a small display.</li>
@@ -2447,18 +2595,34 @@
       content: `
 <h1>Troubleshooting wizard</h1>
 <p>Answer a few questions and we'll point you to the right fix.</p>
-<div id="wizardContainer"></div>`},
-
-    "error-lookup": {
-      title: "Error message lookup", section: "Troubleshooting",
-      content: `
-<h1>Error message lookup</h1>
+<div id="wizardContainer"></div>
+<details><summary>Error code lookup</summary>
 <p>Paste the error message or describe what you see, and we'll find the relevant help.</p>
 <div class="error-lookup">
   <input class="error-input" id="errorInput" placeholder="e.g. 403, cannot be played, black screen..." oninput="lookupError(this.value)" autocomplete="off" aria-label="Paste error message or describe issue">
   <div class="error-results" id="errorResults"></div>
 </div>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Can't find your error? Email ${mailLink()} with a screenshot and we'll help.</div></div>`},
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Can't find your error? Email ${mailLink()} with a screenshot and we'll help.</div></div>
+</details>
+<details><summary>Browser compatibility check</summary>
+<p>Kaynos works in any modern browser. Here's what yours looks like:</p>
+<div id="browserResult"></div>
+<h3>Recommended browsers</h3>
+<div class="shortcut-grid">
+  <div class="shortcut-card"><span>Chrome (recommended)</span><span style="color:var(--success)">Full support</span></div>
+  <div class="shortcut-card"><span>Firefox</span><span style="color:var(--success)">Full support</span></div>
+  <div class="shortcut-card"><span>Safari</span><span style="color:var(--warning)">Good (MKV may fail)</span></div>
+  <div class="shortcut-card"><span>Edge</span><span style="color:var(--success)">Full support</span></div>
+</div>
+<h3>If something doesn't work</h3>
+<ol>
+<li>Try Chrome — it has the broadest codec and feature support</li>
+<li>Hard refresh: <kbd>Ctrl+Shift+R</kbd> (Windows/Linux) or <kbd>Cmd+Shift+R</kbd> (Mac)</li>
+<li>Clear site data for app.kaynos.net in your browser settings</li>
+<li>Disable ad blockers or strict privacy extensions temporarily</li>
+</ol>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>More troubleshooting: <a onclick="navigate('performance')">Performance and loading</a></div></div>
+</details>`},
 
     contact: {
       title: "Contact support", section: "FAQ",
@@ -2489,272 +2653,33 @@
   </div>
 </div>`},
 
-    "session-vs-class": {
-      title: "Session vs Class", section: "Sessions & Classes",
-      content: `
-<h1>Session vs Class</h1>
-<p>The most common question new users have: when do I create a session, and when do I create a class?</p>
-<div class="compare-grid">
-  <div class="compare-card">
-    <div class="compare-label private">Private</div>
-    <h3>Session</h3>
-    <p>One-on-one content for a single client.</p>
-    <ul>
-      <li>Assigned to one specific client</li>
-      <li>Only that client, the creator, and admins can see it</li>
-      <li>Private lessons, individual feedback, competition footage</li>
-      <li>Notes stay between coach and client</li>
-    </ul>
-  </div>
-  <div class="compare-card">
-    <div class="compare-label shared">Shared</div>
-    <h3>Class</h3>
-    <p>Account-wide content for everyone.</p>
-    <ul>
-      <li>Visible to all members, coaches, and admins</li>
-      <li>Group sessions, workshops, technique breakdowns</li>
-      <li>Great for shared curriculum and team training</li>
-      <li>Everyone can leave notes</li>
-    </ul>
-  </div>
-</div>
-<h2>Quick decision</h2>
-<ul>
-<li><strong>Is this for one person?</strong> → Create a <strong>session</strong></li>
-<li><strong>Should everyone see it?</strong> → Create a <strong>class</strong></li>
-</ul>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Step-by-step guides: <a onclick="navigate('creating-sessions')">Creating a session</a> · <a onclick="navigate('creating-classes')">Creating a class</a></div></div>`},
-
-    "upload-checklist": {
-      title: "Upload pre-flight checklist", section: "Video",
-      content: `
-<h1>Upload pre-flight checklist</h1>
-<p>Run through this before uploading to avoid common issues.</p>
-<div class="preflight" id="preflightList"></div>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Full format details: <a onclick="navigate('formats')">Supported formats and limits</a>. Problems? <a onclick="navigate('upload-issues')">Video upload problems</a>.</div></div>`},
-
-    "speed-calculator": {
-      title: "Upload time calculator", section: "Video",
-      content: `
-<h1>Upload time calculator</h1>
-<p>Estimate how long your video will take to upload based on file size and internet speed.</p>
-<div class="calc-wrap">
-  <div class="calc-row">
-    <span class="calc-label">File size</span>
-    <input class="calc-input" id="calcSize" type="number" placeholder="500" min="1" oninput="calcUpload()" aria-label="File size in MB">
-    <span class="calc-unit">MB</span>
-  </div>
-  <div class="calc-row">
-    <span class="calc-label">Upload speed</span>
-    <input class="calc-input" id="calcSpeed" type="number" placeholder="25" min="1" oninput="calcUpload()" aria-label="Upload speed in Mbps">
-    <span class="calc-unit">Mbps</span>
-  </div>
-  <div class="calc-result" id="calcResult"></div>
-</div>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Don't know your upload speed? Go to <a href="https://fast.com" target="_blank" rel="noopener">fast.com</a> — after the download test, click <strong>Show more info</strong> to see your upload speed.</div></div>
-<h2>Tips for faster uploads</h2>
-<ul>
-<li>Use a <strong>wired connection</strong> instead of Wi-Fi when possible</li>
-<li>Pause cloud sync tools (Dropbox, Google Drive, iCloud)</li>
-<li>Upload during off-peak hours for your network</li>
-<li><strong>1080p</strong> is usually enough — 4K files are much larger with little benefit for coaching review</li>
-</ul>`},
-
-    "browser-check": {
-      title: "Browser compatibility", section: "Troubleshooting",
-      content: `
-<h1>Browser compatibility</h1>
-<p>Kaynos works in any modern browser. Here's what yours looks like:</p>
-<div id="browserResult"></div>
-<h2>Recommended browsers</h2>
-<div class="shortcut-grid">
-  <div class="shortcut-card"><span>Chrome (recommended)</span><span style="color:var(--success)">Full support</span></div>
-  <div class="shortcut-card"><span>Firefox</span><span style="color:var(--success)">Full support</span></div>
-  <div class="shortcut-card"><span>Safari</span><span style="color:var(--warning)">Good (MKV may fail)</span></div>
-  <div class="shortcut-card"><span>Edge</span><span style="color:var(--success)">Full support</span></div>
-</div>
-<h2>If something doesn't work</h2>
-<ol>
-<li>Try Chrome — it has the broadest codec and feature support</li>
-<li>Hard refresh: <kbd>Ctrl+Shift+R</kbd> (Windows/Linux) or <kbd>Cmd+Shift+R</kbd> (Mac)</li>
-<li>Clear site data for app.kaynos.net in your browser settings</li>
-<li>Disable ad blockers or strict privacy extensions temporarily</li>
-</ol>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>More troubleshooting: <a onclick="navigate('performance')">Performance and loading</a> · <a onclick="navigate('playback-issues')">Video playback problems</a></div></div>`},
-
-    "player-shortcuts": {
-      title: "Video player shortcuts", section: "Video",
-      content: `
-<h1>Video player shortcuts</h1>
-<p>Use these keyboard shortcuts while watching video in the Kaynos player.</p>
-<h2>Playback</h2>
-<div class="shortcut-grid">
-  <div class="shortcut-card"><span>Play / Pause</span><kbd>Space</kbd></div>
-  <div class="shortcut-card"><span>Play / Pause</span><kbd>K</kbd></div>
-  <div class="shortcut-card"><span>Skip back</span><kbd>J</kbd></div>
-  <div class="shortcut-card"><span>Skip forward</span><kbd>L</kbd></div>
-  <div class="shortcut-card"><span>Fullscreen</span><kbd>F</kbd></div>
-  <div class="shortcut-card"><span>Pause + add note</span><kbd>N</kbd></div>
-</div>
-<h2>Help center shortcuts</h2>
-<div class="shortcut-grid">
-  <div class="shortcut-card"><span>Search docs</span><div><kbd>⌘</kbd> <kbd>K</kbd></div></div>
-  <div class="shortcut-card"><span>Previous page</span><kbd>←</kbd></div>
-  <div class="shortcut-card"><span>Next page</span><kbd>→</kbd></div>
-  <div class="shortcut-card"><span>Bookmark page</span><kbd>B</kbd></div>
-  <div class="shortcut-card"><span>Back to top</span><kbd>T</kbd></div>
-  <div class="shortcut-card"><span>Go home</span><kbd>H</kbd></div>
-  <div class="shortcut-card"><span>All shortcuts</span><kbd>?</kbd></div>
-</div>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Full playback guide: <a onclick="navigate('playback')">Watching and reviewing</a></div></div>`},
-
-    "quick-tips": {
-      title: "Quick tips", section: "Getting Started",
-      content: `
-<h1>Quick tips</h1>
-<p>Visual step-by-step guides for the most common tasks in Kaynos.</p>
-<h2>Upload a video</h2>
-<div class="step-tips">
-  <div class="step-tip"><div class="step-num">1</div><div class="step-body"><h4>Create a session or class</h4><p>Go to <strong>Sessions</strong> or <strong>Classes</strong> and click the <strong>New</strong> button.</p></div></div>
-  <div class="step-tip"><div class="step-num">2</div><div class="step-body"><h4>Choose "Upload" as source</h4><p>Select <strong>Upload</strong> (not Vimeo or Notes Only) when prompted for the video source.</p></div></div>
-  <div class="step-tip"><div class="step-num">3</div><div class="step-body"><h4>Drag or select your file</h4><p>Drop the video onto the upload area, or click to browse. MP4 is recommended.</p></div></div>
-  <div class="step-tip"><div class="step-num">4</div><div class="step-body"><h4>Wait for the green check</h4><p>The progress bar shows speed and ETA. Green check = done. Then fill in title, date, and save.</p></div></div>
-</div>
-<h2>Add a timestamped note</h2>
-<div class="step-tips">
-  <div class="step-tip"><div class="step-num">1</div><div class="step-body"><h4>Open the session or class</h4><p>Navigate to the recording you want to annotate.</p></div></div>
-  <div class="step-tip"><div class="step-num">2</div><div class="step-body"><h4>Play to the right moment</h4><p>Use <kbd>J</kbd>/<kbd>L</kbd> to skip, or click the timeline to jump.</p></div></div>
-  <div class="step-tip"><div class="step-num">3</div><div class="step-body"><h4>Press N or click Add Note</h4><p>The video pauses automatically. Type your observation.</p></div></div>
-  <div class="step-tip"><div class="step-num">4</div><div class="step-body"><h4>Save</h4><p>The note appears as a marker on the timeline. Hover to preview, click to jump back.</p></div></div>
-</div>
-<h2>Invite a client</h2>
-<div class="step-tips">
-  <div class="step-tip"><div class="step-num">1</div><div class="step-body"><h4>Go to Admin or Clients</h4><p>Admins use <strong>Admin</strong> for full control. Coaches use <strong>Clients</strong>.</p></div></div>
-  <div class="step-tip"><div class="step-num">2</div><div class="step-body"><h4>Click Add Member / Add Client</h4><p>Enter their name, email, and role.</p></div></div>
-  <div class="step-tip"><div class="step-num">3</div><div class="step-body"><h4>Send the invite</h4><p>They receive an email with a temporary password. Delivery is usually quick.</p></div></div>
-</div>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Full guides: <a onclick="navigate('first-upload')">Your first video upload</a> · <a onclick="navigate('notes')">Notes and timestamps</a> · <a onclick="navigate('inviting-members')">Inviting your team</a></div></div>`},
-
-    "onboarding-timeline": {
-      title: "Coach onboarding timeline", section: "Getting Started",
-      content: `
-<h1>Coach onboarding timeline</h1>
-<p>A suggested four-week plan for gym owners and head coaches getting started with Kaynos.</p>
-<div class="timeline">
-  <div class="timeline-item">
-    <div class="timeline-dot">${IC.rocket}</div>
-    <div class="timeline-week">Week 1</div>
-    <div class="timeline-title">Set up your account</div>
-    <div class="timeline-body">
-      <ul>
-        <li><a onclick="navigate('setup')">Log in and change your password</a></li>
-        <li><a onclick="navigate('roles')">Understand the three roles</a> (admin, coach, client)</li>
-        <li><a onclick="navigate('profile')">Update your profile</a></li>
-        <li>Explore the dashboard — click around before adding others</li>
-      </ul>
-    </div>
-  </div>
-  <div class="timeline-item">
-    <div class="timeline-dot">${IC.video}</div>
-    <div class="timeline-week">Week 2</div>
-    <div class="timeline-title">Upload your first content</div>
-    <div class="timeline-body">
-      <ul>
-        <li><a onclick="navigate('upload-checklist')">Run the pre-flight checklist</a></li>
-        <li><a onclick="navigate('first-upload')">Upload your first video</a></li>
-        <li><a onclick="navigate('session-vs-class')">Decide: session or class?</a></li>
-        <li><a onclick="navigate('notes')">Add timestamped notes</a> to your recording</li>
-        <li><a onclick="navigate('tags')">Tag content</a> for easy filtering later</li>
-      </ul>
-    </div>
-  </div>
-  <div class="timeline-item">
-    <div class="timeline-dot">${IC.users}</div>
-    <div class="timeline-week">Week 3</div>
-    <div class="timeline-title">Bring your team on board</div>
-    <div class="timeline-body">
-      <ul>
-        <li><a onclick="navigate('inviting-members')">Invite 2-3 coaches first</a> — let them get comfortable</li>
-        <li>Invite a small wave of clients (5-10) as a pilot</li>
-        <li>Ask for feedback — what's confusing? What's working?</li>
-        <li><a onclick="navigate('notifications')">Configure email notifications</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="timeline-item">
-    <div class="timeline-dot">${IC.check}</div>
-    <div class="timeline-week">Week 4</div>
-    <div class="timeline-title">Optimize and scale</div>
-    <div class="timeline-body">
-      <ul>
-        <li>Invite the rest of your roster</li>
-        <li><a onclick="navigate('tags')">Standardize your tag vocabulary</a> with the team</li>
-        <li><a onclick="navigate('progress')">Review progress tracking</a> — see who's watching</li>
-        <li><a onclick="navigate('formats')">Optimize video settings</a> — 1080p H.264 for best results</li>
-        <li>Developers: <a onclick="navigate('developer-api')">explore the API</a> for automation</li>
-      </ul>
-    </div>
-  </div>
-</div>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>This is a suggested pace — move faster or slower based on your team's comfort. The important thing is that you (the admin) are confident before adding a large wave of clients.</div></div>`},
-
-    "whats-new": {
-      title: "What's new", section: "",
-      content: `
-<h1>What's new</h1>
-<p>Recent updates and improvements to Kaynos.</p>
-<h2>April 2026</h2>
-<h3>Help center refresh</h3>
-<ul>
-<li>Improved search with highlighted snippets and keyboard navigation.</li>
-<li>Added keyboard shortcuts for faster navigation — press <kbd>?</kbd> to see them all.</li>
-<li>Print-friendly styles for saving pages offline.</li>
-<li>Better accessibility: skip-to-content, improved ARIA labels, focus management.</li>
-</ul>
-<h3>Developer API docs</h3>
-<ul>
-<li>Full API reference with Swagger UI link, scopes, and token management.</li>
-<li>OpenAPI spec available on GitHub.</li>
-</ul>
-<h2>March 2026</h2>
-<h3>Video playback</h3>
-<ul>
-<li>Keyboard shortcuts during playback: <strong>Space/K</strong> (play/pause), <strong>J/L</strong> (skip), <strong>N</strong> (note), <strong>F</strong> (fullscreen).</li>
-<li>Timeline note markers with hover preview.</li>
-<li>Playback speed controls from 0.5x to 2x.</li>
-</ul>
-<h3>Upload improvements</h3>
-<ul>
-<li>Chunked parallel upload for files over 100 MB with automatic retry.</li>
-<li>Real-time speed and ETA display during upload.</li>
-</ul>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Have a feature request? <a onclick="navigate('feature-requests')">Vote on what we build next</a> or email ${mailLink()}.</div></div>`},
 
     "release-notes": {
       title: "Release notes", section: "",
       content: `
 <h1>Release notes</h1>
 <p>Detailed changelog of everything shipped, in progress, and planned for Kaynos.</p>
+<h2>Recent highlights</h2>
+<h3>April 2026</h3>
+<ul>
+<li>Help center refresh: improved search with highlighted snippets and keyboard navigation.</li>
+<li>Added keyboard shortcuts for faster navigation — press <kbd>?</kbd> to see them all.</li>
+<li>Print-friendly styles for saving pages offline.</li>
+<li>Better accessibility: skip-to-content, improved ARIA labels, focus management.</li>
+<li>Full API reference with Swagger UI link, scopes, and token management.</li>
+</ul>
+<h3>March 2026</h3>
+<ul>
+<li>Keyboard shortcuts during playback: <strong>Space/K</strong> (play/pause), <strong>J/L</strong> (skip), <strong>N</strong> (note), <strong>F</strong> (fullscreen).</li>
+<li>Timeline note markers with hover preview.</li>
+<li>Playback speed controls from 0.5x to 2x.</li>
+<li>Chunked parallel upload for files over 100 MB with automatic retry.</li>
+<li>Real-time speed and ETA display during upload.</li>
+</ul>
+<h2>Full changelog</h2>
 <div class="release-filter" id="releaseFilter"></div>
 <div id="releaseList"></div>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Want to influence what we build? <a onclick="navigate('feature-requests')">Vote on feature requests</a> or email ${mailLink()}.</div></div>`},
-
-    "feature-requests": {
-      title: "Feature requests", section: "",
-      content: `
-<h1>Feature requests</h1>
-<p>Vote on the features you want most. Votes are saved on this device only and are not sent to Kaynos.</p>
-<div class="poll-total" id="pollTotal"></div>
-<div class="poll-sort" id="pollSort"></div>
-<div class="poll-list" id="pollList"></div>
-<div class="poll-submit">
-  <div class="poll-submit-title">Suggest a feature</div>
-  <div class="poll-submit-row">
-    <input class="poll-submit-input" id="pollInput" placeholder="Describe your feature idea..." maxlength="140" aria-label="Feature suggestion" onkeydown="if(event.key==='Enter')submitPollIdea()">
-    <button class="poll-submit-btn" onclick="submitPollIdea()">Submit</button>
-  </div>
-</div>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Votes are saved in your browser. For detailed requests, email ${mailLink()} with specifics.</div></div>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Have feedback on what we should build? Email ${mailLink()}.</div></div>`},
 
     "privacy-on-this-site": {
       title: "Privacy on this site", section: "Legal",
@@ -2794,13 +2719,13 @@
   };
 
   const NAV = [
-    { section: "", pages: ["welcome", "whats-new", "release-notes", "feature-requests"] },
-    { section: "Getting Started", pages: ["setup", "inviting-members", "first-upload", "roles", "glossary", "quick-tips", "onboarding-timeline"] },
-    { section: "Video", pages: ["uploading", "playback", "player-shortcuts", "formats", "upload-checklist", "speed-calculator", "storage"] },
-    { section: "Sessions & Classes", pages: ["session-vs-class", "creating-sessions", "creating-classes", "notes", "tags", "progress"] },
-    { section: "Account Management", pages: ["managing-members", "profile", "notifications"] },
+    { section: "", pages: ["welcome", "release-notes"] },
+    { section: "Getting Started", pages: ["setup", "inviting-members", "first-upload", "roles", "glossary"] },
+    { section: "Video", pages: ["uploading", "playback", "formats", "storage"] },
+    { section: "Sessions & Classes", pages: ["creating-sessions", "creating-classes", "notes", "progress"] },
+    { section: "Account Management", pages: ["managing-members", "profile"] },
     { section: "Developers", pages: ["developer-api"] },
-    { section: "Troubleshooting", pages: ["troubleshoot", "error-lookup", "browser-check", "upload-issues", "playback-issues", "login-issues", "email-issues", "performance", "mobile"] },
+    { section: "Troubleshooting", pages: ["troubleshoot", "login-issues", "email-issues", "performance"] },
     { section: "FAQ", pages: ["faq", "contact"] },
     { section: "Legal", pages: ["privacy-on-this-site"] }
   ];
@@ -2858,7 +2783,7 @@
       html += '<div class="sidebar-links">';
       g.pages.forEach(p => {
         const isRead = readPages.includes(p);
-        const badge = (p === 'whats-new' && hasNewUpdates()) ? '<span class="new-badge" title="New updates"></span>' : '';
+        const badge = (p === 'release-notes' && hasNewUpdates()) ? '<span class="new-badge" title="New updates"></span>' : '';
         html += `<a class="sidebar-link" href="#${p}" tabindex="0" data-page="${p}" onclick="navigate('${p}');return false" onkeydown="if(event.key==='Enter'){navigate('${p}');return false}"><span class="sl-text">${PAGES[p].title}${badge}</span>${isRead ? '<span class="read-dot" title="Read"></span>' : ''}</a>`;
       });
       html += '</div></div>';
@@ -2883,12 +2808,32 @@
     localStorage.setItem('sb-collapsed', JSON.stringify(collapsed));
   }
 
+  /* ── REDIRECTS ──────────────────────────────────────── */
+  const REDIRECTS = {
+    'whats-new': 'release-notes',
+    'feature-requests': 'release-notes',
+    'quick-tips': 'setup',
+    'onboarding-timeline': 'setup',
+    'upload-checklist': 'uploading',
+    'speed-calculator': 'formats',
+    'player-shortcuts': 'playback',
+    'session-vs-class': 'creating-sessions',
+    'tags': 'notes',
+    'notifications': 'profile',
+    'upload-issues': 'uploading',
+    'playback-issues': 'playback',
+    'error-lookup': 'troubleshoot',
+    'browser-check': 'troubleshoot',
+    'mobile': 'performance',
+  };
+
   /* ── NAVIGATE ───────────────────────────────────────── */
   function navigate(pageId) {
+    if (REDIRECTS[pageId]) { pageId = REDIRECTS[pageId]; location.hash = pageId; }
     const page = getPageContent(pageId);
     if (!page) { if (pageId !== 'welcome') navigate('welcome'); return; }
 
-    if (pageId === 'whats-new') markWhatsNewSeen();
+    if (pageId === 'release-notes') markWhatsNewSeen();
 
     const pc = document.getElementById('pageContent');
     // Retrigger animation
@@ -3433,10 +3378,8 @@
     if (pageId === 'welcome') renderWelcomeBack(pc);
     if (pageId === 'welcome') renderChecklist(pc);
     if (pageId === 'troubleshoot') renderWizard('start');
-    if (pageId === 'upload-checklist') renderPreflight();
-    if (pageId === 'browser-check') checkBrowser();
+    if (pageId === 'uploading') renderPreflight();
     if (pageId === 'release-notes') renderReleases();
-    if (pageId === 'feature-requests') renderPoll();
     renderFaqAccordion(pc, pageId);
     addGlossaryTooltips(pc);
     renderRelated(pc, pageId);
@@ -3617,7 +3560,7 @@
       { id: 'cl-password', text: 'Set a new password', page: 'profile' },
       { id: 'cl-playback', text: 'Watch a session', page: 'playback' },
       { id: 'cl-notes', text: 'Leave a note for your coach', page: 'notes' },
-      { id: 'cl-mobile', text: 'Try it on your phone', page: 'mobile' },
+      { id: 'cl-mobile', text: 'Try it on your phone', page: 'performance' },
     ],
     developer: [
       { id: 'cl-login', text: 'Log in as admin', page: 'setup' },
@@ -3696,10 +3639,10 @@
         { text: 'Very slow but no error', next: 'upload-slow' },
       ]
     },
-    'upload-reject': { result: true, title: 'File rejected at start', body: 'Check your file format (MP4, MOV, WebM, MKV) and size (max 5 GB).', page: 'upload-issues' },
-    'upload-stuck': { result: true, title: 'Progress bar stuck', body: 'Large files pause between chunks — wait 60 seconds. If no progress after 2 minutes, cancel and retry.', page: 'upload-issues' },
-    'upload-partial': { result: true, title: 'Fails partway through', body: 'Network error or session expired. Reconnect and retry. A 403 means the upload session expired — start over.', page: 'upload-issues' },
-    'upload-slow': { result: true, title: 'Slow upload', body: 'Check your upload speed (not download) at fast.com. Wired connection helps. Pause other sync tools.', page: 'upload-issues' },
+    'upload-reject': { result: true, title: 'File rejected at start', body: 'Check your file format (MP4, MOV, WebM, MKV) and size (max 5 GB).', page: 'uploading' },
+    'upload-stuck': { result: true, title: 'Progress bar stuck', body: 'Large files pause between chunks — wait 60 seconds. If no progress after 2 minutes, cancel and retry.', page: 'uploading' },
+    'upload-partial': { result: true, title: 'Fails partway through', body: 'Network error or session expired. Reconnect and retry. A 403 means the upload session expired — start over.', page: 'uploading' },
+    'upload-slow': { result: true, title: 'Slow upload', body: 'Check your upload speed (not download) at fast.com. Wired connection helps. Pause other sync tools.', page: 'uploading' },
     playback: {
       q: 'What do you see?',
       opts: [
@@ -3709,9 +3652,9 @@
         { text: 'Sound but no picture', next: 'play-codec' },
       ]
     },
-    'play-black': { result: true, title: 'Black screen', body: 'Hard refresh (Ctrl+Shift+R). Confirm upload completed. Try Chrome.', page: 'playback-issues' },
-    'play-buffer': { result: true, title: 'Buffering', body: 'Check bandwidth, close other streaming tabs, try a 1080p export instead of 4K.', page: 'playback-issues' },
-    'play-codec': { result: true, title: 'Codec issue', body: 'Re-export to MP4 (H.264 + AAC). MKV may fail in Safari — try Chrome or Firefox.', page: 'playback-issues' },
+    'play-black': { result: true, title: 'Black screen', body: 'Hard refresh (Ctrl+Shift+R). Confirm upload completed. Try Chrome.', page: 'playback' },
+    'play-buffer': { result: true, title: 'Buffering', body: 'Check bandwidth, close other streaming tabs, try a 1080p export instead of 4K.', page: 'playback' },
+    'play-codec': { result: true, title: 'Codec issue', body: 'Re-export to MP4 (H.264 + AAC). MKV may fail in Safari — try Chrome or Firefox.', page: 'playback' },
     login: {
       q: 'What\'s happening?',
       opts: [
@@ -3764,17 +3707,17 @@
 
   /* ── ERROR MESSAGE LOOKUP ──────────────────────────── */
   const ERROR_DB = [
-    { patterns: ['please select a video', 'file type', 'unsupported'], title: 'Unsupported file format', hint: 'Convert to MP4 (H.264 + AAC)', page: 'upload-issues' },
+    { patterns: ['please select a video', 'file type', 'unsupported'], title: 'Unsupported file format', hint: 'Convert to MP4 (H.264 + AAC)', page: 'uploading' },
     { patterns: ['file too big', 'too large', '5 gb', 'size limit'], title: 'File too large', hint: 'Maximum is 5 GB — trim or compress', page: 'formats' },
-    { patterns: ['403', 'forbidden', 'session expire'], title: 'Upload session expired (403)', hint: 'Long uploads can expire — cancel and restart', page: 'upload-issues' },
-    { patterns: ['500', 'server error', 'internal'], title: 'Server error (500)', hint: 'Wait a moment and retry — contact support if it persists', page: 'upload-issues' },
-    { patterns: ['network error', 'failed to fetch', 'connection'], title: 'Network error', hint: 'Check your internet — reconnect and retry', page: 'upload-issues' },
-    { patterns: ['cannot be played', 'not supported', 'codec'], title: 'Codec / playback error', hint: 'Re-export to MP4 with H.264 video + AAC audio', page: 'playback-issues' },
-    { patterns: ['black screen', 'no video', 'blank player'], title: 'Black screen / no video', hint: 'Hard refresh, check upload status, try Chrome', page: 'playback-issues' },
+    { patterns: ['403', 'forbidden', 'session expire'], title: 'Upload session expired (403)', hint: 'Long uploads can expire — cancel and restart', page: 'uploading' },
+    { patterns: ['500', 'server error', 'internal'], title: 'Server error (500)', hint: 'Wait a moment and retry — contact support if it persists', page: 'uploading' },
+    { patterns: ['network error', 'failed to fetch', 'connection'], title: 'Network error', hint: 'Check your internet — reconnect and retry', page: 'uploading' },
+    { patterns: ['cannot be played', 'not supported', 'codec'], title: 'Codec / playback error', hint: 'Re-export to MP4 with H.264 video + AAC audio', page: 'playback' },
+    { patterns: ['black screen', 'no video', 'blank player'], title: 'Black screen / no video', hint: 'Hard refresh, check upload status, try Chrome', page: 'playback' },
     { patterns: ['too many attempts', 'rate limit', 'locked out'], title: 'Login rate limited', hint: 'Wait and try again later, or reset your password', page: 'login-issues' },
     { patterns: ['wrong password', 'incorrect', 'invalid credentials'], title: 'Wrong password', hint: 'Check Caps Lock, paste from invite email, ask admin for reset', page: 'login-issues' },
     { patterns: ['no access', 'permission', 'denied', 'unauthorized'], title: 'Access denied', hint: 'Check your role or ask an admin to verify your access', page: 'roles' },
-    { patterns: ['buffering', 'loading', 'spinner', 'slow playback'], title: 'Buffering / slow playback', hint: 'Check bandwidth, close other tabs, try 1080p', page: 'playback-issues' },
+    { patterns: ['buffering', 'loading', 'spinner', 'slow playback'], title: 'Buffering / slow playback', hint: 'Check bandwidth, close other tabs, try 1080p', page: 'playback' },
     { patterns: ['email', 'notification', 'invite', 'not receiving'], title: 'Email / notification issue', hint: 'Check spam, verify address in profile', page: 'email-issues' },
   ];
 
@@ -3926,7 +3869,7 @@
 
   /* ── NUDGE PROMPT ──────────────────────────────────── */
   let nudgeTimer = null;
-  const TROUBLESHOOT_PAGES = ['upload-issues', 'playback-issues', 'login-issues', 'email-issues', 'performance'];
+  const TROUBLESHOOT_PAGES = ['uploading', 'playback', 'login-issues', 'email-issues', 'performance'];
   function startNudge(pageId) {
     clearTimeout(nudgeTimer);
     document.getElementById('nudgePrompt').classList.remove('show');
@@ -4709,7 +4652,8 @@
   buildSidebar();
   const hash = location.hash.slice(1);
   const [initPage, initSection] = hash.split(':');
-  navigate(initPage && PAGES[initPage] ? initPage : 'welcome');
+  const resolvedPage = REDIRECTS[initPage] || initPage;
+  navigate(resolvedPage && PAGES[resolvedPage] ? resolvedPage : 'welcome');
   if (initSection) {
     if (initSection.startsWith('wizard-')) {
       requestAnimationFrame(() => renderWizard(initSection.replace('wizard-', '')));
