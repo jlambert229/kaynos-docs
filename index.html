@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kaynos — Help Center</title>
   <meta name="theme-color" content="#060609" />
+  <meta name="fragment" content="!" />
   <meta name="description" content="Kaynos help center — setup, video upload, playback, troubleshooting, and developer API docs.">
   <link rel="canonical" href="https://docs.kaynos.net/" />
 
@@ -2906,6 +2907,27 @@
     if (!window._isPopstate) window.scrollTo({ top: 0, behavior: 'instant' });
     if (!window._isPopstate) history.pushState({ page: pageId }, '', '#' + pageId);
     document.title = pageId === 'welcome' ? 'Kaynos — Help Center' : `${page.title} — Kaynos Docs`;
+
+    // Dynamic meta description from page content (first ~160 chars, stripped of HTML)
+    const descEl = document.querySelector('meta[name="description"]');
+    if (descEl) {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = page.content;
+      const plainText = (tmp.textContent || tmp.innerText || '').replace(/\s+/g, ' ').trim();
+      descEl.setAttribute('content', plainText.slice(0, 160) + (plainText.length > 160 ? '…' : ''));
+    }
+
+    // Dynamic canonical URL
+    let canonEl = document.querySelector('link[rel="canonical"]');
+    if (!canonEl) {
+      canonEl = document.createElement('link');
+      canonEl.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonEl);
+    }
+    canonEl.setAttribute('href', pageId === 'welcome'
+      ? 'https://docs.kaynos.net/'
+      : 'https://docs.kaynos.net/#' + pageId);
+
     closeSidebar();
     document.getElementById('searchInput').value = '';
     document.getElementById('searchResults').classList.remove('active');
