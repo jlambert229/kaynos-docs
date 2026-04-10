@@ -729,6 +729,13 @@
     .related-card:hover { border-color: var(--accent); background: var(--bg-secondary); text-decoration: none; transform: translateY(-1px); }
     .related-card-title { font-size: .875rem; font-weight: 500; color: var(--text-primary); }
     .related-card-section { font-size: .75rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: .04em; }
+    .next-steps { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); }
+    .next-steps-title { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--text-tertiary); margin-bottom: 10px; }
+    .next-steps-nav { display: flex; justify-content: space-between; gap: 12px; }
+    .next-step { padding: 10px 16px; border-radius: 8px; background: var(--bg-secondary); color: var(--text-primary); text-decoration: none; font-size: .875rem; font-weight: 500; transition: background .15s; }
+    .next-step:hover { background: var(--accent-soft, rgba(99,102,241,.12)); color: var(--accent); }
+    .next-step.prev { text-align: left; }
+    .next-step.next { text-align: right; margin-left: auto; }
 
     /* ── SIDEBAR READ INDICATOR ─── */
     .sidebar-link .read-dot {
@@ -3508,8 +3515,35 @@
     h1.insertAdjacentElement('afterend', meta);
   }
 
+  /* ── ROLE-AWARE NEXT STEPS ─────────────────────────── */
+  const ROLE_PATHS = {
+    admin: ['setup', 'roles', 'inviting-members', 'first-upload', 'managing-members', 'uploading', 'creating-sessions', 'notes', 'progress', 'developer-api'],
+    coach: ['setup', 'first-upload', 'creating-sessions', 'notes', 'uploading', 'playback', 'formats', 'progress', 'faq'],
+    client: ['setup', 'playback', 'notes', 'progress', 'creating-sessions', 'faq', 'troubleshoot', 'performance'],
+    developer: ['setup', 'developer-api', 'formats', 'glossary', 'faq', 'storage'],
+  };
+
   /* ── RELATED ARTICLES ──────────────────────────────── */
   function renderRelated(container, pageId) {
+    const role = localStorage.getItem('user-role');
+    if (role && ROLE_PATHS[role]) {
+      const path = ROLE_PATHS[role];
+      const idx = path.indexOf(pageId);
+      if (idx !== -1) {
+        const prev = idx > 0 ? path[idx - 1] : null;
+        const next = idx < path.length - 1 ? path[idx + 1] : null;
+        if (prev || next) {
+          const nav = document.createElement('div');
+          nav.className = 'next-steps';
+          nav.innerHTML = '<div class="next-steps-title">Next steps</div><div class="next-steps-nav">' +
+            (prev ? `<a class="next-step prev" href="#${prev}" onclick="navigate('${prev}');return false">← ${PAGES[prev].title}</a>` : '<span></span>') +
+            (next ? `<a class="next-step next" href="#${next}" onclick="navigate('${next}');return false">${PAGES[next].title} →</a>` : '<span></span>') +
+            '</div>';
+          container.appendChild(nav);
+          return; // skip random related articles when we have a path
+        }
+      }
+    }
     const page = PAGES[pageId];
     if (!page || !page.section || pageId === 'welcome') return;
     const sameSection = allPageKeys.filter(k => PAGES[k].section === page.section && k !== pageId);
