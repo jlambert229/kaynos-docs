@@ -530,8 +530,8 @@
     .feature-overview summary:hover { color: var(--accent); }
     .feature-overview[open] summary { margin-bottom: 12px; }
     .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
-    .feature-card { background: var(--bg-secondary); border-radius: var(--radius); padding: 16px; border: 1px solid var(--border); transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease); }
-    .feature-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+    .feature-card { display: block; background: var(--bg-secondary); border-radius: var(--radius); padding: 16px; border: 1px solid var(--border); transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease); text-decoration: none !important; color: inherit !important; cursor: pointer; }
+    .feature-card:hover { border-color: var(--accent); transform: translateY(-1px); color: inherit !important; }
     .feature-card h4 { margin: 8px 0 6px; font-size: .875rem; color: var(--text-primary); }
     .feature-card p { font-size: .8125rem; color: var(--text-secondary); line-height: 1.5; margin: 0; }
     .feature-icon { width: 28px; height: 28px; color: var(--accent); }
@@ -1858,36 +1858,36 @@
 <details class="feature-overview">
 <summary><strong>What can Kaynos do?</strong> — quick feature overview</summary>
 <div class="feature-grid">
-  <div class="feature-card">
+  <a class="feature-card" href="#uploading" onclick="navigate('uploading');return false">
     <div class="feature-icon">${IC.video}</div>
     <h4>Video upload & playback</h4>
     <p>Upload MP4, MOV, WebM, or AVI (up to 5 GB). Chunked uploads with auto-retry for large files. Playback with speed controls (0.5×–2×) and resume.</p>
-  </div>
-  <div class="feature-card">
+  </a>
+  <a class="feature-card" href="#notes" onclick="navigate('notes');return false">
     <div class="feature-icon">${IC.book}</div>
     <h4>Timestamped coaching notes</h4>
     <p>Pin notes to exact moments on the timeline. Draw annotations on frames. Voice dictation for hands-free feedback. Reactions, replies, and note types (key moment, drill, question).</p>
-  </div>
-  <div class="feature-card">
+  </a>
+  <a class="feature-card" href="#roles" onclick="navigate('roles');return false">
     <div class="feature-icon">${IC.users}</div>
     <h4>Team & role management</h4>
     <p>Three roles: admin, coach, student. Invite by email, manage permissions, track who watched what. No seat limits.</p>
-  </div>
-  <div class="feature-card">
+  </a>
+  <a class="feature-card" href="#creating-sessions" onclick="navigate('creating-sessions');return false">
     <div class="feature-icon">${IC.rocket}</div>
     <h4>Sessions & scheduling</h4>
     <p>Private sessions (one student) or shared classes (everyone). Calendar view with recurrence and conflict detection. Clips for sharing highlights.</p>
-  </div>
-  <div class="feature-card">
+  </a>
+  <a class="feature-card" href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">
     <div class="feature-icon">${IC.check}</div>
     <h4>Security & compliance</h4>
     <p>Two-factor authentication (TOTP). US-hosted storage (Backblaze B2 + Cloudflare CDN). Data export for GDPR. HTTPS everywhere.</p>
-  </div>
-  <div class="feature-card">
+  </a>
+  <a class="feature-card" href="#developer-api" onclick="navigate('developer-api');return false">
     <div class="feature-icon">${IC.info}</div>
     <h4>Integrations & API</h4>
     <p>REST API with token auth. Webhooks for real-time events. Stripe billing ($49/mo or $490/yr, 14-day free trial).</p>
-  </div>
+  </a>
 </div>
 </details>
 <h2>Jump in</h2>
