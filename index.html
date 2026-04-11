@@ -4756,7 +4756,7 @@
     const replacements = [];
     while (walker.nextNode()) {
       const node = walker.currentNode;
-      if (node.parentElement.closest('.glossary-term, .hint, h1, h2, h3, a, code, pre, .term-tooltip, .faq-question, button, .tldr')) continue;
+      if (node.parentElement.closest('.glossary-term, .hint, h1, h2, h3, a, code, pre, .term-tooltip, .faq-question, button, .tldr, .hero, .start-step, .feature-card, .ql-desc, .ql-title')) continue;
       for (const [term, def] of Object.entries(GLOSSARY_TERMS)) {
         const re = new RegExp(`\\b(${term})\\b`, 'i');
         const match = node.textContent.match(re);
