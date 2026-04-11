@@ -90,7 +90,7 @@ test.describe('Search', () => {
     await page.fill('#searchInput', 'upload');
     await expect(page.locator('.search-results')).toHaveClass(/active/);
     const results = page.locator('.search-result');
-    expect(await results.count()).toBeGreaterThan(0);
+    await expect(results.first()).toBeVisible();
   });
 
   test('search result click navigates to page', async ({ page }) => {
@@ -98,8 +98,7 @@ test.describe('Search', () => {
     await page.fill('#searchInput', 'upload video');
     await page.waitForSelector('.search-result');
     await page.locator('.search-result').first().click();
-    const h1 = await page.locator('.content-inner h1').textContent();
-    expect(h1.length).toBeGreaterThan(0);
+    await expect(page.locator('.content-inner h1')).toBeVisible();
     // Search should clear
     await expect(page.locator('#searchInput')).toHaveValue('');
   });
@@ -182,7 +181,7 @@ test.describe('Icon rendering', () => {
     await page.goto('/#contact');
     await page.waitForSelector('.content-inner h1');
     const icons = page.locator('.support-item-icon');
-    expect(await icons.count()).toBeGreaterThan(0);
+    await expect(icons.first()).toBeVisible();
     const first = icons.first();
     await expect(first.locator('svg')).toHaveCount(1);
   });
@@ -430,8 +429,7 @@ test.describe('Back to top', () => {
     await page.goto('/#faq');
     await expect(page.locator('#back-top')).not.toHaveClass(/visible/);
     await page.evaluate(() => window.scrollTo(0, 800));
-    await page.waitForTimeout(300);
-    await expect(page.locator('#back-top')).toHaveClass(/visible/);
+    await expect(page.locator('#back-top')).toHaveClass(/visible/, { timeout: 5000 });
   });
 });
 
@@ -506,5 +504,32 @@ test.describe('Redirects', () => {
     await page.goto('/#upload-checklist');
     await page.waitForSelector('.content-inner h1');
     await expect(page).toHaveURL(/#uploading/);
+  });
+});
+
+// ── Feature request form ──────────────────────────────────
+test.describe('Feature request form', () => {
+  test('form renders on feature-requests page', async ({ page }) => {
+    await page.goto('/#feature-requests');
+    await expect(page.locator('#featureForm')).toBeVisible();
+    await expect(page.locator('#fr-title')).toBeVisible();
+  });
+});
+
+// ── Role personalization ──────────────────────────────────
+test.describe('Role personalization', () => {
+  test('welcome page shows role-specific links after role selection', async ({ page }) => {
+    await page.goto('/');
+    await page.evaluate(() => localStorage.setItem('user-role', 'admin'));
+    await page.goto('/');
+    await expect(page.locator('.start-here')).toBeVisible();
+  });
+});
+
+// ── Parent guide ──────────────────────────────────────────
+test.describe('Parent guide', () => {
+  test('parent guide page loads', async ({ page }) => {
+    await page.goto('/#parent-guide');
+    await expect(page.locator('.content-inner h1')).toContainText('Parent guide');
   });
 });

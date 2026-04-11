@@ -1792,7 +1792,7 @@
     </div>
   </div>
 
-  <script>
+  <script>(function() { 'use strict';
   /* ── EMAIL OBFUSCATION ────────────────────────────────────── */
   function mailLink(text) {
     const u = 'support', d = 'kaynos.net';
@@ -1843,7 +1843,7 @@
 <div class="hero">
   <div class="hero-badge">Help Center</div>
   <h1>Welcome to Kaynos</h1>
-  <p>Everything you need to get started with Kaynos — uploading video, managing your team, and troubleshooting common issues.</p>
+  <p>Stop losing coaching moments. Upload session footage, add timestamped feedback, and make sure your students actually watch and learn.</p>
   <p style="margin-top:12px;font-size:.8125rem"><a style="cursor:pointer;color:var(--accent)" onclick="startTour()">Take the guided tour</a></p>
 </div>
 <div class="hint hint-info">
@@ -2494,6 +2494,9 @@
 <h2>@Mentions</h2>
 <p>Type <strong>@</strong> followed by a name to mention a teammate in your note. Mentioned users receive an email notification with a link to jump directly to the note.</p>
 <p>Use mentions to loop in specific coaches ("@Marco take a look at this sweep attempt") or prompt students to review ("@Sofia check the guard retention at 2:14").</p>
+<h2>Threaded replies</h2>
+<p>Reply to any note to start a conversation thread. Click <strong>Reply</strong> under a note, type your response, and save. The original author and anyone @mentioned receive an email notification.</p>
+<p>Threads keep feedback organized — the coach's observation, the student's question, and the follow-up all stay connected to the same timestamp.</p>
 <h2>Tips</h2>
 <ul>
 <li>Short, specific lines (a technique name + brief observation) are easier to scan later than long paragraphs.</li>
@@ -2650,7 +2653,18 @@
 <li>Choose frequency: <strong>off</strong>, <strong>daily</strong>, <strong>weekly</strong>, or <strong>monthly</strong>.</li>
 <li>Reports include: total sessions, storage usage, active students, and coach activity.</li>
 </ol>
-<p>Click <strong>Send now</strong> to trigger an immediate report.</p>`},
+<p>Click <strong>Send now</strong> to trigger an immediate report.</p>
+<h2>Admin panel overview</h2>
+<p>The Admin panel has several sections. Here's what each does:</p>
+<dl>
+<dt>Members</dt><dd>View roster, add/remove members, change roles, reset passwords. The main people management hub.</dd>
+<dt>Storage</dt><dd>Monitor video count and storage usage against your limits (default: 100 videos, 50 GB). View expiring videos. Request limit increases.</dd>
+<dt>Reports</dt><dd>Configure automated usage reports (off/daily/weekly/monthly). Send a manual report immediately.</dd>
+<dt>Branding</dt><dd>Set a custom logo, accent color, and welcome text for your academy.</dd>
+<dt>Webhooks</dt><dd>Create webhook endpoints to receive real-time event callbacks (session.created, class.created, etc.). View delivery history.</dd>
+<dt>Settings</dt><dd>School name, operating hours (default 6 AM–9 PM).</dd>
+<dt>Danger Zone</dt><dd>Schedule account deletion (30-day grace period) or cancel a pending deletion.</dd>
+</dl>`},
 
     profile: {
       title: "Profile and password", section: "Account Management",
@@ -2903,6 +2917,53 @@
 <li>Members / roster where the product allows automation</li>
 <li>Notes pinned to sessions and classes</li>
 </ul>
+<h2>Webhook events</h2>
+<p>Subscribe to real-time event callbacks. Configure webhooks under <strong>Admin → Webhooks</strong>.</p>
+<table><thead><tr><th>Event</th><th>Fires when</th></tr></thead><tbody>
+<tr><td><code>session.created</code></td><td>A new session is created</td></tr>
+<tr><td><code>session.updated</code></td><td>Session title, date, or video changes</td></tr>
+<tr><td><code>class.created</code></td><td>A new class is created</td></tr>
+<tr><td><code>class.updated</code></td><td>Class details change</td></tr>
+<tr><td><code>note.added</code></td><td>A note is added to a session or class</td></tr>
+<tr><td><code>member.joined</code></td><td>A new member accepts their invite</td></tr>
+<tr><td><code>member.removed</code></td><td>A member is removed from the account</td></tr>
+</tbody></table>
+<p>Deliveries are retried up to 3 times with exponential backoff. View delivery history and manually retry from the webhooks panel.</p>
+
+<h2>Code examples</h2>
+<h3>List sessions (cURL)</h3>
+<pre>curl -H "Authorization: Bearer YOUR_TOKEN" \\
+  https://app.kaynos.net/api/v1/sessions</pre>
+
+<h3>Create a note (JavaScript)</h3>
+<pre>const res = await fetch('https://app.kaynos.net/api/v1/notes/session/SESSION_ID', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer YOUR_TOKEN',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    text: 'Great guard retention here',
+    timestamp_seconds: 142
+  })
+});</pre>
+
+<h2>Rate limits</h2>
+<table><thead><tr><th>Endpoint</th><th>Limit</th></tr></thead><tbody>
+<tr><td>Login</td><td>25 attempts per IP</td></tr>
+<tr><td>Signup</td><td>10 per IP</td></tr>
+<tr><td>Promo validation</td><td>15 per IP</td></tr>
+<tr><td>General API</td><td>No hard limit (fair use policy)</td></tr>
+</tbody></table>
+
+<h2>Error responses</h2>
+<table><thead><tr><th>Code</th><th>Meaning</th><th>Action</th></tr></thead><tbody>
+<tr><td><code>401</code></td><td>Missing or invalid token</td><td>Check Authorization header</td></tr>
+<tr><td><code>403</code></td><td>Insufficient scope or role</td><td>Token needs write scope or admin role</td></tr>
+<tr><td><code>404</code></td><td>Resource not in your account</td><td>Verify session/class/member ID</td></tr>
+<tr><td><code>429</code></td><td>Rate limited</td><td>Wait and retry with backoff</td></tr>
+</tbody></table>
+
 <h2>Managing tokens while logged in</h2>
 <ol>
 <li><code>GET /api/integrations/tokens</code> — inspect token metadata</li>
@@ -3142,6 +3203,7 @@
 <li>For the full privacy policy, see <a href="https://app.kaynos.net/privacy" target="_blank" rel="noopener">app.kaynos.net/privacy</a>.</li>
 </ul>
 <p>Questions about your child's data or COPPA/FERPA compliance? See the <a onclick="navigate('faq')">FAQ</a> or email \${mailLink()}.</p>
+<div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div><strong>Looking for the full privacy policy?</strong> See <a href="https://app.kaynos.net/privacy" target="_blank" rel="noopener">app.kaynos.net/privacy</a> for the Kaynos application privacy policy, or <a onclick="navigate('privacy-on-this-site')">Privacy on this site</a> for help center privacy details including COPPA and FERPA information.</div></div>
 
 <h2>Schedule and events</h2>
 <p>Check the schedule in the app for upcoming classes, private sessions, and belt tests. Enable email notifications in your profile to get reminders.</p>
@@ -3255,7 +3317,70 @@
 <li>Delete your account (Profile → Delete Account)</li>
 <li>Opt out of optional features (voice dictation, email notifications)</li>
 </ul>
-<p>Exercising your privacy rights will not result in service degradation, higher prices, or reduced functionality.</p>`}
+<p>Exercising your privacy rights will not result in service degradation, higher prices, or reduced functionality.</p>
+
+<h2>US state privacy laws</h2>
+<p>Kaynos complies with applicable state consumer privacy laws including Virginia (VCDPA), Colorado (CPA), Connecticut (CTDPA), Utah (UCPA), Texas (TDPSA), Montana, Iowa, Tennessee, Indiana, Oregon, Delaware, and others. Common rights across all states:</p>
+<ul>
+<li>Access, correct, and delete your personal data</li>
+<li>Opt out of targeted advertising and data sale (Kaynos does neither)</li>
+<li>Data portability (Admin → Export)</li>
+<li>Non-discrimination for exercising rights</li>
+</ul>
+<p>State-specific requests: email ${mailLink('privacy@kaynos.net')} referencing your state.</p>
+
+<h2>Student privacy laws (SOPIPA, NY Education Law 2-d)</h2>
+<p>For K-12 schools and educational institutions:</p>
+<ul>
+<li>Kaynos does not sell student personal information (SOPIPA compliance).</li>
+<li>Kaynos does not share student data with third parties for marketing.</li>
+<li>Student and parent access/deletion rights are supported.</li>
+<li>Data security practices align with NY Education Law 2-d requirements.</li>
+</ul>
+
+<h2>California Age-Appropriate Design Code (CAADCA)</h2>
+<p>Kaynos enforces privacy-protective defaults for users under 18:</p>
+<ul>
+<li>No invasive analytics or behavioral profiling</li>
+<li>No targeted advertising</li>
+<li>Opt-in only for audio processing (voice dictation)</li>
+<li>No dark patterns in consent flows</li>
+<li>Parental consent required for users under 13 (COPPA)</li>
+</ul>
+
+<h2>Record-keeping</h2>
+<p>Kaynos maintains records of all consumer privacy requests (access, deletion, correction) for 24 months per CCPA/CPRA requirements.</p>
+
+<h2>Deepgram voice processing</h2>
+<p>Voice dictation uses <a href="https://deepgram.com/privacy" target="_blank" rel="noopener">Deepgram</a> for real-time speech-to-text. Audio is processed in real time and not stored by Deepgram. Kaynos has a Data Processing Agreement with Deepgram. Opting out of voice dictation does not affect any other feature.</p>
+
+<h2>Data collection justification</h2>
+<table class="comparison-table">
+<thead><tr><th>Data</th><th>Purpose</th><th>Retention</th></tr></thead>
+<tbody>
+<tr><td>Name, email</td><td>Account identity, notifications</td><td>Until account deletion</td></tr>
+<tr><td>Password (hashed)</td><td>Authentication</td><td>Until account deletion</td></tr>
+<tr><td>Video recordings</td><td>Core coaching service</td><td>6 months default (configurable)</td></tr>
+<tr><td>Coaching notes</td><td>Timestamped feedback</td><td>With associated session/class</td></tr>
+<tr><td>Progress data</td><td>Resume playback, completion tracking</td><td>With associated session/class</td></tr>
+<tr><td>Belt rank</td><td>Progression tracking</td><td>Until account deletion</td></tr>
+<tr><td>IP address, browser</td><td>Security, rate limiting</td><td>90 days</td></tr>
+<tr><td>Payment metadata</td><td>Billing (via Stripe — no card numbers)</td><td>Per Stripe retention policy</td></tr>
+</tbody>
+</table>
+
+<h2>Security standards (NY SHIELD, MA 201 CMR 17.00)</h2>
+<ul>
+<li>Written information security program maintained</li>
+<li>Encryption: AES-256 at rest, TLS 1.2+ in transit</li>
+<li>Multi-factor authentication (TOTP) available</li>
+<li>Role-based access controls enforced at API and database level</li>
+<li>48-hour incident response protocol</li>
+<li>Vendor security assessments conducted</li>
+</ul>
+
+<h2>Accessibility conformance (ADA / Section 508)</h2>
+<p>Kaynos is built to WCAG 2.1 AA standards. Features include keyboard navigation, screen reader support, skip links, focus management, and prefers-reduced-motion support. For a detailed accessibility report (VPAT), contact ${mailLink()}.</p>`}
   };
 
   const NAV = [
@@ -3335,6 +3460,7 @@
     const pct = total > 0 ? Math.round((read / total) * 100) : 0;
     if (read > 0) html += `<div class="sidebar-progress"><span>${read}/${total} read</span><div class="sidebar-progress-bar"><div class="sidebar-progress-fill" style="width:${pct}%"></div></div></div>`;
 
+    // Safe: html built from hardcoded NAV/PAGES constants and IC icons only
     sb.innerHTML = html;
 
     // Role-aware section highlighting
@@ -3432,6 +3558,7 @@
     pc.style.animation = 'none';
     void pc.offsetHeight;
     pc.style.animation = '';
+    // Safe: page.content comes from hardcoded PAGES constant (static HTML strings)
     pc.innerHTML = page.content;
 
     // Wrap tables
@@ -3491,6 +3618,7 @@
       const sectionFirst = sectionGroup ? sectionGroup.pages[0] : 'welcome';
       const bc = document.createElement('div');
       bc.className = 'breadcrumb';
+      // Safe: sectionFirst, page.section, page.title all from hardcoded PAGES/NAV constants
       bc.innerHTML = `<a href="#welcome" onclick="navigate('welcome');return false">Help Center</a><span class="breadcrumb-sep">›</span><a href="#${sectionFirst}" onclick="navigate('${sectionFirst}');return false">${page.section}</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">${page.title}</span>`;
       pc.prepend(bc);
     }
@@ -3577,6 +3705,18 @@
       schemaEl.remove();
     }
 
+    // BreadcrumbList schema
+    let bcSchema = document.getElementById('breadcrumb-schema');
+    if (pageId !== 'welcome' && page.section) {
+      const items = [
+        { '@type': 'ListItem', position: 1, name: 'Help Center', item: 'https://docs.kaynos.net/' },
+        { '@type': 'ListItem', position: 2, name: page.section, item: 'https://docs.kaynos.net/' },
+        { '@type': 'ListItem', position: 3, name: page.title, item: 'https://docs.kaynos.net/#' + pageId }
+      ];
+      if (!bcSchema) { bcSchema = document.createElement('script'); bcSchema.type = 'application/ld+json'; bcSchema.id = 'breadcrumb-schema'; document.head.appendChild(bcSchema); }
+      bcSchema.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items });
+    } else if (bcSchema) { bcSchema.remove(); }
+
     // Dynamic canonical URL
     let canonEl = document.querySelector('link[rel="canonical"]');
     if (!canonEl) {
@@ -3637,6 +3777,7 @@
       const label = h.childNodes[0]?.textContent || h.textContent;
       html += `<a class="${cls}" href="#${id}" onclick="tocJump(event,'${id}')">${label.trim()}</a>`;
     });
+    // Safe: labels extracted from page headings (hardcoded PAGES content), IDs are sequential
     toc.innerHTML = html;
 
     if (window._tocObs) window._tocObs.disconnect();
@@ -3690,6 +3831,14 @@
     return words.every(w => lower.includes(w));
   }
 
+  // Pre-built search index — strip HTML once at load, not per keystroke
+  const SEARCH_INDEX = {};
+  for (const [id, page] of Object.entries(PAGES)) {
+    if (id === 'welcome') continue;
+    const text = page.content.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
+    SEARCH_INDEX[id] = { title: page.title, titleLower: page.title.toLowerCase(), text, section: page.section || '' };
+  }
+
   function handleSearch(q) {
     const sr = document.getElementById('searchResults');
     srIdx = -1;
@@ -3699,9 +3848,11 @@
     const bookmarks = getBookmarks();
     const results = [];
     for (const [id, page] of Object.entries(PAGES)) {
-      const text = page.content.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
-      const textLower = text.toLowerCase();
-      const titleMatch = page.title.toLowerCase().includes(lower);
+      const idx = SEARCH_INDEX[id];
+      if (!idx) continue;
+      const text = idx.text;
+      const textLower = text;
+      const titleMatch = idx.titleLower.includes(lower);
       const exactIdx = textLower.indexOf(lower);
       const fuzzy = !titleMatch && exactIdx === -1 && fuzzyMatch(page.title + ' ' + text, q);
       if (titleMatch || exactIdx !== -1 || fuzzy) {
@@ -3717,6 +3868,7 @@
       }
     }
     results.sort((a, b) => b.score - a.score);
+    // Safe: titles/sections escaped via escapeHtml(); snippet uses escapeHtml + <mark> wrapping of query match
     sr.innerHTML = results.length === 0
       ? '<div class="search-empty">No results found</div>'
       : results.slice(0, LIMITS.SEARCH_RESULTS).map((r, i) =>
@@ -4350,6 +4502,7 @@
     const ql = container.querySelector('.quick-links');
     if (!ql) return;
 
+    // Safe: ROLE_LINKS values are all hardcoded constants (hrefs, icons, titles, descs)
     ql.innerHTML = links.map(l =>
       `<a class="quick-link${l.featured ? ' featured' : ''}" href="#${l.href}" onclick="navigate('${l.href}');return false">
         <div class="ql-icon">${l.icon}</div>
@@ -4386,6 +4539,7 @@
     if (steps) {
       const startCard = document.createElement('div');
       startCard.className = 'start-here';
+      // Safe: START_STEPS values are hardcoded constants (nums, text, links)
       startCard.innerHTML = '<div class="start-here-title">Start here</div><div class="start-steps">' +
         steps.map(s => {
           if (s.external) {
@@ -4402,7 +4556,7 @@
       const ROLE_SUBTITLES = {
         admin: 'Set up your academy, invite your team, and manage everything from one place.',
         coach: 'Upload sessions, give timestamped feedback, and track student progress.',
-        client: 'Watch your sessions, read coach notes, and track your progress.',
+        client: 'Three steps: log in, watch your session, leave a note for your coach. That\'s it.',
         developer: 'Integrate with the Kaynos API — auth, endpoints, and schemas.',
       };
       if (ROLE_SUBTITLES[role]) heroP.textContent = ROLE_SUBTITLES[role];
@@ -4645,6 +4799,7 @@
     if (!PAGES[lastPage] || lastPage === 'welcome') return;
     const div = document.createElement('div');
     div.className = 'welcome-back';
+    // Safe: lastPage is a key from PAGES constant; title from PAGES[lastPage].title (hardcoded)
     div.innerHTML = `<span>Welcome back! Continue reading <a onclick="navigate('${lastPage}')">${PAGES[lastPage].title}</a></span><button class="welcome-back-close" onclick="this.parentElement.remove()" aria-label="Dismiss">${IC.x}</button>`;
     const hero = container.querySelector('.hero');
     if (hero) hero.insertAdjacentElement('afterend', div);
@@ -4862,6 +5017,7 @@
       return;
     }
     const shown = lower ? results.slice(0, 10) : results.slice(0, LIMITS.SEARCH_RESULTS);
+    // Safe: titles/types from hardcoded PAGES constant; icons from IC constant
     container.innerHTML = shown.map((r, i) =>
       `<div class="palette-item${i === paletteIdx ? ' focused' : ''}" onclick="paletteSelect(${i})" data-idx="${i}">${r.icon}<span class="palette-item-title">${r.title}</span><span class="palette-item-type">${r.type}</span></div>`
     ).join('');
@@ -5029,6 +5185,12 @@
     e.preventDefault();
     const form = e.target;
     const btn = form.querySelector('.form-submit');
+    const lastSubmit = parseInt(localStorage.getItem('fr-last-submit') || '0');
+    if (Date.now() - lastSubmit < 300000) {
+      showToast('Please wait before submitting again.');
+      if (btn) { btn.disabled = false; btn.textContent = 'Submit request'; }
+      return;
+    }
     if (btn) { btn.disabled = true; btn.textContent = 'Submitting...'; }
     const data = new FormData(form);
     const controller = new AbortController();
@@ -5041,6 +5203,7 @@
     }).then(res => {
       clearTimeout(timeout);
       if (res.ok) {
+        localStorage.setItem('fr-last-submit', String(Date.now()));
         form.style.display = 'none';
         document.getElementById('featureSuccess').style.display = '';
         document.getElementById('featureSuccess').setAttribute('role', 'alert');
@@ -5424,6 +5587,49 @@
   document.getElementById('langToggle').classList.toggle('es', currentLang === 'es');
 
   // First-time onboarding — auto-tour removed (KAY-202); welcome page "Take the tour" link suffices
+
+  // Expose needed functions to global scope for onclick handlers
+  window.navigate = navigate;
+  window.toggleTheme = toggleTheme;
+  window.toggleSidebar = toggleSidebar;
+  window.toggleChat = toggleChat;
+  window.sendChat = sendChat;
+  window.startTour = startTour;
+  window.selectRole = selectRole;
+  window.adjustTextSize = adjustTextSize;
+  window.submitContact = submitContact;
+  window.toggleCheckItem = toggleCheckItem;
+  window.togglePollVote = typeof togglePollVote !== 'undefined' ? togglePollVote : function(){};
+  window.submitPollIdea = typeof submitPollIdea !== 'undefined' ? submitPollIdea : function(){};
+  window.setPollSort = typeof setPollSort !== 'undefined' ? setPollSort : function(){};
+  window.setReleaseFilter = setReleaseFilter;
+  window.calcUpload = calcUpload;
+  window.lookupError = lookupError;
+  window.renderWizard = renderWizard;
+  window.wizardFixed = wizardFixed;
+  window.wizardNotFixed = wizardNotFixed;
+  window.toggleBookmark = toggleBookmark;
+  window.mailLink = mailLink;
+  window.mailHref = mailHref;
+  window.showToast = showToast;
+  window.openKbd = openKbd;
+  window.closeKbd = closeKbd;
+  window.openPalette = openPalette;
+  window.closePalette = closePalette;
+  window.dismissNudge = dismissNudge;
+  window.sendFeedback = sendFeedback;
+  window.renderFeedback = renderFeedback;
+  window.escapeHtml = escapeHtml;
+  window.toggleLang = toggleLang;
+  window.addSearchHistory = addSearchHistory;
+  window.tocJump = tocJump;
+  window.paletteSelect = paletteSelect;
+  window.copyWizardLink = copyWizardLink;
+  window.nextTour = nextTour;
+  window.prevTour = prevTour;
+  window.skipTour = skipTour;
+  window.toggleSection = toggleSection;
+  })();
   </script>
 </body>
 </html>
