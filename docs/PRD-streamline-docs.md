@@ -2,7 +2,12 @@
 
 **Author:** jlambert229
 **Date:** 2026-04-10
-**Status:** Draft
+**Status:** Completed (April 2026)
+
+---
+
+## Results
+Consolidation shipped: 40 pages reduced to 26 with redirects for all removed URLs. Persona-driven improvements added: role-personalized welcome, TL;DR boxes, sidebar dimming, "Start here" cards, "Open in app" links, feature request form, and parent guide.
 
 ---
 

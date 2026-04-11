@@ -38,7 +38,7 @@ See `docs/runbook.md` for incident response.
 
 ## Architecture
 
-Currently a single `index.html` (~4600 lines) with inline CSS, JS, and all help content. A planned split to a static site generator is tracked separately.
+Currently a single `index.html` (~5200 lines) with inline CSS, JS, and all help content including a parent-guide page and a Netlify function for feature-request submissions. A planned split to a static site generator is tracked separately.
 
 ### Adding a help article
 
