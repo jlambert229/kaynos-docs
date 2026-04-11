@@ -19,6 +19,35 @@ const PRIORITY_MAP = {
 };
 
 /**
+ * Fetch with retry logic for transient failures.
+ * Retries once on 5xx responses or network errors (not on AbortError).
+ */
+async function fetchWithRetry(url, options, retries = 1) {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+    try {
+      const res = await fetch(url, { ...options, signal: controller.signal });
+      clearTimeout(timeout);
+      if (res.status >= 500 && attempt < retries) {
+        console.log(`Attempt ${attempt + 1} failed with ${res.status}, retrying...`);
+        await new Promise(r => setTimeout(r, 2000));
+        continue;
+      }
+      return res;
+    } catch (err) {
+      clearTimeout(timeout);
+      if (attempt < retries && err.name !== 'AbortError') {
+        console.log(`Attempt ${attempt + 1} failed: ${err.message}, retrying...`);
+        await new Promise(r => setTimeout(r, 2000));
+        continue;
+      }
+      throw err;
+    }
+  }
+}
+
+/**
  * Strip angle brackets and collapse excessive newlines from user input
  * to prevent markdown injection.
  */
@@ -92,39 +121,34 @@ exports.handler = async function (event) {
     },
   };
 
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 10000);
+  console.log(JSON.stringify({ event: 'submission', form: form_name, title: title.slice(0, 50), timestamp: new Date().toISOString() }));
 
   try {
-    const res = await fetch(LINEAR_API, {
+    const res = await fetchWithRetry(LINEAR_API, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: apiKey,
       },
       body: JSON.stringify({ query: mutation, variables }),
-      signal: controller.signal,
     });
 
     const json = await res.json();
 
     if (json.data?.issueCreate?.success) {
       const issue = json.data.issueCreate.issue;
-      console.log(`Created Linear issue: ${issue.identifier} — ${issue.url}`);
+      console.log(JSON.stringify({ event: 'issue_created', identifier: issue.identifier, url: issue.url, timestamp: new Date().toISOString() }));
       return { statusCode: 200, body: `Created ${issue.identifier}` };
     } else {
-      console.error("Linear API error:", JSON.stringify(json.errors || json));
+      console.error(JSON.stringify({ event: 'linear_error', errors: json.errors || json, timestamp: new Date().toISOString() }));
       return { statusCode: 500, body: "Failed to create Linear issue." };
     }
   } catch (err) {
-    clearTimeout(timeout);
     if (err.name === 'AbortError') {
-      console.error('Linear API request timed out');
+      console.error(JSON.stringify({ event: 'linear_timeout', timestamp: new Date().toISOString() }));
       return { statusCode: 504, body: 'Linear API timeout.' };
     }
-    console.error("Linear API request failed:", err);
+    console.error(JSON.stringify({ event: 'linear_request_failed', error: err.message, timestamp: new Date().toISOString() }));
     return { statusCode: 500, body: "Linear API request failed." };
-  } finally {
-    clearTimeout(timeout);
   }
 };

@@ -9,17 +9,31 @@
     <atom:link href="https://docs.kaynos.net/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>April 2026 — Help center refresh</title>
-      <link>https://docs.kaynos.net/#release-notes</link>
+      <link>https://docs.kaynos.net/#release-notes-2026-04</link>
       <description>Improved search, keyboard shortcuts, print styles, accessibility improvements, Developer API docs, and interactive troubleshooting tools.</description>
       <pubDate>Tue, 07 Apr 2026 00:00:00 GMT</pubDate>
       <guid>https://docs.kaynos.net/#release-notes-2026-04</guid>
     </item>
     <item>
       <title>March 2026 — Video playback and upload improvements</title>
-      <link>https://docs.kaynos.net/#release-notes</link>
+      <link>https://docs.kaynos.net/#release-notes-2026-03</link>
       <description>Keyboard shortcuts during playback, timeline note markers, playback speed controls, chunked parallel upload with retry, real-time upload speed display.</description>
       <pubDate>Sun, 01 Mar 2026 00:00:00 GMT</pubDate>
       <guid>https://docs.kaynos.net/#release-notes-2026-03</guid>
+    </item>
+    <item>
+      <title>February 2026 — Team management and roster updates</title>
+      <link>https://docs.kaynos.net/#release-notes-2026-02</link>
+      <description>Bulk roster import via CSV, role-based access controls for assistants, improved invitation flow with expiry reminders.</description>
+      <pubDate>Sun, 01 Feb 2026 00:00:00 GMT</pubDate>
+      <guid>https://docs.kaynos.net/#release-notes-2026-02</guid>
+    </item>
+    <item>
+      <title>January 2026 — Platform launch</title>
+      <link>https://docs.kaynos.net/#release-notes-2026-01</link>
+      <description>Initial release of Kaynos video review platform for coaches — video upload, playback, team roster, and help center.</description>
+      <pubDate>Thu, 01 Jan 2026 00:00:00 GMT</pubDate>
+      <guid>https://docs.kaynos.net/#release-notes-2026-01</guid>
     </item>
   </channel>
 </rss>
