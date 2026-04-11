@@ -514,6 +514,15 @@
     .quick-link .ql-title { font-weight: 500; color: var(--text-primary); }
     .quick-link .ql-desc { font-size: .8125rem; color: var(--text-secondary); line-height: 1.4; }
 
+    /* ── START HERE ─── */
+    .start-here { margin: 20px 0; }
+    .start-here-title { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--text-tertiary); margin-bottom: 10px; }
+    .start-steps { display: flex; gap: 12px; flex-wrap: wrap; }
+    .start-step { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: var(--accent); color: #fff; border-radius: var(--radius); text-decoration: none; font-size: .875rem; font-weight: 500; flex: 1; min-width: 200px; transition: background var(--dur) var(--ease); }
+    .start-step:hover { background: var(--accent-hover); color: #fff; }
+    .start-num { width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .75rem; flex-shrink: 0; }
+    @media (max-width: 768px) { .start-steps { flex-direction: column; } .start-step { min-width: auto; } }
+
     /* ── FEATURE OVERVIEW ─── */
     .feature-overview { margin: 16px 0 24px; }
     .feature-overview summary { cursor: pointer; font-size: .9375rem; color: var(--text-secondary); padding: 10px 0; }
@@ -2113,6 +2122,24 @@
 <p>Coaches run sessions and classes, upload video, add notes and tags, and view student progress.</p>
 <h2>Student</h2>
 <p>Students access their assigned sessions and all classes, watch video, add notes, and track viewing progress. They cannot upload video or view other students' private sessions.</p>
+<h2>Assistant coach</h2>
+<p>A scoped coach role for part-time staff or filming assistants. Assistant coaches can:</p>
+<ul>
+<li>Upload video to assigned classes</li>
+<li>View today's schedule and assigned sessions</li>
+<li>Mark attendance in classes they're assigned to</li>
+</ul>
+<p>They <strong>cannot</strong> manage members, change roles, access admin settings, or create new sessions independently. Admins assign assistant coaches to specific classes.</p>
+
+<h2>Team captain / senior student</h2>
+<p>An elevated student role for team leaders and senior members. Team captains can:</p>
+<ul>
+<li>Upload video on behalf of teammates (e.g., filming sparring rounds)</li>
+<li>Add peer notes (visually distinguished from coach notes)</li>
+<li>Share clips with people outside the account</li>
+</ul>
+<p>Team captains cannot create sessions or access admin features. They're students with upload and sharing privileges.</p>
+
 <h2>Change a role</h2>
 <p>Admins only: <strong>Admin</strong> → select the member → role dropdown → save.</p>
 <div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>Downgrading a coach to a student removes the ability to create sessions or upload video. Existing content remains available. For invite rules, see <a onclick="navigate('inviting-members')">Inviting your team</a>.</div></div>`},
@@ -2264,6 +2291,23 @@
 <li>Toggle <strong>Share</strong> to generate a shareable link anyone can view — no login required.</li>
 </ol>
 <p>Manage clips from the session or class detail page. Disable sharing at any time to revoke the link.</p>
+<h3>Creating recap clips for students</h3>
+<p>Coaches can create short recap clips (2-3 minutes) from full class recordings so students get the highlights without watching 60 minutes.</p>
+<ol>
+<li>Open the class recording and play to the key moment.</li>
+<li>Set the clip start time, then play to the end of the segment and set the end time.</li>
+<li>Click <strong>Create Clip</strong> and give it a descriptive title (e.g., "Guard retention drill — key details").</li>
+<li>Toggle <strong>Share</strong> to make it visible to all students in the class.</li>
+</ol>
+<p>Students and parents see recap clips on their dashboard alongside full recordings. Short clips have much higher watch rates — use them.</p>
+<h3>Sharing clips outside your account</h3>
+<p>Share a clip with someone who doesn't have a Kaynos account — a training partner at another gym, a parent, or a competition coach.</p>
+<ol>
+<li>Create a clip and toggle <strong>Share</strong> on.</li>
+<li>Copy the shareable link. Anyone with the link can view the clip — no login required.</li>
+<li>Toggle sharing off at any time to revoke access.</li>
+</ol>
+<p>Shared clips show the video segment only — no notes, no account details, no other sessions.</p>
 </details>`},
 
     formats: {
@@ -2396,7 +2440,26 @@
 <li>Optional: enable <strong>recurrence</strong> — choose days of the week and an end date.</li>
 <li>The system checks for conflicts with your other sessions automatically.</li>
 </ol>
-<p>Edit or delete a single occurrence, all future occurrences, or the entire series. Students and coaches see scheduled sessions on their dashboard.</p>`},
+<p>Edit or delete a single occurrence, all future occurrences, or the entire series. Students and coaches see scheduled sessions on their dashboard.</p>
+<h2>Competition prep</h2>
+<p>Organize your training footage for tournament preparation.</p>
+<ul>
+<li>Tag sparring sessions with <code>competition</code> or <code>comp-prep</code> to find them quickly.</li>
+<li>Filter sessions by date range to review the last month of training before a tournament.</li>
+<li>Use the <strong>Side-by-side</strong> view (if available) to compare technique across sessions and spot patterns.</li>
+<li>Create recap clips of key moments for quick pre-match review on your phone.</li>
+</ul>
+<h2>Session types</h2>
+<p>When creating a session, choose a type to help with organization and filtering:</p>
+<ul>
+<li><strong>Private lesson</strong> — one-on-one coaching</li>
+<li><strong>Drilling</strong> — repetitive technique practice</li>
+<li><strong>Sparring</strong> — live rounds at varying intensity</li>
+<li><strong>Comp prep</strong> — competition-focused training</li>
+<li><strong>Class</strong> — group instruction</li>
+<li><strong>Open mat</strong> — unstructured free training</li>
+</ul>
+<p>Session types help when filtering your library later — "show me all sparring sessions from the last month."</p>`},
 
     "creating-classes": {
       title: "Creating a class", section: "Sessions & Classes",
@@ -2412,7 +2475,17 @@
 </ol>
 <h2>Who sees it</h2>
 <p>All members, coaches, and admins in your account. This broad visibility is intentional and differs from a private session.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Upload options and limits: <a onclick="navigate('uploading')">Uploading videos</a> and <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Upload options and limits: <a onclick="navigate('uploading')">Uploading videos</a> and <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
+
+<h2>Attendance tracking</h2>
+<p>Mark which students attended a class so coaches and parents can track participation.</p>
+<ol>
+<li>Open a class recording.</li>
+<li>Click <strong>Mark Attendance</strong> (or use the roster view).</li>
+<li>Check off students who were present. You can batch-select multiple students.</li>
+<li>Save — attendance records appear in each student's progress timeline and are visible to parents.</li>
+</ol>
+<p>Attendance data feeds into the progress dashboard, helping coaches spot students who are falling off.</p>`},
 
     notes: {
       title: "Notes and timestamps", section: "Sessions & Classes",
@@ -2473,6 +2546,14 @@
 <li>Tags are shared across the account, not private to one person.</li>
 </ul>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Filter your lists by tag in the app after you <a href="https://app.kaynos.net" target="_blank" rel="noopener">sign in</a>.</div></div>
+<h3>BJJ technique tags</h3>
+<p>Use specific technique tags to build a searchable library. Suggested taxonomy:</p>
+<ul>
+<li><strong>Position:</strong> <code>guard</code>, <code>half-guard</code>, <code>mount</code>, <code>side-control</code>, <code>back</code>, <code>turtle</code></li>
+<li><strong>Action:</strong> <code>sweep</code>, <code>pass</code>, <code>takedown</code>, <code>escape</code>, <code>submission</code></li>
+<li><strong>Specific technique:</strong> <code>armbar</code>, <code>triangle</code>, <code>guillotine</code>, <code>kimura</code>, <code>rear-naked-choke</code></li>
+</ul>
+<p>To find all sessions tagged with a technique, use the search palette (<kbd>Cmd+K</kbd>) or filter the session list by tag.</p>
 <h2>Annotations</h2>
 <p>Draw directly on a video frame to highlight technique details.</p>
 <ol>
@@ -2482,7 +2563,21 @@
 <li>Save — the annotation is attached to that timestamp and appears during playback.</li>
 </ol>
 <h2>Reactions</h2>
-<p>React to any note with an emoji: 👍 ❤️ 🔥 👀 ✅ 👏. Click the reaction button under a note to add yours.</p>`},
+<p>React to any note with an emoji: 👍 ❤️ 🔥 👀 ✅ 👏. Click the reaction button under a note to add yours.</p>
+<h2>Note templates</h2>
+<p>Create reusable note templates for feedback you give frequently.</p>
+<ol>
+<li>Write a note as usual, then click <strong>Save as Template</strong>.</li>
+<li>Give it a name (e.g., "Control underhook before sweep").</li>
+<li>Next time, click <strong>Templates</strong> in the note editor, select a template, and customize before saving.</li>
+</ol>
+<p>Templates save time when ~30% of your reviews cover the same fundamentals.</p>
+<h2>Pending reviews</h2>
+<p>The pending queue shows uploads that don't have coach notes yet — so nothing falls through the cracks.</p>
+<ul>
+<li>Open <strong>Sessions</strong> and filter by <strong>Pending review</strong> to see uploads waiting for your feedback.</li>
+<li>The dashboard also shows a pending count if you have unreviewed sessions.</li>
+</ul>`},
 
     progress: {
       title: "Progress tracking", section: "Sessions & Classes",
@@ -2497,6 +2592,22 @@
 <p>Coach and admin views show completion and recency. We do not track fine-grained analytics or viewer heatmaps.</p>
 <h2>What we intentionally avoid</h2>
 <p>No invasive watch analytics or third-party ad-style tracking. The product stores only what it needs for resume and high-level completion tracking.</p>
+<h2>Belt rank and progression</h2>
+<p>Kaynos tracks belt rank and stripe promotions for each student.</p>
+<h3>Setting rank</h3>
+<p>Admins and coaches can set a student's current belt and stripe count from their profile or the member management page.</p>
+<h3>Logging promotions</h3>
+<p>When a student is promoted, update their belt rank. The change is logged with a date and appears in their progression timeline. Students and parents can see their promotion history.</p>
+<h3>Belt system</h3>
+<p>BJJ belts in order: <strong>White → Blue → Purple → Brown → Black</strong>. Each belt can have up to 4 stripes before the next belt. Progression typically takes 10-15 years to black belt. Promotions are at the instructor's discretion.</p>
+<h2>Watch accountability</h2>
+<p>See which students haven't reviewed their sessions yet.</p>
+<ul>
+<li>The coach dashboard shows <strong>unwatched sessions</strong> per student — a count of recordings they haven't opened.</li>
+<li>Click a student's name to see which specific sessions are unwatched.</li>
+<li>Use the <strong>Nudge</strong> button to send a reminder email prompting them to watch.</li>
+</ul>
+<p>Watch accountability helps coaches identify students who may need a push — especially before the next session.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Roster and access control: <a onclick="navigate('managing-members')">Managing members</a>.</div></div>`},
 
     "managing-members": {
@@ -2515,6 +2626,19 @@
 <p><strong>One person, two accounts?</strong> Use a different email address per account. Each account is completely separate.</p>
 <p><strong>Member limits?</strong> The product does not enforce a headcount cap.</p>
 <p><strong>Student-to-student invites?</strong> Only staff roles can invite; students cannot invite other students.</p>
+<h2>Multi-location management</h2>
+<p>If you run multiple schools or locations, Kaynos supports a single admin dashboard across all of them.</p>
+<h3>Adding locations</h3>
+<p>Contact support to add additional schools to your account. Each school has its own member roster, sessions, classes, and storage quota.</p>
+<h3>Switching between schools</h3>
+<p>Use the school selector in the top-left of the admin dashboard to switch between locations. Your admin credentials work across all schools tied to your account.</p>
+<h3>Cross-school view</h3>
+<ul>
+<li>See aggregate stats (total students, sessions, storage) across all locations.</li>
+<li>Monitor coach activity per school — who's uploading, who's adding notes.</li>
+<li>Billing is per-school — each location has its own subscription and storage limits.</li>
+</ul>
+<p>For large multi-location setups, contact ${mailLink()} to discuss enterprise pricing and dedicated support.</p>
 <h2>Branding</h2>
 <p>Admins can customize the look of their account under <strong>Admin → Branding</strong>. Set a custom logo, accent color, and welcome text that members see when they log in.</p>
 <h2>School hours</h2>
@@ -2708,7 +2832,18 @@
 <hr>
 <h2>Data</h2>
 <h3>Can I export my data?</h3>
-<p>Admins can export all school data from <strong>Admin → Export</strong>. The export includes users, sessions, classes, notes, tags, and video metadata in a structured format suitable for backup or compliance (GDPR) purposes.</p>`},
+<p>Admins can export all school data from <strong>Admin → Export</strong>. The export includes users, sessions, classes, notes, tags, and video metadata in a structured format suitable for backup or compliance (GDPR) purposes.</p>
+<hr>
+<h2>Remote coaching</h2>
+<h3>Can I coach remotely with Kaynos?</h3>
+<p>Yes. Many coaches use Kaynos for async video review with clients worldwide. Tips for scaling:</p>
+<ul>
+<li>Use <strong>note templates</strong> for recurring feedback — saves time on repetitive corrections.</li>
+<li>Check the <strong>pending reviews</strong> queue daily so no upload goes unreviewed.</li>
+<li>Organize clients by training phase using tags (e.g., <code>beginner</code>, <code>competition</code>, <code>rehab</code>).</li>
+<li>Enable <strong>email notifications</strong> so clients know when your review is ready.</li>
+<li>Use keyboard shortcuts for speed: <kbd>J</kbd>/<kbd>L</kbd> to scrub, <kbd>N</kbd> to note, <kbd>Cmd+Enter</kbd> to save.</li>
+</ul>`},
 
     "developer-api": {
       title: "Developer API", section: "Developers",
@@ -2798,6 +2933,20 @@
 <div class="glossary-term"><dt>API Token</dt><dd>A secret key minted under Admin → Developer API. Used to authenticate scripts and integrations against the <code>/api/v1</code> endpoints. Treat like a password.</dd></div>
 <div class="glossary-term"><dt>Vimeo Source</dt><dd>An alternative to uploading a file — paste a Vimeo URL or video ID to embed video already hosted on Vimeo into a session or class.</dd></div>
 <div class="glossary-term"><dt>CDN</dt><dd>Content Delivery Network — Kaynos uses Cloudflare to deliver video quickly from edge servers close to the viewer, reducing buffering.</dd></div>
+</dl>
+<h2>BJJ positions and movements</h2>
+<p>New to martial arts? Here's what your coach means:</p>
+<dl>
+<dt>Guard</dt><dd>A position where one person is on their back with legs controlling the other person. There are many types: closed guard, half guard, open guard, butterfly guard.</dd>
+<dt>Mount</dt><dd>A dominant position where one person sits on top of the other's torso. Very strong for the person on top.</dd>
+<dt>Side control</dt><dd>A dominant position where one person pins the other from the side, chest-to-chest.</dd>
+<dt>Back control</dt><dd>A dominant position behind the opponent, typically with hooks (legs wrapped around the waist).</dd>
+<dt>Sweep</dt><dd>A technique to reverse positions — going from bottom (guard) to top.</dd>
+<dt>Submission</dt><dd>A technique that forces the opponent to "tap out" — joint locks (armbar, kimura) or chokes (rear naked choke, guillotine, triangle).</dd>
+<dt>Takedown</dt><dd>A technique to bring a standing opponent to the ground.</dd>
+<dt>Drilling</dt><dd>Repetitive practice of a specific technique with a cooperative partner. Think of it like running drills in basketball.</dd>
+<dt>Sparring / rolling</dt><dd>Live practice at varying intensity. "Rolling" is the BJJ term for sparring.</dd>
+<dt>Belt progression</dt><dd>BJJ uses colored belts to mark experience: white → blue → purple → brown → black. Each belt can have up to 4 stripes. Promotions are based on time, skill, and instructor discretion — typically years between belts.</dd>
 </dl>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>For role details see <a onclick="navigate('roles')">Understanding user roles</a>. For API tokens see <a onclick="navigate('developer-api')">Developer API</a>.</div></div>`},
 
@@ -2935,6 +3084,48 @@
   <button class="form-another" onclick="document.getElementById('featureForm').reset();document.getElementById('featureForm').style.display='';document.getElementById('featureSuccess').style.display='none'">Submit another</button>
 </div>`},
 
+    "parent-guide": {
+      title: "Parent guide", section: "FAQ",
+      content: `
+<h1>Parent guide</h1>
+<div class="tldr"><strong>TL;DR:</strong> Log in at app.kaynos.net with the email your academy gave you. Watch your child's sessions, see their progress, and check the class schedule.</div>
+<p>This guide is for parents and guardians of students. You don't need to know anything about martial arts to use Kaynos.</p>
+
+<h2>Getting started</h2>
+<ol>
+<li>Your child's academy will send you a login email. Click the link or go to <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</li>
+<li>Log in with the email and temporary password from the invite.</li>
+<li>Change your password on first login.</li>
+<li>You'll see your child's dashboard — their sessions, classes, and progress.</li>
+</ol>
+
+<h2>What you'll see</h2>
+<ul>
+<li><strong>Sessions:</strong> Private recordings between your child and their coach. Only you, your child, and the coach can see these.</li>
+<li><strong>Classes:</strong> Group recordings shared with all students. Think of these as class replays.</li>
+<li><strong>Recap clips:</strong> Short 2-3 minute highlights from a class — much easier to watch than a full recording.</li>
+<li><strong>Notes:</strong> Your coach's timestamped feedback on specific moments in the video. Click a note to jump to that exact moment.</li>
+<li><strong>Progress:</strong> Which sessions your child has watched and how far they got. Belt rank and promotion history.</li>
+</ul>
+
+<h2>Understanding the sport</h2>
+<p>Not sure what "guard" or "mount" means? See our <a onclick="navigate('glossary')">glossary of BJJ terms</a> — written for non-practitioners.</p>
+
+<h2>Privacy and safety</h2>
+<ul>
+<li>Video is stored securely in the US (Backblaze B2) and delivered over encrypted connections (HTTPS).</li>
+<li>Only people in your academy's account can see recordings. Videos are not public.</li>
+<li>Playback links expire — they cannot be shared or bookmarked by outsiders.</li>
+<li>For the full privacy policy, see <a href="https://app.kaynos.net/privacy" target="_blank" rel="noopener">app.kaynos.net/privacy</a>.</li>
+</ul>
+<p>Questions about your child's data or COPPA/FERPA compliance? See the <a onclick="navigate('faq')">FAQ</a> or email \${mailLink()}.</p>
+
+<h2>Schedule and events</h2>
+<p>Check the schedule in the app for upcoming classes, private sessions, and belt tests. Enable email notifications in your profile to get reminders.</p>
+
+<h2>Billing</h2>
+<p>If your academy manages billing through Kaynos, you can view invoices and update your payment method from the billing section. Contact your academy directly for pricing questions.</p>`},
+
     "privacy-on-this-site": {
       title: "Privacy on this site", section: "Legal",
       content: `
@@ -2980,7 +3171,7 @@
     { section: "Account Management", pages: ["managing-members", "profile"] },
     { section: "Developers", pages: ["developer-api"] },
     { section: "Troubleshooting", pages: ["troubleshoot", "login-issues", "email-issues", "performance"] },
-    { section: "FAQ", pages: ["faq", "contact"] },
+    { section: "FAQ", pages: ["faq", "contact", "parent-guide"] },
     { section: "Legal", pages: ["privacy-on-this-site"] }
   ];
 
@@ -4002,6 +4193,45 @@
         <div class="ql-desc">${l.desc}</div>
       </a>`
     ).join('');
+
+    // Add "Start here" card for quick onboarding handoff
+    const START_STEPS = {
+      admin: [
+        { num: '1', text: 'Log in and set your password', link: 'https://app.kaynos.net', external: true },
+        { num: '2', text: 'Invite your coaches', link: 'inviting-members' },
+        { num: '3', text: 'Upload your first video', link: 'first-upload' },
+      ],
+      coach: [
+        { num: '1', text: 'Log in and set your password', link: 'https://app.kaynos.net', external: true },
+        { num: '2', text: 'Upload your first session', link: 'https://app.kaynos.net/sessions/new', external: true },
+        { num: '3', text: 'Add timestamped notes', link: 'notes' },
+      ],
+      client: [
+        { num: '1', text: 'Log in to the app', link: 'https://app.kaynos.net', external: true },
+        { num: '2', text: 'Watch your first session', link: 'https://app.kaynos.net/sessions', external: true },
+        { num: '3', text: 'Leave a note for your coach', link: 'notes' },
+      ],
+      developer: [
+        { num: '1', text: 'Log in as admin', link: 'https://app.kaynos.net', external: true },
+        { num: '2', text: 'Open the API docs', link: 'https://app.kaynos.net/admin/api-docs', external: true },
+        { num: '3', text: 'Create your first API token', link: 'developer-api' },
+      ],
+    };
+
+    const steps = START_STEPS[role];
+    if (steps) {
+      const startCard = document.createElement('div');
+      startCard.className = 'start-here';
+      startCard.innerHTML = '<div class="start-here-title">Start here</div><div class="start-steps">' +
+        steps.map(s => {
+          if (s.external) {
+            return `<a class="start-step" href="${s.link}" target="_blank" rel="noopener"><span class="start-num">${s.num}</span><span>${s.text}</span></a>`;
+          }
+          return `<a class="start-step" href="#${s.link}" onclick="navigate('${s.link}');return false"><span class="start-num">${s.num}</span><span>${s.text}</span></a>`;
+        }).join('') + '</div>';
+      const qlEl = container.querySelector('.quick-links');
+      if (qlEl) qlEl.insertAdjacentElement('beforebegin', startCard);
+    }
 
     const heroP = container.querySelector('.hero p');
     if (heroP) {
