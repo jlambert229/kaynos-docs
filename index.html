@@ -1792,7 +1792,7 @@
     </div>
   </div>
 
-  <script>
+  <script>(function() { 'use strict';
   /* ── EMAIL OBFUSCATION ────────────────────────────────────── */
   function mailLink(text) {
     const u = 'support', d = 'kaynos.net';
@@ -3460,6 +3460,7 @@
     const pct = total > 0 ? Math.round((read / total) * 100) : 0;
     if (read > 0) html += `<div class="sidebar-progress"><span>${read}/${total} read</span><div class="sidebar-progress-bar"><div class="sidebar-progress-fill" style="width:${pct}%"></div></div></div>`;
 
+    // Safe: html built from hardcoded NAV/PAGES constants and IC icons only
     sb.innerHTML = html;
 
     // Role-aware section highlighting
@@ -3557,6 +3558,7 @@
     pc.style.animation = 'none';
     void pc.offsetHeight;
     pc.style.animation = '';
+    // Safe: page.content comes from hardcoded PAGES constant (static HTML strings)
     pc.innerHTML = page.content;
 
     // Wrap tables
@@ -3616,6 +3618,7 @@
       const sectionFirst = sectionGroup ? sectionGroup.pages[0] : 'welcome';
       const bc = document.createElement('div');
       bc.className = 'breadcrumb';
+      // Safe: sectionFirst, page.section, page.title all from hardcoded PAGES/NAV constants
       bc.innerHTML = `<a href="#welcome" onclick="navigate('welcome');return false">Help Center</a><span class="breadcrumb-sep">›</span><a href="#${sectionFirst}" onclick="navigate('${sectionFirst}');return false">${page.section}</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-current">${page.title}</span>`;
       pc.prepend(bc);
     }
@@ -3774,6 +3777,7 @@
       const label = h.childNodes[0]?.textContent || h.textContent;
       html += `<a class="${cls}" href="#${id}" onclick="tocJump(event,'${id}')">${label.trim()}</a>`;
     });
+    // Safe: labels extracted from page headings (hardcoded PAGES content), IDs are sequential
     toc.innerHTML = html;
 
     if (window._tocObs) window._tocObs.disconnect();
@@ -3864,6 +3868,7 @@
       }
     }
     results.sort((a, b) => b.score - a.score);
+    // Safe: titles/sections escaped via escapeHtml(); snippet uses escapeHtml + <mark> wrapping of query match
     sr.innerHTML = results.length === 0
       ? '<div class="search-empty">No results found</div>'
       : results.slice(0, LIMITS.SEARCH_RESULTS).map((r, i) =>
@@ -4497,6 +4502,7 @@
     const ql = container.querySelector('.quick-links');
     if (!ql) return;
 
+    // Safe: ROLE_LINKS values are all hardcoded constants (hrefs, icons, titles, descs)
     ql.innerHTML = links.map(l =>
       `<a class="quick-link${l.featured ? ' featured' : ''}" href="#${l.href}" onclick="navigate('${l.href}');return false">
         <div class="ql-icon">${l.icon}</div>
@@ -4533,6 +4539,7 @@
     if (steps) {
       const startCard = document.createElement('div');
       startCard.className = 'start-here';
+      // Safe: START_STEPS values are hardcoded constants (nums, text, links)
       startCard.innerHTML = '<div class="start-here-title">Start here</div><div class="start-steps">' +
         steps.map(s => {
           if (s.external) {
@@ -4792,6 +4799,7 @@
     if (!PAGES[lastPage] || lastPage === 'welcome') return;
     const div = document.createElement('div');
     div.className = 'welcome-back';
+    // Safe: lastPage is a key from PAGES constant; title from PAGES[lastPage].title (hardcoded)
     div.innerHTML = `<span>Welcome back! Continue reading <a onclick="navigate('${lastPage}')">${PAGES[lastPage].title}</a></span><button class="welcome-back-close" onclick="this.parentElement.remove()" aria-label="Dismiss">${IC.x}</button>`;
     const hero = container.querySelector('.hero');
     if (hero) hero.insertAdjacentElement('afterend', div);
@@ -5009,6 +5017,7 @@
       return;
     }
     const shown = lower ? results.slice(0, 10) : results.slice(0, LIMITS.SEARCH_RESULTS);
+    // Safe: titles/types from hardcoded PAGES constant; icons from IC constant
     container.innerHTML = shown.map((r, i) =>
       `<div class="palette-item${i === paletteIdx ? ' focused' : ''}" onclick="paletteSelect(${i})" data-idx="${i}">${r.icon}<span class="palette-item-title">${r.title}</span><span class="palette-item-type">${r.type}</span></div>`
     ).join('');
@@ -5578,6 +5587,49 @@
   document.getElementById('langToggle').classList.toggle('es', currentLang === 'es');
 
   // First-time onboarding — auto-tour removed (KAY-202); welcome page "Take the tour" link suffices
+
+  // Expose needed functions to global scope for onclick handlers
+  window.navigate = navigate;
+  window.toggleTheme = toggleTheme;
+  window.toggleSidebar = toggleSidebar;
+  window.toggleChat = toggleChat;
+  window.sendChat = sendChat;
+  window.startTour = startTour;
+  window.selectRole = selectRole;
+  window.adjustTextSize = adjustTextSize;
+  window.submitContact = submitContact;
+  window.toggleCheckItem = toggleCheckItem;
+  window.togglePollVote = typeof togglePollVote !== 'undefined' ? togglePollVote : function(){};
+  window.submitPollIdea = typeof submitPollIdea !== 'undefined' ? submitPollIdea : function(){};
+  window.setPollSort = typeof setPollSort !== 'undefined' ? setPollSort : function(){};
+  window.setReleaseFilter = setReleaseFilter;
+  window.calcUpload = calcUpload;
+  window.lookupError = lookupError;
+  window.renderWizard = renderWizard;
+  window.wizardFixed = wizardFixed;
+  window.wizardNotFixed = wizardNotFixed;
+  window.toggleBookmark = toggleBookmark;
+  window.mailLink = mailLink;
+  window.mailHref = mailHref;
+  window.showToast = showToast;
+  window.openKbd = openKbd;
+  window.closeKbd = closeKbd;
+  window.openPalette = openPalette;
+  window.closePalette = closePalette;
+  window.dismissNudge = dismissNudge;
+  window.sendFeedback = sendFeedback;
+  window.renderFeedback = renderFeedback;
+  window.escapeHtml = escapeHtml;
+  window.toggleLang = toggleLang;
+  window.addSearchHistory = addSearchHistory;
+  window.tocJump = tocJump;
+  window.paletteSelect = paletteSelect;
+  window.copyWizardLink = copyWizardLink;
+  window.nextTour = nextTour;
+  window.prevTour = prevTour;
+  window.skipTour = skipTour;
+  window.toggleSection = toggleSection;
+  })();
   </script>
 </body>
 </html>
