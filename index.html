@@ -2282,6 +2282,23 @@
 <li>Toggle <strong>Share</strong> to generate a shareable link anyone can view — no login required.</li>
 </ol>
 <p>Manage clips from the session or class detail page. Disable sharing at any time to revoke the link.</p>
+<h3>Creating recap clips for students</h3>
+<p>Coaches can create short recap clips (2-3 minutes) from full class recordings so students get the highlights without watching 60 minutes.</p>
+<ol>
+<li>Open the class recording and play to the key moment.</li>
+<li>Set the clip start time, then play to the end of the segment and set the end time.</li>
+<li>Click <strong>Create Clip</strong> and give it a descriptive title (e.g., "Guard retention drill — key details").</li>
+<li>Toggle <strong>Share</strong> to make it visible to all students in the class.</li>
+</ol>
+<p>Students and parents see recap clips on their dashboard alongside full recordings. Short clips have much higher watch rates — use them.</p>
+<h3>Sharing clips outside your account</h3>
+<p>Share a clip with someone who doesn't have a Kaynos account — a training partner at another gym, a parent, or a competition coach.</p>
+<ol>
+<li>Create a clip and toggle <strong>Share</strong> on.</li>
+<li>Copy the shareable link. Anyone with the link can view the clip — no login required.</li>
+<li>Toggle sharing off at any time to revoke access.</li>
+</ol>
+<p>Shared clips show the video segment only — no notes, no account details, no other sessions.</p>
 </details>`},
 
     formats: {
@@ -2414,7 +2431,26 @@
 <li>Optional: enable <strong>recurrence</strong> — choose days of the week and an end date.</li>
 <li>The system checks for conflicts with your other sessions automatically.</li>
 </ol>
-<p>Edit or delete a single occurrence, all future occurrences, or the entire series. Students and coaches see scheduled sessions on their dashboard.</p>`},
+<p>Edit or delete a single occurrence, all future occurrences, or the entire series. Students and coaches see scheduled sessions on their dashboard.</p>
+<h2>Competition prep</h2>
+<p>Organize your training footage for tournament preparation.</p>
+<ul>
+<li>Tag sparring sessions with <code>competition</code> or <code>comp-prep</code> to find them quickly.</li>
+<li>Filter sessions by date range to review the last month of training before a tournament.</li>
+<li>Use the <strong>Side-by-side</strong> view (if available) to compare technique across sessions and spot patterns.</li>
+<li>Create recap clips of key moments for quick pre-match review on your phone.</li>
+</ul>
+<h2>Session types</h2>
+<p>When creating a session, choose a type to help with organization and filtering:</p>
+<ul>
+<li><strong>Private lesson</strong> — one-on-one coaching</li>
+<li><strong>Drilling</strong> — repetitive technique practice</li>
+<li><strong>Sparring</strong> — live rounds at varying intensity</li>
+<li><strong>Comp prep</strong> — competition-focused training</li>
+<li><strong>Class</strong> — group instruction</li>
+<li><strong>Open mat</strong> — unstructured free training</li>
+</ul>
+<p>Session types help when filtering your library later — "show me all sparring sessions from the last month."</p>`},
 
     "creating-classes": {
       title: "Creating a class", section: "Sessions & Classes",
@@ -2501,6 +2537,14 @@
 <li>Tags are shared across the account, not private to one person.</li>
 </ul>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Filter your lists by tag in the app after you <a href="https://app.kaynos.net" target="_blank" rel="noopener">sign in</a>.</div></div>
+<h3>BJJ technique tags</h3>
+<p>Use specific technique tags to build a searchable library. Suggested taxonomy:</p>
+<ul>
+<li><strong>Position:</strong> <code>guard</code>, <code>half-guard</code>, <code>mount</code>, <code>side-control</code>, <code>back</code>, <code>turtle</code></li>
+<li><strong>Action:</strong> <code>sweep</code>, <code>pass</code>, <code>takedown</code>, <code>escape</code>, <code>submission</code></li>
+<li><strong>Specific technique:</strong> <code>armbar</code>, <code>triangle</code>, <code>guillotine</code>, <code>kimura</code>, <code>rear-naked-choke</code></li>
+</ul>
+<p>To find all sessions tagged with a technique, use the search palette (<kbd>Cmd+K</kbd>) or filter the session list by tag.</p>
 <h2>Annotations</h2>
 <p>Draw directly on a video frame to highlight technique details.</p>
 <ol>
@@ -2510,7 +2554,21 @@
 <li>Save — the annotation is attached to that timestamp and appears during playback.</li>
 </ol>
 <h2>Reactions</h2>
-<p>React to any note with an emoji: 👍 ❤️ 🔥 👀 ✅ 👏. Click the reaction button under a note to add yours.</p>`},
+<p>React to any note with an emoji: 👍 ❤️ 🔥 👀 ✅ 👏. Click the reaction button under a note to add yours.</p>
+<h2>Note templates</h2>
+<p>Create reusable note templates for feedback you give frequently.</p>
+<ol>
+<li>Write a note as usual, then click <strong>Save as Template</strong>.</li>
+<li>Give it a name (e.g., "Control underhook before sweep").</li>
+<li>Next time, click <strong>Templates</strong> in the note editor, select a template, and customize before saving.</li>
+</ol>
+<p>Templates save time when ~30% of your reviews cover the same fundamentals.</p>
+<h2>Pending reviews</h2>
+<p>The pending queue shows uploads that don't have coach notes yet — so nothing falls through the cracks.</p>
+<ul>
+<li>Open <strong>Sessions</strong> and filter by <strong>Pending review</strong> to see uploads waiting for your feedback.</li>
+<li>The dashboard also shows a pending count if you have unreviewed sessions.</li>
+</ul>`},
 
     progress: {
       title: "Progress tracking", section: "Sessions & Classes",
@@ -2533,6 +2591,14 @@
 <p>When a student is promoted, update their belt rank. The change is logged with a date and appears in their progression timeline. Students and parents can see their promotion history.</p>
 <h3>Belt system</h3>
 <p>BJJ belts in order: <strong>White → Blue → Purple → Brown → Black</strong>. Each belt can have up to 4 stripes before the next belt. Progression typically takes 10-15 years to black belt. Promotions are at the instructor's discretion.</p>
+<h2>Watch accountability</h2>
+<p>See which students haven't reviewed their sessions yet.</p>
+<ul>
+<li>The coach dashboard shows <strong>unwatched sessions</strong> per student — a count of recordings they haven't opened.</li>
+<li>Click a student's name to see which specific sessions are unwatched.</li>
+<li>Use the <strong>Nudge</strong> button to send a reminder email prompting them to watch.</li>
+</ul>
+<p>Watch accountability helps coaches identify students who may need a push — especially before the next session.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Roster and access control: <a onclick="navigate('managing-members')">Managing members</a>.</div></div>`},
 
     "managing-members": {
@@ -2744,7 +2810,18 @@
 <hr>
 <h2>Data</h2>
 <h3>Can I export my data?</h3>
-<p>Admins can export all school data from <strong>Admin → Export</strong>. The export includes users, sessions, classes, notes, tags, and video metadata in a structured format suitable for backup or compliance (GDPR) purposes.</p>`},
+<p>Admins can export all school data from <strong>Admin → Export</strong>. The export includes users, sessions, classes, notes, tags, and video metadata in a structured format suitable for backup or compliance (GDPR) purposes.</p>
+<hr>
+<h2>Remote coaching</h2>
+<h3>Can I coach remotely with Kaynos?</h3>
+<p>Yes. Many coaches use Kaynos for async video review with clients worldwide. Tips for scaling:</p>
+<ul>
+<li>Use <strong>note templates</strong> for recurring feedback — saves time on repetitive corrections.</li>
+<li>Check the <strong>pending reviews</strong> queue daily so no upload goes unreviewed.</li>
+<li>Organize clients by training phase using tags (e.g., <code>beginner</code>, <code>competition</code>, <code>rehab</code>).</li>
+<li>Enable <strong>email notifications</strong> so clients know when your review is ready.</li>
+<li>Use keyboard shortcuts for speed: <kbd>J</kbd>/<kbd>L</kbd> to scrub, <kbd>N</kbd> to note, <kbd>Cmd+Enter</kbd> to save.</li>
+</ul>`},
 
     "developer-api": {
       title: "Developer API", section: "Developers",
