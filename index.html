@@ -1790,11 +1790,11 @@
   <script>
   /* ── EMAIL OBFUSCATION ────────────────────────────────────── */
   function mailLink(text) {
-    var u = 'support', d = 'kaynos.net';
+    const u = 'support', d = 'kaynos.net';
     return '<a href="mai' + 'lto:' + u + '@' + d + '">' + (text || (u + '@' + d)) + '</a>';
   }
   function mailHref(params) {
-    var u = 'support', d = 'kaynos.net';
+    const u = 'support', d = 'kaynos.net';
     return 'mai' + 'lto:' + u + '@' + d + (params || '');
   }
 
@@ -1825,6 +1825,10 @@
     link:     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 9.5a3.5 3.5 0 005 0l2-2a3.5 3.5 0 00-5-5l-1 1"/><path d="M9.5 6.5a3.5 3.5 0 00-5 0l-2 2a3.5 3.5 0 005 5l1-1"/></svg>',
     headset:  '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8a6 6 0 0112 0"/><path d="M2 8v4a1 1 0 001 1h1a1 1 0 001-1V9a1 1 0 00-1-1H2zM14 8v4a1 1 0 01-1 1h-1a1 1 0 01-1-1V9a1 1 0 011-1h2z"/></svg>',
   };
+
+  /* ── CONSTANTS ────────────────────────────────────────────── */
+  const TIMINGS = { TOAST: 2000, COPY_FEEDBACK: 1500, DEBOUNCE_SEARCH: 150, SCROLL_SAVE: 300 };
+  const LIMITS = { SEARCH_RESULTS: 8, SNIPPET_BEFORE: 45, SNIPPET_AFTER: 70, BACK_TO_TOP: 400 };
 
   /* ── PAGE DATA ─────────────────────────────────────────────── */
   const PAGES = {
@@ -1935,7 +1939,7 @@
       title: "Setting up your account", section: "Getting Started",
       content: `
 <h1>Setting up your account</h1>
-<div class="tldr"><strong>TL;DR:</strong> Log in at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> with your invite email. Change your temporary password first.</div>
+<div class="tldr"><strong>TLDR:</strong> Log in at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> with your invite email. Change your temporary password first.</div>
 <p>After signup, login details go to the email you used. Change the temporary password as soon as you're in.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Open the product at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>. Next steps: <a onclick="navigate('inviting-members')">Inviting your team</a> and <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>
 <h2>First login</h2>
@@ -2149,7 +2153,7 @@
       title: "Uploading videos", section: "Video",
       content: `
 <h1>Uploading videos</h1>
-<div class="tldr"><strong>TL;DR:</strong> Drag a video onto the upload area. MP4 recommended, under 5 GB, 1080p is plenty for coaching review.</div>
+<div class="tldr"><strong>TLDR:</strong> Drag a video onto the upload area. MP4 recommended, under 5 GB, 1080p is plenty for coaching review.</div>
 <p>Each session or class uses one source: <strong>Upload</strong> (file from your device), <strong>Vimeo</strong> (embedded link), or <strong>Notes Only</strong> (no video). Upload from <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> when creating or editing.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Format and size limits: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 <h2>Large files</h2>
@@ -2209,7 +2213,7 @@
       title: "Watching and reviewing", section: "Video",
       content: `
 <h1>Watching and reviewing</h1>
-<div class="tldr"><strong>TL;DR:</strong> Open a session or class, press play. Use <kbd>J</kbd>/<kbd>L</kbd> to skip, <kbd>N</kbd> to add a note, <kbd>Space</kbd> to pause.</div>
+<div class="tldr"><strong>TLDR:</strong> Open a session or class, press play. Use <kbd>J</kbd>/<kbd>L</kbd> to skip, <kbd>N</kbd> to add a note, <kbd>Space</kbd> to pause.</div>
 <p>Playback runs entirely in the browser — no separate app install needed. Open recordings at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Problems playing video? See the troubleshooting section below.</div></div>
 <h2>Playback speed</h2>
@@ -2366,7 +2370,7 @@
     "creating-sessions": {
       title: "Creating a session", section: "Sessions & Classes",
       content: `
-<div class="tldr"><strong>TL;DR:</strong> Sessions are private (one student). Classes are shared (everyone). Create either from the dashboard after signing in.</div>
+<div class="tldr"><strong>TLDR:</strong> Sessions are private (one student). Classes are shared (everyone). Create either from the dashboard after signing in.</div>
 <h2>Session vs Class</h2>
 <p>The most common question new users have: when do I create a session, and when do I create a class?</p>
 <div class="compare-grid">
@@ -2470,7 +2474,7 @@
       title: "Notes and timestamps", section: "Sessions & Classes",
       content: `
 <h1>Notes and timestamps</h1>
-<div class="tldr"><strong>TL;DR:</strong> Pause the video, press <kbd>N</kbd>, type your note. It saves with the timestamp. Add tags to organize by technique or topic.</div>
+<div class="tldr"><strong>TLDR:</strong> Pause the video, press <kbd>N</kbd>, type your note. It saves with the timestamp. Add tags to organize by technique or topic.</div>
 <p>Attach short notes to exact moments on the timeline so everyone lands on the same frame during review.</p>
 <h2>Adding a note from the player</h2>
 <ol>
@@ -2933,7 +2937,7 @@
       title: "Troubleshooting wizard", section: "Troubleshooting",
       content: `
 <h1>Troubleshooting wizard</h1>
-<div class="tldr"><strong>TL;DR:</strong> Use the wizard below to diagnose your issue step by step. Or search for an error code.</div>
+<div class="tldr"><strong>TLDR:</strong> Use the wizard below to diagnose your issue step by step. Or search for an error code.</div>
 <p>Answer a few questions and we'll point you to the right fix.</p>
 <div id="wizardContainer"></div>
 <details><summary>Error code lookup</summary>
@@ -3025,7 +3029,7 @@
       title: "Feature requests", section: "",
       content: `
 <h1>Feature requests</h1>
-<div class="tldr"><strong>TL;DR:</strong> Tell us what you want Kaynos to do. Every submission is reviewed by the team.</div>
+<div class="tldr"><strong>TLDR:</strong> Tell us what you want Kaynos to do. Every submission is reviewed by the team.</div>
 <p>Your feedback directly shapes what we build. Describe the feature you'd like and we'll track it internally.</p>
 <form id="featureForm" class="feature-form" method="POST" data-netlify="true" name="feature-request" netlify-honeypot="bot-field">
   <input type="hidden" name="form-name" value="feature-request">
@@ -3067,7 +3071,7 @@
       title: "Parent guide", section: "FAQ",
       content: `
 <h1>Parent guide</h1>
-<div class="tldr"><strong>TL;DR:</strong> Log in at app.kaynos.net with the email your academy gave you. Watch your child's sessions, see their progress, and check the class schedule.</div>
+<div class="tldr"><strong>TLDR:</strong> Log in at app.kaynos.net with the email your academy gave you. Watch your child's sessions, see their progress, and check the class schedule.</div>
 <p>This guide is for parents and guardians of students. You don't need to know anything about martial arts to use Kaynos.</p>
 
 <h2>Getting started</h2>
@@ -3173,7 +3177,7 @@
 
   function buildSidebar() {
     const sb = document.getElementById('sidebar');
-    const collapsed = JSON.parse(localStorage.getItem('sb-collapsed') || '{}');
+    const collapsed = safeGet('sb-collapsed', {});
     const readPages = getReadPages();
     const bookmarks = getBookmarks();
     const recent = getRecent();
@@ -3257,11 +3261,11 @@
   function toggleSection(el) {
     const section = el.closest('.sidebar-section');
     section.classList.toggle('collapsed');
-    const collapsed = JSON.parse(localStorage.getItem('sb-collapsed') || '{}');
+    const collapsed = safeGet('sb-collapsed', {});
     const name = section.dataset.section;
     if (section.classList.contains('collapsed')) collapsed[name] = true;
     else delete collapsed[name];
-    localStorage.setItem('sb-collapsed', JSON.stringify(collapsed));
+    safeSet('sb-collapsed', collapsed);
   }
 
   /* ── REDIRECTS ──────────────────────────────────────── */
@@ -3333,8 +3337,8 @@
         navigator.clipboard.writeText(pre.textContent.replace('Copy', '').trim()).then(() => {
           btn.textContent = 'Copied!';
           btn.classList.add('copied');
-          setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1500);
-        });
+          setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, TIMINGS.COPY_FEEDBACK);
+        }).catch(() => showToast('Copy failed — try selecting manually'));
       };
       pre.style.position = 'relative';
       pre.appendChild(btn);
@@ -3374,7 +3378,7 @@
       a.onclick = (e) => {
         e.preventDefault();
         const url = location.origin + location.pathname + '#' + pageId + ':' + h.id;
-        navigator.clipboard.writeText(url).then(() => showToast('Link copied'));
+        navigator.clipboard.writeText(url).then(() => showToast('Link copied')).catch(() => showToast('Copy failed — try selecting manually'));
       };
       h.appendChild(a);
     });
@@ -3476,7 +3480,7 @@
       btn.textContent = 'Copied!';
       btn.classList.add('copied');
       showToast('Copied to clipboard');
-      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, TIMINGS.TOAST);
     }).catch(() => {
       showToast('Copy failed — try selecting manually');
     });
@@ -3487,7 +3491,7 @@
     t.textContent = msg;
     t.classList.add('show');
     clearTimeout(window._toast);
-    window._toast = setTimeout(() => t.classList.remove('show'), 2000);
+    window._toast = setTimeout(() => t.classList.remove('show'), TIMINGS.TOAST);
   }
 
   /* ── SEARCH ─────────────────────────────────────────── */
@@ -3495,7 +3499,7 @@
     let t;
     return function(...args) { clearTimeout(t); t = setTimeout(() => fn.apply(this, args), ms); };
   }
-  const debouncedSearch = debounce(handleSearch, 150);
+  const debouncedSearch = debounce(handleSearch, TIMINGS.DEBOUNCE_SEARCH);
   let srIdx = -1;
 
   function fuzzyMatch(text, query) {
@@ -3523,7 +3527,7 @@
         let snippet = '';
         const idx = exactIdx !== -1 ? exactIdx : textLower.indexOf(lower.split(/\s+/)[0]);
         if (idx !== -1) {
-          const s = Math.max(0, idx - 45), e = Math.min(textLower.length, idx + q.length + 70);
+          const s = Math.max(0, idx - LIMITS.SNIPPET_BEFORE), e = Math.min(textLower.length, idx + q.length + LIMITS.SNIPPET_AFTER);
           const raw = (s > 0 ? '…' : '') + text.slice(s, e) + (e < textLower.length ? '…' : '');
           snippet = escapeHtml(raw).replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').split(/\s+/).join('|'), 'gi'), m => `<mark>${escapeHtml(m)}</mark>`);
         }
@@ -3534,7 +3538,7 @@
     results.sort((a, b) => b.score - a.score);
     sr.innerHTML = results.length === 0
       ? '<div class="search-empty">No results found</div>'
-      : results.slice(0, 8).map((r, i) =>
+      : results.slice(0, LIMITS.SEARCH_RESULTS).map((r, i) =>
           `<div class="search-result" role="option" id="sr-${i}" data-page="${r.id}" onclick="addSearchHistory(document.getElementById('searchInput').value.trim());navigate('${r.id}')">
             <div class="sr-title">${escapeHtml(r.title)}${r.isBookmarked ? '<span class="sr-badge sr-bookmarked" title="Bookmarked">' + IC.bookmarkFill + '</span>' : ''}${r.isRead ? '<span class="sr-badge sr-read" title="Read">' + IC.check + '</span>' : ''}</div>
             ${r.section ? `<div class="sr-section">${escapeHtml(r.section)}</div>` : ''}
@@ -3631,14 +3635,14 @@
         const pct = d.scrollHeight > d.clientHeight
           ? (d.scrollTop / (d.scrollHeight - d.clientHeight)) * 100 : 0;
         document.getElementById('progress-bar').style.width = pct + '%';
-        document.getElementById('back-top').classList.toggle('visible', d.scrollTop > 400);
+        document.getElementById('back-top').classList.toggle('visible', d.scrollTop > LIMITS.BACK_TO_TOP);
         _scrollTick = false;
       });
       _scrollTick = true;
     }
     // Debounced scroll position save
     clearTimeout(window._scrollSave);
-    window._scrollSave = setTimeout(saveScrollPos, 300);
+    window._scrollSave = setTimeout(saveScrollPos, TIMINGS.SCROLL_SAVE);
   }, { passive: true });
 
   /* ── POPSTATE ───────────────────────────────────────── */
@@ -4105,7 +4109,7 @@
     ]
   };
 
-  function getChecklist() { return JSON.parse(localStorage.getItem('checklist-done') || '[]'); }
+  function getChecklist() { return safeGet('checklist-done', []); }
 
   function toggleCheckItem(id) {
     let done = getChecklist();
@@ -4466,18 +4470,17 @@
   }
 
   /* ── SEARCH HISTORY ────────────────────────────────── */
-  function getSearchHistory() { return JSON.parse(localStorage.getItem('search-history') || '[]'); }
+  function getSearchHistory() { return safeGet('search-history', []); }
   function addSearchHistory(q) {
     if (!q || q.length < 3) return;
     let h = getSearchHistory().filter(x => x !== q);
     h.unshift(q);
-    if (h.length > 8) h = h.slice(0, 8);
+    if (h.length > LIMITS.SEARCH_RESULTS) h = h.slice(0, LIMITS.SEARCH_RESULTS);
     localStorage.setItem('search-history', JSON.stringify(h));
   }
   function escapeHtml(str) {
-    const d = document.createElement('div');
-    d.textContent = str;
-    return d.innerHTML;
+    const map = {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'};
+    return String(str).replace(/[&<>"']/g, m => map[m]);
   }
 
   function showSearchHistory() {
@@ -4541,7 +4544,7 @@
       else md += text + '\n\n';
     });
     md += '\n---\nFrom Kaynos Help Center: ' + location.origin + location.pathname + '#' + pageId;
-    navigator.clipboard.writeText(md.trim()).then(() => showToast('Article copied as markdown'));
+    navigator.clipboard.writeText(md.trim()).then(() => showToast('Article copied as markdown')).catch(() => showToast('Copy failed — try selecting manually'));
   }
 
   function renderCopyArticleBtn(container, pageId) {
@@ -4571,7 +4574,7 @@
   }
 
   /* ── TEXT HIGHLIGHT ────────────────────────────────── */
-  function getHighlights() { return JSON.parse(localStorage.getItem('highlights') || '{}'); }
+  function getHighlights() { return safeGet('highlights', {}); }
 
   document.addEventListener('mouseup', () => {
     const sel = window.getSelection();
@@ -4677,7 +4680,7 @@
       container.innerHTML = '<div style="padding:16px;text-align:center;color:var(--text-tertiary);font-size:.875rem">No results</div>';
       return;
     }
-    const shown = lower ? results.slice(0, 10) : results.slice(0, 8);
+    const shown = lower ? results.slice(0, 10) : results.slice(0, LIMITS.SEARCH_RESULTS);
     container.innerHTML = shown.map((r, i) =>
       `<div class="palette-item${i === paletteIdx ? ' focused' : ''}" onclick="paletteSelect(${i})" data-idx="${i}">${r.icon}<span class="palette-item-title">${r.title}</span><span class="palette-item-type">${r.type}</span></div>`
     ).join('');
@@ -4700,14 +4703,14 @@
   function saveScrollPos() {
     const cur = (location.hash.slice(1).split(':')[0]) || 'welcome';
     if (cur !== 'welcome') {
-      const positions = JSON.parse(localStorage.getItem('scroll-pos') || '{}');
+      const positions = safeGet('scroll-pos', {});
       positions[cur] = window.scrollY;
-      localStorage.setItem('scroll-pos', JSON.stringify(positions));
+      safeSet('scroll-pos', positions);
     }
   }
   function restoreScrollPos(pageId) {
     if (pageId === 'welcome') return;
-    const positions = JSON.parse(localStorage.getItem('scroll-pos') || '{}');
+    const positions = safeGet('scroll-pos', {});
     if (positions[pageId]) {
       requestAnimationFrame(() => window.scrollTo({ top: positions[pageId], behavior: 'instant' }));
     }
@@ -4847,11 +4850,15 @@
     const btn = form.querySelector('.form-submit');
     if (btn) { btn.disabled = true; btn.textContent = 'Submitting...'; }
     const data = new FormData(form);
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams(data).toString(),
+      signal: controller.signal,
     }).then(res => {
+      clearTimeout(timeout);
       if (res.ok) {
         form.style.display = 'none';
         document.getElementById('featureSuccess').style.display = '';
@@ -4860,8 +4867,13 @@
         showToast('Something went wrong — please try again or email support.');
         if (btn) { btn.disabled = false; btn.textContent = 'Submit request'; }
       }
-    }).catch(() => {
-      showToast('Network error — check your connection and try again.');
+    }).catch(err => {
+      clearTimeout(timeout);
+      if (err.name === 'AbortError') {
+        showToast('Request timed out — check your connection and try again.');
+      } else {
+        showToast('Network error — check your connection and try again.');
+      }
       if (btn) { btn.disabled = false; btn.textContent = 'Submit request'; }
     });
   });
@@ -4955,7 +4967,7 @@
     return location.origin + location.pathname + '#troubleshoot:wizard-' + stepId;
   }
   function copyWizardLink(stepId) {
-    navigator.clipboard.writeText(getWizardShareLink(stepId)).then(() => showToast('Link copied'));
+    navigator.clipboard.writeText(getWizardShareLink(stepId)).then(() => showToast('Link copied')).catch(() => showToast('Copy failed — try selecting manually'));
   }
 
   /* ── PRINT / EXPORT ────────────────────────────────── */
@@ -5161,7 +5173,7 @@
       if (navigator.share) {
         navigator.share({ title: PAGES[pageId].title + ' — Kaynos Docs', url });
       } else {
-        navigator.clipboard.writeText(url).then(() => showToast('Link copied'));
+        navigator.clipboard.writeText(url).then(() => showToast('Link copied')).catch(() => showToast('Copy failed — try selecting manually'));
       }
     };
     bar.appendChild(btn);
@@ -5175,10 +5187,10 @@
   function autoExpandSection(pageId) {
     const page = PAGES[pageId];
     if (!page || !page.section) return;
-    const collapsed = JSON.parse(localStorage.getItem('sb-collapsed') || '{}');
+    const collapsed = safeGet('sb-collapsed', {});
     if (collapsed[page.section]) {
       delete collapsed[page.section];
-      localStorage.setItem('sb-collapsed', JSON.stringify(collapsed));
+      safeSet('sb-collapsed', collapsed);
     }
   }
 
