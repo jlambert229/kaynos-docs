@@ -2221,24 +2221,56 @@
 <li>Click <strong>Add Note</strong>, enter your text, then <strong>Save</strong>.</li>
 </ol>
 <p>The note is tied to the current playhead position.</p>
-<h2>Keyboard shortcuts</h2>
-<table><thead><tr><th>Key</th><th>Action</th></tr></thead><tbody>
-<tr><td><code>Space</code> / <code>K</code></td><td>Play / Pause</td></tr>
-<tr><td><code>J</code> / <code>L</code></td><td>Skip back / forward</td></tr>
-<tr><td><code>N</code></td><td>Pause and add note</td></tr>
-<tr><td><code>F</code></td><td>Toggle fullscreen</td></tr>
-<tr><td><code>M</code></td><td>Mute / unmute</td></tr>
-<tr><td><code>↑</code> / <code>↓</code></td><td>Volume up / down</td></tr>
-<tr><td><code>H</code></td><td>Start / end highlight</td></tr>
-<tr><td><code>A</code></td><td>Draw annotation</td></tr>
-<tr><td><code>Cmd+Enter</code> / <code>Ctrl+Enter</code></td><td>Save note</td></tr>
-<tr><td><code>Esc</code></td><td>Cancel current action</td></tr>
-</tbody></table>
-<p><strong>Mobile:</strong> Double-tap the left half of the video to skip back 10 seconds, or the right half to skip forward.</p>
+<details><summary>Keyboard shortcuts</summary>
+<div class="shortcut-grid">
+  <div class="shortcut-card"><span>Play / Pause</span><kbd>Space</kbd> or <kbd>K</kbd></div>
+  <div class="shortcut-card"><span>Skip back / forward</span><kbd>J</kbd> / <kbd>L</kbd></div>
+  <div class="shortcut-card"><span>Pause + add note</span><kbd>N</kbd></div>
+  <div class="shortcut-card"><span>Fullscreen</span><kbd>F</kbd></div>
+  <div class="shortcut-card"><span>Mute / unmute</span><kbd>M</kbd></div>
+  <div class="shortcut-card"><span>Volume up / down</span><kbd>↑</kbd> / <kbd>↓</kbd></div>
+  <div class="shortcut-card"><span>Start / end highlight</span><kbd>H</kbd></div>
+  <div class="shortcut-card"><span>Draw annotation</span><kbd>A</kbd></div>
+  <div class="shortcut-card"><span>Save note</span><kbd>⌘</kbd> <kbd>Enter</kbd></div>
+  <div class="shortcut-card"><span>Cancel</span><kbd>Esc</kbd></div>
+</div>
+</details>
+<h2>Mobile playback</h2>
+<p>Kaynos runs in the mobile browser — no app install needed.</p>
+<ul>
+<li><strong>Skip:</strong> Double-tap the left half to skip back 10 seconds, or the right half to skip forward.</li>
+<li><strong>Landscape:</strong> Rotate your phone for a wider view, especially when the notes panel is open.</li>
+<li><strong>Resume:</strong> Your playback position syncs across devices — start on your phone, continue on your laptop.</li>
+<li><strong>Add to Home Screen:</strong> iOS: Share → Add to Home Screen. Android: browser menu → Add to Home Screen.</li>
+</ul>
 <h2>Progress tracking</h2>
-<p>Playback position is saved for resume. Coaches can see completion percentage and last-viewed time without heavy analytics.</p>
+<p>Playback position is saved automatically for resume. Coaches can see completion percentage and last-viewed time without heavy analytics.</p>
+<h2>Clips</h2>
+<p>Create a clip from any session or class to highlight a specific moment.</p>
+<ol>
+<li>While watching, set the start and end time for your clip.</li>
+<li>Click <strong>Create Clip</strong>. The clip is saved to your clips list.</li>
+<li>Toggle <strong>Share</strong> to generate a shareable link anyone can view — no login required.</li>
+</ol>
+<p>Manage clips from the session or class detail page. Disable sharing at any time to revoke the link.</p>
+<h3>Recap clips</h3>
+<p>Coaches can create short recap clips (2-3 minutes) from full class recordings so students get the highlights without watching 60 minutes.</p>
+<ol>
+<li>Open the class recording and play to the key moment.</li>
+<li>Set the clip start time, then play to the end of the segment and set the end time.</li>
+<li>Click <strong>Create Clip</strong> and give it a descriptive title (e.g., "Guard retention drill — key details").</li>
+<li>Toggle <strong>Share</strong> to make it visible to all students in the class.</li>
+</ol>
+<p>Students and parents see recap clips on their dashboard alongside full recordings. Short clips have much higher watch rates.</p>
+<h3>Sharing clips externally</h3>
+<p>Share a clip with someone who doesn't have a Kaynos account — a training partner at another gym, a parent, or a competition coach.</p>
+<ol>
+<li>Create a clip and toggle <strong>Share</strong> on.</li>
+<li>Copy the shareable link. Anyone with the link can view the clip — no login required.</li>
+<li>Toggle sharing off at any time to revoke access.</li>
+</ol>
+<p>Shared clips show the video segment only — no notes, no account details, no other sessions.</p>
 <details><summary>Playback troubleshooting</summary>
-<h2>Video playback problems</h2>
 <p>If the player is blank or showing errors, work through these checks.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 <h3>Player blank or broken controls</h3>
@@ -2254,60 +2286,6 @@
 <p>Usually a codec mismatch. Try another browser; if it persists, re-export with standard H.264/AAC.</p>
 <h3>Resume position wrong</h3>
 <p>Progress saves shortly after pausing. Closing the tab immediately can occasionally skip the save.</p>
-</details>
-<details><summary>Keyboard shortcuts</summary>
-<h2>Video player shortcuts</h2>
-<p>Use these keyboard shortcuts while watching video in the Kaynos player.</p>
-<h3>Playback</h3>
-<div class="shortcut-grid">
-  <div class="shortcut-card"><span>Play / Pause</span><kbd>Space</kbd></div>
-  <div class="shortcut-card"><span>Play / Pause</span><kbd>K</kbd></div>
-  <div class="shortcut-card"><span>Skip back</span><kbd>J</kbd></div>
-  <div class="shortcut-card"><span>Skip forward</span><kbd>L</kbd></div>
-  <div class="shortcut-card"><span>Fullscreen</span><kbd>F</kbd></div>
-  <div class="shortcut-card"><span>Pause + add note</span><kbd>N</kbd></div>
-  <div class="shortcut-card"><span>Mute / unmute</span><kbd>M</kbd></div>
-  <div class="shortcut-card"><span>Volume up / down</span><div><kbd>↑</kbd> <kbd>↓</kbd></div></div>
-  <div class="shortcut-card"><span>Start / end highlight</span><kbd>H</kbd></div>
-  <div class="shortcut-card"><span>Draw annotation</span><kbd>A</kbd></div>
-  <div class="shortcut-card"><span>Save note</span><div><kbd>⌘</kbd> <kbd>Enter</kbd></div></div>
-  <div class="shortcut-card"><span>Cancel current action</span><kbd>Esc</kbd></div>
-</div>
-<h3>Help center shortcuts</h3>
-<div class="shortcut-grid">
-  <div class="shortcut-card"><span>Search docs</span><div><kbd>⌘</kbd> <kbd>K</kbd></div></div>
-  <div class="shortcut-card"><span>Previous page</span><kbd>←</kbd></div>
-  <div class="shortcut-card"><span>Next page</span><kbd>→</kbd></div>
-  <div class="shortcut-card"><span>Bookmark page</span><kbd>B</kbd></div>
-  <div class="shortcut-card"><span>Back to top</span><kbd>T</kbd></div>
-  <div class="shortcut-card"><span>Go home</span><kbd>H</kbd></div>
-  <div class="shortcut-card"><span>All shortcuts</span><kbd>?</kbd></div>
-</div>
-<h2>Clips</h2>
-<p>Create a clip from any session or class to highlight a specific moment.</p>
-<ol>
-<li>While watching, set the start and end time for your clip.</li>
-<li>Click <strong>Create Clip</strong>. The clip is saved to your clips list.</li>
-<li>Toggle <strong>Share</strong> to generate a shareable link anyone can view — no login required.</li>
-</ol>
-<p>Manage clips from the session or class detail page. Disable sharing at any time to revoke the link.</p>
-<h3>Creating recap clips for students</h3>
-<p>Coaches can create short recap clips (2-3 minutes) from full class recordings so students get the highlights without watching 60 minutes.</p>
-<ol>
-<li>Open the class recording and play to the key moment.</li>
-<li>Set the clip start time, then play to the end of the segment and set the end time.</li>
-<li>Click <strong>Create Clip</strong> and give it a descriptive title (e.g., "Guard retention drill — key details").</li>
-<li>Toggle <strong>Share</strong> to make it visible to all students in the class.</li>
-</ol>
-<p>Students and parents see recap clips on their dashboard alongside full recordings. Short clips have much higher watch rates — use them.</p>
-<h3>Sharing clips outside your account</h3>
-<p>Share a clip with someone who doesn't have a Kaynos account — a training partner at another gym, a parent, or a competition coach.</p>
-<ol>
-<li>Create a clip and toggle <strong>Share</strong> on.</li>
-<li>Copy the shareable link. Anyone with the link can view the clip — no login required.</li>
-<li>Toggle sharing off at any time to revoke access.</li>
-</ol>
-<p>Shared clips show the video segment only — no notes, no account details, no other sessions.</p>
 </details>`},
 
     formats: {
