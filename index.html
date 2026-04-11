@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Kaynos — Help Center</title>
   <meta name="theme-color" content="#060609" />
   <meta name="fragment" content="!" />
@@ -75,7 +75,7 @@
       --bg-active:    rgba(255,255,255,0.07);
       --text-primary:   #f0f0f6;
       --text-secondary: rgba(240,240,246,0.65);
-      --text-tertiary:  rgba(240,240,246,0.38);
+      --text-tertiary:  rgba(255,255,255,.50);
       --border:         rgba(255,255,255,0.07);
       --border-strong:  rgba(255,255,255,0.12);
       --accent:         #2184f3;
@@ -114,7 +114,7 @@
       --bg-active:    rgba(0,0,0,0.06);
       --text-primary:   #1a1a2e;
       --text-secondary: rgba(26,26,46,0.72);
-      --text-tertiary:  rgba(26,26,46,0.55);
+      --text-tertiary:  rgba(0,0,0,.55);
       --border:         rgba(0,0,0,0.08);
       --border-strong:  rgba(0,0,0,0.14);
       --accent:         #1a6fdb;
@@ -222,6 +222,7 @@
       position: absolute; top: calc(100% + 6px); left: 0; right: 0;
       background: var(--bg-elevated); border: 1px solid var(--border-strong);
       border-radius: var(--radius); max-height: 400px; overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
       display: none; box-shadow: var(--shadow-lg); z-index: 110;
     }
     .search-results.active { display: block; }
@@ -683,6 +684,10 @@
       .feature-form { max-width: 100%; }
       .open-in-app { padding: 12px 20px; font-size: .875rem; }
       .tldr { font-size: .8125rem; padding: 8px 12px; }
+      .menu-btn, .theme-toggle, .text-size-btn, .header-app-link { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+      .bookmark-btn, .share-btn, .copy-article-btn, .print-btn { min-width: 44px; min-height: 44px; }
+      input, textarea, select { font-size: 16px !important; }
+      .mobile-nav { padding-bottom: env(safe-area-inset-bottom, 0); }
     }
 
     @media (max-width: 480px) {
@@ -883,7 +888,7 @@
     }
     .chatbot-fab:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(0,0,0,.4); }
     .chatbot-fab svg { width: 20px; height: 20px; }
-    @media (max-width: 768px) { .chatbot-fab { bottom: 68px; right: 16px; } #back-top { right: 68px; } }
+    @media (max-width: 768px) { .chatbot-fab { bottom: calc(68px + env(safe-area-inset-bottom, 0)); right: 16px; } #back-top { right: 68px; } }
 
     .chatbot-panel {
       position: fixed; bottom: 84px; right: 28px; z-index: 95;
@@ -1465,7 +1470,7 @@
       position: absolute; top: 6px; right: 8px; background: none; border: none;
       color: var(--text-tertiary); cursor: pointer; font-size: 12px;
     }
-    @media (max-width: 768px) { .nudge-prompt { bottom: 130px; right: 16px; left: 16px; max-width: none; } }
+    @media (max-width: 768px) { .nudge-prompt { bottom: calc(130px + env(safe-area-inset-bottom, 0)); right: 16px; left: 16px; max-width: none; } }
 
     /* ── COPY ARTICLE ─── */
     .copy-article-btn {
@@ -1517,7 +1522,7 @@
       font-family: var(--font-body); font-size: 1rem; outline: none;
     }
     .palette-input::placeholder { color: var(--text-tertiary); }
-    .palette-results { max-height: 320px; overflow-y: auto; }
+    .palette-results { max-height: 320px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
     .palette-item {
       padding: 10px 18px; display: flex; align-items: center; gap: 10px;
       cursor: pointer; transition: background var(--dur); font-size: .875rem;
@@ -1637,7 +1642,7 @@
         autocomplete="off" aria-label="Search documentation" role="combobox"
         aria-expanded="false" aria-controls="searchResults">
       <div class="search-kbd" id="searchKbd"><kbd>⌘</kbd><kbd>K</kbd></div>
-      <div class="search-results" id="searchResults" role="listbox"></div>
+      <div class="search-results" id="searchResults" role="listbox" aria-live="polite"></div>
     </div>
 
     <div class="header-spacer"></div>
@@ -1677,7 +1682,7 @@
         <aside class="toc" id="toc" aria-label="On this page"></aside>
       </div>
     </main>
-    <footer class="site-footer">
+    <footer class="site-footer" role="contentinfo">
       <div class="footer-inner">
         <span>&copy; 2024–2026 Kaynos. All rights reserved.</span>
         <nav class="footer-links">
@@ -3386,6 +3391,11 @@
     if (!window._isPopstate) window.scrollTo({ top: 0, behavior: 'instant' });
     if (!window._isPopstate) history.pushState({ page: pageId }, '', '#' + pageId);
     document.title = pageId === 'welcome' ? 'Kaynos — Help Center' : `${page.title} — Kaynos Docs`;
+
+    // Announce page change to screen readers
+    let liveRegion = document.getElementById('sr-announce');
+    if (!liveRegion) { liveRegion = document.createElement('div'); liveRegion.id = 'sr-announce'; liveRegion.setAttribute('aria-live', 'polite'); liveRegion.setAttribute('aria-atomic', 'true'); liveRegion.className = 'sr-only'; document.body.appendChild(liveRegion); }
+    liveRegion.textContent = page.title;
 
     // Dynamic meta description from page content (first ~160 chars, stripped of HTML)
     const descEl = document.querySelector('meta[name="description"]');
