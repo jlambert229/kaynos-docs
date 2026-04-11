@@ -3255,7 +3255,70 @@
 <li>Delete your account (Profile → Delete Account)</li>
 <li>Opt out of optional features (voice dictation, email notifications)</li>
 </ul>
-<p>Exercising your privacy rights will not result in service degradation, higher prices, or reduced functionality.</p>`}
+<p>Exercising your privacy rights will not result in service degradation, higher prices, or reduced functionality.</p>
+
+<h2>US state privacy laws</h2>
+<p>Kaynos complies with applicable state consumer privacy laws including Virginia (VCDPA), Colorado (CPA), Connecticut (CTDPA), Utah (UCPA), Texas (TDPSA), Montana, Iowa, Tennessee, Indiana, Oregon, Delaware, and others. Common rights across all states:</p>
+<ul>
+<li>Access, correct, and delete your personal data</li>
+<li>Opt out of targeted advertising and data sale (Kaynos does neither)</li>
+<li>Data portability (Admin → Export)</li>
+<li>Non-discrimination for exercising rights</li>
+</ul>
+<p>State-specific requests: email ${mailLink('privacy@kaynos.net')} referencing your state.</p>
+
+<h2>Student privacy laws (SOPIPA, NY Education Law 2-d)</h2>
+<p>For K-12 schools and educational institutions:</p>
+<ul>
+<li>Kaynos does not sell student personal information (SOPIPA compliance).</li>
+<li>Kaynos does not share student data with third parties for marketing.</li>
+<li>Student and parent access/deletion rights are supported.</li>
+<li>Data security practices align with NY Education Law 2-d requirements.</li>
+</ul>
+
+<h2>California Age-Appropriate Design Code (CAADCA)</h2>
+<p>Kaynos enforces privacy-protective defaults for users under 18:</p>
+<ul>
+<li>No invasive analytics or behavioral profiling</li>
+<li>No targeted advertising</li>
+<li>Opt-in only for audio processing (voice dictation)</li>
+<li>No dark patterns in consent flows</li>
+<li>Parental consent required for users under 13 (COPPA)</li>
+</ul>
+
+<h2>Record-keeping</h2>
+<p>Kaynos maintains records of all consumer privacy requests (access, deletion, correction) for 24 months per CCPA/CPRA requirements.</p>
+
+<h2>Deepgram voice processing</h2>
+<p>Voice dictation uses <a href="https://deepgram.com/privacy" target="_blank" rel="noopener">Deepgram</a> for real-time speech-to-text. Audio is processed in real time and not stored by Deepgram. Kaynos has a Data Processing Agreement with Deepgram. Opting out of voice dictation does not affect any other feature.</p>
+
+<h2>Data collection justification</h2>
+<table class="comparison-table">
+<thead><tr><th>Data</th><th>Purpose</th><th>Retention</th></tr></thead>
+<tbody>
+<tr><td>Name, email</td><td>Account identity, notifications</td><td>Until account deletion</td></tr>
+<tr><td>Password (hashed)</td><td>Authentication</td><td>Until account deletion</td></tr>
+<tr><td>Video recordings</td><td>Core coaching service</td><td>6 months default (configurable)</td></tr>
+<tr><td>Coaching notes</td><td>Timestamped feedback</td><td>With associated session/class</td></tr>
+<tr><td>Progress data</td><td>Resume playback, completion tracking</td><td>With associated session/class</td></tr>
+<tr><td>Belt rank</td><td>Progression tracking</td><td>Until account deletion</td></tr>
+<tr><td>IP address, browser</td><td>Security, rate limiting</td><td>90 days</td></tr>
+<tr><td>Payment metadata</td><td>Billing (via Stripe — no card numbers)</td><td>Per Stripe retention policy</td></tr>
+</tbody>
+</table>
+
+<h2>Security standards (NY SHIELD, MA 201 CMR 17.00)</h2>
+<ul>
+<li>Written information security program maintained</li>
+<li>Encryption: AES-256 at rest, TLS 1.2+ in transit</li>
+<li>Multi-factor authentication (TOTP) available</li>
+<li>Role-based access controls enforced at API and database level</li>
+<li>48-hour incident response protocol</li>
+<li>Vendor security assessments conducted</li>
+</ul>
+
+<h2>Accessibility conformance (ADA / Section 508)</h2>
+<p>Kaynos is built to WCAG 2.1 AA standards. Features include keyboard navigation, screen reader support, skip links, focus management, and prefers-reduced-motion support. For a detailed accessibility report (VPAT), contact ${mailLink()}.</p>`}
   };
 
   const NAV = [
