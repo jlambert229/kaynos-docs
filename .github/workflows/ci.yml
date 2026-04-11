@@ -22,7 +22,7 @@ jobs:
         run: npx wait-on http://localhost:3000
       - name: Run Playwright tests
         run: BASE_URL=http://localhost:3000 npx playwright test
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: playwright-report
