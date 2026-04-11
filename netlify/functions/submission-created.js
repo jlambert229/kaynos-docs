@@ -18,6 +18,14 @@ const PRIORITY_MAP = {
   "critical": 1,       // Urgent
 };
 
+/**
+ * Strip angle brackets and collapse excessive newlines from user input
+ * to prevent markdown injection.
+ */
+function sanitizeMarkdown(str) {
+  return String(str).replace(/[<>]/g, '').replace(/\n{3,}/g, '\n\n');
+}
+
 exports.handler = async function (event) {
   const { payload } = JSON.parse(event.body);
   const { form_name, data } = payload;
@@ -33,11 +41,23 @@ exports.handler = async function (event) {
     return { statusCode: 500, body: "LINEAR_API_KEY not configured." };
   }
 
-  const title = (data.title || "Untitled feature request").trim();
-  const description = data.description || "";
-  const name = data.name || "Anonymous";
-  const email = data.email || "not provided";
+  let title = (data.title || "Untitled feature request").trim();
+  let description = data.description || "";
+  let name = data.name || "Anonymous";
+  let email = data.email || "not provided";
   const priority = PRIORITY_MAP[data.priority] || 4;
+
+  // Validate inputs
+  if (title.length > 200) title = title.slice(0, 200);
+  if (description.length > 5000) return { statusCode: 400, body: 'Description too long (max 5000 chars).' };
+  if (email !== 'not provided' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    email = 'invalid email provided';
+  }
+
+  // Sanitize user-provided values before building markdown
+  name = sanitizeMarkdown(name);
+  email = sanitizeMarkdown(email);
+  description = sanitizeMarkdown(description);
 
   const markdown = [
     `## Customer feature request`,
@@ -72,6 +92,9 @@ exports.handler = async function (event) {
     },
   };
 
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 10000);
+
   try {
     const res = await fetch(LINEAR_API, {
       method: "POST",
@@ -80,6 +103,7 @@ exports.handler = async function (event) {
         Authorization: apiKey,
       },
       body: JSON.stringify({ query: mutation, variables }),
+      signal: controller.signal,
     });
 
     const json = await res.json();
@@ -93,7 +117,14 @@ exports.handler = async function (event) {
       return { statusCode: 500, body: "Failed to create Linear issue." };
     }
   } catch (err) {
+    clearTimeout(timeout);
+    if (err.name === 'AbortError') {
+      console.error('Linear API request timed out');
+      return { statusCode: 504, body: 'Linear API timeout.' };
+    }
     console.error("Linear API request failed:", err);
     return { statusCode: 500, body: "Linear API request failed." };
+  } finally {
+    clearTimeout(timeout);
   }
 };
