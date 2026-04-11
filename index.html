@@ -2491,6 +2491,9 @@
 <p><strong>All</strong> shows every note; <strong>Coach</strong> shows coach notes only; <strong>Mine</strong> shows only the signed-in student's notes.</p>
 <h2>Who can edit</h2>
 <p>Coaches may edit any note. Students may edit only notes they created.</p>
+<h2>@Mentions</h2>
+<p>Type <strong>@</strong> followed by a name to mention a teammate in your note. Mentioned users receive an email notification with a link to jump directly to the note.</p>
+<p>Use mentions to loop in specific coaches ("@Marco take a look at this sweep attempt") or prompt students to review ("@Sofia check the guard retention at 2:14").</p>
 <h2>Tips</h2>
 <ul>
 <li>Short, specific lines (a technique name + brief observation) are easier to scan later than long paragraphs.</li>
@@ -2550,6 +2553,15 @@
 <li>Draw arrows, circles, or freehand on the frozen frame.</li>
 <li>Save — the annotation is attached to that timestamp and appears during playback.</li>
 </ol>
+<h2>AI review (beta)</h2>
+<p>Kaynos can automatically analyze your video to identify key moments and suggest technique observations.</p>
+<ol>
+<li>Open a session or class detail page.</li>
+<li>Click <strong>Start AI Review</strong>.</li>
+<li>Processing runs in the background — you'll see a status indicator.</li>
+<li>When complete, AI-generated notes appear on the timeline alongside your manual notes.</li>
+</ol>
+<p>AI review uses TwelveLabs for video understanding. Review and edit AI notes like any other note.</p>
 <h2>Reactions</h2>
 <p>React to any note with an emoji: 👍 ❤️ 🔥 👀 ✅ 👏. Click the reaction button under a note to add yours.</p>
 <h2>Note templates</h2>
@@ -2630,7 +2642,15 @@
 <h2>Branding</h2>
 <p>Admins can customize the look of their account under <strong>Admin → Branding</strong>. Set a custom logo, accent color, and welcome text that members see when they log in.</p>
 <h2>School hours</h2>
-<p>Admins can set operating hours under <strong>Admin → Settings</strong>. Default hours are 6 AM to 9 PM. Scheduling outside these hours is allowed but flagged.</p>`},
+<p>Admins can set operating hours under <strong>Admin → Settings</strong>. Default hours are 6 AM to 9 PM. Scheduling outside these hours is allowed but flagged.</p>
+<h2>Usage reports</h2>
+<p>Admins can receive automated email reports summarizing account activity.</p>
+<ol>
+<li>Go to <strong>Admin → Reports</strong>.</li>
+<li>Choose frequency: <strong>off</strong>, <strong>daily</strong>, <strong>weekly</strong>, or <strong>monthly</strong>.</li>
+<li>Reports include: total sessions, storage usage, active students, and coach activity.</li>
+</ol>
+<p>Click <strong>Send now</strong> to trigger an immediate report.</p>`},
 
     profile: {
       title: "Profile and password", section: "Account Management",
@@ -2669,6 +2689,8 @@
 </ul>
 <h3>Turning notifications off</h3>
 <p><strong>Profile</strong> → <strong>Email Notifications</strong>. Security-related messages (such as password resets) may still send.</p>
+<h3>Session reminders</h3>
+<p>You'll receive an email reminder <strong>15 minutes before</strong> each scheduled session. Reminders are tied to your notification preference — disable email notifications to stop them.</p>
 <h2>In-app notifications</h2>
 <p>The bell icon in the header shows unread notifications: mentions, replies, new sessions, new classes, and schedule reminders. Click to view, or mark all as read.</p>
 <h3>Not receiving mail</h3>
@@ -2696,6 +2718,8 @@
 <p>The account may have been removed, or the browser cached an old session. Try a private/incognito window. If that works, clear site data for <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> in normal mode.</p>
 <h2>Still locked out</h2>
 <p>Email ${mailLink()} with your name, account name, and email address.</p>
+<h3>Reset link expired</h3>
+<p>Password reset links expire after <strong>24 hours</strong>. If your link no longer works, request a new one from the login page (<strong>Forgot password?</strong>) or ask your admin to resend from <strong>Admin → Members → Reset Password</strong>.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Profile and password changes: <a onclick="navigate('profile')">Profile and password</a>.</div></div>`},
 
     "email-issues": {
@@ -2815,6 +2839,15 @@
 <p><strong>$49/month</strong> or <strong>$490/year</strong> (saves 17% — two months free). Every new account starts with a <strong>14-day free trial</strong> — no charge until the trial ends. Manage billing, view invoices, and update your payment method from the Stripe billing portal (link in Admin).</p>
 <h3>What happens when my trial ends?</h3>
 <p>Your selected plan begins billing automatically. If you cancel before the trial ends, you won't be charged. All your data stays available while your subscription is active.</p>
+<h3>How do I manage my subscription?</h3>
+<p>Go to <strong>Admin → Billing → Manage Subscription</strong>. This opens the Stripe billing portal where you can:</p>
+<ul>
+<li>Update your payment method (credit card)</li>
+<li>View past invoices and receipts</li>
+<li>Change between monthly and annual plans</li>
+<li>Cancel your subscription</li>
+</ul>
+<p>Kaynos never sees your credit card number — all payment processing is handled by Stripe (PCI-DSS Level 1 certified).</p>
 <hr>
 <h2>Search and navigation</h2>
 <h3>Is there a quick way to find things?</h3>
