@@ -1684,6 +1684,7 @@
           <a href="https://app.kaynos.net/terms" target="_blank" rel="noopener">Terms</a>
           <a href="https://app.kaynos.net/privacy" target="_blank" rel="noopener">Privacy</a>
           <a onclick="navigate('privacy-on-this-site')">Site Privacy</a>
+          <a href="https://github.com/jlambert229/kaynos-docs/blob/main/docs/SECURITY.md" target="_blank" rel="noopener">Security</a>
         </nav>
       </div>
     </footer>
@@ -1934,7 +1935,7 @@
       title: "Setting up your account", section: "Getting Started",
       content: `
 <h1>Setting up your account</h1>
-<div class="tldr"><strong>TL;DR:</strong> Log in at <a href="https://app.kaynos.net" target="_blank">app.kaynos.net</a> with your invite email. Change your temporary password first.</div>
+<div class="tldr"><strong>TL;DR:</strong> Log in at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> with your invite email. Change your temporary password first.</div>
 <p>After signup, login details go to the email you used. Change the temporary password as soon as you're in.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Open the product at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>. Next steps: <a onclick="navigate('inviting-members')">Inviting your team</a> and <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>
 <h2>First login</h2>
@@ -2221,24 +2222,56 @@
 <li>Click <strong>Add Note</strong>, enter your text, then <strong>Save</strong>.</li>
 </ol>
 <p>The note is tied to the current playhead position.</p>
-<h2>Keyboard shortcuts</h2>
-<table><thead><tr><th>Key</th><th>Action</th></tr></thead><tbody>
-<tr><td><code>Space</code> / <code>K</code></td><td>Play / Pause</td></tr>
-<tr><td><code>J</code> / <code>L</code></td><td>Skip back / forward</td></tr>
-<tr><td><code>N</code></td><td>Pause and add note</td></tr>
-<tr><td><code>F</code></td><td>Toggle fullscreen</td></tr>
-<tr><td><code>M</code></td><td>Mute / unmute</td></tr>
-<tr><td><code>↑</code> / <code>↓</code></td><td>Volume up / down</td></tr>
-<tr><td><code>H</code></td><td>Start / end highlight</td></tr>
-<tr><td><code>A</code></td><td>Draw annotation</td></tr>
-<tr><td><code>Cmd+Enter</code> / <code>Ctrl+Enter</code></td><td>Save note</td></tr>
-<tr><td><code>Esc</code></td><td>Cancel current action</td></tr>
-</tbody></table>
-<p><strong>Mobile:</strong> Double-tap the left half of the video to skip back 10 seconds, or the right half to skip forward.</p>
+<details><summary>Keyboard shortcuts</summary>
+<div class="shortcut-grid">
+  <div class="shortcut-card"><span>Play / Pause</span><kbd>Space</kbd> or <kbd>K</kbd></div>
+  <div class="shortcut-card"><span>Skip back / forward</span><kbd>J</kbd> / <kbd>L</kbd></div>
+  <div class="shortcut-card"><span>Pause + add note</span><kbd>N</kbd></div>
+  <div class="shortcut-card"><span>Fullscreen</span><kbd>F</kbd></div>
+  <div class="shortcut-card"><span>Mute / unmute</span><kbd>M</kbd></div>
+  <div class="shortcut-card"><span>Volume up / down</span><kbd>↑</kbd> / <kbd>↓</kbd></div>
+  <div class="shortcut-card"><span>Start / end highlight</span><kbd>H</kbd></div>
+  <div class="shortcut-card"><span>Draw annotation</span><kbd>A</kbd></div>
+  <div class="shortcut-card"><span>Save note</span><kbd>⌘</kbd> <kbd>Enter</kbd></div>
+  <div class="shortcut-card"><span>Cancel</span><kbd>Esc</kbd></div>
+</div>
+</details>
+<h2>Mobile playback</h2>
+<p>Kaynos runs in the mobile browser — no app install needed.</p>
+<ul>
+<li><strong>Skip:</strong> Double-tap the left half to skip back 10 seconds, or the right half to skip forward.</li>
+<li><strong>Landscape:</strong> Rotate your phone for a wider view, especially when the notes panel is open.</li>
+<li><strong>Resume:</strong> Your playback position syncs across devices — start on your phone, continue on your laptop.</li>
+<li><strong>Add to Home Screen:</strong> iOS: Share → Add to Home Screen. Android: browser menu → Add to Home Screen.</li>
+</ul>
 <h2>Progress tracking</h2>
-<p>Playback position is saved for resume. Coaches can see completion percentage and last-viewed time without heavy analytics.</p>
+<p>Playback position is saved automatically for resume. Coaches can see completion percentage and last-viewed time without heavy analytics.</p>
+<h2>Clips</h2>
+<p>Create a clip from any session or class to highlight a specific moment.</p>
+<ol>
+<li>While watching, set the start and end time for your clip.</li>
+<li>Click <strong>Create Clip</strong>. The clip is saved to your clips list.</li>
+<li>Toggle <strong>Share</strong> to generate a shareable link anyone can view — no login required.</li>
+</ol>
+<p>Manage clips from the session or class detail page. Disable sharing at any time to revoke the link.</p>
+<h3>Recap clips</h3>
+<p>Coaches can create short recap clips (2-3 minutes) from full class recordings so students get the highlights without watching 60 minutes.</p>
+<ol>
+<li>Open the class recording and play to the key moment.</li>
+<li>Set the clip start time, then play to the end of the segment and set the end time.</li>
+<li>Click <strong>Create Clip</strong> and give it a descriptive title (e.g., "Guard retention drill — key details").</li>
+<li>Toggle <strong>Share</strong> to make it visible to all students in the class.</li>
+</ol>
+<p>Students and parents see recap clips on their dashboard alongside full recordings. Short clips have much higher watch rates.</p>
+<h3>Sharing clips externally</h3>
+<p>Share a clip with someone who doesn't have a Kaynos account — a training partner at another gym, a parent, or a competition coach.</p>
+<ol>
+<li>Create a clip and toggle <strong>Share</strong> on.</li>
+<li>Copy the shareable link. Anyone with the link can view the clip — no login required.</li>
+<li>Toggle sharing off at any time to revoke access.</li>
+</ol>
+<p>Shared clips show the video segment only — no notes, no account details, no other sessions.</p>
 <details><summary>Playback troubleshooting</summary>
-<h2>Video playback problems</h2>
 <p>If the player is blank or showing errors, work through these checks.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 <h3>Player blank or broken controls</h3>
@@ -2254,60 +2287,6 @@
 <p>Usually a codec mismatch. Try another browser; if it persists, re-export with standard H.264/AAC.</p>
 <h3>Resume position wrong</h3>
 <p>Progress saves shortly after pausing. Closing the tab immediately can occasionally skip the save.</p>
-</details>
-<details><summary>Keyboard shortcuts</summary>
-<h2>Video player shortcuts</h2>
-<p>Use these keyboard shortcuts while watching video in the Kaynos player.</p>
-<h3>Playback</h3>
-<div class="shortcut-grid">
-  <div class="shortcut-card"><span>Play / Pause</span><kbd>Space</kbd></div>
-  <div class="shortcut-card"><span>Play / Pause</span><kbd>K</kbd></div>
-  <div class="shortcut-card"><span>Skip back</span><kbd>J</kbd></div>
-  <div class="shortcut-card"><span>Skip forward</span><kbd>L</kbd></div>
-  <div class="shortcut-card"><span>Fullscreen</span><kbd>F</kbd></div>
-  <div class="shortcut-card"><span>Pause + add note</span><kbd>N</kbd></div>
-  <div class="shortcut-card"><span>Mute / unmute</span><kbd>M</kbd></div>
-  <div class="shortcut-card"><span>Volume up / down</span><div><kbd>↑</kbd> <kbd>↓</kbd></div></div>
-  <div class="shortcut-card"><span>Start / end highlight</span><kbd>H</kbd></div>
-  <div class="shortcut-card"><span>Draw annotation</span><kbd>A</kbd></div>
-  <div class="shortcut-card"><span>Save note</span><div><kbd>⌘</kbd> <kbd>Enter</kbd></div></div>
-  <div class="shortcut-card"><span>Cancel current action</span><kbd>Esc</kbd></div>
-</div>
-<h3>Help center shortcuts</h3>
-<div class="shortcut-grid">
-  <div class="shortcut-card"><span>Search docs</span><div><kbd>⌘</kbd> <kbd>K</kbd></div></div>
-  <div class="shortcut-card"><span>Previous page</span><kbd>←</kbd></div>
-  <div class="shortcut-card"><span>Next page</span><kbd>→</kbd></div>
-  <div class="shortcut-card"><span>Bookmark page</span><kbd>B</kbd></div>
-  <div class="shortcut-card"><span>Back to top</span><kbd>T</kbd></div>
-  <div class="shortcut-card"><span>Go home</span><kbd>H</kbd></div>
-  <div class="shortcut-card"><span>All shortcuts</span><kbd>?</kbd></div>
-</div>
-<h2>Clips</h2>
-<p>Create a clip from any session or class to highlight a specific moment.</p>
-<ol>
-<li>While watching, set the start and end time for your clip.</li>
-<li>Click <strong>Create Clip</strong>. The clip is saved to your clips list.</li>
-<li>Toggle <strong>Share</strong> to generate a shareable link anyone can view — no login required.</li>
-</ol>
-<p>Manage clips from the session or class detail page. Disable sharing at any time to revoke the link.</p>
-<h3>Creating recap clips for students</h3>
-<p>Coaches can create short recap clips (2-3 minutes) from full class recordings so students get the highlights without watching 60 minutes.</p>
-<ol>
-<li>Open the class recording and play to the key moment.</li>
-<li>Set the clip start time, then play to the end of the segment and set the end time.</li>
-<li>Click <strong>Create Clip</strong> and give it a descriptive title (e.g., "Guard retention drill — key details").</li>
-<li>Toggle <strong>Share</strong> to make it visible to all students in the class.</li>
-</ol>
-<p>Students and parents see recap clips on their dashboard alongside full recordings. Short clips have much higher watch rates — use them.</p>
-<h3>Sharing clips outside your account</h3>
-<p>Share a clip with someone who doesn't have a Kaynos account — a training partner at another gym, a parent, or a competition coach.</p>
-<ol>
-<li>Create a clip and toggle <strong>Share</strong> on.</li>
-<li>Copy the shareable link. Anyone with the link can view the clip — no login required.</li>
-<li>Toggle sharing off at any time to revoke access.</li>
-</ol>
-<p>Shared clips show the video segment only — no notes, no account details, no other sessions.</p>
 </details>`},
 
     formats: {
@@ -2382,7 +2361,7 @@
 <li>Playback URLs are time-limited. Share access inside Kaynos rather than relying on long-lived direct links.</li>
 </ul>
 <h2>Data residency</h2>
-<p>Videos are stored in Backblaze B2 (US). Content is delivered globally via Cloudflare CDN. For EU customers: both Backblaze and Cloudflare offer Standard Contractual Clauses (SCCs) in their Data Processing Agreements. Contact <a href="https://app.kaynos.net/terms" target="_blank">support</a> for SCC documentation.</p>`},
+<p>Videos are stored in Backblaze B2 (US). Content is delivered globally via Cloudflare CDN. For EU customers: both Backblaze and Cloudflare offer Standard Contractual Clauses (SCCs) in their Data Processing Agreements. Contact <a href="https://app.kaynos.net/terms" target="_blank" rel="noopener">support</a> for SCC documentation.</p>`},
 
     "creating-sessions": {
       title: "Creating a session", section: "Sessions & Classes",
@@ -2531,9 +2510,9 @@
 <p>Tags group related sessions and classes so lists stay easy to filter as your library grows.</p>
 <h3>Tag ideas</h3>
 <ul>
-<li>Topic: <code>form-review</code>, <code>conditioning</code>, <code>competition</code></li>
-<li>Format: <code>private</code>, <code>group</code>, <code>workshop</code></li>
+<li>Format: <code>private</code>, <code>group</code>, <code>workshop</code>, <code>open-mat</code></li>
 <li>Level: <code>fundamentals</code>, <code>advanced</code>, <code>beginner</code></li>
+<li>Focus: <code>comp-prep</code>, <code>conditioning</code>, <code>drilling</code></li>
 </ul>
 <h3>Adding tags</h3>
 <p>In the session or class form, type a tag and press <strong>Enter</strong>. Repeat for additional tags.</p>
@@ -2541,7 +2520,7 @@
 <p>List views let you filter by tag — for example, everything tagged <code>milestone</code> for a specific training block.</p>
 <h3>Consistency tips</h3>
 <ul>
-<li>Use one spelling and style per concept (avoid <code>review</code>, <code>Review</code>, and <code>form-review</code> for the same thing).</li>
+<li>Use one spelling and style per concept (avoid <code>guard-pass</code>, <code>Guard Pass</code>, and <code>guard_pass</code> for the same thing).</li>
 <li>Agree on a shared vocabulary so your whole team uses consistent tags.</li>
 <li>Tags are shared across the account, not private to one person.</li>
 </ul>
@@ -2836,12 +2815,12 @@
 <hr>
 <h2>Remote coaching</h2>
 <h3>Can I coach remotely with Kaynos?</h3>
-<p>Yes. Many coaches use Kaynos for async video review with clients worldwide. Tips for scaling:</p>
+<p>Yes. Many coaches use Kaynos for async video review with students worldwide. Tips for scaling:</p>
 <ul>
 <li>Use <strong>note templates</strong> for recurring feedback — saves time on repetitive corrections.</li>
 <li>Check the <strong>pending reviews</strong> queue daily so no upload goes unreviewed.</li>
-<li>Organize clients by training phase using tags (e.g., <code>beginner</code>, <code>competition</code>, <code>rehab</code>).</li>
-<li>Enable <strong>email notifications</strong> so clients know when your review is ready.</li>
+<li>Organize students by training phase using tags (e.g., <code>beginner</code>, <code>competition</code>, <code>rehab</code>).</li>
+<li>Enable <strong>email notifications</strong> so students know when your review is ready.</li>
 <li>Use keyboard shortcuts for speed: <kbd>J</kbd>/<kbd>L</kbd> to scrub, <kbd>N</kbd> to note, <kbd>Cmd+Enter</kbd> to save.</li>
 </ul>`},
 
@@ -2928,7 +2907,7 @@
 <div class="glossary-term"><dt>Coach</dt><dd>A staff role that can create sessions and classes, upload video, add notes and tags, and view student progress. Coaches can invite students but not other coaches.</dd></div>
 <div class="glossary-term"><dt>Student <code>member</code></dt><dd>An end user who watches assigned sessions and all published classes, adds notes, and tracks their own progress. Students cannot upload video or view other students' private sessions.</dd></div>
 <div class="glossary-term"><dt>Note</dt><dd>A short text annotation pinned to a specific timestamp on the video timeline. Coaches and students can both create notes; coaches can edit any note.</dd></div>
-<div class="glossary-term"><dt>Tag</dt><dd>A label attached to sessions or classes for organization and filtering. Tags are shared across the account — examples: <code>form-review</code>, <code>competition</code>, <code>fundamentals</code>.</dd></div>
+<div class="glossary-term"><dt>Tag</dt><dd>A label attached to sessions or classes for organization and filtering. Tags are shared across the account — examples: <code>guard</code>, <code>comp-prep</code>, <code>fundamentals</code>.</dd></div>
 <div class="glossary-term"><dt>Progress</dt><dd>A lightweight tracker that records playback position (for resume), completion status, and last-viewed time. Coaches see completion across their students; no invasive analytics.</dd></div>
 <div class="glossary-term"><dt>API Token</dt><dd>A secret key minted under Admin → Developer API. Used to authenticate scripts and integrations against the <code>/api/v1</code> endpoints. Treat like a password.</dd></div>
 <div class="glossary-term"><dt>Vimeo Source</dt><dd>An alternative to uploading a file — paste a Vimeo URL or video ID to embed video already hosted on Vimeo into a session or class.</dd></div>
@@ -3841,7 +3820,7 @@
   const ROLE_PATHS = {
     admin: ['setup', 'roles', 'inviting-members', 'first-upload', 'managing-members', 'uploading', 'creating-sessions', 'notes', 'progress', 'developer-api'],
     coach: ['setup', 'first-upload', 'creating-sessions', 'notes', 'uploading', 'playback', 'formats', 'progress', 'faq'],
-    client: ['setup', 'playback', 'notes', 'progress', 'creating-sessions', 'faq', 'troubleshoot', 'performance'],
+    client: ['setup', 'playback', 'notes', 'progress', 'creating-sessions', 'faq', 'parent-guide', 'troubleshoot', 'performance'],
     developer: ['setup', 'developer-api', 'formats', 'glossary', 'faq', 'storage'],
   };
 
@@ -4429,7 +4408,7 @@
     'coach': 'Staff role that creates sessions/classes, uploads video, and adds notes.',
     'student': 'End user who watches sessions and classes, adds notes, and tracks progress.',
     'note': 'A text annotation pinned to a specific timestamp on the video timeline.',
-    'tag': 'A label for organizing sessions and classes (e.g. form-review, competition).',
+    'tag': 'A label for organizing sessions and classes (e.g. guard, comp-prep, drilling).',
     'api token': 'A secret key for authenticating scripts against the API.',
   };
 
