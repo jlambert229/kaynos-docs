@@ -2917,6 +2917,53 @@
 <li>Members / roster where the product allows automation</li>
 <li>Notes pinned to sessions and classes</li>
 </ul>
+<h2>Webhook events</h2>
+<p>Subscribe to real-time event callbacks. Configure webhooks under <strong>Admin → Webhooks</strong>.</p>
+<table><thead><tr><th>Event</th><th>Fires when</th></tr></thead><tbody>
+<tr><td><code>session.created</code></td><td>A new session is created</td></tr>
+<tr><td><code>session.updated</code></td><td>Session title, date, or video changes</td></tr>
+<tr><td><code>class.created</code></td><td>A new class is created</td></tr>
+<tr><td><code>class.updated</code></td><td>Class details change</td></tr>
+<tr><td><code>note.added</code></td><td>A note is added to a session or class</td></tr>
+<tr><td><code>member.joined</code></td><td>A new member accepts their invite</td></tr>
+<tr><td><code>member.removed</code></td><td>A member is removed from the account</td></tr>
+</tbody></table>
+<p>Deliveries are retried up to 3 times with exponential backoff. View delivery history and manually retry from the webhooks panel.</p>
+
+<h2>Code examples</h2>
+<h3>List sessions (cURL)</h3>
+<pre>curl -H "Authorization: Bearer YOUR_TOKEN" \\
+  https://app.kaynos.net/api/v1/sessions</pre>
+
+<h3>Create a note (JavaScript)</h3>
+<pre>const res = await fetch('https://app.kaynos.net/api/v1/notes/session/SESSION_ID', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer YOUR_TOKEN',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    text: 'Great guard retention here',
+    timestamp_seconds: 142
+  })
+});</pre>
+
+<h2>Rate limits</h2>
+<table><thead><tr><th>Endpoint</th><th>Limit</th></tr></thead><tbody>
+<tr><td>Login</td><td>25 attempts per IP</td></tr>
+<tr><td>Signup</td><td>10 per IP</td></tr>
+<tr><td>Promo validation</td><td>15 per IP</td></tr>
+<tr><td>General API</td><td>No hard limit (fair use policy)</td></tr>
+</tbody></table>
+
+<h2>Error responses</h2>
+<table><thead><tr><th>Code</th><th>Meaning</th><th>Action</th></tr></thead><tbody>
+<tr><td><code>401</code></td><td>Missing or invalid token</td><td>Check Authorization header</td></tr>
+<tr><td><code>403</code></td><td>Insufficient scope or role</td><td>Token needs write scope or admin role</td></tr>
+<tr><td><code>404</code></td><td>Resource not in your account</td><td>Verify session/class/member ID</td></tr>
+<tr><td><code>429</code></td><td>Rate limited</td><td>Wait and retry with backoff</td></tr>
+</tbody></table>
+
 <h2>Managing tokens while logged in</h2>
 <ol>
 <li><code>GET /api/integrations/tokens</code> — inspect token metadata</li>
@@ -3768,6 +3815,14 @@
     return words.every(w => lower.includes(w));
   }
 
+  // Pre-built search index — strip HTML once at load, not per keystroke
+  const SEARCH_INDEX = {};
+  for (const [id, page] of Object.entries(PAGES)) {
+    if (id === 'welcome') continue;
+    const text = page.content.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
+    SEARCH_INDEX[id] = { title: page.title, titleLower: page.title.toLowerCase(), text, section: page.section || '' };
+  }
+
   function handleSearch(q) {
     const sr = document.getElementById('searchResults');
     srIdx = -1;
@@ -3777,9 +3832,11 @@
     const bookmarks = getBookmarks();
     const results = [];
     for (const [id, page] of Object.entries(PAGES)) {
-      const text = page.content.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
-      const textLower = text.toLowerCase();
-      const titleMatch = page.title.toLowerCase().includes(lower);
+      const idx = SEARCH_INDEX[id];
+      if (!idx) continue;
+      const text = idx.text;
+      const textLower = text;
+      const titleMatch = idx.titleLower.includes(lower);
       const exactIdx = textLower.indexOf(lower);
       const fuzzy = !titleMatch && exactIdx === -1 && fuzzyMatch(page.title + ' ' + text, q);
       if (titleMatch || exactIdx !== -1 || fuzzy) {
