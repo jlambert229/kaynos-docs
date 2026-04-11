@@ -2113,6 +2113,24 @@
 <p>Coaches run sessions and classes, upload video, add notes and tags, and view student progress.</p>
 <h2>Student</h2>
 <p>Students access their assigned sessions and all classes, watch video, add notes, and track viewing progress. They cannot upload video or view other students' private sessions.</p>
+<h2>Assistant coach</h2>
+<p>A scoped coach role for part-time staff or filming assistants. Assistant coaches can:</p>
+<ul>
+<li>Upload video to assigned classes</li>
+<li>View today's schedule and assigned sessions</li>
+<li>Mark attendance in classes they're assigned to</li>
+</ul>
+<p>They <strong>cannot</strong> manage members, change roles, access admin settings, or create new sessions independently. Admins assign assistant coaches to specific classes.</p>
+
+<h2>Team captain / senior student</h2>
+<p>An elevated student role for team leaders and senior members. Team captains can:</p>
+<ul>
+<li>Upload video on behalf of teammates (e.g., filming sparring rounds)</li>
+<li>Add peer notes (visually distinguished from coach notes)</li>
+<li>Share clips with people outside the account</li>
+</ul>
+<p>Team captains cannot create sessions or access admin features. They're students with upload and sharing privileges.</p>
+
 <h2>Change a role</h2>
 <p>Admins only: <strong>Admin</strong> → select the member → role dropdown → save.</p>
 <div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>Downgrading a coach to a student removes the ability to create sessions or upload video. Existing content remains available. For invite rules, see <a onclick="navigate('inviting-members')">Inviting your team</a>.</div></div>`},
@@ -2497,6 +2515,14 @@
 <p>Coach and admin views show completion and recency. We do not track fine-grained analytics or viewer heatmaps.</p>
 <h2>What we intentionally avoid</h2>
 <p>No invasive watch analytics or third-party ad-style tracking. The product stores only what it needs for resume and high-level completion tracking.</p>
+<h2>Belt rank and progression</h2>
+<p>Kaynos tracks belt rank and stripe promotions for each student.</p>
+<h3>Setting rank</h3>
+<p>Admins and coaches can set a student's current belt and stripe count from their profile or the member management page.</p>
+<h3>Logging promotions</h3>
+<p>When a student is promoted, update their belt rank. The change is logged with a date and appears in their progression timeline. Students and parents can see their promotion history.</p>
+<h3>Belt system</h3>
+<p>BJJ belts in order: <strong>White → Blue → Purple → Brown → Black</strong>. Each belt can have up to 4 stripes before the next belt. Progression typically takes 10-15 years to black belt. Promotions are at the instructor's discretion.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Roster and access control: <a onclick="navigate('managing-members')">Managing members</a>.</div></div>`},
 
     "managing-members": {
@@ -2798,6 +2824,20 @@
 <div class="glossary-term"><dt>API Token</dt><dd>A secret key minted under Admin → Developer API. Used to authenticate scripts and integrations against the <code>/api/v1</code> endpoints. Treat like a password.</dd></div>
 <div class="glossary-term"><dt>Vimeo Source</dt><dd>An alternative to uploading a file — paste a Vimeo URL or video ID to embed video already hosted on Vimeo into a session or class.</dd></div>
 <div class="glossary-term"><dt>CDN</dt><dd>Content Delivery Network — Kaynos uses Cloudflare to deliver video quickly from edge servers close to the viewer, reducing buffering.</dd></div>
+</dl>
+<h2>BJJ positions and movements</h2>
+<p>New to martial arts? Here's what your coach means:</p>
+<dl>
+<dt>Guard</dt><dd>A position where one person is on their back with legs controlling the other person. There are many types: closed guard, half guard, open guard, butterfly guard.</dd>
+<dt>Mount</dt><dd>A dominant position where one person sits on top of the other's torso. Very strong for the person on top.</dd>
+<dt>Side control</dt><dd>A dominant position where one person pins the other from the side, chest-to-chest.</dd>
+<dt>Back control</dt><dd>A dominant position behind the opponent, typically with hooks (legs wrapped around the waist).</dd>
+<dt>Sweep</dt><dd>A technique to reverse positions — going from bottom (guard) to top.</dd>
+<dt>Submission</dt><dd>A technique that forces the opponent to "tap out" — joint locks (armbar, kimura) or chokes (rear naked choke, guillotine, triangle).</dd>
+<dt>Takedown</dt><dd>A technique to bring a standing opponent to the ground.</dd>
+<dt>Drilling</dt><dd>Repetitive practice of a specific technique with a cooperative partner. Think of it like running drills in basketball.</dd>
+<dt>Sparring / rolling</dt><dd>Live practice at varying intensity. "Rolling" is the BJJ term for sparring.</dd>
+<dt>Belt progression</dt><dd>BJJ uses colored belts to mark experience: white → blue → purple → brown → black. Each belt can have up to 4 stripes. Promotions are based on time, skill, and instructor discretion — typically years between belts.</dd>
 </dl>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>For role details see <a onclick="navigate('roles')">Understanding user roles</a>. For API tokens see <a onclick="navigate('developer-api')">Developer API</a>.</div></div>`},
 
