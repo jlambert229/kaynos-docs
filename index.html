@@ -514,6 +514,15 @@
     .quick-link .ql-title { font-weight: 500; color: var(--text-primary); }
     .quick-link .ql-desc { font-size: .8125rem; color: var(--text-secondary); line-height: 1.4; }
 
+    /* ── START HERE ─── */
+    .start-here { margin: 20px 0; }
+    .start-here-title { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--text-tertiary); margin-bottom: 10px; }
+    .start-steps { display: flex; gap: 12px; flex-wrap: wrap; }
+    .start-step { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: var(--accent); color: #fff; border-radius: var(--radius); text-decoration: none; font-size: .875rem; font-weight: 500; flex: 1; min-width: 200px; transition: background var(--dur) var(--ease); }
+    .start-step:hover { background: var(--accent-hover); color: #fff; }
+    .start-num { width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .75rem; flex-shrink: 0; }
+    @media (max-width: 768px) { .start-steps { flex-direction: column; } .start-step { min-width: auto; } }
+
     /* ── FEATURE OVERVIEW ─── */
     .feature-overview { margin: 16px 0 24px; }
     .feature-overview summary { cursor: pointer; font-size: .9375rem; color: var(--text-secondary); padding: 10px 0; }
@@ -2617,6 +2626,19 @@
 <p><strong>One person, two accounts?</strong> Use a different email address per account. Each account is completely separate.</p>
 <p><strong>Member limits?</strong> The product does not enforce a headcount cap.</p>
 <p><strong>Student-to-student invites?</strong> Only staff roles can invite; students cannot invite other students.</p>
+<h2>Multi-location management</h2>
+<p>If you run multiple schools or locations, Kaynos supports a single admin dashboard across all of them.</p>
+<h3>Adding locations</h3>
+<p>Contact support to add additional schools to your account. Each school has its own member roster, sessions, classes, and storage quota.</p>
+<h3>Switching between schools</h3>
+<p>Use the school selector in the top-left of the admin dashboard to switch between locations. Your admin credentials work across all schools tied to your account.</p>
+<h3>Cross-school view</h3>
+<ul>
+<li>See aggregate stats (total students, sessions, storage) across all locations.</li>
+<li>Monitor coach activity per school — who's uploading, who's adding notes.</li>
+<li>Billing is per-school — each location has its own subscription and storage limits.</li>
+</ul>
+<p>For large multi-location setups, contact ${mailLink()} to discuss enterprise pricing and dedicated support.</p>
 <h2>Branding</h2>
 <p>Admins can customize the look of their account under <strong>Admin → Branding</strong>. Set a custom logo, accent color, and welcome text that members see when they log in.</p>
 <h2>School hours</h2>
@@ -4171,6 +4193,45 @@
         <div class="ql-desc">${l.desc}</div>
       </a>`
     ).join('');
+
+    // Add "Start here" card for quick onboarding handoff
+    const START_STEPS = {
+      admin: [
+        { num: '1', text: 'Log in and set your password', link: 'https://app.kaynos.net', external: true },
+        { num: '2', text: 'Invite your coaches', link: 'inviting-members' },
+        { num: '3', text: 'Upload your first video', link: 'first-upload' },
+      ],
+      coach: [
+        { num: '1', text: 'Log in and set your password', link: 'https://app.kaynos.net', external: true },
+        { num: '2', text: 'Upload your first session', link: 'https://app.kaynos.net/sessions/new', external: true },
+        { num: '3', text: 'Add timestamped notes', link: 'notes' },
+      ],
+      client: [
+        { num: '1', text: 'Log in to the app', link: 'https://app.kaynos.net', external: true },
+        { num: '2', text: 'Watch your first session', link: 'https://app.kaynos.net/sessions', external: true },
+        { num: '3', text: 'Leave a note for your coach', link: 'notes' },
+      ],
+      developer: [
+        { num: '1', text: 'Log in as admin', link: 'https://app.kaynos.net', external: true },
+        { num: '2', text: 'Open the API docs', link: 'https://app.kaynos.net/admin/api-docs', external: true },
+        { num: '3', text: 'Create your first API token', link: 'developer-api' },
+      ],
+    };
+
+    const steps = START_STEPS[role];
+    if (steps) {
+      const startCard = document.createElement('div');
+      startCard.className = 'start-here';
+      startCard.innerHTML = '<div class="start-here-title">Start here</div><div class="start-steps">' +
+        steps.map(s => {
+          if (s.external) {
+            return `<a class="start-step" href="${s.link}" target="_blank" rel="noopener"><span class="start-num">${s.num}</span><span>${s.text}</span></a>`;
+          }
+          return `<a class="start-step" href="#${s.link}" onclick="navigate('${s.link}');return false"><span class="start-num">${s.num}</span><span>${s.text}</span></a>`;
+        }).join('') + '</div>';
+      const qlEl = container.querySelector('.quick-links');
+      if (qlEl) qlEl.insertAdjacentElement('beforebegin', startCard);
+    }
 
     const heroP = container.querySelector('.hero p');
     if (heroP) {
