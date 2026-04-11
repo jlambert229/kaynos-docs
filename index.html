@@ -2430,7 +2430,17 @@
 </ol>
 <h2>Who sees it</h2>
 <p>All members, coaches, and admins in your account. This broad visibility is intentional and differs from a private session.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Upload options and limits: <a onclick="navigate('uploading')">Uploading videos</a> and <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Upload options and limits: <a onclick="navigate('uploading')">Uploading videos</a> and <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
+
+<h2>Attendance tracking</h2>
+<p>Mark which students attended a class so coaches and parents can track participation.</p>
+<ol>
+<li>Open a class recording.</li>
+<li>Click <strong>Mark Attendance</strong> (or use the roster view).</li>
+<li>Check off students who were present. You can batch-select multiple students.</li>
+<li>Save — attendance records appear in each student's progress timeline and are visible to parents.</li>
+</ol>
+<p>Attendance data feeds into the progress dashboard, helping coaches spot students who are falling off.</p>`},
 
     notes: {
       title: "Notes and timestamps", section: "Sessions & Classes",
@@ -2975,6 +2985,48 @@
   <button class="form-another" onclick="document.getElementById('featureForm').reset();document.getElementById('featureForm').style.display='';document.getElementById('featureSuccess').style.display='none'">Submit another</button>
 </div>`},
 
+    "parent-guide": {
+      title: "Parent guide", section: "FAQ",
+      content: `
+<h1>Parent guide</h1>
+<div class="tldr"><strong>TL;DR:</strong> Log in at app.kaynos.net with the email your academy gave you. Watch your child's sessions, see their progress, and check the class schedule.</div>
+<p>This guide is for parents and guardians of students. You don't need to know anything about martial arts to use Kaynos.</p>
+
+<h2>Getting started</h2>
+<ol>
+<li>Your child's academy will send you a login email. Click the link or go to <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</li>
+<li>Log in with the email and temporary password from the invite.</li>
+<li>Change your password on first login.</li>
+<li>You'll see your child's dashboard — their sessions, classes, and progress.</li>
+</ol>
+
+<h2>What you'll see</h2>
+<ul>
+<li><strong>Sessions:</strong> Private recordings between your child and their coach. Only you, your child, and the coach can see these.</li>
+<li><strong>Classes:</strong> Group recordings shared with all students. Think of these as class replays.</li>
+<li><strong>Recap clips:</strong> Short 2-3 minute highlights from a class — much easier to watch than a full recording.</li>
+<li><strong>Notes:</strong> Your coach's timestamped feedback on specific moments in the video. Click a note to jump to that exact moment.</li>
+<li><strong>Progress:</strong> Which sessions your child has watched and how far they got. Belt rank and promotion history.</li>
+</ul>
+
+<h2>Understanding the sport</h2>
+<p>Not sure what "guard" or "mount" means? See our <a onclick="navigate('glossary')">glossary of BJJ terms</a> — written for non-practitioners.</p>
+
+<h2>Privacy and safety</h2>
+<ul>
+<li>Video is stored securely in the US (Backblaze B2) and delivered over encrypted connections (HTTPS).</li>
+<li>Only people in your academy's account can see recordings. Videos are not public.</li>
+<li>Playback links expire — they cannot be shared or bookmarked by outsiders.</li>
+<li>For the full privacy policy, see <a href="https://app.kaynos.net/privacy" target="_blank" rel="noopener">app.kaynos.net/privacy</a>.</li>
+</ul>
+<p>Questions about your child's data or COPPA/FERPA compliance? See the <a onclick="navigate('faq')">FAQ</a> or email \${mailLink()}.</p>
+
+<h2>Schedule and events</h2>
+<p>Check the schedule in the app for upcoming classes, private sessions, and belt tests. Enable email notifications in your profile to get reminders.</p>
+
+<h2>Billing</h2>
+<p>If your academy manages billing through Kaynos, you can view invoices and update your payment method from the billing section. Contact your academy directly for pricing questions.</p>`},
+
     "privacy-on-this-site": {
       title: "Privacy on this site", section: "Legal",
       content: `
@@ -3020,7 +3072,7 @@
     { section: "Account Management", pages: ["managing-members", "profile"] },
     { section: "Developers", pages: ["developer-api"] },
     { section: "Troubleshooting", pages: ["troubleshoot", "login-issues", "email-issues", "performance"] },
-    { section: "FAQ", pages: ["faq", "contact"] },
+    { section: "FAQ", pages: ["faq", "contact", "parent-guide"] },
     { section: "Legal", pages: ["privacy-on-this-site"] }
   ];
 
