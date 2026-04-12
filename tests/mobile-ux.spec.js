@@ -231,6 +231,8 @@ test.describe('Widgets', () => {
 
   test('upload calculator computes result', async ({ page }) => {
     await page.goto('/#formats');
+    // Calculator lives in a collapsed <details> — expand before interacting
+    await page.locator('details', { hasText: 'Upload time calculator' }).locator('summary').click();
     await page.fill('#calcSize', '500');
     await page.fill('#calcSpeed', '25');
     await expect(page.locator('#calcResult')).toBeVisible();
@@ -239,6 +241,8 @@ test.describe('Widgets', () => {
 
   test('error lookup returns matches', async ({ page }) => {
     await page.goto('/#troubleshoot');
+    // Error lookup lives in a collapsed <details> — expand before interacting
+    await page.locator('details', { hasText: 'Error code lookup' }).locator('summary').click();
     await page.fill('#errorInput', '403');
     await expect(page.locator('.error-match')).toHaveCount(1);
   });
@@ -255,6 +259,8 @@ test.describe('Widgets', () => {
 
   test('preflight checklist toggles items', async ({ page }) => {
     await page.goto('/#uploading');
+    // Preflight checklist lives in a collapsed <details> — expand before interacting
+    await page.locator('details', { hasText: 'Upload preflight checklist' }).locator('summary').click();
     await page.waitForSelector('.preflight-item');
     const item = page.locator('.preflight-item').first();
     await expect(item).not.toHaveClass(/checked/);
@@ -487,11 +493,14 @@ test.describe('Release notes', () => {
 // ── Redirects ───────────────────────────────────────────────
 
 test.describe('Redirects', () => {
+  // feature-requests was deliberately kept as its own page to host the
+  // feature-request form (KAY-238); it is not in REDIRECTS. The explicit
+  // redirect cases (whats-new, upload-checklist, etc.) follow below.
   test('old page IDs redirect to new targets', async ({ page }) => {
-    await page.goto('/#feature-requests');
+    await page.goto('/#tags');
     await page.waitForSelector('.content-inner h1');
-    await expect(page).toHaveURL(/#release-notes/);
-    await expect(page.locator('.content-inner h1')).toContainText('Release notes');
+    await expect(page).toHaveURL(/#notes/);
+    await expect(page.locator('.content-inner h1')).toContainText('Notes');
   });
 
   test('whats-new redirects to release-notes', async ({ page }) => {
