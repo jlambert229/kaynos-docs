@@ -15,6 +15,10 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      - name: Validate XML (feed + sitemap)
+        run: npm run validate:xml
+      - name: Validate HTML (index.html structure)
+        run: npm run validate:html
       - run: npx playwright install --with-deps chromium
       - name: Start server
         run: npx http-server . -p 3000 -c-1 &

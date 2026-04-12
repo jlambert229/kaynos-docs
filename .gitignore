@@ -3,3 +3,10 @@ kaynos-docs.html
 node_modules/
 playwright-report/
 test-results/
+
+# claude-flow / swarm local artifacts (not committed)
+.claude-flow/
+.swarm/
+claude-flow.config.json
+ruvector.db
+data/memory/
