@@ -1875,8 +1875,8 @@
   </a>
   <a class="feature-card" href="#creating-sessions" onclick="navigate('creating-sessions');return false">
     <div class="feature-icon">${IC.rocket}</div>
-    <h4>Sessions & scheduling</h4>
-    <p>Private sessions (one student) or shared classes (everyone). Calendar view with conflict detection. Clips for sharing highlights.</p>
+    <h4>Sessions & classes</h4>
+    <p>Private sessions (one student) or shared classes (everyone). Students can request video review from coaches. Clips for sharing highlights.</p>
   </a>
   <a class="feature-card" href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">
     <div class="feature-icon">${IC.check}</div>
@@ -1885,8 +1885,8 @@
   </a>
   <a class="feature-card" href="#developer-api" onclick="navigate('developer-api');return false">
     <div class="feature-icon">${IC.info}</div>
-    <h4>Integrations & API</h4>
-    <p>Developer API planned for a future release. Stripe billing ($49/mo or $490/yr, 14-day free trial).</p>
+    <h4>Billing & API</h4>
+    <p>Stripe billing ($49/mo or $490/yr, 14-day free trial). Developer API planned for a future release.</p>
   </a>
 </div>
 </details>
@@ -1949,10 +1949,19 @@
       title: "Setting up your account", section: "Getting Started",
       content: `
 <h1>Setting up your account</h1>
-<div class="tldr"><strong>TLDR:</strong> Log in at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> with your invite email. Change your temporary password first.</div>
-<p>After signup, login details go to the email you used. Change the temporary password as soon as you're in.</p>
+<div class="tldr"><strong>TLDR:</strong> School owners: sign up, pay, and follow the instructor checklist. Invited members: log in with your invite email and change your temporary password.</div>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Open the product at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>. Next steps: <a onclick="navigate('inviting-members')">Inviting your team</a> and <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>
-<h2>First login</h2>
+<h2>New school signup</h2>
+<p>Creating a new school account takes three steps:</p>
+<ol>
+<li><strong>Sign up</strong> — enter your school name, your name, and email at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</li>
+<li><strong>Payment</strong> — choose monthly ($49/mo) or annual ($490/yr). Every account starts with a 14-day free trial.</li>
+<li><strong>Confirmation</strong> — you land on the coach dashboard with the instructor checklist.</li>
+</ol>
+<p>The <strong>instructor checklist</strong> walks you through three first actions: add a student, record a session, and upload a class. Complete them at your own pace.</p>
+<h2>Invited members</h2>
+<p>If someone invited you (coach or student), login details go to the email they used. Change the temporary password as soon as you are in.</p>
+<h3>First login</h3>
 <ol>
 <li>Use the welcome email link or go to <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</li>
 <li>Enter the same email and the temporary password from the invite.</li>
@@ -2256,7 +2265,7 @@
 <li>Click <strong>Create Clip</strong> and give it a descriptive title (e.g., "Guard retention drill — key details").</li>
 <li>Toggle <strong>Share</strong> to make it visible to all students in the class.</li>
 </ol>
-<p>Students and parents see recap clips on their dashboard alongside full recordings. Short clips have much higher watch rates.</p>
+<p>Students see recap clips on their dashboard alongside full recordings. Short clips have much higher watch rates.</p>
 <h3>Sharing clips externally</h3>
 <p>Share a clip with someone who doesn't have a Kaynos account — a training partner at another gym, a parent, or a competition coach.</p>
 <ol>
@@ -2404,15 +2413,18 @@
 <h2>Who sees it</h2>
 <p>The assigned student, the creator, and admins. Other students cannot open someone else's private session.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>First upload walkthrough: <a onclick="navigate('first-upload')">Your first video upload</a>. Visibility model: <a onclick="navigate('faq')">FAQ</a>.</div></div>
-<h2>Scheduling</h2>
-<p>Schedule sessions in advance from the calendar view.</p>
+<h2>Review requests</h2>
+<p>Students can request a video review from any coach. A review request creates a draft session that the student fills out.</p>
+<h3>How students submit a request</h3>
 <ol>
-<li>Go to <strong>Schedule</strong> in the sidebar.</li>
-<li>Click a time slot or use <strong>New</strong> to create a scheduled session.</li>
-<li>Set title, student (or class), date, time, and duration (default: 60 minutes).</li>
-<li>The system checks for conflicts with your other sessions automatically.</li>
+<li>Click <strong>Request Review</strong> in the student dashboard.</li>
+<li>Select a coach and add a description of what they want feedback on.</li>
+<li>Upload the video to the draft session.</li>
+<li>Submit the request — the coach receives a notification.</li>
 </ol>
-<p>Scheduled sessions appear on the dashboard for both coaches and students. Switch between daily, weekly, and monthly views to manage your calendar.</p>`},
+<h3>How coaches respond</h3>
+<p>Pending review requests appear on the coach dashboard. The coach can <strong>accept</strong>, <strong>decline</strong>, or <strong>skip</strong> each request. Accepting converts the draft into a full session — the coach then watches the video and adds notes and annotations as usual.</p>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Review requests are the main way students initiate feedback. Coaches who enable <a onclick="navigate('profile')">email notifications</a> get alerted as soon as a request comes in.</div></div>`},
 
     "creating-classes": {
       title: "Creating a class", section: "Sessions & Classes",
@@ -2431,12 +2443,12 @@
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Upload options and limits: <a onclick="navigate('uploading')">Uploading videos</a> and <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 
 <h2>Attendance tracking</h2>
-<p>Mark which students attended a class so coaches and parents can track participation.</p>
+<p>Mark which students attended a class so coaches can track participation.</p>
 <ol>
 <li>Open a class recording.</li>
 <li>Click <strong>Mark Attendance</strong> (or use the roster view).</li>
 <li>Check off students who were present. You can batch-select multiple students.</li>
-<li>Save — attendance records appear in each student's progress timeline and are visible to parents.</li>
+<li>Save — attendance records appear in each student's progress timeline.</li>
 </ol>
 <p>Attendance data feeds into the progress dashboard, helping coaches spot students who are falling off.</p>`},
 
@@ -2637,8 +2649,6 @@
 </ul>
 <h3>Turning notifications off</h3>
 <p><strong>Profile</strong> → <strong>Email Notifications</strong>. Security-related messages (such as password resets) may still send.</p>
-<h3>Session reminders</h3>
-<p>You'll receive an email reminder <strong>15 minutes before</strong> each scheduled session. Reminders are tied to your notification preference — disable email notifications to stop them.</p>
 <h2>In-app notifications</h2>
 <p>The bell icon in the header shows unread notifications: mentions, note replies, and session shares. Click to view, or mark all as read.</p>
 <h3>Not receiving mail</h3>
@@ -2845,7 +2855,7 @@
 <div class="glossary-term"><dt>Tag</dt><dd>A label attached to sessions or classes for organization and filtering. Tags are shared across the account — examples: <code>guard</code>, <code>comp-prep</code>, <code>fundamentals</code>.</dd></div>
 <div class="glossary-term"><dt>Progress</dt><dd>A lightweight tracker that records playback position (for resume), completion status, and last-viewed time. Coaches see completion across their students; no invasive analytics.</dd></div>
 <div class="glossary-term"><dt>Clip</dt><dd>A short excerpt from a session or class, created by a coach to highlight a specific moment or technique. Clips can be shared externally via a token link — no login required for the viewer.</dd></div>
-<div class="glossary-term"><dt>Review Request</dt><dd>A student-initiated request asking a coach to review a specific moment in a video. The student flags a timestamp and the coach receives a notification to provide feedback.</dd></div>
+<div class="glossary-term"><dt>Review Request</dt><dd>A student-initiated request for a coach to review a video. The student selects a coach, adds context, and uploads their video to a draft session. The coach can accept, decline, or skip the request from their dashboard.</dd></div>
 <div class="glossary-term"><dt>Highlight</dt><dd>A time-range bookmark on the video timeline, marking a start and end point. Used to call attention to a segment worth reviewing.</dd></div>
 <div class="glossary-term"><dt>Annotation</dt><dd>A drawing overlay on a frozen video frame — arrows, circles, or freehand — attached to a specific timestamp. Appears during playback to highlight technique details.</dd></div>
 <div class="glossary-term"><dt>CDN</dt><dd>Content Delivery Network — Kaynos stores video on Backblaze B2 and delivers it through Cloudflare's edge servers close to the viewer, reducing buffering.</dd></div>
