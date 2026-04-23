@@ -1881,7 +1881,7 @@
   <a class="feature-card" href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">
     <div class="feature-icon">${IC.check}</div>
     <h4>Security & compliance</h4>
-    <p>Two-factor authentication (TOTP). US-hosted storage (Backblaze B2 + Cloudflare CDN). Data export for GDPR. HTTPS everywhere.</p>
+    <p>US-hosted storage (Backblaze B2 + Cloudflare CDN). Data export for GDPR. HTTPS everywhere. Role-based access controls.</p>
   </a>
   <a class="feature-card" href="#developer-api" onclick="navigate('developer-api');return false">
     <div class="feature-icon">${IC.info}</div>
@@ -2583,19 +2583,8 @@
 <p><strong>One person, two accounts?</strong> Use a different email address per account. Each account is completely separate.</p>
 <p><strong>Member limits?</strong> The product does not enforce a headcount cap.</p>
 <p><strong>Student-to-student invites?</strong> Only staff roles can invite; students cannot invite other students.</p>
-<h2>Multi-location management</h2>
-<p>If you run multiple schools or locations, Kaynos supports a single admin dashboard across all of them.</p>
-<h3>Adding locations</h3>
-<p>Contact support to add additional schools to your account. Each school has its own member roster, sessions, classes, and storage quota.</p>
-<h3>Switching between schools</h3>
-<p>Use the school selector in the top-left of the admin dashboard to switch between locations. Your admin credentials work across all schools tied to your account.</p>
-<h3>Cross-school view</h3>
-<ul>
-<li>See aggregate stats (total students, sessions, storage) across all locations.</li>
-<li>Monitor coach activity per school — who's uploading, who's adding notes.</li>
-<li>Billing is per-school — each location has its own subscription and storage limits.</li>
-</ul>
-<p>For large multi-location setups, contact ${mailLink()} to discuss enterprise pricing and dedicated support.</p>
+<h2>Multiple schools</h2>
+<p>Kaynos supports managing multiple schools under one account. Multi-school setup is handled by a tenant admin or by contacting ${mailLink()} — it is not self-service. Each school has its own member roster, sessions, classes, and storage quota.</p>
 <h2>Branding</h2>
 <p>Admins can customize the look of their account under <strong>Admin → Branding</strong>. Set a custom logo, accent color, and welcome text that members see when they log in.</p>
 <h2>School hours</h2>
@@ -2611,11 +2600,13 @@
 <h2>Admin panel overview</h2>
 <p>The Admin panel has several sections. Here's what each does:</p>
 <dl>
-<dt>Members</dt><dd>View roster, add/remove members, change roles, reset passwords. The main people management hub.</dd>
-<dt>Storage</dt><dd>Monitor video count and storage usage against your limits (default: 100 videos, 50 GB). View expiring videos. Request limit increases.</dd>
+<dt>Members</dt><dd>View roster, add/remove members, change roles, reset passwords, and filter by role. The main people management hub.</dd>
+<dt>Storage</dt><dd>Monitor video count and storage usage against your limits (default: 100 videos, 50 GB). View expiring videos. Request a storage increase.</dd>
+<dt>AI Usage</dt><dd>View AI feature usage status for your school.</dd>
 <dt>Reports</dt><dd>Configure automated usage reports (off/daily/weekly/monthly). Send a manual report immediately.</dd>
 <dt>Branding</dt><dd>Set a custom logo, accent color, and welcome text for your academy.</dd>
-<dt>Settings</dt><dd>School name, operating hours (default 6 AM–9 PM).</dd>
+<dt>Settings</dt><dd>School name, operating hours (default 6 AM–9 PM), cancellation policy.</dd>
+<dt>Export</dt><dd>Export your school data.</dd>
 <dt>Danger Zone</dt><dd>Schedule account deletion (30-day grace period) or cancel a pending deletion.</dd>
 </dl>`},
 
@@ -2636,22 +2627,14 @@
 </ol>
 <p>Locked out? Ask an admin for a reset, or email ${mailLink()}. Login help: <a onclick="navigate('login-issues')">Login and access issues</a>.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Profile lives in the app: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> → your name in the sidebar (or menu on mobile).</div></div>
-<h2>Two-factor authentication (2FA)</h2>
-<p>Add an extra layer of security with time-based one-time passwords (TOTP).</p>
-<ol>
-<li>Go to <strong>Profile → Security</strong>.</li>
-<li>Click <strong>Set up 2FA</strong>. Scan the QR code with an authenticator app (Google Authenticator, Authy, 1Password, etc.).</li>
-<li>Enter the 6-digit code from your app to verify.</li>
-<li>2FA is now active. You'll need the code each time you log in.</li>
-</ol>
-<p>To disable: <strong>Profile → Security → Disable 2FA</strong>. Requires your password and a current 6-digit code.</p>
 <h2>Notifications</h2>
-<p>Email covers new sessions, classes, and onboarding (invites and temporary passwords), but not billing. Toggle preferences under <strong>Profile</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
+<p>Email notifications cover mentions, note replies, and session shares. Toggle preferences under <strong>Profile</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Delivery problems? See <a onclick="navigate('email-issues')">Email and notification issues</a>.</div></div>
 <h3>Typical messages</h3>
 <ul>
-<li>New session assigned (students)</li>
-<li>New class available (students)</li>
+<li>Someone mentioned you in a note</li>
+<li>A reply was added to your note</li>
+<li>A session was shared with you</li>
 <li>Invites and temporary passwords (onboarding)</li>
 </ul>
 <h3>Turning notifications off</h3>
@@ -2659,7 +2642,7 @@
 <h3>Session reminders</h3>
 <p>You'll receive an email reminder <strong>15 minutes before</strong> each scheduled session. Reminders are tied to your notification preference — disable email notifications to stop them.</p>
 <h2>In-app notifications</h2>
-<p>The bell icon in the header shows unread notifications: mentions, replies, new sessions, new classes, and schedule reminders. Click to view, or mark all as read.</p>
+<p>The bell icon in the header shows unread notifications: mentions, note replies, and session shares. Click to view, or mark all as read.</p>
 <h3>Not receiving mail</h3>
 <ol>
 <li>Check spam or promotions folders.</li>
@@ -3166,7 +3149,7 @@
 <li>Encryption in transit: TLS 1.2+ (HTTPS everywhere)</li>
 <li>Encryption at rest: AES-256 for stored video</li>
 <li>Passwords: bcrypt hashed (not reversible)</li>
-<li>Two-factor authentication: TOTP available for all accounts</li>
+<li>Role-based access controls enforced at API and database level</li>
 <li>Playback URLs: time-limited and signed</li>
 <li>Payment: PCI-DSS compliant via Stripe (Kaynos never handles card numbers)</li>
 </ul>
@@ -3234,7 +3217,7 @@
 <ul>
 <li>Written information security program maintained</li>
 <li>Encryption: AES-256 at rest, TLS 1.2+ in transit</li>
-<li>Multi-factor authentication (TOTP) available</li>
+<li>Role-based access controls with per-resource authorization</li>
 <li>Role-based access controls enforced at API and database level</li>
 <li>48-hour incident response protocol</li>
 <li>Vendor security assessments conducted</li>
@@ -3399,8 +3382,8 @@
     'progress': 'Track student progress in Kaynos. Watch rate, session count, note count, time-period filtering, and per-session completion tracking.',
     'formats': 'Supported video formats and limits in Kaynos. MP4, MOV, WebM, AVI. Max 5 GB. Upload time calculator.',
     'storage': 'Video storage and retention in Kaynos. Backblaze B2, 6-month retention, 100 video / 50 GB defaults.',
-    'managing-members': 'Manage members in Kaynos. Invite coaches and students, change roles, reset passwords, multi-location.',
-    'profile': 'Kaynos profile settings. Password, 2FA, notifications, and account preferences.',
+    'managing-members': 'Manage members in Kaynos. Invite coaches and students, change roles, reset passwords, admin panel overview.',
+    'profile': 'Kaynos profile settings. Password, notifications, and account preferences.',
     'feature-requests': 'Submit a feature request for Kaynos. Tell us what to build next.',
     'parent-guide': 'Parent and guardian guide for Kaynos. What your child can see and do, privacy and safety info, and how to contact the coach.',
     'privacy-on-this-site': 'Privacy on the Kaynos help center. What data stays in your browser and what is sent externally.',
