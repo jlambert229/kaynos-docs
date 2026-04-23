@@ -1886,7 +1886,7 @@
   <a class="feature-card" href="#developer-api" onclick="navigate('developer-api');return false">
     <div class="feature-icon">${IC.info}</div>
     <h4>Integrations & API</h4>
-    <p>REST API with token auth. Webhooks for real-time events. Stripe billing ($49/mo or $490/yr, 14-day free trial).</p>
+    <p>Developer API planned for a future release. Stripe billing ($49/mo or $490/yr, 14-day free trial).</p>
   </a>
 </div>
 </details>
@@ -2046,7 +2046,7 @@
         <li><a onclick="navigate('notes')">Standardize your tag vocabulary</a> with the team</li>
         <li><a onclick="navigate('progress')">Review progress tracking</a> — see who's watching</li>
         <li><a onclick="navigate('formats')">Optimize video settings</a> — 1080p H.264 for best results</li>
-        <li>Developers: <a onclick="navigate('developer-api')">explore the API</a> for automation</li>
+        <li>Developers: check our <a onclick="navigate('developer-api')">API roadmap</a> for future automation options</li>
       </ul>
     </div>
   </div>
@@ -2615,7 +2615,6 @@
 <dt>Storage</dt><dd>Monitor video count and storage usage against your limits (default: 100 videos, 50 GB). View expiring videos. Request limit increases.</dd>
 <dt>Reports</dt><dd>Configure automated usage reports (off/daily/weekly/monthly). Send a manual report immediately.</dd>
 <dt>Branding</dt><dd>Set a custom logo, accent color, and welcome text for your academy.</dd>
-<dt>Webhooks</dt><dd>Create webhook endpoints to receive real-time event callbacks (session.created, class.created, etc.). View delivery history.</dd>
 <dt>Settings</dt><dd>School name, operating hours (default 6 AM–9 PM).</dd>
 <dt>Danger Zone</dt><dd>Schedule account deletion (30-day grace period) or cancel a pending deletion.</dd>
 </dl>`},
@@ -2794,7 +2793,7 @@
 <h3>Which browsers are supported?</h3>
 <p>Current Chrome, Firefox, Safari, and Edge. If upload or playback fails in one browser, trying Chrome is a reasonable first step.</p>
 <h3>Do you expose an API?</h3>
-<p>Yes. Admins can create API tokens for scripts and integrations. Read <a onclick="navigate('developer-api')">Developer API</a> and avoid committing secrets to source control.</p>
+<p>Not yet. A developer API is planned for a future release. See the <a onclick="navigate('developer-api')">Developer API</a> page for details and how to get notified when it launches.</p>
 <hr>
 <h2>Support</h2>
 <h3>How do I contact you?</h3>
@@ -2838,119 +2837,17 @@
       title: "Developer API", section: "Developers",
       content: `
 <h1>Developer API</h1>
-<p>For accounts that want automation beyond the web UI: schedules, exports, or custom reporting. The API is HTTPS-only and scoped to your account's data. Create and manage tokens under <strong>Admin → Developer API</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> (admin role required).</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Swagger first.</strong> Sign in as an admin, then open the in-app docs. The same browser session lets <em>Try it out</em> use your cookies — <a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener">Swagger UI (production)</a>.</div></div>
-<div class="hint hint-danger"><div class="hint-icon">${IC.danger}</div><div><strong>Protect your secrets.</strong> API tokens are as sensitive as passwords. Store them in a secret manager or env vars — never commit them to git or expose them in frontend code.</div></div>
-<p>Contact support for API documentation access.</p>
-<h2>Two authentication doors</h2>
+<div class="tldr"><strong>TLDR:</strong> A public developer API is planned for a future release. There are no API tokens, webhooks, or third-party integrations available today.</div>
+<p>We are planning a developer API that will let you automate workflows, export data, and build custom integrations with Kaynos. This feature is not yet available.</p>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Interested in integrating with Kaynos? <a href="mailto:support@kaynos.net">Contact us</a> to share your use case and get notified when the API launches. You can also visit our <a onclick="navigate('contact')">contact page</a>.</div></div>
+<h2>What to expect</h2>
+<p>When the developer API is available, it will include:</p>
 <ul>
-<li><strong><code>/api/v1/…</code></strong> — for scripts and integrations: Bearer token minted under <strong>Admin → Developer API</strong>.</li>
-<li><strong><code>/api/integrations/…</code></strong> — while logged in to the browser: create/list/revoke tokens via session cookie (Swagger "Try it out").</li>
-<li>In-app route <strong><code>/admin/api-docs</code></strong> is Swagger UI; admin role required.</li>
+<li>REST endpoints for sessions, classes, members, and notes</li>
+<li>Token-based authentication</li>
+<li>Webhook notifications for real-time events</li>
 </ul>
-<h2>Base URLs</h2>
-<table><thead><tr><th>Environment</th><th>Host</th><th>API prefix</th></tr></thead><tbody>
-<tr><td>Production</td><td><a href="https://app.kaynos.net" target="_blank" rel="noopener"><code>https://app.kaynos.net</code></a></td><td><code>/api/v1</code></td></tr>
-<tr><td>Local Netlify dev</td><td><code>http://localhost:8888</code></td><td><code>/api/v1</code></td></tr>
-</tbody></table>
-<p>See the API reference (requires authentication) for available endpoints.</p>
-<h2>Bearer header</h2>
-<pre>Authorization: Bearer &lt;your-api-token&gt;</pre>
-<p>We show the secret exactly once when you mint it. Treat it like a Stripe key — password manager or env var, never committed.</p>
-<h2>Scopes</h2>
-<table><thead><tr><th>Scope</th><th>Does</th></tr></thead><tbody>
-<tr><td><code>read</code></td><td>GET requests for sessions, classes, members, etc.</td></tr>
-<tr><td><code>write</code></td><td>Creates, updates, deletes — plus all reads.</td></tr>
-</tbody></table>
-<p>The token inherits the permissions of the admin who created it. If they can't do it in the UI, the API returns <code>403</code>. No backdoors.</p>
-<h2>What v1 covers</h2>
-<ul>
-<li>Sessions and classes (lifecycle + progress reads)</li>
-<li>Members / roster where the product allows automation</li>
-<li>Notes pinned to sessions and classes</li>
-</ul>
-<h2>Webhook events</h2>
-<p>Subscribe to real-time event callbacks. Configure webhooks under <strong>Admin → Webhooks</strong>.</p>
-<table><thead><tr><th>Event</th><th>Fires when</th></tr></thead><tbody>
-<tr><td><code>session.created</code></td><td>A new session is created</td></tr>
-<tr><td><code>session.updated</code></td><td>Session title, date, or video changes</td></tr>
-<tr><td><code>class.created</code></td><td>A new class is created</td></tr>
-<tr><td><code>class.updated</code></td><td>Class details change</td></tr>
-<tr><td><code>note.added</code></td><td>A note is added to a session or class</td></tr>
-<tr><td><code>member.joined</code></td><td>A new member accepts their invite</td></tr>
-<tr><td><code>member.removed</code></td><td>A member is removed from the account</td></tr>
-</tbody></table>
-<p>Deliveries are retried up to 3 times with exponential backoff. View delivery history and manually retry from the webhooks panel.</p>
-
-<h2>Code examples</h2>
-<h3>List sessions (cURL)</h3>
-<pre>curl -H "Authorization: Bearer YOUR_TOKEN" \\
-  https://app.kaynos.net/api/v1/sessions</pre>
-
-<h3>Create a note (JavaScript)</h3>
-<pre>const res = await fetch('https://app.kaynos.net/api/v1/notes/session/SESSION_ID', {
-  method: 'POST',
-  headers: {
-    'Authorization': 'Bearer YOUR_TOKEN',
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    text: 'Great guard retention here',
-    timestamp_seconds: 142
-  })
-});</pre>
-
-<h2>Rate limits</h2>
-<table><thead><tr><th>Endpoint</th><th>Limit</th></tr></thead><tbody>
-<tr><td>Login</td><td>25 attempts per IP</td></tr>
-<tr><td>Signup</td><td>10 per IP</td></tr>
-<tr><td>Promo validation</td><td>15 per IP</td></tr>
-<tr><td>General API</td><td>No hard limit (fair use policy)</td></tr>
-</tbody></table>
-
-<h2>Error responses</h2>
-<table><thead><tr><th>Code</th><th>Meaning</th><th>Action</th></tr></thead><tbody>
-<tr><td><code>401</code></td><td>Missing or invalid token</td><td>Check Authorization header</td></tr>
-<tr><td><code>403</code></td><td>Insufficient scope or role</td><td>Token needs write scope or admin role</td></tr>
-<tr><td><code>404</code></td><td>Resource not in your account</td><td>Verify session/class/member ID</td></tr>
-<tr><td><code>429</code></td><td>Rate limited</td><td>Wait and retry with backoff</td></tr>
-</tbody></table>
-
-<h2>Managing tokens while logged in</h2>
-<ol>
-<li><code>GET /api/integrations/tokens</code> — inspect token metadata</li>
-<li><code>POST /api/integrations/tokens</code> — create a token (plaintext secret returned once)</li>
-<li><code>DELETE /api/integrations/tokens/{id}</code> — revoke a compromised key</li>
-</ol>
-<h3>Example create body</h3>
-<pre>{"name":"nightly-export","scopes":["read"]}</pre>
-<p>Add <code>"write"</code> to scopes only when you actually need it.</p>
-<h2>Error responses</h2>
-<table><thead><tr><th>Code</th><th>Meaning</th></tr></thead><tbody>
-<tr><td><code>401</code></td><td>Missing or invalid token</td></tr>
-<tr><td><code>403</code></td><td>Wrong scope or role</td></tr>
-<tr><td><code>404</code></td><td>Resource not in your account</td></tr>
-<tr><td><code>400</code></td><td>Bad request payload</td></tr>
-</tbody></table>
-<h2>Operational practices</h2>
-<ul>
-<li>Rotate API keys when technical staff leave.</li>
-<li>Prefer read-only scopes until write access is clearly required.</li>
-<li>Never embed secrets in client-side code — keep tokens server-side.</li>
-</ul>
-<h2>Quick links</h2>
-<ul>
-<li><a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener">Swagger UI</a></li>
-<li>Contact support for API documentation access</li>
-</ul>
-<h2>Webhooks</h2>
-<p>Receive real-time HTTP callbacks when events happen in your account.</p>
-<ol>
-<li>Go to <strong>Admin → Webhooks</strong>.</li>
-<li>Add an endpoint URL. Choose which events to subscribe to (e.g., session.created, class.created).</li>
-<li>Kaynos sends a POST request to your URL with the event payload.</li>
-</ol>
-<p>View delivery history and retry failed deliveries from the webhooks panel.</p>`},
+<p>Follow our <a onclick="navigate('release-notes')">release notes</a> for updates on API availability.</p>`},
 
     glossary: {
       title: "Glossary", section: "Getting Started",
@@ -2966,7 +2863,6 @@
 <div class="glossary-term"><dt>Note</dt><dd>A short text annotation pinned to a specific timestamp on the video timeline. Coaches and students can both create notes; coaches can edit any note.</dd></div>
 <div class="glossary-term"><dt>Tag</dt><dd>A label attached to sessions or classes for organization and filtering. Tags are shared across the account — examples: <code>guard</code>, <code>comp-prep</code>, <code>fundamentals</code>.</dd></div>
 <div class="glossary-term"><dt>Progress</dt><dd>A lightweight tracker that records playback position (for resume), completion status, and last-viewed time. Coaches see completion across their students; no invasive analytics.</dd></div>
-<div class="glossary-term"><dt>API Token</dt><dd>A secret key minted under Admin → Developer API. Used to authenticate scripts and integrations against the <code>/api/v1</code> endpoints. Treat like a password.</dd></div>
 <div class="glossary-term"><dt>Vimeo Source</dt><dd>An alternative to uploading a file — paste a Vimeo URL or video ID to embed video already hosted on Vimeo into a session or class.</dd></div>
 <div class="glossary-term"><dt>CDN</dt><dd>Content Delivery Network — Kaynos uses Cloudflare to deliver video quickly from edge servers close to the viewer, reducing buffering.</dd></div>
 </dl>
@@ -2983,7 +2879,7 @@
 <dt>Drilling</dt><dd>Repetitive practice of a specific technique with a cooperative partner. Think of it like running drills in basketball.</dd>
 <dt>Sparring / rolling</dt><dd>Live practice at varying intensity. "Rolling" is the BJJ term for sparring.</dd>
 </dl>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>For role details see <a onclick="navigate('roles')">Understanding user roles</a>. For API tokens see <a onclick="navigate('developer-api')">Developer API</a>.</div></div>`},
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>For role details see <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>`},
 
     troubleshoot: {
       title: "Troubleshooting wizard", section: "Troubleshooting",
@@ -3062,7 +2958,7 @@
 <li>Added keyboard shortcuts for faster navigation — press <kbd>?</kbd> to see them all.</li>
 <li>Print-friendly styles for saving pages offline.</li>
 <li>Better accessibility: skip-to-content, improved ARIA labels, focus management.</li>
-<li>Full API reference with Swagger UI link, scopes, and token management.</li>
+<li>Developer API page updated with roadmap and contact information.</li>
 </ul>
 <h3>March 2026</h3>
 <ul>
@@ -3482,7 +3378,7 @@
     'creating-sessions': 'Create sessions and classes in Kaynos. Private lessons vs shared classes, and scheduling.',
     'notes': 'Timestamped coaching notes in Kaynos. Add notes, voice dictation, annotations, reactions, AI review, and tags.',
     'faq': 'Frequently asked questions about Kaynos. Pricing, security, privacy, browser support, and billing.',
-    'developer-api': 'Kaynos Developer API. Authentication, endpoints, scopes, webhooks, and integration guide.',
+    'developer-api': 'Kaynos Developer API. Planned for a future release. Contact us to get notified when it launches.',
     'roles': 'User roles in Kaynos. Admin, coach, and student permissions and capabilities.',
     'troubleshoot': 'Troubleshoot Kaynos issues. Step-by-step wizard for upload, playback, login, and performance problems.',
     'progress': 'Track student progress in Kaynos. Watch rate, session count, note count, time-period filtering, and per-session completion tracking.',
@@ -4162,7 +4058,6 @@
       'playback': 'https://app.kaynos.net/sessions',
       'notes': 'https://app.kaynos.net/sessions',
       'progress': 'https://app.kaynos.net/dashboard',
-      'developer-api': 'https://app.kaynos.net/admin/api-docs',
     };
     const url = APP_LINKS[pageId];
     if (!url) return;
@@ -4385,7 +4280,7 @@
     ],
     developer: [
       { id: 'cl-login', text: 'Log in as admin', page: 'setup' },
-      { id: 'cl-api', text: 'Read the API docs', page: 'developer-api' },
+      { id: 'cl-api', text: 'Review the API roadmap', page: 'developer-api' },
       { id: 'cl-glossary', text: 'Review the glossary', page: 'glossary' },
       { id: 'cl-formats', text: 'Check supported formats', page: 'formats' },
       { id: 'cl-faq', text: 'Browse the FAQ', page: 'faq' },
@@ -4437,7 +4332,7 @@
         { href: 'performance', icon: IC.alert, title: 'Performance tips', desc: 'Speed up loading and playback' },
       ],
       developer: [
-        { href: 'developer-api', icon: IC.book, title: 'API reference', desc: 'Auth, endpoints, and schemas', featured: true },
+        { href: 'developer-api', icon: IC.book, title: 'API roadmap', desc: 'Planned for a future release', featured: true },
         { href: 'formats', icon: IC.video, title: 'Video formats', desc: 'Supported codecs and limits', featured: true },
         { href: 'glossary', icon: IC.book, title: 'Glossary', desc: 'Platform terminology', featured: true },
         { href: 'faq', icon: IC.chat, title: 'FAQ', desc: 'Common questions' },
@@ -4480,8 +4375,8 @@
       ],
       developer: [
         { num: '1', text: 'Log in as admin', link: 'https://app.kaynos.net', external: true },
-        { num: '2', text: 'Open the API docs', link: 'https://app.kaynos.net/admin/api-docs', external: true },
-        { num: '3', text: 'Create your first API token', link: 'developer-api' },
+        { num: '2', text: 'Review the API roadmap', link: 'developer-api' },
+        { num: '3', text: 'Browse the FAQ', link: 'faq' },
       ],
     };
 
@@ -4698,7 +4593,6 @@
     'student': 'End user who watches sessions and classes, adds notes, and tracks progress.',
     'note': 'A text annotation pinned to a specific timestamp on the video timeline.',
     'tag': 'A label for organizing sessions and classes (e.g. guard, comp-prep, drilling).',
-    'api token': 'A secret key for authenticating scripts against the API.',
   };
 
   function addGlossaryTooltips(container) {
@@ -5055,8 +4949,7 @@
     {
       version: 'v2.1', date: 'March 15, 2026', status: 'shipped',
       items: [
-        { type: 'new', text: 'Developer API documentation with Swagger UI link and token management' },
-        { type: 'new', text: 'OpenAPI spec published on GitHub' },
+        { type: 'new', text: 'Developer API placeholder page with roadmap information' },
         { type: 'new', text: 'Interactive troubleshooting wizard with guided diagnosis' },
         { type: 'new', text: 'Error message lookup tool — paste an error to find the fix' },
         { type: 'new', text: 'Upload time calculator based on file size and connection speed' },
