@@ -2582,22 +2582,22 @@
 <p>Coach and admin views show completion and recency. We do not track fine-grained analytics or viewer heatmaps.</p>
 <h2>What we intentionally avoid</h2>
 <p>No invasive watch analytics or third-party ad-style tracking. The product stores only what it needs for resume and high-level completion tracking.</p>
-<h2>Belt rank and progression</h2>
-<p>Kaynos tracks belt rank and stripe promotions for each student.</p>
-<h3>Setting rank</h3>
-<p>Admins and coaches can set a student's current belt and stripe count from their profile or the member management page.</p>
-<h3>Logging promotions</h3>
-<p>When a student is promoted, update their belt rank. The change is logged with a date and appears in their progression timeline. Students and parents can see their promotion history.</p>
-<h3>Belt system</h3>
-<p>BJJ belts in order: <strong>White → Blue → Purple → Brown → Black</strong>. Each belt can have up to 4 stripes before the next belt. Progression typically takes 10-15 years to black belt. Promotions are at the instructor's discretion.</p>
-<h2>Watch accountability</h2>
-<p>See which students haven't reviewed their sessions yet.</p>
+<h2>Dashboard metrics</h2>
+<p>The progress dashboard shows three headline numbers for the selected time period:</p>
 <ul>
-<li>The coach dashboard shows <strong>unwatched sessions</strong> per student — a count of recordings they haven't opened.</li>
-<li>Click a student's name to see which specific sessions are unwatched.</li>
-<li>Use the <strong>Nudge</strong> button to send a reminder email prompting them to watch.</li>
+<li><strong>Watch rate</strong> — percentage of assigned sessions the student has viewed.</li>
+<li><strong>Session count</strong> — total sessions (private and class) in the period.</li>
+<li><strong>Note count</strong> — total coaching notes written on the student's sessions.</li>
 </ul>
-<p>Watch accountability helps coaches identify students who may need a push — especially before the next session.</p>
+<h2>Time-period filtering</h2>
+<p>Use the filter buttons to narrow the view to the <strong>last 7, 30, or 90 days</strong>. The default view is 30 days.</p>
+<h2>Per-session details</h2>
+<p>Each session row shows:</p>
+<ul>
+<li><strong>Last viewed</strong> — when the student last opened the recording.</li>
+<li><strong>Resume position</strong> — where they left off so they can pick up again.</li>
+<li><strong>Completion status</strong> — whether the full video was watched.</li>
+</ul>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Roster and access control: <a onclick="navigate('managing-members')">Managing members</a>.</div></div>`},
 
     "managing-members": {
@@ -3017,7 +3017,6 @@
 <dt>Takedown</dt><dd>A technique to bring a standing opponent to the ground.</dd>
 <dt>Drilling</dt><dd>Repetitive practice of a specific technique with a cooperative partner. Think of it like running drills in basketball.</dd>
 <dt>Sparring / rolling</dt><dd>Live practice at varying intensity. "Rolling" is the BJJ term for sparring.</dd>
-<dt>Belt progression</dt><dd>BJJ uses colored belts to mark experience: white → blue → purple → brown → black. Each belt can have up to 4 stripes. Promotions are based on time, skill, and instructor discretion — typically years between belts.</dd>
 </dl>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>For role details see <a onclick="navigate('roles')">Understanding user roles</a>. For API tokens see <a onclick="navigate('developer-api')">Developer API</a>.</div></div>`},
 
@@ -3176,7 +3175,7 @@
 <li><strong>Classes:</strong> Group recordings shared with all students. Think of these as class replays.</li>
 <li><strong>Recap clips:</strong> Short 2-3 minute highlights from a class — much easier to watch than a full recording.</li>
 <li><strong>Notes:</strong> Your coach's timestamped feedback on specific moments in the video. Click a note to jump to that exact moment.</li>
-<li><strong>Progress:</strong> Which sessions your child has watched and how far they got. Belt rank and promotion history.</li>
+<li><strong>Progress:</strong> Which sessions your child has watched, how far they got, and overall watch rate.</li>
 </ul>
 
 <h2>Understanding the sport</h2>
@@ -3193,7 +3192,7 @@
 <div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div><strong>Looking for the full privacy policy?</strong> See <a href="https://app.kaynos.net/privacy" target="_blank" rel="noopener">app.kaynos.net/privacy</a> for the Kaynos application privacy policy, or <a onclick="navigate('privacy-on-this-site')">Privacy on this site</a> for help center privacy details including COPPA and FERPA information.</div></div>
 
 <h2>Schedule and events</h2>
-<p>Check the schedule in the app for upcoming classes, private sessions, and belt tests. Enable email notifications in your profile to get reminders.</p>
+<p>Check the schedule in the app for upcoming classes and private sessions. Enable email notifications in your profile to get reminders.</p>
 
 <h2>Billing</h2>
 <p>If your academy manages billing through Kaynos, you can view invoices and update your payment method from the billing section. Contact your academy directly for pricing questions.</p>`},
@@ -3260,7 +3259,7 @@
 <li><strong>Right to opt-out</strong> of data sale or sharing. <em>Kaynos does not sell or share personal information with third parties for marketing.</em></li>
 <li><strong>Right to non-discrimination</strong> for exercising these rights.</li>
 </ul>
-<p><strong>Data categories collected:</strong> identifiers (name, email), video recordings, professional information (role, belt rank), internet activity (IP, browser, login times).</p>
+<p><strong>Data categories collected:</strong> identifiers (name, email), video recordings, professional information (role), internet activity (IP, browser, login times).</p>
 <p><strong>Data retention:</strong> account data until deletion; videos for 6 months (configurable); login/session data for 90 days.</p>
 <p>To exercise your rights, email \${mailLink('privacy@kaynos.net')} with your name, email, and request type. We respond within 45 calendar days.</p>
 
@@ -3350,7 +3349,6 @@
 <tr><td>Video recordings</td><td>Core coaching service</td><td>6 months default (configurable)</td></tr>
 <tr><td>Coaching notes</td><td>Timestamped feedback</td><td>With associated session/class</td></tr>
 <tr><td>Progress data</td><td>Resume playback, completion tracking</td><td>With associated session/class</td></tr>
-<tr><td>Belt rank</td><td>Progression tracking</td><td>Until account deletion</td></tr>
 <tr><td>IP address, browser</td><td>Security, rate limiting</td><td>90 days</td></tr>
 <tr><td>Payment metadata</td><td>Billing (via Stripe — no card numbers)</td><td>Per Stripe retention policy</td></tr>
 </tbody>
@@ -3522,7 +3520,7 @@
     'developer-api': 'Kaynos Developer API. Authentication, endpoints, scopes, webhooks, and integration guide.',
     'roles': 'User roles in Kaynos. Admin, coach, and student permissions and capabilities.',
     'troubleshoot': 'Troubleshoot Kaynos issues. Step-by-step wizard for upload, playback, login, and performance problems.',
-    'progress': 'Track student progress in Kaynos. Watch accountability, belt progression, and completion tracking.',
+    'progress': 'Track student progress in Kaynos. Watch rate, session count, note count, time-period filtering, and per-session completion tracking.',
     'formats': 'Supported video formats and limits in Kaynos. MP4, MOV, WebM, AVI. Max 5 GB. Upload time calculator.',
     'storage': 'Video storage and retention in Kaynos. Backblaze B2, 6-month retention, 100 video / 50 GB defaults.',
     'managing-members': 'Manage members in Kaynos. Invite coaches and students, change roles, reset passwords, multi-location.',
