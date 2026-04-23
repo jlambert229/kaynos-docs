@@ -2846,8 +2846,11 @@
 <div class="glossary-term"><dt>Note</dt><dd>A short text annotation pinned to a specific timestamp on the video timeline. Coaches and students can both create notes; coaches can edit any note.</dd></div>
 <div class="glossary-term"><dt>Tag</dt><dd>A label attached to sessions or classes for organization and filtering. Tags are shared across the account — examples: <code>guard</code>, <code>comp-prep</code>, <code>fundamentals</code>.</dd></div>
 <div class="glossary-term"><dt>Progress</dt><dd>A lightweight tracker that records playback position (for resume), completion status, and last-viewed time. Coaches see completion across their students; no invasive analytics.</dd></div>
-<div class="glossary-term"><dt>Vimeo Source</dt><dd>An alternative to uploading a file — paste a Vimeo URL or video ID to embed video already hosted on Vimeo into a session or class.</dd></div>
-<div class="glossary-term"><dt>CDN</dt><dd>Content Delivery Network — Kaynos uses Cloudflare to deliver video quickly from edge servers close to the viewer, reducing buffering.</dd></div>
+<div class="glossary-term"><dt>Clip</dt><dd>A short excerpt from a session or class, created by a coach to highlight a specific moment or technique. Clips can be shared externally via a token link — no login required for the viewer.</dd></div>
+<div class="glossary-term"><dt>Review Request</dt><dd>A student-initiated request asking a coach to review a specific moment in a video. The student flags a timestamp and the coach receives a notification to provide feedback.</dd></div>
+<div class="glossary-term"><dt>Highlight</dt><dd>A time-range bookmark on the video timeline, marking a start and end point. Used to call attention to a segment worth reviewing.</dd></div>
+<div class="glossary-term"><dt>Annotation</dt><dd>A drawing overlay on a frozen video frame — arrows, circles, or freehand — attached to a specific timestamp. Appears during playback to highlight technique details.</dd></div>
+<div class="glossary-term"><dt>CDN</dt><dd>Content Delivery Network — Kaynos stores video on Backblaze B2 and delivers it through Cloudflare's edge servers close to the viewer, reducing buffering.</dd></div>
 </dl>
 <h2>BJJ positions and movements</h2>
 <p>New to martial arts? Here's what your coach means:</p>
@@ -3077,6 +3080,7 @@
 <tr><td>poll-votes, poll-voted, poll-custom</td><td>Feature poll votes (legacy, no longer used)</td><td>localStorage</td></tr>
 <tr><td>highlights</td><td>Text highlights you've made</td><td>localStorage</td></tr>
 <tr><td>scroll-pos</td><td>Scroll position per page</td><td>localStorage</td></tr>
+<tr><td>user-role</td><td>Selected role (admin, coach, student, developer) for personalized navigation</td><td>localStorage</td></tr>
 <tr><td>onboarded, checklist-done</td><td>Onboarding progress</td><td>localStorage</td></tr>
 <tr><td>nudge-dismissed</td><td>Whether you dismissed the help nudge</td><td>sessionStorage</td></tr>
 <tr><td>sb-collapsed</td><td>Sidebar collapsed state</td><td>localStorage</td></tr>
@@ -3313,7 +3317,7 @@
       const ROLE_SECTIONS = {
         admin: ['Getting Started', 'Video', 'Sessions & Classes', 'Account Management'],
         coach: ['Video', 'Sessions & Classes', 'Getting Started'],
-        client: ['Video', 'Sessions & Classes', 'Troubleshooting', 'FAQ'],
+        student: ['Video', 'Sessions & Classes', 'Troubleshooting', 'FAQ'],
         developer: ['Developers', 'FAQ', 'Video'],
       };
       const highlighted = ROLE_SECTIONS[role] || [];
@@ -4001,7 +4005,7 @@
   const ROLE_PATHS = {
     admin: ['setup', 'roles', 'inviting-members', 'first-upload', 'managing-members', 'uploading', 'creating-sessions', 'notes', 'progress', 'developer-api'],
     coach: ['setup', 'first-upload', 'creating-sessions', 'notes', 'uploading', 'playback', 'formats', 'progress', 'faq'],
-    client: ['setup', 'playback', 'notes', 'progress', 'creating-sessions', 'faq', 'parent-guide', 'troubleshoot', 'performance'],
+    student: ['setup', 'playback', 'notes', 'progress', 'creating-sessions', 'faq', 'parent-guide', 'troubleshoot', 'performance'],
     developer: ['setup', 'developer-api', 'formats', 'glossary', 'faq', 'storage'],
   };
 
@@ -4165,7 +4169,7 @@
           <div class="role-card-title">Coach</div>
           <div class="role-card-desc">Sessions, uploads, notes</div>
         </div>
-        <div class="role-card${selectedRole === 'client' ? ' selected' : ''}" role="button" tabindex="0" onclick="selectRole('client')" onkeydown="if(event.key==='Enter')selectRole('client')">
+        <div class="role-card${selectedRole === 'student' ? ' selected' : ''}" role="button" tabindex="0" onclick="selectRole('student')" onkeydown="if(event.key==='Enter')selectRole('student')">
           <div class="role-card-icon">${IC.play}</div>
           <div class="role-card-title">Student / Member</div>
           <div class="role-card-desc">Watch, review, progress</div>
@@ -4189,6 +4193,11 @@
         <button class="tour-btn tour-btn-primary" onclick="nextTour()">${tourStep === TOUR_STEPS.length - 1 ? 'Get Started' : 'Next'}</button>
       </div>`;
   }
+
+  // Migrate legacy 'client' role value to 'student'
+  (function migrateClientRole() {
+    if (localStorage.getItem('user-role') === 'client') localStorage.setItem('user-role', 'student');
+  })();
 
   function selectRole(role) {
     selectedRole = role;
@@ -4269,7 +4278,7 @@
       { id: 'cl-session', text: 'Create a session', page: 'creating-sessions' },
       { id: 'cl-notes', text: 'Add timestamped notes', page: 'notes' },
     ],
-    client: [
+    student: [
       { id: 'cl-login', text: 'Log in to the app', page: 'setup' },
       { id: 'cl-password', text: 'Set a new password', page: 'profile' },
       { id: 'cl-playback', text: 'Watch a session', page: 'playback' },
@@ -4321,7 +4330,7 @@
         { href: 'uploading', icon: IC.video, title: 'Uploading guide', desc: 'Formats, limits, and troubleshooting' },
         { href: 'faq', icon: IC.chat, title: 'FAQ', desc: 'Common questions answered' },
       ],
-      client: [
+      student: [
         { href: 'playback', icon: IC.play, title: 'Watch your sessions', desc: 'Playback, shortcuts, and notes', featured: true },
         { href: 'notes', icon: IC.book, title: 'Notes & feedback', desc: 'Read coach notes, leave replies', featured: true },
         { href: 'troubleshoot', icon: IC.alert, title: 'Fix a problem', desc: 'Step-by-step troubleshooting', featured: true },
@@ -4366,7 +4375,7 @@
         { num: '2', text: 'Upload your first session', link: 'https://app.kaynos.net/sessions/new', external: true },
         { num: '3', text: 'Add timestamped notes', link: 'notes' },
       ],
-      client: [
+      student: [
         { num: '1', text: 'Log in to the app', link: 'https://app.kaynos.net', external: true },
         { num: '2', text: 'Watch your first session', link: 'https://app.kaynos.net/sessions', external: true },
         { num: '3', text: 'Leave a note for your coach', link: 'notes' },
@@ -4399,7 +4408,7 @@
       const ROLE_SUBTITLES = {
         admin: 'Set up your academy, invite your team, and manage everything from one place.',
         coach: 'Upload sessions, give timestamped feedback, and track student progress.',
-        client: 'Three steps: log in, watch your session, leave a note for your coach. That\'s it.',
+        student: 'Three steps: log in, watch your session, leave a note for your coach. That\'s it.',
         developer: 'Integrate with the Kaynos API — auth, endpoints, and schemas.',
       };
       if (ROLE_SUBTITLES[role]) heroP.textContent = ROLE_SUBTITLES[role];
@@ -4591,6 +4600,10 @@
     'student': 'End user who watches sessions and classes, adds notes, and tracks progress.',
     'note': 'A text annotation pinned to a specific timestamp on the video timeline.',
     'tag': 'A label for organizing sessions and classes (e.g. guard, comp-prep, drilling).',
+    'clip': 'A short excerpt from a session or class, shareable externally via a token link.',
+    'review request': 'A student-initiated request for a coach to review a specific video moment.',
+    'highlight': 'A time-range bookmark on the video timeline marking a segment worth reviewing.',
+    'annotation': 'A drawing overlay on a frozen video frame — arrows, circles, or freehand.',
   };
 
   function addGlossaryTooltips(container) {
