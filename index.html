@@ -1881,7 +1881,7 @@
   <a class="feature-card" href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">
     <div class="feature-icon">${IC.check}</div>
     <h4>Security & compliance</h4>
-    <p>US-hosted storage (Backblaze B2 + Cloudflare CDN). Data export for GDPR. HTTPS everywhere. Role-based access controls.</p>
+    <p>US-hosted storage (Backblaze B2, direct presigned playback). Data export for GDPR. HTTPS everywhere. Role-based access controls.</p>
   </a>
   <a class="feature-card" href="#developer-api" onclick="navigate('developer-api');return false">
     <div class="feature-icon">${IC.info}</div>
@@ -2347,7 +2347,7 @@
       content: `
 <h1>Video storage and retention</h1>
 <h2>Where video is stored</h2>
-<p>Videos are stored in <a href="https://www.backblaze.com/b2/cloud-storage.html" target="_blank" rel="noopener">Backblaze B2</a>, delivered through <a href="https://www.cloudflare.com/application-services/products/cdn/" target="_blank" rel="noopener">Cloudflare</a> CDN. Infrastructure is US-hosted.</p>
+<p>Videos are stored in <a href="https://www.backblaze.com/b2/cloud-storage.html" target="_blank" rel="noopener">Backblaze B2</a> (US-hosted). Playback uses short-lived presigned URLs issued directly from B2 — there is no third-party CDN in front of video delivery.</p>
 <h2>Retention</h2>
 <p>Default retention is <strong>6 months per school</strong>, configurable by an admin. Videos flagged as expiring are surfaced one month before the retention limit. There is a <strong>30-day grace period</strong> before actual deletion. Admins can view expiring videos from the Admin panel and request retention-limit increases.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Upload limits and codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
@@ -2364,7 +2364,7 @@
 <li>Playback URLs are time-limited. Share access inside Kaynos rather than relying on long-lived direct links.</li>
 </ul>
 <h2>Data residency</h2>
-<p>Videos are stored in Backblaze B2 (US). Content is delivered globally via Cloudflare CDN. For EU customers: both Backblaze and Cloudflare offer Standard Contractual Clauses (SCCs) in their Data Processing Agreements. Contact <a href="https://app.kaynos.net/terms" target="_blank" rel="noopener">support</a> for SCC documentation.</p>`},
+<p>Videos are stored in Backblaze B2 (US) and streamed directly from B2 via short-lived presigned URLs. For EU customers: Backblaze offers Standard Contractual Clauses (SCCs) in its Data Processing Agreement. Contact <a href="https://app.kaynos.net/terms" target="_blank" rel="noopener">support</a> for SCC documentation.</p>`},
 
     "creating-sessions": {
       title: "Creating a session", section: "Sessions & Classes",
@@ -2781,7 +2781,7 @@
 <hr>
 <h2>Trust, minors on camera, and policy</h2>
 <h3>How serious are you about security?</h3>
-<p>HTTPS in transit, hashed passwords, and video in cloud storage behind a CDN. See <a onclick="navigate('storage')">Video storage and retention</a> for details.</p>
+<p>HTTPS in transit, hashed passwords, and video in cloud storage served via short-lived presigned URLs. See <a onclick="navigate('storage')">Video storage and retention</a> for details.</p>
 <h3>What about minors on the footage?</h3>
 <p>Kaynos is not currently designed for users under 13 (COPPA) or under 16 in the EU (GDPR Article 8). Organizations using Kaynos with minors are responsible for obtaining appropriate parental or guardian consent. Schools using Kaynos for student records should contact us about FERPA-compliant data processing agreements.</p>
 <p>Read the <a href="https://app.kaynos.net/terms" target="_blank" rel="noopener">Terms of Service</a> in the app. For legal questions, consult qualified counsel.</p>
@@ -2866,7 +2866,7 @@
 <div class="glossary-term"><dt>Review Request</dt><dd>A student-initiated request for a coach to review a video. The student selects a coach, adds context, and uploads their video to a draft session. The coach can accept, decline, or skip the request from their dashboard.</dd></div>
 <div class="glossary-term"><dt>Highlight</dt><dd>A time-range bookmark on the video timeline, marking a start and end point. Used to call attention to a segment worth reviewing.</dd></div>
 <div class="glossary-term"><dt>Annotation</dt><dd>A drawing overlay on a frozen video frame — arrows, circles, or freehand — attached to a specific timestamp. Appears during playback to highlight technique details.</dd></div>
-<div class="glossary-term"><dt>CDN</dt><dd>Content Delivery Network — Kaynos stores video on Backblaze B2 and delivers it through Cloudflare's edge servers close to the viewer, reducing buffering.</dd></div>
+<div class="glossary-term"><dt>Presigned URL</dt><dd>A short-lived, signed link to a video file in Backblaze B2 storage. Kaynos serves video playback through presigned URLs (4-hour expiry) rather than a CDN — each viewer request generates a fresh link scoped to that viewer.</dd></div>
 </dl>
 <h2>BJJ positions and movements</h2>
 <p>New to martial arts? Here's what your coach means:</p>
@@ -3156,8 +3156,7 @@
 <table class="comparison-table">
 <thead><tr><th>Service</th><th>Purpose</th><th>Data</th></tr></thead>
 <tbody>
-<tr><td>Backblaze B2</td><td>Video storage</td><td>Uploaded video files (encrypted at rest)</td></tr>
-<tr><td>Cloudflare</td><td>CDN + DDoS protection</td><td>Video streams, IP addresses</td></tr>
+<tr><td>Backblaze B2</td><td>Video storage and playback (via presigned URLs)</td><td>Uploaded video files (encrypted at rest)</td></tr>
 <tr><td>Stripe</td><td>Payment processing</td><td>Billing name, email (not card numbers)</td></tr>
 <tr><td>Deepgram</td><td>Voice dictation (opt-in)</td><td>Audio processed in real time, not stored</td></tr>
 </tbody>
