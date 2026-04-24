@@ -1886,7 +1886,7 @@
   <a class="feature-card" href="#developer-api" onclick="navigate('developer-api');return false">
     <div class="feature-icon">${IC.info}</div>
     <h4>Billing & API</h4>
-    <p>Stripe billing ($49/mo or $490/yr, 14-day free trial). Developer API planned for a future release.</p>
+    <p>Stripe billing ($49/mo or $490/yr, 14-day free trial). Internal API reference for admins/instructors; public API for third parties not yet available.</p>
   </a>
 </div>
 </details>
@@ -2055,7 +2055,7 @@
         <li><a onclick="navigate('notes')">Standardize your tag vocabulary</a> with the team</li>
         <li><a onclick="navigate('progress')">Review progress tracking</a> — see who's watching</li>
         <li><a onclick="navigate('formats')">Optimize video settings</a> — 1080p H.264 for best results</li>
-        <li>Developers: check our <a onclick="navigate('developer-api')">API roadmap</a> for future automation options</li>
+        <li>Developers: see the <a onclick="navigate('developer-api')">Developer API</a> page — internal API reference for admins/instructors</li>
       </ul>
     </div>
   </div>
@@ -2813,7 +2813,7 @@
 <h3>Which browsers are supported?</h3>
 <p>Current Chrome, Firefox, Safari, and Edge. If upload or playback fails in one browser, trying Chrome is a reasonable first step.</p>
 <h3>Do you expose an API?</h3>
-<p>Not yet. A developer API is planned for a future release. See the <a onclick="navigate('developer-api')">Developer API</a> page for details and how to get notified when it launches.</p>
+<p>There's an internal API reference at <strong>Admin → API Docs</strong> for admins and instructors to understand the endpoints the app itself uses. A public developer API with tokens and webhooks for third-party integrations is not available today. See the <a onclick="navigate('developer-api')">Developer API</a> page for details.</p>
 <hr>
 <h2>Support</h2>
 <h3>How do I contact you?</h3>
@@ -2857,17 +2857,26 @@
       title: "Developer API", section: "Developers",
       content: `
 <h1>Developer API</h1>
-<div class="tldr"><strong>TLDR:</strong> A public developer API is planned for a future release. There are no API tokens, webhooks, or third-party integrations available today.</div>
-<p>We are planning a developer API that will let you automate workflows, export data, and build custom integrations with Kaynos. This feature is not yet available.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Interested in integrating with Kaynos? <a href="mailto:support@kaynos.net">Contact us</a> to share your use case and get notified when the API launches. You can also visit our <a onclick="navigate('contact')">contact page</a>.</div></div>
-<h2>What to expect</h2>
-<p>When the developer API is available, it will include:</p>
+<div class="tldr"><strong>TLDR:</strong> Admins and instructors can view an internal API reference at <a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener">Admin → API Docs</a>. Public API tokens, third-party integrations, and customer-facing webhooks are not available today.</div>
+<h2>Internal API reference</h2>
+<p>Kaynos ships an internal API reference for admins and instructors who want to understand what the app is doing under the hood. It's a Swagger UI page backed by an OpenAPI spec that documents the REST endpoints the Kaynos web app uses.</p>
 <ul>
-<li>REST endpoints for sessions, classes, members, and notes</li>
-<li>Token-based authentication</li>
-<li>Webhook notifications for real-time events</li>
+<li><strong>Where:</strong> Sign in as an admin or instructor and open <a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener">Admin → API Docs</a> (direct URL: <code>/admin/api-docs</code>).</li>
+<li><strong>Who can see it:</strong> Admins and instructors only. Students do not have access.</li>
+<li><strong>Authentication:</strong> Session-cookie auth — the same login session that powers the app. There are no separate API keys or tokens to manage.</li>
+<li><strong>Scope:</strong> Documentation of internal endpoints (sessions, classes, members, notes, uploads, billing, and more). Useful for understanding behavior, debugging, and internal tooling.</li>
 </ul>
-<p>Follow our <a onclick="navigate('release-notes')">release notes</a> for updates on API availability.</p>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>The internal reference is provided for transparency and internal use. It is not a stability contract — endpoints and shapes can change between releases.</div></div>
+<h2>Public developer API (not available)</h2>
+<p>Kaynos does not currently offer a public developer API for third-party integrations. Specifically, the following are <strong>not</strong> supported today:</p>
+<ul>
+<li>Public API tokens or personal access tokens</li>
+<li>OAuth apps or third-party clients</li>
+<li>Customer-facing webhooks for real-time events</li>
+<li>SDKs or client libraries</li>
+</ul>
+<p>A public API may come in the future. If you have a use case that would benefit from programmatic access or webhooks, <a href="mailto:support@kaynos.net">contact us</a> or visit our <a onclick="navigate('contact')">contact page</a> so we can prioritize based on demand.</p>
+<p>Follow our <a onclick="navigate('release-notes')">release notes</a> for updates.</p>`},
 
     glossary: {
       title: "Glossary", section: "Getting Started",
@@ -3409,14 +3418,14 @@
   };
 
   const PAGE_DESCRIPTIONS = {
-    'welcome': 'Kaynos help center — setup guides, video upload, playback, troubleshooting, and API roadmap for the video coaching platform.',
+    'welcome': 'Kaynos help center — setup guides, video upload, playback, troubleshooting, and developer API reference for the video coaching platform.',
     'setup': 'Set up your Kaynos account. First login, password change, Google OAuth, and getting started with video coaching.',
     'uploading': 'Upload video to Kaynos. Supported formats (MP4, MOV, WebM, AVI), size limits, chunked upload, and troubleshooting.',
     'playback': 'Watch and review video in Kaynos. Playback speed, keyboard shortcuts, timeline notes, clips, and mobile playback.',
     'creating-sessions': 'Create sessions and classes in Kaynos. Private lessons vs shared classes, and scheduling.',
     'notes': 'Timestamped coaching notes in Kaynos. Add notes, voice dictation, annotations, reactions, AI review, and tags.',
     'faq': 'Frequently asked questions about Kaynos. Pricing, security, privacy, browser support, and billing.',
-    'developer-api': 'Kaynos Developer API. Planned for a future release. Contact us to get notified when it launches.',
+    'developer-api': 'Kaynos Developer API. Internal API reference for admins and instructors at Admin → API Docs. Public API, tokens, and webhooks are not available today.',
     'roles': 'User roles in Kaynos. Admin, coach, and student permissions and capabilities.',
     'troubleshoot': 'Troubleshoot Kaynos issues. Step-by-step wizard for upload, playback, login, and performance problems.',
     'progress': 'Track student progress in Kaynos. Watch rate, session count, note count, time-period filtering, and per-session completion tracking.',
@@ -4213,7 +4222,7 @@
         <div class="role-card${selectedRole === 'developer' ? ' selected' : ''}" role="button" tabindex="0" onclick="selectRole('developer')" onkeydown="if(event.key==='Enter')selectRole('developer')">
           <div class="role-card-icon">${IC.wrench}</div>
           <div class="role-card-title">Developer</div>
-          <div class="role-card-desc">Formats, glossary, API roadmap</div>
+          <div class="role-card-desc">Formats, glossary, internal API reference</div>
         </div>
       </div>`;
     }
@@ -4323,7 +4332,7 @@
     ],
     developer: [
       { id: 'cl-login', text: 'Log in as admin', page: 'setup' },
-      { id: 'cl-api', text: 'Review the API roadmap', page: 'developer-api' },
+      { id: 'cl-api', text: 'Review the Developer API page', page: 'developer-api' },
       { id: 'cl-glossary', text: 'Review the glossary', page: 'glossary' },
       { id: 'cl-formats', text: 'Check supported formats', page: 'formats' },
       { id: 'cl-faq', text: 'Browse the FAQ', page: 'faq' },
@@ -4375,7 +4384,7 @@
         { href: 'performance', icon: IC.alert, title: 'Performance tips', desc: 'Speed up loading and playback' },
       ],
       developer: [
-        { href: 'developer-api', icon: IC.book, title: 'API roadmap', desc: 'Planned for a future release', featured: true },
+        { href: 'developer-api', icon: IC.book, title: 'Developer API', desc: 'Internal API reference for admins/instructors', featured: true },
         { href: 'formats', icon: IC.video, title: 'Video formats', desc: 'Supported codecs and limits', featured: true },
         { href: 'glossary', icon: IC.book, title: 'Glossary', desc: 'Platform terminology', featured: true },
         { href: 'faq', icon: IC.chat, title: 'FAQ', desc: 'Common questions' },
@@ -4418,7 +4427,7 @@
       ],
       developer: [
         { num: '1', text: 'Log in as admin', link: 'https://app.kaynos.net', external: true },
-        { num: '2', text: 'Review the API roadmap', link: 'developer-api' },
+        { num: '2', text: 'Review the Developer API page', link: 'developer-api' },
         { num: '3', text: 'Browse the FAQ', link: 'faq' },
       ],
     };
