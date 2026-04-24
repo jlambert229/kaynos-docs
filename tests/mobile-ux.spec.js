@@ -488,10 +488,10 @@ test.describe('Release notes', () => {
 
 test.describe('Redirects', () => {
   test('old page IDs redirect to new targets', async ({ page }) => {
-    await page.goto('/#feature-requests');
+    await page.goto('/#tags');
     await page.waitForSelector('.content-inner h1');
-    await expect(page).toHaveURL(/#release-notes/);
-    await expect(page.locator('.content-inner h1')).toContainText('Release notes');
+    await expect(page).toHaveURL(/#notes/);
+    await expect(page.locator('.content-inner h1')).toContainText('Notes');
   });
 
   test('whats-new redirects to release-notes', async ({ page }) => {
@@ -530,6 +530,6 @@ test.describe('Role personalization', () => {
 test.describe('Parent guide', () => {
   test('parent guide page loads', async ({ page }) => {
     await page.goto('/#parent-guide');
-    await expect(page.locator('.content-inner h1')).toContainText('Parent guide');
+    await expect(page.locator('.content-inner h1')).toContainText('Parent & guardian guide');
   });
 });

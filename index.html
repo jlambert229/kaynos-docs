@@ -1875,18 +1875,18 @@
   </a>
   <a class="feature-card" href="#creating-sessions" onclick="navigate('creating-sessions');return false">
     <div class="feature-icon">${IC.rocket}</div>
-    <h4>Sessions & scheduling</h4>
-    <p>Private sessions (one student) or shared classes (everyone). Calendar view with recurrence and conflict detection. Clips for sharing highlights.</p>
+    <h4>Sessions & classes</h4>
+    <p>Private sessions (one student) or shared classes (everyone). Students can request video review from coaches. Clips for sharing highlights.</p>
   </a>
   <a class="feature-card" href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">
     <div class="feature-icon">${IC.check}</div>
     <h4>Security & compliance</h4>
-    <p>Two-factor authentication (TOTP). US-hosted storage (Backblaze B2 + Cloudflare CDN). Data export for GDPR. HTTPS everywhere.</p>
+    <p>US-hosted storage (Backblaze B2, direct presigned playback). Data export for GDPR. HTTPS everywhere. Role-based access controls.</p>
   </a>
   <a class="feature-card" href="#developer-api" onclick="navigate('developer-api');return false">
     <div class="feature-icon">${IC.info}</div>
-    <h4>Integrations & API</h4>
-    <p>REST API with token auth. Webhooks for real-time events. Stripe billing ($49/mo or $490/yr, 14-day free trial).</p>
+    <h4>Billing & API</h4>
+    <p>Stripe billing ($49/mo or $490/yr, 14-day free trial). Internal API reference for admins/instructors; public API for third parties not yet available.</p>
   </a>
 </div>
 </details>
@@ -1949,10 +1949,19 @@
       title: "Setting up your account", section: "Getting Started",
       content: `
 <h1>Setting up your account</h1>
-<div class="tldr"><strong>TLDR:</strong> Log in at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> with your invite email. Change your temporary password first.</div>
-<p>After signup, login details go to the email you used. Change the temporary password as soon as you're in.</p>
+<div class="tldr"><strong>TLDR:</strong> School owners: sign up, pay, and follow the instructor checklist. Invited members: log in with your invite email and change your temporary password.</div>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Open the product at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>. Next steps: <a onclick="navigate('inviting-members')">Inviting your team</a> and <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>
-<h2>First login</h2>
+<h2>New school signup</h2>
+<p>Creating a new school account takes three steps:</p>
+<ol>
+<li><strong>Sign up</strong> — enter your school name, your name, and email at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</li>
+<li><strong>Payment</strong> — choose monthly ($49/mo) or annual ($490/yr). Every account starts with a 14-day free trial.</li>
+<li><strong>Confirmation</strong> — you land on the coach dashboard with the instructor checklist.</li>
+</ol>
+<p>The <strong>instructor checklist</strong> walks you through three first actions: add a student, record a session, and upload a class. Complete them at your own pace.</p>
+<h2>Invited members</h2>
+<p>If someone invited you (coach or student), login details go to the email they used. Change the temporary password as soon as you are in.</p>
+<h3>First login</h3>
 <ol>
 <li>Use the welcome email link or go to <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</li>
 <li>Enter the same email and the temporary password from the invite.</li>
@@ -1974,7 +1983,7 @@
 <h3>Upload a video</h3>
 <div class="step-tips">
   <div class="step-tip"><div class="step-num">1</div><div class="step-body"><h4>Create a session or class</h4><p>Go to <strong>Sessions</strong> or <strong>Classes</strong> and click the <strong>New</strong> button.</p></div></div>
-  <div class="step-tip"><div class="step-num">2</div><div class="step-body"><h4>Choose "Upload" as source</h4><p>Select <strong>Upload</strong> (not Vimeo or Notes Only) when prompted for the video source.</p></div></div>
+  <div class="step-tip"><div class="step-num">2</div><div class="step-body"><h4>Choose "Upload" as source</h4><p>Select <strong>Upload</strong> when prompted for the video source.</p></div></div>
   <div class="step-tip"><div class="step-num">3</div><div class="step-body"><h4>Drag or select your file</h4><p>Drop the video onto the upload area, or click to browse. MP4 is recommended.</p></div></div>
   <div class="step-tip"><div class="step-num">4</div><div class="step-body"><h4>Wait for the green check</h4><p>The progress bar shows speed and ETA. Green check = done. Then fill in title, date, and save.</p></div></div>
 </div>
@@ -2046,7 +2055,7 @@
         <li><a onclick="navigate('notes')">Standardize your tag vocabulary</a> with the team</li>
         <li><a onclick="navigate('progress')">Review progress tracking</a> — see who's watching</li>
         <li><a onclick="navigate('formats')">Optimize video settings</a> — 1080p H.264 for best results</li>
-        <li>Developers: <a onclick="navigate('developer-api')">explore the API</a> for automation</li>
+        <li>Developers: see the <a onclick="navigate('developer-api')">Developer API</a> page — internal API reference for admins/instructors</li>
       </ul>
     </div>
   </div>
@@ -2094,7 +2103,7 @@
       title: "Your first video upload", section: "Getting Started",
       content: `
 <h1>Your first video upload</h1>
-<p>A <strong>session</strong> is for one assigned student (private lesson, individual review). A <strong>class</strong> is for everyone in your account (group session, shared recording). Upload a file or link Vimeo in either case — create them after you <a href="https://app.kaynos.net" target="_blank" rel="noopener">sign in</a>.</p>
+<p>A <strong>session</strong> is for one assigned student (private lesson, individual review). A <strong>class</strong> is for everyone in your account (group session, shared recording). Upload a file in either case — create them after you <a href="https://app.kaynos.net" target="_blank" rel="noopener">sign in</a>.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>New to the flow? Read <a onclick="navigate('creating-sessions')">Creating a session</a> and <a onclick="navigate('creating-classes')">Creating a class</a>. Limits and codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 <h2>Upload a file</h2>
 <ol>
@@ -2117,8 +2126,6 @@
 <tr><td>AVI</td><td><code>.avi</code></td><td>Supported; limited browser playback</td></tr>
 </tbody></table>
 <p>Maximum file size is <strong>5 GB</strong>. Full details: <a onclick="navigate('formats')">Supported formats and limits</a>.</p>
-<h2>Vimeo</h2>
-<p>Use the <strong>Vimeo</strong> source option and paste the URL or video ID to embed video already hosted on <a href="https://vimeo.com" target="_blank" rel="noopener">Vimeo</a>. If using a Vimeo video source, your use is also subject to <a href="https://vimeo.com/terms" target="_blank" rel="noopener">Vimeo's Terms of Service</a>.</p>
 <h2>Recording tips</h2>
 <ul>
 <li><strong>Landscape orientation.</strong> Your TV and your phone both want it.</li>
@@ -2132,29 +2139,11 @@
 <h1>Understanding user roles</h1>
 <p>Each person has one of three roles. Assign them so permissions match how your team runs.</p>
 <h2>Admin</h2>
-<p>Typically the owner or head coach. Same capabilities as coaches, plus roster management, invites, role changes, and the <strong>Admin</strong> area for account-wide visibility.</p>
+<p>Typically the school owner or head coach. Full access: everything a coach can do, plus member management, invites, role changes, account settings, and the <strong>Admin</strong> panel for account-wide visibility.</p>
 <h2>Coach</h2>
-<p>Coaches run sessions and classes, upload video, add notes and tags, and view student progress.</p>
+<p>Coaches create sessions and classes, upload video, add notes and annotations, manage their own content, and view student progress. They cannot manage members or access admin settings.</p>
 <h2>Student</h2>
-<p>Students access their assigned sessions and all classes, watch video, add notes, and track viewing progress. They cannot upload video or view other students' private sessions.</p>
-<h2>Assistant coach</h2>
-<p>A scoped coach role for part-time staff or filming assistants. Assistant coaches can:</p>
-<ul>
-<li>Upload video to assigned classes</li>
-<li>View today's schedule and assigned sessions</li>
-<li>Mark attendance in classes they're assigned to</li>
-</ul>
-<p>They <strong>cannot</strong> manage members, change roles, access admin settings, or create new sessions independently. Admins assign assistant coaches to specific classes.</p>
-
-<h2>Team captain / senior student</h2>
-<p>An elevated student role for team leaders and senior members. Team captains can:</p>
-<ul>
-<li>Upload video on behalf of teammates (e.g., filming sparring rounds)</li>
-<li>Add peer notes (visually distinguished from coach notes)</li>
-<li>Share clips with people outside the account</li>
-</ul>
-<p>Team captains cannot create sessions or access admin features. They're students with upload and sharing privileges.</p>
-
+<p>Students watch sessions and classes shared with them, take notes, add replies, request video review from coaches, and track their own progress. They cannot create sessions or classes, upload video, or view other students' private sessions.</p>
 <h2>Change a role</h2>
 <p>Admins only: <strong>Admin</strong> → select the member → role dropdown → save.</p>
 <div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>Downgrading a coach to a student removes the ability to create sessions or upload video. Existing content remains available. For invite rules, see <a onclick="navigate('inviting-members')">Inviting your team</a>.</div></div>`},
@@ -2164,7 +2153,7 @@
       content: `
 <h1>Uploading videos</h1>
 <div class="tldr"><strong>TLDR:</strong> Drag a video onto the upload area. MP4 recommended, under 5 GB, 1080p is plenty for coaching review.</div>
-<p>Each session or class uses one source: <strong>Upload</strong> (file from your device), <strong>Vimeo</strong> (embedded link), or <strong>Notes Only</strong> (no video). Upload from <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> when creating or editing.</p>
+<p>Each session or class uses one source: <strong>Upload</strong> (file from your device) or <strong>Notes Only</strong> (no video). Upload from <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> when creating or editing.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Format and size limits: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 <h2>Large files</h2>
 <p>Files over <strong>100 MB</strong> use chunked multipart upload (<strong>20 MB</strong> per chunk) with parallel connections. Failed parts retry automatically (up to <strong>3 attempts</strong> per chunk) with exponential backoff.</p>
@@ -2276,7 +2265,7 @@
 <li>Click <strong>Create Clip</strong> and give it a descriptive title (e.g., "Guard retention drill — key details").</li>
 <li>Toggle <strong>Share</strong> to make it visible to all students in the class.</li>
 </ol>
-<p>Students and parents see recap clips on their dashboard alongside full recordings. Short clips have much higher watch rates.</p>
+<p>Students see recap clips on their dashboard alongside full recordings. Short clips have much higher watch rates.</p>
 <h3>Sharing clips externally</h3>
 <p>Share a clip with someone who doesn't have a Kaynos account — a training partner at another gym, a parent, or a competition coach.</p>
 <ol>
@@ -2358,7 +2347,7 @@
       content: `
 <h1>Video storage and retention</h1>
 <h2>Where video is stored</h2>
-<p>Videos are stored in <a href="https://www.backblaze.com/b2/cloud-storage.html" target="_blank" rel="noopener">Backblaze B2</a>, delivered through <a href="https://www.cloudflare.com/application-services/products/cdn/" target="_blank" rel="noopener">Cloudflare</a> CDN. Infrastructure is US-hosted.</p>
+<p>Videos are stored in <a href="https://www.backblaze.com/b2/cloud-storage.html" target="_blank" rel="noopener">Backblaze B2</a> (US-hosted). Playback uses short-lived presigned URLs issued directly from B2 — there is no third-party CDN in front of video delivery.</p>
 <h2>Retention</h2>
 <p>Default retention is <strong>6 months per school</strong>, configurable by an admin. Videos flagged as expiring are surfaced one month before the retention limit. There is a <strong>30-day grace period</strong> before actual deletion. Admins can view expiring videos from the Admin panel and request retention-limit increases.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Upload limits and codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
@@ -2375,7 +2364,7 @@
 <li>Playback URLs are time-limited. Share access inside Kaynos rather than relying on long-lived direct links.</li>
 </ul>
 <h2>Data residency</h2>
-<p>Videos are stored in Backblaze B2 (US). Content is delivered globally via Cloudflare CDN. For EU customers: both Backblaze and Cloudflare offer Standard Contractual Clauses (SCCs) in their Data Processing Agreements. Contact <a href="https://app.kaynos.net/terms" target="_blank" rel="noopener">support</a> for SCC documentation.</p>`},
+<p>Videos are stored in Backblaze B2 (US) and streamed directly from B2 via short-lived presigned URLs. For EU customers: Backblaze offers Standard Contractual Clauses (SCCs) in its Data Processing Agreement. Contact <a href="https://app.kaynos.net/terms" target="_blank" rel="noopener">support</a> for SCC documentation.</p>`},
 
     "creating-sessions": {
       title: "Creating a session", section: "Sessions & Classes",
@@ -2417,7 +2406,7 @@
 <h2>Workflow</h2>
 <ol>
 <li>Go to <strong>Sessions</strong> → <strong>New Session</strong>.</li>
-<li>Choose your video source: <strong>Upload</strong>, <strong>Vimeo</strong>, or <strong>Notes Only</strong>.</li>
+<li>Choose your video source: <strong>Upload</strong> or <strong>Notes Only</strong>.</li>
 <li>Fill in title, date, assign the student from your roster, and add optional tags.</li>
 <li>Click <strong>Create Session</strong>.</li>
 </ol>
@@ -2425,34 +2414,25 @@
 <p>The assigned student, the creator, and admins. Other students cannot open someone else's private session.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>First upload walkthrough: <a onclick="navigate('first-upload')">Your first video upload</a>. Visibility model: <a onclick="navigate('faq')">FAQ</a>.</div></div>
 <h2>Scheduling</h2>
-<p>Schedule sessions in advance from the calendar view.</p>
+<p>The <strong>Schedule</strong> page shows a calendar with daily, weekly, and monthly views. To schedule a session:</p>
 <ol>
-<li>Go to <strong>Schedule</strong> in the sidebar.</li>
-<li>Click a time slot or use <strong>New</strong> to create a scheduled session.</li>
-<li>Set title, student (or class), date, time, and duration (default: 60 minutes).</li>
-<li>Optional: enable <strong>recurrence</strong> — choose days of the week and an end date.</li>
-<li>The system checks for conflicts with your other sessions automatically.</li>
+<li>Go to <strong>Schedule</strong> and click a time slot.</li>
+<li>Fill in the session details and assign a student.</li>
+<li>The system checks for conflicts with existing sessions and school hours.</li>
 </ol>
-<p>Edit or delete a single occurrence, all future occurrences, or the entire series. Students and coaches see scheduled sessions on their dashboard.</p>
-<h2>Competition prep</h2>
-<p>Organize your training footage for tournament preparation.</p>
-<ul>
-<li>Tag sparring sessions with <code>competition</code> or <code>comp-prep</code> to find them quickly.</li>
-<li>Filter sessions by date range to review the last month of training before a tournament.</li>
-<li>Use the <strong>Side-by-side</strong> view (if available) to compare technique across sessions and spot patterns.</li>
-<li>Create recap clips of key moments for quick pre-match review on your phone.</li>
-</ul>
-<h2>Session types</h2>
-<p>When creating a session, choose a type to help with organization and filtering:</p>
-<ul>
-<li><strong>Private lesson</strong> — one-on-one coaching</li>
-<li><strong>Drilling</strong> — repetitive technique practice</li>
-<li><strong>Sparring</strong> — live rounds at varying intensity</li>
-<li><strong>Comp prep</strong> — competition-focused training</li>
-<li><strong>Class</strong> — group instruction</li>
-<li><strong>Open mat</strong> — unstructured free training</li>
-</ul>
-<p>Session types help when filtering your library later — "show me all sparring sessions from the last month."</p>`},
+<p>Admins can set operating hours under <strong>Admin → Settings</strong>. Scheduling outside those hours is allowed but flagged.</p>
+<h2>Review requests</h2>
+<p>Students can request a video review from any coach. A review request creates a draft session that the student fills out.</p>
+<h3>How students submit a request</h3>
+<ol>
+<li>Click <strong>Request a review</strong> in the student dashboard.</li>
+<li>Select a coach and add a description of what they want feedback on.</li>
+<li>Upload the video to the draft session.</li>
+<li>Submit the request — the coach receives a notification.</li>
+</ol>
+<h3>How coaches respond</h3>
+<p>Pending review requests appear on the coach dashboard. The coach can <strong>accept</strong>, <strong>decline</strong>, or <strong>skip</strong> each request. Accepting converts the draft into a full session — the coach then watches the video and adds notes and annotations as usual.</p>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Review requests are the main way students initiate feedback. Coaches who enable <a onclick="navigate('profile')">email notifications</a> get alerted as soon as a request comes in.</div></div>`},
 
     "creating-classes": {
       title: "Creating a class", section: "Sessions & Classes",
@@ -2462,7 +2442,7 @@
 <h2>Workflow</h2>
 <ol>
 <li>Go to <strong>Classes</strong> → <strong>New Class</strong>.</li>
-<li>Choose your video source: <strong>Upload</strong>, <strong>Vimeo</strong>, or <strong>Notes Only</strong>.</li>
+<li>Choose your video source: <strong>Upload</strong> or <strong>Notes Only</strong>.</li>
 <li>Fill in title, date, optional description, and tags for filtering.</li>
 <li>Click <strong>Create Class</strong>.</li>
 </ol>
@@ -2471,12 +2451,12 @@
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Upload options and limits: <a onclick="navigate('uploading')">Uploading videos</a> and <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 
 <h2>Attendance tracking</h2>
-<p>Mark which students attended a class so coaches and parents can track participation.</p>
+<p>Mark which students attended a class so coaches can track participation.</p>
 <ol>
 <li>Open a class recording.</li>
 <li>Click <strong>Mark Attendance</strong> (or use the roster view).</li>
 <li>Check off students who were present. You can batch-select multiple students.</li>
-<li>Save — attendance records appear in each student's progress timeline and are visible to parents.</li>
+<li>Save — attendance records appear in each student's progress timeline.</li>
 </ol>
 <p>Attendance data feeds into the progress dashboard, helping coaches spot students who are falling off.</p>`},
 
@@ -2561,8 +2541,8 @@
 <li>Draw arrows, circles, or freehand on the frozen frame.</li>
 <li>Save — the annotation is attached to that timestamp and appears during playback.</li>
 </ol>
-<h2>AI review (beta)</h2>
-<p>Kaynos can automatically analyze your video to identify key moments and suggest technique observations.</p>
+<h2>AI review</h2>
+<p>Kaynos can automatically analyze your video to identify key moments and generate technique observations.</p>
 <ol>
 <li>Open a session or class detail page.</li>
 <li>Click <strong>Start AI Review</strong>.</li>
@@ -2572,20 +2552,7 @@
 <p>AI review uses TwelveLabs for video understanding. Review and edit AI notes like any other note.</p>
 <h2>Reactions</h2>
 <p>React to any note with an emoji: 👍 ❤️ 🔥 👀 ✅ 👏. Click the reaction button under a note to add yours.</p>
-<h2>Note templates</h2>
-<p>Create reusable note templates for feedback you give frequently.</p>
-<ol>
-<li>Write a note as usual, then click <strong>Save as Template</strong>.</li>
-<li>Give it a name (e.g., "Control underhook before sweep").</li>
-<li>Next time, click <strong>Templates</strong> in the note editor, select a template, and customize before saving.</li>
-</ol>
-<p>Templates save time when ~30% of your reviews cover the same fundamentals.</p>
-<h2>Pending reviews</h2>
-<p>The pending queue shows uploads that don't have coach notes yet — so nothing falls through the cracks.</p>
-<ul>
-<li>Open <strong>Sessions</strong> and filter by <strong>Pending review</strong> to see uploads waiting for your feedback.</li>
-<li>The dashboard also shows a pending count if you have unreviewed sessions.</li>
-</ul>`},
+`},
 
     progress: {
       title: "Progress tracking", section: "Sessions & Classes",
@@ -2600,22 +2567,22 @@
 <p>Coach and admin views show completion and recency. We do not track fine-grained analytics or viewer heatmaps.</p>
 <h2>What we intentionally avoid</h2>
 <p>No invasive watch analytics or third-party ad-style tracking. The product stores only what it needs for resume and high-level completion tracking.</p>
-<h2>Belt rank and progression</h2>
-<p>Kaynos tracks belt rank and stripe promotions for each student.</p>
-<h3>Setting rank</h3>
-<p>Admins and coaches can set a student's current belt and stripe count from their profile or the member management page.</p>
-<h3>Logging promotions</h3>
-<p>When a student is promoted, update their belt rank. The change is logged with a date and appears in their progression timeline. Students and parents can see their promotion history.</p>
-<h3>Belt system</h3>
-<p>BJJ belts in order: <strong>White → Blue → Purple → Brown → Black</strong>. Each belt can have up to 4 stripes before the next belt. Progression typically takes 10-15 years to black belt. Promotions are at the instructor's discretion.</p>
-<h2>Watch accountability</h2>
-<p>See which students haven't reviewed their sessions yet.</p>
+<h2>Dashboard metrics</h2>
+<p>The progress dashboard shows three headline numbers for the selected time period:</p>
 <ul>
-<li>The coach dashboard shows <strong>unwatched sessions</strong> per student — a count of recordings they haven't opened.</li>
-<li>Click a student's name to see which specific sessions are unwatched.</li>
-<li>Use the <strong>Nudge</strong> button to send a reminder email prompting them to watch.</li>
+<li><strong>Watch rate</strong> — percentage of assigned sessions the student has viewed.</li>
+<li><strong>Session count</strong> — total sessions (private and class) in the period.</li>
+<li><strong>Note count</strong> — total coaching notes written on the student's sessions.</li>
 </ul>
-<p>Watch accountability helps coaches identify students who may need a push — especially before the next session.</p>
+<h2>Time-period filtering</h2>
+<p>Use the filter buttons to narrow the view to the <strong>last 7, 30, or 90 days</strong>. The default view is 30 days.</p>
+<h2>Per-session details</h2>
+<p>Each session row shows:</p>
+<ul>
+<li><strong>Last viewed</strong> — when the student last opened the recording.</li>
+<li><strong>Resume position</strong> — where they left off so they can pick up again.</li>
+<li><strong>Completion status</strong> — whether the full video was watched.</li>
+</ul>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Roster and access control: <a onclick="navigate('managing-members')">Managing members</a>.</div></div>`},
 
     "managing-members": {
@@ -2634,19 +2601,8 @@
 <p><strong>One person, two accounts?</strong> Use a different email address per account. Each account is completely separate.</p>
 <p><strong>Member limits?</strong> The product does not enforce a headcount cap.</p>
 <p><strong>Student-to-student invites?</strong> Only staff roles can invite; students cannot invite other students.</p>
-<h2>Multi-location management</h2>
-<p>If you run multiple schools or locations, Kaynos supports a single admin dashboard across all of them.</p>
-<h3>Adding locations</h3>
-<p>Contact support to add additional schools to your account. Each school has its own member roster, sessions, classes, and storage quota.</p>
-<h3>Switching between schools</h3>
-<p>Use the school selector in the top-left of the admin dashboard to switch between locations. Your admin credentials work across all schools tied to your account.</p>
-<h3>Cross-school view</h3>
-<ul>
-<li>See aggregate stats (total students, sessions, storage) across all locations.</li>
-<li>Monitor coach activity per school — who's uploading, who's adding notes.</li>
-<li>Billing is per-school — each location has its own subscription and storage limits.</li>
-</ul>
-<p>For large multi-location setups, contact ${mailLink()} to discuss enterprise pricing and dedicated support.</p>
+<h2>Multiple schools</h2>
+<p>Kaynos supports managing multiple schools under one account. Multi-school setup is handled by a tenant admin or by contacting ${mailLink()} — it is not self-service. Each school has its own member roster, sessions, classes, and storage quota.</p>
 <h2>Branding</h2>
 <p>Admins can customize the look of their account under <strong>Admin → Branding</strong>. Set a custom logo, accent color, and welcome text that members see when they log in.</p>
 <h2>School hours</h2>
@@ -2662,12 +2618,13 @@
 <h2>Admin panel overview</h2>
 <p>The Admin panel has several sections. Here's what each does:</p>
 <dl>
-<dt>Members</dt><dd>View roster, add/remove members, change roles, reset passwords. The main people management hub.</dd>
-<dt>Storage</dt><dd>Monitor video count and storage usage against your limits (default: 100 videos, 50 GB). View expiring videos. Request limit increases.</dd>
+<dt>Members</dt><dd>View roster, add/remove members, change roles, reset passwords, and filter by role. The main people management hub.</dd>
+<dt>Storage</dt><dd>Monitor video count and storage usage against your limits (default: 100 videos, 50 GB). View expiring videos. Request a storage increase.</dd>
+<dt>AI Usage</dt><dd>View AI feature usage status for your school.</dd>
 <dt>Reports</dt><dd>Configure automated usage reports (off/daily/weekly/monthly). Send a manual report immediately.</dd>
 <dt>Branding</dt><dd>Set a custom logo, accent color, and welcome text for your academy.</dd>
-<dt>Webhooks</dt><dd>Create webhook endpoints to receive real-time event callbacks (session.created, class.created, etc.). View delivery history.</dd>
-<dt>Settings</dt><dd>School name, operating hours (default 6 AM–9 PM).</dd>
+<dt>Settings</dt><dd>School name, operating hours (default 6 AM–9 PM), cancellation policy.</dd>
+<dt>Export</dt><dd>Export your school data.</dd>
 <dt>Danger Zone</dt><dd>Schedule account deletion (30-day grace period) or cancel a pending deletion.</dd>
 </dl>`},
 
@@ -2688,30 +2645,41 @@
 </ol>
 <p>Locked out? Ask an admin for a reset, or email ${mailLink()}. Login help: <a onclick="navigate('login-issues')">Login and access issues</a>.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Profile lives in the app: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> → your name in the sidebar (or menu on mobile).</div></div>
-<h2>Two-factor authentication (2FA)</h2>
-<p>Add an extra layer of security with time-based one-time passwords (TOTP).</p>
-<ol>
-<li>Go to <strong>Profile → Security</strong>.</li>
-<li>Click <strong>Set up 2FA</strong>. Scan the QR code with an authenticator app (Google Authenticator, Authy, 1Password, etc.).</li>
-<li>Enter the 6-digit code from your app to verify.</li>
-<li>2FA is now active. You'll need the code each time you log in.</li>
-</ol>
-<p>To disable: <strong>Profile → Security → Disable 2FA</strong>. Requires your password and a current 6-digit code.</p>
 <h2>Notifications</h2>
-<p>Email covers new sessions, classes, and onboarding (invites and temporary passwords), but not billing. Toggle preferences under <strong>Profile</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
+<p>Kaynos sends email for a range of account, collaboration, and activity events. Toggle optional preferences under <strong>Profile</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Delivery problems? See <a onclick="navigate('email-issues')">Email and notification issues</a>.</div></div>
-<h3>Typical messages</h3>
+<h3>Account</h3>
 <ul>
-<li>New session assigned (students)</li>
-<li>New class available (students)</li>
-<li>Invites and temporary passwords (onboarding)</li>
+<li>Welcome email when you sign up</li>
+<li>Password reset links (via <strong>Forgot password?</strong>)</li>
+<li>Invites and temporary passwords when you're added to a school</li>
+<li>Support form confirmations</li>
+</ul>
+<h3>Collaboration and activity</h3>
+<ul>
+<li>Someone mentioned you in a note</li>
+<li>A reply was added to your note</li>
+<li>A note was added on one of your sessions</li>
+<li>A session was shared with you</li>
+<li>A new class is available in your school</li>
+<li>A student submitted a review request (coaches)</li>
+</ul>
+<h3>Reminders and reports</h3>
+<ul>
+<li>Trial reminders as your free trial progresses</li>
+<li>Upcoming schedule reminders</li>
+<li>Student progress reports</li>
+<li>Usage reports (for admins)</li>
+</ul>
+<h3>Admin notices</h3>
+<ul>
+<li>AI review pause notices (tenant admins)</li>
+<li>School deletion scheduled or cancelled</li>
 </ul>
 <h3>Turning notifications off</h3>
-<p><strong>Profile</strong> → <strong>Email Notifications</strong>. Security-related messages (such as password resets) may still send.</p>
-<h3>Session reminders</h3>
-<p>You'll receive an email reminder <strong>15 minutes before</strong> each scheduled session. Reminders are tied to your notification preference — disable email notifications to stop them.</p>
+<p><strong>Profile</strong> → <strong>Email Notifications</strong>. Security-critical and account-lifecycle messages (password resets, invites, deletion notices) always send regardless of preferences.</p>
 <h2>In-app notifications</h2>
-<p>The bell icon in the header shows unread notifications: mentions, replies, new sessions, new classes, and schedule reminders. Click to view, or mark all as read.</p>
+<p>The bell icon in the header shows unread notifications: mentions, note replies, session shares, review requests, and other activity. Click to view, or mark all as read.</p>
 <h3>Not receiving mail</h3>
 <ol>
 <li>Check spam or promotions folders.</li>
@@ -2834,7 +2802,7 @@
 <hr>
 <h2>Trust, minors on camera, and policy</h2>
 <h3>How serious are you about security?</h3>
-<p>HTTPS in transit, hashed passwords, and video in cloud storage behind a CDN. See <a onclick="navigate('storage')">Video storage and retention</a> for details.</p>
+<p>HTTPS in transit, hashed passwords, and video in cloud storage served via short-lived presigned URLs. See <a onclick="navigate('storage')">Video storage and retention</a> for details.</p>
 <h3>What about minors on the footage?</h3>
 <p>Kaynos is not currently designed for users under 13 (COPPA) or under 16 in the EU (GDPR Article 8). Organizations using Kaynos with minors are responsible for obtaining appropriate parental or guardian consent. Schools using Kaynos for student records should contact us about FERPA-compliant data processing agreements.</p>
 <p>Read the <a href="https://app.kaynos.net/terms" target="_blank" rel="noopener">Terms of Service</a> in the app. For legal questions, consult qualified counsel.</p>
@@ -2845,7 +2813,7 @@
 <h3>Which browsers are supported?</h3>
 <p>Current Chrome, Firefox, Safari, and Edge. If upload or playback fails in one browser, trying Chrome is a reasonable first step.</p>
 <h3>Do you expose an API?</h3>
-<p>Yes. Admins can create API tokens for scripts and integrations. Read <a onclick="navigate('developer-api')">Developer API</a> and avoid committing secrets to source control.</p>
+<p>There's an internal API reference at <strong>Admin → API Docs</strong> for admins and instructors to understand the endpoints the app itself uses. A public developer API with tokens and webhooks for third-party integrations is not available today. See the <a onclick="navigate('developer-api')">Developer API</a> page for details.</p>
 <hr>
 <h2>Support</h2>
 <h3>How do I contact you?</h3>
@@ -2880,8 +2848,6 @@
 <h3>Can I coach remotely with Kaynos?</h3>
 <p>Yes. Many coaches use Kaynos for async video review with students worldwide. Tips for scaling:</p>
 <ul>
-<li>Use <strong>note templates</strong> for recurring feedback — saves time on repetitive corrections.</li>
-<li>Check the <strong>pending reviews</strong> queue daily so no upload goes unreviewed.</li>
 <li>Organize students by training phase using tags (e.g., <code>beginner</code>, <code>competition</code>, <code>rehab</code>).</li>
 <li>Enable <strong>email notifications</strong> so students know when your review is ready.</li>
 <li>Use keyboard shortcuts for speed: <kbd>J</kbd>/<kbd>L</kbd> to scrub, <kbd>N</kbd> to note, <kbd>Cmd+Enter</kbd> to save.</li>
@@ -2891,119 +2857,26 @@
       title: "Developer API", section: "Developers",
       content: `
 <h1>Developer API</h1>
-<p>For accounts that want automation beyond the web UI: schedules, exports, or custom reporting. The API is HTTPS-only and scoped to your account's data. Create and manage tokens under <strong>Admin → Developer API</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> (admin role required).</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Swagger first.</strong> Sign in as an admin, then open the in-app docs. The same browser session lets <em>Try it out</em> use your cookies — <a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener">Swagger UI (production)</a>.</div></div>
-<div class="hint hint-danger"><div class="hint-icon">${IC.danger}</div><div><strong>Protect your secrets.</strong> API tokens are as sensitive as passwords. Store them in a secret manager or env vars — never commit them to git or expose them in frontend code.</div></div>
-<p>Contact support for API documentation access.</p>
-<h2>Two authentication doors</h2>
+<div class="tldr"><strong>TLDR:</strong> Admins and instructors can view an internal API reference at <a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener">Admin → API Docs</a>. Public API tokens, third-party integrations, and customer-facing webhooks are not available today.</div>
+<h2>Internal API reference</h2>
+<p>Kaynos ships an internal API reference for admins and instructors who want to understand what the app is doing under the hood. It's a Swagger UI page backed by an OpenAPI spec that documents the REST endpoints the Kaynos web app uses.</p>
 <ul>
-<li><strong><code>/api/v1/…</code></strong> — for scripts and integrations: Bearer token minted under <strong>Admin → Developer API</strong>.</li>
-<li><strong><code>/api/integrations/…</code></strong> — while logged in to the browser: create/list/revoke tokens via session cookie (Swagger "Try it out").</li>
-<li>In-app route <strong><code>/admin/api-docs</code></strong> is Swagger UI; admin role required.</li>
+<li><strong>Where:</strong> Sign in as an admin or instructor and open <a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener">Admin → API Docs</a> (direct URL: <code>/admin/api-docs</code>).</li>
+<li><strong>Who can see it:</strong> Admins and instructors only. Students do not have access.</li>
+<li><strong>Authentication:</strong> Session-cookie auth — the same login session that powers the app. There are no separate API keys or tokens to manage.</li>
+<li><strong>Scope:</strong> Documentation of internal endpoints (sessions, classes, members, notes, uploads, billing, and more). Useful for understanding behavior, debugging, and internal tooling.</li>
 </ul>
-<h2>Base URLs</h2>
-<table><thead><tr><th>Environment</th><th>Host</th><th>API prefix</th></tr></thead><tbody>
-<tr><td>Production</td><td><a href="https://app.kaynos.net" target="_blank" rel="noopener"><code>https://app.kaynos.net</code></a></td><td><code>/api/v1</code></td></tr>
-<tr><td>Local Netlify dev</td><td><code>http://localhost:8888</code></td><td><code>/api/v1</code></td></tr>
-</tbody></table>
-<p>See the API reference (requires authentication) for available endpoints.</p>
-<h2>Bearer header</h2>
-<pre>Authorization: Bearer &lt;your-api-token&gt;</pre>
-<p>We show the secret exactly once when you mint it. Treat it like a Stripe key — password manager or env var, never committed.</p>
-<h2>Scopes</h2>
-<table><thead><tr><th>Scope</th><th>Does</th></tr></thead><tbody>
-<tr><td><code>read</code></td><td>GET requests for sessions, classes, members, etc.</td></tr>
-<tr><td><code>write</code></td><td>Creates, updates, deletes — plus all reads.</td></tr>
-</tbody></table>
-<p>The token inherits the permissions of the admin who created it. If they can't do it in the UI, the API returns <code>403</code>. No backdoors.</p>
-<h2>What v1 covers</h2>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>The internal reference is provided for transparency and internal use. It is not a stability contract — endpoints and shapes can change between releases.</div></div>
+<h2>Public developer API (not available)</h2>
+<p>Kaynos does not currently offer a public developer API for third-party integrations. Specifically, the following are <strong>not</strong> supported today:</p>
 <ul>
-<li>Sessions and classes (lifecycle + progress reads)</li>
-<li>Members / roster where the product allows automation</li>
-<li>Notes pinned to sessions and classes</li>
+<li>Public API tokens or personal access tokens</li>
+<li>OAuth apps or third-party clients</li>
+<li>Customer-facing webhooks for real-time events</li>
+<li>SDKs or client libraries</li>
 </ul>
-<h2>Webhook events</h2>
-<p>Subscribe to real-time event callbacks. Configure webhooks under <strong>Admin → Webhooks</strong>.</p>
-<table><thead><tr><th>Event</th><th>Fires when</th></tr></thead><tbody>
-<tr><td><code>session.created</code></td><td>A new session is created</td></tr>
-<tr><td><code>session.updated</code></td><td>Session title, date, or video changes</td></tr>
-<tr><td><code>class.created</code></td><td>A new class is created</td></tr>
-<tr><td><code>class.updated</code></td><td>Class details change</td></tr>
-<tr><td><code>note.added</code></td><td>A note is added to a session or class</td></tr>
-<tr><td><code>member.joined</code></td><td>A new member accepts their invite</td></tr>
-<tr><td><code>member.removed</code></td><td>A member is removed from the account</td></tr>
-</tbody></table>
-<p>Deliveries are retried up to 3 times with exponential backoff. View delivery history and manually retry from the webhooks panel.</p>
-
-<h2>Code examples</h2>
-<h3>List sessions (cURL)</h3>
-<pre>curl -H "Authorization: Bearer YOUR_TOKEN" \\
-  https://app.kaynos.net/api/v1/sessions</pre>
-
-<h3>Create a note (JavaScript)</h3>
-<pre>const res = await fetch('https://app.kaynos.net/api/v1/notes/session/SESSION_ID', {
-  method: 'POST',
-  headers: {
-    'Authorization': 'Bearer YOUR_TOKEN',
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    text: 'Great guard retention here',
-    timestamp_seconds: 142
-  })
-});</pre>
-
-<h2>Rate limits</h2>
-<table><thead><tr><th>Endpoint</th><th>Limit</th></tr></thead><tbody>
-<tr><td>Login</td><td>25 attempts per IP</td></tr>
-<tr><td>Signup</td><td>10 per IP</td></tr>
-<tr><td>Promo validation</td><td>15 per IP</td></tr>
-<tr><td>General API</td><td>No hard limit (fair use policy)</td></tr>
-</tbody></table>
-
-<h2>Error responses</h2>
-<table><thead><tr><th>Code</th><th>Meaning</th><th>Action</th></tr></thead><tbody>
-<tr><td><code>401</code></td><td>Missing or invalid token</td><td>Check Authorization header</td></tr>
-<tr><td><code>403</code></td><td>Insufficient scope or role</td><td>Token needs write scope or admin role</td></tr>
-<tr><td><code>404</code></td><td>Resource not in your account</td><td>Verify session/class/member ID</td></tr>
-<tr><td><code>429</code></td><td>Rate limited</td><td>Wait and retry with backoff</td></tr>
-</tbody></table>
-
-<h2>Managing tokens while logged in</h2>
-<ol>
-<li><code>GET /api/integrations/tokens</code> — inspect token metadata</li>
-<li><code>POST /api/integrations/tokens</code> — create a token (plaintext secret returned once)</li>
-<li><code>DELETE /api/integrations/tokens/{id}</code> — revoke a compromised key</li>
-</ol>
-<h3>Example create body</h3>
-<pre>{"name":"nightly-export","scopes":["read"]}</pre>
-<p>Add <code>"write"</code> to scopes only when you actually need it.</p>
-<h2>Error responses</h2>
-<table><thead><tr><th>Code</th><th>Meaning</th></tr></thead><tbody>
-<tr><td><code>401</code></td><td>Missing or invalid token</td></tr>
-<tr><td><code>403</code></td><td>Wrong scope or role</td></tr>
-<tr><td><code>404</code></td><td>Resource not in your account</td></tr>
-<tr><td><code>400</code></td><td>Bad request payload</td></tr>
-</tbody></table>
-<h2>Operational practices</h2>
-<ul>
-<li>Rotate API keys when technical staff leave.</li>
-<li>Prefer read-only scopes until write access is clearly required.</li>
-<li>Never embed secrets in client-side code — keep tokens server-side.</li>
-</ul>
-<h2>Quick links</h2>
-<ul>
-<li><a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener">Swagger UI</a></li>
-<li>Contact support for API documentation access</li>
-</ul>
-<h2>Webhooks</h2>
-<p>Receive real-time HTTP callbacks when events happen in your account.</p>
-<ol>
-<li>Go to <strong>Admin → Webhooks</strong>.</li>
-<li>Add an endpoint URL. Choose which events to subscribe to (e.g., session.created, class.created).</li>
-<li>Kaynos sends a POST request to your URL with the event payload.</li>
-</ol>
-<p>View delivery history and retry failed deliveries from the webhooks panel.</p>`},
+<p>A public API may come in the future. If you have a use case that would benefit from programmatic access or webhooks, <a href="mailto:support@kaynos.net">contact us</a> or visit our <a onclick="navigate('contact')">contact page</a> so we can prioritize based on demand.</p>
+<p>Follow our <a onclick="navigate('release-notes')">release notes</a> for updates.</p>`},
 
     glossary: {
       title: "Glossary", section: "Getting Started",
@@ -3019,9 +2892,11 @@
 <div class="glossary-term"><dt>Note</dt><dd>A short text annotation pinned to a specific timestamp on the video timeline. Coaches and students can both create notes; coaches can edit any note.</dd></div>
 <div class="glossary-term"><dt>Tag</dt><dd>A label attached to sessions or classes for organization and filtering. Tags are shared across the account — examples: <code>guard</code>, <code>comp-prep</code>, <code>fundamentals</code>.</dd></div>
 <div class="glossary-term"><dt>Progress</dt><dd>A lightweight tracker that records playback position (for resume), completion status, and last-viewed time. Coaches see completion across their students; no invasive analytics.</dd></div>
-<div class="glossary-term"><dt>API Token</dt><dd>A secret key minted under Admin → Developer API. Used to authenticate scripts and integrations against the <code>/api/v1</code> endpoints. Treat like a password.</dd></div>
-<div class="glossary-term"><dt>Vimeo Source</dt><dd>An alternative to uploading a file — paste a Vimeo URL or video ID to embed video already hosted on Vimeo into a session or class.</dd></div>
-<div class="glossary-term"><dt>CDN</dt><dd>Content Delivery Network — Kaynos uses Cloudflare to deliver video quickly from edge servers close to the viewer, reducing buffering.</dd></div>
+<div class="glossary-term"><dt>Clip</dt><dd>A short excerpt from a session or class, created by a coach to highlight a specific moment or technique. Clips can be shared externally via a token link — no login required for the viewer.</dd></div>
+<div class="glossary-term"><dt>Review Request</dt><dd>A student-initiated request for a coach to review a video. The student selects a coach, adds context, and uploads their video to a draft session. The coach can accept, decline, or skip the request from their dashboard.</dd></div>
+<div class="glossary-term"><dt>Highlight</dt><dd>A time-range bookmark on the video timeline, marking a start and end point. Used to call attention to a segment worth reviewing.</dd></div>
+<div class="glossary-term"><dt>Annotation</dt><dd>A drawing overlay on a frozen video frame — arrows, circles, or freehand — attached to a specific timestamp. Appears during playback to highlight technique details.</dd></div>
+<div class="glossary-term"><dt>Presigned URL</dt><dd>A short-lived, signed link to a video file in Backblaze B2 storage. Kaynos serves video playback through presigned URLs (4-hour expiry) rather than a CDN — each viewer request generates a fresh link scoped to that viewer.</dd></div>
 </dl>
 <h2>BJJ positions and movements</h2>
 <p>New to martial arts? Here's what your coach means:</p>
@@ -3035,9 +2910,8 @@
 <dt>Takedown</dt><dd>A technique to bring a standing opponent to the ground.</dd>
 <dt>Drilling</dt><dd>Repetitive practice of a specific technique with a cooperative partner. Think of it like running drills in basketball.</dd>
 <dt>Sparring / rolling</dt><dd>Live practice at varying intensity. "Rolling" is the BJJ term for sparring.</dd>
-<dt>Belt progression</dt><dd>BJJ uses colored belts to mark experience: white → blue → purple → brown → black. Each belt can have up to 4 stripes. Promotions are based on time, skill, and instructor discretion — typically years between belts.</dd>
 </dl>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>For role details see <a onclick="navigate('roles')">Understanding user roles</a>. For API tokens see <a onclick="navigate('developer-api')">Developer API</a>.</div></div>`},
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>For role details see <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>`},
 
     troubleshoot: {
       title: "Troubleshooting wizard", section: "Troubleshooting",
@@ -3116,7 +2990,7 @@
 <li>Added keyboard shortcuts for faster navigation — press <kbd>?</kbd> to see them all.</li>
 <li>Print-friendly styles for saving pages offline.</li>
 <li>Better accessibility: skip-to-content, improved ARIA labels, focus management.</li>
-<li>Full API reference with Swagger UI link, scopes, and token management.</li>
+<li>Developer API page updated with roadmap and contact information.</li>
 </ul>
 <h3>March 2026</h3>
 <ul>
@@ -3176,45 +3050,60 @@
     "parent-guide": {
       title: "Parent guide", section: "FAQ",
       content: `
-<h1>Parent guide</h1>
-<div class="tldr"><strong>TLDR:</strong> Log in at app.kaynos.net with the email your academy gave you. Watch your child's sessions, see their progress, and check the class schedule.</div>
-<p>This guide is for parents and guardians of students. You don't need to know anything about martial arts to use Kaynos.</p>
+<h1>Parent &amp; guardian guide</h1>
+<div class="tldr"><strong>TLDR:</strong> Your child has a student account in Kaynos managed by their coach. They can watch recorded sessions and classes, read coaching notes, and request reviews. All videos are private to the school — nothing is public.</div>
+<p>This guide is for parents and guardians whose children train at an academy that uses Kaynos. You don't need to know anything about martial arts or about the app itself — this page covers what your child's experience looks like and answers common questions.</p>
 
-<h2>Getting started</h2>
-<ol>
-<li>Your child's academy will send you a login email. Click the link or go to <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</li>
-<li>Log in with the email and temporary password from the invite.</li>
-<li>Change your password on first login.</li>
-<li>You'll see your child's dashboard — their sessions, classes, and progress.</li>
-</ol>
-
-<h2>What you'll see</h2>
+<h2>How your child's account works</h2>
+<p>Kaynos has three roles: <strong>admin</strong>, <strong>instructor</strong> (coach), and <strong>student</strong>. There is no separate parent or guardian account. Your child's coach or academy admin creates and manages their student account.</p>
 <ul>
-<li><strong>Sessions:</strong> Private recordings between your child and their coach. Only you, your child, and the coach can see these.</li>
-<li><strong>Classes:</strong> Group recordings shared with all students. Think of these as class replays.</li>
-<li><strong>Recap clips:</strong> Short 2-3 minute highlights from a class — much easier to watch than a full recording.</li>
-<li><strong>Notes:</strong> Your coach's timestamped feedback on specific moments in the video. Click a note to jump to that exact moment.</li>
-<li><strong>Progress:</strong> Which sessions your child has watched and how far they got. Belt rank and promotion history.</li>
+<li>Your child logs in at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> with credentials provided by the academy.</li>
+<li>The coach or admin controls what content is available to students.</li>
+<li>If you need to see what your child sees, ask their coach — they can walk you through it or share relevant details directly.</li>
+</ul>
+
+<h2>What your child can see and do</h2>
+<ul>
+<li><strong>Sessions:</strong> Private one-on-one recordings between your child and their coach. Only the coach and your child can view these.</li>
+<li><strong>Classes:</strong> Group class recordings shared with students in that class. Think of these as class replays your child can re-watch to practice at home.</li>
+<li><strong>Clips:</strong> Short excerpts from sessions or classes that the coach has created to highlight key moments or techniques.</li>
+<li><strong>Notes:</strong> Timestamped coaching feedback attached to specific moments in a video. Your child can click a note to jump to that exact point in the recording.</li>
+<li><strong>Review requests:</strong> Your child can flag a moment in a video and ask their coach for feedback on it.</li>
 </ul>
 
 <h2>Understanding the sport</h2>
-<p>Not sure what "guard" or "mount" means? See our <a onclick="navigate('glossary')">glossary of BJJ terms</a> — written for non-practitioners.</p>
+<p>If your child trains Brazilian Jiu-Jitsu (BJJ) or another martial art, some of the terminology in coaching notes might be unfamiliar. Here are a few common terms:</p>
+<ul>
+<li><strong>Guard:</strong> A position where a person is on their back, using their legs to control or defend against the person on top.</li>
+<li><strong>Mount:</strong> A dominant position where one person sits on top of the other's torso.</li>
+<li><strong>Sweep:</strong> A technique used from the bottom to reverse positions and end up on top.</li>
+<li><strong>Submission:</strong> A hold or lock (like an armbar or choke) that forces the opponent to "tap out" and concede.</li>
+<li><strong>Rolling / sparring:</strong> Live practice with a partner, applying techniques at varying intensity.</li>
+<li><strong>Drilling:</strong> Practicing a single technique repeatedly with a cooperative partner to build muscle memory.</li>
+</ul>
+<p>For a more complete list, see our <a onclick="navigate('glossary')">glossary of BJJ terms</a> — written for people who don't train.</p>
 
 <h2>Privacy and safety</h2>
+<p>We understand that video recordings of children require careful handling. Here is how Kaynos protects your child's data:</p>
 <ul>
-<li>Video is stored securely in the US (Backblaze B2) and delivered over encrypted connections (HTTPS).</li>
-<li>Only people in your academy's account can see recordings. Videos are not public.</li>
-<li>Playback links expire — they cannot be shared or bookmarked by outsiders.</li>
-<li>For the full privacy policy, see <a href="https://app.kaynos.net/privacy" target="_blank" rel="noopener">app.kaynos.net/privacy</a>.</li>
+<li><strong>Videos are private:</strong> Only people within your academy's Kaynos account can see recordings. Nothing is posted publicly or shared outside the school.</li>
+<li><strong>Secure storage:</strong> Video is stored securely in the US (Backblaze B2) and delivered over encrypted connections (HTTPS).</li>
+<li><strong>Links expire:</strong> Playback links are temporary and cannot be shared with or bookmarked by outsiders.</li>
+<li><strong>No public profiles:</strong> Students do not have public-facing profiles, pages, or any content visible outside their academy.</li>
 </ul>
-<p>Questions about your child's data or COPPA/FERPA compliance? See the <a onclick="navigate('faq')">FAQ</a> or email \${mailLink()}.</p>
-<div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div><strong>Looking for the full privacy policy?</strong> See <a href="https://app.kaynos.net/privacy" target="_blank" rel="noopener">app.kaynos.net/privacy</a> for the Kaynos application privacy policy, or <a onclick="navigate('privacy-on-this-site')">Privacy on this site</a> for help center privacy details including COPPA and FERPA information.</div></div>
+<p>For the full privacy policy, see <a href="https://app.kaynos.net/privacy" target="_blank" rel="noopener">app.kaynos.net/privacy</a>. For details on COPPA and FERPA compliance, see <a onclick="navigate('privacy-on-this-site')">Privacy on this site</a>.</p>
+<div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div><strong>Data requests:</strong> Parents can request access to or deletion of their child's data at any time. Email \${mailLink()} or ask your child's coach to connect you with academy administration.</div></div>
 
-<h2>Schedule and events</h2>
-<p>Check the schedule in the app for upcoming classes, private sessions, and belt tests. Enable email notifications in your profile to get reminders.</p>
-
-<h2>Billing</h2>
-<p>If your academy manages billing through Kaynos, you can view invoices and update your payment method from the billing section. Contact your academy directly for pricing questions.</p>`},
+<h2>Questions or concerns?</h2>
+<p>Since there is no parent login, the best way to stay informed is to talk to your child's coach or academy admin directly. They can:</p>
+<ul>
+<li>Show you what your child has been working on</li>
+<li>Explain any coaching notes or feedback</li>
+<li>Answer questions about class content or training</li>
+<li>Help with any account or access issues</li>
+</ul>
+<p>You can also email ${mailLink()} with questions about Kaynos itself, including privacy, data handling, or how the platform works.</p>
+<p>For common questions, see the <a onclick="navigate('faq')">FAQ</a>.</p>`},
 
     "privacy-on-this-site": {
       title: "Privacy on this site", section: "Legal",
@@ -3237,6 +3126,7 @@
 <tr><td>poll-votes, poll-voted, poll-custom</td><td>Feature poll votes (legacy, no longer used)</td><td>localStorage</td></tr>
 <tr><td>highlights</td><td>Text highlights you've made</td><td>localStorage</td></tr>
 <tr><td>scroll-pos</td><td>Scroll position per page</td><td>localStorage</td></tr>
+<tr><td>user-role</td><td>Selected role (admin, coach, student, developer) for personalized navigation</td><td>localStorage</td></tr>
 <tr><td>onboarded, checklist-done</td><td>Onboarding progress</td><td>localStorage</td></tr>
 <tr><td>nudge-dismissed</td><td>Whether you dismissed the help nudge</td><td>sessionStorage</td></tr>
 <tr><td>sb-collapsed</td><td>Sidebar collapsed state</td><td>localStorage</td></tr>
@@ -3278,7 +3168,7 @@
 <li><strong>Right to opt-out</strong> of data sale or sharing. <em>Kaynos does not sell or share personal information with third parties for marketing.</em></li>
 <li><strong>Right to non-discrimination</strong> for exercising these rights.</li>
 </ul>
-<p><strong>Data categories collected:</strong> identifiers (name, email), video recordings, professional information (role, belt rank), internet activity (IP, browser, login times).</p>
+<p><strong>Data categories collected:</strong> identifiers (name, email), video recordings, professional information (role), internet activity (IP, browser, login times).</p>
 <p><strong>Data retention:</strong> account data until deletion; videos for 6 months (configurable); login/session data for 90 days.</p>
 <p>To exercise your rights, email \${mailLink('privacy@kaynos.net')} with your name, email, and request type. We respond within 45 calendar days.</p>
 
@@ -3296,8 +3186,7 @@
 <table class="comparison-table">
 <thead><tr><th>Service</th><th>Purpose</th><th>Data</th></tr></thead>
 <tbody>
-<tr><td>Backblaze B2</td><td>Video storage</td><td>Uploaded video files (encrypted at rest)</td></tr>
-<tr><td>Cloudflare</td><td>CDN + DDoS protection</td><td>Video streams, IP addresses</td></tr>
+<tr><td>Backblaze B2</td><td>Video storage and playback (via presigned URLs)</td><td>Uploaded video files (encrypted at rest)</td></tr>
 <tr><td>Stripe</td><td>Payment processing</td><td>Billing name, email (not card numbers)</td></tr>
 <tr><td>Deepgram</td><td>Voice dictation (opt-in)</td><td>Audio processed in real time, not stored</td></tr>
 </tbody>
@@ -3309,7 +3198,7 @@
 <li>Encryption in transit: TLS 1.2+ (HTTPS everywhere)</li>
 <li>Encryption at rest: AES-256 for stored video</li>
 <li>Passwords: bcrypt hashed (not reversible)</li>
-<li>Two-factor authentication: TOTP available for all accounts</li>
+<li>Role-based access controls enforced at API and database level</li>
 <li>Playback URLs: time-limited and signed</li>
 <li>Payment: PCI-DSS compliant via Stripe (Kaynos never handles card numbers)</li>
 </ul>
@@ -3368,7 +3257,6 @@
 <tr><td>Video recordings</td><td>Core coaching service</td><td>6 months default (configurable)</td></tr>
 <tr><td>Coaching notes</td><td>Timestamped feedback</td><td>With associated session/class</td></tr>
 <tr><td>Progress data</td><td>Resume playback, completion tracking</td><td>With associated session/class</td></tr>
-<tr><td>Belt rank</td><td>Progression tracking</td><td>Until account deletion</td></tr>
 <tr><td>IP address, browser</td><td>Security, rate limiting</td><td>90 days</td></tr>
 <tr><td>Payment metadata</td><td>Billing (via Stripe — no card numbers)</td><td>Per Stripe retention policy</td></tr>
 </tbody>
@@ -3378,7 +3266,7 @@
 <ul>
 <li>Written information security program maintained</li>
 <li>Encryption: AES-256 at rest, TLS 1.2+ in transit</li>
-<li>Multi-factor authentication (TOTP) available</li>
+<li>Role-based access controls with per-resource authorization</li>
 <li>Role-based access controls enforced at API and database level</li>
 <li>48-hour incident response protocol</li>
 <li>Vendor security assessments conducted</li>
@@ -3474,7 +3362,7 @@
       const ROLE_SECTIONS = {
         admin: ['Getting Started', 'Video', 'Sessions & Classes', 'Account Management'],
         coach: ['Video', 'Sessions & Classes', 'Getting Started'],
-        client: ['Video', 'Sessions & Classes', 'Troubleshooting', 'FAQ'],
+        student: ['Video', 'Sessions & Classes', 'Troubleshooting', 'FAQ'],
         developer: ['Developers', 'FAQ', 'Video'],
       };
       const highlighted = ROLE_SECTIONS[role] || [];
@@ -3530,23 +3418,23 @@
   };
 
   const PAGE_DESCRIPTIONS = {
-    'welcome': 'Kaynos help center — setup guides, video upload, playback, troubleshooting, and API docs for the video coaching platform.',
+    'welcome': 'Kaynos help center — setup guides, video upload, playback, troubleshooting, and developer API reference for the video coaching platform.',
     'setup': 'Set up your Kaynos account. First login, password change, Google OAuth, and getting started with video coaching.',
     'uploading': 'Upload video to Kaynos. Supported formats (MP4, MOV, WebM, AVI), size limits, chunked upload, and troubleshooting.',
     'playback': 'Watch and review video in Kaynos. Playback speed, keyboard shortcuts, timeline notes, clips, and mobile playback.',
-    'creating-sessions': 'Create sessions and classes in Kaynos. Private lessons vs shared classes, scheduling, and session types.',
-    'notes': 'Timestamped coaching notes in Kaynos. Add notes, voice dictation, annotations, reactions, templates, and tags.',
+    'creating-sessions': 'Create sessions and classes in Kaynos. Private lessons vs shared classes, and scheduling.',
+    'notes': 'Timestamped coaching notes in Kaynos. Add notes, voice dictation, annotations, reactions, AI review, and tags.',
     'faq': 'Frequently asked questions about Kaynos. Pricing, security, privacy, browser support, and billing.',
-    'developer-api': 'Kaynos Developer API. Authentication, endpoints, scopes, webhooks, and integration guide.',
-    'roles': 'User roles in Kaynos. Admin, coach, student, assistant coach, and team captain permissions.',
+    'developer-api': 'Kaynos Developer API. Internal API reference for admins and instructors at Admin → API Docs. Public API, tokens, and webhooks are not available today.',
+    'roles': 'User roles in Kaynos. Admin, coach, and student permissions and capabilities.',
     'troubleshoot': 'Troubleshoot Kaynos issues. Step-by-step wizard for upload, playback, login, and performance problems.',
-    'progress': 'Track student progress in Kaynos. Watch accountability, belt progression, and completion tracking.',
+    'progress': 'Track student progress in Kaynos. Watch rate, session count, note count, time-period filtering, and per-session completion tracking.',
     'formats': 'Supported video formats and limits in Kaynos. MP4, MOV, WebM, AVI. Max 5 GB. Upload time calculator.',
     'storage': 'Video storage and retention in Kaynos. Backblaze B2, 6-month retention, 100 video / 50 GB defaults.',
-    'managing-members': 'Manage members in Kaynos. Invite coaches and students, change roles, reset passwords, multi-location.',
-    'profile': 'Kaynos profile settings. Password, 2FA, notifications, and account preferences.',
+    'managing-members': 'Manage members in Kaynos. Invite coaches and students, change roles, reset passwords, admin panel overview.',
+    'profile': 'Kaynos profile settings. Password, notifications, and account preferences.',
     'feature-requests': 'Submit a feature request for Kaynos. Tell us what to build next.',
-    'parent-guide': 'Parent guide for Kaynos. How to view your child\'s sessions, progress, and privacy information.',
+    'parent-guide': 'Parent and guardian guide for Kaynos. What your child can see and do, privacy and safety info, and how to contact the coach.',
     'privacy-on-this-site': 'Privacy on the Kaynos help center. What data stays in your browser and what is sent externally.',
   };
 
@@ -4162,7 +4050,7 @@
   const ROLE_PATHS = {
     admin: ['setup', 'roles', 'inviting-members', 'first-upload', 'managing-members', 'uploading', 'creating-sessions', 'notes', 'progress', 'developer-api'],
     coach: ['setup', 'first-upload', 'creating-sessions', 'notes', 'uploading', 'playback', 'formats', 'progress', 'faq'],
-    client: ['setup', 'playback', 'notes', 'progress', 'creating-sessions', 'faq', 'parent-guide', 'troubleshoot', 'performance'],
+    student: ['setup', 'playback', 'notes', 'progress', 'creating-sessions', 'faq', 'parent-guide', 'troubleshoot', 'performance'],
     developer: ['setup', 'developer-api', 'formats', 'glossary', 'faq', 'storage'],
   };
 
@@ -4217,7 +4105,6 @@
       'playback': 'https://app.kaynos.net/sessions',
       'notes': 'https://app.kaynos.net/sessions',
       'progress': 'https://app.kaynos.net/dashboard',
-      'developer-api': 'https://app.kaynos.net/admin/api-docs',
     };
     const url = APP_LINKS[pageId];
     if (!url) return;
@@ -4327,7 +4214,7 @@
           <div class="role-card-title">Coach</div>
           <div class="role-card-desc">Sessions, uploads, notes</div>
         </div>
-        <div class="role-card${selectedRole === 'client' ? ' selected' : ''}" role="button" tabindex="0" onclick="selectRole('client')" onkeydown="if(event.key==='Enter')selectRole('client')">
+        <div class="role-card${selectedRole === 'student' ? ' selected' : ''}" role="button" tabindex="0" onclick="selectRole('student')" onkeydown="if(event.key==='Enter')selectRole('student')">
           <div class="role-card-icon">${IC.play}</div>
           <div class="role-card-title">Student / Member</div>
           <div class="role-card-desc">Watch, review, progress</div>
@@ -4335,7 +4222,7 @@
         <div class="role-card${selectedRole === 'developer' ? ' selected' : ''}" role="button" tabindex="0" onclick="selectRole('developer')" onkeydown="if(event.key==='Enter')selectRole('developer')">
           <div class="role-card-icon">${IC.wrench}</div>
           <div class="role-card-title">Developer</div>
-          <div class="role-card-desc">API, tokens, integrations</div>
+          <div class="role-card-desc">Formats, glossary, internal API reference</div>
         </div>
       </div>`;
     }
@@ -4351,6 +4238,11 @@
         <button class="tour-btn tour-btn-primary" onclick="nextTour()">${tourStep === TOUR_STEPS.length - 1 ? 'Get Started' : 'Next'}</button>
       </div>`;
   }
+
+  // Migrate legacy 'client' role value to 'student'
+  (function migrateClientRole() {
+    if (localStorage.getItem('user-role') === 'client') localStorage.setItem('user-role', 'student');
+  })();
 
   function selectRole(role) {
     selectedRole = role;
@@ -4431,7 +4323,7 @@
       { id: 'cl-session', text: 'Create a session', page: 'creating-sessions' },
       { id: 'cl-notes', text: 'Add timestamped notes', page: 'notes' },
     ],
-    client: [
+    student: [
       { id: 'cl-login', text: 'Log in to the app', page: 'setup' },
       { id: 'cl-password', text: 'Set a new password', page: 'profile' },
       { id: 'cl-playback', text: 'Watch a session', page: 'playback' },
@@ -4440,7 +4332,7 @@
     ],
     developer: [
       { id: 'cl-login', text: 'Log in as admin', page: 'setup' },
-      { id: 'cl-api', text: 'Read the API docs', page: 'developer-api' },
+      { id: 'cl-api', text: 'Review the Developer API page', page: 'developer-api' },
       { id: 'cl-glossary', text: 'Review the glossary', page: 'glossary' },
       { id: 'cl-formats', text: 'Check supported formats', page: 'formats' },
       { id: 'cl-faq', text: 'Browse the FAQ', page: 'faq' },
@@ -4483,7 +4375,7 @@
         { href: 'uploading', icon: IC.video, title: 'Uploading guide', desc: 'Formats, limits, and troubleshooting' },
         { href: 'faq', icon: IC.chat, title: 'FAQ', desc: 'Common questions answered' },
       ],
-      client: [
+      student: [
         { href: 'playback', icon: IC.play, title: 'Watch your sessions', desc: 'Playback, shortcuts, and notes', featured: true },
         { href: 'notes', icon: IC.book, title: 'Notes & feedback', desc: 'Read coach notes, leave replies', featured: true },
         { href: 'troubleshoot', icon: IC.alert, title: 'Fix a problem', desc: 'Step-by-step troubleshooting', featured: true },
@@ -4492,7 +4384,7 @@
         { href: 'performance', icon: IC.alert, title: 'Performance tips', desc: 'Speed up loading and playback' },
       ],
       developer: [
-        { href: 'developer-api', icon: IC.book, title: 'API reference', desc: 'Auth, endpoints, and schemas', featured: true },
+        { href: 'developer-api', icon: IC.book, title: 'Developer API', desc: 'Internal API reference for admins/instructors', featured: true },
         { href: 'formats', icon: IC.video, title: 'Video formats', desc: 'Supported codecs and limits', featured: true },
         { href: 'glossary', icon: IC.book, title: 'Glossary', desc: 'Platform terminology', featured: true },
         { href: 'faq', icon: IC.chat, title: 'FAQ', desc: 'Common questions' },
@@ -4528,15 +4420,15 @@
         { num: '2', text: 'Upload your first session', link: 'https://app.kaynos.net/sessions/new', external: true },
         { num: '3', text: 'Add timestamped notes', link: 'notes' },
       ],
-      client: [
+      student: [
         { num: '1', text: 'Log in to the app', link: 'https://app.kaynos.net', external: true },
         { num: '2', text: 'Watch your first session', link: 'https://app.kaynos.net/sessions', external: true },
         { num: '3', text: 'Leave a note for your coach', link: 'notes' },
       ],
       developer: [
         { num: '1', text: 'Log in as admin', link: 'https://app.kaynos.net', external: true },
-        { num: '2', text: 'Open the API docs', link: 'https://app.kaynos.net/admin/api-docs', external: true },
-        { num: '3', text: 'Create your first API token', link: 'developer-api' },
+        { num: '2', text: 'Review the Developer API page', link: 'developer-api' },
+        { num: '3', text: 'Browse the FAQ', link: 'faq' },
       ],
     };
 
@@ -4561,7 +4453,7 @@
       const ROLE_SUBTITLES = {
         admin: 'Set up your academy, invite your team, and manage everything from one place.',
         coach: 'Upload sessions, give timestamped feedback, and track student progress.',
-        client: 'Three steps: log in, watch your session, leave a note for your coach. That\'s it.',
+        student: 'Three steps: log in, watch your session, leave a note for your coach. That\'s it.',
         developer: 'Integrate with the Kaynos API — auth, endpoints, and schemas.',
       };
       if (ROLE_SUBTITLES[role]) heroP.textContent = ROLE_SUBTITLES[role];
@@ -4753,7 +4645,10 @@
     'student': 'End user who watches sessions and classes, adds notes, and tracks progress.',
     'note': 'A text annotation pinned to a specific timestamp on the video timeline.',
     'tag': 'A label for organizing sessions and classes (e.g. guard, comp-prep, drilling).',
-    'api token': 'A secret key for authenticating scripts against the API.',
+    'clip': 'A short excerpt from a session or class, shareable externally via a token link.',
+    'review request': 'A student-initiated request for a coach to review a specific video moment.',
+    'highlight': 'A time-range bookmark on the video timeline marking a segment worth reviewing.',
+    'annotation': 'A drawing overlay on a frozen video frame — arrows, circles, or freehand.',
   };
 
   function addGlossaryTooltips(container) {
@@ -5110,8 +5005,7 @@
     {
       version: 'v2.1', date: 'March 15, 2026', status: 'shipped',
       items: [
-        { type: 'new', text: 'Developer API documentation with Swagger UI link and token management' },
-        { type: 'new', text: 'OpenAPI spec published on GitHub' },
+        { type: 'new', text: 'Developer API placeholder page with roadmap information' },
         { type: 'new', text: 'Interactive troubleshooting wizard with guided diagnosis' },
         { type: 'new', text: 'Error message lookup tool — paste an error to find the fix' },
         { type: 'new', text: 'Upload time calculator based on file size and connection speed' },
