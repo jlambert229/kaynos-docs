@@ -3,3 +3,12 @@ kaynos-docs.html
 node_modules/
 playwright-report/
 test-results/
+
+# claude-flow / swarm runtime state (see CLAUDE.md §Multi-agent)
+.swarm/
+claude-flow.config.json
+ruvector.db
+memory.db
+memory.db-shm
+memory.db-wal
+state.json
