@@ -12,3 +12,6 @@ memory.db
 memory.db-shm
 memory.db-wal
 state.json
+
+# Local work logs (per kaynos-docs/CLAUDE.md: keep temporary notes out of the published root)
+logs/
