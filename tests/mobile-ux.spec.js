@@ -288,66 +288,9 @@ test.describe('Theme', () => {
   });
 });
 
-// ── Doc Search ──────────────────────────────────────────────
-
-test.describe('Doc Search', () => {
-  test('doc search fab opens panel', async ({ page }) => {
-    await page.goto('/');
-    await page.locator('.chatbot-fab').click();
-    await expect(page.locator('.chatbot-panel')).toHaveClass(/open/);
-  });
-
-  test('doc search shows greeting on first open', async ({ page }) => {
-    await page.goto('/');
-    await page.locator('.chatbot-fab').click();
-    await expect(page.locator('.chat-msg.bot')).toBeVisible();
-    await expect(page.locator('.chat-msg.bot')).toContainText('local search tool');
-  });
-
-  test('doc search close button works', async ({ page }) => {
-    await page.goto('/');
-    await page.locator('.chatbot-fab').click();
-    await expect(page.locator('.chatbot-panel')).toHaveClass(/open/);
-    await page.locator('.chatbot-close').click();
-    await expect(page.locator('.chatbot-panel')).not.toHaveClass(/open/);
-  });
-
-  test('doc search suggestion buttons work', async ({ page }) => {
-    await page.goto('/');
-    await page.locator('.chatbot-fab').click();
-    await page.locator('.chat-suggestion').first().click();
-    const msgs = page.locator('.chat-msg');
-    // Should have greeting + user msg + bot reply = at least 3
-    expect(await msgs.count()).toBeGreaterThanOrEqual(3);
-  });
-
-  test('doc search does not double-init on rapid toggle', async ({ page }) => {
-    await page.goto('/');
-    await page.locator('.chatbot-fab').click();
-    await page.locator('.chatbot-close').click();
-    await page.locator('.chatbot-fab').click();
-    const greetings = page.locator('.chat-msg.bot');
-    // Should still only have 1 greeting
-    await expect(greetings.first()).toContainText('local search tool');
-    expect(await greetings.count()).toBe(1);
-  });
-});
-
-// ── Bookmark ─────────────────────────────────────────────────
-
-test.describe('Bookmark', () => {
-  test('bookmark button toggles', async ({ page }) => {
-    await page.goto('/#setup');
-    await page.waitForSelector('#bookmarkBtn');
-    const btn = page.locator('#bookmarkBtn');
-    await btn.click();
-    await expect(btn).toHaveClass(/bookmarked/);
-    await btn.click();
-    await expect(btn).not.toHaveClass(/bookmarked/);
-  });
-
-  // Feedback widget removed (KAY-198) — was non-functional
-});
+// Doc Search FAB / chat panel removed in PR 1a chrome cuts — header search bar covers this surface
+// Bookmark feature removed in PR 1a chrome cuts — coverage no longer applicable
+// Feedback widget removed (KAY-198) — was non-functional
 
 // ── Touch targets ────────────────────────────────────────────
 
