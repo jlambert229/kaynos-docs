@@ -2729,7 +2729,7 @@
 <tr><td>poll-votes, poll-voted, poll-custom</td><td>Feature poll votes (legacy, no longer used)</td><td>localStorage</td></tr>
 <tr><td>highlights</td><td>Text highlights you've made</td><td>localStorage</td></tr>
 <tr><td>scroll-pos</td><td>Scroll position per page</td><td>localStorage</td></tr>
-<tr><td>sb-collapsed</td><td>Sidebar collapsed state</td><td>localStorage</td></tr>
+<tr><td>sb-expanded</td><td>Which sidebar sections you've explicitly opened (default is collapsed)</td><td>localStorage</td></tr>
 </tbody>
 </table>
 
@@ -2899,18 +2899,29 @@
 
   function buildSidebar() {
     const sb = document.getElementById('sidebar');
-    const collapsed = safeGet('sb-collapsed', {});
+    // Sidebar sections are collapsed by default. sb-expanded[name] === true
+    // means the user has explicitly opened that section. The active page's
+    // section auto-expands so the user can see where they are.
+    const expanded = safeGet('sb-expanded', {});
     const recent = getRecent();
+    const activeSection = (function() {
+      const cur = (location.hash.slice(1).split(':')[0]) || 'welcome';
+      return PAGES[cur] && PAGES[cur].section ? PAGES[cur].section : '';
+    })();
     let html = '';
 
     // Dynamic section: Recent — only render when there are at least 2 entries
     // (one entry is just "the page you were on" — no continuity value).
-    // If the user hid Recent earlier, show a small "Show recent" link instead
-    // of nothing — otherwise the affordance becomes invisible forever.
+    // Renders as a collapsible section (collapsed by default) so it doesn't
+    // dominate the top of the sidebar. If the user previously hid Recent,
+    // show a small "Show recent" link instead.
     const recentHidden = safeGet('recent-hidden', false);
     if (recent.length >= 2 && !recentHidden) {
+      const recentOpen = expanded['__recent'] === true;
       html += '<div class="sidebar-dynamic">';
-      html += '<div class="sidebar-section"><div class="sidebar-section-title">' + IC.clock + ' Recent <button class="sidebar-recent-hide" onclick="hideRecent()" title="Hide recent" aria-label="Hide recent">&times;</button></div><div class="sidebar-links">';
+      html += `<div class="sidebar-section${recentOpen ? '' : ' collapsed'}" data-section="__recent">`;
+      html += '<div class="sidebar-section-title" onclick="toggleSection(this)">' + IC.clock + ' Recent <button class="sidebar-recent-hide" onclick="event.stopPropagation();hideRecent()" title="Hide recent" aria-label="Hide recent">&times;</button><span class="chevron" style="margin-left:auto">▼</span></div>';
+      html += '<div class="sidebar-links">';
       recent.slice(0, 5).forEach(p => {
         if (PAGES[p]) html += `<a class="sidebar-link" href="#${p}" tabindex="0" data-page="${p}" onclick="navigate('${p}');return false" onkeydown="if(event.key==='Enter'){navigate('${p}');return false}"><span class="sl-text">${PAGES[p].title}</span></a>`;
       });
@@ -2923,7 +2934,10 @@
     const sectionIcons = { 'Getting Started': IC.rocket, 'Video': IC.video, 'Sessions & Classes': IC.play, 'Account': IC.users, 'Admin': IC.wrench, 'Troubleshoot': IC.alert };
     NAV.forEach((g, i) => {
       if (g.hidden) return;
-      const isCollapsed = g.section && collapsed[g.section];
+      // Collapse unless the user has explicitly expanded this section,
+      // or the active page lives inside it.
+      const isExpanded = !g.section || expanded[g.section] === true || g.section === activeSection;
+      const isCollapsed = g.section && !isExpanded;
       html += `<div class="sidebar-section${isCollapsed ? ' collapsed' : ''}" data-section="${g.section || ''}">`;
       if (g.section) html += `<div class="sidebar-section-title" onclick="toggleSection(this)">${sectionIcons[g.section] || ''}${g.section}<span class="chevron" style="margin-left:auto">▼</span></div>`;
       html += '<div class="sidebar-links">';
@@ -2942,11 +2956,13 @@
   function toggleSection(el) {
     const section = el.closest('.sidebar-section');
     section.classList.toggle('collapsed');
-    const collapsed = safeGet('sb-collapsed', {});
+    const expanded = safeGet('sb-expanded', {});
     const name = section.dataset.section;
-    if (section.classList.contains('collapsed')) collapsed[name] = true;
-    else delete collapsed[name];
-    safeSet('sb-collapsed', collapsed);
+    // Track the user's explicit expand/collapse choice. Default behaviour
+    // (no entry) = collapsed.
+    if (section.classList.contains('collapsed')) delete expanded[name];
+    else expanded[name] = true;
+    safeSet('sb-expanded', expanded);
   }
 
   /* ── REDIRECTS ──────────────────────────────────────── */
@@ -4442,15 +4458,10 @@
   window.addEventListener('online', () => document.getElementById('offlineBanner').classList.remove('show'));
 
   /* ── AUTO-EXPAND SIDEBAR SECTION ───────────────────── */
-  function autoExpandSection(pageId) {
-    const page = PAGES[pageId];
-    if (!page || !page.section) return;
-    const collapsed = safeGet('sb-collapsed', {});
-    if (collapsed[page.section]) {
-      delete collapsed[page.section];
-      safeSet('sb-collapsed', collapsed);
-    }
-  }
+  // autoExpandSection removed — buildSidebar() now auto-expands the active
+  // section by default (based on the current hash) without persisting the
+  // expansion. Visiting a page no longer mutates sb-expanded.
+  function autoExpandSection() { /* no-op */ }
 
   /* ── THEME TOGGLE ───────────────────────────────────── */
   function applyTheme(mode) {
