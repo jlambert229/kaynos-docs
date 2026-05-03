@@ -2232,7 +2232,7 @@
 </ol>`},
 
     "login-issues": {
-      title: "Login and access issues", section: "Help",
+      title: "Login and access issues", section: "Troubleshoot",
       content: `
 <h1>Login and access issues</h1>
 <p>Most issues stem from the wrong email, typos, or Caps Lock. Repeated failed attempts from the same IP address trigger a brief rate limit (see "Too many attempts" below). Sign in at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
@@ -2253,7 +2253,7 @@
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Profile and password changes: <a onclick="navigate('profile')">Profile and password</a>.</div></div>`},
 
     "email-issues": {
-      title: "Email and notification issues", section: "Help",
+      title: "Email and notification issues", section: "Troubleshoot",
       content: `
 <h1>Email and notification issues</h1>
 <p>Most delivery problems come from spam filtering, address typos, or disabled notification settings. Preferences are under <strong>Profile</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
@@ -2275,7 +2275,7 @@
 <p><strong>Profile</strong> → turn off class and session notifications if the member prefers quiet. Security-related email (password resets) may still send.</p>`},
 
     performance: {
-      title: "Performance and loading", section: "Help",
+      title: "Performance and loading", section: "Troubleshoot",
       content: `
 <h1>Performance and loading</h1>
 <p>Slow loads are usually caused by local network conditions, browser cache, or extensions — not necessarily a full outage.</p>
@@ -2322,7 +2322,7 @@
 </ul>`},
 
     faq: {
-      title: "Frequently asked questions", section: "Help",
+      title: "Frequently asked questions", section: "Getting Started",
       content: `
 <h1>Frequently asked questions</h1>
 <div class="tldr"><strong>TLDR:</strong> If you can't find an answer here, the search bar at the top covers every page. For account-specific questions, ${mailLink('email support')} or use the in-app chat.</div>
@@ -2458,7 +2458,7 @@
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>For role details see <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>`},
 
     troubleshoot: {
-      title: "Troubleshooting wizard", section: "Help",
+      title: "Troubleshooting wizard", section: "Troubleshoot",
       content: `
 <h1>Troubleshooting wizard</h1>
 <div class="tldr"><strong>TLDR:</strong> Use the wizard below to diagnose your issue step by step. Or search for an error code.</div>
@@ -2830,12 +2830,12 @@
 
   const NAV = [
     { section: "", pages: ["welcome"] },
-    { section: "Getting Started", pages: ["setup", "roles", "glossary"] },
+    { section: "Getting Started", pages: ["setup", "roles", "glossary", "faq"] },
     { section: "Video", pages: ["uploading", "playback", "formats", "storage"] },
     { section: "Sessions & Classes", pages: ["creating-sessions", "creating-classes", "notes", "progress"] },
     { section: "Account", pages: ["profile"] },
     { section: "Admin", pages: ["inviting-members", "managing-members", "developer-api"] },
-    { section: "Help", pages: ["troubleshoot", "faq", "login-issues", "email-issues", "performance"] },
+    { section: "Troubleshoot", pages: ["troubleshoot", "login-issues", "email-issues", "performance"] },
     // Demoted to footer; still routable. allPageKeys includes these so search and arrow-key nav work.
     { section: "", pages: ["release-notes", "feature-requests", "parent-guide", "contact", "privacy-on-this-site"], hidden: true }
   ];
@@ -2875,7 +2875,7 @@
       html += '</div>';
     }
 
-    const sectionIcons = { 'Getting Started': IC.rocket, 'Video': IC.video, 'Sessions & Classes': IC.play, 'Account': IC.users, 'Admin': IC.wrench, 'Help': IC.alert };
+    const sectionIcons = { 'Getting Started': IC.rocket, 'Video': IC.video, 'Sessions & Classes': IC.play, 'Account': IC.users, 'Admin': IC.wrench, 'Troubleshoot': IC.alert };
     NAV.forEach((g, i) => {
       if (g.hidden) return;
       const isCollapsed = g.section && collapsed[g.section];
