@@ -1590,7 +1590,7 @@
   <div class="step-tip"><div class="step-num">2</div><div class="step-body"><h4>Click Add Member / Add Student</h4><p>Enter their name, email, and role.</p></div></div>
   <div class="step-tip"><div class="step-num">3</div><div class="step-body"><h4>Send the invite</h4><p>They receive an email with a temporary password. Delivery is usually quick.</p></div></div>
 </div>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Full guides: <a onclick="navigate('first-upload')">Your first video upload</a> · <a onclick="navigate('notes')">Notes and timestamps</a> · <a onclick="navigate('inviting-members')">Inviting your team</a></div></div>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Full guides: <a onclick="navigate('uploading')">Uploading videos</a> · <a onclick="navigate('notes')">Notes and timestamps</a> · <a onclick="navigate('inviting-members')">Inviting your team</a></div></div>
 </details>
 <details><summary>Onboarding timeline</summary>
 <p>A suggested four-week plan for gym owners and head coaches getting started with Kaynos.</p>
@@ -1615,7 +1615,7 @@
     <div class="timeline-body">
       <ul>
         <li><a onclick="navigate('uploading')">Run the pre-flight checklist</a></li>
-        <li><a onclick="navigate('first-upload')">Upload your first video</a></li>
+        <li><a onclick="navigate('uploading')">Upload your first video</a></li>
         <li><a onclick="navigate('creating-sessions')">Decide: session or class?</a></li>
         <li><a onclick="navigate('notes')">Add timestamped notes</a> to your recording</li>
         <li><a onclick="navigate('notes')">Tag content</a> for easy filtering later</li>
@@ -1695,40 +1695,6 @@
 <li>There is no fixed seat limit in the product.</li>
 </ul>`},
 
-    "first-upload": {
-      title: "Your first video upload", section: "Getting Started",
-      content: `
-<h1>Your first video upload</h1>
-<p>A <strong>session</strong> is for one assigned student (private lesson, individual review). A <strong>class</strong> is for everyone in your account (group session, shared recording). Upload a file in either case — create them after you <a href="https://app.kaynos.net" target="_blank" rel="noopener">sign in</a>.</p>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>New to the flow? Read <a onclick="navigate('creating-sessions')">Creating a session</a> and <a onclick="navigate('creating-classes')">Creating a class</a>. Limits and codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
-<h2>Upload a file</h2>
-<ol>
-<li>Create a new session or class, then pick <strong>Upload</strong> for the video source.</li>
-<li>Drag your file onto the box, or click to choose from Finder / Files.</li>
-<li>Watch the progress bar for speed and estimated time remaining.</li>
-<li>Green check appears when done — then fill in title, date, student, and save.</li>
-</ol>
-<h2>Upload behavior</h2>
-<ul>
-<li>Files under ~20 MB often upload in a single request.</li>
-<li>Files over 20 MB use chunked multipart upload (20 MB per chunk) with parallel connections, up to 3 retries per chunk, and exponential backoff.</li>
-<li>You can cancel an in-progress upload at any time.</li>
-</ul>
-<h2>Supported formats</h2>
-<table><thead><tr><th>Format</th><th>Extension</th><th>Notes</th></tr></thead><tbody>
-<tr><td>MP4</td><td><code>.mp4</code></td><td>Recommended default</td></tr>
-<tr><td>MOV</td><td><code>.mov</code></td><td>Common on iPhone and GoPro</td></tr>
-<tr><td>WebM</td><td><code>.webm</code></td><td>Screen and browser capture</td></tr>
-<tr><td>MKV</td><td><code>.mkv</code></td><td>Matroska container; works on most modern browsers</td></tr>
-</tbody></table>
-<p>Maximum file size is <strong>5 GB</strong>. Full details: <a onclick="navigate('formats')">Supported formats and limits</a>.</p>
-<h2>Recording tips</h2>
-<ul>
-<li><strong>Landscape orientation.</strong> Your TV and your phone both want it.</li>
-<li><strong>Camera slightly high</strong> so the full training area is visible, not only lower legs.</li>
-<li><strong>Even lighting</strong> makes small details easier to see on review.</li>
-</ul>`},
-
     roles: {
       title: "Understanding user roles", section: "Getting Started",
       content: `
@@ -1751,6 +1717,21 @@
 <div class="tldr"><strong>TLDR:</strong> Drag a video onto the upload area. MP4 recommended, under 5 GB, 1080p is plenty for coaching review.</div>
 <p>Each session or class uses one source: <strong>Upload</strong> (file from your device) or <strong>Notes Only</strong> (no video). Upload from <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> when creating or editing.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Format and size limits: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
+<h2>Your first upload</h2>
+<p>A <strong>session</strong> is for one assigned student (private lesson, individual review). A <strong>class</strong> is for everyone in your account (group session, shared recording). Upload a file in either case — create them after you <a href="https://app.kaynos.net" target="_blank" rel="noopener">sign in</a>.</p>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>New to the flow? Read <a onclick="navigate('creating-sessions')">Creating a session</a> and <a onclick="navigate('creating-classes')">Creating a class</a> first.</div></div>
+<ol>
+<li>Create a new session or class, then pick <strong>Upload</strong> for the video source.</li>
+<li>Drag your file onto the box, or click to choose from Finder / Files.</li>
+<li>Watch the progress bar for speed and estimated time remaining.</li>
+<li>Green check appears when done — then fill in title, date, student, and save.</li>
+</ol>
+<h3>Recording tips</h3>
+<ul>
+<li><strong>Landscape orientation.</strong> Your TV and your phone both want it.</li>
+<li><strong>Camera slightly high</strong> so the full training area is visible, not only lower legs.</li>
+<li><strong>Even lighting</strong> makes small details easier to see on review.</li>
+</ul>
 <h2>Large files</h2>
 <p>Files over <strong>20 MB</strong> use chunked multipart upload (<strong>20 MB</strong> per chunk) with parallel connections. Failed parts retry automatically (up to <strong>3 attempts</strong> per chunk) with exponential backoff.</p>
 <h2>Requirements</h2>
@@ -2009,7 +1990,7 @@
 </ol>
 <h2>Who sees it</h2>
 <p>The assigned student, the creator, and admins. Other students cannot open someone else's private session.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>First upload walkthrough: <a onclick="navigate('first-upload')">Your first video upload</a>. Visibility model: <a onclick="navigate('faq')">FAQ</a>.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>First upload walkthrough: <a onclick="navigate('uploading')">Your first upload</a> on the Uploading videos page. Visibility model: <a onclick="navigate('faq')">FAQ</a>.</div></div>
 <h2>Scheduling</h2>
 <p>The <strong>Schedule</strong> page shows a calendar with daily, weekly, and monthly views. To schedule a session:</p>
 <ol>
@@ -2849,7 +2830,7 @@
 
   const NAV = [
     { section: "", pages: ["welcome"] },
-    { section: "Getting Started", pages: ["setup", "first-upload", "roles", "glossary"] },
+    { section: "Getting Started", pages: ["setup", "roles", "glossary"] },
     { section: "Video", pages: ["uploading", "playback", "formats", "storage"] },
     { section: "Sessions & Classes", pages: ["creating-sessions", "creating-classes", "notes", "progress"] },
     { section: "Account", pages: ["profile"] },
@@ -2928,6 +2909,7 @@
     'whats-new': 'release-notes',
     'quick-tips': 'setup',
     'onboarding-timeline': 'setup',
+    'first-upload': 'uploading',
     'upload-checklist': 'uploading',
     'speed-calculator': 'formats',
     'player-shortcuts': 'playback',
@@ -4172,7 +4154,7 @@
 <h2>Empezar</h2>
 <div class="quick-links">
   <a class="quick-link featured" href="#setup" onclick="navigate('setup');return false"><div class="ql-icon">${IC.rocket}</div><div class="ql-title">Configurar tu cuenta</div><div class="ql-desc">Primer inicio de sesión y contraseña</div></a>
-  <a class="quick-link featured" href="#first-upload" onclick="navigate('first-upload');return false"><div class="ql-icon">${IC.video}</div><div class="ql-title">Tu primera subida</div><div class="ql-desc">Sube video desde tu móvil o computadora</div></a>
+  <a class="quick-link featured" href="#uploading" onclick="navigate('uploading');return false"><div class="ql-icon">${IC.video}</div><div class="ql-title">Tu primera subida</div><div class="ql-desc">Sube video desde tu móvil o computadora</div></a>
   <a class="quick-link featured" href="#troubleshoot" onclick="navigate('troubleshoot');return false"><div class="ql-icon">${IC.alert}</div><div class="ql-title">Solucionar un problema</div><div class="ql-desc">Asistente de diagnóstico paso a paso</div></a>
   <a class="quick-link" href="#inviting-members" onclick="navigate('inviting-members');return false"><div class="ql-icon">${IC.users}</div><div class="ql-title">Invitar a tu equipo</div><div class="ql-desc">Invitaciones, roles y lista</div></a>
   <a class="quick-link" href="#playback" onclick="navigate('playback');return false"><div class="ql-icon">${IC.play}</div><div class="ql-title">Ver y revisar</div><div class="ql-desc">Reproducción, notas y atajos</div></a>
