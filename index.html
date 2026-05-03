@@ -498,15 +498,6 @@
     .quick-link .ql-title { font-weight: 500; color: var(--text-primary); }
     .quick-link .ql-desc { font-size: .8125rem; color: var(--text-secondary); line-height: 1.4; }
 
-    /* ── START HERE ─── */
-    .start-here { margin: 20px 0; }
-    .start-here-title { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--text-tertiary); margin-bottom: 10px; }
-    .start-steps { display: flex; gap: 12px; flex-wrap: wrap; }
-    .start-step { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: var(--accent); color: #fff !important; border-radius: var(--radius); text-decoration: none !important; font-size: .875rem; font-weight: 500; flex: 1; min-width: 200px; transition: background var(--dur) var(--ease); }
-    .start-step:hover { background: var(--accent-hover); color: #fff !important; }
-    .start-num { width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .75rem; flex-shrink: 0; }
-    @media (max-width: 768px) { .start-steps { flex-direction: column; } .start-step { min-width: auto; } }
-
     /* ── FEATURE OVERVIEW ─── */
     .feature-overview { margin: 16px 0 24px; }
     .feature-overview summary { cursor: pointer; font-size: .9375rem; color: var(--text-secondary); padding: 10px 0; }
@@ -858,37 +849,6 @@
       font-size: .8125rem; font-weight: 500; z-index: 99;
     }
     .offline-banner.show { display: block; }
-
-    /* ── GETTING STARTED CHECKLIST ─── */
-    .checklist { margin-bottom: 28px; }
-    .checklist-title {
-      font-size: .875rem; font-weight: 600; color: var(--text-primary);
-      margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
-    }
-    .checklist-progress {
-      font-size: .75rem; color: var(--text-tertiary); font-weight: 400;
-    }
-    .checklist-item {
-      display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px;
-      border: 1px solid var(--border); border-radius: var(--radius-sm);
-      margin-bottom: 6px; cursor: pointer; transition: all var(--dur);
-      font-size: .875rem; color: var(--text-secondary);
-    }
-    .checklist-item:hover { border-color: var(--accent); background: var(--bg-hover); }
-    .checklist-item.done { opacity: .55; }
-    .checklist-item.done .cl-text { text-decoration: line-through; }
-    .checklist-check {
-      width: 18px; height: 18px; border-radius: 50%;
-      border: 2px solid var(--border-strong); flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      margin-top: 1px; transition: all var(--dur);
-    }
-    .checklist-item.done .checklist-check {
-      background: var(--success); border-color: var(--success); color: #fff;
-    }
-    .checklist-item.done .checklist-check svg { width: 10px; height: 10px; }
-    .cl-text { flex: 1; }
-    .cl-link { color: var(--accent); font-weight: 500; }
 
     /* ── PULSE HINT ─── */
     /* ── TROUBLESHOOT WIZARD ─── */
@@ -2179,6 +2139,7 @@
       title: "Progress tracking", section: "Sessions & Classes",
       content: `
 <h1>Progress tracking</h1>
+<div class="tldr"><strong>TLDR:</strong> For each session and class we record last playback position, completion status, and last-viewed time. Members resume where they left off. Coaches and owners filter by student and date range (1–365 days).</div>
 <p>Progress is simple on purpose: enough to see whether someone finished a recording and when they last opened it.</p>
 <h2>What we store</h2>
 <p>For each session and class, we track: last playback position (so you can resume), whether the full video was completed, and when it was last viewed. Coaches and admins can filter progress reports by student and date range (1 to 365 days).</p>
@@ -2205,6 +2166,7 @@
       title: "Managing members", section: "Admin",
       content: `
 <h1>Managing members</h1>
+<div class="tldr"><strong>TLDR:</strong> Admins manage the full roster from <strong>Admin</strong>. Coaches manage their own students from <strong>Students</strong>. Use the role dropdown to change permissions and the <strong>Remove</strong> button to revoke access — notes the member created stay for history.</div>
 <p>Admins use <strong>Admin</strong> for the full roster. Coaches can use <strong>Students</strong> to manage student invites on their side. Everything happens in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
 <h2>Add someone</h2>
 <p>See <a onclick="navigate('inviting-members')">Inviting your team</a> for the step-by-step invite flow.</p>
@@ -2251,6 +2213,7 @@
       title: "Profile and password", section: "Account",
       content: `
 <h1>Profile and password</h1>
+<div class="tldr"><strong>TLDR:</strong> Open your profile from the sidebar (desktop) or the avatar in the top-right (mobile). Update your name, email, and password from there. Notification preferences and admin-only billing live on the same page.</div>
 <h2>Open your profile</h2>
 <p>Desktop: click your name in the sidebar. Mobile: tap the avatar in the top-right corner of the header, then choose <strong>Profile</strong>.</p>
 <h2>Name and details</h2>
@@ -2381,6 +2344,7 @@
       title: "Frequently asked questions", section: "Help",
       content: `
 <h1>Frequently asked questions</h1>
+<div class="tldr"><strong>TLDR:</strong> If you can't find an answer here, the search bar at the top covers every page. For account-specific questions, ${mailLink('email support')} or use the in-app chat.</div>
 <p>Kaynos is built for coaches who use video review: publish sessions and classes, add timestamped notes, and members watch on their own time.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Quick links:</strong> App: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> · Support: ${mailLink()} · Setup: <a onclick="navigate('setup')">Setting up your account</a></div></div>
 <h2>What you're signing up for</h2>
@@ -2733,7 +2697,6 @@
 <tr><td>poll-votes, poll-voted, poll-custom</td><td>Feature poll votes (legacy, no longer used)</td><td>localStorage</td></tr>
 <tr><td>highlights</td><td>Text highlights you've made</td><td>localStorage</td></tr>
 <tr><td>scroll-pos</td><td>Scroll position per page</td><td>localStorage</td></tr>
-<tr><td>checklist-done</td><td>Getting-started checklist progress</td><td>localStorage</td></tr>
 <tr><td>sb-collapsed</td><td>Sidebar collapsed state</td><td>localStorage</td></tr>
 </tbody>
 </table>
@@ -3632,8 +3595,6 @@
     renderCopyArticleBtn(pc, pageId);
     renderOpenInApp(pc, pageId);
     if (pageId === 'welcome') renderWelcomeBack(pc);
-    if (pageId === 'welcome') renderChecklist(pc);
-    if (pageId === 'welcome') personalizeWelcome(pc);
     if (pageId === 'troubleshoot') renderWizard('start');
     if (pageId === 'uploading') renderPreflight();
     if (pageId === 'release-notes') renderReleases();
@@ -3653,190 +3614,6 @@
       else l.removeAttribute('aria-current');
     });
   };
-
-  /* ── GETTING STARTED CHECKLIST ─────────────────────── */
-  const CHECKLIST_ITEMS = {
-    admin: [
-      { id: 'cl-login', text: 'Log in to the app', page: 'setup' },
-      { id: 'cl-password', text: 'Set a new password', page: 'profile' },
-      { id: 'cl-invite', text: 'Invite your coaches', page: 'inviting-members' },
-      { id: 'cl-upload', text: 'Upload your first video', page: 'first-upload' },
-      { id: 'cl-roles', text: 'Understand user roles', page: 'roles' },
-    ],
-    coach: [
-      { id: 'cl-login', text: 'Log in to the app', page: 'setup' },
-      { id: 'cl-password', text: 'Set a new password', page: 'profile' },
-      { id: 'cl-upload', text: 'Upload your first video', page: 'first-upload' },
-      { id: 'cl-session', text: 'Create a session', page: 'creating-sessions' },
-      { id: 'cl-notes', text: 'Add timestamped notes', page: 'notes' },
-    ],
-    student: [
-      { id: 'cl-login', text: 'Log in to the app', page: 'setup' },
-      { id: 'cl-password', text: 'Set a new password', page: 'profile' },
-      { id: 'cl-playback', text: 'Watch a session', page: 'playback' },
-      { id: 'cl-notes', text: 'Leave a note for your coach', page: 'notes' },
-      { id: 'cl-mobile', text: 'Try it on your phone', page: 'performance' },
-    ],
-    developer: [
-      { id: 'cl-login', text: 'Log in as admin', page: 'setup' },
-      { id: 'cl-api', text: 'Review the Developer API page', page: 'developer-api' },
-      { id: 'cl-glossary', text: 'Review the glossary', page: 'glossary' },
-      { id: 'cl-formats', text: 'Check supported formats', page: 'formats' },
-      { id: 'cl-faq', text: 'Browse the FAQ', page: 'faq' },
-    ]
-  };
-
-  function getChecklist() { return safeGet('checklist-done', []); }
-
-  function toggleCheckItem(id) {
-    let done = getChecklist();
-    if (done.includes(id)) done = done.filter(x => x !== id);
-    else done.push(id);
-    localStorage.setItem('checklist-done', JSON.stringify(done));
-    // Check if all items are now complete
-    const role = localStorage.getItem('user-role');
-    if (role && CHECKLIST_ITEMS[role] && done.length >= CHECKLIST_ITEMS[role].length) {
-      const allDone = CHECKLIST_ITEMS[role].every(i => done.includes(i.id));
-      if (allDone) showToast('Getting started complete — nice work!');
-    }
-  }
-
-  function personalizeWelcome(container) {
-    const role = localStorage.getItem('user-role');
-    if (!role) return; // keep generic links for first-time visitors
-
-    const ROLE_LINKS = {
-      admin: [
-        { href: 'setup', icon: IC.rocket, title: 'Set up your academy', desc: 'First login, password, and admin basics', featured: true },
-        { href: 'inviting-members', icon: IC.users, title: 'Invite your team', desc: 'Add coaches and students', featured: true },
-        { href: 'roles', icon: IC.book, title: 'Roles & permissions', desc: 'Who can do what', featured: true },
-        { href: 'uploading', icon: IC.video, title: 'Upload video', desc: 'Get your first recording in' },
-        { href: 'managing-members', icon: IC.users, title: 'Manage members', desc: 'Roster, passwords, and role changes' },
-        { href: 'troubleshoot', icon: IC.alert, title: 'Fix a problem', desc: 'Step-by-step troubleshooting' },
-      ],
-      coach: [
-        { href: 'first-upload', icon: IC.video, title: 'Your first upload', desc: 'Record and upload in minutes', featured: true },
-        { href: 'creating-sessions', icon: IC.rocket, title: 'Create a session', desc: 'Private lessons and group classes', featured: true },
-        { href: 'notes', icon: IC.book, title: 'Notes & tags', desc: 'Timestamped feedback for students', featured: true },
-        { href: 'playback', icon: IC.play, title: 'Playback & review', desc: 'Watch, annotate, and share' },
-        { href: 'uploading', icon: IC.video, title: 'Uploading guide', desc: 'Formats, limits, and troubleshooting' },
-        { href: 'faq', icon: IC.chat, title: 'FAQ', desc: 'Common questions answered' },
-      ],
-      student: [
-        { href: 'playback', icon: IC.play, title: 'Watch your sessions', desc: 'Playback, shortcuts, and notes', featured: true },
-        { href: 'notes', icon: IC.book, title: 'Notes & feedback', desc: 'Read coach notes, leave replies', featured: true },
-        { href: 'troubleshoot', icon: IC.alert, title: 'Fix a problem', desc: 'Step-by-step troubleshooting', featured: true },
-        { href: 'progress', icon: IC.check, title: 'Your progress', desc: 'Track what you\'ve watched' },
-        { href: 'faq', icon: IC.chat, title: 'FAQ', desc: 'Common questions' },
-        { href: 'performance', icon: IC.alert, title: 'Performance tips', desc: 'Speed up loading and playback' },
-      ],
-      developer: [
-        { href: 'developer-api', icon: IC.book, title: 'Developer API', desc: 'Internal API reference for admins/instructors', featured: true },
-        { href: 'formats', icon: IC.video, title: 'Video formats', desc: 'Supported codecs and limits', featured: true },
-        { href: 'glossary', icon: IC.book, title: 'Glossary', desc: 'Platform terminology', featured: true },
-        { href: 'faq', icon: IC.chat, title: 'FAQ', desc: 'Common questions' },
-        { href: 'storage', icon: IC.info, title: 'Storage & limits', desc: 'Quotas and data residency' },
-        { href: 'troubleshoot', icon: IC.alert, title: 'Troubleshooting', desc: 'Debug common issues' },
-      ],
-    };
-
-    const links = ROLE_LINKS[role];
-    if (!links) return;
-
-    const ql = container.querySelector('.quick-links');
-    if (!ql) return;
-
-    // Safe: ROLE_LINKS values are all hardcoded constants (hrefs, icons, titles, descs)
-    ql.innerHTML = links.map(l =>
-      `<a class="quick-link${l.featured ? ' featured' : ''}" href="#${l.href}" onclick="navigate('${l.href}');return false">
-        <div class="ql-icon">${l.icon}</div>
-        <div class="ql-title">${l.title}</div>
-        <div class="ql-desc">${l.desc}</div>
-      </a>`
-    ).join('');
-
-    // Add "Start here" card for quick onboarding handoff
-    const START_STEPS = {
-      admin: [
-        { num: '1', text: 'Log in and set your password', link: 'https://app.kaynos.net', external: true },
-        { num: '2', text: 'Invite your coaches', link: 'inviting-members' },
-        { num: '3', text: 'Upload your first video', link: 'first-upload' },
-      ],
-      coach: [
-        { num: '1', text: 'Log in and set your password', link: 'https://app.kaynos.net', external: true },
-        { num: '2', text: 'Upload your first session', link: 'https://app.kaynos.net/sessions/new', external: true },
-        { num: '3', text: 'Add timestamped notes', link: 'notes' },
-      ],
-      student: [
-        { num: '1', text: 'Log in to the app', link: 'https://app.kaynos.net', external: true },
-        { num: '2', text: 'Watch your first session', link: 'https://app.kaynos.net/sessions', external: true },
-        { num: '3', text: 'Leave a note for your coach', link: 'notes' },
-      ],
-      developer: [
-        { num: '1', text: 'Log in as admin', link: 'https://app.kaynos.net', external: true },
-        { num: '2', text: 'Review the Developer API page', link: 'developer-api' },
-        { num: '3', text: 'Browse the FAQ', link: 'faq' },
-      ],
-    };
-
-    const steps = START_STEPS[role];
-    if (steps) {
-      const startCard = document.createElement('div');
-      startCard.className = 'start-here';
-      // Safe: START_STEPS values are hardcoded constants (nums, text, links)
-      startCard.innerHTML = '<div class="start-here-title">Start here</div><div class="start-steps">' +
-        steps.map(s => {
-          if (s.external) {
-            return `<a class="start-step" href="${s.link}" target="_blank" rel="noopener"><span class="start-num">${s.num}</span><span>${s.text}</span></a>`;
-          }
-          return `<a class="start-step" href="#${s.link}" onclick="navigate('${s.link}');return false"><span class="start-num">${s.num}</span><span>${s.text}</span></a>`;
-        }).join('') + '</div>';
-      const qlEl = container.querySelector('.quick-links');
-      if (qlEl) qlEl.insertAdjacentElement('beforebegin', startCard);
-    }
-
-    const heroP = container.querySelector('.hero p');
-    if (heroP) {
-      const ROLE_SUBTITLES = {
-        admin: 'Set up your academy, invite your team, and manage everything from one place.',
-        coach: 'Upload sessions, give timestamped feedback, and track student progress.',
-        student: 'Three steps: log in, watch your session, leave a note for your coach. That\'s it.',
-        developer: 'Integrate with the Kaynos API — auth, endpoints, and schemas.',
-      };
-      if (ROLE_SUBTITLES[role]) heroP.textContent = ROLE_SUBTITLES[role];
-    }
-  }
-
-  function renderChecklist(container) {
-    const role = localStorage.getItem('user-role');
-    if (!role || !CHECKLIST_ITEMS[role]) return;
-    const items = CHECKLIST_ITEMS[role];
-    const done = getChecklist();
-    const doneCount = items.filter(i => done.includes(i.id)).length;
-
-    // All items complete — don't render the checklist
-    if (doneCount === items.length) return;
-
-    const div = document.createElement('div');
-    div.className = 'checklist';
-    div.innerHTML = `<div class="checklist-title">Getting started <span class="checklist-progress">${doneCount}/${items.length} complete</span></div>`;
-    items.forEach(item => {
-      const isDone = done.includes(item.id);
-      const el = document.createElement('div');
-      el.className = 'checklist-item' + (isDone ? ' done' : '');
-      el.innerHTML = `<div class="checklist-check">${isDone ? IC.check : ''}</div><div class="cl-text">${item.text} · <a class="cl-link" href="#${item.page}" onclick="navigate('${item.page}');return false">${PAGES[item.page].title}</a></div>`;
-      el.onclick = (e) => {
-        if (e.target.closest('.cl-link')) return;
-        toggleCheckItem(item.id);
-        navigate('welcome');
-      };
-      div.appendChild(el);
-    });
-    // Insert after quick-links
-    const ql = container.querySelector('.quick-links');
-    if (ql) ql.insertAdjacentElement('afterend', div);
-    else container.appendChild(div);
-  }
 
   /* ── TROUBLESHOOTING WIZARD ─────────────────────────── */
   const WIZARD = {
@@ -4654,7 +4431,6 @@
   window.toggleTheme = toggleTheme;
   window.toggleSidebar = toggleSidebar;
   window.submitContact = submitContact;
-  window.toggleCheckItem = toggleCheckItem;
   window.togglePollVote = typeof togglePollVote !== 'undefined' ? togglePollVote : function(){};
   window.submitPollIdea = typeof submitPollIdea !== 'undefined' ? submitPollIdea : function(){};
   window.setPollSort = typeof setPollSort !== 'undefined' ? setPollSort : function(){};
