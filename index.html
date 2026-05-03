@@ -1540,82 +1540,27 @@
   <div class="hint-icon">${IC.info}</div>
   <div><strong>You're reading the help center.</strong> Sign in to the app at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> to upload video, manage your account, and use in-app support.</div>
 </div>
-<details class="feature-overview">
-<summary><strong>What can Kaynos do?</strong> — quick feature overview</summary>
-<div class="feature-grid">
-  <a class="feature-card" href="#uploading" onclick="navigate('uploading');return false">
-    <div class="feature-icon">${IC.video}</div>
-    <h4>Video upload & playback</h4>
-    <p>Upload MP4, MOV, WebM, or AVI (up to 5 GB). Chunked uploads with auto-retry for large files. Playback with speed controls (0.5×–2×) and resume.</p>
-  </a>
-  <a class="feature-card" href="#notes" onclick="navigate('notes');return false">
-    <div class="feature-icon">${IC.book}</div>
-    <h4>Timestamped coaching notes</h4>
-    <p>Pin notes to exact moments on the timeline. Draw annotations on frames. Voice dictation for hands-free feedback. Reactions, replies, and note types (key moment, drill, question).</p>
-  </a>
-  <a class="feature-card" href="#roles" onclick="navigate('roles');return false">
-    <div class="feature-icon">${IC.users}</div>
-    <h4>Team & role management</h4>
-    <p>Three roles: admin, coach, student. Invite by email, manage permissions, track who watched what. No seat limits.</p>
-  </a>
-  <a class="feature-card" href="#creating-sessions" onclick="navigate('creating-sessions');return false">
-    <div class="feature-icon">${IC.rocket}</div>
-    <h4>Sessions & classes</h4>
-    <p>Private sessions (one student) or shared classes (everyone). Students can request video review from coaches. Clips for sharing highlights.</p>
-  </a>
-  <a class="feature-card" href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">
-    <div class="feature-icon">${IC.check}</div>
-    <h4>Security & compliance</h4>
-    <p>US-hosted storage (Backblaze B2, direct presigned playback). Data export for GDPR. HTTPS everywhere. Role-based access controls.</p>
-  </a>
-  <a class="feature-card" href="#developer-api" onclick="navigate('developer-api');return false">
-    <div class="feature-icon">${IC.info}</div>
-    <h4>Billing & API</h4>
-    <p>Stripe billing ($49/mo or $490/yr, 14-day free trial). Internal API reference for admins and coaches; public API for third parties not yet available.</p>
-  </a>
-</div>
-</details>
-<h2>Jump in</h2>
+<h2>What do you want to do?</h2>
 <div class="quick-links">
   <a class="quick-link featured" href="#setup" onclick="navigate('setup');return false">
     <div class="ql-icon">${IC.rocket}</div>
-    <div class="ql-title">Setting up your account</div>
-    <div class="ql-desc">Start here — first login, password, and basics</div>
+    <div class="ql-title">Set up Kaynos</div>
+    <div class="ql-desc">First login, password, and the basics that get a new account ready in 10 minutes.</div>
   </a>
-  <a class="quick-link featured" href="#first-upload" onclick="navigate('first-upload');return false">
+  <a class="quick-link featured" href="#uploading" onclick="navigate('uploading');return false">
     <div class="ql-icon">${IC.video}</div>
-    <div class="ql-title">Your first video upload</div>
-    <div class="ql-desc">Upload from phone or computer in minutes</div>
+    <div class="ql-title">Upload &amp; watch video</div>
+    <div class="ql-desc">From phone or computer. Formats, size limits, playback shortcuts, and clip sharing.</div>
+  </a>
+  <a class="quick-link featured" href="#creating-sessions" onclick="navigate('creating-sessions');return false">
+    <div class="ql-icon">${IC.play}</div>
+    <div class="ql-title">Coach with sessions &amp; notes</div>
+    <div class="ql-desc">Create sessions and classes, add timestamped feedback, track who watched what.</div>
   </a>
   <a class="quick-link featured" href="#troubleshoot" onclick="navigate('troubleshoot');return false">
     <div class="ql-icon">${IC.alert}</div>
     <div class="ql-title">Fix a problem</div>
-    <div class="ql-desc">Step-by-step troubleshooting wizard</div>
-  </a>
-  <a class="quick-link" href="#inviting-members" onclick="navigate('inviting-members');return false">
-    <div class="ql-icon">${IC.users}</div>
-    <div class="ql-title">Inviting your team</div>
-    <div class="ql-desc">Invites, roles, roster basics</div>
-  </a>
-  <a class="quick-link" href="#playback" onclick="navigate('playback');return false">
-    <div class="ql-icon">${IC.play}</div>
-    <div class="ql-title">Watching and reviewing</div>
-    <div class="ql-desc">Playback, notes, and keyboard shortcuts</div>
-  </a>
-  <a class="quick-link" href="#faq" onclick="navigate('faq');return false">
-    <div class="ql-icon">${IC.chat}</div>
-    <div class="ql-title">FAQ</div>
-    <div class="ql-desc">Common questions from owners and coaches</div>
-  </a>
-  <a class="quick-link" href="#release-notes" onclick="navigate('release-notes');return false">
-    <div class="ql-icon">${IC.sparkle}</div>
-    <div class="ql-title">Release notes</div>
-    <div class="ql-desc">Changelog, roadmap, and what's coming</div>
-  </a>
-  <a class="quick-link" href="#feature-requests" onclick="navigate('feature-requests');return false">
-    <div class="ql-icon">${IC.rocket}</div>
-    <div class="ql-title">Request a feature</div>
-    <div class="ql-desc">Tell us what to build next</div>
+    <div class="ql-desc">Step-by-step wizard for upload, playback, login, and performance issues.</div>
   </a>
 </div>
 <h2>Get in touch</h2>
@@ -3373,9 +3318,11 @@
       const text = idx.text;
       const textLower = text;
       const titleMatch = idx.titleLower.includes(lower);
+      const sectionLower = (page.section || '').toLowerCase();
+      const sectionMatch = !!sectionLower && sectionLower.includes(lower);
       const exactIdx = textLower.indexOf(lower);
       const fuzzy = !titleMatch && exactIdx === -1 && fuzzyMatch(page.title + ' ' + text, q);
-      if (titleMatch || exactIdx !== -1 || fuzzy) {
+      if (titleMatch || sectionMatch || exactIdx !== -1 || fuzzy) {
         let snippet = '';
         const idx = exactIdx !== -1 ? exactIdx : textLower.indexOf(lower.split(/\s+/)[0]);
         if (idx !== -1) {
@@ -3383,14 +3330,17 @@
           const raw = (s > 0 ? '…' : '') + text.slice(s, e) + (e < textLower.length ? '…' : '');
           snippet = escapeHtml(raw).replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').split(/\s+/).join('|'), 'gi'), m => `<mark>${escapeHtml(m)}</mark>`);
         }
-        const score = (titleMatch ? 10 : 0) + (exactIdx !== -1 ? 5 : 0) + (fuzzy ? 1 : 0);
+        // Ranking: title >> section name > body exact >> body fuzzy.
+        // Section-name match gives credit when someone searches a category
+        // (e.g. "admin", "help") without matching a single page title.
+        const score = (titleMatch ? 10 : 0) + (sectionMatch ? 4 : 0) + (exactIdx !== -1 ? 3 : 0) + (fuzzy ? 1 : 0);
         results.push({ id, title: page.title, section: page.section, snippet, score });
       }
     }
     results.sort((a, b) => b.score - a.score);
     // Safe: titles/sections escaped via escapeHtml(); snippet uses escapeHtml + <mark> wrapping of query match
     sr.innerHTML = results.length === 0
-      ? '<div class="search-empty">No results found</div>'
+      ? '<div class="search-empty">No matches. Try fewer or different keywords.</div>'
       : results.slice(0, LIMITS.SEARCH_RESULTS).map((r, i) =>
           `<div class="search-result" role="option" id="sr-${i}" data-page="${r.id}" onclick="addSearchHistory(document.getElementById('searchInput').value.trim());navigate('${r.id}')">
             <div class="sr-title">${escapeHtml(r.title)}</div>
@@ -4728,6 +4678,11 @@
   window.copyWizardLink = copyWizardLink;
   window.toggleSection = toggleSection;
   window.hideRecent = hideRecent;
+  // Search input uses inline oninput/onfocus handlers; both helpers were defined
+  // inside this IIFE and never exported, so search has been broken on main for
+  // a while. Exposing them here so search actually works.
+  window.debouncedSearch = debouncedSearch;
+  window.showSearchHistory = showSearchHistory;
   })();
   </script>
 </body>
