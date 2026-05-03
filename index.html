@@ -91,7 +91,6 @@
       --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
       --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
       --sidebar-w: 268px;
-      --toc-w:     216px;
       --header-h:  56px;
       --radius:    10px;
       --radius-sm: 7px;
@@ -549,34 +548,37 @@
     .fn-label { font-size: 11px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: .05em; }
     .fn-title { font-size: .875rem; font-weight: 500; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-    /* ── ON-PAGE TOC ─── */
-    .toc {
-      display: none; position: sticky;
-      top: calc(var(--header-h) + 24px); width: var(--toc-w);
-      max-height: calc(100vh - var(--header-h) - 48px);
-      overflow-y: auto; flex-shrink: 0; padding: 0 0 24px;
-      align-self: flex-start; margin-left: 40px;
-    }
-    .toc-title { font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .09em; color: var(--text-tertiary); margin-bottom: 10px; }
-    .toc-link {
-      display: block; padding: 4px 0 4px 12px;
+    /* ── INLINE "ON THIS PAGE" CALLOUT ─── */
+    /* Renders only on long pages (≥4 H2s). Quiet bordered row of jump links — */
+    /* not a tree. Replaces the right-pane TOC removed in PR 1b.                */
+    .page-toc {
+      margin: 0 0 24px; padding: 10px 14px; border: 1px solid var(--border);
+      border-radius: var(--radius-sm); background: var(--bg-secondary);
       font-size: .8125rem; color: var(--text-tertiary);
-      text-decoration: none; border-left: 2px solid transparent;
-      transition: color var(--dur), border-color var(--dur); line-height: 1.45;
+      display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap;
     }
-    .toc-link:hover { color: var(--text-secondary); text-decoration: none; }
-    .toc-link.active { color: var(--accent); border-left-color: var(--accent); }
-    .toc-link.toc-h3 { padding-left: 20px; font-size: .75rem; }
+    .page-toc-label {
+      font-size: 10.5px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .09em; color: var(--text-tertiary); margin-right: 6px;
+      flex-shrink: 0;
+    }
+    .page-toc a {
+      color: var(--text-secondary); text-decoration: none;
+      transition: color var(--dur);
+    }
+    .page-toc a:hover { color: var(--accent); text-decoration: underline; text-decoration-color: rgba(33,132,243,.4); }
+    .page-toc-sep { color: var(--text-tertiary); user-select: none; }
+
+    /* Page-level opt-in for wider content (tables, comparison grids).
+       Use <main class="content-inner" data-wide> or set data-wide on the wrap. */
+    .content-wrap[data-wide], .content-inner[data-wide] { max-width: 960px !important; }
+    .content-wrap[data-wide] { max-width: 960px; }
 
     /* ── TABLET ─── */
     @media (min-width: 769px) and (max-width: 1199px) {
       .content-with-toc { padding: 32px 28px 80px; }
       .sidebar { width: 220px; }
       .layout { margin-left: 220px; }
-    }
-
-    @media (min-width: 1200px) {
-      .toc { display: block; }
     }
 
     /* ── BACK TO TOP ─── */
@@ -682,7 +684,7 @@
     .sidebar-link:focus-visible, .quick-link:focus-visible, .header-logo:focus-visible {
       outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px rgba(33,132,243,.55);
     }
-    .menu-btn:focus-visible, .theme-toggle:focus-visible, .lang-toggle:focus-visible,
+    .menu-btn:focus-visible, .theme-toggle:focus-visible,
     .share-btn:focus-visible,
     .print-btn:focus-visible, .copy-article-btn:focus-visible,
     .wizard-option:focus-visible,
@@ -721,7 +723,7 @@
       .heading-anchor, .wizard-feedback, .wizard-escalate,
       .wizard-restart, .checklist, .related-articles,
       .step-tips, .preflight, .calc-wrap,
-      .breadcrumb, .error-lookup, .lang-toggle,
+      .breadcrumb, .error-lookup,
       .theme-toggle, .search-kbd,
       .welcome-back,
       .copy-article-btn, .user-highlight,
@@ -798,12 +800,18 @@
     .next-step.prev { text-align: left; }
     .next-step.next { text-align: right; margin-left: auto; }
 
-    /* ── SIDEBAR BOOKMARKS / RECENT ─── */
+    /* ── SIDEBAR RECENT ─── */
     .sidebar-dynamic { border-bottom: 1px solid var(--border); padding-bottom: 4px; margin-bottom: 4px; }
     .sidebar-dynamic:empty { display: none; border: none; padding: 0; margin: 0; }
     .sidebar-dynamic .sidebar-section-title { cursor: default; display: flex; align-items: center; gap: 6px; }
     .sidebar-dynamic .sidebar-section-title svg { width: 12px; height: 12px; flex-shrink: 0; }
     .sidebar-dynamic .sidebar-link { font-size: .8125rem; }
+    .sidebar-recent-hide {
+      margin-left: auto; background: none; border: none; color: var(--text-tertiary);
+      font-size: 14px; line-height: 1; cursor: pointer; padding: 2px 6px;
+      border-radius: var(--radius-xs);
+    }
+    .sidebar-recent-hide:hover { color: var(--text-primary); background: var(--bg-hover); }
 
     /* ── ARTICLE ACTIONS BAR ─── */
     .article-actions {
@@ -1100,17 +1108,6 @@
     .print-btn svg { width: 12px; height: 12px; }
     @media print { .print-btn { display: none !important; } }
 
-    /* ── LANGUAGE TOGGLE ─── */
-    .lang-toggle {
-      background: none; border: 1px solid var(--border-strong);
-      color: var(--text-secondary); padding: 4px 8px;
-      border-radius: var(--radius-sm); font-size: .75rem; font-weight: 600;
-      cursor: pointer; transition: all var(--dur); flex-shrink: 0;
-      min-width: 32px; text-align: center;
-    }
-    .lang-toggle:hover { color: var(--text-primary); border-color: var(--accent); }
-    .lang-toggle.es { background: var(--accent-soft); border-color: var(--accent-border); color: var(--accent); }
-
     /* ── STEP TIPS ─── */
     .step-tips { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
     .step-tip {
@@ -1396,19 +1393,16 @@
 
     <div class="header-spacer"></div>
 
-    <!-- Language toggle hidden until ES translations cover >90% of pages (KAY-201) -->
-    <button class="lang-toggle" id="langToggle" onclick="toggleLang()" title="Switch language" hidden style="display:none">EN</button>
-
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode" id="themeToggle" title="Toggle theme">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" id="themeIcon"><path d="M8 1v1M8 14v1M1 8h1M14 8h1M3.1 3.1l.7.7M12.2 12.2l.7.7M12.9 3.1l-.7.7M3.8 12.2l-.7.7"/><circle cx="8" cy="8" r="3"/></svg>
     </button>
 
-    <a href="https://www.kaynos.net/" class="header-app-link" target="_blank" rel="noopener noreferrer">
+    <a href="https://app.kaynos.net/" class="header-app-link" id="headerAppLink" target="_blank" rel="noopener noreferrer" onclick="localStorage.setItem('app-clicked', '1')">
       <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
         <path d="M5 2H2a1 1 0 00-1 1v8a1 1 0 001 1h8a1 1 0 001-1V8"/>
         <path d="M8 1h4v4M12 1L6.5 6.5"/>
       </svg>
-      <span>Open App</span>
+      <span id="headerAppLinkLabel">Open App</span>
     </a>
   </header>
 
@@ -1423,16 +1417,17 @@
           <main class="content-inner" id="pageContent"></main>
           <nav class="footer-nav" id="footerNav" aria-label="Page navigation"></nav>
         </div>
-        <aside class="toc" id="toc" aria-label="On this page"></aside>
       </div>
     </main>
     <footer class="site-footer" role="contentinfo">
       <div class="footer-inner">
         <span>&copy; 2024–2026 Kaynos. All rights reserved.</span>
         <nav class="footer-links">
-          <a href="https://app.kaynos.net/terms" target="_blank" rel="noopener">Terms</a>
-          <a href="https://app.kaynos.net/privacy" target="_blank" rel="noopener">Privacy</a>
-          <a onclick="navigate('privacy-on-this-site')">Site Privacy</a>
+          <a onclick="navigate('release-notes')">What's new</a>
+          <a onclick="navigate('feature-requests')">Feature requests</a>
+          <a onclick="navigate('parent-guide')">Parent guide</a>
+          <a onclick="navigate('contact')">Contact</a>
+          <a onclick="navigate('privacy-on-this-site')">Legal</a>
           <a href="https://github.com/jlambert229/kaynos-docs/blob/main/docs/SECURITY.md" target="_blank" rel="noopener">Security</a>
         </nav>
       </div>
@@ -1471,10 +1466,6 @@
     <button class="mobile-nav-btn" onclick="toggleSidebar()" aria-label="Menu">
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/></svg>
       <span>Menu</span>
-    </button>
-    <button class="mobile-nav-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
-      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 15V5M6 9l4-4 4 4"/></svg>
-      <span>Top</span>
     </button>
   </nav>
 
@@ -1758,7 +1749,7 @@
 </details>`},
 
     "inviting-members": {
-      title: "Inviting your team", section: "Getting Started",
+      title: "Inviting your team", section: "Admin",
       content: `
 <h1>Inviting your team</h1>
 <p>Members join by email with a temporary password. Admins may invite coaches or students; coaches may invite students only. Everything happens in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> under <strong>Admin</strong> or <strong>Students</strong>.</p>
@@ -2266,7 +2257,7 @@
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Roster and access control: <a onclick="navigate('managing-members')">Managing members</a>.</div></div>`},
 
     "managing-members": {
-      title: "Managing members", section: "Account Management",
+      title: "Managing members", section: "Admin",
       content: `
 <h1>Managing members</h1>
 <p>Admins use <strong>Admin</strong> for the full roster. Coaches can use <strong>Students</strong> to manage student invites on their side. Everything happens in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
@@ -2312,7 +2303,7 @@
 <p>Billing (manage subscription, update payment method) lives on the <strong>Profile</strong> page for the signed-in admin, not under Admin.</p>`},
 
     profile: {
-      title: "Profile and password", section: "Account Management",
+      title: "Profile and password", section: "Account",
       content: `
 <h1>Profile and password</h1>
 <h2>Open your profile</h2>
@@ -2352,7 +2343,7 @@
 </ol>`},
 
     "login-issues": {
-      title: "Login and access issues", section: "Troubleshooting",
+      title: "Login and access issues", section: "Help",
       content: `
 <h1>Login and access issues</h1>
 <p>Most issues stem from the wrong email, typos, or Caps Lock. Repeated failed attempts from the same IP address trigger a brief rate limit (see "Too many attempts" below). Sign in at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
@@ -2373,7 +2364,7 @@
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Profile and password changes: <a onclick="navigate('profile')">Profile and password</a>.</div></div>`},
 
     "email-issues": {
-      title: "Email and notification issues", section: "Troubleshooting",
+      title: "Email and notification issues", section: "Help",
       content: `
 <h1>Email and notification issues</h1>
 <p>Most delivery problems come from spam filtering, address typos, or disabled notification settings. Preferences are under <strong>Profile</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
@@ -2395,7 +2386,7 @@
 <p><strong>Profile</strong> → turn off class and session notifications if the member prefers quiet. Security-related email (password resets) may still send.</p>`},
 
     performance: {
-      title: "Performance and loading", section: "Troubleshooting",
+      title: "Performance and loading", section: "Help",
       content: `
 <h1>Performance and loading</h1>
 <p>Slow loads are usually caused by local network conditions, browser cache, or extensions — not necessarily a full outage.</p>
@@ -2442,7 +2433,7 @@
 </ul>`},
 
     faq: {
-      title: "Frequently asked questions", section: "FAQ",
+      title: "Frequently asked questions", section: "Help",
       content: `
 <h1>Frequently asked questions</h1>
 <p>Kaynos is built for coaches who use video review: publish sessions and classes, add timestamped notes, and members watch on their own time.</p>
@@ -2517,7 +2508,7 @@
 </ul>`},
 
     "developer-api": {
-      title: "Developer API", section: "Developers",
+      title: "Developer API", section: "Admin",
       content: `
 <h1>Developer API</h1>
 <div class="tldr"><strong>TLDR:</strong> Admins and coaches can view an internal API reference at <a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener"><code>/admin/api-docs</code></a>. Public API tokens, third-party integrations, and customer-facing webhooks are not available today.</div>
@@ -2578,7 +2569,7 @@
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>For role details see <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>`},
 
     troubleshoot: {
-      title: "Troubleshooting wizard", section: "Troubleshooting",
+      title: "Troubleshooting wizard", section: "Help",
       content: `
 <h1>Troubleshooting wizard</h1>
 <div class="tldr"><strong>TLDR:</strong> Use the wizard below to diagnose your issue step by step. Or search for an error code.</div>
@@ -2613,7 +2604,7 @@
 </details>`},
 
     contact: {
-      title: "Contact support", section: "FAQ",
+      title: "Contact support", section: "",
       content: `
 <h1>Contact support</h1>
 <p>Fill out the form below and we'll copy a formatted message for you to send to ${mailLink()}.</p>
@@ -2722,7 +2713,7 @@
 </div>`},
 
     "parent-guide": {
-      title: "Parent guide", section: "FAQ",
+      title: "Parent guide", section: "",
       content: `
 <h1>Parent &amp; guardian guide</h1>
 <div class="tldr"><strong>TLDR:</strong> Your child has a student account in Kaynos managed by their coach. They can watch recorded sessions and classes, read coaching notes, and request reviews. All videos are private to the school — nothing is public.</div>
@@ -2780,7 +2771,7 @@
 <p>For common questions, see the <a onclick="navigate('faq')">FAQ</a>.</p>`},
 
     "privacy-on-this-site": {
-      title: "Privacy on this site", section: "Legal",
+      title: "Privacy on this site", section: "",
       content: `
 <h1>Privacy on this site</h1>
 <p>This help center is a static site hosted on Netlify. It does not require login and does not track you across sessions.</p>
@@ -2950,15 +2941,15 @@
   };
 
   const NAV = [
-    { section: "", pages: ["welcome", "release-notes", "feature-requests"] },
-    { section: "Getting Started", pages: ["setup", "inviting-members", "first-upload", "roles", "glossary"] },
+    { section: "", pages: ["welcome"] },
+    { section: "Getting Started", pages: ["setup", "first-upload", "roles", "glossary"] },
     { section: "Video", pages: ["uploading", "playback", "formats", "storage"] },
     { section: "Sessions & Classes", pages: ["creating-sessions", "creating-classes", "notes", "progress"] },
-    { section: "Account Management", pages: ["managing-members", "profile"] },
-    { section: "Developers", pages: ["developer-api"] },
-    { section: "Troubleshooting", pages: ["troubleshoot", "login-issues", "email-issues", "performance"] },
-    { section: "FAQ", pages: ["faq", "contact", "parent-guide"] },
-    { section: "Legal", pages: ["privacy-on-this-site"] }
+    { section: "Account", pages: ["profile"] },
+    { section: "Admin", pages: ["inviting-members", "managing-members", "developer-api"] },
+    { section: "Help", pages: ["troubleshoot", "faq", "login-issues", "email-issues", "performance"] },
+    // Demoted to footer; still routable. allPageKeys includes these so search and arrow-key nav work.
+    { section: "", pages: ["release-notes", "feature-requests", "parent-guide", "contact", "privacy-on-this-site"], hidden: true }
   ];
 
   const allPageKeys = NAV.flatMap(g => g.pages);
@@ -2975,6 +2966,7 @@
 
   /* ── SIDEBAR ─────────────────────────────────────────── */
   function getRecent() { return safeGet('recent-pages', []); }
+  function hideRecent() { safeSet('recent-hidden', true); buildSidebar(); }
 
   function buildSidebar() {
     const sb = document.getElementById('sidebar');
@@ -2982,10 +2974,12 @@
     const recent = getRecent();
     let html = '';
 
-    // Dynamic section: Recent
-    if (recent.length) {
+    // Dynamic section: Recent — only render when there are at least 2 entries
+    // (one entry is just "the page you were on" — no continuity value)
+    const recentHidden = safeGet('recent-hidden', false);
+    if (recent.length >= 2 && !recentHidden) {
       html += '<div class="sidebar-dynamic">';
-      html += '<div class="sidebar-section"><div class="sidebar-section-title">' + IC.clock + ' Recent</div><div class="sidebar-links">';
+      html += '<div class="sidebar-section"><div class="sidebar-section-title">' + IC.clock + ' Recent <button class="sidebar-recent-hide" onclick="hideRecent()" title="Hide recent" aria-label="Hide recent">&times;</button></div><div class="sidebar-links">';
       recent.slice(0, 5).forEach(p => {
         if (PAGES[p]) html += `<a class="sidebar-link" href="#${p}" tabindex="0" data-page="${p}" onclick="navigate('${p}');return false" onkeydown="if(event.key==='Enter'){navigate('${p}');return false}"><span class="sl-text">${PAGES[p].title}</span></a>`;
       });
@@ -2993,10 +2987,11 @@
       html += '</div>';
     }
 
+    const sectionIcons = { 'Getting Started': IC.rocket, 'Video': IC.video, 'Sessions & Classes': IC.play, 'Account': IC.users, 'Admin': IC.wrench, 'Help': IC.alert };
     NAV.forEach((g, i) => {
+      if (g.hidden) return;
       const isCollapsed = g.section && collapsed[g.section];
       html += `<div class="sidebar-section${isCollapsed ? ' collapsed' : ''}" data-section="${g.section || ''}">`;
-      const sectionIcons = { 'Getting Started': IC.rocket, 'Video': IC.video, 'Sessions & Classes': IC.play, 'Account Management': IC.users, 'Developers': IC.wrench, 'Troubleshooting': IC.alert, 'FAQ': IC.chat };
       if (g.section) html += `<div class="sidebar-section-title" onclick="toggleSection(this)">${sectionIcons[g.section] || ''}${g.section}<span class="chevron" style="margin-left:auto">▼</span></div>`;
       html += '<div class="sidebar-links">';
       g.pages.forEach(p => {
@@ -3278,31 +3273,43 @@
     }
   }
 
-  /* ── ON-PAGE TOC ────────────────────────────────────── */
+  /* ── INLINE "ON THIS PAGE" CALLOUT ──────────────────── */
+  /* Renders only when the page has at least PAGE_TOC_MIN_H2 H2 sections.    */
+  /* 6 was picked from the actual H2 distribution: it surfaces a TOC on the  */
+  /* 7 longest pages (notes, managing-members, faq, progress, profile,      */
+  /* uploading, playback) — the only ones where a jump nav clearly helps.   */
+  const PAGE_TOC_MIN_H2 = 6;
   function renderToc(container) {
-    const toc = document.getElementById('toc');
-    const headings = container.querySelectorAll('h2, h3');
-    if (headings.length < 2) { toc.innerHTML = ''; return; }
+    // Drop any previously rendered inline TOC before rendering the new one
+    const old = container.querySelector('.page-toc');
+    if (old) old.remove();
 
-    let html = '<div class="toc-title">On this page</div>';
-    headings.forEach((h, i) => {
+    const h2s = Array.from(container.querySelectorAll('h2'));
+    if (h2s.length < PAGE_TOC_MIN_H2) return;
+
+    // Anchor each h2 with a stable sequential id
+    const items = h2s.map((h, i) => {
       const id = 'h-' + i;
       h.id = id;
-      const cls = h.tagName === 'H3' ? 'toc-link toc-h3' : 'toc-link';
-      const label = h.childNodes[0]?.textContent || h.textContent;
-      html += `<a class="${cls}" href="#${id}" onclick="tocJump(event,'${id}')">${label.trim()}</a>`;
+      const label = (h.childNodes[0]?.textContent || h.textContent).trim();
+      return { id, label };
     });
-    // Safe: labels extracted from page headings (hardcoded PAGES content), IDs are sequential
-    toc.innerHTML = html;
 
-    if (window._tocObs) window._tocObs.disconnect();
-    window._tocObs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        const link = toc.querySelector(`[href="#${e.target.id}"]`);
-        if (link) link.classList.toggle('active', e.isIntersecting);
-      });
-    }, { rootMargin: `-${56}px 0px -65% 0px`, threshold: 0 });
-    headings.forEach(h => window._tocObs.observe(h));
+    const nav = document.createElement('nav');
+    nav.className = 'page-toc';
+    nav.setAttribute('aria-label', 'On this page');
+    const parts = ['<span class="page-toc-label">On this page</span>'];
+    items.forEach((it, i) => {
+      if (i > 0) parts.push('<span class="page-toc-sep" aria-hidden="true">·</span>');
+      parts.push(`<a href="#${it.id}" onclick="tocJump(event,'${it.id}')">${escapeHtml(it.label)}</a>`);
+    });
+    // Safe: labels are escaped; ids are sequential and not user-controlled
+    nav.innerHTML = parts.join(' ');
+
+    // Insert after the h1 (or at top if no h1)
+    const h1 = container.querySelector('h1');
+    if (h1 && h1.parentNode === container) h1.insertAdjacentElement('afterend', nav);
+    else container.prepend(nav);
   }
 
   function tocJump(e, id) {
@@ -4466,9 +4473,6 @@
     currentLang = currentLang === 'en' ? 'es' : 'en';
     localStorage.setItem('lang', currentLang);
     document.documentElement.lang = currentLang;
-    const lt = document.getElementById('langToggle');
-    lt.textContent = currentLang.toUpperCase();
-    lt.classList.toggle('es', currentLang === 'es');
     const cur = (location.hash.slice(1).split(':')[0]) || 'welcome';
     navigate(cur);
   }
@@ -4683,9 +4687,17 @@
       });
     }
   }
-  // Language init
-  document.getElementById('langToggle').textContent = currentLang.toUpperCase();
-  document.getElementById('langToggle').classList.toggle('es', currentLang === 'es');
+  // Language: lang toggle button removed; ES content still served when localStorage.lang === 'es'
+  document.documentElement.lang = currentLang;
+
+  // Header app-link CTA: switch label to "Sign in" for users who haven't visited the app from here yet
+  (function initAppCta() {
+    if (localStorage.getItem('app-clicked')) return;
+    const label = document.getElementById('headerAppLinkLabel');
+    if (label) label.textContent = 'Sign in';
+    const link = document.getElementById('headerAppLink');
+    if (link) link.title = 'Sign in to app.kaynos.net';
+  })();
 
   // Expose needed functions to global scope for onclick handlers
   window.navigate = navigate;
@@ -4715,6 +4727,7 @@
   window.tocJump = tocJump;
   window.copyWizardLink = copyWizardLink;
   window.toggleSection = toggleSection;
+  window.hideRecent = hideRecent;
   })();
   </script>
 </body>
