@@ -1802,7 +1802,7 @@
 <p>Large uploads depend on stable internet and a supported format. Work through the checks below before assuming an app bug.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Reference: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 <h3>Fails immediately</h3>
-<p><strong>"Please select a video file":</strong> the file may not be MP4, MOV, WebM, or AVI. Convert to MP4 with <a href="https://handbrake.fr" target="_blank" rel="noopener">HandBrake</a> or <a href="https://www.videolan.org/vlc/" target="_blank" rel="noopener">VLC</a>, then try again.</p>
+<p><strong>"Please select a video file":</strong> the file may not be MP4, MOV, WebM, or MKV. Convert to MP4 with <a href="https://handbrake.fr" target="_blank" rel="noopener">HandBrake</a> or <a href="https://www.videolan.org/vlc/" target="_blank" rel="noopener">VLC</a>, then try again.</p>
 <p><strong>File too big:</strong> the limit is 5 GB. Trim the clip or export at 1080p — HandBrake's "Fast 1080p30" preset is a common choice.</p>
 <h3>Progress appears stuck</h3>
 <ol>
@@ -2172,10 +2172,10 @@
       title: "Progress tracking", section: "Sessions & Classes",
       content: `
 <h1>Progress tracking</h1>
-<div class="tldr"><strong>TLDR:</strong> For each session and class we record last playback position, completion status, and last-viewed time. Members resume where they left off. Coaches and owners filter by student and date range (1–365 days).</div>
+<div class="tldr"><strong>TLDR:</strong> For each session and class we record last playback position, completion status, and last-viewed time. Members resume where they left off. Coaches and owners filter by student and time range — Week, Month, or Quarter.</div>
 <p>Progress is simple on purpose: enough to see whether someone finished a recording and when they last opened it.</p>
 <h2>What we store</h2>
-<p>For each session and class, we track: last playback position (so you can resume), whether the full video was completed, and when it was last viewed. Coaches and admins can filter progress reports by student and date range (1 to 365 days).</p>
+<p>For each session and class, we track: last playback position (so you can resume), whether the full video was completed, and when it was last viewed. Coaches and admins can filter progress reports by student and time range: <strong>Week</strong> (7 days), <strong>Month</strong> (30 days), or <strong>Quarter</strong> (90 days).</p>
 <h2>For members</h2>
 <p>They resume where they left off. Overviews show items that still need a full watch versus completed items.</p>
 <h2>For coaches and owners</h2>
@@ -2295,7 +2295,7 @@
 <li>Ask an admin for a reset or email ${mailLink()}.</li>
 </ul>
 <h2>"Too many attempts"</h2>
-<p>Roughly <strong>25 failed attempts</strong> from the same IP within a one-minute window trigger rate limiting (HTTP 429). Wait a few minutes and try again, or reset your password. If you still need help, contact ${mailLink()}.</p>
+<p>After several failed attempts from the same IP, sign-ins are temporarily rate limited (HTTP 429). Wait a few minutes and try again, or reset your password. If you still need help, contact ${mailLink()}.</p>
 <h2>Blank page or "no access"</h2>
 <p>The account may have been removed, or the browser cached an old session. Try a private/incognito window. If that works, clear site data for <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> in normal mode.</p>
 <h2>Still locked out</h2>
@@ -2324,7 +2324,7 @@
 <li>Corporate filters may require IT allowlisting; an admin can still issue a manual password reset in the meantime.</li>
 </ul>
 <h2>Too many emails</h2>
-<p><strong>Profile</strong> → turn off class and session notifications if the member prefers quiet. Security-related email (password resets) may still send.</p>`},
+<p><strong>Profile</strong> → turn off the email-notifications toggle if the member prefers quiet. This is a single switch that mutes all collaboration email (mentions, replies, shares, review requests). Security-related email (password resets) still sends.</p>`},
 
     performance: {
       title: "Performance and loading", section: "Troubleshoot",
@@ -2333,7 +2333,7 @@
 <p>Slow loads are usually caused by local network conditions, browser cache, or extensions — not necessarily a full outage.</p>
 <h2>General slowness</h2>
 <ol>
-<li>About 5 Mbps down is enough for typical use.</li>
+<li>About 5 Mbps down for smooth 1080p playback. Upload speeds are covered on the <a onclick="navigate('uploading')">Uploading videos</a> page.</li>
 <li>Clear cache and site data for <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</li>
 <li>Try Chrome or Firefox if Safari misbehaves during troubleshooting.</li>
 <li>Temporarily disable strict ad or script blockers to test.</li>
@@ -2531,7 +2531,7 @@
 <div class="shortcut-grid">
   <div class="shortcut-card"><span>Chrome (recommended)</span><span style="color:var(--success)">Full support</span></div>
   <div class="shortcut-card"><span>Firefox</span><span style="color:var(--success)">Full support</span></div>
-  <div class="shortcut-card"><span>Safari</span><span style="color:var(--warning)">Good (AVI may have limited support)</span></div>
+  <div class="shortcut-card"><span>Safari</span><span style="color:var(--warning)">Good (use MP4 with H.264 for best compatibility)</span></div>
   <div class="shortcut-card"><span>Edge</span><span style="color:var(--success)">Full support</span></div>
 </div>
 <h3>If something doesn't work</h3>
@@ -2881,6 +2881,10 @@
   ];
 
   const allPageKeys = NAV.flatMap(g => g.pages);
+  // Footer prev/next nav walks only visible groups so demoted pages
+  // (release-notes, contact, etc.) don't surface as a dangling "Next →"
+  // at the end of Troubleshoot. allPageKeys still drives search and arrow nav.
+  const visiblePageKeys = NAV.filter(g => !g.hidden).flatMap(g => g.pages);
 
   /* ── SAFE STORAGE ────────────────────────────────────── */
   function safeGet(key, fallback) {
@@ -2987,7 +2991,7 @@
   const PAGE_DESCRIPTIONS = {
     'welcome': 'Kaynos help center — setup guides, video upload, playback, troubleshooting, and developer API reference for the video coaching platform.',
     'setup': 'Set up your Kaynos account. First login, password change, Google OAuth, and getting started with video coaching.',
-    'uploading': 'Upload video to Kaynos. Supported formats (MP4, MOV, WebM, AVI), size limits, chunked upload, and troubleshooting.',
+    'uploading': 'Upload video to Kaynos. Supported formats (MP4, MOV, WebM, MKV), size limits, chunked upload, and troubleshooting.',
     'playback': 'Watch and review video in Kaynos. Playback speed, keyboard shortcuts, timeline notes, clips, and mobile playback.',
     'creating-sessions': 'Create sessions and classes in Kaynos. Private lessons vs shared classes, and scheduling.',
     'notes': 'Timestamped coaching notes in Kaynos. Add notes, voice dictation, annotations, reactions, AI review, and tags.',
@@ -2996,7 +3000,7 @@
     'roles': 'User roles in Kaynos. Admin, coach, and student permissions and capabilities.',
     'troubleshoot': 'Troubleshoot Kaynos issues. Step-by-step wizard for upload, playback, login, and performance problems.',
     'progress': 'Track student progress in Kaynos. Watch rate, session count, note count, time-period filtering, and per-session completion tracking.',
-    'formats': 'Supported video formats and limits in Kaynos. MP4, MOV, WebM, AVI. Max 5 GB. Upload time calculator.',
+    'formats': 'Supported video formats and limits in Kaynos. MP4, MOV, WebM, MKV. Max 5 GB. Upload time calculator.',
     'storage': 'Video storage and retention in Kaynos. Backblaze B2, 6-month retention, 100 video / 50 GB defaults.',
     'managing-members': 'Manage members in Kaynos. Invite coaches and students, change roles, reset passwords, admin panel overview.',
     'profile': 'Kaynos profile settings. Password, notifications, and account preferences.',
@@ -3200,11 +3204,12 @@
 
   /* ── FOOTER NAV ─────────────────────────────────────── */
   function renderFooterNav(pageId) {
-    const idx = allPageKeys.indexOf(pageId);
+    const idx = visiblePageKeys.indexOf(pageId);
     const fn = document.getElementById('footerNav');
     fn.innerHTML = '';
+    if (idx === -1) return;
     if (idx > 0) {
-      const id = allPageKeys[idx - 1];
+      const id = visiblePageKeys[idx - 1];
       const a = document.createElement('a');
       a.className = 'footer-nav-btn prev';
       a.href = '#' + id;
@@ -3212,8 +3217,8 @@
       a.innerHTML = `<span class="fn-label">← Previous</span><span class="fn-title">${PAGES[id].title}</span>`;
       fn.appendChild(a);
     }
-    if (idx < allPageKeys.length - 1) {
-      const id = allPageKeys[idx + 1];
+    if (idx < visiblePageKeys.length - 1) {
+      const id = visiblePageKeys[idx + 1];
       const a = document.createElement('a');
       a.className = 'footer-nav-btn next';
       a.href = '#' + id;
@@ -3735,7 +3740,7 @@
         { text: 'Very slow but no error', next: 'upload-slow' },
       ]
     },
-    'upload-reject': { result: true, title: 'File rejected at start', body: 'Check your file format (MP4, MOV, WebM, AVI) and size (max 5 GB).', page: 'uploading' },
+    'upload-reject': { result: true, title: 'File rejected at start', body: 'Check your file format (MP4, MOV, WebM, MKV) and size (max 5 GB).', page: 'uploading' },
     'upload-stuck': { result: true, title: 'Progress bar stuck', body: 'Large files pause between chunks — wait 60 seconds. If no progress after 2 minutes, cancel and retry.', page: 'uploading' },
     'upload-partial': { result: true, title: 'Fails partway through', body: 'Network error or session expired. Reconnect and retry. A 403 means the upload session expired — start over.', page: 'uploading' },
     'upload-slow': { result: true, title: 'Slow upload', body: 'Check your upload speed (not download) at fast.com. Wired connection helps. Pause other sync tools.', page: 'uploading' },
@@ -3750,7 +3755,7 @@
     },
     'play-black': { result: true, title: 'Black screen', body: 'Hard refresh (Ctrl+Shift+R). Confirm upload completed. Try Chrome.', page: 'playback' },
     'play-buffer': { result: true, title: 'Buffering', body: 'Check bandwidth, close other streaming tabs, try a 1080p export instead of 4K.', page: 'playback' },
-    'play-codec': { result: true, title: 'Codec issue', body: 'Re-export to MP4 (H.264 + AAC). AVI may have limited browser support — try Chrome or Firefox.', page: 'playback' },
+    'play-codec': { result: true, title: 'Codec issue', body: 'Re-export to MP4 (H.264 + AAC). MKV codecs vary by browser — try Chrome or Firefox.', page: 'playback' },
     login: {
       q: 'What\'s happening?',
       opts: [
@@ -4377,7 +4382,7 @@
 
   /* ── UPLOAD PREFLIGHT CHECKLIST ────────────────────── */
   const PREFLIGHT = [
-    { id: 'pf-format', text: 'File is MP4, MOV, WebM, or AVI' },
+    { id: 'pf-format', text: 'File is MP4, MOV, WebM, or MKV' },
     { id: 'pf-size', text: 'File is under 5 GB' },
     { id: 'pf-landscape', text: 'Recorded in landscape orientation' },
     { id: 'pf-1080', text: 'Resolution is 1080p or lower (recommended)' },
@@ -4424,11 +4429,11 @@
     let browser = 'Unknown';
     let status = 'warn';
     let msg = '';
-    if (isIOS) { browser = 'Safari (iOS)'; status = 'warn'; msg = 'Good support. All iOS browsers use WebKit — AVI may have limited support, use MP4 instead.'; }
+    if (isIOS) { browser = 'Safari (iOS)'; status = 'warn'; msg = 'Good support. All iOS browsers use WebKit — use MP4 with H.264 for best compatibility.'; }
     else if (ua.includes('Edg')) { browser = 'Edge'; status = 'good'; msg = 'Full support.'; }
     else if (ua.includes('Chrome')) { browser = 'Chrome'; status = 'good'; msg = 'Full support — recommended browser.'; }
     else if (ua.includes('Firefox')) { browser = 'Firefox'; status = 'good'; msg = 'Full support — great choice.'; }
-    else if (ua.includes('Safari')) { browser = 'Safari'; status = 'warn'; msg = 'Good support. AVI files may have limited support — use MP4 instead.'; }
+    else if (ua.includes('Safari')) { browser = 'Safari'; status = 'warn'; msg = 'Good support. Use MP4 with H.264 for best compatibility.'; }
     else { msg = 'Unknown browser. If you run into issues, try Chrome.'; }
     el.className = 'browser-result ' + status;
     el.innerHTML = `${status === 'good' ? IC.check : IC.warn} <div><strong>You're using ${browser}.</strong> ${msg}</div>`;
