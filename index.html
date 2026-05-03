@@ -1886,7 +1886,7 @@
   <a class="feature-card" href="#developer-api" onclick="navigate('developer-api');return false">
     <div class="feature-icon">${IC.info}</div>
     <h4>Billing & API</h4>
-    <p>Stripe billing ($49/mo or $490/yr, 14-day free trial). Internal API reference for admins/instructors; public API for third parties not yet available.</p>
+    <p>Stripe billing ($49/mo or $490/yr, 14-day free trial). Internal API reference for admins and coaches; public API for third parties not yet available.</p>
   </a>
 </div>
 </details>
@@ -2055,7 +2055,7 @@
         <li><a onclick="navigate('notes')">Standardize your tag vocabulary</a> with the team</li>
         <li><a onclick="navigate('progress')">Review progress tracking</a> — see who's watching</li>
         <li><a onclick="navigate('formats')">Optimize video settings</a> — 1080p H.264 for best results</li>
-        <li>Developers: see the <a onclick="navigate('developer-api')">Developer API</a> page — internal API reference for admins/instructors</li>
+        <li>Developers: see the <a onclick="navigate('developer-api')">Developer API</a> page — internal API reference for admins and coaches</li>
       </ul>
     </div>
   </div>
@@ -2073,10 +2073,16 @@
 <ol>
 <li>Go to <strong>Admin</strong> (full roster control) or <strong>Students</strong> (coaches adding a student).</li>
 <li>Click <strong>Add Member</strong> / <strong>Add Student</strong>.</li>
-<li>Enter name, email address, and role (admin can also set coach vs member).</li>
-<li>Click <strong>Send Invite</strong>.</li>
+<li>Enter name, email address, and role (admin can also set coach vs student).</li>
+<li>Choose how to deliver the invite:
+  <ul>
+    <li><strong>Email invite</strong> — Kaynos generates a temporary password and emails it to the new member.</li>
+    <li><strong>Generate link</strong> — Kaynos creates a single-use setup link that expires after 7 days. No password is sent; the new member sets their own when they open the link. Useful when you'd rather hand the link over directly (in person, in chat, etc.) than rely on email delivery.</li>
+  </ul>
+</li>
+<li>Click <strong>Send Invite</strong> (or <strong>Generate link</strong>).</li>
 </ol>
-<p>Delivery is usually quick. If nothing arrives, check spam and verify the address for typos.</p>
+<p>Email delivery is usually quick. If nothing arrives, check spam and verify the address for typos.</p>
 <div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>Still missing mail? See <a onclick="navigate('email-issues')">Email and notification issues</a> or contact ${mailLink()}.</div></div>
 <h2>Who can invite</h2>
 <table><thead><tr><th>Your role</th><th>Can add</th></tr></thead><tbody>
@@ -2114,8 +2120,8 @@
 </ol>
 <h2>Upload behavior</h2>
 <ul>
-<li>Files under ~100 MB often upload in a single request.</li>
-<li>Files over 100 MB use chunked multipart upload (20 MB per chunk) with up to 3 retries per chunk and exponential backoff.</li>
+<li>Files under ~20 MB often upload in a single request.</li>
+<li>Files over 20 MB use chunked multipart upload (20 MB per chunk) with parallel connections, up to 3 retries per chunk, and exponential backoff.</li>
 <li>You can cancel an in-progress upload at any time.</li>
 </ul>
 <h2>Supported formats</h2>
@@ -2123,7 +2129,7 @@
 <tr><td>MP4</td><td><code>.mp4</code></td><td>Recommended default</td></tr>
 <tr><td>MOV</td><td><code>.mov</code></td><td>Common on iPhone and GoPro</td></tr>
 <tr><td>WebM</td><td><code>.webm</code></td><td>Screen and browser capture</td></tr>
-<tr><td>AVI</td><td><code>.avi</code></td><td>Supported; limited browser playback</td></tr>
+<tr><td>MKV</td><td><code>.mkv</code></td><td>Matroska container; works on most modern browsers</td></tr>
 </tbody></table>
 <p>Maximum file size is <strong>5 GB</strong>. Full details: <a onclick="navigate('formats')">Supported formats and limits</a>.</p>
 <h2>Recording tips</h2>
@@ -2156,10 +2162,10 @@
 <p>Each session or class uses one source: <strong>Upload</strong> (file from your device) or <strong>Notes Only</strong> (no video). Upload from <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> when creating or editing.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Format and size limits: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 <h2>Large files</h2>
-<p>Files over <strong>100 MB</strong> use chunked multipart upload (<strong>20 MB</strong> per chunk) with parallel connections. Failed parts retry automatically (up to <strong>3 attempts</strong> per chunk) with exponential backoff.</p>
+<p>Files over <strong>20 MB</strong> use chunked multipart upload (<strong>20 MB</strong> per chunk) with parallel connections. Failed parts retry automatically (up to <strong>3 attempts</strong> per chunk) with exponential backoff.</p>
 <h2>Requirements</h2>
 <ul>
-<li>Formats: MP4, MOV, WebM, AVI (convert others before uploading).</li>
+<li>Formats: MP4, MOV, WebM, MKV (convert others before uploading).</li>
 <li>Maximum 5 GB per video.</li>
 <li>Only admins and coaches may upload.</li>
 </ul>
@@ -2221,21 +2227,22 @@
 <p>Markers on the timeline are notes. Hover to preview the text, click to jump to that exact moment.</p>
 <h2>Add a note while watching</h2>
 <ol>
-<li>Pause (or press <strong>N</strong>).</li>
+<li>Pause the video.</li>
 <li>Click <strong>Add Note</strong>, enter your text, then <strong>Save</strong>.</li>
 </ol>
 <p>The note is tied to the current playhead position.</p>
 <details><summary>Keyboard shortcuts</summary>
+<p><strong>Player controls</strong> (when the video has focus):</p>
 <div class="shortcut-grid">
   <div class="shortcut-card"><span>Play / Pause</span><kbd>Space</kbd> or <kbd>K</kbd></div>
-  <div class="shortcut-card"><span>Skip back / forward</span><kbd>J</kbd> / <kbd>L</kbd></div>
-  <div class="shortcut-card"><span>Pause + add note</span><kbd>N</kbd></div>
+  <div class="shortcut-card"><span>Skip back / forward 10s</span><kbd>J</kbd> / <kbd>L</kbd> or <kbd>←</kbd> / <kbd>→</kbd></div>
   <div class="shortcut-card"><span>Fullscreen</span><kbd>F</kbd></div>
   <div class="shortcut-card"><span>Mute / unmute</span><kbd>M</kbd></div>
   <div class="shortcut-card"><span>Volume up / down</span><kbd>↑</kbd> / <kbd>↓</kbd></div>
-  <div class="shortcut-card"><span>Start / end highlight</span><kbd>H</kbd></div>
-  <div class="shortcut-card"><span>Draw annotation</span><kbd>A</kbd></div>
-  <div class="shortcut-card"><span>Save note</span><kbd>⌘</kbd> <kbd>Enter</kbd></div>
+</div>
+<p><strong>Inside the note editor</strong> (after clicking Add Note):</p>
+<div class="shortcut-grid">
+  <div class="shortcut-card"><span>Save note</span><kbd>⌘</kbd>/<kbd>Ctrl</kbd> <kbd>Enter</kbd></div>
   <div class="shortcut-card"><span>Cancel</span><kbd>Esc</kbd></div>
 </div>
 </details>
@@ -2279,7 +2286,7 @@
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
 <h3>Player blank or broken controls</h3>
 <p><strong>Black screen / no controls:</strong> refresh, then hard refresh or clear cache, then try <a href="https://www.google.com/chrome/" target="_blank" rel="noopener">Chrome</a>. Confirm the upload finished (not stuck on "uploading" or showing "failed").</p>
-<p><strong>"Cannot be played":</strong> often a codec or browser issue. AVI may have limited browser support — try <a href="https://www.google.com/chrome/" target="_blank" rel="noopener">Chrome</a> or <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener">Firefox</a>, or re-export to MP4 with H.264 video and AAC audio.</p>
+<p><strong>"Cannot be played":</strong> often a codec or browser issue. MKV files use codecs that vary by browser — try <a href="https://www.google.com/chrome/" target="_blank" rel="noopener">Chrome</a> or <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener">Firefox</a>, or re-export to MP4 with H.264 video and AAC audio.</p>
 <h3>Buffering or long spinners</h3>
 <ul>
 <li>Check your bandwidth (upload and download can differ dramatically by network).</li>
@@ -2302,9 +2309,9 @@
 <tr><td>MP4</td><td><code>.mp4</code></td><td>Recommended default</td></tr>
 <tr><td>MOV</td><td><code>.mov</code></td><td>Supported</td></tr>
 <tr><td>WebM</td><td><code>.webm</code></td><td>Supported</td></tr>
-<tr><td>AVI</td><td><code>.avi</code></td><td>Supported; limited browser playback</td></tr>
+<tr><td>MKV</td><td><code>.mkv</code></td><td>Matroska container; works on most modern browsers</td></tr>
 </tbody></table>
-<p><strong>MP4</strong> is the most predictable for uploads and playback. MOV from iPhone usually works well.</p>
+<p><strong>MP4</strong> is the most predictable for uploads and playback. MOV from iPhone usually works well. AVI is not supported &mdash; convert to MP4 first.</p>
 <h2>File size</h2>
 <ul>
 <li>Maximum <strong>5 GB</strong> per file.</li>
@@ -2431,7 +2438,7 @@
 <li>Submit the request — the coach receives a notification.</li>
 </ol>
 <h3>How coaches respond</h3>
-<p>Pending review requests appear on the coach dashboard. The coach can <strong>accept</strong>, <strong>decline</strong>, or <strong>skip</strong> each request. Accepting converts the draft into a full session — the coach then watches the video and adds notes and annotations as usual.</p>
+<p>Pending review requests appear on the coach dashboard under <strong>Awaiting feedback</strong>. The coach can <strong>accept</strong> or <strong>decline</strong> each request. Accepting converts the draft into a full session — the coach then watches the video and adds notes and annotations as usual.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Review requests are the main way students initiate feedback. Coaches who enable <a onclick="navigate('profile')">email notifications</a> get alerted as soon as a request comes in.</div></div>`},
 
     "creating-classes": {
@@ -2448,28 +2455,18 @@
 </ol>
 <h2>Who sees it</h2>
 <p>All members, coaches, and admins in your account. This broad visibility is intentional and differs from a private session.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Upload options and limits: <a onclick="navigate('uploading')">Uploading videos</a> and <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
-
-<h2>Attendance tracking</h2>
-<p>Mark which students attended a class so coaches can track participation.</p>
-<ol>
-<li>Open a class recording.</li>
-<li>Click <strong>Mark Attendance</strong> (or use the roster view).</li>
-<li>Check off students who were present. You can batch-select multiple students.</li>
-<li>Save — attendance records appear in each student's progress timeline.</li>
-</ol>
-<p>Attendance data feeds into the progress dashboard, helping coaches spot students who are falling off.</p>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Upload options and limits: <a onclick="navigate('uploading')">Uploading videos</a> and <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>`},
 
     notes: {
       title: "Notes and timestamps", section: "Sessions & Classes",
       content: `
 <h1>Notes and timestamps</h1>
-<div class="tldr"><strong>TLDR:</strong> Pause the video, press <kbd>N</kbd>, type your note. It saves with the timestamp. Add tags to organize by technique or topic.</div>
+<div class="tldr"><strong>TLDR:</strong> Pause the video, click <strong>Add Note</strong>, type your note. It saves with the timestamp. Add tags to organize by technique or topic.</div>
 <p>Attach short notes to exact moments on the timeline so everyone lands on the same frame during review.</p>
 <h2>Adding a note from the player</h2>
 <ol>
-<li>Pause the video (shortcut: <strong>N</strong>).</li>
-<li>Click <strong>Add Note</strong>, type your text, then <strong>Save</strong>.</li>
+<li>Pause the video.</li>
+<li>Click <strong>Add Note</strong>, type your text, then <strong>Save</strong> (or press <kbd>Cmd/Ctrl</kbd>+<kbd>Enter</kbd>).</li>
 </ol>
 <p>The note is saved at the current playhead position. Markers appear on the scrub bar; click any to jump.</p>
 <h2>Filters</h2>
@@ -2493,13 +2490,12 @@
 <p>When creating a note, choose a type to categorize it:</p>
 <ul>
 <li><strong>Note</strong> — general observation (default)</li>
-<li><strong>Key moment</strong> — marks an important technique or breakthrough</li>
-<li><strong>Drill</strong> — a drill or exercise to practice</li>
-<li><strong>Question</strong> — something to discuss next session</li>
 <li><strong>Highlight</strong> — marks a time range (start and end) on the timeline</li>
+<li><strong>Annotation</strong> — a drawing overlay on a paused frame (see Annotations below)</li>
 </ul>
+<p>AI review may also add notes flagged as <strong>AI suggestions</strong> — these can be edited or deleted like any other note.</p>
 <h2>Voice dictation</h2>
-<p>Coaches can dictate notes hands-free using speech-to-text (powered by Deepgram).</p>
+<p>Anyone can dictate notes hands-free using speech-to-text (powered by Deepgram).</p>
 <ol>
 <li>The first time you use it, you'll be asked to grant microphone access and consent to audio processing.</li>
 <li>Click the microphone icon in the note editor, speak your observation, and the text appears in real time.</li>
@@ -2525,20 +2521,15 @@
 <li>Tags are shared across the account, not private to one person.</li>
 </ul>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Filter your lists by tag in the app after you <a href="https://app.kaynos.net" target="_blank" rel="noopener">sign in</a>.</div></div>
-<h3>BJJ technique tags</h3>
-<p>Use specific technique tags to build a searchable library. Suggested taxonomy:</p>
-<ul>
-<li><strong>Position:</strong> <code>guard</code>, <code>half-guard</code>, <code>mount</code>, <code>side-control</code>, <code>back</code>, <code>turtle</code></li>
-<li><strong>Action:</strong> <code>sweep</code>, <code>pass</code>, <code>takedown</code>, <code>escape</code>, <code>submission</code></li>
-<li><strong>Specific technique:</strong> <code>armbar</code>, <code>triangle</code>, <code>guillotine</code>, <code>kimura</code>, <code>rear-naked-choke</code></li>
-</ul>
-<p>To find all sessions tagged with a technique, use the search palette (<kbd>Cmd+K</kbd>) or filter the session list by tag.</p>
+<h3>Building a technique vocabulary</h3>
+<p>Tags are free-form text — there's no built-in taxonomy. Build a shared vocabulary your team will use consistently. Common starting points for grappling: positions (<code>guard</code>, <code>mount</code>, <code>side-control</code>), actions (<code>sweep</code>, <code>pass</code>, <code>escape</code>), and specific techniques (<code>armbar</code>, <code>triangle</code>). The exact list is up to you.</p>
+<p>To find all sessions tagged a particular way, filter the session list by tag.</p>
 <h2>Annotations</h2>
 <p>Draw directly on a video frame to highlight technique details.</p>
 <ol>
 <li>Pause the video at the moment you want to annotate.</li>
-<li>Press <kbd>A</kbd> or click the annotation tool.</li>
-<li>Draw arrows, circles, or freehand on the frozen frame.</li>
+<li>Click the annotation tool in the note editor.</li>
+<li>Draw with the pen, line, circle, or arrow tool on the frozen frame. Pick a stroke colour and width; undo/redo are available.</li>
 <li>Save — the annotation is attached to that timestamp and appears during playback.</li>
 </ol>
 <h2>AI review</h2>
@@ -2577,12 +2568,7 @@
 <h2>Time-period filtering</h2>
 <p>Use the filter buttons to narrow the view to the <strong>last 7, 30, or 90 days</strong>. The default view is 30 days.</p>
 <h2>Per-session details</h2>
-<p>Each session row shows:</p>
-<ul>
-<li><strong>Last viewed</strong> — when the student last opened the recording.</li>
-<li><strong>Resume position</strong> — where they left off so they can pick up again.</li>
-<li><strong>Completion status</strong> — whether the full video was watched.</li>
-</ul>
+<p>Each row in the recent-sessions list shows the session title, date, a check icon if the full video has been watched, and the note count. Resume position and last-viewed timestamp are tracked behind the scenes so playback picks up where it left off.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Roster and access control: <a onclick="navigate('managing-members')">Managing members</a>.</div></div>`},
 
     "managing-members": {
@@ -2595,8 +2581,11 @@
 <h2>Change roles</h2>
 <p><strong>Admin</strong> → select the member → role dropdown → save. Changes apply immediately. Details: <a onclick="navigate('roles')">Understanding user roles</a>.</p>
 <h2>Remove access</h2>
-<p><strong>Remove Member</strong> ends their access immediately. Notes they already created remain for history.</p>
+<p><strong>Remove Member</strong> ends their access immediately. Notes they already created remain for history. You can also remove a student directly from their profile page (<code>/students/&lt;id&gt;</code>) using the <strong>Remove</strong> button — admin only, mirrors the roster flow.</p>
 <div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>Removal is immediate — the person loses login access to your account on <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> right away.</div></div>
+<h2>Activity indicator and email privacy</h2>
+<p>Student avatars in the roster show an activity dot: <strong>green</strong> when the student has had a session in the last 30 days, <strong>dim</strong> when activity is older than 30 days, no dot when they have no sessions yet.</p>
+<p>For screen-sharing or recording, toggle <strong>Hide emails</strong> in the Members section. Addresses are masked to first letter + domain (<code>j****@example.com</code>); search still works against the full address.</p>
 <h2>Common questions</h2>
 <p><strong>One person, two accounts?</strong> Use a different email address per account. Each account is completely separate.</p>
 <p><strong>Member limits?</strong> The product does not enforce a headcount cap.</p>
@@ -2604,82 +2593,62 @@
 <h2>Multiple schools</h2>
 <p>Kaynos supports managing multiple schools under one account. Multi-school setup is handled by a tenant admin or by contacting ${mailLink()} — it is not self-service. Each school has its own member roster, sessions, classes, and storage quota.</p>
 <h2>Branding</h2>
-<p>Admins can customize the look of their account under <strong>Admin → Branding</strong>. Set a custom logo, accent color, and welcome text that members see when they log in.</p>
+<p>Admins can upload a custom logo for their academy under <strong>Admin → Branding</strong>. Members see the logo in the header after they log in. PNG or SVG, square aspect, at least 200×200px.</p>
 <h2>School hours</h2>
-<p>Admins can set operating hours under <strong>Admin → Settings</strong>. Default hours are 6 AM to 9 PM. Scheduling outside these hours is allowed but flagged.</p>
+<p>Admins can set operating hours under <strong>Admin → School hours</strong>. Default hours are 6 AM to 9 PM. The schedule view uses these hours to lay out the daily/weekly grids; sessions can still be booked outside the window.</p>
 <h2>Usage reports</h2>
-<p>Admins can receive automated email reports summarizing account activity.</p>
+<p>Once your school has at least five sessions or classes, admins can receive automated email reports summarizing account activity.</p>
 <ol>
-<li>Go to <strong>Admin → Reports</strong>.</li>
-<li>Choose frequency: <strong>off</strong>, <strong>daily</strong>, <strong>weekly</strong>, or <strong>monthly</strong>.</li>
-<li>Reports include: total sessions, storage usage, active students, and coach activity.</li>
+<li>Go to <strong>Admin → Reports &amp; Exports</strong>.</li>
+<li>Choose frequency: <strong>off</strong>, <strong>weekly</strong>, or <strong>monthly</strong>.</li>
+<li>Reports cover the previous period — sessions and classes created, active students, storage usage.</li>
 </ol>
 <p>Click <strong>Send now</strong> to trigger an immediate report.</p>
 <h2>Admin panel overview</h2>
-<p>The Admin panel has several sections. Here's what each does:</p>
+<p>The Admin panel has several sections. Here's what each does, in the order they appear:</p>
 <dl>
-<dt>Members</dt><dd>View roster, add/remove members, change roles, reset passwords, and filter by role. The main people management hub.</dd>
+<dt>Academy</dt><dd>School name and subscription status (active, trialing, past due, cancelled). Edit the academy name from here.</dd>
+<dt>Members</dt><dd>View roster, add/remove members, change roles, reset passwords, filter by role, and toggle email privacy mode for screen sharing.</dd>
+<dt>School hours</dt><dd>Set operating hours used by the schedule view (default 6 AM–9 PM).</dd>
+<dt>Branding</dt><dd>Upload a custom logo for the in-app header.</dd>
 <dt>Storage</dt><dd>Monitor video count and storage usage against your limits (default: 100 videos, 50 GB). View expiring videos. Request a storage increase.</dd>
-<dt>AI Usage</dt><dd>View AI feature usage status for your school.</dd>
-<dt>Reports</dt><dd>Configure automated usage reports (off/daily/weekly/monthly). Send a manual report immediately.</dd>
-<dt>Branding</dt><dd>Set a custom logo, accent color, and welcome text for your academy.</dd>
-<dt>Settings</dt><dd>School name, operating hours (default 6 AM–9 PM), cancellation policy.</dd>
-<dt>Export</dt><dd>Export your school data.</dd>
-<dt>Danger Zone</dt><dd>Schedule account deletion (30-day grace period) or cancel a pending deletion.</dd>
-</dl>`},
+<dt>Reports &amp; Exports</dt><dd>Configure automated usage reports (off/weekly/monthly), send a manual report, and export school data as JSON or members as CSV. Visible once your school has at least 5 sessions or classes.</dd>
+<dt>Danger Zone</dt><dd>Schedule account deletion (30-day grace period) or cancel a pending deletion. Collapsed by default; auto-expanded if a deletion is already scheduled.</dd>
+</dl>
+<p>Billing (manage subscription, update payment method) lives on the <strong>Profile</strong> page for the signed-in admin, not under Admin.</p>`},
 
     profile: {
       title: "Profile and password", section: "Account Management",
       content: `
 <h1>Profile and password</h1>
 <h2>Open your profile</h2>
-<p>Desktop: click your name in the sidebar. Mobile: open the menu, then tap your name.</p>
+<p>Desktop: click your name in the sidebar. Mobile: tap the avatar in the top-right corner of the header, then choose <strong>Profile</strong>.</p>
 <h2>Name and details</h2>
-<p>Update your display name or other profile fields, then click <strong>Save Changes</strong>.</p>
+<p>Update your display name, then click <strong>Save changes</strong>.</p>
+<h2>Email address</h2>
+<p>Your email is your sign-in identifier. To change it:</p>
+<ol>
+<li>In the <strong>Email address</strong> section, click <strong>Change</strong>.</li>
+<li>Enter the new address and click <strong>Send verification</strong>. Kaynos emails a verification link to the new address.</li>
+<li>Open that link to confirm. Your sign-in email updates only after the link is opened.</li>
+</ol>
+<p>While a change is pending, you'll see the new address listed as <strong>Pending</strong> with a <strong>Cancel pending change</strong> button. Verification links expire — request a new one if it lapses.</p>
 <h2>Change password</h2>
 <ol>
 <li>Click <strong>Change Password</strong>.</li>
 <li>Enter your current password.</li>
-<li>Enter your new password and confirmation.</li>
+<li>Enter your new password (minimum <strong>8 characters</strong>) and confirm it.</li>
 <li>Click <strong>Update Password</strong>.</li>
 </ol>
 <p>Locked out? Ask an admin for a reset, or email ${mailLink()}. Login help: <a onclick="navigate('login-issues')">Login and access issues</a>.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Profile lives in the app: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> → your name in the sidebar (or menu on mobile).</div></div>
+<h2>Billing (admins only)</h2>
+<p>Admins see a <strong>Billing</strong> section on their profile with the current subscription status and a <strong>Manage</strong> button that opens the Stripe billing portal in a new tab. Update payment methods, download invoices, or change plans there.</p>
 <h2>Notifications</h2>
-<p>Kaynos sends email for a range of account, collaboration, and activity events. Toggle optional preferences under <strong>Profile</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
+<p>Email notifications are controlled by a single toggle in the profile <strong>Notifications</strong> section. When enabled, Kaynos sends email for collaboration and activity events: someone mentions you, a reply is added to your note, a session or class is shared with you, and (for coaches) review requests.</p>
+<p>Account-lifecycle and security messages always send regardless of this toggle: welcome emails, password resets, invites with temporary passwords, email-change verification links, deletion notices, and support form confirmations. Admins also receive automated usage reports based on the schedule they choose under <strong>Admin → Reports &amp; Exports</strong>.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Delivery problems? See <a onclick="navigate('email-issues')">Email and notification issues</a>.</div></div>
-<h3>Account</h3>
-<ul>
-<li>Welcome email when you sign up</li>
-<li>Password reset links (via <strong>Forgot password?</strong>)</li>
-<li>Invites and temporary passwords when you're added to a school</li>
-<li>Support form confirmations</li>
-</ul>
-<h3>Collaboration and activity</h3>
-<ul>
-<li>Someone mentioned you in a note</li>
-<li>A reply was added to your note</li>
-<li>A note was added on one of your sessions</li>
-<li>A session was shared with you</li>
-<li>A new class is available in your school</li>
-<li>A student submitted a review request (coaches)</li>
-</ul>
-<h3>Reminders and reports</h3>
-<ul>
-<li>Trial reminders as your free trial progresses</li>
-<li>Upcoming schedule reminders</li>
-<li>Student progress reports</li>
-<li>Usage reports (for admins)</li>
-</ul>
-<h3>Admin notices</h3>
-<ul>
-<li>AI review pause notices (tenant admins)</li>
-<li>School deletion scheduled or cancelled</li>
-</ul>
-<h3>Turning notifications off</h3>
-<p><strong>Profile</strong> → <strong>Email Notifications</strong>. Security-critical and account-lifecycle messages (password resets, invites, deletion notices) always send regardless of preferences.</p>
 <h2>In-app notifications</h2>
-<p>The bell icon in the header shows unread notifications: mentions, note replies, session shares, review requests, and other activity. Click to view, or mark all as read.</p>
+<p>The bell icon in the header shows unread notifications: mentions, note replies, session shares, review requests, and other activity. Click to view, or mark all as read. On mobile, the panel can be dismissed with the close button.</p>
 <h3>Not receiving mail</h3>
 <ol>
 <li>Check spam or promotions folders.</li>
@@ -2692,7 +2661,7 @@
       title: "Login and access issues", section: "Troubleshooting",
       content: `
 <h1>Login and access issues</h1>
-<p>Most issues stem from the wrong email, typos, or Caps Lock. <strong>5 failed login attempts</strong> lock the account for <strong>15 minutes</strong>. Sign in at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
+<p>Most issues stem from the wrong email, typos, or Caps Lock. Repeated failed attempts from the same IP address trigger a brief rate limit (see "Too many attempts" below). Sign in at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
 <h2>Password problems</h2>
 <ul>
 <li>Use the same email the invite was sent to.</li>
@@ -2700,13 +2669,13 @@
 <li>Ask an admin for a reset or email ${mailLink()}.</li>
 </ul>
 <h2>"Too many attempts"</h2>
-<p><strong>25 failed attempts</strong> from a single IP trigger rate limiting (HTTP 429). Wait 15 minutes and try again, or reset your password. If you still need help, contact ${mailLink()}.</p>
+<p>Roughly <strong>25 failed attempts</strong> from the same IP within a one-minute window trigger rate limiting (HTTP 429). Wait a few minutes and try again, or reset your password. If you still need help, contact ${mailLink()}.</p>
 <h2>Blank page or "no access"</h2>
 <p>The account may have been removed, or the browser cached an old session. Try a private/incognito window. If that works, clear site data for <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> in normal mode.</p>
 <h2>Still locked out</h2>
 <p>Email ${mailLink()} with your name, account name, and email address.</p>
 <h3>Reset link expired</h3>
-<p>Password reset links expire after <strong>24 hours</strong>. If your link no longer works, request a new one from the login page (<strong>Forgot password?</strong>) or ask your admin to resend from <strong>Admin → Members → Reset Password</strong>.</p>
+<p>Password reset links expire after <strong>1 hour</strong>. If your link no longer works, request a new one from the login page (<strong>Forgot password?</strong>) or ask your admin to resend from <strong>Admin → Members → Reset Password</strong>.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Profile and password changes: <a onclick="navigate('profile')">Profile and password</a>.</div></div>`},
 
     "email-issues": {
@@ -2813,7 +2782,7 @@
 <h3>Which browsers are supported?</h3>
 <p>Current Chrome, Firefox, Safari, and Edge. If upload or playback fails in one browser, trying Chrome is a reasonable first step.</p>
 <h3>Do you expose an API?</h3>
-<p>There's an internal API reference at <strong>Admin → API Docs</strong> for admins and instructors to understand the endpoints the app itself uses. A public developer API with tokens and webhooks for third-party integrations is not available today. See the <a onclick="navigate('developer-api')">Developer API</a> page for details.</p>
+<p>There's an internal API reference at <code>/admin/api-docs</code> for admins and coaches to understand the endpoints the app itself uses. A public developer API with tokens and webhooks for third-party integrations is not available today. See the <a onclick="navigate('developer-api')">Developer API</a> page for details.</p>
 <hr>
 <h2>Support</h2>
 <h3>How do I contact you?</h3>
@@ -2823,11 +2792,11 @@
 <hr>
 <h2>Billing and pricing</h2>
 <h3>How much does Kaynos cost?</h3>
-<p><strong>$49/month</strong> or <strong>$490/year</strong> (saves 17% — two months free). Every new account starts with a <strong>14-day free trial</strong> — no charge until the trial ends. Manage billing, view invoices, and update your payment method from the Stripe billing portal (link in Admin).</p>
+<p><strong>$49/month</strong> or <strong>$490/year</strong> (saves 17% — two months free). Every new account starts with a <strong>14-day free trial</strong> — no charge until the trial ends. Manage billing, view invoices, and update your payment method from the Stripe billing portal (linked from your <strong>Profile</strong> page when you're signed in as an admin).</p>
 <h3>What happens when my trial ends?</h3>
 <p>Your selected plan begins billing automatically. If you cancel before the trial ends, you won't be charged. All your data stays available while your subscription is active.</p>
 <h3>How do I manage my subscription?</h3>
-<p>Go to <strong>Admin → Billing → Manage Subscription</strong>. This opens the Stripe billing portal where you can:</p>
+<p>Open your <strong>Profile</strong> (avatar in the header) and click <strong>Manage</strong> in the Billing section — admins only. This opens the Stripe billing portal where you can:</p>
 <ul>
 <li>Update your payment method (credit card)</li>
 <li>View past invoices and receipts</li>
@@ -2857,12 +2826,12 @@
       title: "Developer API", section: "Developers",
       content: `
 <h1>Developer API</h1>
-<div class="tldr"><strong>TLDR:</strong> Admins and instructors can view an internal API reference at <a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener">Admin → API Docs</a>. Public API tokens, third-party integrations, and customer-facing webhooks are not available today.</div>
+<div class="tldr"><strong>TLDR:</strong> Admins and coaches can view an internal API reference at <a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener"><code>/admin/api-docs</code></a>. Public API tokens, third-party integrations, and customer-facing webhooks are not available today.</div>
 <h2>Internal API reference</h2>
-<p>Kaynos ships an internal API reference for admins and instructors who want to understand what the app is doing under the hood. It's a Swagger UI page backed by an OpenAPI spec that documents the REST endpoints the Kaynos web app uses.</p>
+<p>Kaynos ships an internal API reference for admins and coaches who want to understand what the app is doing under the hood. It's a Swagger UI page backed by an OpenAPI spec that documents the REST endpoints the Kaynos web app uses.</p>
 <ul>
-<li><strong>Where:</strong> Sign in as an admin or instructor and open <a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener">Admin → API Docs</a> (direct URL: <code>/admin/api-docs</code>).</li>
-<li><strong>Who can see it:</strong> Admins and instructors only. Students do not have access.</li>
+<li><strong>Where:</strong> Sign in as an admin or coach and open <a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener"><code>/admin/api-docs</code></a> directly. There's no menu item — bookmark the URL.</li>
+<li><strong>Who can see it:</strong> Admins and coaches only. Students do not have access.</li>
 <li><strong>Authentication:</strong> Session-cookie auth — the same login session that powers the app. There are no separate API keys or tokens to manage.</li>
 <li><strong>Scope:</strong> Documentation of internal endpoints (sessions, classes, members, notes, uploads, billing, and more). Useful for understanding behavior, debugging, and internal tooling.</li>
 </ul>
@@ -2893,10 +2862,11 @@
 <div class="glossary-term"><dt>Tag</dt><dd>A label attached to sessions or classes for organization and filtering. Tags are shared across the account — examples: <code>guard</code>, <code>comp-prep</code>, <code>fundamentals</code>.</dd></div>
 <div class="glossary-term"><dt>Progress</dt><dd>A lightweight tracker that records playback position (for resume), completion status, and last-viewed time. Coaches see completion across their students; no invasive analytics.</dd></div>
 <div class="glossary-term"><dt>Clip</dt><dd>A short excerpt from a session or class, created by a coach to highlight a specific moment or technique. Clips can be shared externally via a token link — no login required for the viewer.</dd></div>
-<div class="glossary-term"><dt>Review Request</dt><dd>A student-initiated request for a coach to review a video. The student selects a coach, adds context, and uploads their video to a draft session. The coach can accept, decline, or skip the request from their dashboard.</dd></div>
+<div class="glossary-term"><dt>Review Request</dt><dd>A student-initiated request for a coach to review a video. The student selects a coach, adds context, and uploads their video to a draft session. The coach can accept or decline the request from their dashboard.</dd></div>
 <div class="glossary-term"><dt>Highlight</dt><dd>A time-range bookmark on the video timeline, marking a start and end point. Used to call attention to a segment worth reviewing.</dd></div>
-<div class="glossary-term"><dt>Annotation</dt><dd>A drawing overlay on a frozen video frame — arrows, circles, or freehand — attached to a specific timestamp. Appears during playback to highlight technique details.</dd></div>
-<div class="glossary-term"><dt>Presigned URL</dt><dd>A short-lived, signed link to a video file in Backblaze B2 storage. Kaynos serves video playback through presigned URLs (4-hour expiry) rather than a CDN — each viewer request generates a fresh link scoped to that viewer.</dd></div>
+<div class="glossary-term"><dt>Annotation</dt><dd>A drawing overlay on a frozen video frame — pen, line, circle, or arrow — attached to a specific timestamp. Appears during playback to highlight technique details.</dd></div>
+<div class="glossary-term"><dt>AI review</dt><dd>An optional, on-demand analysis of a session video that suggests coaching notes based on what the model sees. Powered by Twelve Labs. Suggestions arrive as regular notes flagged "AI suggestion" — coaches can edit, keep, or delete them.</dd></div>
+<div class="glossary-term"><dt>Presigned URL</dt><dd>A short-lived, signed link to a video file in Backblaze B2 storage. Kaynos serves video playback through presigned URLs rather than a CDN — each viewer request generates a fresh link scoped to that viewer.</dd></div>
 </dl>
 <h2>BJJ positions and movements</h2>
 <p>New to martial arts? Here's what your coach means:</p>
@@ -2984,20 +2954,30 @@
 <h1>Release notes</h1>
 <p>Detailed changelog of everything shipped, in progress, and planned for Kaynos.</p>
 <h2>Recent highlights</h2>
+<h3>May 2026</h3>
+<ul>
+<li>Multi-video sessions and classes: attach more than one video to the same session or class and switch between them in the player.</li>
+<li>Self-serve email change with verification: update your sign-in email from <strong>Profile → Email address</strong> and confirm via a link sent to the new address.</li>
+<li>Mobile nav redesign: profile, admin, support, and install actions now open from the avatar in the header (replacing the bottom "More" tab).</li>
+<li>Admin Members: <strong>Hide emails</strong> toggle for screen sharing, and an activity dot on student avatars (green = session in last 30 days).</li>
+<li>Admin Remove button on student profile pages — a shortcut for taking a student off the roster without going back to the list.</li>
+<li>Faster phone-clip uploads: chunked multipart now kicks in at 20 MB with parallel presigning.</li>
+</ul>
 <h3>April 2026</h3>
 <ul>
+<li>AI review (powered by Twelve Labs): on-demand video analysis that suggests coaching notes you can edit, keep, or delete.</li>
 <li>Help center refresh: improved search with highlighted snippets and keyboard navigation.</li>
-<li>Added keyboard shortcuts for faster navigation — press <kbd>?</kbd> to see them all.</li>
+<li>Added keyboard shortcuts for faster help-center navigation — press <kbd>?</kbd> to see them all.</li>
 <li>Print-friendly styles for saving pages offline.</li>
 <li>Better accessibility: skip-to-content, improved ARIA labels, focus management.</li>
-<li>Developer API page updated with roadmap and contact information.</li>
+<li>Developer API page updated with the internal API reference link and a clearer note that a public API is not available today.</li>
 </ul>
 <h3>March 2026</h3>
 <ul>
-<li>Keyboard shortcuts during playback: <strong>Space/K</strong> (play/pause), <strong>J/L</strong> (skip), <strong>N</strong> (note), <strong>F</strong> (fullscreen).</li>
+<li>Keyboard shortcuts during playback: <strong>Space/K</strong> (play/pause), <strong>J/L</strong> or arrow keys (skip 10s), <strong>F</strong> (fullscreen), <strong>M</strong> (mute), <strong>↑/↓</strong> (volume).</li>
 <li>Timeline note markers with hover preview.</li>
 <li>Playback speed controls from 0.5x to 2x.</li>
-<li>Chunked parallel upload for files over 100 MB with automatic retry.</li>
+<li>Chunked parallel upload with automatic retry.</li>
 <li>Real-time speed and ETA display during upload.</li>
 </ul>
 <h2>Full changelog</h2>
@@ -3188,7 +3168,11 @@
 <tbody>
 <tr><td>Backblaze B2</td><td>Video storage and playback (via presigned URLs)</td><td>Uploaded video files (encrypted at rest)</td></tr>
 <tr><td>Stripe</td><td>Payment processing</td><td>Billing name, email (not card numbers)</td></tr>
+<tr><td>Resend</td><td>Transactional email delivery (invites, password resets, mention notifications, reports)</td><td>Recipient email addresses, message subject and body</td></tr>
+<tr><td>Twelve Labs</td><td>AI video understanding for the optional AI review feature</td><td>Video file URLs (presigned) and the visual content the model analyzes</td></tr>
 <tr><td>Deepgram</td><td>Voice dictation (opt-in)</td><td>Audio processed in real time, not stored</td></tr>
+<tr><td>Neon</td><td>PostgreSQL database hosting</td><td>All structured account data (members, sessions, notes, etc.)</td></tr>
+<tr><td>Netlify</td><td>Application hosting and serverless functions</td><td>Application requests, server logs</td></tr>
 </tbody>
 </table>
 <p>All processors have signed Data Processing Agreements. Kaynos never sells your data.</p>
