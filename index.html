@@ -239,8 +239,6 @@
     .search-result mark { background: rgba(33,132,243,.20); color: var(--accent-hover); border-radius: 2px; padding: 0 2px; }
     .sr-badge { display: inline-flex; margin-left: 6px; vertical-align: middle; }
     .sr-badge svg { width: 11px; height: 11px; }
-    .sr-bookmarked { color: var(--warning); }
-    .sr-read { color: var(--success); }
     .search-empty { padding: 24px 14px; text-align: center; color: var(--text-tertiary); font-size: .875rem; }
 
     .header-spacer { flex: 1; }
@@ -304,20 +302,6 @@
     }
     .sidebar-section.collapsed .chevron { transform: rotate(-90deg); }
     .sidebar-section.collapsed .sidebar-links { display: none; }
-    .sidebar-section.dimmed { opacity: 0.5; }
-    .sidebar-section.dimmed:hover { opacity: 0.8; }
-    .sidebar-show-all {
-      display: block;
-      margin: 12px 16px;
-      padding: 0;
-      background: none;
-      border: none;
-      color: var(--text-tertiary);
-      font-size: .75rem;
-      cursor: pointer;
-      text-align: left;
-    }
-    .sidebar-show-all:hover { color: var(--accent); }
     .sidebar-link {
       display: block; padding: 6px 16px 6px 20px;
       font-size: .875rem; color: var(--text-secondary);
@@ -670,12 +654,11 @@
       .menu-btn { display: flex; }
       .header-search { max-width: none; }
       .header-app-link span { display: none; }
-      .text-size-controls { display: none; }
       .footer-nav { flex-direction: column; }
       .footer-nav-btn { max-width: none; }
       .footer-nav-btn.next { align-items: flex-start; }
       .hero h1 { font-size: 1.75rem !important; }
-      .bookmark-btn, .share-btn, .print-btn,
+      .share-btn, .print-btn,
       .copy-article-btn, .wizard-option, .checklist-item,
       .preflight-item { min-height: 44px; display: inline-flex; align-items: center; }
       .feature-grid { grid-template-columns: 1fr; }
@@ -684,8 +667,8 @@
       .feature-form { max-width: 100%; }
       .open-in-app { padding: 12px 20px; font-size: .875rem; }
       .tldr { font-size: .8125rem; padding: 8px 12px; }
-      .menu-btn, .theme-toggle, .text-size-btn, .header-app-link { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
-      .bookmark-btn, .share-btn, .copy-article-btn, .print-btn { min-width: 44px; min-height: 44px; }
+      .menu-btn, .theme-toggle, .header-app-link { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+      .share-btn, .copy-article-btn, .print-btn { min-width: 44px; min-height: 44px; }
       input, textarea, select { font-size: 16px !important; }
       .mobile-nav { padding-bottom: env(safe-area-inset-bottom, 0); }
     }
@@ -700,9 +683,9 @@
       outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px rgba(33,132,243,.55);
     }
     .menu-btn:focus-visible, .theme-toggle:focus-visible, .lang-toggle:focus-visible,
-    .bookmark-btn:focus-visible, .share-btn:focus-visible,
-    .print-btn:focus-visible, .copy-article-btn:focus-visible, .chatbot-fab:focus-visible,
-    .text-size-btn:focus-visible, .tour-btn:focus-visible, .wizard-option:focus-visible,
+    .share-btn:focus-visible,
+    .print-btn:focus-visible, .copy-article-btn:focus-visible,
+    .wizard-option:focus-visible,
     .mobile-nav-btn:focus-visible, .header-app-link:focus-visible {
       outline: none; box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px rgba(33,132,243,.55);
     }
@@ -712,7 +695,6 @@
     .form-submit:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     .form-another:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     .copy-code-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; opacity: 1; }
-    .sidebar-show-all:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
     .open-in-app:active { transform: scale(0.98); }
     .next-step:active { transform: scale(0.98); }
@@ -733,18 +715,18 @@
     @media print {
       .header, .sidebar, .toc, #back-top, #toast, #progress-bar,
       .footer-nav, .skip-link, .overlay, .menu-btn, .copy-btn,
-      .chatbot-fab, .chatbot-panel, .mobile-nav, .tour-overlay,
+      .mobile-nav,
       .kbd-modal-overlay, .offline-banner,
-      .article-actions, .bookmark-btn, .share-btn, .print-btn,
+      .article-actions, .share-btn, .print-btn,
       .heading-anchor, .wizard-feedback, .wizard-escalate,
       .wizard-restart, .checklist, .related-articles,
-      .role-picker, .step-tips, .preflight, .calc-wrap,
+      .step-tips, .preflight, .calc-wrap,
       .breadcrumb, .error-lookup, .lang-toggle,
-      .text-size-controls, .theme-toggle, .search-kbd,
-      .palette-overlay, .nudge-prompt, .welcome-back,
+      .theme-toggle, .search-kbd,
+      .welcome-back,
       .copy-article-btn, .user-highlight,
       .feature-overview, .feature-form, .open-in-app, .next-steps,
-      .scroll-progress, .copy-code-btn, .sidebar-show-all,
+      .scroll-progress, .copy-code-btn,
       .form-submit, .form-another { display: none !important; }
       .layout { margin-left: 0 !important; }
       .content-with-toc { padding: 0 !important; }
@@ -816,28 +798,6 @@
     .next-step.prev { text-align: left; }
     .next-step.next { text-align: right; margin-left: auto; }
 
-    /* ── SIDEBAR READ INDICATOR ─── */
-    .sidebar-link .read-dot {
-      display: inline-block; width: 6px; height: 6px; border-radius: 50%;
-      background: var(--success); margin-left: 6px; vertical-align: middle; flex-shrink: 0;
-    }
-    .sidebar-link { display: flex; align-items: center; }
-    .sidebar-link .sl-text { flex: 1; }
-
-    /* ── SIDEBAR PROGRESS BAR ─── */
-    .sidebar-progress {
-      padding: 14px 16px; border-top: 1px solid var(--border);
-      font-size: .75rem; color: var(--text-tertiary);
-    }
-    .sidebar-progress-bar {
-      height: 3px; background: var(--bg-tertiary); border-radius: 2px;
-      margin-top: 6px; overflow: hidden;
-    }
-    .sidebar-progress-fill {
-      height: 100%; background: var(--success); border-radius: 2px;
-      transition: width .3s var(--ease);
-    }
-
     /* ── SIDEBAR BOOKMARKS / RECENT ─── */
     .sidebar-dynamic { border-bottom: 1px solid var(--border); padding-bottom: 4px; margin-bottom: 4px; }
     .sidebar-dynamic:empty { display: none; border: none; padding: 0; margin: 0; }
@@ -849,18 +809,6 @@
     .article-actions {
       display: flex; align-items: center; gap: 8px; margin-bottom: 20px;
     }
-
-    /* ── BOOKMARK BUTTON ─── */
-    .bookmark-btn {
-      background: none; border: 1px solid var(--border-strong);
-      color: var(--text-tertiary); padding: 4px 10px;
-      border-radius: var(--radius-sm); font-size: .75rem;
-      cursor: pointer; transition: all var(--dur);
-      display: inline-flex; align-items: center; gap: 4px;
-    }
-    .bookmark-btn:hover { color: var(--accent); border-color: var(--accent); }
-    .bookmark-btn.bookmarked { color: var(--warning); border-color: rgba(253,126,20,.4); background: var(--warning-soft); }
-    .bookmark-btn svg { width: 12px; height: 12px; }
 
     /* ── GLOSSARY ─── */
     .glossary-term {
@@ -883,91 +831,6 @@
     .content-inner dt:first-child { margin-top: 0; }
     .content-inner dd { color: var(--text-secondary); line-height: 1.6; font-size: .875rem; margin: 2px 0 0 0; padding-left: 0; }
 
-    /* ── DOC SEARCH (FAB + panel) ─── */
-    .chatbot-fab {
-      position: fixed; bottom: 28px; right: 80px; z-index: 90;
-      width: 44px; height: 44px; border-radius: 50%;
-      background: var(--accent); color: #fff; border: none;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 16px rgba(0,0,0,.3); transition: all .2s var(--ease);
-    }
-    .chatbot-fab:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(0,0,0,.4); }
-    .chatbot-fab svg { width: 20px; height: 20px; }
-    @media (max-width: 768px) { .chatbot-fab { bottom: calc(68px + env(safe-area-inset-bottom, 0)); right: 16px; } #back-top { right: 68px; } }
-
-    .chatbot-panel {
-      position: fixed; bottom: 84px; right: 28px; z-index: 95;
-      width: 360px; max-height: 480px; background: var(--bg-elevated);
-      border: 1px solid var(--border-strong); border-radius: var(--radius);
-      box-shadow: var(--shadow-lg); display: none; flex-direction: column;
-      overflow: hidden;
-    }
-    .chatbot-panel.open { display: flex; }
-    @media (max-width: 768px) { .chatbot-panel { bottom: 120px; right: 8px; left: 8px; width: auto; } }
-
-    .chatbot-header {
-      padding: 12px 16px; border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
-      flex-shrink: 0;
-    }
-    .chatbot-header-title { font-size: .875rem; font-weight: 600; color: var(--text-primary); display: flex; align-items: center; gap: 6px; }
-    .chatbot-header-title svg { width: 14px; height: 14px; color: var(--accent); }
-    .chatbot-close {
-      background: none; border: none; color: var(--text-tertiary);
-      cursor: pointer; padding: 4px; border-radius: var(--radius-xs);
-      transition: color var(--dur); display: flex;
-    }
-    .chatbot-close:hover { color: var(--text-primary); }
-    .chatbot-close svg { width: 14px; height: 14px; }
-
-    .chatbot-messages {
-      flex: 1; overflow-y: auto; padding: 16px;
-      display: flex; flex-direction: column; gap: 10px;
-      min-height: 200px; max-height: 340px;
-    }
-    .chat-msg {
-      max-width: 85%; padding: 8px 12px; border-radius: var(--radius-sm);
-      font-size: .8125rem; line-height: 1.55;
-    }
-    .chat-msg.bot {
-      background: var(--bg-secondary); color: var(--text-secondary);
-      align-self: flex-start; border: 1px solid var(--border);
-    }
-    .chat-msg.user {
-      background: var(--accent-soft); color: var(--text-primary);
-      align-self: flex-end; border: 1px solid var(--accent-border);
-    }
-    .chat-msg a { color: var(--accent); font-weight: 500; cursor: pointer; }
-    .chat-msg a:hover { text-decoration: underline; }
-    .chat-suggestions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
-    .chat-suggestion {
-      font-size: .75rem; padding: 4px 10px; border-radius: 9999px;
-      border: 1px solid var(--border-strong); background: var(--bg-elevated);
-      color: var(--text-secondary); cursor: pointer; transition: all var(--dur);
-    }
-    .chat-suggestion:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
-
-    .chatbot-input-wrap {
-      padding: 10px 12px; border-top: 1px solid var(--border);
-      display: flex; gap: 8px; flex-shrink: 0;
-    }
-    .chatbot-input {
-      flex: 1; padding: 7px 12px; border: 1px solid var(--border-strong);
-      border-radius: var(--radius-sm); background: var(--bg-secondary);
-      color: var(--text-primary); font-family: var(--font-body);
-      font-size: .8125rem; outline: none; transition: border-color var(--dur);
-    }
-    .chatbot-input:focus { border-color: var(--accent); }
-    .chatbot-input::placeholder { color: var(--text-tertiary); }
-    .chatbot-send {
-      padding: 7px 12px; background: var(--accent); color: #fff;
-      border: none; border-radius: var(--radius-sm); cursor: pointer;
-      font-size: .8125rem; font-weight: 500; transition: background var(--dur);
-      display: flex; align-items: center;
-    }
-    .chatbot-send:hover { background: var(--accent-hover); }
-    .chatbot-send svg { width: 14px; height: 14px; }
-
     /* ── SHARE BUTTON ─── */
     .share-btn {
       background: none; border: 1px solid var(--border-strong);
@@ -979,22 +842,6 @@
     .share-btn:hover { color: var(--accent); border-color: var(--accent); }
     .share-btn svg { width: 12px; height: 12px; }
 
-    /* ── TEXT SIZE ─── */
-    .text-size-controls {
-      display: flex; align-items: center; gap: 2px; flex-shrink: 0;
-    }
-    .text-size-btn {
-      background: none; border: 1px solid var(--border-strong);
-      color: var(--text-secondary); width: 28px; height: 28px;
-      border-radius: var(--radius-xs); cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      font-size: .75rem; font-weight: 600; transition: all var(--dur);
-      font-family: var(--font-body);
-    }
-    .text-size-btn:hover { color: var(--text-primary); border-color: var(--accent); }
-    .text-size-btn:first-child { border-radius: var(--radius-xs) 0 0 var(--radius-xs); border-right: none; }
-    .text-size-btn:last-child { border-radius: 0 var(--radius-xs) var(--radius-xs) 0; }
-
     /* ── OFFLINE BANNER ─── */
     .offline-banner {
       display: none; position: fixed; top: var(--header-h); left: 0; right: 0;
@@ -1003,60 +850,6 @@
       font-size: .8125rem; font-weight: 500; z-index: 99;
     }
     .offline-banner.show { display: block; }
-
-    /* ── ONBOARDING TOUR ─── */
-    .tour-overlay {
-      position: fixed; inset: 0; z-index: 400;
-      background: rgba(0,0,0,.70); backdrop-filter: blur(3px);
-      display: none; align-items: center; justify-content: center;
-    }
-    .tour-overlay.active { display: flex; }
-
-    .tour-card {
-      background: var(--bg-elevated); border: 1px solid var(--border-strong);
-      border-radius: var(--radius); padding: 28px 32px;
-      max-width: 420px; width: 90%; box-shadow: var(--shadow-lg);
-      text-align: center; animation: fadeUp .2s var(--ease);
-    }
-    .tour-card h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; color: var(--text-primary); letter-spacing: -.02em; }
-    .tour-card p { font-size: .875rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; }
-    .tour-icon { margin-bottom: 16px; color: var(--accent); }
-    .tour-icon svg { width: 40px; height: 40px; }
-
-    .tour-steps { display: flex; gap: 6px; justify-content: center; margin-bottom: 20px; }
-    .tour-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--bg-tertiary); transition: all .2s;
-    }
-    .tour-dot.active { background: var(--accent); width: 20px; border-radius: 4px; }
-
-    .tour-actions { display: flex; gap: 10px; justify-content: center; }
-    .tour-btn {
-      padding: 8px 20px; border-radius: var(--radius-sm);
-      font-size: .875rem; font-weight: 500; cursor: pointer;
-      transition: all var(--dur); border: none;
-    }
-    .tour-btn-primary { background: var(--accent); color: #fff; }
-    .tour-btn-primary:hover { background: var(--accent-hover); }
-    .tour-btn-ghost {
-      background: transparent; color: var(--text-tertiary);
-      border: 1px solid var(--border-strong);
-    }
-    .tour-btn-ghost:hover { color: var(--text-primary); border-color: var(--text-tertiary); }
-
-    /* ── ROLE PICKER ─── */
-    .role-picker { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
-    .role-card {
-      padding: 16px; background: var(--bg-secondary);
-      border: 2px solid var(--border-strong); border-radius: var(--radius);
-      cursor: pointer; transition: all var(--dur); text-align: left;
-    }
-    .role-card:hover { border-color: var(--accent); background: var(--accent-soft); }
-    .role-card.selected { border-color: var(--accent); background: var(--accent-soft); box-shadow: 0 0 0 2px rgba(33,132,243,.2); }
-    .role-card-icon { font-size: .875rem; margin-bottom: 6px; color: var(--accent); display: flex; }
-    .role-card-icon svg { width: 20px; height: 20px; }
-    .role-card-title { font-weight: 600; font-size: .875rem; color: var(--text-primary); }
-    .role-card-desc { font-size: .75rem; color: var(--text-tertiary); margin-top: 2px; }
 
     /* ── GETTING STARTED CHECKLIST ─── */
     .checklist { margin-bottom: 28px; }
@@ -1461,22 +1254,6 @@
     .search-history-item:hover { background: var(--bg-hover); }
     .search-history-item svg { width: 12px; height: 12px; color: var(--text-tertiary); flex-shrink: 0; }
 
-    /* ── NUDGE PROMPT ─── */
-    .nudge-prompt {
-      position: fixed; bottom: 84px; right: 80px; z-index: 88;
-      background: var(--bg-elevated); border: 1px solid var(--border-strong);
-      border-radius: var(--radius); padding: 12px 16px; max-width: 240px;
-      box-shadow: var(--shadow-lg); font-size: .8125rem; color: var(--text-secondary);
-      animation: fadeUp .2s var(--ease); display: none;
-    }
-    .nudge-prompt.show { display: block; }
-    .nudge-prompt a { color: var(--accent); font-weight: 500; cursor: pointer; }
-    .nudge-close {
-      position: absolute; top: 6px; right: 8px; background: none; border: none;
-      color: var(--text-tertiary); cursor: pointer; font-size: 12px;
-    }
-    @media (max-width: 768px) { .nudge-prompt { bottom: calc(130px + env(safe-area-inset-bottom, 0)); right: 16px; left: 16px; max-width: none; } }
-
     /* ── COPY ARTICLE ─── */
     .copy-article-btn {
       background: none; border: 1px solid var(--border-strong);
@@ -1508,38 +1285,6 @@
     }
     .highlight-tooltip:hover { color: var(--danger); border-color: var(--danger); }
     .user-highlight:hover .highlight-tooltip { display: flex; align-items: center; gap: 4px; }
-
-    /* ── COMMAND PALETTE ─── */
-    .palette-overlay {
-      display: none; position: fixed; inset: 0; z-index: 350;
-      background: rgba(0,0,0,.55); backdrop-filter: blur(3px);
-      align-items: flex-start; justify-content: center; padding-top: 20vh;
-    }
-    .palette-overlay.active { display: flex; }
-    .palette-box {
-      background: var(--bg-elevated); border: 1px solid var(--border-strong);
-      border-radius: var(--radius); width: 90%; max-width: 480px;
-      box-shadow: var(--shadow-lg); overflow: hidden;
-    }
-    .palette-input {
-      width: 100%; padding: 14px 18px; border: none; border-bottom: 1px solid var(--border);
-      background: transparent; color: var(--text-primary);
-      font-family: var(--font-body); font-size: 1rem; outline: none;
-    }
-    .palette-input::placeholder { color: var(--text-tertiary); }
-    .palette-results { max-height: 320px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-    .palette-item {
-      padding: 10px 18px; display: flex; align-items: center; gap: 10px;
-      cursor: pointer; transition: background var(--dur); font-size: .875rem;
-    }
-    .palette-item:hover, .palette-item.focused { background: var(--bg-hover); }
-    .palette-item svg { width: 14px; height: 14px; color: var(--text-tertiary); flex-shrink: 0; }
-    .palette-item-title { color: var(--text-primary); }
-    .palette-item-hint { font-size: .75rem; color: var(--text-tertiary); margin-left: auto; }
-    .palette-item-type {
-      font-size: .6875rem; color: var(--text-tertiary); background: var(--bg-tertiary);
-      padding: 1px 6px; border-radius: 3px; margin-left: auto;
-    }
 
     @keyframes pulse-ring {
       0% { box-shadow: 0 0 0 0 rgba(33,132,243,.4); }
@@ -1595,7 +1340,6 @@
       .content-with-toc { padding-bottom: 100px !important; }
       #back-top { bottom: 68px; }
       #toast { bottom: 68px; }
-      .nudge-prompt { bottom: 68px; }
     }
 
     /* ── SITE FOOTER ─── */
@@ -1654,11 +1398,6 @@
 
     <!-- Language toggle hidden until ES translations cover >90% of pages (KAY-201) -->
     <button class="lang-toggle" id="langToggle" onclick="toggleLang()" title="Switch language" hidden style="display:none">EN</button>
-
-    <div class="text-size-controls">
-      <button class="text-size-btn" onclick="adjustTextSize(-1)" title="Decrease text size" aria-label="Decrease text size">A-</button>
-      <button class="text-size-btn" onclick="adjustTextSize(1)" title="Increase text size" aria-label="Increase text size">A+</button>
-    </div>
 
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode" id="themeToggle" title="Toggle theme">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" id="themeIcon"><path d="M8 1v1M8 14v1M1 8h1M14 8h1M3.1 3.1l.7.7M12.2 12.2l.7.7M12.9 3.1l-.7.7M3.8 12.2l-.7.7"/><circle cx="8" cy="8" r="3"/></svg>
@@ -1719,27 +1458,6 @@
   <!-- Offline Banner -->
   <div class="offline-banner" id="offlineBanner">You're offline — some features may not work</div>
 
-  <!-- Doc Search -->
-  <button class="chatbot-fab" onclick="toggleChat()" aria-label="Search docs" id="chatFab">
-    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><line x1="10.2" y1="10.2" x2="14" y2="14"/></svg>
-  </button>
-
-  <div class="chatbot-panel" id="chatPanel">
-    <div class="chatbot-header">
-      <div class="chatbot-header-title"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><line x1="10.2" y1="10.2" x2="14" y2="14"/></svg> Doc Search</div>
-      <button class="chatbot-close" onclick="toggleChat()" aria-label="Close chat"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></button>
-    </div>
-    <div class="chatbot-messages" id="chatMessages"></div>
-    <div class="chatbot-input-wrap">
-      <label for="chatInput" class="sr-only">Ask a question</label>
-      <input class="chatbot-input" id="chatInput" placeholder="Search the docs..." autocomplete="off"
-        onkeydown="if(event.key==='Enter')sendChat()">
-      <button class="chatbot-send" onclick="sendChat()" aria-label="Send">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 1.5l-6 13-2.5-5.5L1.5 6.5z"/><path d="M14.5 1.5L6 9"/></svg>
-      </button>
-    </div>
-  </div>
-
   <!-- Mobile Bottom Nav -->
   <nav class="mobile-nav" aria-label="Mobile navigation">
     <button class="mobile-nav-btn" onclick="navigate('welcome')" aria-label="Home">
@@ -1760,26 +1478,6 @@
     </button>
   </nav>
 
-  <!-- Nudge Prompt -->
-  <div class="nudge-prompt" id="nudgePrompt">
-    <button class="nudge-close" onclick="dismissNudge()">&times;</button>
-    Still looking? Try the <a onclick="navigate('troubleshoot');dismissNudge()">troubleshooting wizard</a> or <a onclick="toggleChat();dismissNudge()">search the docs</a>.
-  </div>
-
-  <!-- Command Palette -->
-  <div class="palette-overlay" id="paletteOverlay" onclick="if(event.target===this)closePalette()">
-    <div class="palette-box">
-      <label for="paletteInput" class="sr-only">Search pages or run a command</label>
-      <input class="palette-input" id="paletteInput" placeholder="Search pages or run a command..." oninput="filterPalette(this.value)" onkeydown="handlePaletteKey(event)" autocomplete="off">
-      <div class="palette-results" id="paletteResults"></div>
-    </div>
-  </div>
-
-  <!-- Onboarding Tour -->
-  <div class="tour-overlay" id="tourOverlay">
-    <div class="tour-card" id="tourCard"></div>
-  </div>
-
   <div id="toast" role="status" aria-live="polite"></div>
 
   <!-- Keyboard Shortcuts Modal -->
@@ -1791,7 +1489,6 @@
       <div class="kbd-row"><span>Next page</span><kbd>→</kbd></div>
       <div class="kbd-row"><span>Back to top</span><kbd>T</kbd></div>
       <div class="kbd-row"><span>Home</span><kbd>H</kbd></div>
-      <div class="kbd-row"><span>Bookmark page</span><kbd>B</kbd></div>
       <div class="kbd-row"><span>Show shortcuts</span><kbd>?</kbd></div>
       <button class="kbd-modal-close" onclick="closeKbd()">Close <kbd>Esc</kbd></button>
     </div>
@@ -1824,8 +1521,6 @@
     wrench:   '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2a4 4 0 00-3.8 5.2L2 11.5V14h2.5l4.3-4.2A4 4 0 1010 2z"/></svg>',
     mail:     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="3" width="13" height="10" rx="1.5"/><path d="M1.5 4.5L8 9l6.5-4.5"/></svg>',
     check:    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3.5,8.5 6.5,11.5 12.5,4.5"/></svg>',
-    bookmark: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2h10a1 1 0 011 1v12l-5-3-5 3V3a1 1 0 011-1z"/></svg>',
-    bookmarkFill: '<svg viewBox="0 0 16 16" fill="currentColor" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2h10a1 1 0 011 1v12l-5-3-5 3V3a1 1 0 011-1z"/></svg>',
     clock:    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="8" cy="8" r="6.5"/><polyline points="8,4.5 8,8 11,9.5"/></svg>',
     book:     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2.5h4.5a1.5 1.5 0 011.5 1.5v10S6.5 13 4.25 13 2 14 2 14V2.5zM14 2.5H9.5A1.5 1.5 0 008 4v10s1.5-1 3.75-1S14 14 14 14V2.5z"/></svg>',
     send:     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 1.5l-6 13-2.5-5.5L1.5 6.5z"/><path d="M14.5 1.5L6 9"/></svg>',
@@ -1849,7 +1544,6 @@
   <div class="hero-badge">Help Center</div>
   <h1>Welcome to Kaynos</h1>
   <p>Stop losing coaching moments. Upload session footage, add timestamped feedback, and make sure your students actually watch and learn.</p>
-  <p style="margin-top:12px;font-size:.8125rem"><a style="cursor:pointer;color:var(--accent)" onclick="startTour()">Take the guided tour</a></p>
 </div>
 <div class="hint hint-info">
   <div class="hint-icon">${IC.info}</div>
@@ -2807,7 +2501,7 @@
 <hr>
 <h2>Search and navigation</h2>
 <h3>Is there a quick way to find things?</h3>
-<p>Press <kbd>Cmd+K</kbd> (Mac) or <kbd>Ctrl+K</kbd> (Windows) to open the search palette. Search across sessions, classes, and students instantly. Use arrow keys to navigate results and Enter to jump to one. Recent items appear automatically.</p>
+<p>Use the search bar at the top of every page. Type a keyword — pages and sections matching the term appear instantly. Press <kbd>Cmd+K</kbd> (Mac) or <kbd>Ctrl+K</kbd> (Windows) to jump straight into the search field from anywhere on the page; arrow keys navigate results, Enter opens one.</p>
 <hr>
 <h2>Data</h2>
 <h3>Can I export my data?</h3>
@@ -3097,18 +2791,13 @@
 <thead><tr><th>Key</th><th>Purpose</th><th>Storage</th></tr></thead>
 <tbody>
 <tr><td>theme</td><td>Dark/light mode preference</td><td>localStorage</td></tr>
-<tr><td>text-size</td><td>Font size preference</td><td>localStorage</td></tr>
 <tr><td>lang</td><td>Language preference (EN/ES)</td><td>localStorage</td></tr>
-<tr><td>bookmarks</td><td>Bookmarked help pages</td><td>localStorage</td></tr>
-<tr><td>read-pages</td><td>Pages you've visited</td><td>localStorage</td></tr>
 <tr><td>recent-pages</td><td>Recently viewed pages</td><td>localStorage</td></tr>
 <tr><td>search-history</td><td>Recent search terms</td><td>localStorage</td></tr>
 <tr><td>poll-votes, poll-voted, poll-custom</td><td>Feature poll votes (legacy, no longer used)</td><td>localStorage</td></tr>
 <tr><td>highlights</td><td>Text highlights you've made</td><td>localStorage</td></tr>
 <tr><td>scroll-pos</td><td>Scroll position per page</td><td>localStorage</td></tr>
-<tr><td>user-role</td><td>Selected role (admin, coach, student, developer) for personalized navigation</td><td>localStorage</td></tr>
-<tr><td>onboarded, checklist-done</td><td>Onboarding progress</td><td>localStorage</td></tr>
-<tr><td>nudge-dismissed</td><td>Whether you dismissed the help nudge</td><td>sessionStorage</td></tr>
+<tr><td>checklist-done</td><td>Getting-started checklist progress</td><td>localStorage</td></tr>
 <tr><td>sb-collapsed</td><td>Sidebar collapsed state</td><td>localStorage</td></tr>
 </tbody>
 </table>
@@ -3285,35 +2974,22 @@
   }
 
   /* ── SIDEBAR ─────────────────────────────────────────── */
-  function getReadPages() { return safeGet('read-pages', []); }
-  function getBookmarks() { return safeGet('bookmarks', []); }
   function getRecent() { return safeGet('recent-pages', []); }
 
   function buildSidebar() {
     const sb = document.getElementById('sidebar');
     const collapsed = safeGet('sb-collapsed', {});
-    const readPages = getReadPages();
-    const bookmarks = getBookmarks();
     const recent = getRecent();
     let html = '';
 
-    // Dynamic sections: Bookmarks + Recent
-    if (bookmarks.length || recent.length) {
+    // Dynamic section: Recent
+    if (recent.length) {
       html += '<div class="sidebar-dynamic">';
-      if (bookmarks.length) {
-        html += '<div class="sidebar-section"><div class="sidebar-section-title">' + IC.bookmark + ' Bookmarks</div><div class="sidebar-links">';
-        bookmarks.forEach(p => {
-          if (PAGES[p]) html += `<a class="sidebar-link" href="#${p}" tabindex="0" data-page="${p}" onclick="navigate('${p}');return false" onkeydown="if(event.key==='Enter'){navigate('${p}');return false}"><span class="sl-text">${PAGES[p].title}</span></a>`;
-        });
-        html += '</div></div>';
-      }
-      if (recent.length) {
-        html += '<div class="sidebar-section"><div class="sidebar-section-title">' + IC.clock + ' Recent</div><div class="sidebar-links">';
-        recent.slice(0, 5).forEach(p => {
-          if (PAGES[p]) html += `<a class="sidebar-link" href="#${p}" tabindex="0" data-page="${p}" onclick="navigate('${p}');return false" onkeydown="if(event.key==='Enter'){navigate('${p}');return false}"><span class="sl-text">${PAGES[p].title}</span></a>`;
-        });
-        html += '</div></div>';
-      }
+      html += '<div class="sidebar-section"><div class="sidebar-section-title">' + IC.clock + ' Recent</div><div class="sidebar-links">';
+      recent.slice(0, 5).forEach(p => {
+        if (PAGES[p]) html += `<a class="sidebar-link" href="#${p}" tabindex="0" data-page="${p}" onclick="navigate('${p}');return false" onkeydown="if(event.key==='Enter'){navigate('${p}');return false}"><span class="sl-text">${PAGES[p].title}</span></a>`;
+      });
+      html += '</div></div>';
       html += '</div>';
     }
 
@@ -3324,53 +3000,15 @@
       if (g.section) html += `<div class="sidebar-section-title" onclick="toggleSection(this)">${sectionIcons[g.section] || ''}${g.section}<span class="chevron" style="margin-left:auto">▼</span></div>`;
       html += '<div class="sidebar-links">';
       g.pages.forEach(p => {
-        const isRead = readPages.includes(p);
         const badge = (p === 'release-notes' && hasNewUpdates()) ? '<span class="new-badge" title="New updates"></span>' : '';
-        html += `<a class="sidebar-link" href="#${p}" tabindex="0" data-page="${p}" onclick="navigate('${p}');return false" onkeydown="if(event.key==='Enter'){navigate('${p}');return false}"><span class="sl-text">${PAGES[p].title}${badge}</span>${isRead ? '<span class="read-dot" title="Read"></span>' : ''}</a>`;
+        html += `<a class="sidebar-link" href="#${p}" tabindex="0" data-page="${p}" onclick="navigate('${p}');return false" onkeydown="if(event.key==='Enter'){navigate('${p}');return false}"><span class="sl-text">${PAGES[p].title}${badge}</span></a>`;
       });
       html += '</div></div>';
     });
 
-    // Progress bar
-    const total = allPageKeys.filter(k => k !== 'welcome').length;
-    const read = readPages.filter(k => k !== 'welcome' && allPageKeys.includes(k)).length;
-    const pct = total > 0 ? Math.round((read / total) * 100) : 0;
-    if (read > 0) html += `<div class="sidebar-progress"><span>${read}/${total} read</span><div class="sidebar-progress-bar"><div class="sidebar-progress-fill" style="width:${pct}%"></div></div></div>`;
-
     // Safe: html built from hardcoded NAV/PAGES constants and IC icons only
     sb.innerHTML = html;
 
-    // Role-aware section highlighting
-    const role = localStorage.getItem('user-role');
-    if (role) {
-      const ROLE_SECTIONS = {
-        admin: ['Getting Started', 'Video', 'Sessions & Classes', 'Account Management'],
-        coach: ['Video', 'Sessions & Classes', 'Getting Started'],
-        student: ['Video', 'Sessions & Classes', 'Troubleshooting', 'FAQ'],
-        developer: ['Developers', 'FAQ', 'Video'],
-      };
-      const highlighted = ROLE_SECTIONS[role] || [];
-      const sections = sb.querySelectorAll('.sidebar-section');
-      sections.forEach(sec => {
-        const title = sec.querySelector('.sidebar-section-title');
-        if (title && highlighted.length > 0 && !highlighted.includes(title.textContent.trim())) {
-          sec.classList.add('dimmed');
-        }
-      });
-
-      // Add "Show all" toggle
-      const existing = sb.querySelector('.sidebar-show-all');
-      if (!existing) {
-        const btn = document.createElement('button');
-        btn.className = 'sidebar-show-all';
-        btn.textContent = 'Show all sections';
-        btn.onclick = () => {
-          sb.querySelectorAll('.sidebar-section.dimmed').forEach(s => s.classList.remove('dimmed'));
-          btn.remove();
-        };
-        sb.appendChild(btn);
-      }
-    }
   }
 
   function toggleSection(el) {
@@ -3721,8 +3359,6 @@
     srIdx = -1;
     if (!q || q.length < 2) { sr.classList.remove('active'); sr.innerHTML = ''; document.getElementById('searchInput').setAttribute('aria-expanded', 'false'); return; }
     const lower = q.toLowerCase();
-    const readPages = getReadPages();
-    const bookmarks = getBookmarks();
     const results = [];
     for (const [id, page] of Object.entries(PAGES)) {
       const idx = SEARCH_INDEX[id];
@@ -3740,8 +3376,8 @@
           const raw = (s > 0 ? '…' : '') + text.slice(s, e) + (e < textLower.length ? '…' : '');
           snippet = escapeHtml(raw).replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').split(/\s+/).join('|'), 'gi'), m => `<mark>${escapeHtml(m)}</mark>`);
         }
-        const score = (titleMatch ? 10 : 0) + (exactIdx !== -1 ? 5 : 0) + (bookmarks.includes(id) ? 2 : 0) + (fuzzy ? 1 : 0);
-        results.push({ id, title: page.title, section: page.section, snippet, score, isRead: readPages.includes(id), isBookmarked: bookmarks.includes(id) });
+        const score = (titleMatch ? 10 : 0) + (exactIdx !== -1 ? 5 : 0) + (fuzzy ? 1 : 0);
+        results.push({ id, title: page.title, section: page.section, snippet, score });
       }
     }
     results.sort((a, b) => b.score - a.score);
@@ -3750,7 +3386,7 @@
       ? '<div class="search-empty">No results found</div>'
       : results.slice(0, LIMITS.SEARCH_RESULTS).map((r, i) =>
           `<div class="search-result" role="option" id="sr-${i}" data-page="${r.id}" onclick="addSearchHistory(document.getElementById('searchInput').value.trim());navigate('${r.id}')">
-            <div class="sr-title">${escapeHtml(r.title)}${r.isBookmarked ? '<span class="sr-badge sr-bookmarked" title="Bookmarked">' + IC.bookmarkFill + '</span>' : ''}${r.isRead ? '<span class="sr-badge sr-read" title="Read">' + IC.check + '</span>' : ''}</div>
+            <div class="sr-title">${escapeHtml(r.title)}</div>
             ${r.section ? `<div class="sr-section">${escapeHtml(r.section)}</div>` : ''}
             ${r.snippet ? `<div class="sr-snippet">${r.snippet}</div>` : ''}
           </div>`
@@ -3793,8 +3429,11 @@
 
   document.addEventListener('keydown', e => {
     if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      const input = document.getElementById('searchInput');
+      if (!input) return;
       e.preventDefault();
-      openPalette();
+      input.focus();
+      input.select();
     }
   });
 
@@ -3893,8 +3532,6 @@
       if (e.key === 'Escape') closeKbd();
       return;
     }
-    if (document.getElementById('paletteOverlay').classList.contains('active')) return;
-    if (document.getElementById('tourOverlay').classList.contains('active')) return;
     if (e.key === '?') { e.preventDefault(); openKbd(); return; }
     if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
       const cur = location.hash.slice(1) || 'welcome';
@@ -3905,26 +3542,13 @@
     }
     if (e.key === 't' || e.key === 'T') window.scrollTo({ top: 0, behavior: 'smooth' });
     if (e.key === 'h' || e.key === 'H') navigate('welcome');
-    if (e.key === 'b' || e.key === 'B') {
-      const cur = location.hash.slice(1).split(':')[0] || 'welcome';
-      if (cur !== 'welcome') { toggleBookmark(cur); showToast(getBookmarks().includes(cur) ? 'Page bookmarked' : 'Bookmark removed'); }
-    }
   });
 
   /* ── FEEDBACK WIDGET (removed — was non-functional, see KAY-198) ── */
   function renderFeedback() {}
   function sendFeedback() {}
 
-  /* ── READING PROGRESS & BOOKMARKS ────────────────────── */
-  function markAsRead(pageId) {
-    if (pageId === 'welcome') return;
-    const read = getReadPages();
-    if (!read.includes(pageId)) {
-      read.push(pageId);
-      localStorage.setItem('read-pages', JSON.stringify(read));
-    }
-  }
-
+  /* ── RECENT PAGES ─────────────────────────────────────── */
   function addToRecent(pageId) {
     if (pageId === 'welcome') return;
     let recent = getRecent();
@@ -3932,49 +3556,6 @@
     recent.unshift(pageId);
     if (recent.length > 5) recent = recent.slice(0, 5);
     localStorage.setItem('recent-pages', JSON.stringify(recent));
-  }
-
-  function toggleBookmark(pageId) {
-    let bm = getBookmarks();
-    if (bm.includes(pageId)) bm = bm.filter(p => p !== pageId);
-    else bm.push(pageId);
-    localStorage.setItem('bookmarks', JSON.stringify(bm));
-    buildSidebar();
-    updateBookmarkBtn(pageId);
-    // Re-set active state
-    document.querySelectorAll('.sidebar-link').forEach(l => {
-      l.classList.toggle('active', l.dataset.page === pageId);
-    });
-  }
-
-  function renderBookmarkBtn(container, pageId) {
-    if (pageId === 'welcome') return;
-    let bar = container.querySelector('.article-actions');
-    if (!bar) {
-      bar = document.createElement('div');
-      bar.className = 'article-actions';
-      const meta = container.querySelector('.article-meta');
-      if (meta) meta.insertAdjacentElement('afterend', bar);
-      else {
-        const h1 = container.querySelector('h1');
-        if (h1) h1.insertAdjacentElement('afterend', bar);
-      }
-    }
-    const isBookmarked = getBookmarks().includes(pageId);
-    const btn = document.createElement('button');
-    btn.className = 'bookmark-btn' + (isBookmarked ? ' bookmarked' : '');
-    btn.id = 'bookmarkBtn';
-    btn.onclick = () => toggleBookmark(pageId);
-    btn.innerHTML = (isBookmarked ? IC.bookmarkFill : IC.bookmark) + (isBookmarked ? ' Saved' : ' Save');
-    bar.appendChild(btn);
-  }
-
-  function updateBookmarkBtn(pageId) {
-    const btn = document.getElementById('bookmarkBtn');
-    if (!btn) return;
-    const isBookmarked = getBookmarks().includes(pageId);
-    btn.className = 'bookmark-btn' + (isBookmarked ? ' bookmarked' : '');
-    btn.innerHTML = (isBookmarked ? IC.bookmarkFill : IC.bookmark) + (isBookmarked ? ' Saved' : ' Save');
   }
 
   /* ── FAQ ACCORDION ──────────────────────────────────── */
@@ -4030,35 +3611,8 @@
     h1.insertAdjacentElement('afterend', meta);
   }
 
-  /* ── ROLE-AWARE NEXT STEPS ─────────────────────────── */
-  const ROLE_PATHS = {
-    admin: ['setup', 'roles', 'inviting-members', 'first-upload', 'managing-members', 'uploading', 'creating-sessions', 'notes', 'progress', 'developer-api'],
-    coach: ['setup', 'first-upload', 'creating-sessions', 'notes', 'uploading', 'playback', 'formats', 'progress', 'faq'],
-    student: ['setup', 'playback', 'notes', 'progress', 'creating-sessions', 'faq', 'parent-guide', 'troubleshoot', 'performance'],
-    developer: ['setup', 'developer-api', 'formats', 'glossary', 'faq', 'storage'],
-  };
-
   /* ── RELATED ARTICLES ──────────────────────────────── */
   function renderRelated(container, pageId) {
-    const role = localStorage.getItem('user-role');
-    if (role && ROLE_PATHS[role]) {
-      const path = ROLE_PATHS[role];
-      const idx = path.indexOf(pageId);
-      if (idx !== -1) {
-        const prev = idx > 0 ? path[idx - 1] : null;
-        const next = idx < path.length - 1 ? path[idx + 1] : null;
-        if (prev || next) {
-          const nav = document.createElement('div');
-          nav.className = 'next-steps';
-          nav.innerHTML = '<div class="next-steps-title">Next steps</div><div class="next-steps-nav">' +
-            (prev ? `<a class="next-step prev" href="#${prev}" onclick="navigate('${prev}');return false">← ${PAGES[prev].title}</a>` : '<span></span>') +
-            (next ? `<a class="next-step next" href="#${next}" onclick="navigate('${next}');return false">${PAGES[next].title} →</a>` : '<span></span>') +
-            '</div>';
-          container.appendChild(nav);
-          return; // skip random related articles when we have a path
-        }
-      }
-    }
     const page = PAGES[pageId];
     if (!page || !page.section || pageId === 'welcome') return;
     const sameSection = allPageKeys.filter(k => PAGES[k].section === page.section && k !== pageId);
@@ -4116,7 +3670,6 @@
     if (!pc || !pc.innerHTML) return;
     renderArticleMeta(pc, pageId);
     renderLastUpdated(pc, pageId);
-    renderBookmarkBtn(pc, pageId);
     renderShareBtn(pc, pageId);
     renderPrintBtn(pc, pageId);
     renderCopyArticleBtn(pc, pageId);
@@ -4132,10 +3685,8 @@
     renderRelated(pc, pageId);
     renderFeedback(pc);
     applyHighlights(pc, pageId);
-    markAsRead(pageId);
     addToRecent(pageId);
     autoExpandSection(pageId);
-    startNudge(pageId);
     buildSidebar();
     // Restore active state after sidebar rebuild
     document.querySelectorAll('.sidebar-link').forEach(l => {
@@ -4145,151 +3696,6 @@
       else l.removeAttribute('aria-current');
     });
   };
-
-  /* ── ONBOARDING TOUR ────────────────────────────────── */
-  const TOUR_STEPS = [
-    {
-      icon: IC.book,
-      title: 'Welcome to Kaynos Docs',
-      body: 'This help center has everything you need to get started with Kaynos — from uploading your first video to managing your whole team.'
-    },
-    {
-      icon: IC.rocket,
-      title: 'What\'s your role?',
-      body: 'Pick your role so we can show you the most relevant content first.',
-      roleSelect: true
-    },
-    {
-      icon: IC.chat,
-      title: 'Need help? Just ask',
-      body: 'Use the <strong>search bar</strong> at the top or click the <strong>chat bubble</strong> in the bottom-right to find answers fast. Press <kbd>⌘K</kbd> for quick search.'
-    },
-    {
-      icon: IC.check,
-      title: 'You\'re all set!',
-      body: 'Start exploring — we\'ve personalized your homepage based on your role. You can always come back here from the sidebar.'
-    }
-  ];
-
-  let tourStep = 0;
-  let selectedRole = null;
-
-  function isFirstVisit() {
-    return !localStorage.getItem('onboarded');
-  }
-
-  function renderTourStep() {
-    const step = TOUR_STEPS[tourStep];
-    const card = document.getElementById('tourCard');
-    const dots = TOUR_STEPS.map((_, i) =>
-      `<div class="tour-dot${i === tourStep ? ' active' : ''}"></div>`
-    ).join('');
-
-    let roleHtml = '';
-    if (step.roleSelect) {
-      roleHtml = `<div class="role-picker">
-        <div class="role-card${selectedRole === 'admin' ? ' selected' : ''}" role="button" tabindex="0" onclick="selectRole('admin')" onkeydown="if(event.key==='Enter')selectRole('admin')">
-          <div class="role-card-icon">${IC.wrench}</div>
-          <div class="role-card-title">Admin / Owner</div>
-          <div class="role-card-desc">Roster, invites, settings</div>
-        </div>
-        <div class="role-card${selectedRole === 'coach' ? ' selected' : ''}" role="button" tabindex="0" onclick="selectRole('coach')" onkeydown="if(event.key==='Enter')selectRole('coach')">
-          <div class="role-card-icon">${IC.video}</div>
-          <div class="role-card-title">Coach</div>
-          <div class="role-card-desc">Sessions, uploads, notes</div>
-        </div>
-        <div class="role-card${selectedRole === 'student' ? ' selected' : ''}" role="button" tabindex="0" onclick="selectRole('student')" onkeydown="if(event.key==='Enter')selectRole('student')">
-          <div class="role-card-icon">${IC.play}</div>
-          <div class="role-card-title">Student / Member</div>
-          <div class="role-card-desc">Watch, review, progress</div>
-        </div>
-        <div class="role-card${selectedRole === 'developer' ? ' selected' : ''}" role="button" tabindex="0" onclick="selectRole('developer')" onkeydown="if(event.key==='Enter')selectRole('developer')">
-          <div class="role-card-icon">${IC.wrench}</div>
-          <div class="role-card-title">Developer</div>
-          <div class="role-card-desc">Formats, glossary, internal API reference</div>
-        </div>
-      </div>`;
-    }
-
-    card.innerHTML = `
-      <div class="tour-icon">${step.icon}</div>
-      <h2>${step.title}</h2>
-      <p>${step.body}</p>
-      ${roleHtml}
-      <div class="tour-steps">${dots}</div>
-      <div class="tour-actions">
-        ${tourStep > 0 ? '<button class="tour-btn tour-btn-ghost" onclick="prevTour()">Back</button>' : '<button class="tour-btn tour-btn-ghost" onclick="skipTour()">Skip</button>'}
-        <button class="tour-btn tour-btn-primary" onclick="nextTour()">${tourStep === TOUR_STEPS.length - 1 ? 'Get Started' : 'Next'}</button>
-      </div>`;
-  }
-
-  // Migrate legacy 'client' role value to 'student'
-  (function migrateClientRole() {
-    if (localStorage.getItem('user-role') === 'client') localStorage.setItem('user-role', 'student');
-  })();
-
-  function selectRole(role) {
-    selectedRole = role;
-    localStorage.setItem('user-role', role);
-    renderTourStep();
-  }
-
-  function nextTour() {
-    if (tourStep < TOUR_STEPS.length - 1) {
-      tourStep++;
-      renderTourStep();
-    } else {
-      finishTour();
-    }
-  }
-
-  function prevTour() {
-    if (tourStep > 0) { tourStep--; renderTourStep(); }
-  }
-
-  function skipTour() { finishTour(); }
-
-  function finishTour() {
-    localStorage.setItem('onboarded', 'true');
-    const overlay = document.getElementById('tourOverlay');
-    overlay.classList.remove('active');
-    overlay.removeEventListener('keydown', trapTourFocus);
-    // Pulse hints on key elements
-    document.getElementById('searchInput').classList.add('pulse-hint');
-    document.getElementById('chatFab').classList.add('pulse-hint');
-    setTimeout(() => {
-      document.getElementById('searchInput').classList.remove('pulse-hint');
-      document.getElementById('chatFab').classList.remove('pulse-hint');
-    }, 6000);
-    // Rebuild welcome page with role-aware content
-    navigate('welcome');
-  }
-
-  function startTour() {
-    tourStep = 0;
-    selectedRole = localStorage.getItem('user-role') || null;
-    const overlay = document.getElementById('tourOverlay');
-    overlay.classList.add('active');
-    renderTourStep();
-    // Focus first button in tour card
-    requestAnimationFrame(() => {
-      const firstBtn = overlay.querySelector('.tour-btn, .role-card');
-      if (firstBtn) firstBtn.focus();
-    });
-    // Trap focus within tour
-    overlay.addEventListener('keydown', trapTourFocus);
-  }
-
-  function trapTourFocus(e) {
-    if (e.key === 'Escape') { skipTour(); return; }
-    if (e.key !== 'Tab') return;
-    const overlay = document.getElementById('tourOverlay');
-    const focusable = overlay.querySelectorAll('button, [role="button"][tabindex="0"]');
-    if (!focusable.length) return;
-    const first = focusable[0], last = focusable[focusable.length - 1];
-    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-  }
 
   /* ── GETTING STARTED CHECKLIST ─────────────────────── */
   const CHECKLIST_ITEMS = {
@@ -4678,7 +4084,7 @@
   /* ── WELCOME BACK ───────────────────────────────────── */
   function renderWelcomeBack(container) {
     const recent = getRecent();
-    if (recent.length === 0 || isFirstVisit()) return;
+    if (recent.length === 0) return;
     const lastPage = recent[0];
     if (!PAGES[lastPage] || lastPage === 'welcome') return;
     const div = document.createElement('div');
@@ -4726,25 +4132,6 @@
     sr.appendChild(wrapper);
     sr.classList.add('active');
     input.setAttribute('aria-expanded', 'true');
-  }
-
-  /* ── NUDGE PROMPT ──────────────────────────────────── */
-  let nudgeTimer = null;
-  const TROUBLESHOOT_PAGES = ['uploading', 'playback', 'login-issues', 'email-issues', 'performance'];
-  function startNudge(pageId) {
-    clearTimeout(nudgeTimer);
-    document.getElementById('nudgePrompt').classList.remove('show');
-    if (!TROUBLESHOOT_PAGES.includes(pageId)) return;
-    nudgeTimer = setTimeout(() => {
-      if (!sessionStorage.getItem('nudge-dismissed')) {
-        document.getElementById('nudgePrompt').classList.add('show');
-      }
-    }, 35000);
-  }
-  function dismissNudge() {
-    document.getElementById('nudgePrompt').classList.remove('show');
-    sessionStorage.setItem('nudge-dismissed', 'true');
-    clearTimeout(nudgeTimer);
   }
 
   /* ── COPY ARTICLE AS MARKDOWN ──────────────────────── */
@@ -4851,73 +4238,6 @@
         break;
       }
     });
-  }
-
-  /* ── COMMAND PALETTE ───────────────────────────────── */
-  let paletteIdx = -1;
-  const PALETTE_ACTIONS = [
-    { title: 'Toggle dark/light mode', icon: IC.tip, action: () => toggleTheme(), type: 'Action' },
-    { title: 'Open troubleshooting wizard', icon: IC.alert, action: () => navigate('troubleshoot'), type: 'Action' },
-    { title: 'Print this page', icon: IC.print, action: () => window.print(), type: 'Action' },
-    { title: 'Search docs', icon: IC.chat, action: () => { closePalette(); toggleChat(); }, type: 'Action' },
-    { title: 'Show keyboard shortcuts', icon: IC.info, action: () => { closePalette(); openKbd(); }, type: 'Action' },
-    // { title: 'Toggle language (EN/ES)', icon: IC.book, action: () => toggleLang(), type: 'Action' }, // Hidden until ES translations cover >90% (KAY-201)
-  ];
-
-  function openPalette() {
-    _savedFocus = document.activeElement;
-    var ov = document.getElementById('paletteOverlay');
-    ov.classList.add('active');
-    const input = document.getElementById('paletteInput');
-    input.value = '';
-    input.focus();
-    paletteIdx = -1;
-    filterPalette('');
-    trapFocus(ov);
-  }
-  function closePalette() {
-    var ov = document.getElementById('paletteOverlay');
-    ov.classList.remove('active');
-    paletteIdx = -1;
-    releaseFocus(ov);
-  }
-  function filterPalette(q) {
-    const lower = (q || '').toLowerCase();
-    const results = [];
-    // Actions
-    PALETTE_ACTIONS.forEach(a => {
-      if (!lower || a.title.toLowerCase().includes(lower)) results.push(a);
-    });
-    // Pages
-    for (const [id, page] of Object.entries(PAGES)) {
-      if (id === 'welcome') continue;
-      if (!lower || page.title.toLowerCase().includes(lower) || (page.section || '').toLowerCase().includes(lower)) {
-        results.push({ title: page.title, icon: IC.book, action: () => navigate(id), type: page.section || 'Page' });
-      }
-    }
-    const container = document.getElementById('paletteResults');
-    if (results.length === 0) {
-      container.innerHTML = '<div style="padding:16px;text-align:center;color:var(--text-tertiary);font-size:.875rem">No results</div>';
-      return;
-    }
-    const shown = lower ? results.slice(0, 10) : results.slice(0, LIMITS.SEARCH_RESULTS);
-    // Safe: titles/types from hardcoded PAGES constant; icons from IC constant
-    container.innerHTML = shown.map((r, i) =>
-      `<div class="palette-item${i === paletteIdx ? ' focused' : ''}" onclick="paletteSelect(${i})" data-idx="${i}">${r.icon}<span class="palette-item-title">${r.title}</span><span class="palette-item-type">${r.type}</span></div>`
-    ).join('');
-    window._paletteItems = shown;
-    paletteIdx = -1;
-  }
-  function paletteSelect(idx) {
-    const items = window._paletteItems;
-    if (items && items[idx]) { closePalette(); items[idx].action(); }
-  }
-  function handlePaletteKey(e) {
-    const items = document.querySelectorAll('#paletteResults .palette-item');
-    if (e.key === 'Escape') { closePalette(); return; }
-    if (e.key === 'ArrowDown') { e.preventDefault(); paletteIdx = Math.min(paletteIdx + 1, items.length - 1); items.forEach((el, i) => el.classList.toggle('focused', i === paletteIdx)); }
-    else if (e.key === 'ArrowUp') { e.preventDefault(); paletteIdx = Math.max(paletteIdx - 1, 0); items.forEach((el, i) => el.classList.toggle('focused', i === paletteIdx)); }
-    else if (e.key === 'Enter' && paletteIdx >= 0) { paletteSelect(paletteIdx); }
   }
 
   /* ── SCROLL POSITION MEMORY ─────────────────────────── */
@@ -5114,7 +4434,6 @@
   <div class="hero-badge">Centro de Ayuda</div>
   <h1>Bienvenido a Kaynos</h1>
   <p>Todo lo que necesitas para empezar con Kaynos — subir video, gestionar tu equipo y solucionar problemas comunes.</p>
-  <p style="margin-top:12px;font-size:.8125rem"><a style="cursor:pointer;color:var(--accent)" onclick="startTour()">Hacer el tour guiado</a></p>
 </div>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Estás leyendo el centro de ayuda.</strong> Inicia sesión en <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> para subir video y gestionar tu cuenta.</div></div>
 <h2>Empezar</h2>
@@ -5286,107 +4605,6 @@
     el.innerHTML = `${status === 'good' ? IC.check : IC.warn} <div><strong>You're using ${browser}.</strong> ${msg}</div>`;
   }
 
-  /* ── DOC SEARCH ─────────────────────────────────────── */
-  let chatOpen = false;
-  let chatInitialized = false;
-  function toggleChat() {
-    chatOpen = !chatOpen;
-    document.getElementById('chatPanel').classList.toggle('open', chatOpen);
-    if (chatOpen && !chatInitialized) {
-      chatInitialized = true;
-      addBotMsg("Search the docs by keyword. This is a local search tool — no messages are sent or stored.", [
-        "How do I upload video?",
-        "What are the user roles?",
-        "Video won't play",
-        "How do I use the API?"
-      ]);
-    }
-    if (chatOpen) document.getElementById('chatInput').focus();
-  }
-
-  function addBotMsg(text, suggestions) {
-    const msgs = document.getElementById('chatMessages');
-    const div = document.createElement('div');
-    div.className = 'chat-msg bot';
-    div.innerHTML = text;
-    if (suggestions && suggestions.length) {
-      const sg = document.createElement('div');
-      sg.className = 'chat-suggestions';
-      suggestions.forEach(s => {
-        const btn = document.createElement('button');
-        btn.className = 'chat-suggestion';
-        btn.textContent = s;
-        btn.onclick = () => { document.getElementById('chatInput').value = s; sendChat(); };
-        sg.appendChild(btn);
-      });
-      div.appendChild(sg);
-    }
-    msgs.appendChild(div);
-    msgs.scrollTop = msgs.scrollHeight;
-  }
-
-  function addUserMsg(text) {
-    const msgs = document.getElementById('chatMessages');
-    const div = document.createElement('div');
-    div.className = 'chat-msg user';
-    div.textContent = text;
-    msgs.appendChild(div);
-    msgs.scrollTop = msgs.scrollHeight;
-  }
-
-  function sendChat() {
-    const input = document.getElementById('chatInput');
-    const q = input.value.trim();
-    if (!q) return;
-    input.value = '';
-    addUserMsg(q);
-
-    // Search docs for relevant pages
-    const lower = q.toLowerCase();
-    const words = lower.split(/\s+/).filter(w => w.length > 1);
-    const scored = [];
-    for (const [id, page] of Object.entries(PAGES)) {
-      if (id === 'welcome') continue;
-      const text = (page.title + ' ' + page.content.replace(/<[^>]+>/g, ' ')).toLowerCase();
-      let score = 0;
-      words.forEach(w => {
-        if (page.title.toLowerCase().includes(w)) score += 5;
-        const count = (text.match(new RegExp(w, 'g')) || []).length;
-        score += Math.min(count, 10);
-      });
-      if (score > 0) scored.push({ id, title: page.title, section: page.section, score });
-    }
-    scored.sort((a, b) => b.score - a.score);
-    const top = scored.slice(0, 3);
-
-    if (top.length === 0) {
-      addBotMsg("I couldn't find docs matching that. Try different keywords, or " + mailLink('email support') + " for direct help.", [
-        "Upload problems",
-        "Login issues",
-        "Video formats"
-      ]);
-    } else {
-      const links = top.map(r =>
-        `<a onclick="navigate('${r.id}');toggleChat()">${r.title}</a> <span style="font-size:.7rem;color:var(--text-tertiary)">${r.section || ''}</span>`
-      ).join('<br>');
-      const followups = scored.slice(3, 6).map(r => r.title);
-      addBotMsg(`Here's what I found:<br><br>${links}<br><br>Click any link to jump there.`, followups.length ? followups : null);
-    }
-  }
-
-  /* ── TEXT SIZE ──────────────────────────────────────── */
-  function adjustTextSize(dir) {
-    const root = document.documentElement;
-    const current = parseFloat(getComputedStyle(root).fontSize);
-    const next = Math.max(13, Math.min(20, current + dir));
-    root.style.fontSize = next + 'px';
-    localStorage.setItem('text-size', next);
-  }
-  (function initTextSize() {
-    const saved = localStorage.getItem('text-size');
-    if (saved) document.documentElement.style.fontSize = saved + 'px';
-  })();
-
   /* ── SHARE BUTTON ──────────────────────────────────── */
   function renderShareBtn(container, pageId) {
     if (pageId === 'welcome') return;
@@ -5469,17 +4687,10 @@
   document.getElementById('langToggle').textContent = currentLang.toUpperCase();
   document.getElementById('langToggle').classList.toggle('es', currentLang === 'es');
 
-  // First-time onboarding — auto-tour removed (KAY-202); welcome page "Take the tour" link suffices
-
   // Expose needed functions to global scope for onclick handlers
   window.navigate = navigate;
   window.toggleTheme = toggleTheme;
   window.toggleSidebar = toggleSidebar;
-  window.toggleChat = toggleChat;
-  window.sendChat = sendChat;
-  window.startTour = startTour;
-  window.selectRole = selectRole;
-  window.adjustTextSize = adjustTextSize;
   window.submitContact = submitContact;
   window.toggleCheckItem = toggleCheckItem;
   window.togglePollVote = typeof togglePollVote !== 'undefined' ? togglePollVote : function(){};
@@ -5491,26 +4702,18 @@
   window.renderWizard = renderWizard;
   window.wizardFixed = wizardFixed;
   window.wizardNotFixed = wizardNotFixed;
-  window.toggleBookmark = toggleBookmark;
   window.mailLink = mailLink;
   window.mailHref = mailHref;
   window.showToast = showToast;
   window.openKbd = openKbd;
   window.closeKbd = closeKbd;
-  window.openPalette = openPalette;
-  window.closePalette = closePalette;
-  window.dismissNudge = dismissNudge;
   window.sendFeedback = sendFeedback;
   window.renderFeedback = renderFeedback;
   window.escapeHtml = escapeHtml;
   window.toggleLang = toggleLang;
   window.addSearchHistory = addSearchHistory;
   window.tocJump = tocJump;
-  window.paletteSelect = paletteSelect;
   window.copyWizardLink = copyWizardLink;
-  window.nextTour = nextTour;
-  window.prevTour = prevTour;
-  window.skipTour = skipTour;
   window.toggleSection = toggleSection;
   })();
   </script>
