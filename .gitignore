@@ -13,5 +13,9 @@ memory.db-shm
 memory.db-wal
 state.json
 
+# Claude Code / superpowers runtime state
+.claude/
+.superpowers/
+
 # Local work logs (per kaynos-docs/CLAUDE.md: keep temporary notes out of the published root)
 logs/

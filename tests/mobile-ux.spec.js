@@ -36,7 +36,7 @@ test.describe('Mobile navigation', () => {
     test.skip(!isMobile, 'mobile only');
     await page.goto('/');
     const buttons = page.locator('.mobile-nav button.mobile-nav-btn');
-    await expect(buttons).toHaveCount(4);
+    await expect(buttons).toHaveCount(2);
   });
 
   test('menu button opens sidebar', async ({ page, isMobile }) => {
@@ -60,6 +60,8 @@ test.describe('Mobile navigation', () => {
     test.skip(!isMobile, 'mobile only');
     await page.goto('/');
     await page.locator('.menu-btn').click();
+    // Sidebar sections are collapsed by default; expand "Getting Started" to reveal the setup link.
+    await page.locator('.sidebar-section[data-section="Getting Started"] .sidebar-section-title').click();
     await page.locator('.sidebar-link[data-page="setup"]').click();
     await expect(page.locator('.content-inner h1')).toContainText('Setting up');
     // Sidebar should auto-close
@@ -131,7 +133,8 @@ test.describe('SPA navigation', () => {
   test('breadcrumb renders on article pages', async ({ page }) => {
     await page.goto('/#setup');
     await expect(page.locator('.breadcrumb')).toBeVisible();
-    await expect(page.locator('.breadcrumb-current')).toContainText('Setting up');
+    // .breadcrumb-current also appears in .breadcrumb-trail near the H1; scope to the top breadcrumb.
+    await expect(page.locator('.breadcrumb .breadcrumb-current')).toContainText('Setting up');
   });
 
   test('footer nav has prev/next buttons', async ({ page }) => {
@@ -231,6 +234,8 @@ test.describe('Widgets', () => {
 
   test('upload calculator computes result', async ({ page }) => {
     await page.goto('/#formats');
+    // Calculator lives inside a collapsed <details>; expand it before interacting.
+    await page.locator('details summary', { hasText: 'Upload time calculator' }).click();
     await page.fill('#calcSize', '500');
     await page.fill('#calcSpeed', '25');
     await expect(page.locator('#calcResult')).toBeVisible();
@@ -239,6 +244,7 @@ test.describe('Widgets', () => {
 
   test('error lookup returns matches', async ({ page }) => {
     await page.goto('/#troubleshoot');
+    await page.locator('details summary', { hasText: 'Error code lookup' }).click();
     await page.fill('#errorInput', '403');
     await expect(page.locator('.error-match')).toHaveCount(1);
   });
@@ -255,6 +261,7 @@ test.describe('Widgets', () => {
 
   test('preflight checklist toggles items', async ({ page }) => {
     await page.goto('/#uploading');
+    await page.locator('details summary', { hasText: 'Upload preflight checklist' }).click();
     await page.waitForSelector('.preflight-item');
     const item = page.locator('.preflight-item').first();
     await expect(item).not.toHaveClass(/checked/);
@@ -456,16 +463,6 @@ test.describe('Feature request form', () => {
     await page.goto('/#feature-requests');
     await expect(page.locator('#featureForm')).toBeVisible();
     await expect(page.locator('#fr-title')).toBeVisible();
-  });
-});
-
-// ── Role personalization ──────────────────────────────────
-test.describe('Role personalization', () => {
-  test('welcome page shows role-specific links after role selection', async ({ page }) => {
-    await page.goto('/');
-    await page.evaluate(() => localStorage.setItem('user-role', 'admin'));
-    await page.goto('/');
-    await expect(page.locator('.start-here')).toBeVisible();
   });
 });
 

@@ -3,28 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Kaynos — Help Center</title>
+  <title>Kaynos Docs</title>
   <meta name="theme-color" content="#060609" />
-  <meta name="fragment" content="!" />
-  <meta name="description" content="Kaynos help center — setup, video upload, playback, troubleshooting, and developer API docs.">
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="description" content="Kaynos docs — setup, video upload, playback, troubleshooting, and developer API reference.">
   <link rel="canonical" href="https://docs.kaynos.net/" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Kaynos Help Center" />
-  <meta property="og:title" content="Kaynos — Help Center" />
-  <meta property="og:description" content="Video review for coaches — setup, video upload, playback, troubleshooting, and developer API docs." />
+  <meta property="og:site_name" content="Kaynos Docs" />
+  <meta property="og:title" content="Kaynos Docs" />
+  <meta property="og:description" content="Video review for coaches — setup, video upload, playback, troubleshooting, and developer API reference." />
   <meta property="og:url" content="https://docs.kaynos.net/" />
   <meta property="og:image" content="https://docs.kaynos.net/og-image.png" />
-  <meta property="og:image:alt" content="Kaynos Help Center" />
+  <meta property="og:image:alt" content="Kaynos Docs" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Kaynos — Help Center" />
-  <meta name="twitter:description" content="Video review for coaches — setup guides, troubleshooting, and API docs." />
+  <meta name="twitter:title" content="Kaynos Docs" />
+  <meta name="twitter:description" content="Video review for coaches — setup guides, troubleshooting, and API reference." />
   <meta name="twitter:image" content="https://docs.kaynos.net/og-image.png" />
+  <meta name="twitter:url" content="https://docs.kaynos.net/" />
 
   <!-- Prevent theme flicker on first paint (KAY-206) -->
   <script>
@@ -42,23 +43,31 @@
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Kaynos Help Center",
+    "name": "Kaynos Docs",
     "url": "https://docs.kaynos.net/",
-    "description": "Help center for Kaynos — video review platform for coaches.",
+    "description": "Documentation for Kaynos — video review platform for coaches.",
     "publisher": {
       "@type": "Organization",
       "name": "Kaynos",
       "url": "https://www.kaynos.net/"
-    },
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://docs.kaynos.net/#search={search_term_string}",
-      "query-input": "required name=search_term_string"
     }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Kaynos",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "url": "https://app.kaynos.net/",
+    "publisher": { "@type": "Organization", "name": "Kaynos", "url": "https://www.kaynos.net/" },
+    "offers": { "@type": "Offer", "category": "subscription" }
   }
   </script>
 
   <link rel="preload" href="/fonts/fonts.css" as="style">
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/fonts/fonts.css">
   <link rel="dns-prefetch" href="https://app.kaynos.net" />
   <link rel="alternate" type="application/rss+xml" title="Kaynos What's New" href="/feed.xml" />
@@ -75,7 +84,7 @@
       --bg-active:    rgba(255,255,255,0.07);
       --text-primary:   #f0f0f6;
       --text-secondary: rgba(240,240,246,0.65);
-      --text-tertiary:  rgba(255,255,255,.50);
+      --text-tertiary:  rgba(255,255,255,.62);
       --border:         rgba(255,255,255,0.07);
       --border-strong:  rgba(255,255,255,0.12);
       --accent:         #2184f3;
@@ -113,7 +122,7 @@
       --bg-active:    rgba(0,0,0,0.06);
       --text-primary:   #1a1a2e;
       --text-secondary: rgba(26,26,46,0.72);
-      --text-tertiary:  rgba(0,0,0,.55);
+      --text-tertiary:  rgba(0,0,0,.65);
       --border:         rgba(0,0,0,0.08);
       --border-strong:  rgba(0,0,0,0.14);
       --accent:         #1a6fdb;
@@ -293,6 +302,7 @@
       text-transform: uppercase; letter-spacing: .09em; color: var(--text-tertiary);
       display: flex; align-items: center; justify-content: space-between;
       cursor: pointer; user-select: none; transition: color var(--dur); gap: 6px;
+      width: 100%; background: none; border: 0; text-align: left; font: inherit;
     }
     .sidebar-section-title svg { width: 12px; height: 12px; flex-shrink: 0; opacity: .6; }
     .sidebar-section-title:hover { color: var(--text-secondary); }
@@ -1366,12 +1376,12 @@
 <body>
 
   <a href="#pageContent" class="skip-link">Skip to content</a>
-  <noscript><h1>Kaynos Help Center</h1><p>This help center requires JavaScript. Please enable it or visit <a href="https://app.kaynos.net">app.kaynos.net</a>.</p></noscript>
-  <div id="progress-bar" class="scroll-progress" role="progressbar" aria-hidden="true"></div>
+  <noscript><h1>Kaynos Docs</h1><p>This documentation site requires JavaScript. Please enable it or visit <a href="https://app.kaynos.net">app.kaynos.net</a>.</p></noscript>
+  <div id="progress-bar" class="scroll-progress" aria-hidden="true"></div>
 
   <header class="header" role="banner">
-    <button class="menu-btn" onclick="toggleSidebar()" aria-label="Open menu">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+    <button class="menu-btn" onclick="toggleSidebar()" aria-label="Open menu" aria-expanded="false" aria-controls="sidebar">
+      <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
         <line x1="2" y1="4.5" x2="16" y2="4.5"/>
         <line x1="2" y1="9" x2="16" y2="9"/>
         <line x1="2" y1="13.5" x2="16" y2="13.5"/>
@@ -1380,7 +1390,7 @@
 
     <a href="#" class="header-logo" onclick="navigate('welcome');return false">
       <div class="header-logo-icon">
-        <svg width="16" height="16" viewBox="0 0 32 32" fill="none">
+        <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 32 32" fill="none">
           <g transform="translate(4.5,4) scale(0.124)">
             <path d="M 64 151 L 102 189 L 178 190 L 102 114 Z" fill="#2184f3" fill-rule="evenodd"/>
             <path d="M 184 1 L 116 1 L 1 115 L 0 185 Z" fill="#2184f3" fill-rule="evenodd"/>
@@ -1393,7 +1403,7 @@
 
     <div class="header-search">
       <div class="header-search-icon">
-        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6">
+        <svg aria-hidden="true" focusable="false" width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6">
           <circle cx="6.5" cy="6.5" r="4.5"/>
           <line x1="10" y1="10" x2="13.5" y2="13.5" stroke-linecap="round"/>
         </svg>
@@ -1402,19 +1412,19 @@
       <input type="text" id="searchInput" placeholder="Search docs…"
         oninput="debouncedSearch(this.value)" onfocus="showSearchHistory()"
         autocomplete="off" aria-label="Search documentation" role="combobox"
-        aria-expanded="false" aria-controls="searchResults">
+        aria-expanded="false" aria-controls="searchResults" aria-autocomplete="list">
       <div class="search-kbd" id="searchKbd"><kbd>⌘</kbd><kbd>K</kbd></div>
-      <div class="search-results" id="searchResults" role="listbox" aria-live="polite"></div>
+      <div class="search-results" id="searchResults" role="listbox" aria-label="Search results"></div>
     </div>
 
     <div class="header-spacer"></div>
 
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode" id="themeToggle" title="Toggle theme">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" id="themeIcon"><path d="M8 1v1M8 14v1M1 8h1M14 8h1M3.1 3.1l.7.7M12.2 12.2l.7.7M12.9 3.1l-.7.7M3.8 12.2l-.7.7"/><circle cx="8" cy="8" r="3"/></svg>
+      <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" id="themeIcon"><path d="M8 1v1M8 14v1M1 8h1M14 8h1M3.1 3.1l.7.7M12.2 12.2l.7.7M12.9 3.1l-.7.7M3.8 12.2l-.7.7"/><circle cx="8" cy="8" r="3"/></svg>
     </button>
 
     <a href="https://app.kaynos.net/" class="header-app-link" target="_blank" rel="noopener noreferrer" title="Open app.kaynos.net">
-      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <svg aria-hidden="true" focusable="false" width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
         <path d="M5 2H2a1 1 0 00-1 1v8a1 1 0 001 1h8a1 1 0 001-1V8"/>
         <path d="M8 1h4v4M12 1L6.5 6.5"/>
       </svg>
@@ -1427,31 +1437,31 @@
   <div class="layout">
     <nav class="sidebar" id="sidebar" aria-label="Documentation navigation"></nav>
 
-    <main class="content">
+    <div class="content">
       <div class="content-with-toc">
         <div class="content-wrap">
-          <main class="content-inner" id="pageContent"></main>
+          <main class="content-inner" id="pageContent" tabindex="-1"></main>
           <nav class="footer-nav" id="footerNav" aria-label="Page navigation"></nav>
         </div>
       </div>
-    </main>
+    </div>
     <footer class="site-footer" role="contentinfo">
       <div class="footer-inner">
         <span>&copy; 2024–2026 Kaynos. All rights reserved.</span>
         <nav class="footer-links">
-          <a onclick="navigate('release-notes')">What's new</a>
-          <a onclick="navigate('feature-requests')">Feature requests</a>
-          <a onclick="navigate('parent-guide')">Parent guide</a>
-          <a onclick="navigate('contact')">Contact</a>
-          <a onclick="navigate('privacy-on-this-site')">Legal</a>
+          <a href="#release-notes" onclick="navigate('release-notes');return false">What's new</a>
+          <a href="#feature-requests" onclick="navigate('feature-requests');return false">Feature requests</a>
+          <a href="#parent-guide" onclick="navigate('parent-guide');return false">Parent guide</a>
+          <a href="#contact" onclick="navigate('contact');return false">Contact</a>
+          <a href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">Legal</a>
           <a href="https://github.com/jlambert229/kaynos-docs/blob/main/docs/SECURITY.md" target="_blank" rel="noopener">Security</a>
         </nav>
       </div>
     </footer>
   </div>
 
-  <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+  <button id="back-top" onclick="window.scrollTo({top:0,behavior:smoothBehavior()})" aria-label="Back to top">
+    <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
       <path d="M7 11V3M3 7l4-4 4 4"/>
     </svg>
   </button>
@@ -1472,11 +1482,11 @@
   <!-- Mobile Bottom Nav -->
   <nav class="mobile-nav" aria-label="Mobile navigation">
     <button class="mobile-nav-btn" onclick="navigate('welcome')" aria-label="Home">
-      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l7-7 7 7"/><path d="M5 8v8a1 1 0 001 1h3v-4h2v4h3a1 1 0 001-1V8"/></svg>
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l7-7 7 7"/><path d="M5 8v8a1 1 0 001 1h3v-4h2v4h3a1 1 0 001-1V8"/></svg>
       <span>Home</span>
     </button>
-    <button class="mobile-nav-btn" onclick="toggleSidebar()" aria-label="Menu">
-      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/></svg>
+    <button class="mobile-nav-btn" onclick="toggleSidebar()" aria-label="Menu" aria-expanded="false" aria-controls="sidebar">
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/></svg>
       <span>Menu</span>
     </button>
   </nav>
@@ -1485,8 +1495,8 @@
 
   <!-- Keyboard Shortcuts Modal -->
   <div class="kbd-modal-overlay" id="kbdModal" onclick="if(event.target===this)closeKbd()">
-    <div class="kbd-modal" role="dialog" aria-label="Keyboard shortcuts">
-      <h3>Keyboard shortcuts</h3>
+    <div class="kbd-modal" role="dialog" aria-modal="true" aria-labelledby="kbdModalTitle">
+      <h3 id="kbdModalTitle">Keyboard shortcuts</h3>
       <div class="kbd-row"><span>Search</span><div><kbd class="mod-key">⌘</kbd> <kbd>K</kbd></div></div>
       <div class="kbd-row"><span>Previous page</span><kbd>←</kbd></div>
       <div class="kbd-row"><span>Next page</span><kbd>→</kbd></div>
@@ -1510,28 +1520,28 @@
 
   /* ── SVG ICONS ────────────────────────────────────────────── */
   const IC = {
-    info:     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6.5"/><line x1="8" y1="7" x2="8" y2="11"/><circle cx="8" cy="5" r=".5" fill="currentColor" stroke="none"/></svg>',
-    tip:      '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 13h4M6.5 14.5h3M8 1.5a4.5 4.5 0 012.5 8.2V11h-5V9.7A4.5 4.5 0 018 1.5z"/></svg>',
-    warn:     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 1.5L1 14h14L8 1.5z"/><line x1="8" y1="6" x2="8" y2="10"/><circle cx="8" cy="12" r=".5" fill="currentColor" stroke="none"/></svg>',
-    danger:   '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6.5"/><line x1="5.5" y1="5.5" x2="10.5" y2="10.5"/><line x1="10.5" y1="5.5" x2="5.5" y2="10.5"/></svg>',
-    rocket:   '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14s-2-2-2-5c0-3 2-7 2-7s2 4 2 7-2 5-2 5z"/><path d="M5.5 10.5L3 12l1-3"/><path d="M10.5 10.5L13 12l-1-3"/><circle cx="8" cy="7" r="1"/></svg>',
-    video:    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="3.5" width="9" height="9" rx="1.5"/><path d="M10.5 6.5L14.5 4v8l-4-2.5"/></svg>',
-    alert:    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M8 1.5L1 14h14L8 1.5z"/><line x1="8" y1="6" x2="8" y2="10"/><circle cx="8" cy="12" r=".5" fill="currentColor" stroke="none"/></svg>',
-    play:     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.5"/><polygon points="6.5,5 11.5,8 6.5,11" fill="currentColor" stroke="none"/></svg>',
-    users:    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="5" r="2.5"/><path d="M1.5 14.5c0-2.5 2-4.5 4.5-4.5s4.5 2 4.5 4.5"/><circle cx="11" cy="5.5" r="2"/><path d="M11 9c2 0 3.5 1.5 3.5 3.5"/></svg>',
-    chat:     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2.5h12a.5.5 0 01.5.5v7a.5.5 0 01-.5.5H5L2 13V3a.5.5 0 01.5-.5z"/></svg>',
-    sparkle:  '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1v3M8 12v3M1 8h3M12 8h3M3.5 3.5l2 2M10.5 10.5l2 2M12.5 3.5l-2 2M5.5 10.5l-2 2"/></svg>',
-    wrench:   '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2a4 4 0 00-3.8 5.2L2 11.5V14h2.5l4.3-4.2A4 4 0 1010 2z"/></svg>',
-    mail:     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="3" width="13" height="10" rx="1.5"/><path d="M1.5 4.5L8 9l6.5-4.5"/></svg>',
-    check:    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3.5,8.5 6.5,11.5 12.5,4.5"/></svg>',
-    clock:    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="8" cy="8" r="6.5"/><polyline points="8,4.5 8,8 11,9.5"/></svg>',
-    book:     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2.5h4.5a1.5 1.5 0 011.5 1.5v10S6.5 13 4.25 13 2 14 2 14V2.5zM14 2.5H9.5A1.5 1.5 0 008 4v10s1.5-1 3.75-1S14 14 14 14V2.5z"/></svg>',
-    send:     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 1.5l-6 13-2.5-5.5L1.5 6.5z"/><path d="M14.5 1.5L6 9"/></svg>',
-    share:    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8v5a1 1 0 001 1h6a1 1 0 001-1V8"/><polyline points="5,5 8,2 11,5"/><line x1="8" y1="2" x2="8" y2="10"/></svg>',
-    x:        '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg>',
-    print:    '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="8" height="4" rx="1"/><path d="M4 12H2.5A1.5 1.5 0 011 10.5v-4A1.5 1.5 0 012.5 5h11A1.5 1.5 0 0115 6.5v4a1.5 1.5 0 01-1.5 1.5H12"/><path d="M4 5V2h8v3"/></svg>',
-    link:     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 9.5a3.5 3.5 0 005 0l2-2a3.5 3.5 0 00-5-5l-1 1"/><path d="M9.5 6.5a3.5 3.5 0 00-5 0l-2 2a3.5 3.5 0 005 5l1-1"/></svg>',
-    headset:  '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8a6 6 0 0112 0"/><path d="M2 8v4a1 1 0 001 1h1a1 1 0 001-1V9a1 1 0 00-1-1H2zM14 8v4a1 1 0 01-1 1h-1a1 1 0 01-1-1V9a1 1 0 011-1h2z"/></svg>',
+    info:     '<svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6.5"/><line x1="8" y1="7" x2="8" y2="11"/><circle cx="8" cy="5" r=".5" fill="currentColor" stroke="none"/></svg>',
+    tip:      '<svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 13h4M6.5 14.5h3M8 1.5a4.5 4.5 0 012.5 8.2V11h-5V9.7A4.5 4.5 0 018 1.5z"/></svg>',
+    warn:     '<svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 1.5L1 14h14L8 1.5z"/><line x1="8" y1="6" x2="8" y2="10"/><circle cx="8" cy="12" r=".5" fill="currentColor" stroke="none"/></svg>',
+    danger:   '<svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="8" cy="8" r="6.5"/><line x1="5.5" y1="5.5" x2="10.5" y2="10.5"/><line x1="10.5" y1="5.5" x2="5.5" y2="10.5"/></svg>',
+    rocket:   '<svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14s-2-2-2-5c0-3 2-7 2-7s2 4 2 7-2 5-2 5z"/><path d="M5.5 10.5L3 12l1-3"/><path d="M10.5 10.5L13 12l-1-3"/><circle cx="8" cy="7" r="1"/></svg>',
+    video:    '<svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="3.5" width="9" height="9" rx="1.5"/><path d="M10.5 6.5L14.5 4v8l-4-2.5"/></svg>',
+    alert:    '<svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M8 1.5L1 14h14L8 1.5z"/><line x1="8" y1="6" x2="8" y2="10"/><circle cx="8" cy="12" r=".5" fill="currentColor" stroke="none"/></svg>',
+    play:     '<svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.5"/><polygon points="6.5,5 11.5,8 6.5,11" fill="currentColor" stroke="none"/></svg>',
+    users:    '<svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="5" r="2.5"/><path d="M1.5 14.5c0-2.5 2-4.5 4.5-4.5s4.5 2 4.5 4.5"/><circle cx="11" cy="5.5" r="2"/><path d="M11 9c2 0 3.5 1.5 3.5 3.5"/></svg>',
+    chat:     '<svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2.5h12a.5.5 0 01.5.5v7a.5.5 0 01-.5.5H5L2 13V3a.5.5 0 01.5-.5z"/></svg>',
+    sparkle:  '<svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1v3M8 12v3M1 8h3M12 8h3M3.5 3.5l2 2M10.5 10.5l2 2M12.5 3.5l-2 2M5.5 10.5l-2 2"/></svg>',
+    wrench:   '<svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2a4 4 0 00-3.8 5.2L2 11.5V14h2.5l4.3-4.2A4 4 0 1010 2z"/></svg>',
+    mail:     '<svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="3" width="13" height="10" rx="1.5"/><path d="M1.5 4.5L8 9l6.5-4.5"/></svg>',
+    check:    '<svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3.5,8.5 6.5,11.5 12.5,4.5"/></svg>',
+    clock:    '<svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="8" cy="8" r="6.5"/><polyline points="8,4.5 8,8 11,9.5"/></svg>',
+    book:     '<svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2.5h4.5a1.5 1.5 0 011.5 1.5v10S6.5 13 4.25 13 2 14 2 14V2.5zM14 2.5H9.5A1.5 1.5 0 008 4v10s1.5-1 3.75-1S14 14 14 14V2.5z"/></svg>',
+    send:     '<svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 1.5l-6 13-2.5-5.5L1.5 6.5z"/><path d="M14.5 1.5L6 9"/></svg>',
+    share:    '<svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8v5a1 1 0 001 1h6a1 1 0 001-1V8"/><polyline points="5,5 8,2 11,5"/><line x1="8" y1="2" x2="8" y2="10"/></svg>',
+    x:        '<svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg>',
+    print:    '<svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="8" height="4" rx="1"/><path d="M4 12H2.5A1.5 1.5 0 011 10.5v-4A1.5 1.5 0 012.5 5h11A1.5 1.5 0 0115 6.5v4a1.5 1.5 0 01-1.5 1.5H12"/><path d="M4 5V2h8v3"/></svg>',
+    link:     '<svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 9.5a3.5 3.5 0 005 0l2-2a3.5 3.5 0 00-5-5l-1 1"/><path d="M9.5 6.5a3.5 3.5 0 00-5 0l-2 2a3.5 3.5 0 005 5l1-1"/></svg>',
+    headset:  '<svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8a6 6 0 0112 0"/><path d="M2 8v4a1 1 0 001 1h1a1 1 0 001-1V9a1 1 0 00-1-1H2zM14 8v4a1 1 0 01-1 1h-1a1 1 0 01-1-1V9a1 1 0 011-1h2z"/></svg>',
   };
 
   /* ── CONSTANTS ────────────────────────────────────────────── */
@@ -1592,12 +1602,12 @@
       content: `
 <h1>Setting up your account</h1>
 <div class="tldr"><strong>TLDR:</strong> School owners: sign up, pay, and follow the instructor checklist. Invited members: log in with your invite email and change your temporary password.</div>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Open the product at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>. Next steps: <a onclick="navigate('inviting-members')">Inviting your team</a> and <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Open the product at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>. Next steps: <a href="#inviting-members" onclick="navigate('inviting-members');return false">Inviting your team</a> and <a href="#roles" onclick="navigate('roles');return false">Understanding user roles</a>.</div></div>
 <h2>New school signup</h2>
 <p>Creating a new school account takes three steps:</p>
 <ol>
 <li><strong>Sign up</strong> — enter your school name, your name, and email at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</li>
-<li><strong>Payment</strong> — flat $29/mo for the coach. Students stay free no matter how many you add. Every account starts with a 14-day free trial; card required, no charge until day 15.</li>
+<li><strong>Payment</strong> — flat <strong>[$X/month]</strong> or <strong>[$Y/year]</strong> per school. All members (owners, coaches, students) are included regardless of count — there are no per-coach or per-student tiers. Every account starts with a 14-day free trial; card required, no charge until day 15.</li>
 <li><strong>Confirmation</strong> — you land on the coach dashboard with the instructor checklist.</li>
 </ol>
 <p>The <strong>instructor checklist</strong> walks you through three first actions: add a student, record a session, and upload a class. Complete them at your own pace.</p>
@@ -1642,7 +1652,7 @@
   <div class="step-tip"><div class="step-num">2</div><div class="step-body"><h4>Click Add Member / Add Student</h4><p>Enter their name, email, and role.</p></div></div>
   <div class="step-tip"><div class="step-num">3</div><div class="step-body"><h4>Send the invite</h4><p>They receive an email with a temporary password. Delivery is usually quick.</p></div></div>
 </div>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Full guides: <a onclick="navigate('uploading')">Uploading videos</a> · <a onclick="navigate('notes')">Notes and timestamps</a> · <a onclick="navigate('inviting-members')">Inviting your team</a></div></div>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Full guides: <a href="#uploading" onclick="navigate('uploading');return false">Uploading videos</a> · <a href="#notes" onclick="navigate('notes');return false">Notes and timestamps</a> · <a href="#inviting-members" onclick="navigate('inviting-members');return false">Inviting your team</a></div></div>
 </details>
 <details><summary>Onboarding timeline</summary>
 <p>A suggested four-week plan for gym owners and head coaches getting started with Kaynos.</p>
@@ -1653,9 +1663,9 @@
     <div class="timeline-title">Set up your account</div>
     <div class="timeline-body">
       <ul>
-        <li><a onclick="navigate('setup')">Log in and change your password</a></li>
-        <li><a onclick="navigate('roles')">Understand the three roles</a> (admin, coach, student)</li>
-        <li><a onclick="navigate('profile')">Update your profile</a></li>
+        <li><a href="#setup" onclick="navigate('setup');return false">Log in and change your password</a></li>
+        <li><a href="#roles" onclick="navigate('roles');return false">Understand the three roles</a> (admin, coach, student)</li>
+        <li><a href="#profile" onclick="navigate('profile');return false">Update your profile</a></li>
         <li>Explore the dashboard — click around before adding others</li>
       </ul>
     </div>
@@ -1666,11 +1676,11 @@
     <div class="timeline-title">Upload your first content</div>
     <div class="timeline-body">
       <ul>
-        <li><a onclick="navigate('uploading')">Run the pre-flight checklist</a></li>
-        <li><a onclick="navigate('uploading')">Upload your first video</a></li>
-        <li><a onclick="navigate('creating-sessions')">Decide: session or class?</a></li>
-        <li><a onclick="navigate('notes')">Add timestamped notes</a> to your recording</li>
-        <li><a onclick="navigate('notes')">Tag content</a> for easy filtering later</li>
+        <li><a href="#uploading" onclick="navigate('uploading');return false">Run the pre-flight checklist</a></li>
+        <li><a href="#uploading" onclick="navigate('uploading');return false">Upload your first video</a></li>
+        <li><a href="#creating-sessions" onclick="navigate('creating-sessions');return false">Decide: session or class?</a></li>
+        <li><a href="#notes" onclick="navigate('notes');return false">Add timestamped notes</a> to your recording</li>
+        <li><a href="#notes" onclick="navigate('notes');return false">Tag content</a> for easy filtering later</li>
       </ul>
     </div>
   </div>
@@ -1680,10 +1690,10 @@
     <div class="timeline-title">Bring your team on board</div>
     <div class="timeline-body">
       <ul>
-        <li><a onclick="navigate('inviting-members')">Invite 2-3 coaches first</a> — let them get comfortable</li>
+        <li><a href="#inviting-members" onclick="navigate('inviting-members');return false">Invite 2-3 coaches first</a> — let them get comfortable</li>
         <li>Invite a small wave of students (5-10) as a pilot</li>
         <li>Ask for feedback — what's confusing? What's working?</li>
-        <li><a onclick="navigate('profile')">Configure email notifications</a></li>
+        <li><a href="#profile" onclick="navigate('profile');return false">Configure email notifications</a></li>
       </ul>
     </div>
   </div>
@@ -1694,10 +1704,10 @@
     <div class="timeline-body">
       <ul>
         <li>Invite the rest of your roster</li>
-        <li><a onclick="navigate('notes')">Standardize your tag vocabulary</a> with the team</li>
-        <li><a onclick="navigate('progress')">Review progress tracking</a> — see who's watching</li>
-        <li><a onclick="navigate('formats')">Optimize video settings</a> — 1080p H.264 for best results</li>
-        <li>Developers: see the <a onclick="navigate('developer-api')">Developer API</a> page — internal API reference for admins and coaches</li>
+        <li><a href="#notes" onclick="navigate('notes');return false">Standardize your tag vocabulary</a> with the team</li>
+        <li><a href="#progress" onclick="navigate('progress');return false">Review progress tracking</a> — see who's watching</li>
+        <li><a href="#formats" onclick="navigate('formats');return false">Optimize video settings</a> — 1080p H.264 for best results</li>
+        <li>Developers: see the <a href="#developer-api" onclick="navigate('developer-api');return false">Developer API</a> page — internal API reference for admins and coaches</li>
       </ul>
     </div>
   </div>
@@ -1710,7 +1720,7 @@
       content: `
 <h1>Inviting your team</h1>
 <p>Members join by email with a temporary password. Admins may invite coaches or students; coaches may invite students only. Everything happens in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> under <strong>Admin</strong> or <strong>Students</strong>.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Role capabilities are summarized on <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Role capabilities are summarized on <a href="#roles" onclick="navigate('roles');return false">Understanding user roles</a>.</div></div>
 <h2>Send an invite</h2>
 <ol>
 <li>Go to <strong>Admin</strong> (full roster control) or <strong>Students</strong> (coaches adding a student).</li>
@@ -1725,7 +1735,7 @@
 <li>Click <strong>Send Invite</strong> (or <strong>Generate link</strong>).</li>
 </ol>
 <p>Email delivery is usually quick. If nothing arrives, check spam and verify the address for typos.</p>
-<div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>Still missing mail? See <a onclick="navigate('email-issues')">Email and notification issues</a> or contact ${mailLink()}.</div></div>
+<div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>Still missing mail? See <a href="#email-issues" onclick="navigate('email-issues');return false">Email and notification issues</a> or contact ${mailLink()}.</div></div>
 <h2>Who can invite</h2>
 <table><thead><tr><th>Your role</th><th>Can add</th></tr></thead><tbody>
 <tr><td><strong>Admin</strong></td><td>Coaches and students</td></tr>
@@ -1760,7 +1770,7 @@
 <p>Students watch sessions and classes shared with them, take notes, add replies, request video review from coaches, and track their own progress. They cannot create sessions or classes, upload video, or view other students' private sessions.</p>
 <h2>Change a role</h2>
 <p>Admins only: <strong>Admin</strong> → select the member → role dropdown → save.</p>
-<div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>Downgrading a coach to a student removes the ability to create sessions or upload video. Existing content remains available. For invite rules, see <a onclick="navigate('inviting-members')">Inviting your team</a>.</div></div>`},
+<div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>Downgrading a coach to a student removes the ability to create sessions or upload video. Existing content remains available. For invite rules, see <a href="#inviting-members" onclick="navigate('inviting-members');return false">Inviting your team</a>.</div></div>`},
 
     uploading: {
       title: "Uploading videos", section: "Video",
@@ -1768,10 +1778,10 @@
 <h1>Uploading videos</h1>
 <div class="tldr"><strong>TLDR:</strong> Drag a video onto the upload area. MP4 recommended, under 5 GB, 1080p is plenty for coaching review.</div>
 <p>Each session or class uses one source: <strong>Upload</strong> (file from your device) or <strong>Notes Only</strong> (no video). Upload from <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> when creating or editing.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Format and size limits: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Format and size limits: <a href="#formats" onclick="navigate('formats');return false">Supported formats and limits</a>.</div></div>
 <h2>Your first upload</h2>
 <p>A <strong>session</strong> is for one assigned student (private lesson, individual review). A <strong>class</strong> is for everyone in your account (group session, shared recording). Upload a file in either case — create them after you <a href="https://app.kaynos.net" target="_blank" rel="noopener">sign in</a>.</p>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>New to the flow? Read <a onclick="navigate('creating-sessions')">Creating a session</a> and <a onclick="navigate('creating-classes')">Creating a class</a> first.</div></div>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>New to the flow? Read <a href="#creating-sessions" onclick="navigate('creating-sessions');return false">Creating a session</a> and <a href="#creating-classes" onclick="navigate('creating-classes');return false">Creating a class</a> first.</div></div>
 <ol>
 <li>Create a new session or class, then pick <strong>Upload</strong> for the video source.</li>
 <li>Drag your file onto the box, or click to choose from Finder / Files.</li>
@@ -1796,11 +1806,11 @@
 <p>The UI shows percent complete, current speed, time remaining, and a <strong>Cancel</strong> button if you need to stop.</p>
 <h2>Replace a video</h2>
 <p>Open the session or class, remove the current video with <strong>×</strong>, then upload a replacement. The previous file is deleted from storage.</p>
-<div class="hint hint-danger"><div class="hint-icon">${IC.danger}</div><div><strong>Replacing video is destructive.</strong> The old file is deleted from storage with no undo. Archive a copy elsewhere first if you might need it later.</div></div>
+<div class="hint hint-danger"><div class="hint-icon">${IC.danger}</div><div><strong>Replacing video is destructive.</strong> The old file is deleted from storage with no undo, and <strong>every note attached to that video is permanently deleted along with it</strong> — notes do not migrate to the new upload and cannot be recovered. Archive the video and copy any notes you want to keep before replacing.</div></div>
 <details><summary>Upload troubleshooting</summary>
 <h2>Video upload problems</h2>
 <p>Large uploads depend on stable internet and a supported format. Work through the checks below before assuming an app bug.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Reference: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Reference: <a href="#formats" onclick="navigate('formats');return false">Supported formats and limits</a>.</div></div>
 <h3>Fails immediately</h3>
 <p><strong>"Please select a video file":</strong> the file may not be MP4, MOV, WebM, or MKV. Convert to MP4 with <a href="https://handbrake.fr" target="_blank" rel="noopener">HandBrake</a> or <a href="https://www.videolan.org/vlc/" target="_blank" rel="noopener">VLC</a>, then try again.</p>
 <p><strong>File too big:</strong> the limit is 5 GB. Trim the clip or export at 1080p — HandBrake's "Fast 1080p30" preset is a common choice.</p>
@@ -1834,7 +1844,7 @@
 <h2>Upload pre-flight checklist</h2>
 <p>Run through this before uploading to avoid common issues.</p>
 <div class="preflight" id="preflightList"></div>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Full format details: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Full format details: <a href="#formats" onclick="navigate('formats');return false">Supported formats and limits</a>.</div></div>
 </details>`},
 
     playback: {
@@ -1886,7 +1896,7 @@
 <li>Click <strong>Create Clip</strong>. The clip is saved to your clips list.</li>
 <li>Toggle <strong>Share</strong> to generate a shareable link anyone can view — no login required.</li>
 </ol>
-<p>Manage clips from the session or class detail page. Disable sharing at any time to revoke the link.</p>
+<p>Manage clips from the session or class detail page. <strong>Disable sharing</strong> at any time — every existing link to that clip stops working immediately (returns 404), so a leaked link is recoverable without rotating the token. Re-enabling later restores access using the same link.</p>
 <h3>Recap clips</h3>
 <p>Coaches can create short recap clips (2-3 minutes) from full class recordings so students get the highlights without watching 60 minutes.</p>
 <ol>
@@ -1901,12 +1911,12 @@
 <ol>
 <li>Create a clip and toggle <strong>Share</strong> on.</li>
 <li>Copy the shareable link. Anyone with the link can view the clip — no login required.</li>
-<li>Toggle sharing off at any time to revoke access.</li>
+<li>Toggle sharing off at any time to revoke access — old links return 404 instantly across all viewers; no need to rotate a token or reissue a new URL.</li>
 </ol>
 <p>Shared clips show the video segment only — no notes, no account details, no other sessions.</p>
 <details><summary>Playback troubleshooting</summary>
 <p>If the player is blank or showing errors, work through these checks.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Codecs: <a href="#formats" onclick="navigate('formats');return false">Supported formats and limits</a>.</div></div>
 <h3>Player blank or broken controls</h3>
 <p><strong>Black screen / no controls:</strong> refresh, then hard refresh or clear cache, then try <a href="https://www.google.com/chrome/" target="_blank" rel="noopener">Chrome</a>. Confirm the upload finished (not stuck on "uploading" or showing "failed").</p>
 <p><strong>"Cannot be played":</strong> often a codec or browser issue. MKV files use codecs that vary by browser — try <a href="https://www.google.com/chrome/" target="_blank" rel="noopener">Chrome</a> or <a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener">Firefox</a>, or re-export to MP4 with H.264 video and AAC audio.</p>
@@ -1927,7 +1937,7 @@
       content: `
 <h1>Supported formats and limits</h1>
 <p>Use common codecs your devices and browsers handle well. When unsure, export to MP4 (H.264 + AAC). Free converters: <a href="https://handbrake.fr" target="_blank" rel="noopener">HandBrake</a>, <a href="https://www.videolan.org/vlc/" target="_blank" rel="noopener">VLC</a>.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Where files live and how long they're kept: <a onclick="navigate('storage')">Video storage and retention</a>.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Where files live and how long they're kept: <a href="#storage" onclick="navigate('storage');return false">Video storage and retention</a>.</div></div>
 <table><thead><tr><th>Format</th><th>Extension</th><th>Support level</th></tr></thead><tbody>
 <tr><td>MP4</td><td><code>.mp4</code></td><td>Recommended default</td></tr>
 <tr><td>MOV</td><td><code>.mov</code></td><td>Supported</td></tr>
@@ -1979,8 +1989,8 @@
 <h2>Where video is stored</h2>
 <p>Videos are stored in <a href="https://www.backblaze.com/b2/cloud-storage.html" target="_blank" rel="noopener">Backblaze B2</a> (US-hosted). Playback uses short-lived presigned URLs issued directly from B2 — there is no third-party CDN in front of video delivery.</p>
 <h2>Retention</h2>
-<p>Default retention is <strong>6 months per school</strong>, configurable by an admin. Videos flagged as expiring are surfaced one month before the retention limit. There is a <strong>30-day grace period</strong> before actual deletion. Admins can view expiring videos from the Admin panel and request retention-limit increases.</p>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Upload limits and codecs: <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>
+<p>Default retention is <strong>6 months per school</strong>, with a <strong>30-day grace period</strong> before actual deletion. Videos flagged as expiring are surfaced one month before the retention limit. School admins can view expiring videos from the Admin panel and request retention-limit changes by emailing support — the limit is set per school by Kaynos staff, not adjustable directly from the Admin UI.</p>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Upload limits and codecs: <a href="#formats" onclick="navigate('formats');return false">Supported formats and limits</a>.</div></div>
 <h2>Default quotas</h2>
 <ul>
 <li><strong>100 videos</strong> per school.</li>
@@ -2042,7 +2052,7 @@
 </ol>
 <h2>Who sees it</h2>
 <p>The assigned student, the creator, and admins. Other students cannot open someone else's private session.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>First upload walkthrough: <a onclick="navigate('uploading')">Your first upload</a> on the Uploading videos page. Visibility model: <a onclick="navigate('faq')">FAQ</a>.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>First upload walkthrough: <a href="#uploading" onclick="navigate('uploading');return false">Your first upload</a> on the Uploading videos page. Visibility model: <a href="#faq" onclick="navigate('faq');return false">FAQ</a>.</div></div>
 <h2>Scheduling</h2>
 <p>The <strong>Schedule</strong> page shows a calendar with daily, weekly, and monthly views. To schedule a session:</p>
 <ol>
@@ -2062,7 +2072,7 @@
 </ol>
 <h3>How coaches respond</h3>
 <p>Pending review requests appear on the coach dashboard under <strong>Awaiting feedback</strong>. The coach can <strong>accept</strong> or <strong>decline</strong> each request. Accepting converts the draft into a full session — the coach then watches the video and adds notes and annotations as usual.</p>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Review requests are the main way students initiate feedback. Coaches who enable <a onclick="navigate('profile')">email notifications</a> get alerted as soon as a request comes in.</div></div>`},
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Review requests are the main way students initiate feedback. Coaches who enable <a href="#profile" onclick="navigate('profile');return false">email notifications</a> get alerted as soon as a request comes in.</div></div>`},
 
     "creating-classes": {
       title: "Creating a class", section: "Sessions & Classes",
@@ -2078,7 +2088,7 @@
 </ol>
 <h2>Who sees it</h2>
 <p>All members, coaches, and admins in your account. This broad visibility is intentional and differs from a private session.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Upload options and limits: <a onclick="navigate('uploading')">Uploading videos</a> and <a onclick="navigate('formats')">Supported formats and limits</a>.</div></div>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Upload options and limits: <a href="#uploading" onclick="navigate('uploading');return false">Uploading videos</a> and <a href="#formats" onclick="navigate('formats');return false">Supported formats and limits</a>.</div></div>`},
 
     notes: {
       title: "Notes and timestamps", section: "Sessions & Classes",
@@ -2108,7 +2118,7 @@
 <li>Students can leave questions on their own sessions for coach follow-up.</li>
 <li>Use the coach filter to quickly review your notes across several recordings.</li>
 </ul>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Playback shortcuts and the full note workflow: <a onclick="navigate('playback')">Watching and reviewing</a>.</div></div>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Playback shortcuts and the full note workflow: <a href="#playback" onclick="navigate('playback');return false">Watching and reviewing</a>.</div></div>
 <h2>Note types</h2>
 <p>When creating a note, choose a type to categorize it:</p>
 <ul>
@@ -2193,7 +2203,7 @@
 <p>Use the filter buttons to narrow the view to the <strong>last 7, 30, or 90 days</strong>. The default view is 30 days.</p>
 <h2>Per-session details</h2>
 <p>Each row in the recent-sessions list shows the session title, date, a check icon if the full video has been watched, and the note count. Resume position and last-viewed timestamp are tracked behind the scenes so playback picks up where it left off.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Roster and access control: <a onclick="navigate('managing-members')">Managing members</a>.</div></div>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Roster and access control: <a href="#managing-members" onclick="navigate('managing-members');return false">Managing members</a>.</div></div>`},
 
     "managing-members": {
       title: "Managing members", section: "Admin",
@@ -2202,9 +2212,9 @@
 <div class="tldr"><strong>TLDR:</strong> Admins manage the full roster from <strong>Admin</strong>. Coaches manage their own students from <strong>Students</strong>. Use the role dropdown to change permissions and the <strong>Remove</strong> button to revoke access — notes the member created stay for history.</div>
 <p>Admins use <strong>Admin</strong> for the full roster. Coaches can use <strong>Students</strong> to manage student invites on their side. Everything happens in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
 <h2>Add someone</h2>
-<p>See <a onclick="navigate('inviting-members')">Inviting your team</a> for the step-by-step invite flow.</p>
+<p>See <a href="#inviting-members" onclick="navigate('inviting-members');return false">Inviting your team</a> for the step-by-step invite flow.</p>
 <h2>Change roles</h2>
-<p><strong>Admin</strong> → select the member → role dropdown → save. Changes apply immediately. Details: <a onclick="navigate('roles')">Understanding user roles</a>.</p>
+<p><strong>Admin</strong> → select the member → role dropdown → save. Changes apply immediately. Details: <a href="#roles" onclick="navigate('roles');return false">Understanding user roles</a>.</p>
 <h2>Remove access</h2>
 <p><strong>Remove Member</strong> ends their access immediately. Notes they already created remain for history. You can also remove a student directly from their profile page (<code>/students/&lt;id&gt;</code>) using the <strong>Remove</strong> button — admin only, mirrors the roster flow.</p>
 <div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>Removal is immediate — the person loses login access to your account on <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> right away.</div></div>
@@ -2266,13 +2276,13 @@
 <li>Enter your new password (minimum <strong>8 characters</strong>) and confirm it.</li>
 <li>Click <strong>Update Password</strong>.</li>
 </ol>
-<p>Locked out? Ask an admin for a reset, or email ${mailLink()}. Login help: <a onclick="navigate('login-issues')">Login and access issues</a>.</p>
+<p>Locked out? Ask an admin for a reset, or email ${mailLink()}. Login help: <a href="#login-issues" onclick="navigate('login-issues');return false">Login and access issues</a>.</p>
 <h2>Billing (admins only)</h2>
 <p>Admins see a <strong>Billing</strong> section on their profile with the current subscription status and a <strong>Manage</strong> button that opens the Stripe billing portal in a new tab. Update payment methods, download invoices, or change plans there.</p>
 <h2>Notifications</h2>
 <p>Email notifications are controlled by a single toggle in the profile <strong>Notifications</strong> section. When enabled, Kaynos sends email for collaboration and activity events: someone mentions you, a reply is added to your note, a session or class is shared with you, and (for coaches) review requests.</p>
 <p>Account-lifecycle and security messages always send regardless of this toggle: welcome emails, password resets, invites with temporary passwords, email-change verification links, deletion notices, and support form confirmations. Admins also receive automated usage reports based on the schedule they choose under <strong>Admin → Reports &amp; Exports</strong>.</p>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Delivery problems? See <a onclick="navigate('email-issues')">Email and notification issues</a>.</div></div>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Delivery problems? See <a href="#email-issues" onclick="navigate('email-issues');return false">Email and notification issues</a>.</div></div>
 <h2>In-app notifications</h2>
 <p>The bell icon in the header shows unread notifications: mentions, note replies, session shares, review requests, and other activity. Click to view, or mark all as read. On mobile, the panel can be dismissed with the close button.</p>
 <h3>Not receiving mail</h3>
@@ -2302,14 +2312,14 @@
 <p>Email ${mailLink()} with your name, account name, and email address.</p>
 <h3>Reset link expired</h3>
 <p>Password reset links expire after <strong>1 hour</strong>. If your link no longer works, request a new one from the login page (<strong>Forgot password?</strong>) or ask your admin to resend from <strong>Admin → Members → Reset Password</strong>.</p>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Profile and password changes: <a onclick="navigate('profile')">Profile and password</a>.</div></div>`},
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Profile and password changes: <a href="#profile" onclick="navigate('profile');return false">Profile and password</a>.</div></div>`},
 
     "email-issues": {
       title: "Email and notification issues", section: "Troubleshoot",
       content: `
 <h1>Email and notification issues</h1>
 <p>Most delivery problems come from spam filtering, address typos, or disabled notification settings. Preferences are under <strong>Profile</strong> in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>What we send: <a onclick="navigate('profile')">Email notifications</a>. Invites: <a onclick="navigate('inviting-members')">Inviting your team</a>.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>What we send: <a href="#profile" onclick="navigate('profile');return false">Email notifications</a>. Invites: <a href="#inviting-members" onclick="navigate('inviting-members');return false">Inviting your team</a>.</div></div>
 <h2>Not receiving messages</h2>
 <ol>
 <li>Check spam or promotions folders (Gmail often sorts automated mail here).</li>
@@ -2333,7 +2343,7 @@
 <p>Slow loads are usually caused by local network conditions, browser cache, or extensions — not necessarily a full outage.</p>
 <h2>General slowness</h2>
 <ol>
-<li>About 5 Mbps down for smooth 1080p playback. Upload speeds are covered on the <a onclick="navigate('uploading')">Uploading videos</a> page.</li>
+<li>About 5 Mbps down for smooth 1080p playback. Upload speeds are covered on the <a href="#uploading" onclick="navigate('uploading');return false">Uploading videos</a> page.</li>
 <li>Clear cache and site data for <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</li>
 <li>Try Chrome or Firefox if Safari misbehaves during troubleshooting.</li>
 <li>Temporarily disable strict ad or script blockers to test.</li>
@@ -2348,7 +2358,7 @@
 </ul>
 <h2>Mobile tips</h2>
 <p>Kaynos runs in the mobile browser — no app store install needed. Open <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> in your phone's browser.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Upload troubleshooting: <a onclick="navigate('uploading')">Uploading videos</a>.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Upload troubleshooting: <a href="#uploading" onclick="navigate('uploading');return false">Uploading videos</a>.</div></div>
 <h3>Supported mobile browsers</h3>
 <ul>
 <li>iPhone / iPad: Safari or Chrome</li>
@@ -2379,12 +2389,12 @@
 <h1>Frequently asked questions</h1>
 <div class="tldr"><strong>TLDR:</strong> Common pre-purchase and account questions, grouped: signup &amp; what you're getting, day-to-day running, trust &amp; minors on camera, devices &amp; integrations, support, billing &amp; pricing, search &amp; navigation, data, remote coaching, and the internal API. For account-specific issues, ${mailLink('email support')} or use the in-app chat.</div>
 <p>Kaynos is built for coaches who use video review: publish sessions and classes, add timestamped notes, and members watch on their own time.</p>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Quick links:</strong> App: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> · Support: ${mailLink()} · Setup: <a onclick="navigate('setup')">Setting up your account</a></div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Quick links:</strong> App: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> · Support: ${mailLink()} · Setup: <a href="#setup" onclick="navigate('setup');return false">Setting up your account</a></div></div>
 <h2>What you're signing up for</h2>
 <h3>What is Kaynos, in plain language?</h3>
 <p>It replaces ad-hoc clip sharing in chat. You put session footage on a <strong>session</strong> (one student) or a <strong>class</strong> (everyone in your account), add notes on the timeline, and students review when they can. Everything runs in the browser at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> — no separate app install.</p>
 <h3>Do my students need to install something?</h3>
-<p>No. They open <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> in a normal phone or laptop browser. If YouTube works on your network, Kaynos should too.</p>
+<p>No. They open <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> in a normal phone or laptop browser. Practical bandwidth: about <strong>5 Mbps down for smooth 1080p playback</strong> and <strong>10 Mbps up for a single 1080p upload</strong>. The <a href="#uploading" onclick="navigate('uploading');return false">Uploading videos</a> page has a calculator for larger files and slower connections.</p>
 <h3>What types of coaching does this work for?</h3>
 <p>Kaynos works for any coaching practice where reviewing video helps students improve: personal training, sports coaching, music lessons, dance instruction, or any skill-based teaching.</p>
 <hr>
@@ -2398,18 +2408,20 @@
 <hr>
 <h2>Trust, minors on camera, and policy</h2>
 <h3>How serious are you about security?</h3>
-<p>HTTPS in transit, hashed passwords, and video in cloud storage served via short-lived presigned URLs. See <a onclick="navigate('storage')">Video storage and retention</a> for details.</p>
+<p>HTTPS in transit, hashed passwords, and video in cloud storage served via short-lived presigned URLs. See <a href="#storage" onclick="navigate('storage');return false">Video storage and retention</a> for details.</p>
+<h3>Which third parties process my data?</h3>
+<p>The full subprocessor list is on the <a href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">privacy page</a>. Headline subprocessors: <strong>Stripe</strong> (billing), <strong>Resend</strong> (transactional email), <strong>Backblaze B2</strong> (video storage), and <strong>Neon</strong> (Postgres). Optional features use <strong>Twelve Labs</strong> (AI review of an uploaded video, on demand) and <strong>Deepgram</strong> (voice dictation for note entry, opt-in per use). Audio sent to Deepgram is processed in real time and is not stored by Deepgram.</p>
 <h3>What about minors on the footage?</h3>
 <p>Kaynos is not currently designed for users under 13 (COPPA) or under 16 in the EU (GDPR Article 8). Organizations using Kaynos with minors are responsible for obtaining appropriate parental or guardian consent. Schools using Kaynos for student records should contact us about FERPA-compliant data processing agreements.</p>
 <p>Read the <a href="https://app.kaynos.net/terms" target="_blank" rel="noopener">Terms of Service</a> in the app. For legal questions, consult qualified counsel.</p>
 <h3>Do you comply with state privacy laws?</h3>
-<p>Yes. Kaynos complies with applicable US privacy laws including CCPA/CPRA (California), VCDPA (Virginia), CPA (Colorado), CTDPA (Connecticut), and others. We do not sell personal information. See our <a onclick="navigate('privacy-on-this-site')">privacy page</a> for details on your rights.</p>
+<p>Yes. Kaynos complies with applicable US privacy laws including CCPA/CPRA (California), VCDPA (Virginia), CPA (Colorado), CTDPA (Connecticut), and others. We do not sell personal information. See our <a href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">privacy page</a> for details on your rights.</p>
 <hr>
 <h2>Devices and integrations</h2>
 <h3>Which browsers are supported?</h3>
 <p>Current Chrome, Firefox, Safari, and Edge. If upload or playback fails in one browser, trying Chrome is a reasonable first step.</p>
 <h3>Do you expose an API?</h3>
-<p>There's an internal API reference at <code>/admin/api-docs</code> for admins and coaches to understand the endpoints the app itself uses. A public developer API with tokens and webhooks for third-party integrations is not available today. See the <a onclick="navigate('developer-api')">Developer API</a> page for details.</p>
+<p>There's an internal API reference at <code>/admin/api-docs</code> for admins and coaches to understand the endpoints the app itself uses. A public developer API with tokens and webhooks for third-party integrations is not available today. See the <a href="#developer-api" onclick="navigate('developer-api');return false">Developer API</a> page for details.</p>
 <hr>
 <h2>Support</h2>
 <h3>How do I contact you?</h3>
@@ -2419,7 +2431,7 @@
 <hr>
 <h2>Billing and pricing</h2>
 <h3>How much does Kaynos cost?</h3>
-<p><strong>$29/month flat</strong> for the coach — students are free no matter how many you add, and every feature is included with no per-seat tiers. Every new account starts with a <strong>14-day free trial</strong> — card required, no charge until day 15. Manage billing, view invoices, and update your payment method from the Stripe billing portal (linked from your <strong>Profile</strong> page when you're signed in as an admin).</p>
+<p><strong>[$X/month]</strong> or <strong>[$Y/year]</strong> — flat per school. Every feature is included; there are no per-coach or per-student tiers and no seat counts. <strong>Worked example:</strong> a school with 1 owner + 3 coaches + 50 students pays the same flat price as a school with just 1 owner — coach and student counts don't change the bill. Every new account starts with a <strong>14-day free trial</strong> — card required, no charge until day 15. Manage billing, view invoices, and update your payment method from the Stripe billing portal (linked from your <strong>Profile</strong> page when you're signed in as an admin).</p>
 <h3>What happens when my trial ends?</h3>
 <p>Your selected plan begins billing automatically. If you cancel before the trial ends, you won't be charged. All your data stays available while your subscription is active.</p>
 <h3>How do I manage my subscription?</h3>
@@ -2470,8 +2482,8 @@
 <li>Customer-facing webhooks for real-time events</li>
 <li>SDKs or client libraries</li>
 </ul>
-<p>A public API may come in the future. If you have a use case that would benefit from programmatic access or webhooks, <a href="mailto:support@kaynos.net">contact us</a> or visit our <a onclick="navigate('contact')">contact page</a> so we can prioritize based on demand.</p>
-<p>Follow our <a onclick="navigate('release-notes')">release notes</a> for updates.</p>`},
+<p>A public API may come in the future. If you have a use case that would benefit from programmatic access or webhooks, <a href="mailto:support@kaynos.net">contact us</a> or visit our <a href="#contact" onclick="navigate('contact');return false">contact page</a> so we can prioritize based on demand.</p>
+<p>Follow our <a href="#release-notes" onclick="navigate('release-notes');return false">release notes</a> for updates.</p>`},
 
     glossary: {
       title: "Glossary", section: "Getting Started",
@@ -2507,7 +2519,7 @@
 <dt>Drilling</dt><dd>Repetitive practice of a specific technique with a cooperative partner. Think of it like running drills in basketball.</dd>
 <dt>Sparring / rolling</dt><dd>Live practice at varying intensity. "Rolling" is the BJJ term for sparring.</dd>
 </dl>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>For role details see <a onclick="navigate('roles')">Understanding user roles</a>.</div></div>`},
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>For role details see <a href="#roles" onclick="navigate('roles');return false">Understanding user roles</a>.</div></div>`},
 
     troubleshoot: {
       title: "Troubleshooting wizard", section: "Troubleshoot",
@@ -2541,7 +2553,7 @@
 <li>Clear site data for app.kaynos.net in your browser settings</li>
 <li>Disable ad blockers or strict privacy extensions temporarily</li>
 </ol>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>More troubleshooting: <a onclick="navigate('performance')">Performance and loading</a></div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>More troubleshooting: <a href="#performance" onclick="navigate('performance');return false">Performance and loading</a></div></div>
 </details>`},
 
     contact: {
@@ -2609,7 +2621,7 @@
 <h2>Full changelog</h2>
 <div class="release-filter" id="releaseFilter"></div>
 <div id="releaseList"></div>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Have an idea? <a onclick="navigate('feature-requests')">Submit a feature request</a> or email ${mailLink()}.</div></div>`},
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Have an idea? <a href="#feature-requests" onclick="navigate('feature-requests');return false">Submit a feature request</a> or email ${mailLink()}.</div></div>`},
 
     "feature-requests": {
       title: "Feature requests", section: "",
@@ -2687,7 +2699,7 @@
 <li><strong>Rolling / sparring:</strong> Live practice with a partner, applying techniques at varying intensity.</li>
 <li><strong>Drilling:</strong> Practicing a single technique repeatedly with a cooperative partner to build muscle memory.</li>
 </ul>
-<p>For a more complete list, see our <a onclick="navigate('glossary')">glossary of BJJ terms</a> — written for people who don't train.</p>
+<p>For a more complete list, see our <a href="#glossary" onclick="navigate('glossary');return false">glossary of BJJ terms</a> — written for people who don't train.</p>
 
 <h2>Privacy and safety</h2>
 <p>We understand that video recordings of children require careful handling. Here is how Kaynos protects your child's data:</p>
@@ -2697,7 +2709,7 @@
 <li><strong>Links expire:</strong> Playback links are temporary and cannot be shared with or bookmarked by outsiders.</li>
 <li><strong>No public profiles:</strong> Students do not have public-facing profiles, pages, or any content visible outside their academy.</li>
 </ul>
-<p>For the full privacy policy, see <a href="https://app.kaynos.net/privacy" target="_blank" rel="noopener">app.kaynos.net/privacy</a>. For details on COPPA and FERPA compliance, see <a onclick="navigate('privacy-on-this-site')">Privacy on this site</a>.</p>
+<p>For the full privacy policy, see <a href="https://app.kaynos.net/privacy" target="_blank" rel="noopener">app.kaynos.net/privacy</a>. For details on COPPA and FERPA compliance, see <a href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">Privacy on this site</a>.</p>
 <div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div><strong>Data requests:</strong> Parents can request access to or deletion of their child's data at any time. Email \${mailLink()} or ask your child's coach to connect you with academy administration.</div></div>
 
 <h2>Questions or concerns?</h2>
@@ -2709,7 +2721,7 @@
 <li>Help with any account or access issues</li>
 </ul>
 <p>You can also email ${mailLink()} with questions about Kaynos itself, including privacy, data handling, or how the platform works.</p>
-<p>For common questions, see the <a onclick="navigate('faq')">FAQ</a>.</p>`},
+<p>For common questions, see the <a href="#faq" onclick="navigate('faq');return false">FAQ</a>.</p>`},
 
     "privacy-on-this-site": {
       title: "Privacy on this site", section: "",
@@ -2736,7 +2748,7 @@
 <h2>What is sent externally</h2>
 <p>No analytics, tracking pixels, or cookies are used. The "Contact Support" form composes a <code>mailto:</code> link — your email client sends the message, not this site.</p>
 <p>This site loads fonts from your browser's cache (self-hosted). No external requests are made after the initial page load, except when clicking external links.</p>
-<div class="hint hint-info"><div class="hint-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.5"/><line x1="8" y1="7" x2="8" y2="11"/><circle cx="8" cy="5" r=".5" fill="currentColor"/></svg></div><div>This page describes the help center at docs.kaynos.net. The application has its own policy at <a href="https://app.kaynos.net/privacy" target="_blank" rel="noopener">app.kaynos.net/privacy</a>; sections below cover the application as well.</div></div>
+<div class="hint hint-info"><div class="hint-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.5"/><line x1="8" y1="7" x2="8" y2="11"/><circle cx="8" cy="5" r=".5" fill="currentColor"/></svg></div><div>This page describes the help center at docs.kaynos.net. The application has its own policy at <a href="https://app.kaynos.net/privacy" target="_blank" rel="noopener">app.kaynos.net/privacy</a>; sections below cover the application as well.</div></div>
 
 <h2>Third-party processors (the application)</h2>
 <table class="comparison-table">
@@ -2759,7 +2771,7 @@
 <tbody>
 <tr><td>Name, email</td><td>Account identity, notifications</td><td>Until account deletion</td></tr>
 <tr><td>Password (hashed)</td><td>Authentication</td><td>Until account deletion</td></tr>
-<tr><td>Video recordings</td><td>Core coaching service</td><td>6 months default (configurable)</td></tr>
+<tr><td>Video recordings</td><td>Core coaching service</td><td>6 months default (configurable per school on request)</td></tr>
 <tr><td>Coaching notes</td><td>Timestamped feedback</td><td>With associated session/class</td></tr>
 <tr><td>Progress data</td><td>Resume playback, completion tracking</td><td>With associated session/class</td></tr>
 <tr><td>IP address, browser</td><td>Security, rate limiting</td><td>90 days</td></tr>
@@ -2876,20 +2888,32 @@
     { section: "Account", pages: ["profile"] },
     { section: "Admin", pages: ["inviting-members", "managing-members", "developer-api"] },
     { section: "Troubleshoot", pages: ["troubleshoot", "login-issues", "email-issues", "performance"] },
-    // Demoted to footer; still routable. allPageKeys includes these so search and arrow-key nav work.
+    // Hidden from sidebar but still routable via hash links and the footer.
     { section: "", pages: ["release-notes", "feature-requests", "parent-guide", "contact", "privacy-on-this-site"], hidden: true }
   ];
 
+  // allPageKeys: every routable page (used for hash routing and related-articles).
+  // visiblePageKeys: drives sequential nav (footer + arrow keys) so hidden
+  // pages don't surface as a dangling "Next →" at the end of the sidebar.
   const allPageKeys = NAV.flatMap(g => g.pages);
-  // Footer prev/next nav walks only visible groups so demoted pages
-  // (release-notes, contact, etc.) don't surface as a dangling "Next →"
-  // at the end of Troubleshoot. allPageKeys still drives search and arrow nav.
   const visiblePageKeys = NAV.filter(g => !g.hidden).flatMap(g => g.pages);
+
+  const SUPPORTED_FORMATS = 'MP4, MOV, WebM, MKV';
 
   /* ── SAFE STORAGE ────────────────────────────────────── */
   function safeGet(key, fallback) {
     try { return JSON.parse(localStorage.getItem(key)) || fallback; }
     catch { return fallback; }
+  }
+  function safeSessionGet(key, fallback) {
+    try { return JSON.parse(sessionStorage.getItem(key)) || fallback; }
+    catch { return fallback; }
+  }
+
+  // Resolve scroll behavior at call time so the user toggling reduced-motion
+  // takes effect immediately without a reload.
+  function smoothBehavior() {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
   }
   function safeSet(key, value) {
     try { localStorage.setItem(key, JSON.stringify(value)); }
@@ -2924,7 +2948,7 @@
       const recentOpen = expanded['__recent'] === true;
       html += '<div class="sidebar-dynamic">';
       html += `<div class="sidebar-section${recentOpen ? '' : ' collapsed'}" data-section="__recent">`;
-      html += '<div class="sidebar-section-title" onclick="toggleSection(this)">' + IC.clock + ' Recent <button class="sidebar-recent-hide" onclick="event.stopPropagation();hideRecent()" title="Hide recent" aria-label="Hide recent">&times;</button><span class="chevron" style="margin-left:auto">▼</span></div>';
+      html += '<div class="sidebar-section-title-row" style="display:flex;align-items:center"><button class="sidebar-section-title" type="button" onclick="toggleSection(this)" aria-expanded="' + (recentOpen ? 'true' : 'false') + '">' + IC.clock + ' Recent <span class="chevron" style="margin-left:auto">▼</span></button><button class="sidebar-recent-hide" onclick="hideRecent()" title="Hide recent" aria-label="Hide recent">&times;</button></div>';
       html += '<div class="sidebar-links">';
       recent.slice(0, 5).forEach(p => {
         if (PAGES[p]) html += `<a class="sidebar-link" href="#${p}" tabindex="0" data-page="${p}" onclick="navigate('${p}');return false" onkeydown="if(event.key==='Enter'){navigate('${p}');return false}"><span class="sl-text">${PAGES[p].title}</span></a>`;
@@ -2943,7 +2967,7 @@
       const isExpanded = !g.section || expanded[g.section] === true || g.section === activeSection;
       const isCollapsed = g.section && !isExpanded;
       html += `<div class="sidebar-section${isCollapsed ? ' collapsed' : ''}" data-section="${g.section || ''}">`;
-      if (g.section) html += `<div class="sidebar-section-title" onclick="toggleSection(this)">${sectionIcons[g.section] || ''}${g.section}<span class="chevron" style="margin-left:auto">▼</span></div>`;
+      if (g.section) html += `<button class="sidebar-section-title" type="button" onclick="toggleSection(this)" aria-expanded="${isExpanded ? 'true' : 'false'}">${sectionIcons[g.section] || ''}${g.section}<span class="chevron" style="margin-left:auto">▼</span></button>`;
       html += '<div class="sidebar-links">';
       g.pages.forEach(p => {
         const badge = (p === 'release-notes' && hasNewUpdates()) ? '<span class="new-badge" title="New updates"></span>' : '';
@@ -2960,11 +2984,13 @@
   function toggleSection(el) {
     const section = el.closest('.sidebar-section');
     section.classList.toggle('collapsed');
+    const isCollapsed = section.classList.contains('collapsed');
+    el.setAttribute('aria-expanded', String(!isCollapsed));
     const expanded = safeGet('sb-expanded', {});
     const name = section.dataset.section;
     // Track the user's explicit expand/collapse choice. Default behaviour
     // (no entry) = collapsed.
-    if (section.classList.contains('collapsed')) delete expanded[name];
+    if (isCollapsed) delete expanded[name];
     else expanded[name] = true;
     safeSet('sb-expanded', expanded);
   }
@@ -2991,7 +3017,7 @@
   const PAGE_DESCRIPTIONS = {
     'welcome': 'Kaynos help center — setup guides, video upload, playback, troubleshooting, and developer API reference for the video coaching platform.',
     'setup': 'Set up your Kaynos account. First login, password change, Google OAuth, and getting started with video coaching.',
-    'uploading': 'Upload video to Kaynos. Supported formats (MP4, MOV, WebM, MKV), size limits, chunked upload, and troubleshooting.',
+    'uploading': `Upload video to Kaynos. Supported formats (${SUPPORTED_FORMATS}), size limits, chunked upload, and troubleshooting.`,
     'playback': 'Watch and review video in Kaynos. Playback speed, keyboard shortcuts, timeline notes, clips, and mobile playback.',
     'creating-sessions': 'Create sessions and classes in Kaynos. Private lessons vs shared classes, and scheduling.',
     'notes': 'Timestamped coaching notes in Kaynos. Add notes, voice dictation, annotations, reactions, AI review, and tags.',
@@ -3000,7 +3026,7 @@
     'roles': 'User roles in Kaynos. Admin, coach, and student permissions and capabilities.',
     'troubleshoot': 'Troubleshoot Kaynos issues. Step-by-step wizard for upload, playback, login, and performance problems.',
     'progress': 'Track student progress in Kaynos. Watch rate, session count, note count, time-period filtering, and per-session completion tracking.',
-    'formats': 'Supported video formats and limits in Kaynos. MP4, MOV, WebM, MKV. Max 5 GB. Upload time calculator.',
+    'formats': `Supported video formats and limits in Kaynos. ${SUPPORTED_FORMATS}. Max 5 GB. Upload time calculator.`,
     'storage': 'Video storage and retention in Kaynos. Backblaze B2, 6-month retention, 100 video / 50 GB defaults.',
     'managing-members': 'Manage members in Kaynos. Invite coaches and students, change roles, reset passwords, admin panel overview.',
     'profile': 'Kaynos profile settings. Password, notifications, and account preferences.',
@@ -3110,7 +3136,11 @@
 
     if (!window._isPopstate) window.scrollTo({ top: 0, behavior: 'instant' });
     if (!window._isPopstate) history.pushState({ page: pageId }, '', '#' + pageId);
-    document.title = pageId === 'welcome' ? 'Kaynos — Help Center' : `${page.title} — Kaynos Docs`;
+    document.title = pageId === 'welcome' ? 'Kaynos Docs' : `${page.title} — Kaynos Docs`;
+
+    // Move focus to the new content so keyboard/SR users land at the article
+    // start instead of resuming Tab order from the now-replaced previous page.
+    pc.focus({ preventScroll: true });
 
     // Announce page change to screen readers
     let liveRegion = document.getElementById('sr-announce');
@@ -3132,13 +3162,14 @@
       }
     }
 
-    // Update OG tags
+    // Update OG / Twitter tags
     const ogTitle = document.querySelector('meta[property="og:title"]');
     const ogDesc = document.querySelector('meta[property="og:description"]');
     const ogUrl = document.querySelector('meta[property="og:url"]');
     const twTitle = document.querySelector('meta[name="twitter:title"]');
     const twDesc = document.querySelector('meta[name="twitter:description"]');
-    const pageTitle = pageId === 'welcome' ? 'Kaynos — Help Center' : page.title + ' — Kaynos Docs';
+    const twUrl = document.querySelector('meta[name="twitter:url"]');
+    const pageTitle = pageId === 'welcome' ? 'Kaynos Docs' : page.title + ' — Kaynos Docs';
     const pageDesc = plainText.slice(0, 160);
     const pageUrl = pageId === 'welcome' ? 'https://docs.kaynos.net/' : 'https://docs.kaynos.net/#' + pageId;
     if (ogTitle) ogTitle.setAttribute('content', pageTitle);
@@ -3146,6 +3177,7 @@
     if (ogUrl) ogUrl.setAttribute('content', pageUrl);
     if (twTitle) twTitle.setAttribute('content', pageTitle);
     if (twDesc) twDesc.setAttribute('content', pageDesc);
+    if (twUrl) twUrl.setAttribute('content', pageUrl);
 
     // FAQ structured data
     let schemaEl = document.getElementById('dynamic-schema');
@@ -3199,7 +3231,7 @@
 
     // Scroll active link into view
     const active = document.querySelector('.sidebar-link.active');
-    if (active) active.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    if (active) active.scrollIntoView({ block: 'nearest', behavior: smoothBehavior() });
   }
 
   /* ── FOOTER NAV ─────────────────────────────────────── */
@@ -3288,7 +3320,7 @@
   function tocJump(e, id) {
     e.preventDefault();
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (el) el.scrollIntoView({ behavior: smoothBehavior(), block: 'start' });
   }
 
   /* ── COPY ───────────────────────────────────────────── */
@@ -3326,18 +3358,28 @@
     return words.every(w => lower.includes(w));
   }
 
-  // Pre-built search index — strip HTML once at load, not per keystroke
+  // Search index — built lazily so we don't strip ~99 KB of HTML on every page
+  // load when most visitors never search. Built on first search-input focus or
+  // during browser idle, whichever comes first.
   const SEARCH_INDEX = {};
-  for (const [id, page] of Object.entries(PAGES)) {
-    if (id === 'welcome') continue;
-    const text = page.content.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
-    SEARCH_INDEX[id] = { title: page.title, titleLower: page.title.toLowerCase(), text, section: page.section || '' };
+  let _searchIndexBuilt = false;
+  function buildSearchIndex() {
+    if (_searchIndexBuilt) return;
+    for (const [id, page] of Object.entries(PAGES)) {
+      if (id === 'welcome') continue;
+      const text = page.content.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
+      SEARCH_INDEX[id] = { title: page.title, titleLower: page.title.toLowerCase(), text, section: page.section || '' };
+    }
+    _searchIndexBuilt = true;
   }
+  if (typeof requestIdleCallback === 'function') requestIdleCallback(buildSearchIndex, { timeout: 2000 });
+  else setTimeout(buildSearchIndex, 1000);
 
   function handleSearch(q) {
     const sr = document.getElementById('searchResults');
     srIdx = -1;
     if (!q || q.length < 2) { sr.classList.remove('active'); sr.innerHTML = ''; document.getElementById('searchInput').setAttribute('aria-expanded', 'false'); return; }
+    buildSearchIndex();
     const lower = q.toLowerCase();
     const results = [];
     for (const [id, page] of Object.entries(PAGES)) {
@@ -3452,11 +3494,15 @@
   });
 
   /* ── SIDEBAR TOGGLE ─────────────────────────────────── */
+  function setMenuExpanded(open) {
+    document.querySelectorAll('[aria-controls="sidebar"]').forEach(b => b.setAttribute('aria-expanded', String(open)));
+  }
   function toggleSidebar() {
     const sb = document.getElementById('sidebar');
     const ov = document.getElementById('overlay');
     const isOpen = sb.classList.toggle('open');
     ov.classList.toggle('active', isOpen);
+    setMenuExpanded(isOpen);
     if (isOpen) {
       sb.setAttribute('aria-modal', 'true');
       sb.setAttribute('role', 'dialog');
@@ -3467,13 +3513,14 @@
       sb.removeAttribute('aria-modal');
       sb.removeAttribute('role');
       sb.removeEventListener('keydown', trapFocus);
-      document.querySelector('.menu-btn').focus();
+      document.querySelector('.menu-btn')?.focus();
     }
   }
   function closeSidebar() {
     const sb = document.getElementById('sidebar');
     sb.classList.remove('open');
     document.getElementById('overlay').classList.remove('active');
+    setMenuExpanded(false);
     sb.removeAttribute('aria-modal');
     sb.removeAttribute('role');
     sb.removeEventListener('keydown', trapFocus);
@@ -3518,9 +3565,11 @@
   });
 
   /* ── KEYBOARD SHORTCUTS ─────────────────────────────── */
-  /* Focus-trap helper (KAY-202) */
+  /* Focus-trap helper (KAY-202). Distinct from the sidebar's trapFocus above
+     — separate names because both lived in the same scope and the later
+     declaration was silently shadowing the sidebar trap. */
   let _savedFocus = null;
-  function trapFocus(overlay) {
+  function trapModalFocus(overlay) {
     const focusable = overlay.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
     if (!focusable.length) return;
     focusable[0].focus();
@@ -3537,7 +3586,7 @@
     if (_savedFocus) { try { _savedFocus.focus(); } catch(e){} _savedFocus = null; }
   }
 
-  function openKbd() { _savedFocus = document.activeElement; var m = document.getElementById('kbdModal'); m.classList.add('active'); trapFocus(m); }
+  function openKbd() { _savedFocus = document.activeElement; var m = document.getElementById('kbdModal'); m.classList.add('active'); trapModalFocus(m); }
   function closeKbd() { var m = document.getElementById('kbdModal'); m.classList.remove('active'); releaseFocus(m); }
 
   document.addEventListener('keydown', e => {
@@ -3549,18 +3598,14 @@
     if (e.key === '?') { e.preventDefault(); openKbd(); return; }
     if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
       const cur = location.hash.slice(1) || 'welcome';
-      const idx = allPageKeys.indexOf(cur);
+      const idx = visiblePageKeys.indexOf(cur);
       if (idx === -1) return;
-      if (e.key === 'ArrowLeft' && idx > 0) navigate(allPageKeys[idx - 1]);
-      if (e.key === 'ArrowRight' && idx < allPageKeys.length - 1) navigate(allPageKeys[idx + 1]);
+      if (e.key === 'ArrowLeft' && idx > 0) navigate(visiblePageKeys[idx - 1]);
+      if (e.key === 'ArrowRight' && idx < visiblePageKeys.length - 1) navigate(visiblePageKeys[idx + 1]);
     }
-    if (e.key === 't' || e.key === 'T') window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (e.key === 't' || e.key === 'T') window.scrollTo({ top: 0, behavior: smoothBehavior() });
     if (e.key === 'h' || e.key === 'H') navigate('welcome');
   });
-
-  /* ── FEEDBACK WIDGET (removed — was non-functional, see KAY-198) ── */
-  function renderFeedback() {}
-  function sendFeedback() {}
 
   /* ── RECENT PAGES ─────────────────────────────────────── */
   function addToRecent(pageId) {
@@ -3676,7 +3721,7 @@
     link.href = url;
     link.target = '_blank';
     link.rel = 'noopener';
-    link.innerHTML = 'Open in app <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 3h7v7"/><path d="M13 3L6 10"/></svg>';
+    link.innerHTML = 'Open in app <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 3h7v7"/><path d="M13 3L6 10"/></svg>';
     // Insert after h1 and tldr if present
     const tldr = container.querySelector('.tldr');
     const h1 = container.querySelector('h1');
@@ -3704,10 +3749,8 @@
     renderFaqAccordion(pc, pageId);
     addGlossaryTooltips(pc);
     renderRelated(pc, pageId);
-    renderFeedback(pc);
     applyHighlights(pc, pageId);
     addToRecent(pageId);
-    autoExpandSection(pageId);
     buildSidebar();
     // Restore active state after sidebar rebuild
     document.querySelectorAll('.sidebar-link').forEach(l => {
@@ -3740,7 +3783,7 @@
         { text: 'Very slow but no error', next: 'upload-slow' },
       ]
     },
-    'upload-reject': { result: true, title: 'File rejected at start', body: 'Check your file format (MP4, MOV, WebM, MKV) and size (max 5 GB).', page: 'uploading' },
+    'upload-reject': { result: true, title: 'File rejected at start', body: `Check your file format (${SUPPORTED_FORMATS}) and size (max 5 GB).`, page: 'uploading' },
     'upload-stuck': { result: true, title: 'Progress bar stuck', body: 'Large files pause between chunks — wait 60 seconds. If no progress after 2 minutes, cancel and retry.', page: 'uploading' },
     'upload-partial': { result: true, title: 'Fails partway through', body: 'Network error or session expired. Reconnect and retry. A 403 means the upload session expired — start over.', page: 'uploading' },
     'upload-slow': { result: true, title: 'Slow upload', body: 'Check your upload speed (not download) at fast.com. Wired connection helps. Pause other sync tools.', page: 'uploading' },
@@ -3785,7 +3828,7 @@
       div.innerHTML = `<div class="wizard-result">
         <p><strong>${step.title}</strong></p>
         <p>${step.body}</p>
-        <p><a style="color:var(--accent);font-weight:500;cursor:pointer" onclick="navigate('${step.page}')">Read full guide: ${PAGES[step.page].title} →</a></p>
+        <p><a href="#${step.page}" style="color:var(--accent);font-weight:500;cursor:pointer" onclick="navigate('${step.page}');return false">Read full guide: ${PAGES[step.page].title} →</a></p>
         <p style="margin-top:8px"><a style="color:var(--text-tertiary);font-size:.75rem;cursor:pointer" onclick="copyWizardLink('${stepId}')">${IC.link} Copy shareable link</a></p>
       </div>`;
       const restartBtn = document.createElement('button');
@@ -3847,12 +3890,12 @@
 
   /* ── CONTACT FORM ──────────────────────────────────── */
   function submitContact() {
-    const name = document.getElementById('cfName').value.trim();
-    const email = document.getElementById('cfEmail').value.trim();
-    const subject = document.getElementById('cfSubject').value.trim();
-    const body = document.getElementById('cfBody').value.trim();
+    const name = document.getElementById('cfName')?.value.trim() || '';
+    const email = document.getElementById('cfEmail')?.value.trim() || '';
+    const subject = document.getElementById('cfSubject')?.value.trim() || '';
+    const body = document.getElementById('cfBody')?.value.trim() || '';
     if (!subject && !body) { showToast('Please describe your issue'); return; }
-    const msg = `Name: ${name || '(not provided)'}\nEmail: ${email || '(not provided)'}\nSubject: ${subject}\n\n${body}\n\n---\nSent from Kaynos Help Center\nBrowser: ${navigator.userAgent.split(' ').slice(-2).join(' ')}`;
+    const msg = `Name: ${name || '(not provided)'}\nEmail: ${email || '(not provided)'}\nSubject: ${subject}\n\n${body}\n\n---\nSent from Kaynos Docs\nBrowser: ${navigator.userAgent.split(' ').slice(-2).join(' ')}`;
     navigator.clipboard.writeText(msg).then(() => {
       showToast('Copied — opening email');
       setTimeout(() => {
@@ -3923,11 +3966,13 @@
     const recent = getRecent();
     if (recent.length === 0) return;
     const lastPage = recent[0];
-    if (!PAGES[lastPage] || lastPage === 'welcome') return;
+    // hasOwnProperty guard rejects inherited keys (__proto__, constructor) that
+    // a tampered localStorage could feed into the onclick template below.
+    if (!Object.prototype.hasOwnProperty.call(PAGES, lastPage) || lastPage === 'welcome') return;
     const div = document.createElement('div');
     div.className = 'welcome-back';
-    // Safe: lastPage is a key from PAGES constant; title from PAGES[lastPage].title (hardcoded)
-    div.innerHTML = `<span>Welcome back! Continue reading <a onclick="navigate('${lastPage}')">${PAGES[lastPage].title}</a></span><button class="welcome-back-close" onclick="this.parentElement.remove()" aria-label="Dismiss">${IC.x}</button>`;
+    const safeId = escapeHtml(lastPage);
+    div.innerHTML = `<span>Welcome back! Continue reading <a href="#${safeId}" onclick="navigate('${safeId}');return false">${escapeHtml(PAGES[lastPage].title)}</a></span><button class="welcome-back-close" onclick="this.parentElement.remove()" aria-label="Dismiss">${IC.x}</button>`;
     const hero = container.querySelector('.hero');
     if (hero) hero.insertAdjacentElement('afterend', div);
   }
@@ -3987,7 +4032,7 @@
       else if (el.tagName === 'PRE') md += '```\n' + text + '\n```\n\n';
       else md += text + '\n\n';
     });
-    md += '\n---\nFrom Kaynos Help Center: ' + location.origin + location.pathname + '#' + pageId;
+    md += '\n---\nFrom Kaynos Docs: ' + location.origin + location.pathname + '#' + pageId;
     navigator.clipboard.writeText(md.trim()).then(() => showToast('Article copied as markdown')).catch(() => showToast('Copy failed — try selecting manually'));
   }
 
@@ -4262,59 +4307,7 @@
     });
   });
 
-  /* ── LANGUAGE TOGGLE ───────────────────────────────── */
-  let currentLang = localStorage.getItem('lang') || 'en';
-
-  const ES_TRANSLATIONS = {
-    welcome: { title: 'Bienvenido a Kaynos', content: `
-<div class="hero">
-  <div class="hero-badge">Centro de Ayuda</div>
-  <h1>Bienvenido a Kaynos</h1>
-  <p>Todo lo que necesitas para empezar con Kaynos — subir video, gestionar tu equipo y solucionar problemas comunes.</p>
-</div>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Estás leyendo el centro de ayuda.</strong> Inicia sesión en <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> para subir video y gestionar tu cuenta.</div></div>
-<h2>Empezar</h2>
-<div class="quick-links">
-  <a class="quick-link featured" href="#setup" onclick="navigate('setup');return false"><div class="ql-icon">${IC.rocket}</div><div class="ql-title">Configurar tu cuenta</div><div class="ql-desc">Primer inicio de sesión y contraseña</div></a>
-  <a class="quick-link featured" href="#uploading" onclick="navigate('uploading');return false"><div class="ql-icon">${IC.video}</div><div class="ql-title">Tu primera subida</div><div class="ql-desc">Sube video desde tu móvil o computadora</div></a>
-  <a class="quick-link featured" href="#troubleshoot" onclick="navigate('troubleshoot');return false"><div class="ql-icon">${IC.alert}</div><div class="ql-title">Solucionar un problema</div><div class="ql-desc">Asistente de diagnóstico paso a paso</div></a>
-  <a class="quick-link" href="#inviting-members" onclick="navigate('inviting-members');return false"><div class="ql-icon">${IC.users}</div><div class="ql-title">Invitar a tu equipo</div><div class="ql-desc">Invitaciones, roles y lista</div></a>
-  <a class="quick-link" href="#playback" onclick="navigate('playback');return false"><div class="ql-icon">${IC.play}</div><div class="ql-title">Ver y revisar</div><div class="ql-desc">Reproducción, notas y atajos</div></a>
-  <a class="quick-link" href="#faq" onclick="navigate('faq');return false"><div class="ql-icon">${IC.chat}</div><div class="ql-title">Preguntas frecuentes</div><div class="ql-desc">Respuestas a dudas comunes</div></a>
-</div>
-<h2>Contacto</h2>
-<div class="support-card">
-  <div class="support-item"><div class="support-item-icon">${IC.mail}</div><div><strong>Email:</strong> ${mailLink()}</div></div>
-  <div class="support-item"><div class="support-item-icon">${IC.chat}</div><div><strong>Chat:</strong> Esquina inferior derecha en <a href="https://app.kaynos.net" target="_blank" rel="noopener">la app</a></div></div>
-</div>` },
-    setup: { title: 'Configurar tu cuenta', content: `
-<h1>Configurar tu cuenta</h1>
-<p>Después de registrarte, los datos de acceso llegan al email que usaste. Cambia la contraseña temporal en cuanto entres.</p>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Abre la app en <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</div></div>
-<h2>Primer inicio de sesión</h2>
-<ol><li>Usa el enlace del email de bienvenida o ve a <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</li><li>Ingresa tu email y la contraseña temporal de la invitación.</li><li>Llegarás al <strong>Panel del Coach</strong> — esa es tu base.</li></ol>
-<h2>Cambiar contraseña</h2>
-<ol><li>Haz clic en tu nombre en la barra lateral → <strong>Perfil</strong>.</li><li><strong>Cambiar Contraseña</strong>: ingresa la actual, la nueva y confirma.</li><li>Haz clic en <strong>Actualizar Contraseña</strong>.</li></ol>
-<h2>Área de administración</h2>
-<p>Los administradores pueden usar <strong>Admin</strong> en la barra lateral para gestionar la lista, invitaciones y cambios de rol.</p>` },
-  };
-
-  function toggleLang() {
-    currentLang = currentLang === 'en' ? 'es' : 'en';
-    localStorage.setItem('lang', currentLang);
-    document.documentElement.lang = currentLang;
-    const cur = (location.hash.slice(1).split(':')[0]) || 'welcome';
-    navigate(cur);
-  }
-
   function getPageContent(pageId) {
-    if (currentLang === 'es' && ES_TRANSLATIONS[pageId]) {
-      return { ...PAGES[pageId], ...ES_TRANSLATIONS[pageId] };
-    }
-    if (currentLang === 'es' && !ES_TRANSLATIONS[pageId] && PAGES[pageId]) {
-      // Untranslated page — show English with note
-      return PAGES[pageId];
-    }
     return PAGES[pageId];
   }
 
@@ -4395,7 +4388,7 @@
   function renderPreflight() {
     const container = document.getElementById('preflightList');
     if (!container) return;
-    const checked = JSON.parse(sessionStorage.getItem('preflight') || '[]');
+    const checked = safeSessionGet('preflight', []);
     container.innerHTML = '';
     PREFLIGHT.forEach(item => {
       const isDone = checked.includes(item.id);
@@ -4403,7 +4396,7 @@
       el.className = 'preflight-item' + (isDone ? ' checked' : '');
       el.innerHTML = `<div class="preflight-box">${isDone ? IC.check : ''}</div><span class="pf-text">${item.text}</span>`;
       el.onclick = () => {
-        let c = JSON.parse(sessionStorage.getItem('preflight') || '[]');
+        let c = safeSessionGet('preflight', []);
         if (c.includes(item.id)) c = c.filter(x => x !== item.id);
         else c.push(item.id);
         sessionStorage.setItem('preflight', JSON.stringify(c));
@@ -4442,8 +4435,20 @@
   /* ── SHARE BUTTON ──────────────────────────────────── */
   function renderShareBtn(container, pageId) {
     if (pageId === 'welcome') return;
+    // Lazy-create the actions bar; it has no static markup. Renders for share,
+    // print, and copy-article all append into it, so the first to run creates it.
     let bar = container.querySelector('.article-actions');
-    if (!bar) return;
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.className = 'article-actions';
+      const meta = container.querySelector('.article-meta');
+      if (meta) meta.insertAdjacentElement('afterend', bar);
+      else {
+        const h1 = container.querySelector('h1');
+        if (h1) h1.insertAdjacentElement('afterend', bar);
+        else return;
+      }
+    }
     const btn = document.createElement('button');
     btn.className = 'share-btn';
     btn.innerHTML = IC.share + ' Share';
@@ -4459,14 +4464,8 @@
   }
 
   /* ── OFFLINE DETECTION ─────────────────────────────── */
-  window.addEventListener('offline', () => document.getElementById('offlineBanner').classList.add('show'));
-  window.addEventListener('online', () => document.getElementById('offlineBanner').classList.remove('show'));
-
-  /* ── AUTO-EXPAND SIDEBAR SECTION ───────────────────── */
-  // autoExpandSection removed — buildSidebar() now auto-expands the active
-  // section by default (based on the current hash) without persisting the
-  // expansion. Visiting a page no longer mutates sb-expanded.
-  function autoExpandSection() { /* no-op */ }
+  window.addEventListener('offline', () => document.getElementById('offlineBanner')?.classList.add('show'));
+  window.addEventListener('online', () => document.getElementById('offlineBanner')?.classList.remove('show'));
 
   /* ── THEME TOGGLE ───────────────────────────────────── */
   function applyTheme(mode) {
@@ -4508,13 +4507,10 @@
     } else {
       requestAnimationFrame(() => {
         const el = document.getElementById(initSection);
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (el) el.scrollIntoView({ behavior: smoothBehavior(), block: 'start' });
       });
     }
   }
-  // Language: lang toggle button removed; ES content still served when localStorage.lang === 'es'
-  document.documentElement.lang = currentLang;
-
   // Expose needed functions to global scope for onclick handlers
   window.navigate = navigate;
   window.toggleTheme = toggleTheme;
@@ -4534,10 +4530,7 @@
   window.showToast = showToast;
   window.openKbd = openKbd;
   window.closeKbd = closeKbd;
-  window.sendFeedback = sendFeedback;
-  window.renderFeedback = renderFeedback;
   window.escapeHtml = escapeHtml;
-  window.toggleLang = toggleLang;
   window.addSearchHistory = addSearchHistory;
   window.tocJump = tocJump;
   window.copyWizardLink = copyWizardLink;

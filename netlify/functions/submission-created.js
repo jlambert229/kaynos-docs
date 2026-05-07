@@ -56,8 +56,16 @@ function sanitizeMarkdown(str) {
 }
 
 exports.handler = async function (event) {
-  const { payload } = JSON.parse(event.body);
-  const { form_name, data } = payload;
+  let payload;
+  try {
+    ({ payload } = JSON.parse(event.body));
+  } catch {
+    return { statusCode: 400, body: 'Malformed JSON body.' };
+  }
+  if (!payload || typeof payload !== 'object') {
+    return { statusCode: 400, body: 'Missing payload.' };
+  }
+  const { form_name, data = {} } = payload;
 
   // Only handle the feature-request form
   if (form_name !== "feature-request") {
