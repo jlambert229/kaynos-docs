@@ -21,6 +21,14 @@
     Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
+  for = "/sw.js"
+  [headers.values]
+    # Service worker must not be aggressively cached or clients won't pick up
+    # updates. Browsers also re-fetch sw.js on every page load by default.
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Content-Type = "application/javascript"
+
+[[headers]]
   for = "/robots.txt"
   [headers.values]
     Cache-Control = "public, max-age=86400"

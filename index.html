@@ -248,6 +248,15 @@
     .sr-badge { display: inline-flex; margin-left: 6px; vertical-align: middle; }
     .sr-badge svg { width: 11px; height: 11px; }
     .search-empty { padding: 24px 14px; text-align: center; color: var(--text-tertiary); font-size: .875rem; }
+    .search-chips { display: flex; flex-wrap: wrap; gap: 4px; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+    .search-chip {
+      padding: 3px 10px; font-size: .75rem; font-family: inherit;
+      background: transparent; color: var(--text-secondary);
+      border: 1px solid var(--border-strong); border-radius: 9999px; cursor: pointer;
+      transition: background var(--dur), color var(--dur), border-color var(--dur);
+    }
+    .search-chip:hover { background: var(--bg-hover); color: var(--text-primary); }
+    .search-chip.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
     .header-spacer { flex: 1; }
 
@@ -1249,6 +1258,35 @@
     .form-success .success-icon svg { width: 100%; height: 100%; }
     .form-success h2 { margin: 0 0 8px; color: var(--text-primary); font-size: 1rem; font-weight: 600; }
     .form-success p { color: var(--text-secondary); margin: 0 0 16px; }
+
+    /* ── ARTICLE FEEDBACK ─── */
+    .article-feedback {
+      margin: 32px 0 16px; padding: 16px 20px;
+      background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius);
+    }
+    .article-feedback-prompt { font-size: .8125rem; color: var(--text-secondary); margin: 0 0 10px; font-weight: 500; }
+    .article-feedback-buttons { display: flex; gap: 8px; }
+    .article-feedback-btn {
+      padding: 6px 14px; background: transparent; color: var(--text-primary);
+      border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
+      font-size: .8125rem; cursor: pointer; transition: background var(--dur), border-color var(--dur);
+      font-family: inherit;
+    }
+    .article-feedback-btn:hover { background: var(--bg-hover); border-color: var(--accent); }
+    .article-feedback-form { margin-top: 12px; }
+    .article-feedback-form textarea {
+      width: 100%; padding: 8px 12px; margin-bottom: 8px;
+      background: var(--bg); color: var(--text-primary); font-family: inherit; font-size: .8125rem;
+      border: 1px solid var(--border); border-radius: var(--radius-sm); resize: vertical; min-height: 60px;
+    }
+    .article-feedback-form textarea:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(33,132,243,.1); }
+    .article-feedback-submit {
+      padding: 6px 14px; background: var(--accent); color: #fff; border: none; border-radius: var(--radius-sm);
+      font-size: .8125rem; font-weight: 500; cursor: pointer; transition: background var(--dur);
+    }
+    .article-feedback-submit:hover { background: var(--accent-hover); }
+    .article-feedback-thanks { font-size: .8125rem; color: var(--text-secondary); }
+    @media print { .article-feedback { display: none !important; } }
     .form-another { padding: 8px 16px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary); cursor: pointer; font-size: .8125rem; }
     .form-another:hover { border-color: var(--accent); color: var(--accent); }
     /* ── WELCOME BACK BAR ─── */
@@ -1455,6 +1493,8 @@
           <a href="#contact" onclick="navigate('contact');return false">Contact</a>
           <a href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">Legal</a>
           <a href="https://github.com/jlambert229/kaynos-docs/blob/main/docs/SECURITY.md" target="_blank" rel="noopener">Security</a>
+          <!-- Status: Netlify hosts this site; swap to a Kaynos-owned status page when one exists. -->
+          <a href="https://www.netlifystatus.com/" target="_blank" rel="noopener">Status</a>
         </nav>
       </div>
     </footer>
@@ -1467,6 +1507,13 @@
   </button>
 
   <!-- Netlify Forms hidden detection forms (must be in static HTML for Netlify to register them) -->
+  <form name="article-feedback" netlify netlify-honeypot="bot-field" hidden>
+    <input name="bot-field">
+    <input name="pageId">
+    <input name="pageTitle">
+    <input name="helpful">
+    <textarea name="comment"></textarea>
+  </form>
   <form name="contact-support" netlify netlify-honeypot="bot-field" hidden>
     <input name="bot-field">
     <input name="name">
@@ -2405,7 +2452,101 @@
 <ul>
 <li>Very large files on older phones can be slow or unstable — a laptop may be more reliable.</li>
 <li>Landscape helps when the notes panel is open on a small display.</li>
-</ul>`},
+</ul>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>For everything mobile-specific — installing as an app, granting permissions, push setup — see <a href="#using-on-mobile" onclick="navigate('using-on-mobile');return false">Using Kaynos on mobile</a>.</div></div>`},
+
+    "using-on-mobile": {
+      title: "Using Kaynos on mobile", section: "Troubleshoot",
+      content: `
+<h1>Using Kaynos on mobile</h1>
+<div class="tldr"><strong>TLDR:</strong> Kaynos runs in any modern mobile browser — no app-store download. Install it to your home screen for an app-like experience. This page covers install, permissions (camera, mic, photos), notifications, and the realities of recording and uploading on a phone.</div>
+
+<h2>Install Kaynos as a home-screen app</h2>
+<p>Kaynos is a Progressive Web App (PWA). After installing it, the app opens full-screen with no browser chrome and shows up as its own icon — same as a native app.</p>
+<h3>iOS (Safari)</h3>
+<ol>
+<li>Open <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> in Safari (it must be Safari, not Chrome on iOS).</li>
+<li>Tap the <strong>Share</strong> button (square with an up-arrow) at the bottom of the screen.</li>
+<li>Scroll the share sheet and tap <strong>Add to Home Screen</strong>.</li>
+<li>Edit the name if you want, then tap <strong>Add</strong>. The Kaynos icon appears on your home screen.</li>
+</ol>
+<h3>Android (Chrome)</h3>
+<ol>
+<li>Open <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> in Chrome.</li>
+<li>Tap the <strong>⋮</strong> menu in the top-right.</li>
+<li>Tap <strong>Add to Home screen</strong> (or <strong>Install app</strong> on newer versions).</li>
+<li>Confirm. The icon appears in your launcher.</li>
+</ol>
+
+<h2>Permissions</h2>
+<p>Kaynos asks for permissions only when you use a feature that needs them. If you've previously denied a permission, you'll need to grant it from your device settings — the in-app prompt won't reappear.</p>
+
+<h3>Camera and microphone (recording from the app)</h3>
+<p>Granted on first use. If you accidentally denied:</p>
+<ul>
+<li><strong>iOS Safari:</strong> Settings app → Safari → Camera (and Microphone) → set Kaynos to <strong>Allow</strong>. If Kaynos isn't listed, open the site once first.</li>
+<li><strong>iOS PWA installed to home screen:</strong> Settings app → scroll to <strong>Kaynos</strong> in the app list → toggle Camera / Microphone.</li>
+<li><strong>Android Chrome:</strong> in Chrome, tap the <strong>⋮</strong> menu → Settings → Site settings → Camera (or Microphone) → find <code>app.kaynos.net</code> → set to Allow.</li>
+</ul>
+
+<h3>Microphone (voice dictation for notes)</h3>
+<p>Voice dictation uses Deepgram for transcription. Same permission path as Camera/Microphone above. Audio is processed in real time and not stored — see <a href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">Privacy on this site</a> for details.</p>
+
+<h3>Photos / files (selecting a video to upload)</h3>
+<ul>
+<li><strong>iOS:</strong> tapping <strong>Upload</strong> shows the iOS picker — choose <strong>Photo Library</strong>, <strong>Take Photo or Video</strong>, or <strong>Choose Files</strong>. iOS may ask to grant Kaynos access to your photo library on first use.</li>
+<li><strong>Android:</strong> a similar system picker appears — Files, Photos, or your gallery app of choice.</li>
+</ul>
+
+<h2>Notifications</h2>
+<p>Kaynos uses email for most notifications today (configured under <a href="#profile" onclick="navigate('profile');return false">Profile → Notifications</a>) — there are no native push notifications yet on either platform.</p>
+<p>If you want a fast bell on your phone, two reliable approaches:</p>
+<ul>
+<li><strong>Email push:</strong> in your phone's mail app, set the address you use for Kaynos to "push" delivery. iOS Mail and Gmail both support this per-account.</li>
+<li><strong>Email-to-notification routing:</strong> services like IFTTT or Apple Shortcuts can convert specific emails (sender = <code>noreply@kaynos.net</code>) into a phone notification.</li>
+</ul>
+
+<h2>Recording and uploading from a phone</h2>
+
+<h3>What works well</h3>
+<ul>
+<li>Short clips (under a few minutes) record and upload reliably on most phones from 2020 onward.</li>
+<li>Multipart upload kicks in at <strong>20 MB</strong> with parallel parts and automatic retry, so a brief signal hiccup doesn't restart the whole thing.</li>
+<li>Uploads continue while the app is in the foreground or in the background for a short window. <strong>Long uploads work best with the screen on.</strong></li>
+</ul>
+
+<h3>What to watch out for</h3>
+<ul>
+<li><strong>Screen lock pauses uploads.</strong> If a 30-minute class video is uploading and your phone goes to sleep, the upload pauses — sometimes the app can resume, sometimes the part URL has expired (1-hour limit) and you'll need to retry. Plug in and disable auto-lock for long uploads.</li>
+<li><strong>Hot phone during recording.</strong> Long recordings make a phone hot, which can throttle the camera. If you need 30+ minutes of footage, a dedicated camera or a laptop-tethered phone is more reliable.</li>
+<li><strong>Storage on the phone.</strong> A 1080p video at typical bitrates is roughly 1 GB per 10 minutes. Make sure the phone has free space before recording — you can upload directly from the camera roll later.</li>
+<li><strong>Cellular data.</strong> Uploading a 1 GB video on cellular eats your plan. Default to Wi-Fi where you can. The <a href="#uploading" onclick="navigate('uploading');return false">upload time calculator</a> on the Uploading page helps you sanity-check before starting.</li>
+</ul>
+
+<h2>Mobile playback tips</h2>
+<ul>
+<li><strong>Skip:</strong> double-tap the left half of the player to skip back 10 seconds, the right half to skip forward.</li>
+<li><strong>Landscape:</strong> rotate to widen the player when the notes panel is open.</li>
+<li><strong>Resume:</strong> playback position syncs across devices — start on your phone in the gym, finish on your laptop at home.</li>
+<li><strong>Picture-in-picture (iOS Safari, Android Chrome):</strong> tap the PiP button on the player to keep watching while reading notes in another tab.</li>
+</ul>
+
+<h2>Battery and data</h2>
+<ul>
+<li>Recording and uploading both drain the battery quickly. Plug in for anything over 15 minutes.</li>
+<li>Streaming playback typically uses 0.5–2 GB per hour of 1080p video. The player adapts to bandwidth, so a slower connection serves a lower bitrate automatically.</li>
+<li>If you're on a strict cellular plan, download or save the video over Wi-Fi first, then watch later from the same browser session.</li>
+</ul>
+
+<h2>Troubleshooting</h2>
+<ul>
+<li><strong>"This site can't be reached" after install:</strong> a stale PWA cache. Remove the home-screen shortcut and re-add it from the current app URL.</li>
+<li><strong>Permission prompt won't reappear:</strong> you previously denied. Use the device settings paths above.</li>
+<li><strong>Upload stuck:</strong> see the <a href="#troubleshoot" onclick="navigate('troubleshoot');return false">troubleshooting wizard</a> — pick "Upload won't finish".</li>
+<li><strong>Browser is showing the old version:</strong> hard-refresh (long-press refresh on Safari iOS; pull-to-refresh on Chrome Android), or clear site data for app.kaynos.net.</li>
+</ul>
+
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Need a desktop-class flow? See <a href="#uploading" onclick="navigate('uploading');return false">Uploading videos</a> and <a href="#playback" onclick="navigate('playback');return false">Watching and reviewing</a> for the full workflow.</div></div>`},
 
     faq: {
       title: "Frequently asked questions", section: "Getting Started",
@@ -2928,7 +3069,7 @@
     { section: "Sessions & Classes", pages: ["creating-sessions", "creating-classes", "notes", "progress"] },
     { section: "Account", pages: ["profile"] },
     { section: "Admin", pages: ["inviting-members", "managing-members", "developer-api"] },
-    { section: "Troubleshoot", pages: ["troubleshoot", "login-issues", "email-issues", "performance"] },
+    { section: "Troubleshoot", pages: ["troubleshoot", "login-issues", "email-issues", "performance", "using-on-mobile"] },
     // Hidden from sidebar but still routable via hash links and the footer.
     { section: "", pages: ["release-notes", "feature-requests", "parent-guide", "contact", "privacy-on-this-site"], hidden: true }
   ];
@@ -3074,6 +3215,39 @@
     'feature-requests': 'Submit a feature request for Kaynos. Tell us what to build next.',
     'parent-guide': 'Parent and guardian guide for Kaynos. What your child can see and do, privacy and safety info, and how to contact the coach.',
     'privacy-on-this-site': 'Privacy on the Kaynos help center. What data stays in your browser and what is sent externally.',
+    'using-on-mobile': 'Using Kaynos on mobile. PWA install for iOS and Android, camera/mic/photo permissions, push notifications, recording and uploading from a phone, battery and data tips.',
+  };
+
+  // Last touched per page. Pages absent from this map fall back to LAST_UPDATED_DEFAULT.
+  const LAST_UPDATED_DEFAULT = '2026-04-24';
+  const LAST_UPDATED = {
+    'welcome': '2026-05-08',
+    'setup': '2026-05-08',
+    'roles': '2026-05-08',
+    'uploading': '2026-05-03',
+    'playback': '2026-05-08',
+    'formats': '2026-05-08',
+    'storage': '2026-05-08',
+    'creating-sessions': '2026-05-08',
+    'creating-classes': '2026-05-02',
+    'notes': '2026-05-02',
+    'progress': '2026-05-02',
+    'inviting-members': '2026-05-02',
+    'managing-members': '2026-05-02',
+    'profile': '2026-05-08',
+    'login-issues': '2026-05-02',
+    'email-issues': '2026-05-08',
+    'performance': '2026-04-24',
+    'faq': '2026-05-08',
+    'developer-api': '2026-05-08',
+    'glossary': '2026-05-02',
+    'troubleshoot': '2026-05-08',
+    'using-on-mobile': '2026-05-08',
+    'contact': '2026-05-08',
+    'release-notes': '2026-05-02',
+    'feature-requests': '2026-04-24',
+    'parent-guide': '2026-05-08',
+    'privacy-on-this-site': '2026-04-24',
   };
 
   /* ── NAVIGATE ───────────────────────────────────────── */
@@ -3421,39 +3595,108 @@
   if (typeof requestIdleCallback === 'function') requestIdleCallback(buildSearchIndex, { timeout: 2000 });
   else setTimeout(buildSearchIndex, 1000);
 
-  function handleSearch(q) {
+  // Synonyms: when a user types one term, also consider the others as matches.
+  // Bidirectional — typing any term in a group surfaces pages that mention any
+  // other term in the same group. Each entry is a single equivalence class.
+  const SEARCH_SYNONYM_GROUPS = [
+    ['student', 'students', 'member', 'members', 'learner', 'user'],
+    ['coach', 'coaches', 'instructor', 'instructors', 'teacher'],
+    ['admin', 'admins', 'owner', 'manager'],
+    ['video', 'videos', 'clip', 'clips', 'recording', 'footage'],
+    ['session', 'sessions', 'lesson'],
+    ['class', 'classes', 'group session', 'workshop'],
+    ['note', 'notes', 'comment', 'comments', 'feedback', 'annotation'],
+    ['upload', 'uploads', 'uploading', 'add video', 'send'],
+    ['login', 'log in', 'sign in', 'signin'],
+    ['signup', 'sign up', 'register', 'create account', 'subscribe'],
+    ['password', 'passcode', 'pin'],
+    ['payment', 'billing', 'invoice', 'charge', 'subscription'],
+    ['delete', 'remove', 'cancel'],
+    ['notification', 'notifications', 'alert', 'email'],
+    ['mobile', 'phone', 'iphone', 'android', 'tablet'],
+  ];
+  // Build lookup: term -> Set of all terms in the same group(s).
+  const SYNONYM_MAP = (() => {
+    const m = new Map();
+    for (const group of SEARCH_SYNONYM_GROUPS) {
+      const set = new Set(group);
+      for (const term of group) {
+        const existing = m.get(term);
+        if (existing) for (const t of set) existing.add(t);
+        else m.set(term, new Set(set));
+      }
+    }
+    return m;
+  })();
+  function expandWithSynonyms(query) {
+    const trimmed = query.trim().toLowerCase();
+    if (!trimmed) return [trimmed];
+    // Whole-query lookup first (handles multi-word phrases like "sign in").
+    const whole = SYNONYM_MAP.get(trimmed);
+    if (whole) return Array.from(whole);
+    // Otherwise, single-token expansion: any matched token broadens the search.
+    const tokens = trimmed.split(/\s+/);
+    const expanded = new Set([trimmed]);
+    for (const t of tokens) {
+      const set = SYNONYM_MAP.get(t);
+      if (set) for (const syn of set) expanded.add(syn);
+    }
+    return Array.from(expanded);
+  }
+
+  // Section filter for search results — set by the chip row, cleared on each fresh search.
+  let searchSectionFilter = '';
+
+  function handleSearch(q, opts = {}) {
     const sr = document.getElementById('searchResults');
     srIdx = -1;
-    if (!q || q.length < 2) { sr.classList.remove('active'); sr.innerHTML = ''; document.getElementById('searchInput').setAttribute('aria-expanded', 'false'); return; }
+    if (!q || q.length < 2) { sr.classList.remove('active'); sr.innerHTML = ''; document.getElementById('searchInput').setAttribute('aria-expanded', 'false'); searchSectionFilter = ''; return; }
+    if (!opts.preserveFilter) searchSectionFilter = '';
     buildSearchIndex();
     const lower = q.toLowerCase();
+    const synonyms = expandWithSynonyms(q);
     const results = [];
     for (const [id, page] of Object.entries(PAGES)) {
       const idx = SEARCH_INDEX[id];
       if (!idx) continue;
       const text = idx.text;
       const textLower = text;
-      const titleMatch = idx.titleLower.includes(lower);
+      // Match if ANY synonym appears in title/section/body. Score is highest for
+      // an exact-query hit; synonym-only hits still count but score lower.
+      const titleMatch = synonyms.some((s) => idx.titleLower.includes(s));
       const sectionLower = (page.section || '').toLowerCase();
-      const sectionMatch = !!sectionLower && sectionLower.includes(lower);
-      const exactIdx = textLower.indexOf(lower);
+      const sectionMatch = !!sectionLower && synonyms.some((s) => sectionLower.includes(s));
+      let exactIdx = -1;
+      for (const s of synonyms) {
+        const i = textLower.indexOf(s);
+        if (i !== -1) { exactIdx = i; break; }
+      }
       const fuzzy = !titleMatch && exactIdx === -1 && fuzzyMatch(page.title + ' ' + text, q);
       if (titleMatch || sectionMatch || exactIdx !== -1 || fuzzy) {
         let snippet = '';
-        const idx = exactIdx !== -1 ? exactIdx : textLower.indexOf(lower.split(/\s+/)[0]);
-        if (idx !== -1) {
-          const s = Math.max(0, idx - LIMITS.SNIPPET_BEFORE), e = Math.min(textLower.length, idx + q.length + LIMITS.SNIPPET_AFTER);
+        const snipIdx = exactIdx !== -1 ? exactIdx : textLower.indexOf(lower.split(/\s+/)[0]);
+        if (snipIdx !== -1) {
+          const s = Math.max(0, snipIdx - LIMITS.SNIPPET_BEFORE), e = Math.min(textLower.length, snipIdx + q.length + LIMITS.SNIPPET_AFTER);
           const raw = (s > 0 ? '…' : '') + text.slice(s, e) + (e < textLower.length ? '…' : '');
-          snippet = escapeHtml(raw).replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').split(/\s+/).join('|'), 'gi'), m => `<mark>${escapeHtml(m)}</mark>`);
+          // Highlight the literal query first, then synonyms (so visual match still tracks what the user typed).
+          const escapedRaw = escapeHtml(raw);
+          const allTerms = [q, ...synonyms.filter((x) => x !== lower)].filter(Boolean);
+          const pattern = allTerms.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+          snippet = pattern ? escapedRaw.replace(new RegExp(pattern, 'gi'), (m) => `<mark>${escapeHtml(m)}</mark>`) : escapedRaw;
         }
         // Ranking: title >> section name > body exact >> body fuzzy.
-        // Section-name match gives credit when someone searches a category
-        // (e.g. "admin", "help") without matching a single page title.
-        const score = (titleMatch ? 10 : 0) + (sectionMatch ? 4 : 0) + (exactIdx !== -1 ? 3 : 0) + (fuzzy ? 1 : 0);
+        // Exact-query bonus when the user's literal text appears in title/body.
+        const literalTitle = idx.titleLower.includes(lower);
+        const literalBody = textLower.indexOf(lower);
+        const score = (titleMatch ? 10 : 0) + (literalTitle ? 4 : 0) + (sectionMatch ? 4 : 0) + (exactIdx !== -1 ? 3 : 0) + (literalBody !== -1 ? 2 : 0) + (fuzzy ? 1 : 0);
         results.push({ id, title: page.title, section: page.section, snippet, score });
       }
     }
     results.sort((a, b) => b.score - a.score);
+
+    // Apply section filter if set (chip row click).
+    const sectionsPresent = Array.from(new Set(results.map((r) => r.section).filter(Boolean)));
+    const filtered = searchSectionFilter ? results.filter((r) => r.section === searchSectionFilter) : results;
 
     // Empty-state "did you mean": suggest pages whose title shares meaningful
     // overlap with the query. Cheap character-Jaccard so we catch typos and
@@ -3483,19 +3726,36 @@
       }
     }
 
+    // Section-filter chip row — only shown when there are 2+ sections to choose from
+    let chipRow = '';
+    if (sectionsPresent.length > 1) {
+      const chip = (label, value) => {
+        const active = (value === searchSectionFilter) || (!value && !searchSectionFilter);
+        return `<button type="button" class="search-chip${active ? ' active' : ''}" onclick="filterSearchBySection('${escapeHtml(value)}')">${escapeHtml(label)}</button>`;
+      };
+      chipRow = '<div class="search-chips">' + chip('All', '') + sectionsPresent.map((s) => chip(s, s)).join('') + '</div>';
+    }
+
     // Safe: titles/sections escaped via escapeHtml(); snippet uses escapeHtml + <mark> wrapping of query match
-    sr.innerHTML = results.length === 0
+    const renderResults = filtered.length === 0
       ? (didYouMean || '<div class="search-empty">No matches. Try fewer or different keywords.</div>')
-      : results.slice(0, LIMITS.SEARCH_RESULTS).map((r, i) =>
+      : filtered.slice(0, LIMITS.SEARCH_RESULTS).map((r, i) =>
           `<div class="search-result" role="option" id="sr-${i}" data-page="${r.id}" onclick="addSearchHistory(document.getElementById('searchInput').value.trim());navigate('${r.id}')">
             <div class="sr-title">${escapeHtml(r.title)}</div>
             ${r.section ? `<div class="sr-section">${escapeHtml(r.section)}</div>` : ''}
             ${r.snippet ? `<div class="sr-snippet">${r.snippet}</div>` : ''}
           </div>`
         ).join('');
+    sr.innerHTML = chipRow + renderResults;
     sr.classList.add('active');
     document.getElementById('searchInput').setAttribute('aria-expanded', 'true');
   }
+  function filterSearchBySection(section) {
+    searchSectionFilter = section || '';
+    const q = document.getElementById('searchInput').value;
+    handleSearch(q, { preserveFilter: true });
+  }
+  window.filterSearchBySection = filterSearchBySection;
 
   document.getElementById('searchInput').addEventListener('keydown', e => {
     const sr = document.getElementById('searchResults');
@@ -3721,9 +3981,79 @@
     }
     const meta = document.createElement('div');
     meta.className = 'article-meta';
-    meta.innerHTML = `<span class="read-time">${mins} min read</span><span class="article-meta-dot"></span><span>${words} words</span>`;
+    const updated = LAST_UPDATED[pageId] || LAST_UPDATED_DEFAULT;
+    meta.innerHTML = `<span class="read-time">${mins} min read</span><span class="article-meta-dot"></span><span>${words} words</span><span class="article-meta-dot"></span><span>Updated ${updated}</span>`;
     h1.insertAdjacentElement('afterend', meta);
   }
+
+  /* ── ARTICLE FEEDBACK WIDGET ──────────────────────── */
+  // Pages that already function as a feedback channel get no widget.
+  const FEEDBACK_EXCLUDED = new Set(['welcome', 'contact', 'feature-requests']);
+  function renderArticleFeedback(container, pageId) {
+    if (FEEDBACK_EXCLUDED.has(pageId)) return;
+    const page = PAGES[pageId];
+    if (!page) return;
+    // Don't ask twice in the same browser
+    const seen = safeGet('article-feedback-given', {});
+    if (seen[pageId]) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'article-feedback';
+    wrap.dataset.page = pageId;
+    wrap.innerHTML = `
+      <p class="article-feedback-prompt">Was this page helpful?</p>
+      <div class="article-feedback-buttons">
+        <button type="button" class="article-feedback-btn" onclick="rateHelpful('${pageId}', 'yes')">${IC.check} Yes</button>
+        <button type="button" class="article-feedback-btn" onclick="rateHelpful('${pageId}', 'no')">${IC.x} No</button>
+      </div>
+      <form class="article-feedback-form" id="articleFeedbackForm" method="POST" data-netlify="true" name="article-feedback" netlify-honeypot="bot-field" hidden>
+        <input type="hidden" name="form-name" value="article-feedback">
+        <input type="hidden" name="pageId" value="${escapeHtml(pageId)}">
+        <input type="hidden" name="pageTitle" value="${escapeHtml(page.title)}">
+        <input type="hidden" name="helpful" value="no">
+        <p class="hidden" style="display:none"><input name="bot-field"></p>
+        <label for="afComment" class="sr-only">What didn't work?</label>
+        <textarea id="afComment" name="comment" placeholder="What didn't work? Any details help us improve this page." rows="3" required></textarea>
+        <button type="submit" class="article-feedback-submit">Send feedback</button>
+      </form>
+      <div class="article-feedback-thanks" hidden>Thanks for letting us know.</div>`;
+    container.appendChild(wrap);
+  }
+  function rateHelpful(pageId, value) {
+    const wrap = document.querySelector(`.article-feedback[data-page="${pageId}"]`);
+    if (!wrap) return;
+    const buttons = wrap.querySelector('.article-feedback-buttons');
+    const form = wrap.querySelector('.article-feedback-form');
+    const thanks = wrap.querySelector('.article-feedback-thanks');
+    if (value === 'no') {
+      // Reveal the comment form for context
+      buttons.style.display = 'none';
+      form.hidden = false;
+      const ta = form.querySelector('textarea');
+      if (ta) ta.focus();
+      return;
+    }
+    // value === 'yes': fire-and-forget, mark as given
+    const data = new URLSearchParams({
+      'form-name': 'article-feedback',
+      pageId,
+      pageTitle: PAGES[pageId]?.title || pageId,
+      helpful: 'yes',
+      comment: '',
+    });
+    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: data.toString() })
+      .catch(() => { /* best-effort; widget still records locally */ });
+    markFeedbackGiven(pageId);
+    buttons.style.display = 'none';
+    form.hidden = true;
+    thanks.hidden = false;
+    thanks.setAttribute('role', 'status');
+  }
+  function markFeedbackGiven(pageId) {
+    const seen = safeGet('article-feedback-given', {});
+    seen[pageId] = Date.now();
+    safeSet('article-feedback-given', seen);
+  }
+  window.rateHelpful = rateHelpful;
 
   /* ── RELATED ARTICLES ──────────────────────────────── */
   function renderRelated(container, pageId) {
@@ -3783,7 +4113,6 @@
     const pc = document.getElementById('pageContent');
     if (!pc || !pc.innerHTML) return;
     renderArticleMeta(pc, pageId);
-    renderLastUpdated(pc, pageId);
     renderShareBtn(pc, pageId);
     renderPrintBtn(pc, pageId);
     renderCopyArticleBtn(pc, pageId);
@@ -3795,6 +4124,7 @@
     renderFaqAccordion(pc, pageId);
     addGlossaryTooltips(pc);
     renderRelated(pc, pageId);
+    renderArticleFeedback(pc, pageId);
     applyHighlights(pc, pageId);
     addToRecent(pageId);
     buildSidebar();
@@ -4076,20 +4406,6 @@
     bar.appendChild(btn);
   }
 
-  /* ── LAST UPDATED DISPLAY ──────────────────────────── */
-  function renderLastUpdated(container, pageId) {
-    if (pageId === 'welcome') return;
-    const meta = container.querySelector('.article-meta');
-    if (!meta) return;
-    const span = document.createElement('span');
-    span.className = 'last-updated';
-    const dot = document.createElement('span');
-    dot.className = 'article-meta-dot';
-    meta.appendChild(dot);
-    span.textContent = 'Updated Apr 2026';
-    meta.appendChild(span);
-  }
-
   /* ── TEXT HIGHLIGHT ────────────────────────────────── */
   function getHighlights() { return safeGet('highlights', {}); }
 
@@ -4294,8 +4610,9 @@
 
   /* ── NETLIFY FORM AJAX HANDLER (feature-request, contact-support) ────── */
   const NETLIFY_FORMS = {
-    featureForm:  { rateKey: 'fr-last-submit', successId: 'featureSuccess', submitText: 'Submit request', btnSel: '.form-submit' },
-    contactForm:  { rateKey: 'cf-last-submit', successId: 'contactSuccess', submitText: 'Send message',    btnSel: '.contact-submit' },
+    featureForm:         { rateKey: 'fr-last-submit', successId: 'featureSuccess', submitText: 'Submit request', btnSel: '.form-submit' },
+    contactForm:         { rateKey: 'cf-last-submit', successId: 'contactSuccess', submitText: 'Send message',    btnSel: '.contact-submit' },
+    articleFeedbackForm: { rateKey: 'af-last-submit', successId: null,             submitText: 'Send feedback',   btnSel: '.article-feedback-submit', inlineSuccess: true },
   };
   document.addEventListener('submit', function(e) {
     const cfg = NETLIFY_FORMS[e.target.id];
@@ -4322,10 +4639,23 @@
       clearTimeout(timeout);
       if (res.ok) {
         localStorage.setItem(cfg.rateKey, String(Date.now()));
+        form.hidden = true;
         form.style.display = 'none';
-        const success = document.getElementById(cfg.successId);
-        success.style.display = '';
-        success.setAttribute('role', 'alert');
+        if (cfg.inlineSuccess) {
+          // For widgets that share a wrapper with their success state
+          // (e.g. article-feedback), reveal the local thanks element.
+          const wrap = form.closest('.article-feedback');
+          if (wrap) {
+            const thanks = wrap.querySelector('.article-feedback-thanks');
+            if (thanks) { thanks.hidden = false; thanks.setAttribute('role', 'status'); }
+            const pageId = wrap.dataset.page;
+            if (pageId) markFeedbackGiven(pageId);
+          }
+        } else if (cfg.successId) {
+          const success = document.getElementById(cfg.successId);
+          success.style.display = '';
+          success.setAttribute('role', 'alert');
+        }
       } else {
         showToast('Something went wrong — please try again or email support.');
         if (btn) { btn.disabled = false; btn.textContent = cfg.submitText; }
@@ -4576,6 +4906,16 @@
   window.debouncedSearch = debouncedSearch;
   window.showSearchHistory = showSearchHistory;
   })();
+  </script>
+
+  <!-- Service worker — cache-first for fonts, network-first for HTML.
+       Lets previously-visited pages load on flaky / no connection. -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/sw.js').catch(function () { /* best-effort */ });
+      });
+    }
   </script>
 </body>
 </html>
