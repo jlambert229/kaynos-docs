@@ -1247,7 +1247,7 @@
     .form-success { text-align: center; padding: 32px 0; }
     .form-success .success-icon { width: 48px; height: 48px; color: var(--success); margin: 0 auto 12px; }
     .form-success .success-icon svg { width: 100%; height: 100%; }
-    .form-success h3 { margin: 0 0 8px; color: var(--text-primary); }
+    .form-success h2 { margin: 0 0 8px; color: var(--text-primary); font-size: 1rem; font-weight: 600; }
     .form-success p { color: var(--text-secondary); margin: 0 0 16px; }
     .form-another { padding: 8px 16px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary); cursor: pointer; font-size: .8125rem; }
     .form-another:hover { border-color: var(--accent); color: var(--accent); }
@@ -1744,13 +1744,13 @@
 <p>Email delivery is usually quick. If nothing arrives, check spam and verify the address for typos.</p>
 <div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>Still missing mail? See <a href="#email-issues" onclick="navigate('email-issues');return false">Email and notification issues</a> or contact ${mailLink()}.</div></div>
 <h2>Who can invite</h2>
-<table><thead><tr><th>Your role</th><th>Can add</th></tr></thead><tbody>
+<table><thead><tr><th scope="col">Your role</th><th scope="col">Can add</th></tr></thead><tbody>
 <tr><td><strong>Admin</strong></td><td>Coaches and students</td></tr>
 <tr><td><strong>Coach</strong></td><td>Students only</td></tr>
 <tr><td><strong>Student</strong></td><td>Nobody</td></tr>
 </tbody></table>
 <h2>What each role can do</h2>
-<table><thead><tr><th>Role</th><th>What they can do</th></tr></thead><tbody>
+<table><thead><tr><th scope="col">Role</th><th scope="col">What they can do</th></tr></thead><tbody>
 <tr><td><strong>Admin</strong></td><td>Everything a coach can do, plus roster management, invites, and settings.</td></tr>
 <tr><td><strong>Coach</strong></td><td>Sessions, classes, video upload, notes, tags, and student progress.</td></tr>
 <tr><td><strong>Student</strong></td><td>Private sessions assigned to them, all published classes, notes, progress tracking. No uploads; cannot view other students' private sessions.</td></tr>
@@ -1836,7 +1836,7 @@
 </ul>
 <h3>Slow uploads</h3>
 <p>Measure your <strong>upload</strong> speed, not download. <a href="https://fast.com" target="_blank" rel="noopener">fast.com</a> shows upload after the initial result.</p>
-<table><thead><tr><th>Upload speed</th><th>500 MB</th><th>1 GB</th><th>2 GB</th></tr></thead><tbody>
+<table><thead><tr><th scope="col">Upload speed</th><th scope="col">500 MB</th><th scope="col">1 GB</th><th scope="col">2 GB</th></tr></thead><tbody>
 <tr><td>10 Mbps</td><td>~7 min</td><td>~14 min</td><td>~28 min</td></tr>
 <tr><td>25 Mbps</td><td>~3 min</td><td>~5 min</td><td>~11 min</td></tr>
 <tr><td>50 Mbps</td><td>~1.5 min</td><td>~3 min</td><td>~5 min</td></tr>
@@ -1947,7 +1947,7 @@
 <div class="tldr"><strong>TLDR:</strong> MP4 (H.264 video + AAC audio) is the safe default. MOV, WebM, and MKV also work. Maximum file size is 5&nbsp;GB.</div>
 <p>Use common codecs your devices and browsers handle well. When unsure, export to MP4 (H.264 + AAC). Free converters: <a href="https://handbrake.fr" target="_blank" rel="noopener">HandBrake</a>, <a href="https://www.videolan.org/vlc/" target="_blank" rel="noopener">VLC</a>.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Where files live and how long they're kept: <a href="#storage" onclick="navigate('storage');return false">Video storage and retention</a>.</div></div>
-<table><thead><tr><th>Format</th><th>Extension</th><th>Support level</th></tr></thead><tbody>
+<table><thead><tr><th scope="col">Format</th><th scope="col">Extension</th><th scope="col">Support level</th></tr></thead><tbody>
 <tr><td>MP4</td><td><code>.mp4</code></td><td>Recommended default</td></tr>
 <tr><td>MOV</td><td><code>.mov</code></td><td>Supported</td></tr>
 <tr><td>WebM</td><td><code>.webm</code></td><td>Supported</td></tr>
@@ -2548,14 +2548,14 @@
 <details><summary>Browser compatibility check</summary>
 <p>Kaynos works in any modern browser. Here's what yours looks like:</p>
 <div id="browserResult"></div>
-<h3>Recommended browsers</h3>
+<h2>Recommended browsers</h2>
 <div class="shortcut-grid">
-  <div class="shortcut-card"><span>Chrome (recommended)</span><span style="color:var(--success)">Full support</span></div>
-  <div class="shortcut-card"><span>Firefox</span><span style="color:var(--success)">Full support</span></div>
-  <div class="shortcut-card"><span>Safari</span><span style="color:var(--warning)">Good (use MP4 with H.264 for best compatibility)</span></div>
-  <div class="shortcut-card"><span>Edge</span><span style="color:var(--success)">Full support</span></div>
+  <div class="shortcut-card"><span>Chrome (recommended)</span><span style="color:var(--success)">${IC.check} Full support</span></div>
+  <div class="shortcut-card"><span>Firefox</span><span style="color:var(--success)">${IC.check} Full support</span></div>
+  <div class="shortcut-card"><span>Safari</span><span style="color:var(--warning)">${IC.warn} Good (use MP4 with H.264 for best compatibility)</span></div>
+  <div class="shortcut-card"><span>Edge</span><span style="color:var(--success)">${IC.check} Full support</span></div>
 </div>
-<h3>If something doesn't work</h3>
+<h2>If something doesn't work</h2>
 <ol>
 <li>Try Chrome — it has the broadest codec and feature support</li>
 <li>Hard refresh: <kbd>Ctrl+Shift+R</kbd> (Windows/Linux) or <kbd>Cmd+Shift+R</kbd> (Mac)</li>
@@ -2573,19 +2573,27 @@
 <form id="contactForm" class="contact-form" method="POST" data-netlify="true" name="contact-support" netlify-honeypot="bot-field">
   <input type="hidden" name="form-name" value="contact-support">
   <p class="hidden" style="display:none"><input name="bot-field"></p>
-  <label for="cfName" class="sr-only">Your name</label>
-  <input class="contact-field" id="cfName" name="name" placeholder="Your name" autocomplete="name" aria-label="Your name">
-  <label for="cfEmail" class="sr-only">Email</label>
-  <input class="contact-field" id="cfEmail" name="email" type="email" placeholder="Email address on your account" autocomplete="email" required aria-label="Email address">
-  <label for="cfSubject" class="sr-only">Subject</label>
-  <input class="contact-field" id="cfSubject" name="subject" placeholder="Subject (e.g. Upload stuck, Can't log in)" required aria-label="Subject">
-  <label for="cfBody" class="sr-only">Description</label>
-  <textarea class="contact-field" id="cfBody" name="description" rows="5" placeholder="Describe what happened, what you expected, and any error messages you saw..." required aria-label="Description"></textarea>
+  <div class="form-group">
+    <label for="cfName">Your name <span class="optional">(optional)</span></label>
+    <input class="contact-field" id="cfName" name="name" placeholder="Jane Smith" autocomplete="name">
+  </div>
+  <div class="form-group">
+    <label for="cfEmail">Email <span class="required">*</span></label>
+    <input class="contact-field" id="cfEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+  </div>
+  <div class="form-group">
+    <label for="cfSubject">Subject <span class="required">*</span></label>
+    <input class="contact-field" id="cfSubject" name="subject" placeholder="e.g. Upload stuck, Can't log in" required>
+  </div>
+  <div class="form-group">
+    <label for="cfBody">What happened? <span class="required">*</span></label>
+    <textarea class="contact-field" id="cfBody" name="description" rows="5" placeholder="Describe what happened, what you expected, and any error messages you saw..." required></textarea>
+  </div>
   <button type="submit" class="contact-submit">Send message</button>
 </form>
 <div id="contactSuccess" class="form-success" style="display:none">
   <div class="success-icon">${IC.check}</div>
-  <h3>Message sent — thanks!</h3>
+  <h2>Message sent — thanks!</h2>
   <p>We've received your message and will reply to the email you provided. Usually same day on business days.</p>
   <button class="form-another" onclick="document.getElementById('contactForm').reset();document.getElementById('contactForm').style.display='';document.getElementById('contactSuccess').style.display='none'">Send another</button>
 </div>
@@ -2677,7 +2685,7 @@
 </form>
 <div id="featureSuccess" class="form-success" style="display:none">
   <div class="success-icon">${IC.check}</div>
-  <h3>Thanks for your suggestion!</h3>
+  <h2>Thanks for your suggestion!</h2>
   <p>We've received your feature request and will review it. If you left an email, we may follow up with questions.</p>
   <button class="form-another" onclick="document.getElementById('featureForm').reset();document.getElementById('featureForm').style.display='';document.getElementById('featureSuccess').style.display='none'">Submit another</button>
 </div>`},
@@ -2749,7 +2757,7 @@
 <h2>What stays in your browser</h2>
 <p>We use <code>localStorage</code> and <code>sessionStorage</code> to remember your preferences. This data never leaves your device.</p>
 <table class="comparison-table">
-<thead><tr><th>Key</th><th>Purpose</th><th>Storage</th></tr></thead>
+<thead><tr><th scope="col">Key</th><th scope="col">Purpose</th><th scope="col">Storage</th></tr></thead>
 <tbody>
 <tr><td>theme</td><td>Dark/light mode preference</td><td>localStorage</td></tr>
 <tr><td>lang</td><td>Language preference (EN/ES)</td><td>localStorage</td></tr>
@@ -2769,7 +2777,7 @@
 
 <h2>Third-party processors (the application)</h2>
 <table class="comparison-table">
-<thead><tr><th>Service</th><th>Purpose</th><th>Data</th></tr></thead>
+<thead><tr><th scope="col">Service</th><th scope="col">Purpose</th><th scope="col">Data</th></tr></thead>
 <tbody>
 <tr><td>Backblaze B2</td><td>Video storage and playback (via presigned URLs)</td><td>Uploaded video files (encrypted at rest)</td></tr>
 <tr><td>Stripe</td><td>Payment processing</td><td>Billing name, email (not card numbers)</td></tr>
@@ -2784,7 +2792,7 @@
 
 <h2>Data collection justification</h2>
 <table class="comparison-table">
-<thead><tr><th>Data</th><th>Purpose</th><th>Retention</th></tr></thead>
+<thead><tr><th scope="col">Data</th><th scope="col">Purpose</th><th scope="col">Retention</th></tr></thead>
 <tbody>
 <tr><td>Name, email</td><td>Account identity, notifications</td><td>Until account deletion</td></tr>
 <tr><td>Password (hashed)</td><td>Authentication</td><td>Until account deletion</td></tr>
