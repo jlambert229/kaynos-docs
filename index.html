@@ -776,7 +776,7 @@
       .copy-article-btn, .user-highlight,
       .feature-overview, .feature-form, .open-in-app, .next-steps,
       .scroll-progress, .copy-code-btn,
-      .form-submit, .form-another { display: none !important; }
+      .form-submit, .form-another, .contact-form, .contact-submit { display: none !important; }
       .layout { margin-left: 0 !important; }
       .content-with-toc { padding: 0 !important; }
       body { background: #fff; color: #111; font-size: 12pt; }
@@ -3165,7 +3165,12 @@
 
     // Move focus to the new content so keyboard/SR users land at the article
     // start instead of resuming Tab order from the now-replaced previous page.
-    pc.focus({ preventScroll: true });
+    // Skip on initial page load so the skip-link remains the first tab stop
+    // (WCAG 2.4.1 — bypass blocks); only move focus when the user has
+    // already been interacting with the page chrome.
+    if (document.activeElement && document.activeElement !== document.body) {
+      pc.focus({ preventScroll: true });
+    }
 
     // Announce page change to screen readers
     let liveRegion = document.getElementById('sr-announce');
