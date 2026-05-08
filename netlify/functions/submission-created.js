@@ -1,6 +1,10 @@
 /**
  * Netlify event-triggered function: fires automatically when a form
- * submission is created. Creates a Linear issue for each feature request.
+ * submission is created. Creates a Linear issue for each submission.
+ *
+ * Handles two forms:
+ *   - feature-request → "[Customer request] …" with FEATURE + HELP_CENTER labels
+ *   - contact-support → "[Support] …" with HELP_CENTER label, priority Medium
  *
  * Required env var: LINEAR_API_KEY (set in Netlify dashboard → Site settings → Environment variables)
  *
@@ -75,6 +79,78 @@ function looksLikeNetlifyEvent(payload) {
   return true;
 }
 
+function clean(str, max) {
+  const s = sanitizeMarkdown(String(str || '').trim());
+  return s.length > max ? s.slice(0, max) : s;
+}
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function buildFeatureRequestIssue(data) {
+  const title = clean(data.title, 200) || "Untitled feature request";
+  const description = clean(data.description, 5000);
+  if (description.length === 0) return { error: 'Description required.' };
+  const name = clean(data.name, 200) || 'Anonymous';
+  const rawEmail = clean(data.email, 200);
+  const email = !rawEmail ? 'not provided' : isValidEmail(rawEmail) ? rawEmail : 'invalid email provided';
+  const priority = PRIORITY_MAP[data.priority] || 4;
+  const markdown = [
+    `## Customer feature request`,
+    ``,
+    `**From:** ${name} (${email})`,
+    `**Priority (self-reported):** ${data.priority || "not specified"}`,
+    ``,
+    `---`,
+    ``,
+    description,
+    ``,
+    `---`,
+    `_Submitted via [docs.kaynos.net](https://docs.kaynos.net/#feature-requests) feature request form._`,
+  ].join("\n");
+  return {
+    input: {
+      teamId: TEAM_ID,
+      title: `[Customer request] ${title}`,
+      description: markdown,
+      priority,
+      labelIds: [LABEL_FEATURE, LABEL_HELP_CENTER],
+    },
+  };
+}
+
+function buildContactSupportIssue(data) {
+  const subject = clean(data.subject, 200) || "Untitled support request";
+  const description = clean(data.description, 5000);
+  if (description.length === 0) return { error: 'Description required.' };
+  const rawEmail = clean(data.email, 200);
+  if (!rawEmail || !isValidEmail(rawEmail)) return { error: 'Valid email required.' };
+  const name = clean(data.name, 200) || 'Anonymous';
+  const markdown = [
+    `## Customer support request`,
+    ``,
+    `**From:** ${name} (${rawEmail})`,
+    ``,
+    `---`,
+    ``,
+    description,
+    ``,
+    `---`,
+    `_Submitted via [docs.kaynos.net](https://docs.kaynos.net/#contact) support form. Reply to the email above._`,
+  ].join("\n");
+  return {
+    input: {
+      teamId: TEAM_ID,
+      title: `[Support] ${subject}`,
+      description: markdown,
+      // Medium priority by default — support team can re-prioritise on triage.
+      priority: 3,
+      labelIds: [LABEL_HELP_CENTER],
+    },
+  };
+}
+
 exports.handler = async function (event) {
   let payload;
   try {
@@ -96,48 +172,23 @@ exports.handler = async function (event) {
 
   const { form_name, data = {} } = payload;
 
-  // Only handle the feature-request form
-  if (form_name !== "feature-request") {
-    return { statusCode: 200, body: "Not a feature request — skipped." };
+  // Route based on form. Both forms post Netlify form submissions; we triage
+  // each into a Linear issue with a different label set + title prefix.
+  let issueInput;
+  if (form_name === "feature-request") {
+    issueInput = buildFeatureRequestIssue(data);
+  } else if (form_name === "contact-support") {
+    issueInput = buildContactSupportIssue(data);
+  } else {
+    return { statusCode: 200, body: `Form '${form_name}' not handled — skipped.` };
   }
+  if (issueInput.error) return { statusCode: 400, body: issueInput.error };
 
   const apiKey = process.env.LINEAR_API_KEY;
   if (!apiKey) {
     console.error("LINEAR_API_KEY not set");
     return { statusCode: 500, body: "LINEAR_API_KEY not configured." };
   }
-
-  let title = (data.title || "Untitled feature request").trim();
-  let description = data.description || "";
-  let name = data.name || "Anonymous";
-  let email = data.email || "not provided";
-  const priority = PRIORITY_MAP[data.priority] || 4;
-
-  // Validate inputs
-  if (title.length > 200) title = title.slice(0, 200);
-  if (description.length > 5000) return { statusCode: 400, body: 'Description too long (max 5000 chars).' };
-  if (email !== 'not provided' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    email = 'invalid email provided';
-  }
-
-  // Sanitize user-provided values before building markdown
-  name = sanitizeMarkdown(name);
-  email = sanitizeMarkdown(email);
-  description = sanitizeMarkdown(description);
-
-  const markdown = [
-    `## Customer feature request`,
-    ``,
-    `**From:** ${name} (${email})`,
-    `**Priority (self-reported):** ${data.priority || "not specified"}`,
-    ``,
-    `---`,
-    ``,
-    description,
-    ``,
-    `---`,
-    `_Submitted via [docs.kaynos.net](https://docs.kaynos.net/#feature-requests) feature request form._`,
-  ].join("\n");
 
   const mutation = `
     mutation CreateIssue($input: IssueCreateInput!) {
@@ -148,17 +199,9 @@ exports.handler = async function (event) {
     }
   `;
 
-  const variables = {
-    input: {
-      teamId: TEAM_ID,
-      title: `[Customer request] ${title}`,
-      description: markdown,
-      priority: priority,
-      labelIds: [LABEL_FEATURE, LABEL_HELP_CENTER],
-    },
-  };
+  const variables = { input: issueInput.input };
 
-  console.log(JSON.stringify({ event: 'submission', form: form_name, title: title.slice(0, 50), timestamp: new Date().toISOString() }));
+  console.log(JSON.stringify({ event: 'submission', form: form_name, title: issueInput.input.title.slice(0, 80), timestamp: new Date().toISOString() }));
 
   try {
     const res = await fetchWithRetry(LINEAR_API, {

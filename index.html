@@ -1423,12 +1423,12 @@
       <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" id="themeIcon"><path d="M8 1v1M8 14v1M1 8h1M14 8h1M3.1 3.1l.7.7M12.2 12.2l.7.7M12.9 3.1l-.7.7M3.8 12.2l-.7.7"/><circle cx="8" cy="8" r="3"/></svg>
     </button>
 
-    <a href="https://app.kaynos.net/" class="header-app-link" target="_blank" rel="noopener noreferrer" title="Open app.kaynos.net">
+    <a href="https://app.kaynos.net/" class="header-app-link" target="_blank" rel="noopener noreferrer" title="Sign in at app.kaynos.net">
       <svg aria-hidden="true" focusable="false" width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
         <path d="M5 2H2a1 1 0 00-1 1v8a1 1 0 001 1h8a1 1 0 001-1V8"/>
         <path d="M8 1h4v4M12 1L6.5 6.5"/>
       </svg>
-      <span>Open App</span>
+      <span>Sign in</span>
     </a>
   </header>
 
@@ -1466,7 +1466,14 @@
     </svg>
   </button>
 
-  <!-- Netlify Forms hidden detection form (must be in static HTML for Netlify to register it) -->
+  <!-- Netlify Forms hidden detection forms (must be in static HTML for Netlify to register them) -->
+  <form name="contact-support" netlify netlify-honeypot="bot-field" hidden>
+    <input name="bot-field">
+    <input name="name">
+    <input name="email">
+    <input name="subject">
+    <textarea name="description"></textarea>
+  </form>
   <form name="feature-request" netlify netlify-honeypot="bot-field" hidden>
     <input name="bot-field">
     <input name="name">
@@ -1566,7 +1573,7 @@
 <div class="quick-links">
   <a class="quick-link featured" href="#setup" onclick="navigate('setup');return false">
     <div class="ql-icon">${IC.rocket}</div>
-    <div class="ql-title">Set up Kaynos <span class="ql-aud">Owners</span></div>
+    <div class="ql-title">Set up Kaynos <span class="ql-aud">Anyone</span></div>
     <div class="ql-desc">First login, password, and the basics that get a new account ready in 10 minutes.</div>
   </a>
   <a class="quick-link featured" href="#uploading" onclick="navigate('uploading');return false">
@@ -1607,7 +1614,7 @@
 <p>Creating a new school account takes three steps:</p>
 <ol>
 <li><strong>Sign up</strong> — enter your school name, your name, and email at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</li>
-<li><strong>Payment</strong> — flat <strong>[$X/month]</strong> or <strong>[$Y/year]</strong> per school. All members (owners, coaches, students) are included regardless of count — there are no per-coach or per-student tiers. Every account starts with a 14-day free trial; card required, no charge until day 15.</li>
+<li><strong>Payment</strong> — flat <strong>$29/mo</strong> per school. All members (owners, coaches, students) are included regardless of count — there are no per-coach or per-student tiers. Every account starts with a 14-day free trial; card required, no charge until day 15.</li>
 <li><strong>Confirmation</strong> — you land on the coach dashboard with the instructor checklist.</li>
 </ol>
 <p>The <strong>instructor checklist</strong> walks you through three first actions: add a student, record a session, and upload a class. Complete them at your own pace.</p>
@@ -1643,7 +1650,7 @@
 <div class="step-tips">
   <div class="step-tip"><div class="step-num">1</div><div class="step-body"><h4>Open the session or class</h4><p>Navigate to the recording you want to annotate.</p></div></div>
   <div class="step-tip"><div class="step-num">2</div><div class="step-body"><h4>Play to the right moment</h4><p>Use <kbd>J</kbd>/<kbd>L</kbd> to skip, or click the timeline to jump.</p></div></div>
-  <div class="step-tip"><div class="step-num">3</div><div class="step-body"><h4>Press N or click Add Note</h4><p>The video pauses automatically. Type your observation.</p></div></div>
+  <div class="step-tip"><div class="step-num">3</div><div class="step-body"><h4>Click Add Note</h4><p>The video pauses automatically. Type your observation.</p></div></div>
   <div class="step-tip"><div class="step-num">4</div><div class="step-body"><h4>Save</h4><p>The note appears as a marker on the timeline. Hover to preview, click to jump back.</p></div></div>
 </div>
 <h3>Invite a student</h3>
@@ -1761,6 +1768,7 @@
       title: "Understanding user roles", section: "Getting Started",
       content: `
 <h1>Understanding user roles</h1>
+<div class="tldr"><strong>TLDR:</strong> Three roles — <strong>admin</strong> manages members and settings, <strong>coach</strong> uploads video and writes notes, <strong>student</strong> watches and replies. Pick the one that matches how each person uses Kaynos.</div>
 <p>Each person has one of three roles. Assign them so permissions match how your team runs.</p>
 <h2>Admin</h2>
 <p>Typically the school owner or head coach. Full access: everything a coach can do, plus member management, invites, role changes, account settings, and the <strong>Admin</strong> panel for account-wide visibility.</p>
@@ -1851,7 +1859,7 @@
       title: "Watching and reviewing", section: "Video",
       content: `
 <h1>Watching and reviewing</h1>
-<div class="tldr"><strong>TLDR:</strong> Open a session or class, press play. Use <kbd>J</kbd>/<kbd>L</kbd> to skip, <kbd>N</kbd> to add a note, <kbd>Space</kbd> to pause.</div>
+<div class="tldr"><strong>TLDR:</strong> Open a session or class and press play. Use <kbd>Space</kbd> to pause, <kbd>J</kbd>/<kbd>L</kbd> to skip 10s, <kbd>F</kbd> for fullscreen. Click <strong>Add Note</strong> to leave timestamped feedback.</div>
 <p>Playback runs entirely in the browser — no separate app install needed. Open recordings at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Problems playing video? See the troubleshooting section below.</div></div>
 <h2>Playback speed</h2>
@@ -1936,6 +1944,7 @@
       title: "Supported formats and limits", section: "Video",
       content: `
 <h1>Supported formats and limits</h1>
+<div class="tldr"><strong>TLDR:</strong> MP4 (H.264 video + AAC audio) is the safe default. MOV, WebM, and MKV also work. Maximum file size is 5&nbsp;GB.</div>
 <p>Use common codecs your devices and browsers handle well. When unsure, export to MP4 (H.264 + AAC). Free converters: <a href="https://handbrake.fr" target="_blank" rel="noopener">HandBrake</a>, <a href="https://www.videolan.org/vlc/" target="_blank" rel="noopener">VLC</a>.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Where files live and how long they're kept: <a href="#storage" onclick="navigate('storage');return false">Video storage and retention</a>.</div></div>
 <table><thead><tr><th>Format</th><th>Extension</th><th>Support level</th></tr></thead><tbody>
@@ -2431,7 +2440,7 @@
 <hr>
 <h2>Billing and pricing</h2>
 <h3>How much does Kaynos cost?</h3>
-<p><strong>[$X/month]</strong> or <strong>[$Y/year]</strong> — flat per school. Every feature is included; there are no per-coach or per-student tiers and no seat counts. <strong>Worked example:</strong> a school with 1 owner + 3 coaches + 50 students pays the same flat price as a school with just 1 owner — coach and student counts don't change the bill. Every new account starts with a <strong>14-day free trial</strong> — card required, no charge until day 15. Manage billing, view invoices, and update your payment method from the Stripe billing portal (linked from your <strong>Profile</strong> page when you're signed in as an admin).</p>
+<p><strong>$29/mo</strong> — flat per school. Every feature is included; there are no per-coach or per-student tiers and no seat counts. <strong>Worked example:</strong> a school with 1 owner + 3 coaches + 50 students pays the same flat price as a school with just 1 owner — coach and student counts don't change the bill. Every new account starts with a <strong>14-day free trial</strong> — card required, no charge until day 15. Manage billing, view invoices, and update your payment method from the Stripe billing portal (linked from your <strong>Profile</strong> page when you're signed in as an admin).</p>
 <h3>What happens when my trial ends?</h3>
 <p>Your selected plan begins billing automatically. If you cancel before the trial ends, you won't be charged. All your data stays available while your subscription is active.</p>
 <h3>How do I manage my subscription?</h3>
@@ -2457,7 +2466,7 @@
 <ul>
 <li>Organize students by training phase using tags (e.g., <code>beginner</code>, <code>competition</code>, <code>rehab</code>).</li>
 <li>Enable <strong>email notifications</strong> so students know when your review is ready.</li>
-<li>Use keyboard shortcuts for speed: <kbd>J</kbd>/<kbd>L</kbd> to scrub, <kbd>N</kbd> to note, <kbd>Cmd+Enter</kbd> to save.</li>
+<li>Use keyboard shortcuts for speed: <kbd>J</kbd>/<kbd>L</kbd> to scrub the timeline, then <kbd>Cmd+Enter</kbd> (or <kbd>Ctrl+Enter</kbd>) once you're in the note editor to save.</li>
 </ul>`},
 
     "developer-api": {
@@ -2482,7 +2491,7 @@
 <li>Customer-facing webhooks for real-time events</li>
 <li>SDKs or client libraries</li>
 </ul>
-<p>A public API may come in the future. If you have a use case that would benefit from programmatic access or webhooks, <a href="mailto:support@kaynos.net">contact us</a> or visit our <a href="#contact" onclick="navigate('contact');return false">contact page</a> so we can prioritize based on demand.</p>
+<p>A public API may come in the future. If you have a use case that would benefit from programmatic access or webhooks, <a href="${mailHref()}">contact us</a> or visit our <a href="#contact" onclick="navigate('contact');return false">contact page</a> so we can prioritize based on demand.</p>
 <p>Follow our <a href="#release-notes" onclick="navigate('release-notes');return false">release notes</a> for updates.</p>`},
 
     glossary: {
@@ -2560,17 +2569,25 @@
       title: "Contact support", section: "",
       content: `
 <h1>Contact support</h1>
-<p>Fill out the form below and we'll copy a formatted message for you to send to ${mailLink()}.</p>
-<div class="contact-form" id="contactForm">
+<p>Send a message and the support team will pick it up. Most issues get a same-day reply on business days.</p>
+<form id="contactForm" class="contact-form" method="POST" data-netlify="true" name="contact-support" netlify-honeypot="bot-field">
+  <input type="hidden" name="form-name" value="contact-support">
+  <p class="hidden" style="display:none"><input name="bot-field"></p>
   <label for="cfName" class="sr-only">Your name</label>
-  <input class="contact-field" id="cfName" placeholder="Your name" aria-label="Your name">
+  <input class="contact-field" id="cfName" name="name" placeholder="Your name" autocomplete="name" aria-label="Your name">
   <label for="cfEmail" class="sr-only">Email</label>
-  <input class="contact-field" id="cfEmail" placeholder="Email address on your account" type="email" aria-label="Email address">
+  <input class="contact-field" id="cfEmail" name="email" type="email" placeholder="Email address on your account" autocomplete="email" required aria-label="Email address">
   <label for="cfSubject" class="sr-only">Subject</label>
-  <input class="contact-field" id="cfSubject" placeholder="Subject (e.g. Upload stuck, Can't log in)" aria-label="Subject">
+  <input class="contact-field" id="cfSubject" name="subject" placeholder="Subject (e.g. Upload stuck, Can't log in)" required aria-label="Subject">
   <label for="cfBody" class="sr-only">Description</label>
-  <textarea class="contact-field" id="cfBody" rows="5" placeholder="Describe what happened, what you expected, and any error messages you saw..." aria-label="Description"></textarea>
-  <button class="contact-submit" onclick="submitContact()">Copy to clipboard &amp; open email</button>
+  <textarea class="contact-field" id="cfBody" name="description" rows="5" placeholder="Describe what happened, what you expected, and any error messages you saw..." required aria-label="Description"></textarea>
+  <button type="submit" class="contact-submit">Send message</button>
+</form>
+<div id="contactSuccess" class="form-success" style="display:none">
+  <div class="success-icon">${IC.check}</div>
+  <h3>Message sent — thanks!</h3>
+  <p>We've received your message and will reply to the email you provided. Usually same day on business days.</p>
+  <button class="form-another" onclick="document.getElementById('contactForm').reset();document.getElementById('contactForm').style.display='';document.getElementById('contactSuccess').style.display='none'">Send another</button>
 </div>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Response time:</strong> Usually same day on business days. Include your account name and browser for faster diagnosis.</div></div>
 <h2>Other ways to reach us</h2>
@@ -2673,7 +2690,7 @@
 <p>This guide is for parents and guardians whose children train at an academy that uses Kaynos. You don't need to know anything about martial arts or about the app itself — this page covers what your child's experience looks like and answers common questions.</p>
 
 <h2>How your child's account works</h2>
-<p>Kaynos has three roles: <strong>admin</strong>, <strong>instructor</strong> (coach), and <strong>student</strong>. There is no separate parent or guardian account. Your child's coach or academy admin creates and manages their student account.</p>
+<p>Kaynos has three roles: <strong>admin</strong>, <strong>coach</strong>, and <strong>student</strong>. There is no separate parent or guardian account. Your child's coach or academy admin creates and manages their student account.</p>
 <ul>
 <li>Your child logs in at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> with credentials provided by the academy.</li>
 <li>The coach or admin controls what content is available to students.</li>
@@ -3888,24 +3905,6 @@
     ).join('') || (q.length > 3 ? '<div style="font-size:.8125rem;color:var(--text-tertiary);padding:8px 0">No matches — try different keywords or <a href="' + mailHref() + '" style="color:var(--accent)">email support</a></div>' : '');
   }
 
-  /* ── CONTACT FORM ──────────────────────────────────── */
-  function submitContact() {
-    const name = document.getElementById('cfName')?.value.trim() || '';
-    const email = document.getElementById('cfEmail')?.value.trim() || '';
-    const subject = document.getElementById('cfSubject')?.value.trim() || '';
-    const body = document.getElementById('cfBody')?.value.trim() || '';
-    if (!subject && !body) { showToast('Please describe your issue'); return; }
-    const msg = `Name: ${name || '(not provided)'}\nEmail: ${email || '(not provided)'}\nSubject: ${subject}\n\n${body}\n\n---\nSent from Kaynos Docs\nBrowser: ${navigator.userAgent.split(' ').slice(-2).join(' ')}`;
-    navigator.clipboard.writeText(msg).then(() => {
-      showToast('Copied — opening email');
-      setTimeout(() => {
-        window.open(mailHref('?subject=' + encodeURIComponent(subject || 'Support request') + '&body=' + encodeURIComponent(msg)), '_blank');
-      }, 500);
-    }).catch(() => {
-      window.open(mailHref('?subject=' + encodeURIComponent(subject || 'Support request') + '&body=' + encodeURIComponent(msg)), '_blank');
-    });
-  }
-
   /* ── GLOSSARY TOOLTIPS ─────────────────────────────── */
   const GLOSSARY_TERMS = {
     'session': 'A one-on-one recording assigned to a single student — only they, the creator, and admins can see it.',
@@ -4264,19 +4263,24 @@
     renderReleases();
   }
 
-  /* ── FEATURE REQUEST FORM (Netlify Forms AJAX) ────── */
+  /* ── NETLIFY FORM AJAX HANDLER (feature-request, contact-support) ────── */
+  const NETLIFY_FORMS = {
+    featureForm:  { rateKey: 'fr-last-submit', successId: 'featureSuccess', submitText: 'Submit request', btnSel: '.form-submit' },
+    contactForm:  { rateKey: 'cf-last-submit', successId: 'contactSuccess', submitText: 'Send message',    btnSel: '.contact-submit' },
+  };
   document.addEventListener('submit', function(e) {
-    if (e.target.id !== 'featureForm') return;
+    const cfg = NETLIFY_FORMS[e.target.id];
+    if (!cfg) return;
     e.preventDefault();
     const form = e.target;
-    const btn = form.querySelector('.form-submit');
-    const lastSubmit = parseInt(localStorage.getItem('fr-last-submit') || '0');
+    const btn = form.querySelector(cfg.btnSel);
+    const lastSubmit = parseInt(localStorage.getItem(cfg.rateKey) || '0');
     if (Date.now() - lastSubmit < 300000) {
       showToast('Please wait before submitting again.');
-      if (btn) { btn.disabled = false; btn.textContent = 'Submit request'; }
+      if (btn) { btn.disabled = false; btn.textContent = cfg.submitText; }
       return;
     }
-    if (btn) { btn.disabled = true; btn.textContent = 'Submitting...'; }
+    if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
     const data = new FormData(form);
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 10000);
@@ -4288,13 +4292,14 @@
     }).then(res => {
       clearTimeout(timeout);
       if (res.ok) {
-        localStorage.setItem('fr-last-submit', String(Date.now()));
+        localStorage.setItem(cfg.rateKey, String(Date.now()));
         form.style.display = 'none';
-        document.getElementById('featureSuccess').style.display = '';
-        document.getElementById('featureSuccess').setAttribute('role', 'alert');
+        const success = document.getElementById(cfg.successId);
+        success.style.display = '';
+        success.setAttribute('role', 'alert');
       } else {
         showToast('Something went wrong — please try again or email support.');
-        if (btn) { btn.disabled = false; btn.textContent = 'Submit request'; }
+        if (btn) { btn.disabled = false; btn.textContent = cfg.submitText; }
       }
     }).catch(err => {
       clearTimeout(timeout);
@@ -4303,7 +4308,7 @@
       } else {
         showToast('Network error — check your connection and try again.');
       }
-      if (btn) { btn.disabled = false; btn.textContent = 'Submit request'; }
+      if (btn) { btn.disabled = false; btn.textContent = cfg.submitText; }
     });
   });
 
@@ -4515,7 +4520,6 @@
   window.navigate = navigate;
   window.toggleTheme = toggleTheme;
   window.toggleSidebar = toggleSidebar;
-  window.submitContact = submitContact;
   window.togglePollVote = typeof togglePollVote !== 'undefined' ? togglePollVote : function(){};
   window.submitPollIdea = typeof submitPollIdea !== 'undefined' ? submitPollIdea : function(){};
   window.setPollSort = typeof setPollSort !== 'undefined' ? setPollSort : function(){};
