@@ -2010,7 +2010,7 @@
 <ul>
 <li>HTTPS for all data in transit.</li>
 <li>Account data is isolated — your files are not mixed with other organizations' storage.</li>
-<li>Playback URLs are time-limited. Share access inside Kaynos rather than relying on long-lived direct links.</li>
+<li>Playback URLs are time-limited (<strong>4 hours</strong>); upload URLs are even shorter (<strong>1 hour</strong>). Share access inside Kaynos rather than relying on long-lived direct links — if a link stops working partway through, just re-open the video in the app to fetch a fresh one.</li>
 </ul>
 <h2>Data residency</h2>
 <p>Videos are stored in Backblaze B2 (US) and streamed directly from B2 via short-lived presigned URLs. For EU customers: Backblaze offers Standard Contractual Clauses (SCCs) in its Data Processing Agreement. Contact <a href="https://app.kaynos.net/terms" target="_blank" rel="noopener">support</a> for SCC documentation.</p>`},
@@ -2069,7 +2069,7 @@
 <li>Fill in the session details and assign a student.</li>
 <li>The system checks for conflicts with existing sessions and school hours.</li>
 </ol>
-<p>Admins can set operating hours under <strong>Admin → Settings</strong>. Scheduling outside those hours is allowed but flagged.</p>
+<p>Admins can set operating hours under <strong>Admin → School hours</strong>. Scheduling outside those hours is allowed.</p>
 <h2>Review requests</h2>
 <p>Students can request a video review from any coach. A review request creates a draft session that the student fills out.</p>
 <h3>How students submit a request</h3>
@@ -2081,7 +2081,16 @@
 </ol>
 <h3>How coaches respond</h3>
 <p>Pending review requests appear on the coach dashboard under <strong>Awaiting feedback</strong>. The coach can <strong>accept</strong> or <strong>decline</strong> each request. Accepting converts the draft into a full session — the coach then watches the video and adds notes and annotations as usual.</p>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Review requests are the main way students initiate feedback. Coaches who enable <a href="#profile" onclick="navigate('profile');return false">email notifications</a> get alerted as soon as a request comes in.</div></div>`},
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Review requests are the main way students initiate feedback. Coaches who enable <a href="#profile" onclick="navigate('profile');return false">email notifications</a> get alerted as soon as a request comes in.</div></div>
+<h2>Multiple videos per session</h2>
+<p>A session isn't limited to one video. You can attach more than one clip to the same session — useful when a student sends two angles of the same drill, or when you want to compare an "attempt 1" and "attempt 2" side-by-side in the same session record.</p>
+<ul>
+<li><strong>Add another video:</strong> open an existing session and click <strong>Add video</strong>. Same upload flow as the first.</li>
+<li><strong>Switch between videos:</strong> the player has a clip rail so you can jump from one to the next without leaving the session.</li>
+<li><strong>Reorder:</strong> drag clips in the rail, or use the up/down controls. The order students see updates immediately.</li>
+<li><strong>Notes</strong> stay tied to whichever clip was active when you wrote them — switching videos doesn't move existing notes.</li>
+</ul>
+<p>The same Add/Reorder/Switch flow applies to <a href="#creating-classes" onclick="navigate('creating-classes');return false">classes</a> with multiple recordings.</p>`},
 
     "creating-classes": {
       title: "Creating a class", section: "Sessions & Classes",
@@ -2277,7 +2286,7 @@
 <li>Enter the new address and click <strong>Send verification</strong>. Kaynos emails a verification link to the new address.</li>
 <li>Open that link to confirm. Your sign-in email updates only after the link is opened.</li>
 </ol>
-<p>While a change is pending, you'll see the new address listed as <strong>Pending</strong> with a <strong>Cancel pending change</strong> button. Verification links expire — request a new one if it lapses.</p>
+<p>While a change is pending, you'll see the new address listed as <strong>Pending</strong> with a <strong>Cancel pending change</strong> button. Verification links expire after <strong>24 hours</strong> — request a new one if it lapses.</p>
 <h2>Change password</h2>
 <ol>
 <li>Click <strong>Change Password</strong>.</li>
@@ -2289,8 +2298,14 @@
 <h2>Billing (admins only)</h2>
 <p>Admins see a <strong>Billing</strong> section on their profile with the current subscription status and a <strong>Manage</strong> button that opens the Stripe billing portal in a new tab. Update payment methods, download invoices, or change plans there.</p>
 <h2>Notifications</h2>
-<p>Email notifications are controlled by a single toggle in the profile <strong>Notifications</strong> section. When enabled, Kaynos sends email for collaboration and activity events: someone mentions you, a reply is added to your note, a session or class is shared with you, and (for coaches) review requests.</p>
-<p>Account-lifecycle and security messages always send regardless of this toggle: welcome emails, password resets, invites with temporary passwords, email-change verification links, deletion notices, and support form confirmations. Admins also receive automated usage reports based on the schedule they choose under <strong>Admin → Reports &amp; Exports</strong>.</p>
+<p>Email notifications live in the profile <strong>Notifications</strong> section. There's a master <strong>Email notifications</strong> toggle at the top, and three per-event-type toggles underneath:</p>
+<ul>
+<li><strong>New sessions</strong> — when a coach creates a session for you.</li>
+<li><strong>Class recordings</strong> — when a class recording is posted to your school.</li>
+<li><strong>Notes from instructors</strong> — when a coach adds a note on your session.</li>
+</ul>
+<p>Turning the master switch off silences all three. With the master on, you can flip each sub-toggle on or off individually — for example, keep <strong>Notes from instructors</strong> on but turn off the class-recording emails if you only want personal coaching alerts.</p>
+<p><strong>What always sends regardless of these toggles:</strong> welcome emails, password resets, invites, email-change verification links, deletion notices, and support form confirmations. Admins also receive automated usage reports based on the schedule they choose under <strong>Admin → Reports &amp; Exports</strong>.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Delivery problems? See <a href="#email-issues" onclick="navigate('email-issues');return false">Email and notification issues</a>.</div></div>
 <h2>In-app notifications</h2>
 <p>The bell icon in the header shows unread notifications: mentions, note replies, session shares, review requests, and other activity. Click to view, or mark all as read. On mobile, the panel can be dismissed with the close button.</p>
@@ -2343,7 +2358,7 @@
 <li>Corporate filters may require IT allowlisting; an admin can still issue a manual password reset in the meantime.</li>
 </ul>
 <h2>Too many emails</h2>
-<p><strong>Profile</strong> → turn off the email-notifications toggle if the member prefers quiet. This is a single switch that mutes all collaboration email (mentions, replies, shares, review requests). Security-related email (password resets) still sends.</p>`},
+<p><strong>Profile</strong> → turn off the master <strong>Email notifications</strong> toggle to silence everything, or use the three per-event-type toggles (New sessions, Class recordings, Notes from instructors) to keep some categories and mute others. Security-related email (password resets, invites, email-change verifications) always sends.</p>`},
 
     performance: {
       title: "Performance and loading", section: "Troubleshoot",
@@ -2483,6 +2498,7 @@
 <li><strong>Scope:</strong> Documentation of internal endpoints (sessions, classes, members, notes, uploads, billing, and more). Useful for understanding behavior, debugging, and internal tooling.</li>
 </ul>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>The internal reference is provided for transparency and internal use. It is not a stability contract — endpoints and shapes can change between releases.</div></div>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div><strong>API field naming:</strong> the role we call <strong>coach</strong> in the UI is stored as <code>"instructor"</code> in API request and response bodies (e.g. <code>role: "instructor"</code>). Plan for that mapping if you're scripting against the internal endpoints.</div></div>
 <h2>Public developer API (not available)</h2>
 <p>Kaynos does not currently offer a public developer API for third-party integrations. Specifically, the following are <strong>not</strong> supported today:</p>
 <ul>
