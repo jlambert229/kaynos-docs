@@ -55,6 +55,26 @@ function sanitizeMarkdown(str) {
   return String(str).replace(/[<>]/g, '').replace(/\n{3,}/g, '\n\n');
 }
 
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const PAYLOAD_MAX_AGE_MS = 5 * 60 * 1000;
+
+/**
+ * Verify that the payload looks like a real Netlify form-submission event
+ * rather than an arbitrary POST to the function URL. Netlify always sends
+ * id (UUID), site_url, and a recent created_at; an attacker forging a
+ * payload would have to match all three — and the site_url has to match
+ * the deploy's own URL, which is set by Netlify at build time.
+ */
+function looksLikeNetlifyEvent(payload) {
+  if (!payload.id || !UUID_RE.test(payload.id)) return false;
+  const expectedSite = process.env.URL;
+  if (expectedSite && payload.site_url !== expectedSite) return false;
+  const ts = Date.parse(payload.created_at);
+  if (!Number.isFinite(ts)) return false;
+  if (Math.abs(Date.now() - ts) > PAYLOAD_MAX_AGE_MS) return false;
+  return true;
+}
+
 exports.handler = async function (event) {
   let payload;
   try {
@@ -65,6 +85,15 @@ exports.handler = async function (event) {
   if (!payload || typeof payload !== 'object') {
     return { statusCode: 400, body: 'Missing payload.' };
   }
+
+  // Only handle real Netlify form events. Reject direct POSTs that try to
+  // spoof a submission. Return 200 so abuse callers can't probe which check
+  // failed.
+  if (!looksLikeNetlifyEvent(payload)) {
+    console.log(JSON.stringify({ event: 'rejected_non_netlify_payload', timestamp: new Date().toISOString() }));
+    return { statusCode: 200, body: 'OK' };
+  }
+
   const { form_name, data = {} } = payload;
 
   // Only handle the feature-request form
