@@ -79,7 +79,19 @@ Prefer the **`linear` CLI** in the shell for issue **CRUD**, bulk field updates 
 
 ## Pull requests and production deploys
 
-Use **GitHub pull requests (PRs)** for changes that should go through review. Target **`main`** (this repo's default branch; it is not `master` here). **Merging a PR into `main`** triggers **production** Netlify deploys for the linked docs site (this repo has no in-repo GitHub Actions workflow; Netlify is the primary build path). Treat a merge as shipping docs to production.
+Use **GitHub pull requests (PRs)** for changes that go through GitHub. Target **`main`** (this repo's default branch; it is not `master` here). Merging a PR into `main` triggers a **production** Netlify deploy for `docs.kaynos.net` — this repo has no in-repo GitHub Actions deploy workflow, Netlify is the build path.
+
+### Auto-merge default (kaynos-docs only)
+
+After Claude opens a PR on this repo:
+
+```bash
+gh pr merge <N> --squash --auto --delete-branch
+```
+
+That's it. Don't ask. Don't wait for "merge it" from the user — they've said they don't want to be the merge button. If CI is already green it squash-merges immediately and Netlify ships. If CI fails, the auto-merge sits until you push a fix.
+
+This default is **specific to `kaynos-docs`**. The other Kaynos repos (`kaynos`, `kaynos-site`) keep their standard review flow per their own CLAUDE.md.
 
 ## Support
 
