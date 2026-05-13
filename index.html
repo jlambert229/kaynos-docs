@@ -4964,7 +4964,9 @@
   const hash = location.hash.slice(1);
   const [initPage, initSection] = hash.split(':');
   const resolvedPage = REDIRECTS[initPage] || initPage;
-  navigate(resolvedPage && PAGES[resolvedPage] ? resolvedPage : 'welcome');
+  // Empty hash → welcome. Unknown hash → fall through to navigate() so its
+  // "Page not found" handler renders with the preserved URL.
+  navigate(resolvedPage || 'welcome');
   if (initSection) {
     if (initSection.startsWith('wizard-')) {
       requestAnimationFrame(() => renderWizard(initSection.replace('wizard-', '')));
