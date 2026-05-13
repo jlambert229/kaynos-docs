@@ -341,8 +341,15 @@
     }
     .content-wrap { width: 100%; max-width: 720px; display: flex; flex-direction: column; }
 
-    /* ── PAGE TRANSITION ─── */
-    .content-inner { animation: fadeUp .18s var(--ease); }
+    /* ── PAGE TRANSITION ───
+       Opacity-only fade — no transform, so descendant positions don't shift
+       during the .18s animation. fadeUp (below) keeps the upward-translate
+       feel for smaller in-page elements where layout stability isn't fragile. */
+    .content-inner { animation: fadeIn .18s var(--ease); }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(8px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -3226,35 +3233,36 @@
   };
 
   // Last touched per page. Pages absent from this map fall back to LAST_UPDATED_DEFAULT.
-  const LAST_UPDATED_DEFAULT = '2026-04-24';
+  // Every entry below was rewritten for clarity/concision on 2026-05-13 (PR #66).
+  const LAST_UPDATED_DEFAULT = '2026-05-13';
   const LAST_UPDATED = {
-    'welcome': '2026-05-08',
-    'setup': '2026-05-08',
-    'roles': '2026-05-08',
-    'uploading': '2026-05-03',
-    'playback': '2026-05-08',
-    'formats': '2026-05-08',
-    'storage': '2026-05-08',
-    'creating-sessions': '2026-05-08',
-    'creating-classes': '2026-05-02',
-    'notes': '2026-05-02',
-    'progress': '2026-05-02',
-    'inviting-members': '2026-05-02',
-    'managing-members': '2026-05-02',
-    'profile': '2026-05-08',
-    'login-issues': '2026-05-02',
-    'email-issues': '2026-05-08',
-    'performance': '2026-04-24',
-    'faq': '2026-05-08',
-    'developer-api': '2026-05-08',
-    'glossary': '2026-05-02',
-    'troubleshoot': '2026-05-08',
-    'using-on-mobile': '2026-05-08',
-    'contact': '2026-05-08',
-    'release-notes': '2026-05-02',
-    'feature-requests': '2026-04-24',
-    'parent-guide': '2026-05-08',
-    'privacy-on-this-site': '2026-04-24',
+    'welcome': '2026-05-13',
+    'setup': '2026-05-13',
+    'roles': '2026-05-13',
+    'uploading': '2026-05-13',
+    'playback': '2026-05-13',
+    'formats': '2026-05-13',
+    'storage': '2026-05-13',
+    'creating-sessions': '2026-05-13',
+    'creating-classes': '2026-05-13',
+    'notes': '2026-05-13',
+    'progress': '2026-05-13',
+    'inviting-members': '2026-05-13',
+    'managing-members': '2026-05-13',
+    'profile': '2026-05-13',
+    'login-issues': '2026-05-13',
+    'email-issues': '2026-05-13',
+    'performance': '2026-05-13',
+    'faq': '2026-05-13',
+    'developer-api': '2026-05-13',
+    'glossary': '2026-05-13',
+    'troubleshoot': '2026-05-13',
+    'using-on-mobile': '2026-05-13',
+    'contact': '2026-05-13',
+    'release-notes': '2026-05-13',
+    'feature-requests': '2026-05-13',
+    'parent-guide': '2026-05-13',
+    'privacy-on-this-site': '2026-05-13',
   };
 
   /* ── NAVIGATE ───────────────────────────────────────── */
