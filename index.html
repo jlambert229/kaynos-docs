@@ -640,7 +640,7 @@
     /* ── BACK TO TOP ─── */
     #back-top {
       position: fixed; bottom: 28px; right: 28px;
-      width: 38px; height: 38px; background: var(--bg-elevated);
+      width: 44px; height: 44px; background: var(--bg-elevated);
       border: 1px solid var(--border-strong); border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       color: var(--text-secondary); cursor: pointer; box-shadow: var(--shadow);
@@ -943,9 +943,10 @@
     .wizard-option svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
     .wizard-restart {
       font-size: .8125rem; color: var(--text-tertiary); cursor: pointer;
-      background: none; border: none; padding: 0; margin-top: 8px;
-      transition: color var(--dur);
+      background: none; border: none; padding: 8px 10px; margin-top: 8px;
+      transition: color var(--dur); display: inline-flex; align-items: center;
     }
+    @media (max-width: 768px) { .wizard-restart { min-height: 44px; min-width: 44px; } }
     .wizard-restart:hover { color: var(--accent); }
     .wizard-result {
       padding: 16px; background: var(--bg-elevated);
@@ -1399,8 +1400,8 @@
     @media (max-width: 768px) {
       .mobile-nav { display: flex; }
       .content-with-toc { padding-bottom: 100px !important; }
-      #back-top { bottom: 68px; }
-      #toast { bottom: 68px; }
+      #back-top { bottom: calc(68px + env(safe-area-inset-bottom, 0px)); }
+      #toast { bottom: calc(68px + env(safe-area-inset-bottom, 0px)); }
     }
 
     /* ── SITE FOOTER ─── */
@@ -1492,9 +1493,9 @@
           <a href="#parent-guide" onclick="navigate('parent-guide');return false">Parent guide</a>
           <a href="#contact" onclick="navigate('contact');return false">Contact</a>
           <a href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">Legal</a>
-          <a href="https://github.com/jlambert229/kaynos-docs/blob/main/docs/SECURITY.md" target="_blank" rel="noopener">Security</a>
+          <a href="https://github.com/jlambert229/kaynos-docs/blob/main/docs/SECURITY.md" target="_blank" rel="noopener noreferrer">Security</a>
           <!-- Status: Netlify hosts this site; swap to a Kaynos-owned status page when one exists. -->
-          <a href="https://www.netlifystatus.com/" target="_blank" rel="noopener">Status</a>
+          <a href="https://www.netlifystatus.com/" target="_blank" rel="noopener noreferrer">Status</a>
         </nav>
       </div>
     </footer>
@@ -1655,7 +1656,7 @@
       title: "Setting up your account", section: "Getting Started",
       content: `
 <h1>Setting up your account</h1>
-<div class="tldr"><strong>TLDR:</strong> School owners: sign up, pay, and follow the instructor checklist. Invited members: log in with your invite email and change your temporary password.</div>
+<div class="tldr"><strong>TLDR:</strong> School owners: sign up, start the 14-day free trial (no charge until day 15), and follow the instructor checklist. Invited members: log in with your invite email and change your temporary password.</div>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Open the product at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>. Next steps: <a href="#inviting-members" onclick="navigate('inviting-members');return false">Inviting your team</a> and <a href="#roles" onclick="navigate('roles');return false">Understanding user roles</a>.</div></div>
 <h2>New school signup</h2>
 <p>Creating a new school account takes three steps:</p>
@@ -1860,7 +1861,7 @@
 <h2>During upload</h2>
 <p>The UI shows percent complete, current speed, time remaining, and a <strong>Cancel</strong> button if you need to stop.</p>
 <h2>Replace a video</h2>
-<p>Open the session or class, remove the current video with <strong>×</strong>, then upload a replacement. The previous file is deleted from storage.</p>
+<p>Open the session or class detail page. In the video section above the notes panel, click the <strong>×</strong> button on the current video to remove it, then upload a replacement using the same flow as a first upload. The previous file is deleted from storage.</p>
 <div class="hint hint-danger"><div class="hint-icon">${IC.danger}</div><div><strong>Replacing video is destructive.</strong> The old file is deleted from storage with no undo, and <strong>every note attached to that video is permanently deleted along with it</strong> — notes do not migrate to the new upload and cannot be recovered. Archive the video and copy any notes you want to keep before replacing.</div></div>
 <details><summary>Upload troubleshooting</summary>
 <h2>Video upload problems</h2>
@@ -1979,7 +1980,7 @@
 <ul>
 <li>Check your bandwidth (upload and download can differ dramatically by network).</li>
 <li>Close other streaming tabs or heavy downloads.</li>
-<li>Very high-bitrate 4K sources may stutter — a 1080p export often plays more reliably.</li>
+<li>High-bitrate 4K sources can stutter on typical home connections — a 1080p H.264 export plays more reliably and is enough for coaching review.</li>
 </ul>
 <h3>Sound but no picture (or the reverse)</h3>
 <p>Usually a codec mismatch. Try another browser; if it persists, re-export with standard H.264/AAC.</p>
@@ -2004,7 +2005,7 @@
 <h2>File size</h2>
 <ul>
 <li>Maximum <strong>5 GB</strong> per file.</li>
-<li>Files under about <strong>2 GB</strong> upload faster on typical home or gym Wi-Fi.</li>
+<li>Files under <strong>2 GB</strong> typically upload faster on typical home or gym Wi-Fi (5 GB is the hard cap).</li>
 </ul>
 <h2>Smaller files, same teaching value</h2>
 <ul>
@@ -2116,7 +2117,7 @@
 <li>Fill in the session details and assign a student.</li>
 <li>The system checks for conflicts with existing sessions and school hours.</li>
 </ol>
-<p>Admins can set operating hours under <strong>Admin → School hours</strong>. Scheduling outside those hours is allowed.</p>
+<p>Admins set operating hours from the sidebar: open <strong>Admin</strong> → <strong>School hours</strong> section. Scheduling outside those hours is allowed.</p>
 <h2>Review requests</h2>
 <p>Students can request a video review from any coach. A review request creates a draft session that the student fills out.</p>
 <h3>How students submit a request</h3>
@@ -2128,6 +2129,12 @@
 </ol>
 <h3>How coaches respond</h3>
 <p>Pending review requests appear on the coach dashboard under <strong>Awaiting feedback</strong>. The coach can <strong>accept</strong> or <strong>decline</strong> each request. Accepting converts the draft into a full session — the coach then watches the video and adds notes and annotations as usual.</p>
+<h3>If a coach declines or doesn't respond</h3>
+<ul>
+<li>Declined requests are archived in the student's request history and the student receives an email notification.</li>
+<li>Pending requests do not auto-expire — they wait until a coach acts. Students can reassign the request to a different coach from the same screen.</li>
+<li>Students can cancel a pending request before it's accepted; once accepted it becomes a session and the cancel option goes away.</li>
+</ul>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Review requests are the main way students initiate feedback. Coaches who enable <a href="#profile" onclick="navigate('profile');return false">email notifications</a> get alerted as soon as a request comes in.</div></div>
 <h2>Multiple videos per session</h2>
 <p>A session isn't limited to one video. You can attach more than one clip to the same session — useful when a student sends two angles of the same drill, or when you want to compare an "attempt 1" and "attempt 2" side-by-side in the same session record.</p>
@@ -2188,8 +2195,8 @@
 <p>When creating a note, choose a type to categorize it:</p>
 <ul>
 <li><strong>Note</strong> — general observation (default)</li>
-<li><strong>Highlight</strong> — marks a time range (start and end) on the timeline</li>
-<li><strong>Annotation</strong> — a drawing overlay on a paused frame (see Annotations below)</li>
+<li><strong>Highlight</strong> — a time-range bookmark on the timeline (start and end points)</li>
+<li><strong>Annotation</strong> — a drawing overlay on a paused frame (see the <em>Annotations</em> section)</li>
 </ul>
 <p>AI review may also add notes flagged as <strong>AI suggestions</strong> — these can be edited or deleted like any other note.</p>
 <h2>Voice dictation</h2>
@@ -2599,6 +2606,8 @@
 <p><strong>$29/mo</strong> — flat per school. Every feature is included; there are no per-coach or per-student tiers and no seat counts. <strong>Worked example:</strong> a school with 1 owner + 3 coaches + 50 students pays the same flat price as a school with just 1 owner — coach and student counts don't change the bill. Every new account starts with a <strong>14-day free trial</strong> — card required, no charge until day 15. Manage billing, view invoices, and update your payment method from the Stripe billing portal (linked from your <strong>Profile</strong> page when you're signed in as an admin).</p>
 <h3>What happens when my trial ends?</h3>
 <p>Your selected plan begins billing automatically. If you cancel before the trial ends, you won't be charged. All your data stays available while your subscription is active.</p>
+<h3>Where do I see how many trial days are left?</h3>
+<p>Sign in as an admin and open your <strong>Profile</strong> (avatar in the header). The Billing section shows your current status (trialing, active, past due, or cancelled) and, while you're in the trial, when it ends.</p>
 <h3>How do I manage my subscription?</h3>
 <p>Open your <strong>Profile</strong> (avatar in the header) and click <strong>Manage</strong> in the Billing section — admins only. This opens the Stripe billing portal where you can:</p>
 <ul>
@@ -2607,6 +2616,8 @@
 <li>Cancel your subscription</li>
 </ul>
 <p>Kaynos never sees your credit card number — all payment processing is handled by Stripe (PCI-DSS Level 1 certified).</p>
+<h3>Can I pause my subscription?</h3>
+<p>Not directly from the app. To take a break, cancel from the Stripe billing portal (Profile → Manage) — your account stays available through the end of the paid period, then deactivates. Re-subscribe any time to restore full access. If you need a longer pause without losing data, email ${mailLink()} and we'll work something out.</p>
 <hr>
 <h2>Search and navigation</h2>
 <h3>Is there a quick way to find things?</h3>
@@ -2754,7 +2765,7 @@
   <p>We've received your message and will reply to the email you provided. Usually same day on business days.</p>
   <button class="form-another" onclick="document.getElementById('contactForm').reset();document.getElementById('contactForm').style.display='';document.getElementById('contactSuccess').style.display='none'">Send another</button>
 </div>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Response time:</strong> Usually same day on business days. Include your account name and browser for faster diagnosis.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Response time:</strong> Usually within 24 business hours (Mon–Fri); weekend messages get answered the next business day. For urgent issues, use in-app chat once signed in — it's faster. Include your account name and browser for quicker diagnosis.</div></div>
 <h2>Other ways to reach us</h2>
 <div class="support-card">
   <div class="support-item">
@@ -2892,7 +2903,7 @@
 <li><strong>No public profiles:</strong> Students do not have public-facing profiles, pages, or any content visible outside their academy.</li>
 </ul>
 <p>For the full privacy policy, see <a href="https://app.kaynos.net/privacy" target="_blank" rel="noopener">app.kaynos.net/privacy</a>. For details on COPPA and FERPA compliance, see <a href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">Privacy on this site</a>.</p>
-<div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div><strong>Data requests:</strong> Parents can request access to or deletion of their child's data at any time. Email \${mailLink()} or ask your child's coach to connect you with academy administration.</div></div>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div><strong>Data requests:</strong> Parents can request access to or deletion of their child's data at any time. Email ${mailLink()} or ask your child's coach to connect you with academy administration.</div></div>
 
 <h2>Questions or concerns?</h2>
 <p>Since there is no parent login, the best way to stay informed is to talk to your child's coach or academy admin directly. They can:</p>
@@ -2998,20 +3009,20 @@
 <p>Kaynos maintains records of all consumer privacy requests (access, deletion, correction) for 24 months per CCPA/CPRA requirements.</p>
 
 <h2>Compliance frameworks</h2>
-<p>Specific frameworks Kaynos aligns with. To exercise rights under any of them, email \${mailLink('privacy@kaynos.net')} with your name, email, request type, and (for state-specific rights) which state you reside in. We respond within 45 calendar days.</p>
+<p>Specific frameworks Kaynos aligns with. To exercise rights under any of them, email ${mailLink()} with your name, email, request type, and (for state-specific rights) which state you reside in. We respond within 45 calendar days.</p>
 
 <h3>COPPA — children under 13</h3>
 <p>Kaynos is not designed for direct use by children under 13. If your organization enrolls students under 13:</p>
 <ul>
 <li>Obtain verifiable parental consent before creating the student's account.</li>
 <li>Ensure a parent email is registered so they can access their child's data.</li>
-<li>Parents can request review or deletion of their child's data by emailing \${mailLink()}.</li>
+<li>Parents can request review or deletion of their child's data by emailing ${mailLink()}.</li>
 </ul>
 
 <h3>FERPA — schools</h3>
 <p>If your school or academy uses Kaynos for student records (performance videos tied to grades or evaluations), FERPA may apply.</p>
 <ul>
-<li>Kaynos provides a FERPA-compliant Data Processing Agreement (DPA) upon request — email \${mailLink()}.</li>
+<li>Kaynos provides a FERPA-compliant Data Processing Agreement (DPA) upon request — email ${mailLink()}.</li>
 <li>Admin and coach roles function as "school officials" with access limited to assigned students.</li>
 <li>Parents and eligible students (18+) may request access to or deletion of education records.</li>
 </ul>
@@ -3254,7 +3265,21 @@
   function navigate(pageId) {
     if (REDIRECTS[pageId]) { pageId = REDIRECTS[pageId]; location.hash = pageId; }
     const page = getPageContent(pageId);
-    if (!page) { if (pageId !== 'welcome') navigate('welcome'); return; }
+    if (!page) {
+      // Unknown hash — render an in-SPA "page not found" instead of silently
+      // bouncing to welcome. Keeps the URL intact so the reader sees what they
+      // typed and gets an obvious next step.
+      const pc = document.getElementById('pageContent');
+      if (pc) {
+        pc.style.animation = 'none'; void pc.offsetHeight; pc.style.animation = '';
+        const safe = escapeHtml(pageId || '');
+        pc.innerHTML = '<h1>Page not found</h1>'
+          + '<p>We couldn’t find <code>#' + safe + '</code>. The page may have moved or never existed.</p>'
+          + '<div class="hint hint-info"><div class="hint-icon">' + IC.info + '</div><div>Try the search bar above, or jump to <a href="#welcome" onclick="navigate(\'welcome\');return false">the help center home</a>. Still stuck? <a href="#contact" onclick="navigate(\'contact\');return false">Contact support</a>.</div></div>';
+        document.title = 'Page not found · Kaynos Docs';
+      }
+      return;
+    }
 
     if (pageId === 'release-notes') markWhatsNewSeen();
 
@@ -3607,8 +3632,9 @@
     ['class', 'classes', 'group session', 'workshop'],
     ['note', 'notes', 'comment', 'comments', 'feedback', 'annotation'],
     ['upload', 'uploads', 'uploading', 'add video', 'send'],
-    ['login', 'log in', 'sign in', 'signin'],
+    ['login', 'log in', 'sign in', 'signin', "can't login", 'locked out', 'lockout', 'access denied'],
     ['signup', 'sign up', 'register', 'create account', 'subscribe'],
+    ['cancel subscription', 'pause subscription', 'cancel trial', 'end subscription', 'unsubscribe'],
     ['password', 'passcode', 'pin'],
     ['payment', 'billing', 'invoice', 'charge', 'subscription'],
     ['delete', 'remove', 'cancel'],
@@ -3762,14 +3788,16 @@
     const items = sr.querySelectorAll('.search-result');
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      srIdx = Math.min(srIdx + 1, items.length - 1);
+      // Wrap-around: past the last result jumps back to the first.
+      srIdx = items.length ? (srIdx + 1) % items.length : -1;
       items.forEach((el, i) => el.classList.toggle('focused', i === srIdx));
       if (items[srIdx]) { items[srIdx].scrollIntoView({ block: 'nearest' }); document.getElementById('searchInput').setAttribute('aria-activedescendant', 'sr-' + srIdx); }
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
-      srIdx = Math.max(srIdx - 1, -1);
+      // Wrap-around: pressing up at the input jumps to the last result.
+      srIdx = items.length ? (srIdx - 1 + items.length) % items.length : -1;
       items.forEach((el, i) => el.classList.toggle('focused', i === srIdx));
-      document.getElementById('searchInput').setAttribute('aria-activedescendant', srIdx >= 0 ? 'sr-' + srIdx : '');
+      if (items[srIdx]) { items[srIdx].scrollIntoView({ block: 'nearest' }); document.getElementById('searchInput').setAttribute('aria-activedescendant', 'sr-' + srIdx); }
     } else if (e.key === 'Enter' && srIdx >= 0 && items[srIdx]) {
       addSearchHistory(document.getElementById('searchInput').value.trim());
       navigate(items[srIdx].dataset.page);
@@ -3809,16 +3837,21 @@
     const isOpen = sb.classList.toggle('open');
     ov.classList.toggle('active', isOpen);
     setMenuExpanded(isOpen);
+    // Lock background scroll only while the sidebar overlays content on mobile.
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
     if (isOpen) {
       sb.setAttribute('aria-modal', 'true');
       sb.setAttribute('role', 'dialog');
       const first = sb.querySelector('.sidebar-link');
       if (first) first.focus();
-      sb.addEventListener('keydown', trapFocus);
+      // Idempotent attach guards against duplicate listeners on rapid toggle.
+      if (!sb._trapAttached) { sb.addEventListener('keydown', trapFocus); sb._trapAttached = true; }
     } else {
       sb.removeAttribute('aria-modal');
       sb.removeAttribute('role');
-      sb.removeEventListener('keydown', trapFocus);
+      if (sb._trapAttached) { sb.removeEventListener('keydown', trapFocus); sb._trapAttached = false; }
       document.querySelector('.menu-btn')?.focus();
     }
   }
@@ -3827,9 +3860,10 @@
     sb.classList.remove('open');
     document.getElementById('overlay').classList.remove('active');
     setMenuExpanded(false);
+    document.body.style.overflow = '';
     sb.removeAttribute('aria-modal');
     sb.removeAttribute('role');
-    sb.removeEventListener('keydown', trapFocus);
+    if (sb._trapAttached) { sb.removeEventListener('keydown', trapFocus); sb._trapAttached = false; }
   }
   function trapFocus(e) {
     if (e.key === 'Escape') { closeSidebar(); document.querySelector('.menu-btn').focus(); return; }
