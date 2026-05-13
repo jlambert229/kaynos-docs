@@ -248,6 +248,15 @@
     .sr-badge { display: inline-flex; margin-left: 6px; vertical-align: middle; }
     .sr-badge svg { width: 11px; height: 11px; }
     .search-empty { padding: 24px 14px; text-align: center; color: var(--text-tertiary); font-size: .875rem; }
+    .search-chips { display: flex; flex-wrap: wrap; gap: 4px; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+    .search-chip {
+      padding: 3px 10px; font-size: .75rem; font-family: inherit;
+      background: transparent; color: var(--text-secondary);
+      border: 1px solid var(--border-strong); border-radius: 9999px; cursor: pointer;
+      transition: background var(--dur), color var(--dur), border-color var(--dur);
+    }
+    .search-chip:hover { background: var(--bg-hover); color: var(--text-primary); }
+    .search-chip.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
     .header-spacer { flex: 1; }
 
@@ -631,7 +640,7 @@
     /* ── BACK TO TOP ─── */
     #back-top {
       position: fixed; bottom: 28px; right: 28px;
-      width: 38px; height: 38px; background: var(--bg-elevated);
+      width: 44px; height: 44px; background: var(--bg-elevated);
       border: 1px solid var(--border-strong); border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       color: var(--text-secondary); cursor: pointer; box-shadow: var(--shadow);
@@ -934,9 +943,10 @@
     .wizard-option svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
     .wizard-restart {
       font-size: .8125rem; color: var(--text-tertiary); cursor: pointer;
-      background: none; border: none; padding: 0; margin-top: 8px;
-      transition: color var(--dur);
+      background: none; border: none; padding: 8px 10px; margin-top: 8px;
+      transition: color var(--dur); display: inline-flex; align-items: center;
     }
+    @media (max-width: 768px) { .wizard-restart { min-height: 44px; min-width: 44px; } }
     .wizard-restart:hover { color: var(--accent); }
     .wizard-result {
       padding: 16px; background: var(--bg-elevated);
@@ -1216,9 +1226,10 @@
     .release-badge.fixed { background: var(--warning-soft); color: var(--warning); }
     .release-filter {
       display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap;
+      scroll-margin-top: calc(var(--header-h) + 16px);
     }
     .release-filter-btn {
-      padding: 4px 12px; border-radius: 9999px; font-size: .75rem; font-weight: 500;
+      padding: 6px 14px; border-radius: 9999px; font-size: .75rem; font-weight: 500;
       border: 1px solid var(--border-strong); background: var(--bg-elevated);
       color: var(--text-secondary); cursor: pointer; transition: all var(--dur);
     }
@@ -1249,6 +1260,35 @@
     .form-success .success-icon svg { width: 100%; height: 100%; }
     .form-success h2 { margin: 0 0 8px; color: var(--text-primary); font-size: 1rem; font-weight: 600; }
     .form-success p { color: var(--text-secondary); margin: 0 0 16px; }
+
+    /* ── ARTICLE FEEDBACK ─── */
+    .article-feedback {
+      margin: 32px 0 16px; padding: 16px 20px;
+      background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius);
+    }
+    .article-feedback-prompt { font-size: .8125rem; color: var(--text-secondary); margin: 0 0 10px; font-weight: 500; }
+    .article-feedback-buttons { display: flex; gap: 8px; }
+    .article-feedback-btn {
+      padding: 6px 14px; background: transparent; color: var(--text-primary);
+      border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
+      font-size: .8125rem; cursor: pointer; transition: background var(--dur), border-color var(--dur);
+      font-family: inherit;
+    }
+    .article-feedback-btn:hover { background: var(--bg-hover); border-color: var(--accent); }
+    .article-feedback-form { margin-top: 12px; }
+    .article-feedback-form textarea {
+      width: 100%; padding: 8px 12px; margin-bottom: 8px;
+      background: var(--bg); color: var(--text-primary); font-family: inherit; font-size: .8125rem;
+      border: 1px solid var(--border); border-radius: var(--radius-sm); resize: vertical; min-height: 60px;
+    }
+    .article-feedback-form textarea:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(33,132,243,.1); }
+    .article-feedback-submit {
+      padding: 6px 14px; background: var(--accent); color: #fff; border: none; border-radius: var(--radius-sm);
+      font-size: .8125rem; font-weight: 500; cursor: pointer; transition: background var(--dur);
+    }
+    .article-feedback-submit:hover { background: var(--accent-hover); }
+    .article-feedback-thanks { font-size: .8125rem; color: var(--text-secondary); }
+    @media print { .article-feedback { display: none !important; } }
     .form-another { padding: 8px 16px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary); cursor: pointer; font-size: .8125rem; }
     .form-another:hover { border-color: var(--accent); color: var(--accent); }
     /* ── WELCOME BACK BAR ─── */
@@ -1361,8 +1401,8 @@
     @media (max-width: 768px) {
       .mobile-nav { display: flex; }
       .content-with-toc { padding-bottom: 100px !important; }
-      #back-top { bottom: 68px; }
-      #toast { bottom: 68px; }
+      #back-top { bottom: calc(68px + env(safe-area-inset-bottom, 0px)); }
+      #toast { bottom: calc(68px + env(safe-area-inset-bottom, 0px)); }
     }
 
     /* ── SITE FOOTER ─── */
@@ -1454,7 +1494,9 @@
           <a href="#parent-guide" onclick="navigate('parent-guide');return false">Parent guide</a>
           <a href="#contact" onclick="navigate('contact');return false">Contact</a>
           <a href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">Legal</a>
-          <a href="https://github.com/jlambert229/kaynos-docs/blob/main/docs/SECURITY.md" target="_blank" rel="noopener">Security</a>
+          <a href="https://github.com/jlambert229/kaynos-docs/blob/main/docs/SECURITY.md" target="_blank" rel="noopener noreferrer">Security</a>
+          <!-- Status: Netlify hosts this site; swap to a Kaynos-owned status page when one exists. -->
+          <a href="https://www.netlifystatus.com/" target="_blank" rel="noopener noreferrer">Status</a>
         </nav>
       </div>
     </footer>
@@ -1467,6 +1509,13 @@
   </button>
 
   <!-- Netlify Forms hidden detection forms (must be in static HTML for Netlify to register them) -->
+  <form name="article-feedback" netlify netlify-honeypot="bot-field" hidden>
+    <input name="bot-field">
+    <input name="pageId">
+    <input name="pageTitle">
+    <input name="helpful">
+    <textarea name="comment"></textarea>
+  </form>
   <form name="contact-support" netlify netlify-honeypot="bot-field" hidden>
     <input name="bot-field">
     <input name="name">
@@ -1608,7 +1657,7 @@
       title: "Setting up your account", section: "Getting Started",
       content: `
 <h1>Setting up your account</h1>
-<div class="tldr"><strong>TLDR:</strong> School owners: sign up, pay, and follow the instructor checklist. Invited members: log in with your invite email and change your temporary password.</div>
+<div class="tldr"><strong>TLDR:</strong> School owners: sign up, start the 14-day free trial (no charge until day 15), and follow the instructor checklist. Invited members: log in with your invite email and change your temporary password.</div>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Open the product at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>. Next steps: <a href="#inviting-members" onclick="navigate('inviting-members');return false">Inviting your team</a> and <a href="#roles" onclick="navigate('roles');return false">Understanding user roles</a>.</div></div>
 <h2>New school signup</h2>
 <p>Creating a new school account takes three steps:</p>
@@ -1813,7 +1862,7 @@
 <h2>During upload</h2>
 <p>The UI shows percent complete, current speed, time remaining, and a <strong>Cancel</strong> button if you need to stop.</p>
 <h2>Replace a video</h2>
-<p>Open the session or class, remove the current video with <strong>×</strong>, then upload a replacement. The previous file is deleted from storage.</p>
+<p>Open the session or class detail page. In the video section above the notes panel, click the <strong>×</strong> button on the current video to remove it, then upload a replacement using the same flow as a first upload. The previous file is deleted from storage.</p>
 <div class="hint hint-danger"><div class="hint-icon">${IC.danger}</div><div><strong>Replacing video is destructive.</strong> The old file is deleted from storage with no undo, and <strong>every note attached to that video is permanently deleted along with it</strong> — notes do not migrate to the new upload and cannot be recovered. Archive the video and copy any notes you want to keep before replacing.</div></div>
 <details><summary>Upload troubleshooting</summary>
 <h2>Video upload problems</h2>
@@ -1932,7 +1981,7 @@
 <ul>
 <li>Check your bandwidth (upload and download can differ dramatically by network).</li>
 <li>Close other streaming tabs or heavy downloads.</li>
-<li>Very high-bitrate 4K sources may stutter — a 1080p export often plays more reliably.</li>
+<li>High-bitrate 4K sources can stutter on typical home connections — a 1080p H.264 export plays more reliably and is enough for coaching review.</li>
 </ul>
 <h3>Sound but no picture (or the reverse)</h3>
 <p>Usually a codec mismatch. Try another browser; if it persists, re-export with standard H.264/AAC.</p>
@@ -1957,7 +2006,7 @@
 <h2>File size</h2>
 <ul>
 <li>Maximum <strong>5 GB</strong> per file.</li>
-<li>Files under about <strong>2 GB</strong> upload faster on typical home or gym Wi-Fi.</li>
+<li>Files under <strong>2 GB</strong> typically upload faster on typical home or gym Wi-Fi (5 GB is the hard cap).</li>
 </ul>
 <h2>Smaller files, same teaching value</h2>
 <ul>
@@ -2069,7 +2118,7 @@
 <li>Fill in the session details and assign a student.</li>
 <li>The system checks for conflicts with existing sessions and school hours.</li>
 </ol>
-<p>Admins can set operating hours under <strong>Admin → School hours</strong>. Scheduling outside those hours is allowed.</p>
+<p>Admins set operating hours from the sidebar: open <strong>Admin</strong> → <strong>School hours</strong> section. Scheduling outside those hours is allowed.</p>
 <h2>Review requests</h2>
 <p>Students can request a video review from any coach. A review request creates a draft session that the student fills out.</p>
 <h3>How students submit a request</h3>
@@ -2081,6 +2130,12 @@
 </ol>
 <h3>How coaches respond</h3>
 <p>Pending review requests appear on the coach dashboard under <strong>Awaiting feedback</strong>. The coach can <strong>accept</strong> or <strong>decline</strong> each request. Accepting converts the draft into a full session — the coach then watches the video and adds notes and annotations as usual.</p>
+<h3>If a coach declines or doesn't respond</h3>
+<ul>
+<li>Declined requests are archived in the student's request history and the student receives an email notification.</li>
+<li>Pending requests do not auto-expire — they wait until a coach acts. Students can reassign the request to a different coach from the same screen.</li>
+<li>Students can cancel a pending request before it's accepted; once accepted it becomes a session and the cancel option goes away.</li>
+</ul>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Review requests are the main way students initiate feedback. Coaches who enable <a href="#profile" onclick="navigate('profile');return false">email notifications</a> get alerted as soon as a request comes in.</div></div>
 <h2>Multiple videos per session</h2>
 <p>A session isn't limited to one video. You can attach more than one clip to the same session — useful when a student sends two angles of the same drill, or when you want to compare an "attempt 1" and "attempt 2" side-by-side in the same session record.</p>
@@ -2141,8 +2196,8 @@
 <p>When creating a note, choose a type to categorize it:</p>
 <ul>
 <li><strong>Note</strong> — general observation (default)</li>
-<li><strong>Highlight</strong> — marks a time range (start and end) on the timeline</li>
-<li><strong>Annotation</strong> — a drawing overlay on a paused frame (see Annotations below)</li>
+<li><strong>Highlight</strong> — a time-range bookmark on the timeline (start and end points)</li>
+<li><strong>Annotation</strong> — a drawing overlay on a paused frame (see the <em>Annotations</em> section)</li>
 </ul>
 <p>AI review may also add notes flagged as <strong>AI suggestions</strong> — these can be edited or deleted like any other note.</p>
 <h2>Voice dictation</h2>
@@ -2405,7 +2460,101 @@
 <ul>
 <li>Very large files on older phones can be slow or unstable — a laptop may be more reliable.</li>
 <li>Landscape helps when the notes panel is open on a small display.</li>
-</ul>`},
+</ul>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>For everything mobile-specific — installing as an app, granting permissions, push setup — see <a href="#using-on-mobile" onclick="navigate('using-on-mobile');return false">Using Kaynos on mobile</a>.</div></div>`},
+
+    "using-on-mobile": {
+      title: "Using Kaynos on mobile", section: "Troubleshoot",
+      content: `
+<h1>Using Kaynos on mobile</h1>
+<div class="tldr"><strong>TLDR:</strong> Kaynos runs in any modern mobile browser — no app-store download. Install it to your home screen for an app-like experience. This page covers install, permissions (camera, mic, photos), notifications, and the realities of recording and uploading on a phone.</div>
+
+<h2>Install Kaynos as a home-screen app</h2>
+<p>Kaynos is a Progressive Web App (PWA). After installing it, the app opens full-screen with no browser chrome and shows up as its own icon — same as a native app.</p>
+<h3>iOS (Safari)</h3>
+<ol>
+<li>Open <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> in Safari (it must be Safari, not Chrome on iOS).</li>
+<li>Tap the <strong>Share</strong> button (square with an up-arrow) at the bottom of the screen.</li>
+<li>Scroll the share sheet and tap <strong>Add to Home Screen</strong>.</li>
+<li>Edit the name if you want, then tap <strong>Add</strong>. The Kaynos icon appears on your home screen.</li>
+</ol>
+<h3>Android (Chrome)</h3>
+<ol>
+<li>Open <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> in Chrome.</li>
+<li>Tap the <strong>⋮</strong> menu in the top-right.</li>
+<li>Tap <strong>Add to Home screen</strong> (or <strong>Install app</strong> on newer versions).</li>
+<li>Confirm. The icon appears in your launcher.</li>
+</ol>
+
+<h2>Permissions</h2>
+<p>Kaynos asks for permissions only when you use a feature that needs them. If you've previously denied a permission, you'll need to grant it from your device settings — the in-app prompt won't reappear.</p>
+
+<h3>Camera and microphone (recording from the app)</h3>
+<p>Granted on first use. If you accidentally denied:</p>
+<ul>
+<li><strong>iOS Safari:</strong> Settings app → Safari → Camera (and Microphone) → set Kaynos to <strong>Allow</strong>. If Kaynos isn't listed, open the site once first.</li>
+<li><strong>iOS PWA installed to home screen:</strong> Settings app → scroll to <strong>Kaynos</strong> in the app list → toggle Camera / Microphone.</li>
+<li><strong>Android Chrome:</strong> in Chrome, tap the <strong>⋮</strong> menu → Settings → Site settings → Camera (or Microphone) → find <code>app.kaynos.net</code> → set to Allow.</li>
+</ul>
+
+<h3>Microphone (voice dictation for notes)</h3>
+<p>Voice dictation uses Deepgram for transcription. Same permission path as Camera/Microphone above. Audio is processed in real time and not stored — see <a href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">Privacy on this site</a> for details.</p>
+
+<h3>Photos / files (selecting a video to upload)</h3>
+<ul>
+<li><strong>iOS:</strong> tapping <strong>Upload</strong> shows the iOS picker — choose <strong>Photo Library</strong>, <strong>Take Photo or Video</strong>, or <strong>Choose Files</strong>. iOS may ask to grant Kaynos access to your photo library on first use.</li>
+<li><strong>Android:</strong> a similar system picker appears — Files, Photos, or your gallery app of choice.</li>
+</ul>
+
+<h2>Notifications</h2>
+<p>Kaynos uses email for most notifications today (configured under <a href="#profile" onclick="navigate('profile');return false">Profile → Notifications</a>) — there are no native push notifications yet on either platform.</p>
+<p>If you want a fast bell on your phone, two reliable approaches:</p>
+<ul>
+<li><strong>Email push:</strong> in your phone's mail app, set the address you use for Kaynos to "push" delivery. iOS Mail and Gmail both support this per-account.</li>
+<li><strong>Email-to-notification routing:</strong> services like IFTTT or Apple Shortcuts can convert specific emails (sender = <code>noreply@kaynos.net</code>) into a phone notification.</li>
+</ul>
+
+<h2>Recording and uploading from a phone</h2>
+
+<h3>What works well</h3>
+<ul>
+<li>Short clips (under a few minutes) record and upload reliably on most phones from 2020 onward.</li>
+<li>Multipart upload kicks in at <strong>20 MB</strong> with parallel parts and automatic retry, so a brief signal hiccup doesn't restart the whole thing.</li>
+<li>Uploads continue while the app is in the foreground or in the background for a short window. <strong>Long uploads work best with the screen on.</strong></li>
+</ul>
+
+<h3>What to watch out for</h3>
+<ul>
+<li><strong>Screen lock pauses uploads.</strong> If a 30-minute class video is uploading and your phone goes to sleep, the upload pauses — sometimes the app can resume, sometimes the part URL has expired (1-hour limit) and you'll need to retry. Plug in and disable auto-lock for long uploads.</li>
+<li><strong>Hot phone during recording.</strong> Long recordings make a phone hot, which can throttle the camera. If you need 30+ minutes of footage, a dedicated camera or a laptop-tethered phone is more reliable.</li>
+<li><strong>Storage on the phone.</strong> A 1080p video at typical bitrates is roughly 1 GB per 10 minutes. Make sure the phone has free space before recording — you can upload directly from the camera roll later.</li>
+<li><strong>Cellular data.</strong> Uploading a 1 GB video on cellular eats your plan. Default to Wi-Fi where you can. The <a href="#uploading" onclick="navigate('uploading');return false">upload time calculator</a> on the Uploading page helps you sanity-check before starting.</li>
+</ul>
+
+<h2>Mobile playback tips</h2>
+<ul>
+<li><strong>Skip:</strong> double-tap the left half of the player to skip back 10 seconds, the right half to skip forward.</li>
+<li><strong>Landscape:</strong> rotate to widen the player when the notes panel is open.</li>
+<li><strong>Resume:</strong> playback position syncs across devices — start on your phone in the gym, finish on your laptop at home.</li>
+<li><strong>Picture-in-picture (iOS Safari, Android Chrome):</strong> tap the PiP button on the player to keep watching while reading notes in another tab.</li>
+</ul>
+
+<h2>Battery and data</h2>
+<ul>
+<li>Recording and uploading both drain the battery quickly. Plug in for anything over 15 minutes.</li>
+<li>Streaming playback typically uses 0.5–2 GB per hour of 1080p video. The player adapts to bandwidth, so a slower connection serves a lower bitrate automatically.</li>
+<li>If you're on a strict cellular plan, download or save the video over Wi-Fi first, then watch later from the same browser session.</li>
+</ul>
+
+<h2>Troubleshooting</h2>
+<ul>
+<li><strong>"This site can't be reached" after install:</strong> a stale PWA cache. Remove the home-screen shortcut and re-add it from the current app URL.</li>
+<li><strong>Permission prompt won't reappear:</strong> you previously denied. Use the device settings paths above.</li>
+<li><strong>Upload stuck:</strong> see the <a href="#troubleshoot" onclick="navigate('troubleshoot');return false">troubleshooting wizard</a> — pick "Upload won't finish".</li>
+<li><strong>Browser is showing the old version:</strong> hard-refresh (long-press refresh on Safari iOS; pull-to-refresh on Chrome Android), or clear site data for app.kaynos.net.</li>
+</ul>
+
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Need a desktop-class flow? See <a href="#uploading" onclick="navigate('uploading');return false">Uploading videos</a> and <a href="#playback" onclick="navigate('playback');return false">Watching and reviewing</a> for the full workflow.</div></div>`},
 
     faq: {
       title: "Frequently asked questions", section: "Getting Started",
@@ -2458,6 +2607,8 @@
 <p><strong>$29/mo</strong> — flat per school. Every feature is included; there are no per-coach or per-student tiers and no seat counts. <strong>Worked example:</strong> a school with 1 owner + 3 coaches + 50 students pays the same flat price as a school with just 1 owner — coach and student counts don't change the bill. Every new account starts with a <strong>14-day free trial</strong> — card required, no charge until day 15. Manage billing, view invoices, and update your payment method from the Stripe billing portal (linked from your <strong>Profile</strong> page when you're signed in as an admin).</p>
 <h3>What happens when my trial ends?</h3>
 <p>Your selected plan begins billing automatically. If you cancel before the trial ends, you won't be charged. All your data stays available while your subscription is active.</p>
+<h3>Where do I see how many trial days are left?</h3>
+<p>Sign in as an admin and open your <strong>Profile</strong> (avatar in the header). The Billing section shows your current status (trialing, active, past due, or cancelled) and, while you're in the trial, when it ends.</p>
 <h3>How do I manage my subscription?</h3>
 <p>Open your <strong>Profile</strong> (avatar in the header) and click <strong>Manage</strong> in the Billing section — admins only. This opens the Stripe billing portal where you can:</p>
 <ul>
@@ -2466,6 +2617,8 @@
 <li>Cancel your subscription</li>
 </ul>
 <p>Kaynos never sees your credit card number — all payment processing is handled by Stripe (PCI-DSS Level 1 certified).</p>
+<h3>Can I pause my subscription?</h3>
+<p>Not directly from the app. To take a break, cancel from the Stripe billing portal (Profile → Manage) — your account stays available through the end of the paid period, then deactivates. Re-subscribe any time to restore full access. If you need a longer pause without losing data, email ${mailLink()} and we'll work something out.</p>
 <hr>
 <h2>Search and navigation</h2>
 <h3>Is there a quick way to find things?</h3>
@@ -2613,7 +2766,7 @@
   <p>We've received your message and will reply to the email you provided. Usually same day on business days.</p>
   <button class="form-another" onclick="document.getElementById('contactForm').reset();document.getElementById('contactForm').style.display='';document.getElementById('contactSuccess').style.display='none'">Send another</button>
 </div>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Response time:</strong> Usually same day on business days. Include your account name and browser for faster diagnosis.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Response time:</strong> Usually within 24 business hours (Mon–Fri); weekend messages get answered the next business day. For urgent issues, use in-app chat once signed in — it's faster. Include your account name and browser for quicker diagnosis.</div></div>
 <h2>Other ways to reach us</h2>
 <div class="support-card">
   <div class="support-item">
@@ -2751,7 +2904,7 @@
 <li><strong>No public profiles:</strong> Students do not have public-facing profiles, pages, or any content visible outside their academy.</li>
 </ul>
 <p>For the full privacy policy, see <a href="https://app.kaynos.net/privacy" target="_blank" rel="noopener">app.kaynos.net/privacy</a>. For details on COPPA and FERPA compliance, see <a href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">Privacy on this site</a>.</p>
-<div class="hint hint-tip"><div class="hint-icon">\${IC.tip}</div><div><strong>Data requests:</strong> Parents can request access to or deletion of their child's data at any time. Email \${mailLink()} or ask your child's coach to connect you with academy administration.</div></div>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div><strong>Data requests:</strong> Parents can request access to or deletion of their child's data at any time. Email ${mailLink()} or ask your child's coach to connect you with academy administration.</div></div>
 
 <h2>Questions or concerns?</h2>
 <p>Since there is no parent login, the best way to stay informed is to talk to your child's coach or academy admin directly. They can:</p>
@@ -2857,20 +3010,20 @@
 <p>Kaynos maintains records of all consumer privacy requests (access, deletion, correction) for 24 months per CCPA/CPRA requirements.</p>
 
 <h2>Compliance frameworks</h2>
-<p>Specific frameworks Kaynos aligns with. To exercise rights under any of them, email \${mailLink('privacy@kaynos.net')} with your name, email, request type, and (for state-specific rights) which state you reside in. We respond within 45 calendar days.</p>
+<p>Specific frameworks Kaynos aligns with. To exercise rights under any of them, email ${mailLink()} with your name, email, request type, and (for state-specific rights) which state you reside in. We respond within 45 calendar days.</p>
 
 <h3>COPPA — children under 13</h3>
 <p>Kaynos is not designed for direct use by children under 13. If your organization enrolls students under 13:</p>
 <ul>
 <li>Obtain verifiable parental consent before creating the student's account.</li>
 <li>Ensure a parent email is registered so they can access their child's data.</li>
-<li>Parents can request review or deletion of their child's data by emailing \${mailLink()}.</li>
+<li>Parents can request review or deletion of their child's data by emailing ${mailLink()}.</li>
 </ul>
 
 <h3>FERPA — schools</h3>
 <p>If your school or academy uses Kaynos for student records (performance videos tied to grades or evaluations), FERPA may apply.</p>
 <ul>
-<li>Kaynos provides a FERPA-compliant Data Processing Agreement (DPA) upon request — email \${mailLink()}.</li>
+<li>Kaynos provides a FERPA-compliant Data Processing Agreement (DPA) upon request — email ${mailLink()}.</li>
 <li>Admin and coach roles function as "school officials" with access limited to assigned students.</li>
 <li>Parents and eligible students (18+) may request access to or deletion of education records.</li>
 </ul>
@@ -2928,7 +3081,7 @@
     { section: "Sessions & Classes", pages: ["creating-sessions", "creating-classes", "notes", "progress"] },
     { section: "Account", pages: ["profile"] },
     { section: "Admin", pages: ["inviting-members", "managing-members", "developer-api"] },
-    { section: "Troubleshoot", pages: ["troubleshoot", "login-issues", "email-issues", "performance"] },
+    { section: "Troubleshoot", pages: ["troubleshoot", "login-issues", "email-issues", "performance", "using-on-mobile"] },
     // Hidden from sidebar but still routable via hash links and the footer.
     { section: "", pages: ["release-notes", "feature-requests", "parent-guide", "contact", "privacy-on-this-site"], hidden: true }
   ];
@@ -3074,13 +3227,60 @@
     'feature-requests': 'Submit a feature request for Kaynos. Tell us what to build next.',
     'parent-guide': 'Parent and guardian guide for Kaynos. What your child can see and do, privacy and safety info, and how to contact the coach.',
     'privacy-on-this-site': 'Privacy on the Kaynos help center. What data stays in your browser and what is sent externally.',
+    'using-on-mobile': 'Using Kaynos on mobile. PWA install for iOS and Android, camera/mic/photo permissions, push notifications, recording and uploading from a phone, battery and data tips.',
+  };
+
+  // Last touched per page. Pages absent from this map fall back to LAST_UPDATED_DEFAULT.
+  const LAST_UPDATED_DEFAULT = '2026-04-24';
+  const LAST_UPDATED = {
+    'welcome': '2026-05-08',
+    'setup': '2026-05-08',
+    'roles': '2026-05-08',
+    'uploading': '2026-05-03',
+    'playback': '2026-05-08',
+    'formats': '2026-05-08',
+    'storage': '2026-05-08',
+    'creating-sessions': '2026-05-08',
+    'creating-classes': '2026-05-02',
+    'notes': '2026-05-02',
+    'progress': '2026-05-02',
+    'inviting-members': '2026-05-02',
+    'managing-members': '2026-05-02',
+    'profile': '2026-05-08',
+    'login-issues': '2026-05-02',
+    'email-issues': '2026-05-08',
+    'performance': '2026-04-24',
+    'faq': '2026-05-08',
+    'developer-api': '2026-05-08',
+    'glossary': '2026-05-02',
+    'troubleshoot': '2026-05-08',
+    'using-on-mobile': '2026-05-08',
+    'contact': '2026-05-08',
+    'release-notes': '2026-05-02',
+    'feature-requests': '2026-04-24',
+    'parent-guide': '2026-05-08',
+    'privacy-on-this-site': '2026-04-24',
   };
 
   /* ── NAVIGATE ───────────────────────────────────────── */
   function navigate(pageId) {
     if (REDIRECTS[pageId]) { pageId = REDIRECTS[pageId]; location.hash = pageId; }
     const page = getPageContent(pageId);
-    if (!page) { if (pageId !== 'welcome') navigate('welcome'); return; }
+    if (!page) {
+      // Unknown hash — render an in-SPA "page not found" instead of silently
+      // bouncing to welcome. Keeps the URL intact so the reader sees what they
+      // typed and gets an obvious next step.
+      const pc = document.getElementById('pageContent');
+      if (pc) {
+        pc.style.animation = 'none'; void pc.offsetHeight; pc.style.animation = '';
+        const safe = escapeHtml(pageId || '');
+        pc.innerHTML = '<h1>Page not found</h1>'
+          + '<p>We couldn’t find <code>#' + safe + '</code>. The page may have moved or never existed.</p>'
+          + '<div class="hint hint-info"><div class="hint-icon">' + IC.info + '</div><div>Try the search bar above, or jump to <a href="#welcome" onclick="navigate(\'welcome\');return false">the help center home</a>. Still stuck? <a href="#contact" onclick="navigate(\'contact\');return false">Contact support</a>.</div></div>';
+        document.title = 'Page not found · Kaynos Docs';
+      }
+      return;
+    }
 
     if (pageId === 'release-notes') markWhatsNewSeen();
 
@@ -3421,39 +3621,109 @@
   if (typeof requestIdleCallback === 'function') requestIdleCallback(buildSearchIndex, { timeout: 2000 });
   else setTimeout(buildSearchIndex, 1000);
 
-  function handleSearch(q) {
+  // Synonyms: when a user types one term, also consider the others as matches.
+  // Bidirectional — typing any term in a group surfaces pages that mention any
+  // other term in the same group. Each entry is a single equivalence class.
+  const SEARCH_SYNONYM_GROUPS = [
+    ['student', 'students', 'member', 'members', 'learner', 'user'],
+    ['coach', 'coaches', 'instructor', 'instructors', 'teacher'],
+    ['admin', 'admins', 'owner', 'manager'],
+    ['video', 'videos', 'clip', 'clips', 'recording', 'footage'],
+    ['session', 'sessions', 'lesson'],
+    ['class', 'classes', 'group session', 'workshop'],
+    ['note', 'notes', 'comment', 'comments', 'feedback', 'annotation'],
+    ['upload', 'uploads', 'uploading', 'add video', 'send'],
+    ['login', 'log in', 'sign in', 'signin', "can't login", 'locked out', 'lockout', 'access denied'],
+    ['signup', 'sign up', 'register', 'create account', 'subscribe'],
+    ['cancel subscription', 'pause subscription', 'cancel trial', 'end subscription', 'unsubscribe'],
+    ['password', 'passcode', 'pin'],
+    ['payment', 'billing', 'invoice', 'charge', 'subscription'],
+    ['delete', 'remove', 'cancel'],
+    ['notification', 'notifications', 'alert', 'email'],
+    ['mobile', 'phone', 'iphone', 'android', 'tablet'],
+  ];
+  // Build lookup: term -> Set of all terms in the same group(s).
+  const SYNONYM_MAP = (() => {
+    const m = new Map();
+    for (const group of SEARCH_SYNONYM_GROUPS) {
+      const set = new Set(group);
+      for (const term of group) {
+        const existing = m.get(term);
+        if (existing) for (const t of set) existing.add(t);
+        else m.set(term, new Set(set));
+      }
+    }
+    return m;
+  })();
+  function expandWithSynonyms(query) {
+    const trimmed = query.trim().toLowerCase();
+    if (!trimmed) return [trimmed];
+    // Whole-query lookup first (handles multi-word phrases like "sign in").
+    const whole = SYNONYM_MAP.get(trimmed);
+    if (whole) return Array.from(whole);
+    // Otherwise, single-token expansion: any matched token broadens the search.
+    const tokens = trimmed.split(/\s+/);
+    const expanded = new Set([trimmed]);
+    for (const t of tokens) {
+      const set = SYNONYM_MAP.get(t);
+      if (set) for (const syn of set) expanded.add(syn);
+    }
+    return Array.from(expanded);
+  }
+
+  // Section filter for search results — set by the chip row, cleared on each fresh search.
+  let searchSectionFilter = '';
+
+  function handleSearch(q, opts = {}) {
     const sr = document.getElementById('searchResults');
     srIdx = -1;
-    if (!q || q.length < 2) { sr.classList.remove('active'); sr.innerHTML = ''; document.getElementById('searchInput').setAttribute('aria-expanded', 'false'); return; }
+    if (!q || q.length < 2) { sr.classList.remove('active'); sr.innerHTML = ''; document.getElementById('searchInput').setAttribute('aria-expanded', 'false'); searchSectionFilter = ''; return; }
+    if (!opts.preserveFilter) searchSectionFilter = '';
     buildSearchIndex();
     const lower = q.toLowerCase();
+    const synonyms = expandWithSynonyms(q);
     const results = [];
     for (const [id, page] of Object.entries(PAGES)) {
       const idx = SEARCH_INDEX[id];
       if (!idx) continue;
       const text = idx.text;
       const textLower = text;
-      const titleMatch = idx.titleLower.includes(lower);
+      // Match if ANY synonym appears in title/section/body. Score is highest for
+      // an exact-query hit; synonym-only hits still count but score lower.
+      const titleMatch = synonyms.some((s) => idx.titleLower.includes(s));
       const sectionLower = (page.section || '').toLowerCase();
-      const sectionMatch = !!sectionLower && sectionLower.includes(lower);
-      const exactIdx = textLower.indexOf(lower);
+      const sectionMatch = !!sectionLower && synonyms.some((s) => sectionLower.includes(s));
+      let exactIdx = -1;
+      for (const s of synonyms) {
+        const i = textLower.indexOf(s);
+        if (i !== -1) { exactIdx = i; break; }
+      }
       const fuzzy = !titleMatch && exactIdx === -1 && fuzzyMatch(page.title + ' ' + text, q);
       if (titleMatch || sectionMatch || exactIdx !== -1 || fuzzy) {
         let snippet = '';
-        const idx = exactIdx !== -1 ? exactIdx : textLower.indexOf(lower.split(/\s+/)[0]);
-        if (idx !== -1) {
-          const s = Math.max(0, idx - LIMITS.SNIPPET_BEFORE), e = Math.min(textLower.length, idx + q.length + LIMITS.SNIPPET_AFTER);
+        const snipIdx = exactIdx !== -1 ? exactIdx : textLower.indexOf(lower.split(/\s+/)[0]);
+        if (snipIdx !== -1) {
+          const s = Math.max(0, snipIdx - LIMITS.SNIPPET_BEFORE), e = Math.min(textLower.length, snipIdx + q.length + LIMITS.SNIPPET_AFTER);
           const raw = (s > 0 ? '…' : '') + text.slice(s, e) + (e < textLower.length ? '…' : '');
-          snippet = escapeHtml(raw).replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').split(/\s+/).join('|'), 'gi'), m => `<mark>${escapeHtml(m)}</mark>`);
+          // Highlight the literal query first, then synonyms (so visual match still tracks what the user typed).
+          const escapedRaw = escapeHtml(raw);
+          const allTerms = [q, ...synonyms.filter((x) => x !== lower)].filter(Boolean);
+          const pattern = allTerms.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+          snippet = pattern ? escapedRaw.replace(new RegExp(pattern, 'gi'), (m) => `<mark>${escapeHtml(m)}</mark>`) : escapedRaw;
         }
         // Ranking: title >> section name > body exact >> body fuzzy.
-        // Section-name match gives credit when someone searches a category
-        // (e.g. "admin", "help") without matching a single page title.
-        const score = (titleMatch ? 10 : 0) + (sectionMatch ? 4 : 0) + (exactIdx !== -1 ? 3 : 0) + (fuzzy ? 1 : 0);
+        // Exact-query bonus when the user's literal text appears in title/body.
+        const literalTitle = idx.titleLower.includes(lower);
+        const literalBody = textLower.indexOf(lower);
+        const score = (titleMatch ? 10 : 0) + (literalTitle ? 4 : 0) + (sectionMatch ? 4 : 0) + (exactIdx !== -1 ? 3 : 0) + (literalBody !== -1 ? 2 : 0) + (fuzzy ? 1 : 0);
         results.push({ id, title: page.title, section: page.section, snippet, score });
       }
     }
     results.sort((a, b) => b.score - a.score);
+
+    // Apply section filter if set (chip row click).
+    const sectionsPresent = Array.from(new Set(results.map((r) => r.section).filter(Boolean)));
+    const filtered = searchSectionFilter ? results.filter((r) => r.section === searchSectionFilter) : results;
 
     // Empty-state "did you mean": suggest pages whose title shares meaningful
     // overlap with the query. Cheap character-Jaccard so we catch typos and
@@ -3483,33 +3753,52 @@
       }
     }
 
+    // Section-filter chip row — only shown when there are 2+ sections to choose from
+    let chipRow = '';
+    if (sectionsPresent.length > 1) {
+      const chip = (label, value) => {
+        const active = (value === searchSectionFilter) || (!value && !searchSectionFilter);
+        return `<button type="button" class="search-chip${active ? ' active' : ''}" onclick="filterSearchBySection('${escapeHtml(value)}')">${escapeHtml(label)}</button>`;
+      };
+      chipRow = '<div class="search-chips">' + chip('All', '') + sectionsPresent.map((s) => chip(s, s)).join('') + '</div>';
+    }
+
     // Safe: titles/sections escaped via escapeHtml(); snippet uses escapeHtml + <mark> wrapping of query match
-    sr.innerHTML = results.length === 0
+    const renderResults = filtered.length === 0
       ? (didYouMean || '<div class="search-empty">No matches. Try fewer or different keywords.</div>')
-      : results.slice(0, LIMITS.SEARCH_RESULTS).map((r, i) =>
+      : filtered.slice(0, LIMITS.SEARCH_RESULTS).map((r, i) =>
           `<div class="search-result" role="option" id="sr-${i}" data-page="${r.id}" onclick="addSearchHistory(document.getElementById('searchInput').value.trim());navigate('${r.id}')">
             <div class="sr-title">${escapeHtml(r.title)}</div>
             ${r.section ? `<div class="sr-section">${escapeHtml(r.section)}</div>` : ''}
             ${r.snippet ? `<div class="sr-snippet">${r.snippet}</div>` : ''}
           </div>`
         ).join('');
+    sr.innerHTML = chipRow + renderResults;
     sr.classList.add('active');
     document.getElementById('searchInput').setAttribute('aria-expanded', 'true');
   }
+  function filterSearchBySection(section) {
+    searchSectionFilter = section || '';
+    const q = document.getElementById('searchInput').value;
+    handleSearch(q, { preserveFilter: true });
+  }
+  window.filterSearchBySection = filterSearchBySection;
 
   document.getElementById('searchInput').addEventListener('keydown', e => {
     const sr = document.getElementById('searchResults');
     const items = sr.querySelectorAll('.search-result');
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      srIdx = Math.min(srIdx + 1, items.length - 1);
+      // Wrap-around: past the last result jumps back to the first.
+      srIdx = items.length ? (srIdx + 1) % items.length : -1;
       items.forEach((el, i) => el.classList.toggle('focused', i === srIdx));
       if (items[srIdx]) { items[srIdx].scrollIntoView({ block: 'nearest' }); document.getElementById('searchInput').setAttribute('aria-activedescendant', 'sr-' + srIdx); }
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
-      srIdx = Math.max(srIdx - 1, -1);
+      // Wrap-around: pressing up at the input jumps to the last result.
+      srIdx = items.length ? (srIdx - 1 + items.length) % items.length : -1;
       items.forEach((el, i) => el.classList.toggle('focused', i === srIdx));
-      document.getElementById('searchInput').setAttribute('aria-activedescendant', srIdx >= 0 ? 'sr-' + srIdx : '');
+      if (items[srIdx]) { items[srIdx].scrollIntoView({ block: 'nearest' }); document.getElementById('searchInput').setAttribute('aria-activedescendant', 'sr-' + srIdx); }
     } else if (e.key === 'Enter' && srIdx >= 0 && items[srIdx]) {
       addSearchHistory(document.getElementById('searchInput').value.trim());
       navigate(items[srIdx].dataset.page);
@@ -3549,16 +3838,21 @@
     const isOpen = sb.classList.toggle('open');
     ov.classList.toggle('active', isOpen);
     setMenuExpanded(isOpen);
+    // Lock background scroll only while the sidebar overlays content on mobile.
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
     if (isOpen) {
       sb.setAttribute('aria-modal', 'true');
       sb.setAttribute('role', 'dialog');
       const first = sb.querySelector('.sidebar-link');
       if (first) first.focus();
-      sb.addEventListener('keydown', trapFocus);
+      // Idempotent attach guards against duplicate listeners on rapid toggle.
+      if (!sb._trapAttached) { sb.addEventListener('keydown', trapFocus); sb._trapAttached = true; }
     } else {
       sb.removeAttribute('aria-modal');
       sb.removeAttribute('role');
-      sb.removeEventListener('keydown', trapFocus);
+      if (sb._trapAttached) { sb.removeEventListener('keydown', trapFocus); sb._trapAttached = false; }
       document.querySelector('.menu-btn')?.focus();
     }
   }
@@ -3567,9 +3861,10 @@
     sb.classList.remove('open');
     document.getElementById('overlay').classList.remove('active');
     setMenuExpanded(false);
+    document.body.style.overflow = '';
     sb.removeAttribute('aria-modal');
     sb.removeAttribute('role');
-    sb.removeEventListener('keydown', trapFocus);
+    if (sb._trapAttached) { sb.removeEventListener('keydown', trapFocus); sb._trapAttached = false; }
   }
   function trapFocus(e) {
     if (e.key === 'Escape') { closeSidebar(); document.querySelector('.menu-btn').focus(); return; }
@@ -3721,9 +4016,79 @@
     }
     const meta = document.createElement('div');
     meta.className = 'article-meta';
-    meta.innerHTML = `<span class="read-time">${mins} min read</span><span class="article-meta-dot"></span><span>${words} words</span>`;
+    const updated = LAST_UPDATED[pageId] || LAST_UPDATED_DEFAULT;
+    meta.innerHTML = `<span class="read-time">${mins} min read</span><span class="article-meta-dot"></span><span>${words} words</span><span class="article-meta-dot"></span><span>Updated ${updated}</span>`;
     h1.insertAdjacentElement('afterend', meta);
   }
+
+  /* ── ARTICLE FEEDBACK WIDGET ──────────────────────── */
+  // Pages that already function as a feedback channel get no widget.
+  const FEEDBACK_EXCLUDED = new Set(['welcome', 'contact', 'feature-requests']);
+  function renderArticleFeedback(container, pageId) {
+    if (FEEDBACK_EXCLUDED.has(pageId)) return;
+    const page = PAGES[pageId];
+    if (!page) return;
+    // Don't ask twice in the same browser
+    const seen = safeGet('article-feedback-given', {});
+    if (seen[pageId]) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'article-feedback';
+    wrap.dataset.page = pageId;
+    wrap.innerHTML = `
+      <p class="article-feedback-prompt">Was this page helpful?</p>
+      <div class="article-feedback-buttons">
+        <button type="button" class="article-feedback-btn" onclick="rateHelpful('${pageId}', 'yes')">${IC.check} Yes</button>
+        <button type="button" class="article-feedback-btn" onclick="rateHelpful('${pageId}', 'no')">${IC.x} No</button>
+      </div>
+      <form class="article-feedback-form" id="articleFeedbackForm" method="POST" data-netlify="true" name="article-feedback" netlify-honeypot="bot-field" hidden>
+        <input type="hidden" name="form-name" value="article-feedback">
+        <input type="hidden" name="pageId" value="${escapeHtml(pageId)}">
+        <input type="hidden" name="pageTitle" value="${escapeHtml(page.title)}">
+        <input type="hidden" name="helpful" value="no">
+        <p class="hidden" style="display:none"><input name="bot-field"></p>
+        <label for="afComment" class="sr-only">What didn't work?</label>
+        <textarea id="afComment" name="comment" placeholder="What didn't work? Any details help us improve this page." rows="3" required></textarea>
+        <button type="submit" class="article-feedback-submit">Send feedback</button>
+      </form>
+      <div class="article-feedback-thanks" hidden>Thanks for letting us know.</div>`;
+    container.appendChild(wrap);
+  }
+  function rateHelpful(pageId, value) {
+    const wrap = document.querySelector(`.article-feedback[data-page="${pageId}"]`);
+    if (!wrap) return;
+    const buttons = wrap.querySelector('.article-feedback-buttons');
+    const form = wrap.querySelector('.article-feedback-form');
+    const thanks = wrap.querySelector('.article-feedback-thanks');
+    if (value === 'no') {
+      // Reveal the comment form for context
+      buttons.style.display = 'none';
+      form.hidden = false;
+      const ta = form.querySelector('textarea');
+      if (ta) ta.focus();
+      return;
+    }
+    // value === 'yes': fire-and-forget, mark as given
+    const data = new URLSearchParams({
+      'form-name': 'article-feedback',
+      pageId,
+      pageTitle: PAGES[pageId]?.title || pageId,
+      helpful: 'yes',
+      comment: '',
+    });
+    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: data.toString() })
+      .catch(() => { /* best-effort; widget still records locally */ });
+    markFeedbackGiven(pageId);
+    buttons.style.display = 'none';
+    form.hidden = true;
+    thanks.hidden = false;
+    thanks.setAttribute('role', 'status');
+  }
+  function markFeedbackGiven(pageId) {
+    const seen = safeGet('article-feedback-given', {});
+    seen[pageId] = Date.now();
+    safeSet('article-feedback-given', seen);
+  }
+  window.rateHelpful = rateHelpful;
 
   /* ── RELATED ARTICLES ──────────────────────────────── */
   function renderRelated(container, pageId) {
@@ -3783,7 +4148,6 @@
     const pc = document.getElementById('pageContent');
     if (!pc || !pc.innerHTML) return;
     renderArticleMeta(pc, pageId);
-    renderLastUpdated(pc, pageId);
     renderShareBtn(pc, pageId);
     renderPrintBtn(pc, pageId);
     renderCopyArticleBtn(pc, pageId);
@@ -3795,6 +4159,7 @@
     renderFaqAccordion(pc, pageId);
     addGlossaryTooltips(pc);
     renderRelated(pc, pageId);
+    renderArticleFeedback(pc, pageId);
     applyHighlights(pc, pageId);
     addToRecent(pageId);
     buildSidebar();
@@ -4076,20 +4441,6 @@
     bar.appendChild(btn);
   }
 
-  /* ── LAST UPDATED DISPLAY ──────────────────────────── */
-  function renderLastUpdated(container, pageId) {
-    if (pageId === 'welcome') return;
-    const meta = container.querySelector('.article-meta');
-    if (!meta) return;
-    const span = document.createElement('span');
-    span.className = 'last-updated';
-    const dot = document.createElement('span');
-    dot.className = 'article-meta-dot';
-    meta.appendChild(dot);
-    span.textContent = 'Updated Apr 2026';
-    meta.appendChild(span);
-  }
-
   /* ── TEXT HIGHLIGHT ────────────────────────────────── */
   function getHighlights() { return safeGet('highlights', {}); }
 
@@ -4294,8 +4645,9 @@
 
   /* ── NETLIFY FORM AJAX HANDLER (feature-request, contact-support) ────── */
   const NETLIFY_FORMS = {
-    featureForm:  { rateKey: 'fr-last-submit', successId: 'featureSuccess', submitText: 'Submit request', btnSel: '.form-submit' },
-    contactForm:  { rateKey: 'cf-last-submit', successId: 'contactSuccess', submitText: 'Send message',    btnSel: '.contact-submit' },
+    featureForm:         { rateKey: 'fr-last-submit', successId: 'featureSuccess', submitText: 'Submit request', btnSel: '.form-submit' },
+    contactForm:         { rateKey: 'cf-last-submit', successId: 'contactSuccess', submitText: 'Send message',    btnSel: '.contact-submit' },
+    articleFeedbackForm: { rateKey: 'af-last-submit', successId: null,             submitText: 'Send feedback',   btnSel: '.article-feedback-submit', inlineSuccess: true },
   };
   document.addEventListener('submit', function(e) {
     const cfg = NETLIFY_FORMS[e.target.id];
@@ -4322,10 +4674,23 @@
       clearTimeout(timeout);
       if (res.ok) {
         localStorage.setItem(cfg.rateKey, String(Date.now()));
+        form.hidden = true;
         form.style.display = 'none';
-        const success = document.getElementById(cfg.successId);
-        success.style.display = '';
-        success.setAttribute('role', 'alert');
+        if (cfg.inlineSuccess) {
+          // For widgets that share a wrapper with their success state
+          // (e.g. article-feedback), reveal the local thanks element.
+          const wrap = form.closest('.article-feedback');
+          if (wrap) {
+            const thanks = wrap.querySelector('.article-feedback-thanks');
+            if (thanks) { thanks.hidden = false; thanks.setAttribute('role', 'status'); }
+            const pageId = wrap.dataset.page;
+            if (pageId) markFeedbackGiven(pageId);
+          }
+        } else if (cfg.successId) {
+          const success = document.getElementById(cfg.successId);
+          success.style.display = '';
+          success.setAttribute('role', 'alert');
+        }
       } else {
         showToast('Something went wrong — please try again or email support.');
         if (btn) { btn.disabled = false; btn.textContent = cfg.submitText; }
@@ -4576,6 +4941,16 @@
   window.debouncedSearch = debouncedSearch;
   window.showSearchHistory = showSearchHistory;
   })();
+  </script>
+
+  <!-- Service worker — cache-first for fonts, network-first for HTML.
+       Lets previously-visited pages load on flaky / no connection. -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/sw.js').catch(function () { /* best-effort */ });
+      });
+    }
   </script>
 </body>
 </html>

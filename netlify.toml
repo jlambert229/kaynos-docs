@@ -8,6 +8,7 @@
   [headers.values]
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
+    X-DNS-Prefetch-Control = "on"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), serial=(), interest-cohort=()"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
@@ -19,6 +20,14 @@
   for = "/*.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    # Service worker must not be aggressively cached or clients won't pick up
+    # updates. Browsers also re-fetch sw.js on every page load by default.
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Content-Type = "application/javascript"
 
 [[headers]]
   for = "/robots.txt"

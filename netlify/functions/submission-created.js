@@ -151,6 +151,39 @@ function buildContactSupportIssue(data) {
   };
 }
 
+function buildArticleFeedbackIssue(data) {
+  const helpful = clean(data.helpful, 10);
+  const pageId = clean(data.pageId, 200) || 'unknown';
+  const pageTitle = clean(data.pageTitle, 200) || pageId;
+  const comment = clean(data.comment, 5000);
+  // Positive feedback is recorded by Netlify Forms (visible in the dashboard)
+  // but does not warrant a Linear issue per page-rating.
+  if (helpful !== 'no') return { skipReason: `Positive feedback for ${pageId} — recorded only.` };
+  if (comment.length === 0) return { error: 'Comment required for negative feedback.' };
+  const markdown = [
+    `## Docs feedback — page rated unhelpful`,
+    ``,
+    `**Page:** ${pageTitle} (\`${pageId}\`)`,
+    `**URL:** https://docs.kaynos.net/#${pageId}`,
+    ``,
+    `---`,
+    ``,
+    comment,
+    ``,
+    `---`,
+    `_Submitted via the "Was this page helpful?" widget at the bottom of the article._`,
+  ].join("\n");
+  return {
+    input: {
+      teamId: TEAM_ID,
+      title: `[Docs feedback] ${pageTitle}`.slice(0, 200),
+      description: markdown,
+      priority: 4, // Low — review in next docs sweep
+      labelIds: [LABEL_HELP_CENTER],
+    },
+  };
+}
+
 exports.handler = async function (event) {
   let payload;
   try {
@@ -172,17 +205,24 @@ exports.handler = async function (event) {
 
   const { form_name, data = {} } = payload;
 
-  // Route based on form. Both forms post Netlify form submissions; we triage
-  // each into a Linear issue with a different label set + title prefix.
+  // Route based on form. Each form posts a Netlify form submission; we triage
+  // each into a Linear issue (or a no-op for positive ratings) with a
+  // different label set + title prefix.
   let issueInput;
   if (form_name === "feature-request") {
     issueInput = buildFeatureRequestIssue(data);
   } else if (form_name === "contact-support") {
     issueInput = buildContactSupportIssue(data);
+  } else if (form_name === "article-feedback") {
+    issueInput = buildArticleFeedbackIssue(data);
   } else {
     return { statusCode: 200, body: `Form '${form_name}' not handled — skipped.` };
   }
   if (issueInput.error) return { statusCode: 400, body: issueInput.error };
+  if (issueInput.skipReason) {
+    console.log(JSON.stringify({ event: 'feedback_recorded_only', form: form_name, reason: issueInput.skipReason, timestamp: new Date().toISOString() }));
+    return { statusCode: 200, body: issueInput.skipReason };
+  }
 
   const apiKey = process.env.LINEAR_API_KEY;
   if (!apiKey) {
