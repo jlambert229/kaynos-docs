@@ -404,6 +404,11 @@
     .content-inner h3:hover .heading-anchor,
     .heading-anchor:focus { opacity: 1; }
     .heading-anchor:hover { color: var(--accent); }
+    /* On touch devices there's no hover, so the anchor is invisible by default.
+       Show it at low opacity so the affordance is discoverable. */
+    @media (hover: none) {
+      .heading-anchor { opacity: .45; }
+    }
     .content-inner h3 {
       font-size: 1rem; font-weight: 600; margin-top: 28px; margin-bottom: 10px;
       color: var(--text-primary); scroll-margin-top: calc(var(--header-h) + 16px);
@@ -465,6 +470,12 @@
     pre:hover .copy-code-btn, .code-block:hover .copy-code-btn { opacity: 1; }
     .copy-code-btn:hover { color: var(--accent); border-color: var(--accent); }
     .copy-code-btn.copied { color: var(--success); border-color: var(--success); }
+    /* On touch (no hover), keep copy buttons partly visible so the affordance
+       is discoverable without first tapping the code block. */
+    @media (hover: none) {
+      .copy-code-btn { opacity: .65; }
+      .copy-btn { opacity: .65; }
+    }
 
     .open-in-app {
       display: inline-flex;
@@ -728,6 +739,10 @@
 
     /* ── MOBILE ─── */
     @media (max-width: 768px) {
+      /* Body text bumps to 16px on mobile so paragraphs read at a comfortable
+         size on phones without zoom — the desktop 15px feels cramped here. */
+      body { font-size: 1rem; }
+      .content-inner p, .content-inner li { font-size: 1rem; line-height: 1.65; }
       .sidebar { transform: translateX(-100%); z-index: 95; }
       .sidebar.open { transform: translateX(0); }
       .layout { margin-left: 0; }
