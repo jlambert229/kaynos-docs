@@ -4891,9 +4891,18 @@
     bar.appendChild(btn);
   }
 
-  /* ── OFFLINE DETECTION ─────────────────────────────── */
-  window.addEventListener('offline', () => document.getElementById('offlineBanner')?.classList.add('show'));
-  window.addEventListener('online', () => document.getElementById('offlineBanner')?.classList.remove('show'));
+  /* ── OFFLINE DETECTION ───────────────────────────────
+     Event listeners only fire on connectivity *change*. If the visitor
+     loads (or reloads) while already offline — the SW serves cached
+     HTML — neither 'offline' nor 'online' has fired yet, so the banner
+     stays hidden despite navigator.onLine being false. Check initial
+     state too. */
+  function _setOfflineBanner(off) {
+    document.getElementById('offlineBanner')?.classList.toggle('show', off);
+  }
+  if (typeof navigator !== 'undefined' && navigator.onLine === false) _setOfflineBanner(true);
+  window.addEventListener('offline', () => _setOfflineBanner(true));
+  window.addEventListener('online',  () => _setOfflineBanner(false));
 
   /* ── THEME TOGGLE ───────────────────────────────────── */
   function applyTheme(mode) {
