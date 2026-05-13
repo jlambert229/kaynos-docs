@@ -3947,12 +3947,31 @@
   }, { passive: true });
 
   /* ── POPSTATE ───────────────────────────────────────── */
+  // popstate fires on browser back/forward AND on hash changes triggered
+  // outside our SPA (typing a hash in the address bar, clicking a plain
+  // <a href="#x"> elsewhere, a deep link that lands on the already-loaded
+  // tab). e.state is null in those last cases, so the URL is the only
+  // source of truth.
+  function pageFromHash() {
+    const raw = (location.hash.slice(1).split(':')[0]) || 'welcome';
+    return REDIRECTS[raw] || raw;
+  }
   window.addEventListener('popstate', e => {
-    const pageId = e.state?.page || 'welcome';
+    const pageId = e.state?.page || pageFromHash();
     window._isPopstate = true;
     navigate(pageId);
     window._isPopstate = false;
     restoreScrollPos(pageId);
+  });
+  // hashchange catches address-bar edits and hash-only nav from external
+  // links — popstate doesn't fire reliably for those across all browsers.
+  window.addEventListener('hashchange', () => {
+    const pageId = pageFromHash();
+    // navigate() also reads the hash for REDIRECTS; this is idempotent.
+    if ((document.querySelector('.content-inner h1')?.textContent || '') !==
+        (PAGES[pageId]?.title || '')) {
+      navigate(pageId);
+    }
   });
 
   /* ── KEYBOARD SHORTCUTS ─────────────────────────────── */
@@ -4927,9 +4946,18 @@
     bar.appendChild(btn);
   }
 
-  /* ── OFFLINE DETECTION ─────────────────────────────── */
-  window.addEventListener('offline', () => document.getElementById('offlineBanner')?.classList.add('show'));
-  window.addEventListener('online', () => document.getElementById('offlineBanner')?.classList.remove('show'));
+  /* ── OFFLINE DETECTION ───────────────────────────────
+     Event listeners only fire on connectivity *change*. If the visitor
+     loads (or reloads) while already offline — the SW serves cached
+     HTML — neither 'offline' nor 'online' has fired yet, so the banner
+     stays hidden despite navigator.onLine being false. Check initial
+     state too. */
+  function _setOfflineBanner(off) {
+    document.getElementById('offlineBanner')?.classList.toggle('show', off);
+  }
+  if (typeof navigator !== 'undefined' && navigator.onLine === false) _setOfflineBanner(true);
+  window.addEventListener('offline', () => _setOfflineBanner(true));
+  window.addEventListener('online',  () => _setOfflineBanner(false));
 
   /* ── THEME TOGGLE ───────────────────────────────────── */
   function applyTheme(mode) {
