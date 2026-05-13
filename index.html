@@ -1508,14 +1508,9 @@
     </svg>
   </button>
 
-  <!-- Netlify Forms hidden detection forms (must be in static HTML for Netlify to register them) -->
-  <form name="article-feedback" netlify netlify-honeypot="bot-field" hidden>
-    <input name="bot-field">
-    <input name="pageId">
-    <input name="pageTitle">
-    <input name="helpful">
-    <textarea name="comment"></textarea>
-  </form>
+  <!-- Netlify Forms hidden detection forms (must be in static HTML for Netlify to register them).
+       Note: article-feedback is no longer wired to Netlify Forms — it opens a mailto: composer
+       so the widget works regardless of network or form-service status. -->
   <form name="contact-support" netlify netlify-honeypot="bot-field" hidden>
     <input name="bot-field">
     <input name="name">
@@ -4040,17 +4035,12 @@
         <button type="button" class="article-feedback-btn" onclick="rateHelpful('${pageId}', 'yes')">${IC.check} Yes</button>
         <button type="button" class="article-feedback-btn" onclick="rateHelpful('${pageId}', 'no')">${IC.x} No</button>
       </div>
-      <form class="article-feedback-form" id="articleFeedbackForm" method="POST" data-netlify="true" name="article-feedback" netlify-honeypot="bot-field" hidden>
-        <input type="hidden" name="form-name" value="article-feedback">
-        <input type="hidden" name="pageId" value="${escapeHtml(pageId)}">
-        <input type="hidden" name="pageTitle" value="${escapeHtml(page.title)}">
-        <input type="hidden" name="helpful" value="no">
-        <p class="hidden" style="display:none"><input name="bot-field"></p>
-        <label for="afComment" class="sr-only">What didn't work?</label>
-        <textarea id="afComment" name="comment" placeholder="What didn't work? Any details help us improve this page." rows="3" required></textarea>
-        <button type="submit" class="article-feedback-submit">Send feedback</button>
-      </form>
-      <div class="article-feedback-thanks" hidden>Thanks for letting us know.</div>`;
+      <div class="article-feedback-form" hidden>
+        <label for="afComment-${escapeHtml(pageId)}" class="sr-only">What didn't work?</label>
+        <textarea id="afComment-${escapeHtml(pageId)}" placeholder="What didn't work? Any details help us improve this page." rows="3"></textarea>
+        <button type="button" class="article-feedback-submit" onclick="sendArticleFeedback('${pageId}')">Send feedback</button>
+      </div>
+      <div class="article-feedback-thanks" hidden>Thanks — your email client will open with the details prefilled.</div>`;
     container.appendChild(wrap);
   }
   function rateHelpful(pageId, value) {
@@ -4060,29 +4050,47 @@
     const form = wrap.querySelector('.article-feedback-form');
     const thanks = wrap.querySelector('.article-feedback-thanks');
     if (value === 'no') {
-      // Reveal the comment form for context
+      // Reveal the comment composer
       buttons.style.display = 'none';
       form.hidden = false;
       const ta = form.querySelector('textarea');
       if (ta) ta.focus();
       return;
     }
-    // value === 'yes': fire-and-forget, mark as given
-    const data = new URLSearchParams({
-      'form-name': 'article-feedback',
-      pageId,
-      pageTitle: PAGES[pageId]?.title || pageId,
-      helpful: 'yes',
-      comment: '',
-    });
-    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: data.toString() })
-      .catch(() => { /* best-effort; widget still records locally */ });
+    // value === 'yes' — record locally and dismiss; no submission needed.
     markFeedbackGiven(pageId);
     buttons.style.display = 'none';
     form.hidden = true;
     thanks.hidden = false;
+    thanks.textContent = 'Thanks!';
     thanks.setAttribute('role', 'status');
   }
+  function sendArticleFeedback(pageId) {
+    const wrap = document.querySelector(`.article-feedback[data-page="${pageId}"]`);
+    if (!wrap) return;
+    const ta = wrap.querySelector('textarea');
+    const comment = (ta && ta.value || '').trim();
+    if (!comment) { ta?.focus(); return; }
+    const page = PAGES[pageId];
+    const title = page?.title || pageId;
+    const subject = 'Docs feedback: ' + title;
+    const body =
+      'Page: ' + title + ' (#' + pageId + ')\n' +
+      'URL: ' + location.origin + location.pathname + '#' + pageId + '\n\n' +
+      comment;
+    const url = mailHref('?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body));
+    // Update the widget first so the UI reflects success even if the mail
+    // client never opens (or the user dismisses the prompt).
+    markFeedbackGiven(pageId);
+    const form = wrap.querySelector('.article-feedback-form');
+    const thanks = wrap.querySelector('.article-feedback-thanks');
+    form.hidden = true;
+    thanks.hidden = false;
+    thanks.setAttribute('role', 'status');
+    // Then trigger the email composer — works on every platform, no Netlify Forms required.
+    window.location.href = url;
+  }
+  window.sendArticleFeedback = sendArticleFeedback;
   function markFeedbackGiven(pageId) {
     const seen = safeGet('article-feedback-given', {});
     seen[pageId] = Date.now();
@@ -4643,11 +4651,13 @@
     renderReleases();
   }
 
-  /* ── NETLIFY FORM AJAX HANDLER (feature-request, contact-support) ────── */
+  /* ── NETLIFY FORM AJAX HANDLER (feature-request, contact-support) ──────
+   * Article feedback uses a mailto: composer (see sendArticleFeedback) so
+   * it works without Netlify Forms, on local dev, and when the visitor is
+   * offline. */
   const NETLIFY_FORMS = {
-    featureForm:         { rateKey: 'fr-last-submit', successId: 'featureSuccess', submitText: 'Submit request', btnSel: '.form-submit' },
-    contactForm:         { rateKey: 'cf-last-submit', successId: 'contactSuccess', submitText: 'Send message',    btnSel: '.contact-submit' },
-    articleFeedbackForm: { rateKey: 'af-last-submit', successId: null,             submitText: 'Send feedback',   btnSel: '.article-feedback-submit', inlineSuccess: true },
+    featureForm: { rateKey: 'fr-last-submit', successId: 'featureSuccess', submitText: 'Submit request', btnSel: '.form-submit' },
+    contactForm: { rateKey: 'cf-last-submit', successId: 'contactSuccess', submitText: 'Send message',    btnSel: '.contact-submit' },
   };
   document.addEventListener('submit', function(e) {
     const cfg = NETLIFY_FORMS[e.target.id];
