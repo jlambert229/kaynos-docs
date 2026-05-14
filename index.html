@@ -1988,6 +1988,7 @@
 <li><strong>Camera slightly high</strong> so the full training area is visible, not just lower legs.</li>
 <li><strong>Even lighting</strong> makes small details easier to see on review.</li>
 </ul>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Setting up a phone or camera for repeated recording? <a href="#recording-setup" onclick="navigate('recording-setup');return false">Recording setup</a> covers tripods, mics, lighting, and settings worth knowing.</div></div>
 <h2>Large files</h2>
 <p>Files over <strong>20 MB</strong> use chunked multipart upload (<strong>20 MB</strong> per chunk) with parallel connections. Failed parts retry automatically (up to <strong>3 attempts</strong> per chunk) with exponential backoff.</p>
 <h2>Requirements</h2>
@@ -2176,6 +2177,76 @@
 <li><strong>1080p</strong> is enough — 4K files are much larger with little benefit for coaching review</li>
 </ul>
 </details>`},
+
+    "recording-setup": {
+      title: "Recording setup", section: "Video",
+      content: `
+<h1>Recording setup</h1>
+<div class="tldr"><strong>TLDR:</strong> A modern phone in landscape covers 95% of coaching footage. Recording 30+ minutes regularly? Add a tripod and an external mic. Skip a "real camera" unless slow-motion or low light is actually a problem.</div>
+
+<h2>The honest minimum</h2>
+<p>Start with the phone in your pocket. Any iPhone or Pixel from the last 4–5 years records 1080p at 30 fps that looks great on a laptop screen. Don't go shopping until you've felt the limits.</p>
+<ul>
+<li>Phone in landscape, propped against a wall or on a tripod.</li>
+<li>Camera at chest height of the action, not floor level — full bodies visible.</li>
+<li>Even lighting; avoid backlighting (windows behind subjects).</li>
+<li>Quiet space, or accept that ambient noise is part of the recording.</li>
+</ul>
+
+<h2>Phones that work well</h2>
+<p>Anything that records 1080p H.264 at 30 fps with usable autofocus. Specifically:</p>
+<ul>
+<li><strong>iPhone:</strong> iPhone 11 forward. Default Camera app at 1080p30, or 1080p60 if you'll slow-mo in post. Switch <strong>Settings → Camera → Formats</strong> to "Most Compatible" rather than "High Efficiency" so the resulting file plays back in every browser.</li>
+<li><strong>Pixel:</strong> Pixel 4 forward. Default Camera at 1080p.</li>
+<li><strong>Samsung Galaxy:</strong> S20 forward. Set the codec to H.264 in Camera settings if it's offering HEVC.</li>
+</ul>
+
+<h2>Tripods &amp; mounts</h2>
+<p>The single highest-ROI accessory. A stable shot makes a 30-minute review watchable; handheld shake makes it unusable.</p>
+<ul>
+<li><strong>Mini tripod / tabletop ($15–25)</strong> — Joby GripTight ONE or a generic equivalent. Good for individual lessons in tight spaces.</li>
+<li><strong>Full-height tripod ($30–60)</strong> — Manfrotto Compact or any 60" travel tripod with a phone clamp. Easiest setup for a class recording.</li>
+<li><strong>Wall mount</strong> — phone clamp on a high shelf with a suction cup or screw mount. Great for academies recording every class from the same angle.</li>
+</ul>
+
+<h2>Audio</h2>
+<p>Phone mics are fine inside 10 ft. Past that, voice gets muddy and ambient noise dominates.</p>
+<ul>
+<li><strong>Lapel/lavalier mic ($20–50)</strong> — Rode SmartLav+ or a generic. Plugs into the headphone port (USB-C with adapter for newer phones). Big jump in clarity for verbal instruction.</li>
+<li><strong>Wireless mic ($60–150)</strong> — Rode Wireless GO or DJI Mic. Lets the coach move around. Worth it for voiceover commentary.</li>
+<li><strong>Skip:</strong> shotgun mics on a phone are awkward and on-camera condensers rarely beat a phone in a noisy gym.</li>
+</ul>
+
+<h2>Lighting</h2>
+<p>Most academies have plenty of overhead light. Trouble spots:</p>
+<ul>
+<li><strong>Mixed light sources</strong> — daylight from a window plus warm interior light shifts color across the frame. Close blinds or kill the interior lights.</li>
+<li><strong>Strong backlight</strong> — subject silhouetted against a bright window. Move the camera or cover the window.</li>
+<li><strong>Dim corner</strong> — a $20 LED panel or clip-on ring light fills it. Don't overspend.</li>
+</ul>
+
+<h2>When to move past a phone</h2>
+<p>Only if you need one of these:</p>
+<ul>
+<li><strong>Slow motion</strong> at usable resolution (120–240 fps). GoPro Hero, Sony ZV-1, or any recent mirrorless.</li>
+<li><strong>Low light</strong> in a poorly lit gym. Larger sensor wins — mirrorless beats phone here.</li>
+<li><strong>Wide shots from far back.</strong> Action cams (GoPro) have wider field of view; useful for tournament footage.</li>
+<li><strong>Long sessions (60+ minutes)</strong> where phone overheating becomes a problem. A camera with active cooling outlasts a phone in summer.</li>
+</ul>
+
+<h2>Settings that matter</h2>
+<ul>
+<li><strong>Resolution:</strong> 1080p is enough; 4K is overkill and slower to upload.</li>
+<li><strong>Frame rate:</strong> 30 fps for normal review; 60 fps if you'll slow-mo in post.</li>
+<li><strong>Codec:</strong> H.264 ("Most Compatible" on iPhone). H.265/HEVC saves space but plays inconsistently across browsers.</li>
+<li><strong>Stabilization:</strong> on, if your phone offers it.</li>
+<li><strong>Auto-focus tracking:</strong> on for moving subjects. Lock focus only for stationary instruction footage.</li>
+</ul>
+
+<h2>Storage on the phone</h2>
+<p>1080p H.264 is roughly 1 GB per 10 minutes. A 60-minute class is ~6 GB. Free up space before a long recording, or upload between classes so the camera roll doesn't fill.</p>
+
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>The only wrong rig is the one that's too complicated to set up before class. Start with what you have, add the tripod first, then the mic. Skip the camera unless slow-mo or low light is forcing your hand.</div></div>`},
 
     storage: {
       title: "Video storage and retention", section: "Video",
@@ -2388,6 +2459,85 @@
 <p>React to any note with an emoji: 👍 ❤️ 🔥 👀 ✅ 👏. Click the reaction button under a note.</p>
 `},
 
+    "coach-handbook": {
+      title: "Coach handbook", section: "Sessions & Classes",
+      content: `
+<h1>Coach handbook</h1>
+<div class="tldr"><strong>TLDR:</strong> Advanced patterns for getting the most out of Kaynos as a coach — naming and tagging conventions, class structure, recap clips, AI review tips, and the feedback loops that move students fastest.</div>
+
+<p>Read the <a href="#setup" onclick="navigate('setup');return false">setup guide</a> first if you're brand new. This page is for coaches who've got the basics and want to move faster.</p>
+
+<h2>Naming sessions and classes</h2>
+<p>A name you write today is a search query in three months. Patterns that scale:</p>
+<ul>
+<li><strong>Session:</strong> <code>{Student}, {Date}, {Focus}</code> — "Maya, 2026-05-04, guard retention".</li>
+<li><strong>Class:</strong> <code>{Day}, {Topic}, {Level}</code> — "Mon, scissor sweeps, intermediate".</li>
+<li>Be consistent across coaches — a shared convention compounds.</li>
+</ul>
+
+<h2>Tagging conventions</h2>
+<p>Tags are free-form text; they only become useful with team discipline. Pick one style and stick to it. Common starting points for BJJ:</p>
+<ul>
+<li><strong>Position:</strong> <code>guard</code>, <code>mount</code>, <code>side-control</code>, <code>back</code>.</li>
+<li><strong>Action:</strong> <code>sweep</code>, <code>pass</code>, <code>escape</code>, <code>submission</code>.</li>
+<li><strong>Technique:</strong> <code>armbar</code>, <code>triangle</code>, <code>kimura</code> — get specific.</li>
+<li><strong>Phase:</strong> <code>fundamentals</code>, <code>comp-prep</code>, <code>rehab</code>.</li>
+</ul>
+<p>Don't mix styles in one tag (no <code>guardpass</code>, <code>guard-pass</code>, and <code>Guard Pass</code> for the same thing). Search treats them as separate.</p>
+
+<h2>Class structure that gets watched</h2>
+<p>A 60-minute class recording, posted untouched, has a brutally low completion rate. What works:</p>
+<ul>
+<li><strong>Upload the full class</strong> so it exists in the archive.</li>
+<li><strong>Pull a 2–3 minute recap clip</strong> of the most important moment — a sweep variation, a key correction, a sparring exchange worth dissecting. The recap gets watched 5–10× more often than the full recording.</li>
+<li>Tag the clip with the same vocabulary as the source session.</li>
+</ul>
+<p>Recap clip workflow: <a href="#playback" onclick="navigate('playback');return false">Watching and reviewing → Recap clips</a>.</p>
+
+<h2>Notes that students act on</h2>
+<p>Three habits that turn passive watching into actual change:</p>
+<ul>
+<li><strong>Question, not statement:</strong> "What's happening with your right hand here?" beats "Your right hand is wrong." Students engage with questions.</li>
+<li><strong>Reference earlier work:</strong> @mention a previous session note when the same issue recurs. The pattern becomes visible.</li>
+<li><strong>One thing per note:</strong> timestamped notes are scannable. Don't write paragraphs — write three short notes at three moments instead.</li>
+</ul>
+
+<h2>Review requests</h2>
+<p>Encourage students to submit short clips (under 2 minutes) with one specific question. Long unfocused requests sit in your queue; short specific ones get fast responses and create a virtuous loop.</p>
+
+<h2>AI review</h2>
+<p>AI review (powered by Twelve Labs) surfaces moments worth attention. Treat it as a draft, not a verdict — edit, keep, or delete each suggestion. Good fits:</p>
+<ul>
+<li>Long sparring footage where you want to skim for technique-relevant moments before writing notes manually.</li>
+<li>Pulling potential recap clips from a multi-pair sparring session.</li>
+</ul>
+<p>Bad fits: cold-reading footage for tactical decisions specific to your gym's curriculum. The model doesn't know your house techniques.</p>
+
+<h2>Voice dictation</h2>
+<p>For long review sessions where typing slows you down: click the mic icon in the note editor. Audio is transcribed in real time by Deepgram and appears as you talk. Edit before saving. Microphone access required; consent prompt appears the first time.</p>
+
+<h2>Progress reviews</h2>
+<p>Run a quick pass on the <a href="#progress" onclick="navigate('progress');return false">progress dashboard</a> weekly — who watched what, who hasn't. Reach out directly to students who haven't watched anything for two weeks. The intervention is small; the retention impact compounds.</p>
+
+<h2>Multi-coach gyms</h2>
+<p>Each coach has their own student roster, but classes are visible to everyone. Conventions worth aligning on at a team level:</p>
+<ul>
+<li>Tag vocabulary (above).</li>
+<li>Who owns class recordings (one person, or the coach who taught).</li>
+<li>How to handle review requests when the student picked another coach.</li>
+<li>Whether assistant coaches add notes to a head coach's sessions (most do — clarify expectations).</li>
+</ul>
+
+<h2>Tournament footage</h2>
+<p>If you record competition footage for review:</p>
+<ul>
+<li>Upload to a <strong>session</strong> assigned to the competitor — it's their performance, even if you debrief in class later.</li>
+<li>Mirror the recap-clip pattern: a 30-second clip of the key match moment gets watched; the full match doesn't.</li>
+<li>Tag with the event name plus your house convention.</li>
+</ul>
+
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>The single highest-impact habit: write at least one note per video. Notes you write are notes students return to. Notes you don't write fade.</div></div>`},
+
     progress: {
       title: "Progress tracking", section: "Sessions & Classes",
       content: `
@@ -2488,7 +2638,7 @@
 </ol>
 <p>Locked out? Ask an admin for a reset, or email ${mailLink()}. Login help: <a href="#login-issues" onclick="navigate('login-issues');return false">Login and access issues</a>.</p>
 <h2>Billing (admins only)</h2>
-<p>Admins see a <strong>Billing</strong> section with the current subscription status and a <strong>Manage</strong> button that opens the Stripe billing portal in a new tab. Update payment methods, download invoices, or change plans there.</p>
+<p>Admins see a <strong>Billing</strong> section with the current subscription status and a <strong>Manage</strong> button that opens the Stripe billing portal in a new tab. Update payment methods, download invoices, or change plans there. Full reference on <a href="#billing" onclick="navigate('billing');return false">Billing &amp; subscription</a>.</p>
 <h2>Notifications</h2>
 <p>Email notifications live in the profile <strong>Notifications</strong> section. A master <strong>Email notifications</strong> toggle sits at the top, with three per-event toggles underneath:</p>
 <ul>
@@ -2508,6 +2658,48 @@
 <li>Confirm notifications are enabled in your profile settings.</li>
 <li>If it still fails, contact ${mailLink()} with the expected address.</li>
 </ol>`},
+
+    billing: {
+      title: "Billing & subscription", section: "Account",
+      content: `
+<h1>Billing &amp; subscription</h1>
+<div class="tldr"><strong>TLDR:</strong> See <a href="https://www.kaynos.net/#pricing" target="_blank" rel="noopener noreferrer">current pricing</a>. Manage card, invoices, and cancellation from <strong>Profile → Billing → Manage</strong> (admin only). A failed payment gets one-time automatic retries before access pauses.</div>
+<h2>Where billing lives</h2>
+<p>Billing is admin-only. Sign in as an admin, open your <strong>Profile</strong> (avatar in the header), then click <strong>Manage</strong> in the Billing section. That opens the Stripe billing portal — every billing change happens there.</p>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Coaches and students can't see billing, even if they're paying for it personally — admins only. If you're paying for the academy from outside the school account, ask the school owner to add you as an admin first.</div></div>
+<h2>What you can do in the portal</h2>
+<ul>
+<li>Update card, expiration, and billing address.</li>
+<li>Download every past invoice (Stripe also emails a PDF after each charge).</li>
+<li>See your next-charge date and amount.</li>
+<li>Cancel — see "Cancel" below for what that means.</li>
+</ul>
+<h2>Free trial</h2>
+<p>Every account starts with a free trial. Card required to begin so we don't have to interrupt you on day one to take payment. The exact trial length lives on the <a href="https://www.kaynos.net/#pricing" target="_blank" rel="noopener noreferrer">pricing page</a>; the in-app countdown sits in Profile → Billing.</p>
+<p><strong>Cancel before the trial ends → no charge.</strong> Cancel after → you're charged through the current period and access continues until that period ends.</p>
+<h2>Failed payment</h2>
+<p>If a charge fails (expired card, insufficient funds, fraud check), Stripe retries automatically over the next few days and emails you on each attempt. While retries are pending, your account stays active.</p>
+<p>If every retry fails, the account moves to <strong>past due</strong>: read-only access stays for a short grace window so you can update the card. After that, the account suspends — data preserved, no upload/notes/share until billing is fixed.</p>
+<p>To recover: Profile → Billing → Manage → update the card. Stripe retries on the spot and the account restores.</p>
+<h2>Invoices &amp; receipts</h2>
+<p>Every charge emails a Stripe receipt to the billing address. Downloadable PDF invoices are in the portal. Need a custom invoice for accounting (specific school name, tax ID, PO number)? Email ${mailLink()} and we'll add the line items.</p>
+<h2>Tax &amp; VAT</h2>
+<p>Stripe calculates tax from your billing address — VAT for EU customers, sales tax for applicable US states. The invoice line items show the breakdown. With a VAT ID or tax-exempt status, add it in the billing portal before your next renewal; it applies going forward.</p>
+<h2>Refunds</h2>
+<p>We refund pro-rata for mid-period cancellations if you're unhappy with the service. Email ${mailLink()} with your school name — refunds usually clear in 5–10 business days back to the original card.</p>
+<h2>Cancel</h2>
+<p>Profile → Billing → Manage → Cancel subscription. Access stays available through the end of the period you've already paid for, then the account deactivates. Data is preserved for the standard <a href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">retention window</a> after that — re-subscribe anytime to restore full access without losing recordings or notes.</p>
+<h2>Pausing</h2>
+<p>There's no in-app pause. The functional equivalent: cancel via the portal (no next-period charge, data preserved during retention), re-subscribe when you're ready. For a longer pause where you're worried about hitting the retention window, email ${mailLink()} and we'll work something out.</p>
+<h2>Adding coaches / changing seats</h2>
+<p>The plan is flat per coach. There are no tiers or seat counts to manage. Add coaches by inviting them as admin/coach in <a href="#managing-members" onclick="navigate('managing-members');return false">Members</a> — Kaynos creates their account at the standard rate and Stripe prorates the change on the next invoice.</p>
+<h2>Account deletion vs cancellation</h2>
+<p>Two different things:</p>
+<ul>
+<li><strong>Cancel</strong> stops the recurring charge. Data stays in retention; resume by re-subscribing.</li>
+<li><strong>Delete</strong> (Admin → Delete School) schedules account-wide deletion with a 30-day grace period. After 30 days, all data is permanently removed and re-subscribing won't recover it.</li>
+</ul>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Stripe never sends Kaynos your card number — payment processing happens at PCI-DSS Level 1 inside Stripe. We see the receipt, the customer email, and the brand and last-4 of the card.</div></div>`},
 
     "login-issues": {
       title: "Login and access issues", section: "Troubleshoot",
@@ -2740,6 +2932,7 @@
 <p>Yes. Delete your own account from <strong>Profile → Delete Account</strong>. Admins can schedule school deletion from <strong>Admin → Delete School</strong> — a 30-day grace period lets you cancel. After 30 days, all data is permanently removed.</p>
 <hr>
 <h2>Billing and pricing</h2>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Full coverage of refunds, invoices, taxes, failed payment, pausing, and cancellation lives on the dedicated <a href="#billing" onclick="navigate('billing');return false">Billing &amp; subscription</a> page.</div></div>
 <h3>How much does Kaynos cost?</h3>
 <p>Plan pricing, what's included, and free-trial terms live on the <a href="https://www.kaynos.net/#pricing" target="_blank" rel="noopener noreferrer">Kaynos pricing page</a> — the single source of truth, so this help center never drifts. A card is required to start the trial; cancel before it ends and you won't be charged.</p>
 <h3>What happens when my trial ends?</h3>
@@ -2800,6 +2993,61 @@
 <p>A public API may come later. If your use case needs programmatic access or webhooks, <a href="${mailHref()}">contact us</a> or visit the <a href="#contact" onclick="navigate('contact');return false">contact page</a> — demand drives priority.</p>
 <p>Follow our <a href="#release-notes" onclick="navigate('release-notes');return false">release notes</a> for updates.</p>`},
 
+    integrations: {
+      title: "Integrations & exports", section: "Admin",
+      content: `
+<h1>Integrations &amp; exports</h1>
+<div class="tldr"><strong>TLDR:</strong> Kaynos is a focused tool — most things stay inside the app. Email notifications, in-app chat, full data export (JSON/CSV), and shareable clip links are the integration surface. Public API and webhooks aren't available yet.</div>
+
+<h2>What's available</h2>
+<dl>
+<dt>Data export (admin)</dt>
+<dd><strong>Admin → Reports &amp; Exports</strong>. Full school data as JSON; member list as CSV. Includes users, sessions, classes, notes, tags, and video metadata. Useful for backups, migrations, and GDPR portability.</dd>
+
+<dt>Usage reports (admin)</dt>
+<dd>Email reports of academy activity at a chosen cadence (off / weekly / monthly). Send a manual report on demand. Available once the school has 5+ sessions or classes.</dd>
+
+<dt>Email notifications</dt>
+<dd>Per-event categories under Profile → Notifications. Mention notifications include a deep link to the exact note timestamp.</dd>
+
+<dt>In-app chat</dt>
+<dd>Bottom-right corner inside <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> when logged in. Reaches support directly. Logs are kept for context if you reopen the same conversation later.</dd>
+
+<dt>Shareable clip links</dt>
+<dd>Toggle <strong>Share</strong> on any clip to generate a public link. Anyone with the link can view the clip — no login. Toggle off to revoke immediately. Useful for sharing a single technique clip with a coach at another gym, a parent, or a competition coach.</dd>
+
+<dt>Add to home screen (PWA)</dt>
+<dd>Both <a href="https://app.kaynos.net" target="_blank" rel="noopener">the app</a> and this help center support Add to Home Screen on iOS and Android — a full-screen icon-launched experience without browser chrome. See <a href="#using-on-mobile" onclick="navigate('using-on-mobile');return false">Using Kaynos on mobile</a>.</dd>
+
+<dt>Internal API reference</dt>
+<dd>Admins and coaches can view <a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener"><code>/admin/api-docs</code></a> — the Swagger UI for the endpoints the web app uses. Session-cookie auth, no tokens. Not a stability contract — endpoints can change. See <a href="#developer-api" onclick="navigate('developer-api');return false">Developer API</a>.</dd>
+</dl>
+
+<h2>What's not available (yet)</h2>
+<ul>
+<li><strong>Public API with tokens.</strong> No personal access tokens, no OAuth apps, no third-party API clients. Demand drives the roadmap — let us know via <a href="#feature-requests" onclick="navigate('feature-requests');return false">Feature requests</a>.</li>
+<li><strong>Customer-facing webhooks</strong> for real-time events.</li>
+<li><strong>SDKs / client libraries.</strong></li>
+<li><strong>Calendar sync</strong> (Google / Apple / Outlook). Schedule is in-app only today.</li>
+<li><strong>Slack, Discord, Teams</strong>, or chat-app bridges.</li>
+<li><strong>Direct LMS integration</strong> (Canvas, Schoology, etc.).</li>
+<li><strong>Video CDN embed</strong> on external sites. Clip share links are the closest equivalent.</li>
+<li><strong>Native push notifications</strong> on iOS / Android. Email is the notification channel today; on mobile, set the mailbox to push delivery for instant pings.</li>
+</ul>
+
+<h2>Migrating from another platform</h2>
+<p>Moving from a competitor:</p>
+<ul>
+<li>Export your videos from the source as files (not just URLs) and upload to Kaynos one at a time — the <a href="#uploading" onclick="navigate('uploading');return false">upload flow</a> doesn't import in bulk yet.</li>
+<li>Re-build your tag vocabulary in Kaynos when you go; the source's taxonomy probably doesn't map.</li>
+<li>Hundreds of videos to move? Email ${mailLink()} — we can help.</li>
+</ul>
+
+<h2>Backups</h2>
+<p>Run the JSON export at the cadence your retention policy requires. Videos stay in Backblaze B2 within the retention window; the export is the metadata/notes/structure snapshot.</p>
+
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Have an integration that would make Kaynos work better for you? Submit a <a href="#feature-requests" onclick="navigate('feature-requests');return false">feature request</a> with the specific workflow you'd want — that's how we prioritize.</div></div>`},
+
     glossary: {
       title: "Glossary", section: "Getting Started",
       content: `
@@ -2840,7 +3088,7 @@
       title: "Troubleshooting wizard", section: "Troubleshoot",
       content: `
 <h1>Troubleshooting wizard</h1>
-<div class="tldr"><strong>TLDR:</strong> Use the wizard below to diagnose your issue step by step. Or search for an error code.</div>
+<div class="tldr"><strong>TLDR:</strong> Use the wizard below to diagnose your issue step by step. For a flat reference of every error message and how to fix it, see <a href="#errors" onclick="navigate('errors');return false">Error reference</a>.</div>
 <p>Answer a few questions and we'll point you to the right fix.</p>
 <div id="wizardContainer"></div>
 <details><summary>Error code lookup</summary>
@@ -2870,6 +3118,94 @@
 </ol>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>More troubleshooting: <a href="#performance" onclick="navigate('performance');return false">Performance and loading</a></div></div>
 </details>`},
+
+    errors: {
+      title: "Error reference", section: "Troubleshoot",
+      content: `
+<h1>Error reference</h1>
+<div class="tldr"><strong>TLDR:</strong> Common errors, what they mean, and what to try first. For something not listed here, the <a href="#troubleshoot" onclick="navigate('troubleshoot');return false">troubleshooting wizard</a> walks step-by-step, or email ${mailLink()}.</div>
+
+<h2>Sign-in errors</h2>
+<dl>
+<dt>Invalid email or password</dt>
+<dd>The email or password didn't match. Check Caps Lock; paste the password to bypass typos. If you signed up with Google, click <strong>Sign in with Google</strong> rather than entering a password.</dd>
+<dt>Too many attempts (HTTP 429)</dt>
+<dd>The login endpoint is rate-limited per IP. Wait 5–10 minutes and try again. On a corporate network where several people retry at once, the limit can trip — try a different network or wait it out. Reset your password if you're not sure of it.</dd>
+<dt>Email not verified</dt>
+<dd>Your account exists but the welcome email hasn't been confirmed. Check spam and promotions for the verification link. Still missing? Ask your admin to resend the invite or email ${mailLink()}.</dd>
+<dt>Account suspended</dt>
+<dd>The school's subscription is past due or canceled. The admin updates billing — see <a href="#billing" onclick="navigate('billing');return false">Billing &amp; subscription</a>.</dd>
+</dl>
+
+<h2>Upload errors</h2>
+<dl>
+<dt>"Please select a video file"</dt>
+<dd>File type isn't supported. Convert to MP4 (H.264 video + AAC audio). Free tools: <a href="https://handbrake.fr" target="_blank" rel="noopener">HandBrake</a> or <a href="https://www.videolan.org/vlc/" target="_blank" rel="noopener">VLC</a>.</dd>
+<dt>File too big (5 GB limit)</dt>
+<dd>Trim the clip or re-export at 1080p H.264. Most coaching content fits comfortably under 5 GB at 1080p30.</dd>
+<dt>Part upload failed: 403</dt>
+<dd>The signed upload URL expired (1-hour limit). Cancel and re-upload. Most common on long uploads with intermittent connectivity.</dd>
+<dt>500 server error during upload</dt>
+<dd>Transient issue on our side. Cancel and retry. If it persists, email ${mailLink()} with the file size and the step it failed at.</dd>
+<dt>Upload stuck at the same percent</dt>
+<dd>A chunk is silently failing to retry. Cancel and re-upload. If your connection is unstable, switch to wired.</dd>
+<dt>Status stuck on "uploading"</dt>
+<dd>The browser closed mid-upload and the session didn't clean itself up. Email ${mailLink()} with the session name; we'll reset the status.</dd>
+</dl>
+
+<h2>Playback errors</h2>
+<dl>
+<dt>"This video cannot be played"</dt>
+<dd>Codec mismatch — usually MKV or an unusual audio codec. Try a different browser, or re-export to MP4 with H.264 video and AAC audio.</dd>
+<dt>Black screen with audio (or audio with no video)</dt>
+<dd>Codec mismatch on one of the tracks. Re-export as standard MP4 H.264/AAC and re-upload.</dd>
+<dt>Long buffering or stuttering</dt>
+<dd>Check bandwidth (download speed). Very high-bitrate 4K sources can stutter on standard home networks — a 1080p H.264 export plays more reliably.</dd>
+<dt>403 / "not authorized to view this video"</dt>
+<dd>The playback URL expired (4-hour limit) or your role changed. Refresh the page; the player generates a fresh presigned link.</dd>
+<dt>"This clip is no longer available" (shared link)</dt>
+<dd>The coach disabled sharing on the clip. Ask them to re-enable it — same URL works again.</dd>
+</dl>
+
+<h2>Recording / camera errors</h2>
+<dl>
+<dt>"Camera permission denied"</dt>
+<dd>iOS Safari: Settings → Safari → Camera → set Kaynos to Allow. Android Chrome: tap the lock icon in the address bar → Permissions → Camera → Allow.</dd>
+<dt>"Microphone permission denied"</dt>
+<dd>Same path as camera. Required for voice dictation; not required for video upload.</dd>
+<dt>"Could not access camera"</dt>
+<dd>Another app or tab is holding the camera (FaceTime, Zoom, another open browser window). Close them, refresh, and try again.</dd>
+</dl>
+
+<h2>Payment errors</h2>
+<dl>
+<dt>"Your card was declined"</dt>
+<dd>Stripe rejected the charge. Common reasons: expired card, insufficient funds, fraud-check from the issuing bank, or a country mismatch. Try a different card or contact your bank. Full detail in Profile → Billing → Manage.</dd>
+<dt>"This card requires authentication" (3DS)</dt>
+<dd>European cards trigger Strong Customer Authentication. Complete the bank prompt; Stripe retries automatically.</dd>
+<dt>Subscription past due</dt>
+<dd>One or more charges failed and the retry window has elapsed. Update your card in Profile → Billing → Manage. The account un-pauses on the next successful charge.</dd>
+</dl>
+
+<h2>Email errors</h2>
+<dl>
+<dt>Invite email never arrives</dt>
+<dd>See <a href="#email-issues" onclick="navigate('email-issues');return false">Email and notification issues</a>. Usually: spam folder, address typo, or a corporate filter.</dd>
+<dt>Password reset link expired</dt>
+<dd>Reset links are valid for 1 hour. Request a new one from the login page (<strong>Forgot password?</strong>) or ask an admin to issue a manual reset.</dd>
+<dt>Email change verification expired</dt>
+<dd>Verification links live 24 hours. Re-request from Profile → Email → Send verification.</dd>
+</dl>
+
+<h2>Generic errors</h2>
+<dl>
+<dt>"Something went wrong"</dt>
+<dd>Transient client-side error. Refresh once. If it persists, screenshot what you clicked and email ${mailLink()}.</dd>
+<dt>Red error banner across the top</dt>
+<dd>A network request failed. Check your internet, refresh, and retry. Persistent? <a href="https://www.netlifystatus.com/" target="_blank" rel="noopener noreferrer">netlifystatus.com</a> covers the hosting status; for the app itself, email ${mailLink()}.</dd>
+</dl>
+
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>If you have a specific code or message, paste it into the <a href="#troubleshoot" onclick="navigate('troubleshoot');return false">error code lookup</a> on Troubleshoot — same content, indexed for fast filtering.</div></div>`},
 
     contact: {
       title: "Contact support", section: "",
@@ -2996,12 +3332,78 @@
   <button class="form-another" onclick="document.getElementById('featureForm').reset();document.getElementById('featureForm').style.display='';document.getElementById('featureSuccess').style.display='none'">Submit another</button>
 </div>`},
 
+    "student-guide": {
+      title: "Student guide", section: "",
+      content: `
+<h1>Student guide</h1>
+<div class="tldr"><strong>TLDR:</strong> Sign in at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>. Watch sessions assigned to you, watch class recordings, leave notes, ask for review. Everything is private to your academy.</div>
+
+<p>This page is written for students — the people watching, learning, and getting reviewed. If you're a coach or admin, the <a href="#coach-handbook" onclick="navigate('coach-handbook');return false">coach handbook</a> or the <a href="#managing-members" onclick="navigate('managing-members');return false">admin pages</a> are a better fit.</p>
+
+<h2>First sign-in</h2>
+<ol>
+<li>Open the welcome email from your coach. The temporary password is there.</li>
+<li>Go to <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> and sign in.</li>
+<li>Change the password under <a href="#profile" onclick="navigate('profile');return false">Profile</a>. Make it something only you know.</li>
+</ol>
+
+<h2>What's on your dashboard</h2>
+<ul>
+<li><strong>Sessions</strong> — private one-on-one recordings between you and a coach.</li>
+<li><strong>Classes</strong> — recordings shared with everyone in the academy.</li>
+<li><strong>Clips</strong> — short highlights the coach has pulled out.</li>
+<li><strong>Notifications</strong> (bell icon, top of header) — opens when a coach leaves a note or replies to a thread.</li>
+</ul>
+
+<h2>Watching a session or class</h2>
+<p>Click into one to open the player. Notes show up as markers on the timeline — hover (or tap on phone) to preview, click to jump. Use <kbd>Space</kbd> to play/pause, <kbd>J</kbd>/<kbd>L</kbd> to skip 10s. Full controls on <a href="#playback" onclick="navigate('playback');return false">Watching and reviewing</a>.</p>
+
+<h2>Asking for review</h2>
+<p>If you recorded yourself and want a coach to look at it:</p>
+<ol>
+<li>Click <strong>Request a review</strong> on your dashboard.</li>
+<li>Pick a coach. Add a sentence on what you want feedback on ("technique on the closed-guard sweep — it feels off and I can't tell why").</li>
+<li>Upload the video to the draft session that's created.</li>
+<li>Submit. The coach gets an email.</li>
+</ol>
+<p>You'll get an email back when the coach responds. If they decline or don't respond, re-assign to a different coach from the same screen.</p>
+
+<h2>Leaving notes</h2>
+<p>While watching anything shared with you — your own session or a class — pause and click <strong>Add Note</strong>. Notes pin to the exact timestamp. Type a question for your coach, a reminder to yourself, whatever.</p>
+<p>Mention a teammate or coach with <strong>@name</strong> — they get an email with a link to that specific moment.</p>
+
+<h2>Tuning notifications</h2>
+<p>Profile → Notifications. Three categories:</p>
+<ul>
+<li><strong>New sessions</strong> — when a coach creates a session for you.</li>
+<li><strong>Class recordings</strong> — when a class recording is posted.</li>
+<li><strong>Notes from instructors</strong> — when a coach adds a note on one of your sessions.</li>
+</ul>
+<p>Each one toggles independently. Password resets and invites always send regardless.</p>
+
+<h2>What you can't do (by design)</h2>
+<ul>
+<li>Upload class recordings (only coaches/admins).</li>
+<li>See other students' private sessions.</li>
+<li>Invite people to the academy.</li>
+<li>Change the academy logo or settings.</li>
+</ul>
+<p>You can always upload to your own session via a review request, and you can take notes on anything shared with you.</p>
+
+<h2>On your phone</h2>
+<p>Open <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> in your phone's browser — no separate app to install. Or add it to your home screen (Share → Add to Home Screen on iOS; browser menu → Add to Home Screen on Android) for an app-like icon. See <a href="#using-on-mobile" onclick="navigate('using-on-mobile');return false">Using Kaynos on mobile</a>.</p>
+
+<h2>Privacy</h2>
+<p>Everything you do — recordings, notes, replies — is visible only inside your academy. Nothing is public. Full description on <a href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">Privacy on this site</a>, or the <a href="#parent-guide" onclick="navigate('parent-guide');return false">parent guide</a> for a less technical version.</p>
+
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Stuck on something specific? The <a href="#faq" onclick="navigate('faq');return false">FAQ</a> answers most common questions, the <a href="#troubleshoot" onclick="navigate('troubleshoot');return false">troubleshooting wizard</a> walks fixes step-by-step, and ${mailLink()} reaches a human.</div></div>`},
+
     "parent-guide": {
       title: "Parent guide", section: "",
       content: `
 <h1>Parent &amp; guardian guide</h1>
 <div class="tldr"><strong>TLDR:</strong> Your child has a student account in Kaynos managed by their coach. They can watch recorded sessions and classes, read coaching notes, and request reviews. All videos are private to the school — nothing is public.</div>
-<p>This guide is for parents and guardians whose children train at an academy using Kaynos. You don't need any background in martial arts or the app — this page covers your child's experience and answers common questions.</p>
+<p>This guide is for parents and guardians whose children train at an academy using Kaynos. You don't need any background in martial arts or the app — this page covers your child's experience and answers common questions. For the student's-eye view of the app itself, the <a href="#student-guide" onclick="navigate('student-guide');return false">student guide</a> walks through the actual screens.</p>
 
 <h2>How your child's account works</h2>
 <p>Kaynos has three roles: <strong>admin</strong>, <strong>coach</strong>, and <strong>student</strong> — there is no separate parent or guardian account. Your child's coach or academy admin creates and manages their student account.</p>
@@ -3053,6 +3455,54 @@
 </ul>
 <p>You can also email ${mailLink()} with questions about Kaynos itself — privacy, data handling, or how the platform works.</p>
 <p>For common questions, see the <a href="#faq" onclick="navigate('faq');return false">FAQ</a>.</p>`},
+
+    "data-rights": {
+      title: "Data & privacy rights", section: "Account",
+      content: `
+<h1>Data &amp; privacy rights</h1>
+<div class="tldr"><strong>TLDR:</strong> Export, correct, or delete your data — from Profile or via ${mailLink()}. We respond within 45 calendar days for formal requests. Parents act on a minor's behalf.</div>
+
+<h2>What you can do yourself</h2>
+<dl>
+<dt>Export</dt>
+<dd>Admins: <strong>Admin → Reports &amp; Exports</strong> for school data (JSON) or members (CSV). Individuals: ask your admin to include you in the export, or email ${mailLink()} for a personal-account export.</dd>
+<dt>Correct</dt>
+<dd>Profile → name, email, password. Coaches edit their own notes; admins can edit any.</dd>
+<dt>Delete (your account)</dt>
+<dd>Profile → Delete Account. Removes you immediately; notes you wrote stay attributed for history. School admins delete the whole school from <strong>Admin → Delete School</strong> (30-day grace, then permanent).</dd>
+<dt>Opt out</dt>
+<dd>Profile → Notifications toggles email categories off. Voice dictation is opt-in per use. AI review is opt-in per video.</dd>
+</dl>
+
+<h2>What requires a request</h2>
+<p>For anything we can't expose in the UI — full data subject access, certain corrections beyond what's editable, custom retention windows, or a copy of the operational logs touching your account — email ${mailLink()} from the address on file.</p>
+<p>Include:</p>
+<ul>
+<li>The request type (access, deletion, correction, restriction, portability).</li>
+<li>If you're acting on behalf of someone else (a parent/guardian for a minor; a school employee with delegated authority), describe the relationship.</li>
+<li>For state-specific rights (CCPA/CPRA, VCDPA, CPA, CTDPA), the state you reside in.</li>
+</ul>
+<p>We acknowledge within 5 business days and complete within 45 calendar days. If a request is unusually large we'll tell you up front, and we won't charge a fee for a reasonable first request.</p>
+
+<h2>For parents / guardians of minors</h2>
+<p>Kaynos isn't designed for direct use by children under 13 (COPPA) or under 16 in the EU (GDPR Article 8). When a school enrolls a minor, the school holds the consent obligation. As a parent:</p>
+<ul>
+<li>Request review, correction, or deletion of your child's data by emailing ${mailLink()} — we'll verify your relationship before acting.</li>
+<li>You can also ask the academy directly; they have the same access via the admin panel.</li>
+<li>For the day-to-day side, see the <a href="#parent-guide" onclick="navigate('parent-guide');return false">Parent &amp; guardian guide</a>.</li>
+</ul>
+
+<h2>For schools (FERPA)</h2>
+<p>If you're a school or academic institution using Kaynos for graded performance review, FERPA may apply. We provide a FERPA-compliant Data Processing Agreement (DPA) on request — email ${mailLink()} from your administrative address.</p>
+
+<h2>Data Processing Agreement (DPA)</h2>
+<p>Available for any business customer who needs one — schools, gyms, training facilities, EU customers. Standard DPA with Standard Contractual Clauses for EU transfers. Email ${mailLink()} to start.</p>
+
+<h2>Breach notification</h2>
+<p>If your data is affected by a security incident, you'll receive an email within 48 hours of confirmed discovery. The notice covers what was affected, what's being done about it, and what you can do.</p>
+
+<h2>Where the rest lives</h2>
+<p>Full data-handling description, third-party subprocessor list, retention schedules, and compliance framework mappings (CCPA, CPRA, VCDPA, COPPA, FERPA, NY SHIELD, MA 201 CMR 17.00) are on <a href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">Privacy on this site</a>.</p>`},
 
     "privacy-on-this-site": {
       title: "Privacy on this site", section: "",
@@ -3131,7 +3581,7 @@
 <li>Delete your account (Profile → Delete Account)</li>
 <li>Opt out of optional features (voice dictation, email notifications)</li>
 </ul>
-<p>Exercising your privacy rights will not result in service degradation, higher prices, or reduced functionality.</p>
+<p>Exercising your privacy rights will not result in service degradation, higher prices, or reduced functionality. Step-by-step flows for every action — including parent-on-behalf requests, DPA requests, and breach notification — are on <a href="#data-rights" onclick="navigate('data-rights');return false">Data &amp; privacy rights</a>.</p>
 
 <h2>Biometric data</h2>
 <p>Video recordings may contain biometric identifiers (faces, body structure). Kaynos does <strong>not</strong> perform facial recognition, age detection, gait analysis, or automated biometric processing. Video is stored and delivered as-is for coaching review only.</p>
@@ -3340,9 +3790,42 @@
     'notifications': 'profile',
     'upload-issues': 'uploading',
     'playback-issues': 'playback',
-    'error-lookup': 'troubleshoot',
+    'error-lookup': 'errors',
     'browser-check': 'troubleshoot',
     'mobile': 'performance',
+    // Aliases for the new pages — common URLs users might type.
+    'pricing': 'billing',
+    'subscription': 'billing',
+    'cancel': 'billing',
+    'refund': 'billing',
+    'invoice': 'billing',
+    'invoices': 'billing',
+    'error': 'errors',
+    'error-codes': 'errors',
+    'troubleshooting-errors': 'errors',
+    'camera': 'recording-setup',
+    'cameras': 'recording-setup',
+    'recording': 'recording-setup',
+    'hardware': 'recording-setup',
+    'equipment': 'recording-setup',
+    'tripod': 'recording-setup',
+    'microphone': 'recording-setup',
+    'privacy-rights': 'data-rights',
+    'gdpr': 'data-rights',
+    'ccpa': 'data-rights',
+    'dpa': 'data-rights',
+    'student': 'student-guide',
+    'students': 'student-guide',
+    'student-handbook': 'student-guide',
+    'coach': 'coach-handbook',
+    'coach-playbook': 'coach-handbook',
+    'coaching': 'coach-handbook',
+    'integration': 'integrations',
+    'api': 'developer-api',
+    'export': 'integrations',
+    'exports': 'integrations',
+    'webhooks': 'integrations',
+    'backup': 'integrations',
   };
 
   const PAGE_DESCRIPTIONS = {
@@ -3365,6 +3848,13 @@
     'parent-guide': 'Parent and guardian guide for Kaynos. What your child can see and do, privacy and safety info, and how to contact the coach.',
     'privacy-on-this-site': 'Privacy on the Kaynos help center. What data stays in your browser and what is sent externally.',
     'using-on-mobile': 'Using Kaynos on mobile. PWA install for iOS and Android, camera/mic/photo permissions, push notifications, recording and uploading from a phone, battery and data tips.',
+    'billing': 'Kaynos billing and subscription. Manage card, invoices, refunds, taxes, failed payments, trial, and cancellation from the Stripe portal.',
+    'errors': 'Kaynos error reference. Common sign-in, upload, playback, recording, payment, and email errors with fixes.',
+    'recording-setup': 'Recording setup for Kaynos. Phone, tripod, microphone, and lighting recommendations for video coaching.',
+    'data-rights': 'Data and privacy rights in Kaynos. Export, correct, delete your data. GDPR, CCPA, COPPA, FERPA, and DPA flows.',
+    'student-guide': 'Student guide for Kaynos. Sign in, watch sessions and classes, leave notes, request review, manage notifications.',
+    'coach-handbook': 'Coach handbook for Kaynos. Naming conventions, tagging, class structure, recap clips, AI review, and progress reviews.',
+    'integrations': 'Kaynos integrations and exports. Data export (JSON/CSV), email, in-app chat, shareable clip links. What is and is not supported.',
   };
 
   // Last touched per page. Pages absent from this map fall back to LAST_UPDATED_DEFAULT.
@@ -3398,6 +3888,13 @@
     'feature-requests': '2026-05-13',
     'parent-guide': '2026-05-13',
     'privacy-on-this-site': '2026-05-13',
+    'billing': '2026-05-14',
+    'errors': '2026-05-14',
+    'recording-setup': '2026-05-14',
+    'data-rights': '2026-05-14',
+    'student-guide': '2026-05-14',
+    'coach-handbook': '2026-05-14',
+    'integrations': '2026-05-14',
   };
 
   /* ── NAVIGATE ───────────────────────────────────────── */
@@ -3775,10 +4272,15 @@
     ['signup', 'sign up', 'register', 'create account', 'subscribe'],
     ['cancel subscription', 'pause subscription', 'cancel trial', 'end subscription', 'unsubscribe'],
     ['password', 'passcode', 'pin'],
-    ['payment', 'billing', 'invoice', 'charge', 'subscription'],
+    ['payment', 'billing', 'invoice', 'invoices', 'charge', 'subscription', 'receipt', 'receipts', 'refund', 'refunds', 'card', 'pricing', 'cost', 'price', 'tax', 'vat'],
     ['delete', 'remove', 'cancel'],
     ['notification', 'notifications', 'alert', 'email'],
     ['mobile', 'phone', 'iphone', 'android', 'tablet'],
+    ['error', 'errors', 'bug', 'broken', 'not working', 'crash', 'failure'],
+    ['camera', 'cameras', 'tripod', 'microphone', 'mic', 'audio', 'lighting', 'hardware', 'equipment', 'recording gear'],
+    ['gdpr', 'ccpa', 'cpra', 'privacy rights', 'data rights', 'data request', 'data export', 'dpa', 'data processing agreement'],
+    ['export', 'exports', 'backup', 'download data', 'data export'],
+    ['api', 'integration', 'integrations', 'webhook', 'webhooks', 'sdk'],
   ];
   // Build lookup: term -> Set of all terms in the same group(s).
   const SYNONYM_MAP = (() => {
