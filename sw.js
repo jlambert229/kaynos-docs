@@ -1,12 +1,16 @@
 // Kaynos Docs service worker — cache-first for fonts, network-first for HTML.
 // Bump VERSION on any deploy where you want clients to drop their old caches.
-const VERSION = '2026-05-13-1';
+const VERSION = '2026-05-14-1';
 const CACHE = 'kaynos-docs-' + VERSION;
 const PRECACHE = [
   '/',
   '/fonts/fonts.css',
   '/fonts/inter-latin.woff2',
   '/fonts/jetbrains-mono-latin.woff2',
+  '/apple-touch-icon.png',
+  '/icon-192.png',
+  '/icon-512.png',
+  '/manifest.webmanifest',
 ];
 
 self.addEventListener('install', (event) => {
