@@ -5,9 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Kaynos Docs</title>
   <meta name="theme-color" content="#060609" />
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="description" content="Kaynos docs — setup, video upload, playback, troubleshooting, and developer API reference.">
+  <meta name="color-scheme" content="dark light" />
   <link rel="canonical" href="https://docs.kaynos.net/" />
+
+  <!-- iOS / Add-to-Home-Screen — when the site is opened from the home-screen
+       icon, run as a full-screen PWA with a black-translucent status bar that
+       blends into the dark theme. format-detection prevents iOS from
+       auto-linking arbitrary digit sequences as phone-number `tel:` links. -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Kaynos Docs" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="format-detection" content="telephone=no" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -35,8 +47,14 @@
     } catch(e) {}
   </script>
 
-  <!-- Favicon (Kaynos logo) -->
+  <!-- Favicon (Kaynos logo) — inline SVG for browser tabs. -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23050508'/%3E%3Cg transform='translate(4.5,4) scale(0.124)'%3E%3Cpath d='M 64 151 L 102 189 L 178 190 L 102 114 Z' fill='%232184f3' fill-rule='evenodd'/%3E%3Cpath d='M 184 1 L 116 1 L 1 115 L 0 185 Z' fill='%232184f3' fill-rule='evenodd'/%3E%3Cpath d='M 58 0 L 3 0 L 0 3 L 0 91 L 57 34 Z' fill='%232184f3' fill-rule='evenodd'/%3E%3C/g%3E%3C/svg%3E" />
+
+  <!-- Add-to-Home-Screen icons — iOS Safari uses apple-touch-icon, Chrome /
+       Android uses the manifest. The PNGs are pre-baked from the SVG above so
+       the icon resolves crisply in every installer. -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.webmanifest" />
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -100,7 +118,9 @@
       --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
       --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
       --sidebar-w: 268px;
-      --header-h:  56px;
+      /* 56px header + iOS notch / status-bar inset so .layout, .sidebar,
+         scroll-margin offsets all stay synced when the inset is non-zero. */
+      --header-h: calc(56px + env(safe-area-inset-top));
       --radius:    10px;
       --radius-sm: 7px;
       --radius-xs: 4px;
@@ -140,12 +160,41 @@
       color-scheme: light;
     }
 
-    html { font-size: 16px; scroll-behavior: smooth; text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
+    html {
+      font-size: 16px; scroll-behavior: smooth;
+      text-size-adjust: 100%; -webkit-text-size-adjust: 100%;
+      /* Block the iOS-Safari pull-to-refresh / rubber-band that constantly
+         interrupts touch scrolling on a SPA. `none` on the doc element kills
+         the pull-to-refresh; descendants opt back into normal overflow. */
+      overscroll-behavior-y: none;
+      /* Subtle accent-tinted tap flash — replaces iOS Safari's default dark
+         square, which is invisible on the dark theme and ugly on light. */
+      -webkit-tap-highlight-color: rgba(33, 132, 243, 0.18);
+    }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
       html { scroll-behavior: auto; }
     }
+
+    /* Suppress the iOS long-press copy/share callout on icon-only controls.
+       Text content (paragraphs, code, headings) keeps the default callout
+       so users can still select and copy article text. */
+    button, .menu-btn, .theme-toggle, .mobile-nav-btn, .header-logo,
+    .heading-anchor, .copy-btn, .copy-code-btn, .copy-article-btn,
+    .share-btn, .print-btn, .back-top, #back-top,
+    .preflight-item, .wizard-option, .wizard-fb-btn, .wizard-restart,
+    .release-filter-btn, .search-chip, .article-feedback-btn,
+    .article-feedback-submit, .form-submit, .form-another, .contact-submit,
+    .quick-link .ql-icon, .feature-card, .related-card, .footer-nav-btn,
+    .sidebar-section-title, .next-step {
+      -webkit-touch-callout: none;
+    }
+
+    /* Default to no double-tap-zoom + no 300ms click delay on every
+       interactive control. Pinch-zoom (browser-level) still works for
+       accessibility — this only suppresses the per-element double-tap. */
+    button, a { touch-action: manipulation; }
 
     * { scrollbar-width: thin; scrollbar-color: var(--bg-tertiary) transparent; }
     *::-webkit-scrollbar { width: 5px; height: 5px; }
@@ -153,6 +202,20 @@
     *::-webkit-scrollbar-thumb { background: var(--bg-tertiary); border-radius: 9999px; }
 
     ::selection { background: rgba(33,132,243,.28); color: var(--text-primary); }
+
+    /* Strip iOS Safari's default chrome on text-like inputs — rounded corners,
+       inner shadow, the search-input X button — so our custom styling is the
+       only one applied. textarea gets resize control kept on purpose. */
+    input[type="text"], input[type="search"], input[type="email"], input[type="url"],
+    input[type="tel"], input[type="number"], input[type="password"], textarea, select {
+      -webkit-appearance: none;
+      appearance: none;
+      border-radius: 0; /* let component classes set their own radius */
+    }
+    input[type="search"]::-webkit-search-decoration,
+    input[type="search"]::-webkit-search-cancel-button,
+    input[type="search"]::-webkit-search-results-button,
+    input[type="search"]::-webkit-search-results-decoration { display: none; }
 
     body {
       font-family: var(--font-body);
@@ -173,15 +236,23 @@
     }
 
     /* ── HEADER ─── */
+    /* --header-h already includes env(safe-area-inset-top), so this height
+       covers the notch / status bar in PWA mode and landscape. padding-top
+       pushes the controls down below the system UI. Left/right padding
+       consumes any horizontal inset on landscape iPhones with a notch so
+       buttons don't disappear under the cutout. */
     .header {
       position: fixed; top: 0; left: 0; right: 0;
       height: var(--header-h);
+      padding-top: env(safe-area-inset-top);
+      padding-left: calc(20px + env(safe-area-inset-left));
+      padding-right: calc(20px + env(safe-area-inset-right));
       background: var(--bg-glass);
       backdrop-filter: blur(18px) saturate(160%);
       -webkit-backdrop-filter: blur(18px) saturate(160%);
       border-bottom: 1px solid var(--border);
       display: flex; align-items: center;
-      padding: 0 20px; z-index: 100; gap: 12px;
+      z-index: 100; gap: 12px;
     }
 
     .header-logo {
@@ -551,7 +622,13 @@
     .quick-link:hover {
       border-color: var(--accent); background: var(--bg-secondary);
       box-shadow: 0 0 0 1px rgba(33,132,243,.12), var(--shadow);
-      text-decoration: none; transform: translateY(-1px);
+      text-decoration: none;
+    }
+    /* The lift transform sticks on iOS Safari after a tap until the user
+       taps elsewhere — gate it on real hover so phones don't show a
+       "stuck up" card after navigation. */
+    @media (hover: hover) {
+      .quick-link:hover { transform: translateY(-1px); }
     }
     .quick-link .ql-icon { margin-bottom: 6px; display: flex; color: var(--accent); }
     .quick-link .ql-icon svg { width: 22px; height: 22px; }
@@ -571,7 +648,8 @@
     .feature-overview[open] summary { margin-bottom: 12px; }
     .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
     .feature-card { display: block; background: var(--bg-secondary); border-radius: var(--radius); padding: 16px; border: 1px solid var(--border); transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease); text-decoration: none !important; color: inherit !important; cursor: pointer; }
-    .feature-card:hover { border-color: var(--accent); transform: translateY(-1px); color: inherit !important; }
+    .feature-card:hover { border-color: var(--accent); color: inherit !important; }
+    @media (hover: hover) { .feature-card:hover { transform: translateY(-1px); } }
     .feature-card h4 { margin: 8px 0 6px; font-size: .875rem; color: var(--text-primary); }
     .feature-card p { font-size: .8125rem; color: var(--text-secondary); line-height: 1.5; margin: 0; }
     .feature-icon { width: 28px; height: 28px; color: var(--accent); }
@@ -746,7 +824,13 @@
       .sidebar { transform: translateX(-100%); z-index: 95; }
       .sidebar.open { transform: translateX(0); }
       .layout { margin-left: 0; }
-      .content-with-toc { padding: 24px 20px 80px; }
+      /* On landscape iPhone with a notch, env(safe-area-inset-left/right) is
+         non-zero. Pad content away from the notch so paragraphs don't run
+         under the cutout. */
+      .content-with-toc {
+        padding: 24px calc(20px + env(safe-area-inset-right))
+                 80px calc(20px + env(safe-area-inset-left));
+      }
       .quick-links { grid-template-columns: 1fr; }
       .menu-btn { display: flex; }
       .header-search { max-width: none; }
@@ -887,14 +971,16 @@
     @media (max-width: 768px) {
       .related-card { min-height: 48px; justify-content: center; }
     }
-    .related-card:hover { border-color: var(--accent); background: var(--bg-secondary); text-decoration: none; transform: translateY(-1px); }
+    .related-card:hover { border-color: var(--accent); background: var(--bg-secondary); text-decoration: none; }
+    @media (hover: hover) { .related-card:hover { transform: translateY(-1px); } }
     .related-card-title { font-size: .875rem; font-weight: 500; color: var(--text-primary); }
     .related-card-section { font-size: .75rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: .04em; }
     .next-steps { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); }
     .next-steps-title { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--text-tertiary); margin-bottom: 10px; }
     .next-steps-nav { display: flex; justify-content: space-between; gap: 12px; }
     .next-step { padding: 10px 16px; border-radius: var(--radius); background: var(--bg-secondary); color: var(--text-primary); text-decoration: none; font-size: .875rem; font-weight: 500; transition: background var(--dur) var(--ease), transform var(--dur) var(--ease); }
-    .next-step:hover { background: var(--accent-soft, rgba(33,132,243,.12)); color: var(--accent); transform: translateY(-1px); }
+    .next-step:hover { background: var(--accent-soft, rgba(33,132,243,.12)); color: var(--accent); }
+    @media (hover: hover) { .next-step:hover { transform: translateY(-1px); } }
     .next-step.prev { text-align: left; }
     .next-step.next { text-align: right; margin-left: auto; }
 
@@ -1481,7 +1567,7 @@
       </svg>
     </button>
 
-    <a href="#" class="header-logo" onclick="navigate('welcome');return false">
+    <a href="#welcome" class="header-logo" onclick="navigate('welcome');return false">
       <div class="header-logo-icon">
         <svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 32 32" fill="none">
           <g transform="translate(4.5,4) scale(0.124)">
@@ -1502,9 +1588,11 @@
         </svg>
       </div>
       <label for="searchInput" class="sr-only">Search documentation</label>
-      <input type="text" id="searchInput" placeholder="Search docs…"
+      <input type="search" id="searchInput" placeholder="Search docs…"
         oninput="debouncedSearch(this.value)" onfocus="showSearchHistory()"
-        autocomplete="off" aria-label="Search documentation" role="combobox"
+        autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false"
+        inputmode="search" enterkeyhint="search"
+        aria-label="Search documentation" role="combobox"
         aria-expanded="false" aria-controls="searchResults" aria-autocomplete="list">
       <div class="search-kbd" id="searchKbd"><kbd>⌘</kbd><kbd>K</kbd></div>
       <div class="search-results" id="searchResults" role="listbox" aria-label="Search results"></div>
@@ -2069,12 +2157,12 @@
 <div class="calc-wrap">
   <div class="calc-row">
     <span class="calc-label">File size</span>
-    <input class="calc-input" id="calcSize" type="number" placeholder="500" min="1" oninput="calcUpload()" aria-label="File size in MB">
+    <input class="calc-input" id="calcSize" type="number" placeholder="500" min="1" inputmode="decimal" enterkeyhint="done" oninput="calcUpload()" aria-label="File size in MB">
     <span class="calc-unit">MB</span>
   </div>
   <div class="calc-row">
     <span class="calc-label">Upload speed</span>
-    <input class="calc-input" id="calcSpeed" type="number" placeholder="25" min="1" oninput="calcUpload()" aria-label="Upload speed in Mbps">
+    <input class="calc-input" id="calcSpeed" type="number" placeholder="25" min="1" inputmode="decimal" enterkeyhint="done" oninput="calcUpload()" aria-label="Upload speed in Mbps">
     <span class="calc-unit">Mbps</span>
   </div>
   <div class="calc-result" id="calcResult"></div>
@@ -2758,7 +2846,7 @@
 <details><summary>Error code lookup</summary>
 <p>Paste the error message or describe what you see, and we'll find the relevant help.</p>
 <div class="error-lookup">
-  <input class="error-input" id="errorInput" placeholder="e.g. 403, cannot be played, black screen..." oninput="lookupError(this.value)" autocomplete="off" aria-label="Paste error message or describe issue">
+  <input class="error-input" id="errorInput" placeholder="e.g. 403, cannot be played, black screen..." oninput="lookupError(this.value)" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="search" enterkeyhint="search" aria-label="Paste error message or describe issue">
   <div class="error-results" id="errorResults"></div>
 </div>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Can't find your error? Email ${mailLink()} with a screenshot and we'll help.</div></div>
@@ -2793,19 +2881,19 @@
   <p class="hidden" style="display:none"><input name="bot-field"></p>
   <div class="form-group">
     <label for="cfName">Your name <span class="optional">(optional)</span></label>
-    <input class="contact-field" id="cfName" name="name" placeholder="Jane Smith" autocomplete="name">
+    <input class="contact-field" id="cfName" name="name" placeholder="Jane Smith" autocomplete="name" autocapitalize="words" enterkeyhint="next">
   </div>
   <div class="form-group">
     <label for="cfEmail">Email <span class="required">*</span></label>
-    <input class="contact-field" id="cfEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+    <input class="contact-field" id="cfEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" autocapitalize="none" autocorrect="off" spellcheck="false" inputmode="email" enterkeyhint="next" required>
   </div>
   <div class="form-group">
     <label for="cfSubject">Subject <span class="required">*</span></label>
-    <input class="contact-field" id="cfSubject" name="subject" placeholder="e.g. Upload stuck, Can't log in" required>
+    <input class="contact-field" id="cfSubject" name="subject" placeholder="e.g. Upload stuck, Can't log in" autocapitalize="sentences" enterkeyhint="next" required>
   </div>
   <div class="form-group">
     <label for="cfBody">What happened? <span class="required">*</span></label>
-    <textarea class="contact-field" id="cfBody" name="description" rows="5" placeholder="Describe what happened, what you expected, and any error messages you saw..." required></textarea>
+    <textarea class="contact-field" id="cfBody" name="description" rows="5" placeholder="Describe what happened, what you expected, and any error messages you saw..." autocapitalize="sentences" enterkeyhint="send" required></textarea>
   </div>
   <button type="submit" class="contact-submit">Send message</button>
 </form>
@@ -2877,19 +2965,19 @@
   <p class="hidden" style="display:none"><input name="bot-field"></p>
   <div class="form-group">
     <label for="fr-name">Your name <span class="optional">(optional)</span></label>
-    <input type="text" id="fr-name" name="name" placeholder="Jane Smith" autocomplete="name">
+    <input type="text" id="fr-name" name="name" placeholder="Jane Smith" autocomplete="name" autocapitalize="words" enterkeyhint="next">
   </div>
   <div class="form-group">
     <label for="fr-email">Email <span class="optional">(optional — only if you want a reply)</span></label>
-    <input type="email" id="fr-email" name="email" placeholder="you@example.com" autocomplete="email">
+    <input type="email" id="fr-email" name="email" placeholder="you@example.com" autocomplete="email" autocapitalize="none" autocorrect="off" spellcheck="false" inputmode="email" enterkeyhint="next">
   </div>
   <div class="form-group">
     <label for="fr-title">Feature title <span class="required">*</span></label>
-    <input type="text" id="fr-title" name="title" placeholder="e.g. Side-by-side video comparison" required>
+    <input type="text" id="fr-title" name="title" placeholder="e.g. Side-by-side video comparison" autocapitalize="sentences" enterkeyhint="next" required>
   </div>
   <div class="form-group">
     <label for="fr-desc">Description <span class="required">*</span></label>
-    <textarea id="fr-desc" name="description" rows="4" placeholder="What problem does this solve? How would you use it?" required></textarea>
+    <textarea id="fr-desc" name="description" rows="4" placeholder="What problem does this solve? How would you use it?" autocapitalize="sentences" enterkeyhint="send" required></textarea>
   </div>
   <div class="form-group">
     <label for="fr-priority">How important is this to you?</label>
@@ -4111,7 +4199,7 @@
       </div>
       <div class="article-feedback-form" hidden>
         <label for="afComment-${escapeHtml(pageId)}" class="sr-only">What didn't work?</label>
-        <textarea id="afComment-${escapeHtml(pageId)}" placeholder="What didn't work? Any details help us improve this page." rows="3"></textarea>
+        <textarea id="afComment-${escapeHtml(pageId)}" placeholder="What didn't work? Any details help us improve this page." rows="3" autocapitalize="sentences" enterkeyhint="send"></textarea>
         <button type="button" class="article-feedback-submit" onclick="sendArticleFeedback('${pageId}')">Send feedback</button>
       </div>
       <div class="article-feedback-thanks" hidden>Thanks — your email client will open with the details prefilled.</div>`;
@@ -4938,7 +5026,10 @@
     btn.onclick = () => {
       const url = location.origin + location.pathname + '#' + pageId;
       if (navigator.share) {
-        navigator.share({ title: PAGES[pageId].title + ' — Kaynos Docs', url });
+        // iOS Safari rejects the promise with AbortError when the user
+        // dismisses the share sheet — that's not an error worth surfacing.
+        navigator.share({ title: PAGES[pageId].title + ' — Kaynos Docs', url })
+          .catch(err => { if (err && err.name !== 'AbortError') showToast('Share failed — try copying the link'); });
       } else {
         navigator.clipboard.writeText(url).then(() => showToast('Link copied')).catch(() => showToast('Copy failed — try selecting manually'));
       }
