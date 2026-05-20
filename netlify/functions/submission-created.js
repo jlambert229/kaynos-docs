@@ -2,9 +2,13 @@
  * Netlify event-triggered function: fires automatically when a form
  * submission is created. Creates a Linear issue for each submission.
  *
- * Handles two forms:
- *   - feature-request → "[Customer request] …" with FEATURE + HELP_CENTER labels
- *   - contact-support → "[Support] …" with HELP_CENTER label, priority Medium
+ * DEPRECATED for contact-support and feature-request (KAY-1494): docs.kaynos.net
+ * now POSTs JSON directly to www.kaynos.net/.netlify/functions/contact-support
+ * and feature-request. Submissions for those form names are skipped here to avoid
+ * duplicate Linear issues if legacy Netlify Forms events still fire.
+ *
+ * Still handles (if registered):
+ *   - article-feedback → docs page-rating negative feedback (mailto path is primary)
  *
  * Required env var: LINEAR_API_KEY (set in Netlify dashboard → Site settings → Environment variables)
  *
@@ -13,14 +17,7 @@
 
 const LINEAR_API = "https://api.linear.app/graphql";
 const TEAM_ID = "43202946-d721-46b4-a33f-ed07dd8cfee2";
-const LABEL_FEATURE = "61e8e02a-b0ca-4f23-9c55-7feb5c7c8dba";
 const LABEL_HELP_CENTER = "9f803902-f8f4-4553-8f49-89e1becff555";
-
-const PRIORITY_MAP = {
-  "nice-to-have": 4,   // Low
-  "important": 2,      // High
-  "critical": 1,       // Urgent
-};
 
 /**
  * Fetch with retry logic for transient failures.
@@ -84,73 +81,6 @@ function clean(str, max) {
   return s.length > max ? s.slice(0, max) : s;
 }
 
-function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-function buildFeatureRequestIssue(data) {
-  const title = clean(data.title, 200) || "Untitled feature request";
-  const description = clean(data.description, 5000);
-  if (description.length === 0) return { error: 'Description required.' };
-  const name = clean(data.name, 200) || 'Anonymous';
-  const rawEmail = clean(data.email, 200);
-  const email = !rawEmail ? 'not provided' : isValidEmail(rawEmail) ? rawEmail : 'invalid email provided';
-  const priority = PRIORITY_MAP[data.priority] || 4;
-  const markdown = [
-    `## Customer feature request`,
-    ``,
-    `**From:** ${name} (${email})`,
-    `**Priority (self-reported):** ${data.priority || "not specified"}`,
-    ``,
-    `---`,
-    ``,
-    description,
-    ``,
-    `---`,
-    `_Submitted via [docs.kaynos.net](https://docs.kaynos.net/#feature-requests) feature request form._`,
-  ].join("\n");
-  return {
-    input: {
-      teamId: TEAM_ID,
-      title: `[Customer request] ${title}`,
-      description: markdown,
-      priority,
-      labelIds: [LABEL_FEATURE, LABEL_HELP_CENTER],
-    },
-  };
-}
-
-function buildContactSupportIssue(data) {
-  const subject = clean(data.subject, 200) || "Untitled support request";
-  const description = clean(data.description, 5000);
-  if (description.length === 0) return { error: 'Description required.' };
-  const rawEmail = clean(data.email, 200);
-  if (!rawEmail || !isValidEmail(rawEmail)) return { error: 'Valid email required.' };
-  const name = clean(data.name, 200) || 'Anonymous';
-  const markdown = [
-    `## Customer support request`,
-    ``,
-    `**From:** ${name} (${rawEmail})`,
-    ``,
-    `---`,
-    ``,
-    description,
-    ``,
-    `---`,
-    `_Submitted via [docs.kaynos.net](https://docs.kaynos.net/#contact) support form. Reply to the email above._`,
-  ].join("\n");
-  return {
-    input: {
-      teamId: TEAM_ID,
-      title: `[Support] ${subject}`,
-      description: markdown,
-      // Medium priority by default — support team can re-prioritise on triage.
-      priority: 3,
-      labelIds: [LABEL_HELP_CENTER],
-    },
-  };
-}
-
 function buildArticleFeedbackIssue(data) {
   const helpful = clean(data.helpful, 10);
   const pageId = clean(data.pageId, 200) || 'unknown';
@@ -205,15 +135,19 @@ exports.handler = async function (event) {
 
   const { form_name, data = {} } = payload;
 
-  // Route based on form. Each form posts a Netlify form submission; we triage
-  // each into a Linear issue (or a no-op for positive ratings) with a
-  // different label set + title prefix.
+  // Route based on form. contact-support and feature-request are handled on kaynos-site.
+  if (form_name === "feature-request" || form_name === "contact-support") {
+    console.log(JSON.stringify({
+      event: 'skipped_deprecated_form',
+      form: form_name,
+      reason: 'wired_to_kaynos_site_http_functions',
+      timestamp: new Date().toISOString(),
+    }));
+    return { statusCode: 200, body: `Form '${form_name}' handled by kaynos-site — skipped.` };
+  }
+
   let issueInput;
-  if (form_name === "feature-request") {
-    issueInput = buildFeatureRequestIssue(data);
-  } else if (form_name === "contact-support") {
-    issueInput = buildContactSupportIssue(data);
-  } else if (form_name === "article-feedback") {
+  if (form_name === "article-feedback") {
     issueInput = buildArticleFeedbackIssue(data);
   } else {
     return { statusCode: 200, body: `Form '${form_name}' not handled — skipped.` };
