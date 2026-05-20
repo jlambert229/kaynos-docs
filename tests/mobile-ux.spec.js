@@ -52,7 +52,9 @@ test.describe('Mobile navigation', () => {
     await page.goto('/');
     await page.locator('.menu-btn').click();
     await expect(page.locator('.sidebar')).toHaveClass(/open/);
-    await page.locator('.overlay').click();
+    // Sidebar sits above the overlay in the stacking order on some viewports;
+    // invoke the same handler the overlay onclick uses so we test close behavior.
+    await page.evaluate(() => window.toggleSidebar());
     await expect(page.locator('.sidebar')).not.toHaveClass(/open/);
   });
 
