@@ -1650,25 +1650,6 @@
     </svg>
   </button>
 
-  <!-- Netlify Forms hidden detection forms (must be in static HTML for Netlify to register them).
-       Note: article-feedback is no longer wired to Netlify Forms — it opens a mailto: composer
-       so the widget works regardless of network or form-service status. -->
-  <form name="contact-support" netlify netlify-honeypot="bot-field" hidden>
-    <input name="bot-field">
-    <input name="name">
-    <input name="email">
-    <input name="subject">
-    <textarea name="description"></textarea>
-  </form>
-  <form name="feature-request" netlify netlify-honeypot="bot-field" hidden>
-    <input name="bot-field">
-    <input name="name">
-    <input name="email">
-    <input name="title">
-    <textarea name="description"></textarea>
-    <input name="priority">
-  </form>
-
   <!-- Offline Banner -->
   <div class="offline-banner" id="offlineBanner">You're offline — some features may not work</div>
 
@@ -3212,9 +3193,7 @@
       content: `
 <h1>Contact support</h1>
 <p>Send a message and the support team will pick it up. Most issues get a same-day reply on business days.</p>
-<form id="contactForm" class="contact-form" method="POST" data-netlify="true" name="contact-support" netlify-honeypot="bot-field">
-  <input type="hidden" name="form-name" value="contact-support">
-  <p class="hidden" style="display:none"><input name="bot-field"></p>
+<form id="contactForm" class="contact-form" method="POST" novalidate>
   <div class="form-group">
     <label for="cfName">Your name <span class="optional">(optional)</span></label>
     <input class="contact-field" id="cfName" name="name" placeholder="Jane Smith" autocomplete="name" autocapitalize="words" enterkeyhint="next">
@@ -3296,9 +3275,7 @@
 <h1>Feature requests</h1>
 <div class="tldr"><strong>TLDR:</strong> Tell us what you want Kaynos to do. Every submission is reviewed by the team.</div>
 <p>Your feedback shapes what we build. Describe the feature you want and we'll track it internally.</p>
-<form id="featureForm" class="feature-form" method="POST" data-netlify="true" name="feature-request" netlify-honeypot="bot-field">
-  <input type="hidden" name="form-name" value="feature-request">
-  <p class="hidden" style="display:none"><input name="bot-field"></p>
+<form id="featureForm" class="feature-form" method="POST" novalidate>
   <div class="form-group">
     <label for="fr-name">Your name <span class="optional">(optional)</span></label>
     <input type="text" id="fr-name" name="name" placeholder="Jane Smith" autocomplete="name" autocapitalize="words" enterkeyhint="next">
@@ -5315,60 +5292,105 @@
     renderReleases();
   }
 
-  /* ── NETLIFY FORM AJAX HANDLER (feature-request, contact-support) ──────
-   * Article feedback uses a mailto: composer (see sendArticleFeedback) so
-   * it works without Netlify Forms, on local dev, and when the visitor is
-   * offline. */
-  const NETLIFY_FORMS = {
-    featureForm: { rateKey: 'fr-last-submit', successId: 'featureSuccess', submitText: 'Submit request', btnSel: '.form-submit' },
-    contactForm: { rateKey: 'cf-last-submit', successId: 'contactSuccess', submitText: 'Send message',    btnSel: '.contact-submit' },
+  /* ── DOCS FORM SUBMIT (contact + feature request → kaynos-site functions) ─
+   * POSTs JSON to www.kaynos.net Netlify Functions (Linear issue creation).
+   * Article feedback uses a mailto: composer (see sendArticleFeedback). */
+  const DOCS_FORM_ENDPOINTS = {
+    contactForm: {
+      url: 'https://www.kaynos.net/.netlify/functions/contact-support',
+      rateKey: 'cf-last-submit',
+      successId: 'contactSuccess',
+      submitText: 'Send message',
+      btnSel: '.contact-submit',
+      buildPayload(fd) {
+        return {
+          name: (fd.get('name') || '').trim(),
+          email: (fd.get('email') || '').trim(),
+          subject: (fd.get('subject') || '').trim(),
+          description: (fd.get('description') || '').trim(),
+        };
+      },
+    },
+    featureForm: {
+      url: 'https://www.kaynos.net/.netlify/functions/feature-request',
+      rateKey: 'fr-last-submit',
+      successId: 'featureSuccess',
+      submitText: 'Submit request',
+      btnSel: '.form-submit',
+      buildPayload(fd) {
+        return {
+          name: (fd.get('name') || '').trim(),
+          email: (fd.get('email') || '').trim(),
+          title: (fd.get('title') || '').trim(),
+          description: (fd.get('description') || '').trim(),
+          priority: fd.get('priority') || 'nice-to-have',
+        };
+      },
+    },
   };
+
+  function showFormError(res, cfg, btn) {
+    if (res.status === 429) {
+      showToast('Too many submissions — please wait a minute and try again.');
+    } else {
+      showToast('Something went wrong — please try again or email support.');
+    }
+    if (btn) { btn.disabled = false; btn.textContent = cfg.submitText; }
+  }
+
   document.addEventListener('submit', function(e) {
-    const cfg = NETLIFY_FORMS[e.target.id];
+    const cfg = DOCS_FORM_ENDPOINTS[e.target.id];
     if (!cfg) return;
     e.preventDefault();
     const form = e.target;
     const btn = form.querySelector(cfg.btnSel);
-    const lastSubmit = parseInt(localStorage.getItem(cfg.rateKey) || '0');
+    const lastSubmit = parseInt(localStorage.getItem(cfg.rateKey) || '0', 10);
     if (Date.now() - lastSubmit < 300000) {
       showToast('Please wait before submitting again.');
       if (btn) { btn.disabled = false; btn.textContent = cfg.submitText; }
       return;
     }
     if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
-    const data = new FormData(form);
+    const payload = cfg.buildPayload(new FormData(form));
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 10000);
-    fetch('/', {
+    fetch(cfg.url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(data).toString(),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
       signal: controller.signal,
-    }).then(res => {
+    }).then(async (res) => {
       clearTimeout(timeout);
-      if (res.ok) {
+      if (res.status === 200) {
         localStorage.setItem(cfg.rateKey, String(Date.now()));
         form.hidden = true;
         form.style.display = 'none';
-        if (cfg.inlineSuccess) {
-          // For widgets that share a wrapper with their success state
-          // (e.g. article-feedback), reveal the local thanks element.
-          const wrap = form.closest('.article-feedback');
-          if (wrap) {
-            const thanks = wrap.querySelector('.article-feedback-thanks');
-            if (thanks) { thanks.hidden = false; thanks.setAttribute('role', 'status'); }
-            const pageId = wrap.dataset.page;
-            if (pageId) markFeedbackGiven(pageId);
-          }
-        } else if (cfg.successId) {
-          const success = document.getElementById(cfg.successId);
+        const success = document.getElementById(cfg.successId);
+        if (success) {
           success.style.display = '';
           success.setAttribute('role', 'alert');
         }
-      } else {
-        showToast('Something went wrong — please try again or email support.');
-        if (btn) { btn.disabled = false; btn.textContent = cfg.submitText; }
+        return;
       }
+      if (res.status === 429) {
+        let msg = 'Too many submissions — please wait a minute and try again.';
+        try {
+          const body = await res.json();
+          if (body && body.error) msg = body.error;
+        } catch (_) { /* use default */ }
+        showToast(msg);
+        if (btn) { btn.disabled = false; btn.textContent = cfg.submitText; }
+        return;
+      }
+      try {
+        const body = await res.json();
+        if (body && body.error) {
+          showToast(body.error);
+          if (btn) { btn.disabled = false; btn.textContent = cfg.submitText; }
+          return;
+        }
+      } catch (_) { /* fall through */ }
+      showFormError(res, cfg, btn);
     }).catch(err => {
       clearTimeout(timeout);
       if (err.name === 'AbortError') {
