@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Page not found — Kaynos Docs</title>
+  <meta name="theme-color" content="#060609" />
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="robots" content="noindex, follow" />
+  <meta name="description" content="The page you were looking for moved or never existed. Search the Kaynos help center or jump to a popular article." />
+  <link rel="canonical" href="https://docs.kaynos.net/404.html" />
+
+  <!-- Prevent theme flicker on first paint (mirrors index.html). -->
+  <script>
+    try {
+      var t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      if (t === 'light') document.documentElement.classList.add('light');
+    } catch (e) {}
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23050508'/%3E%3Cg transform='translate(4.5,4) scale(0.124)'%3E%3Cpath d='M 64 151 L 102 189 L 178 190 L 102 114 Z' fill='%232184f3' fill-rule='evenodd'/%3E%3Cpath d='M 184 1 L 116 1 L 1 115 L 0 185 Z' fill='%232184f3' fill-rule='evenodd'/%3E%3Cpath d='M 58 0 L 3 0 L 0 3 L 0 91 L 57 34 Z' fill='%232184f3' fill-rule='evenodd'/%3E%3C/g%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="preload" href="/fonts/fonts.css" as="style" />
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts/fonts.css" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #060609;
+      --bg-elevated: #111115;
+      --bg-secondary: #1a1a20;
+      --text-primary: #f0f0f6;
+      --text-secondary: rgba(240,240,246,0.65);
+      --border: rgba(255,255,255,0.07);
+      --border-strong: rgba(255,255,255,0.12);
+      --accent: #2184f3;
+      --accent-hover: #4da3f7;
+      --accent-soft: rgba(33,132,243,0.10);
+      --radius: 10px;
+      --radius-sm: 7px;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      color-scheme: dark;
+    }
+    :root.light {
+      --bg: #ffffff;
+      --bg-elevated: #f8f9fa;
+      --bg-secondary: #f1f3f5;
+      --text-primary: #1a1a2e;
+      --text-secondary: rgba(26,26,46,0.72);
+      --border: rgba(0,0,0,0.08);
+      --border-strong: rgba(0,0,0,0.14);
+      --accent: #1a6fdb;
+      --accent-hover: #1560c2;
+      --accent-soft: rgba(26,111,219,0.08);
+      color-scheme: light;
+    }
+    html, body { height: 100%; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 8px;
+      padding: 8px 12px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      z-index: 1000;
+    }
+    .skip-link:focus { top: 8px; }
+    header.site {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-elevated);
+    }
+    header.site a.brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    header.site .brand-mark {
+      width: 22px;
+      height: 22px;
+      display: inline-block;
+    }
+    header.site nav { margin-left: auto; display: flex; gap: 18px; font-size: 0.9rem; }
+    header.site nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+    header.site nav a:hover { color: var(--accent); }
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px 64px;
+    }
+    .wrap {
+      width: 100%;
+      max-width: 720px;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 4px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: clamp(2rem, 5vw, 2.6rem);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    p.lead {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+      max-width: 60ch;
+    }
+    form.search {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+    .search input[type="search"] {
+      flex: 1;
+      padding: 12px 14px;
+      font: inherit;
+      color: inherit;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      outline: none;
+    }
+    .search input[type="search"]:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+    .search button {
+      padding: 12px 18px;
+      font: inherit;
+      font-weight: 600;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+    }
+    .search button:hover { background: var(--accent-hover); }
+    h2 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+    ul.popular {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+    ul.popular a {
+      display: block;
+      padding: 14px 16px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: border-color .15s, background .15s;
+    }
+    ul.popular a:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+    ul.popular a strong { display: block; font-size: 0.98rem; margin-bottom: 2px; }
+    ul.popular a span { display: block; font-size: 0.85rem; color: var(--text-secondary); }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .actions a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .actions a.primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .actions a.primary:hover { background: var(--accent-hover); }
+    .actions a.secondary {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border-strong);
+    }
+    .actions a.secondary:hover { border-color: var(--accent); color: var(--accent); }
+    footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+    footer a { color: var(--text-secondary); }
+    footer a:hover { color: var(--accent); }
+    @media print {
+      header.site, footer, .actions, form.search { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header class="site">
+    <a class="brand" href="/">
+      <svg class="brand-mark" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+        <path d="M 64 151 L 102 189 L 178 190 L 102 114 Z" fill="#2184f3" fill-rule="evenodd"/>
+        <path d="M 184 1 L 116 1 L 1 115 L 0 185 Z" fill="#2184f3" fill-rule="evenodd"/>
+        <path d="M 58 0 L 3 0 L 0 3 L 0 91 L 57 34 Z" fill="#2184f3" fill-rule="evenodd"/>
+      </svg>
+      <span>Kaynos Docs</span>
+    </a>
+    <nav aria-label="Top">
+      <a href="https://app.kaynos.net" target="_blank" rel="noopener">Open app</a>
+      <a href="https://www.kaynos.net" target="_blank" rel="noopener">Marketing site</a>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <div class="wrap">
+      <span class="badge">404</span>
+      <h1>That page moved or never existed.</h1>
+      <p class="lead">No problem — try a search, or jump straight to one of the most-read pages below. If you followed a link from elsewhere on the web, the help center recently restructured and the old anchor may have changed.</p>
+
+      <form class="search" action="/" method="get" role="search" aria-label="Search the help center">
+        <label for="q" class="sr-only" style="position:absolute;width:1px;height:1px;clip:rect(0 0 0 0);overflow:hidden">Search</label>
+        <input type="search" id="q" name="q" placeholder="Search the help center…" autocomplete="off" autocapitalize="sentences" enterkeyhint="search" />
+        <button type="submit">Search</button>
+      </form>
+
+      <h2>Popular articles</h2>
+      <ul class="popular">
+        <li><a href="/#setup"><strong>Setting up your account</strong><span>First login, password, and admin overview.</span></a></li>
+        <li><a href="/#uploading"><strong>Uploading videos</strong><span>From phone or computer, formats and size limits.</span></a></li>
+        <li><a href="/#playback"><strong>Watching and reviewing</strong><span>Playback speed, timeline markers, mobile.</span></a></li>
+        <li><a href="/#creating-sessions"><strong>Creating a session</strong><span>Workflow, scheduling, and review requests.</span></a></li>
+        <li><a href="/#notes"><strong>Notes &amp; timestamps</strong><span>Adding notes, @mentions, reactions, AI suggestions.</span></a></li>
+        <li><a href="/#troubleshoot"><strong>Troubleshooting</strong><span>Login, upload, playback, and performance fixes.</span></a></li>
+        <li><a href="/#ai-inbox"><strong>AI inbox &amp; bulk actions</strong><span>Triage AI note suggestions, accept or dismiss in bulk.</span></a></li>
+        <li><a href="/#billing"><strong>Billing &amp; subscription</strong><span>Cards, invoices, refunds, and the Stripe portal.</span></a></li>
+      </ul>
+
+      <div class="actions">
+        <a href="/" class="primary">Back to the help center</a>
+        <a href="https://app.kaynos.net" target="_blank" rel="noopener" class="secondary">Open the app</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>If you got here from a link inside the app and it's broken, please <a href="mailto:support@kaynos.net?subject=Broken%20link%20on%20docs.kaynos.net">tell us where it lived</a>. Kaynos Docs &middot; <a href="/">docs.kaynos.net</a></p>
+  </footer>
+
+  <script>
+    // Forward search to the help center's built-in search (#q=...) so we don't
+    // have to rebuild the index here. The main page reads ?q=... and opens its
+    // search dialog with the query prefilled.
+    (function () {
+      var f = document.querySelector('form.search');
+      if (!f) return;
+      f.addEventListener('submit', function (e) {
+        var q = (f.elements.q.value || '').trim();
+        if (!q) return; // let the form submit to "/" with no query
+        e.preventDefault();
+        window.location.href = '/?q=' + encodeURIComponent(q);
+      });
+    }());
+  </script>
+</body>
+</html>
