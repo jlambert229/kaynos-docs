@@ -1746,7 +1746,7 @@
   <a class="quick-link featured" href="#uploading" onclick="navigate('uploading');return false">
     <div class="ql-icon">${IC.video}</div>
     <div class="ql-title">Upload &amp; watch video <span class="ql-aud">Anyone</span></div>
-    <div class="ql-desc">From phone or computer. Formats, size limits, playback shortcuts, and clip sharing.</div>
+    <div class="ql-desc">From phone or computer. Formats, size limits, playback shortcuts, and multi-video sessions.</div>
   </a>
   <a class="quick-link featured" href="#creating-sessions" onclick="navigate('creating-sessions');return false">
     <div class="ql-icon">${IC.play}</div>
@@ -1767,7 +1767,7 @@
   </div>
   <div class="support-item">
     <div class="support-item-icon">${IC.chat}</div>
-    <div><strong>Chat:</strong> Bottom-right corner in <a href="https://app.kaynos.net" target="_blank" rel="noopener">the app</a> when logged in</div>
+    <div><strong>In-app support:</strong> The <strong>Support</strong> page in <a href="https://app.kaynos.net" target="_blank" rel="noopener">the app</a> — submit a request and get a reference number; replies within 1 business day</div>
   </div>
 </div>`},
 
@@ -1838,7 +1838,7 @@
     <div class="timeline-body">
       <ul>
         <li><a href="#setup" onclick="navigate('setup');return false">Log in and change your password</a></li>
-        <li><a href="#roles" onclick="navigate('roles');return false">Understand the three roles</a> (admin, coach, student)</li>
+        <li><a href="#roles" onclick="navigate('roles');return false">Understand the roles</a> (admin, coach, student — plus optional parent accounts)</li>
         <li><a href="#profile" onclick="navigate('profile');return false">Update your profile</a></li>
         <li>Explore the dashboard — click around before adding others</li>
       </ul>
@@ -1854,7 +1854,7 @@
         <li><a href="#uploading" onclick="navigate('uploading');return false">Upload your first video</a></li>
         <li><a href="#creating-sessions" onclick="navigate('creating-sessions');return false">Decide: session or class?</a></li>
         <li><a href="#notes" onclick="navigate('notes');return false">Add timestamped notes</a> to your recording</li>
-        <li><a href="#notes" onclick="navigate('notes');return false">Tag content</a> for easy filtering later</li>
+        <li>Pick a <a href="#creating-sessions" onclick="navigate('creating-sessions');return false">session type</a> (private, drilling, sparring, comp prep) so lists stay scannable</li>
       </ul>
     </div>
   </div>
@@ -1878,10 +1878,10 @@
     <div class="timeline-body">
       <ul>
         <li>Invite the rest of your roster</li>
-        <li><a href="#notes" onclick="navigate('notes');return false">Standardize your tag vocabulary</a> with the team</li>
+        <li><a href="#coach-handbook" onclick="navigate('coach-handbook');return false">Standardize naming conventions</a> with the team</li>
         <li><a href="#progress" onclick="navigate('progress');return false">Review progress tracking</a> — see who's watching</li>
         <li><a href="#formats" onclick="navigate('formats');return false">Optimize video settings</a> — 1080p H.264 for best results</li>
-        <li>Developers: see the <a href="#developer-api" onclick="navigate('developer-api');return false">Developer API</a> page — internal API reference for admins and coaches</li>
+        <li>Secure staff accounts with <a href="#profile" onclick="navigate('profile');return false">two-factor authentication</a></li>
       </ul>
     </div>
   </div>
@@ -1910,17 +1910,23 @@
 </ol>
 <p>Email delivery is typically quick. If nothing arrives, check spam and verify the address for typos.</p>
 <div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>Still missing mail? See <a href="#email-issues" onclick="navigate('email-issues');return false">Email and notification issues</a> or contact ${mailLink()}.</div></div>
+<h2>Bulk invites (CSV)</h2>
+<p>Admins can invite up to <strong>500 members at once</strong> by uploading a CSV from the Admin area. Bulk invites use link mode — each row gets a single-use setup link rather than an emailed temporary password. A dry-run validates the file (duplicates, bad addresses) before anything is created. Admin accounts can't be bulk-created; add those one at a time.</p>
+<h2>Parent &amp; guardian accounts</h2>
+<p>Admins and coaches can invite a <strong>parent or guardian</strong> from a student's profile. The parent gets an email with an accept link (valid <strong>14 days</strong>), sets their own name and password, and can then see that student's <strong>published</strong> sessions. One parent email can be linked to multiple students under a single login. Whether parents can comment on notes is a per-school setting — off by default. Staff can revoke a parent link at any time.</p>
 <h2>Who can invite</h2>
 <table><thead><tr><th scope="col">Your role</th><th scope="col">Can add</th></tr></thead><tbody>
-<tr><td><strong>Admin</strong></td><td>Coaches and students</td></tr>
-<tr><td><strong>Coach</strong></td><td>Students only</td></tr>
+<tr><td><strong>Admin</strong></td><td>Coaches, students, and parents</td></tr>
+<tr><td><strong>Coach</strong></td><td>Students and parents</td></tr>
 <tr><td><strong>Student</strong></td><td>Nobody</td></tr>
+<tr><td><strong>Parent</strong></td><td>Nobody</td></tr>
 </tbody></table>
 <h2>What each role can do</h2>
 <table><thead><tr><th scope="col">Role</th><th scope="col">What they can do</th></tr></thead><tbody>
 <tr><td><strong>Admin</strong></td><td>Everything a coach can do, plus roster management, invites, and settings.</td></tr>
-<tr><td><strong>Coach</strong></td><td>Sessions, classes, video upload, notes, tags, and student progress.</td></tr>
-<tr><td><strong>Student</strong></td><td>Their assigned private sessions, all published classes, notes, progress tracking. No uploads; cannot view other students' private sessions.</td></tr>
+<tr><td><strong>Coach</strong></td><td>Sessions, classes, video upload, notes, and student progress.</td></tr>
+<tr><td><strong>Student</strong></td><td>Their assigned private sessions, all published classes, notes, progress tracking. Can upload to their own review requests; cannot view other students' private sessions.</td></tr>
+<tr><td><strong>Parent</strong></td><td>View published sessions of their linked student(s). Commenting only if the school enables it.</td></tr>
 </tbody></table>
 <h2>Resend or reset</h2>
 <p><strong>Admin</strong> → find them in the roster → <strong>Reset Password</strong>. Kaynos emails a fresh temporary password.</p>
@@ -1935,16 +1941,18 @@
       title: "Understanding user roles", section: "Getting Started",
       content: `
 <h1>Understanding user roles</h1>
-<div class="tldr"><strong>TLDR:</strong> Three roles — <strong>admin</strong> manages members and settings, <strong>coach</strong> uploads video and writes notes, <strong>student</strong> watches and replies. Pick the one that matches how each person uses Kaynos.</div>
-<p>Each person has one of three roles. Assign them so permissions match how your team runs.</p>
+<div class="tldr"><strong>TLDR:</strong> Three core roles — <strong>admin</strong> manages members and settings, <strong>coach</strong> uploads video and writes notes, <strong>student</strong> watches and replies — plus an optional <strong>parent</strong> role for viewing a linked student's published sessions.</div>
+<p>Each person has one role. Assign them so permissions match how your team runs.</p>
 <h2>Admin</h2>
 <p>Typically the school owner or head coach. Full access: everything a coach can do, plus member management, invites, role changes, account settings, and the <strong>Admin</strong> panel for account-wide visibility.</p>
 <h2>Coach</h2>
-<p>Coaches create sessions and classes, upload video, add notes and annotations, manage their own content, and view student progress. They can't manage members or access admin settings.</p>
+<p>Coaches create sessions and classes, upload video, add notes and annotations, manage their own content, view student progress, and invite students and parents. They can't manage the roster or access admin settings.</p>
 <h2>Student</h2>
-<p>Students watch sessions and classes shared with them, take notes, reply, request video review from coaches, and track their own progress. They can't create sessions or classes, upload video, or view other students' private sessions.</p>
+<p>Students watch sessions and classes shared with them, take notes, reply, request video review from coaches, and track their own progress. They can't create sessions or classes, and can't view other students' private sessions. The one place a student can upload video is to their own review request.</p>
+<h2>Parent</h2>
+<p>An optional guardian role, linked to one or more students by invite (see <a href="#inviting-members" onclick="navigate('inviting-members');return false">Inviting your team</a>). Parents see their linked students' <strong>published</strong> sessions. Commenting on notes is off by default and controlled by a per-school setting.</p>
 <h2>Change a role</h2>
-<p>Admins only: <strong>Admin</strong> → select the member → role dropdown → save.</p>
+<p>Admins only: <strong>Admin</strong> → select the member → role dropdown → save. Admin accounts themselves can't be modified or removed from the roster screen, and parent access is managed via the link on the student's profile rather than the role dropdown.</p>
 <div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div>Downgrading a coach to student removes the ability to create sessions or upload video. Existing content stays available. For invite rules, see <a href="#inviting-members" onclick="navigate('inviting-members');return false">Inviting your team</a>.</div></div>`},
 
     uploading: {
@@ -1976,13 +1984,15 @@
 <ul>
 <li>Formats: MP4, MOV, WebM, MKV (convert others before uploading).</li>
 <li>Max 5 GB per video.</li>
-<li>Admins and coaches only.</li>
+<li>Coaches and admins upload to any session or class; students can upload only to their own review requests.</li>
 </ul>
 <h2>During upload</h2>
-<p>The UI shows percent complete, current speed, time remaining, and a <strong>Cancel</strong> button.</p>
+<p>The UI shows percent complete, current speed, time remaining, plus <strong>Pause</strong> and <strong>Cancel</strong> buttons (pause is available on chunked uploads). If your connection drops, the upload pauses itself and resumes automatically when you're back online.</p>
+<h2>Resume an interrupted upload</h2>
+<p>Chunked uploads are resumable — progress is saved on your device. If the page reloads or the browser closes mid-upload, reopen the same session or class and select the <strong>same file</strong>: the upload picks up from the last completed chunk instead of starting over. If the saved upload has expired on the server, the app tells you to start over with the original file.</p>
 <h2>Replace a video</h2>
-<p>Open the session or class detail page. In the video section above the notes panel, click the <strong>×</strong> on the current video to remove it, then upload a replacement using the same flow. The previous file is deleted from storage.</p>
-<div class="hint hint-danger"><div class="hint-icon">${IC.danger}</div><div><strong>Replacing video is destructive.</strong> The old file is deleted from storage with no undo, and <strong>every note attached to that video is permanently deleted along with it</strong> — notes do not migrate to the new upload and cannot be recovered. Archive the video and copy any notes you want to keep before replacing.</div></div>
+<p>There's no in-place "replace" — sessions and classes support <a href="#creating-sessions" onclick="navigate('creating-sessions');return false">multiple videos</a>, so the usual fix is to upload the corrected take as another video and delete the bad one from the clip rail.</p>
+<div class="hint hint-danger"><div class="hint-icon">${IC.danger}</div><div><strong>Deleting a video is destructive.</strong> The file is removed from storage with no undo, and notes attached to that video go with it — they don't migrate to other videos in the session. Copy any notes you want to keep before deleting.</div></div>
 <details><summary>Upload troubleshooting</summary>
 <h2>Video upload problems</h2>
 <p>Large uploads depend on stable internet and a supported format. Work through the checks below before assuming a bug.</p>
@@ -1998,8 +2008,8 @@
 </ol>
 <h3>Fails partway through</h3>
 <ul>
-<li><strong>Network error during part upload:</strong> reconnect and retry.</li>
-<li><strong>Part upload failed: 403:</strong> on long uploads the session can expire. Cancel and upload again.</li>
+<li><strong>Network error during part upload:</strong> reconnect — the upload auto-pauses offline and resumes when the connection returns.</li>
+<li><strong>Part upload failed: 403:</strong> the signed upload URLs last 6 hours; a very long pause can outlive them. The app detects an expired upload and asks you to start over with the original file.</li>
 <li><strong>500 server error:</strong> wait briefly and retry; if it persists, email ${mailLink()}.</li>
 </ul>
 <h3>Slow uploads</h3>
@@ -2031,7 +2041,7 @@
 <p>Playback runs in the browser — no app install needed. Open recordings at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Problems playing video? See the troubleshooting section below.</div></div>
 <h2>Playback speed</h2>
-<p>Use <strong>0.5×</strong>–<strong>2×</strong> for slow-motion analysis or faster skimming.</p>
+<p>Preset speeds run <strong>0.5×</strong>–<strong>2×</strong> for slow-motion analysis or faster skimming. On mobile, the speed sheet adds a fine-grained slider from <strong>0.25×</strong> to <strong>3×</strong>.</p>
 <h2>Timeline markers</h2>
 <p>Markers on the timeline are notes. Hover to preview, click to jump to that moment.</p>
 <h2>Add a note while watching</h2>
@@ -2044,8 +2054,15 @@
 <p><strong>Player controls</strong> (when the video has focus):</p>
 <div class="shortcut-grid">
   <div class="shortcut-card"><span>Play / Pause</span><kbd>Space</kbd> or <kbd>K</kbd></div>
-  <div class="shortcut-card"><span>Skip back / forward 10s</span><kbd>J</kbd> / <kbd>L</kbd> or <kbd>←</kbd> / <kbd>→</kbd></div>
+  <div class="shortcut-card"><span>Skip back / forward 10s</span><kbd>J</kbd> / <kbd>L</kbd></div>
+  <div class="shortcut-card"><span>Skip back / forward 5s</span><kbd>←</kbd> / <kbd>→</kbd></div>
+  <div class="shortcut-card"><span>Frame step back / forward</span><kbd>,</kbd> / <kbd>.</kbd></div>
+  <div class="shortcut-card"><span>Speed down / up</span><kbd>&lt;</kbd> / <kbd>&gt;</kbd></div>
+  <div class="shortcut-card"><span>Jump to 0–90% of video</span><kbd>0</kbd>–<kbd>9</kbd></div>
+  <div class="shortcut-card"><span>A–B loop (set start → end → clear)</span><kbd>R</kbd></div>
   <div class="shortcut-card"><span>Fullscreen</span><kbd>F</kbd></div>
+  <div class="shortcut-card"><span>Picture-in-picture</span><kbd>P</kbd></div>
+  <div class="shortcut-card"><span>Captions (when available)</span><kbd>C</kbd></div>
   <div class="shortcut-card"><span>Mute / unmute</span><kbd>M</kbd></div>
   <div class="shortcut-card"><span>Volume up / down</span><kbd>↑</kbd> / <kbd>↓</kbd></div>
 </div>
@@ -2055,41 +2072,23 @@
   <div class="shortcut-card"><span>Cancel</span><kbd>Esc</kbd></div>
 </div>
 </details>
+<h2>A–B loop</h2>
+<p>Loop a segment to study one exchange on repeat: press <kbd>R</kbd> (or the loop button) once to set the start, again to set the end, a third time to clear. Pair it with a slow playback speed for detail work.</p>
 <h2>Mobile playback</h2>
 <p>Kaynos runs in the mobile browser — no app install needed.</p>
 <ul>
 <li><strong>Skip:</strong> Double-tap the left half to skip back 10 seconds, the right half to skip forward.</li>
+<li><strong>Scrub:</strong> Drag along the timeline — a floating time bubble shows where you'll land.</li>
+<li><strong>Zoom:</strong> Pinch to zoom in on a detail (up to 5×), then drag to pan around the frame.</li>
 <li><strong>Landscape:</strong> Rotate your phone for a wider view, especially with the notes panel open.</li>
 <li><strong>Resume:</strong> Playback position syncs across devices — start on your phone, continue on your laptop.</li>
 <li><strong>Add to Home Screen:</strong> iOS: Share → Add to Home Screen. Android: browser menu → Add to Home Screen.</li>
 </ul>
 <h2>Progress tracking</h2>
 <p>Playback position saves automatically. Coaches see completion percentage and last-viewed time without heavy analytics.</p>
-<h2>Clips</h2>
-<p>Create a clip from any session or class to highlight a specific moment.</p>
-<ol>
-<li>While watching, set the start and end time for the clip.</li>
-<li>Click <strong>Create Clip</strong>. The clip saves to your clips list.</li>
-<li>Toggle <strong>Share</strong> to generate a shareable link anyone can view — no login required.</li>
-</ol>
-<p>Manage clips from the session or class detail page. <strong>Disable sharing</strong> at any time — every existing link stops working immediately (returns 404), so a leaked link is recoverable without rotating tokens. Re-enabling later restores access using the same link.</p>
-<h3>Recap clips</h3>
-<p>Create 2–3 minute recap clips from full class recordings so students see the highlights without watching the whole 60 minutes.</p>
-<ol>
-<li>Open the class recording and play to the key moment.</li>
-<li>Set the clip start time, then play to the end of the segment and set the end time.</li>
-<li>Click <strong>Create Clip</strong> and give it a descriptive title (e.g., "Guard retention drill — key details").</li>
-<li>Toggle <strong>Share</strong> to make it visible to all students in the class.</li>
-</ol>
-<p>Students see recap clips on their dashboard alongside full recordings. Short clips get much higher watch rates.</p>
-<h3>Sharing clips externally</h3>
-<p>Share a clip with someone who doesn't have a Kaynos account — a training partner at another gym, a parent, or a competition coach.</p>
-<ol>
-<li>Create a clip and toggle <strong>Share</strong> on.</li>
-<li>Copy the shareable link. Anyone with the link can view the clip — no login required.</li>
-<li>Toggle sharing off to revoke access — old links return 404 instantly; no token rotation or new URL needed.</li>
-</ol>
-<p>Shared clips show the video segment only — no notes, no account details, no other sessions.</p>
+<h2>Multiple videos in one session</h2>
+<p>A session or class can hold more than one video — extra angles, attempt 1 vs attempt 2, or several sparring rounds. The player shows a <strong>clip rail</strong>: jump between videos without leaving the page. Notes attach to the specific video that was playing when they were written. Adding and reordering videos is covered in <a href="#creating-sessions" onclick="navigate('creating-sessions');return false">Creating a session</a>.</p>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Videos play inside Kaynos only — there are no public share links or downloads. Everyone who should see a recording gets access through their account (<a href="#roles" onclick="navigate('roles');return false">roles</a>).</div></div>
 <details><summary>Playback troubleshooting</summary>
 <p>If the player is blank or showing errors, work through these checks in order.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Codecs: <a href="#formats" onclick="navigate('formats');return false">Supported formats and limits</a>.</div></div>
@@ -2248,7 +2247,7 @@
 <ul>
 <li>HTTPS for all data in transit.</li>
 <li>Account data is isolated — your files are not mixed with other organizations' storage.</li>
-<li>Playback URLs are time-limited (<strong>4 hours</strong>); upload URLs shorter still (<strong>1 hour</strong>). Share access inside Kaynos rather than passing long-lived direct links — if a link stops working partway through, re-open the video in the app to fetch a fresh one.</li>
+<li>Playback URLs are time-limited (<strong>4 hours</strong>); upload URLs last <strong>6 hours</strong>. Share access inside Kaynos rather than passing direct links — if a link stops working partway through, re-open the video in the app to fetch a fresh one.</li>
 </ul>
 <h2>Data residency</h2>
 <p>Videos are stored in Backblaze B2 (US) and streamed directly via short-lived presigned URLs. For EU customers: Backblaze offers Standard Contractual Clauses (SCCs) in its Data Processing Agreement. Contact <a href="https://app.kaynos.net/terms" target="_blank" rel="noopener">support</a> for SCC documentation.</p>`},
@@ -2294,11 +2293,13 @@
 <ol>
 <li>Go to <strong>Sessions</strong> → <strong>New Session</strong>.</li>
 <li>Choose your video source: <strong>Upload</strong> or <strong>Notes Only</strong>.</li>
-<li>Fill in title and date, assign the student from your roster, and add optional tags.</li>
+<li>Fill in title and date, assign the student from your roster, and pick a session type (<strong>private</strong>, <strong>drilling</strong>, <strong>sparring</strong>, or <strong>comp prep</strong>).</li>
 <li>Click <strong>Create Session</strong>.</li>
 </ol>
+<h2>Draft and publish</h2>
+<p>A new session starts as a <strong>draft</strong> — visible to coaches and admins but not yet to the student. Publish it when the video and notes are ready; the student gets an email (if their notifications are on) and the session appears on their dashboard. You can unpublish to pull it back to draft. Linked parents see published sessions only.</p>
 <h2>Who sees it</h2>
-<p>The assigned student, the creator, and admins. Other students can't open someone else's private session.</p>
+<p>Once published: the assigned student, the creator, staff, and any linked parents. Other students can't open someone else's private session.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>First upload walkthrough: <a href="#uploading" onclick="navigate('uploading');return false">Your first upload</a> on the Uploading videos page. Visibility model: <a href="#faq" onclick="navigate('faq');return false">FAQ</a>.</div></div>
 <h2>Scheduling</h2>
 <p>The <strong>Schedule</strong> page shows a calendar with daily, weekly, and monthly views. To schedule a session:</p>
@@ -2318,12 +2319,11 @@
 <li>Submit the request — the coach receives a notification.</li>
 </ol>
 <h3>How coaches respond</h3>
-<p>Pending requests appear on the coach dashboard under <strong>Awaiting feedback</strong>. Coaches <strong>accept</strong> or <strong>decline</strong> each request. Accepting converts the draft into a full session — the coach watches the video and adds notes and annotations as usual.</p>
+<p>Pending requests appear in the coach's review queue. Coaches <strong>accept</strong> or <strong>decline</strong> each request. Accepting converts the request into a full session — the coach watches the video and adds notes and annotations as usual. The queue also shows each coach's pending count, the age of the oldest request, and their average response time, so nothing sits forgotten.</p>
 <h3>If a coach declines or doesn't respond</h3>
 <ul>
-<li>Declined requests are archived in the student's request history; the student gets an email notification.</li>
-<li>Pending requests don't auto-expire — they wait until a coach acts. Students can reassign to a different coach from the same screen.</li>
-<li>Students can cancel a pending request before it's accepted; once accepted it becomes a session and the cancel option disappears.</li>
+<li>Declined requests stay in the student's history for reference; the student is notified.</li>
+<li>Pending requests don't auto-expire — they wait until the coach acts. If a request is stuck, the student's quickest path is to ask the coach directly or submit a new request to another coach.</li>
 </ul>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Review requests are the main way students initiate feedback. Coaches who enable <a href="#profile" onclick="navigate('profile');return false">email notifications</a> get alerted as soon as a request comes in.</div></div>
 <h2>Multiple videos per session</h2>
@@ -2345,18 +2345,18 @@
 <ol>
 <li>Go to <strong>Classes</strong> → <strong>New Class</strong>.</li>
 <li>Choose your video source: <strong>Upload</strong> or <strong>Notes Only</strong>.</li>
-<li>Fill in title and date, plus an optional description and filtering tags.</li>
+<li>Fill in title and date, plus an optional description.</li>
 <li>Click <strong>Create Class</strong>.</li>
 </ol>
 <h2>Who sees it</h2>
-<p>All members, coaches, and admins in your account. This broad visibility is intentional — it's what separates a class from a private session.</p>
+<p>All members, coaches, and admins in your account. This broad visibility is intentional — it's what separates a class from a private session. There's no draft step: when the class is created, students with the <strong>Class recordings</strong> email preference on get a notification.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Upload options and limits: <a href="#uploading" onclick="navigate('uploading');return false">Uploading videos</a> and <a href="#formats" onclick="navigate('formats');return false">Supported formats and limits</a>.</div></div>`},
 
     notes: {
       title: "Notes and timestamps", section: "Sessions & Classes",
       content: `
 <h1>Notes and timestamps</h1>
-<div class="tldr"><strong>TLDR:</strong> Pause the video, click <strong>Add Note</strong>, type your note. It saves with the timestamp. Add tags to organize by technique or topic.</div>
+<div class="tldr"><strong>TLDR:</strong> Pause the video, click <strong>Add Note</strong>, type (or record) your note. It saves with the timestamp. @mention teammates, reply in threads, and react with emoji.</div>
 <p>Attach short notes to exact moments on the timeline so everyone lands on the same frame.</p>
 <h2>Adding a note from the player</h2>
 <ol>
@@ -2364,10 +2364,10 @@
 <li>Click <strong>Add Note</strong>, type your text, then <strong>Save</strong> (or press <kbd>Cmd/Ctrl</kbd>+<kbd>Enter</kbd>).</li>
 </ol>
 <p>The note saves at the current playhead position. Markers appear on the scrub bar; click any to jump.</p>
-<h2>Filters</h2>
-<p><strong>All</strong> shows every note; <strong>Coach</strong> shows coach notes only; <strong>Mine</strong> shows only the signed-in student's notes.</p>
 <h2>Who can edit</h2>
 <p>Coaches can edit any note. Students can edit only notes they created.</p>
+<h2>Pinned notes</h2>
+<p>Coaches can <strong>pin</strong> up to three top-level notes per session or class to keep the most important feedback at the top of the list. Replies can't be pinned.</p>
 <h2>@Mentions</h2>
 <p>Type <strong>@</strong> followed by a name to mention a teammate. Mentioned users get an email with a link straight to the note.</p>
 <p>Use mentions to loop in a coach ("@Marco take a look at this sweep attempt") or prompt a student to review ("@Sofia check the guard retention at 2:14").</p>
@@ -2388,37 +2388,16 @@
 <li><strong>Highlight</strong> — a time-range bookmark on the timeline (start and end points)</li>
 <li><strong>Annotation</strong> — a drawing overlay on a paused frame (see the <em>Annotations</em> section)</li>
 </ul>
-<p>AI review may also add notes flagged as <strong>AI suggestions</strong> — edit or delete them like any other note.</p>
-<h2>Voice dictation</h2>
-<p>Dictate notes hands-free using speech-to-text (powered by Deepgram).</p>
+<h2>Voice notes</h2>
+<p>Record a spoken note instead of typing — handy mid-review or on a phone.</p>
 <ol>
-<li>The first time, grant microphone access and consent to audio processing.</li>
-<li>Click the microphone icon in the note editor and speak — text appears in real time.</li>
-<li>Edit the transcription if needed, then save.</li>
+<li>The first time, grant microphone access when prompted.</li>
+<li>Press and hold the microphone button to record (up to <strong>60 seconds</strong>). On mobile, slide up to lock hands-free, slide left to cancel.</li>
+<li>Release to attach the voice note at the current timestamp.</li>
 </ol>
-<p>Voice dictation is opt-in per user. Audio is processed in real time and not stored.</p>
-<h2>Tags</h2>
-<p>Tags group related sessions and classes so list views stay scannable as your library grows.</p>
-<h3>Tag ideas</h3>
-<ul>
-<li>Format: <code>private</code>, <code>group</code>, <code>workshop</code>, <code>open-mat</code></li>
-<li>Level: <code>fundamentals</code>, <code>advanced</code>, <code>beginner</code></li>
-<li>Focus: <code>comp-prep</code>, <code>conditioning</code>, <code>drilling</code></li>
-</ul>
-<h3>Adding tags</h3>
-<p>In the session or class form, type a tag and press <strong>Enter</strong>. Repeat for more.</p>
-<h3>Finding content</h3>
-<p>Filter list views by tag — for example, everything tagged <code>milestone</code> for a training block.</p>
-<h3>Consistency tips</h3>
-<ul>
-<li>Use one spelling per concept (avoid <code>guard-pass</code>, <code>Guard Pass</code>, and <code>guard_pass</code> for the same thing).</li>
-<li>Agree on a shared vocabulary so the whole team uses consistent tags.</li>
-<li>Tags are shared across the account, not private.</li>
-</ul>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Filter your lists by tag in the app after you <a href="https://app.kaynos.net" target="_blank" rel="noopener">sign in</a>.</div></div>
-<h3>Building a technique vocabulary</h3>
-<p>Tags are free-form text — there's no built-in taxonomy. Build a shared vocabulary the team will use consistently. Common starting points for grappling: positions (<code>guard</code>, <code>mount</code>, <code>side-control</code>), actions (<code>sweep</code>, <code>pass</code>, <code>escape</code>), and specific techniques (<code>armbar</code>, <code>triangle</code>). The exact list is up to you.</p>
-<p>To find all sessions with a tag, filter the session list by that tag.</p>
+<p>Voice notes are stored with the session and playable by anyone who can see the note. They're transcribed automatically (powered by Deepgram) so the content is searchable and readable without headphones; Deepgram processes the audio in real time and doesn't keep it.</p>
+<h2>Organizing content</h2>
+<p>Sessions and classes are organized by <strong>session type</strong> (private, drilling, sparring, comp prep, class) plus consistent naming — see <a href="#coach-handbook" onclick="navigate('coach-handbook');return false">the coach handbook</a> for naming conventions that hold up months later. Coaches also get a personal <strong>Notebook</strong> for free-form entries with their own tags and pins, separate from any session.</p>
 <h2>Annotations</h2>
 <p>Draw on a video frame to highlight technique details.</p>
 <ol>
@@ -2427,24 +2406,17 @@
 <li>Draw with pen, line, circle, or arrow on the frozen frame. Pick stroke colour and width; undo/redo are available.</li>
 <li>Save — the annotation attaches to that timestamp and appears during playback.</li>
 </ol>
-<h2>AI review</h2>
-<p>Kaynos can analyze your video automatically to identify key moments and generate technique observations.</p>
-<ol>
-<li>Open a session or class detail page.</li>
-<li>Click <strong>Start AI Review</strong>.</li>
-<li>Processing runs in the background — watch the status indicator.</li>
-<li>When done, AI-generated notes appear on the timeline alongside your manual notes.</li>
-</ol>
-<p>AI review uses TwelveLabs for video understanding. Edit AI notes like any other note.</p>
+<h2>AI review (currently unavailable)</h2>
+<p>Kaynos has an AI review feature that analyzes video and suggests coaching notes (powered by Twelve Labs). <strong>It is currently switched off platform-wide</strong> — you won't see AI options in the app right now. If it returns, AI suggestions arrive as clearly flagged notes that coaches review and edit before students see them; students never see raw AI output. Watch the <a href="#release-notes" onclick="navigate('release-notes');return false">release notes</a> for status.</p>
 <h2>Reactions</h2>
-<p>React to any note with an emoji: 👍 ❤️ 🔥 👀 ✅ 👏. Click the reaction button under a note.</p>
+<p>React to any note with an emoji: 👍 ❤️ 🔥 👀 ✅ 👏 🔖. Click the reaction button under a note. Two of them carry meaning beyond a nod: <strong>✅</strong> marks a correction as worked, and <strong>🔖</strong> adds the note to your drill list so you can pull up everything you've bookmarked across sessions.</p>
 `},
 
     "coach-handbook": {
       title: "Coach handbook", section: "Sessions & Classes",
       content: `
 <h1>Coach handbook</h1>
-<div class="tldr"><strong>TLDR:</strong> Advanced patterns for getting the most out of Kaynos as a coach — naming and tagging conventions, class structure, recap clips, AI review tips, and the feedback loops that move students fastest.</div>
+<div class="tldr"><strong>TLDR:</strong> Advanced patterns for getting the most out of Kaynos as a coach — naming conventions, session types, multi-video sessions, the coach notebook, and the feedback loops that move students fastest.</div>
 
 <p>Read the <a href="#setup" onclick="navigate('setup');return false">setup guide</a> first if you're brand new. This page is for coaches who've got the basics and want to move faster.</p>
 
@@ -2456,24 +2428,20 @@
 <li>Be consistent across coaches — a shared convention compounds.</li>
 </ul>
 
-<h2>Tagging conventions</h2>
-<p>Tags are free-form text; they only become useful with team discipline. Pick one style and stick to it. Common starting points for BJJ:</p>
+<h2>Session types and the coach notebook</h2>
+<p>Two organizing tools, used differently:</p>
 <ul>
-<li><strong>Position:</strong> <code>guard</code>, <code>mount</code>, <code>side-control</code>, <code>back</code>.</li>
-<li><strong>Action:</strong> <code>sweep</code>, <code>pass</code>, <code>escape</code>, <code>submission</code>.</li>
-<li><strong>Technique:</strong> <code>armbar</code>, <code>triangle</code>, <code>kimura</code> — get specific.</li>
-<li><strong>Phase:</strong> <code>fundamentals</code>, <code>comp-prep</code>, <code>rehab</code>.</li>
+<li><strong>Session type</strong> (private, drilling, sparring, comp prep) is set on every session — pick it deliberately so a student's history reads at a glance.</li>
+<li><strong>The Notebook</strong> is your private scratchpad: free-form entries with your own tags and pins, separate from any session. Lesson plans, curriculum ideas, per-student observations that aren't ready to be a note yet. Students never see it.</li>
 </ul>
-<p>Don't mix styles in one tag (no <code>guardpass</code>, <code>guard-pass</code>, and <code>Guard Pass</code> for the same thing). Search treats them as separate.</p>
 
 <h2>Class structure that gets watched</h2>
 <p>A 60-minute class recording, posted untouched, has a brutally low completion rate. What works:</p>
 <ul>
 <li><strong>Upload the full class</strong> so it exists in the archive.</li>
-<li><strong>Pull a 2–3 minute recap clip</strong> of the most important moment — a sweep variation, a key correction, a sparring exchange worth dissecting. The recap gets watched 5–10× more often than the full recording.</li>
-<li>Tag the clip with the same vocabulary as the source session.</li>
+<li><strong>Pin the key moments.</strong> Drop a timestamped note at each important segment ("12:40 — the grip detail everyone missed") and <strong>pin</strong> the most important one. Students jump straight to the markers instead of scrubbing 60 minutes.</li>
+<li><strong>Use a highlight note</strong> (start + end time) to bracket the one exchange worth re-watching on loop.</li>
 </ul>
-<p>Recap clip workflow: <a href="#playback" onclick="navigate('playback');return false">Watching and reviewing → Recap clips</a>.</p>
 
 <h2>Notes that students act on</h2>
 <p>Three habits that turn passive watching into actual change:</p>
@@ -2487,15 +2455,10 @@
 <p>Encourage students to submit short clips (under 2 minutes) with one specific question. Long unfocused requests sit in your queue; short specific ones get fast responses and create a virtuous loop.</p>
 
 <h2>AI review</h2>
-<p>AI review (powered by Twelve Labs) surfaces moments worth attention. Treat it as a draft, not a verdict — edit, keep, or delete each suggestion. Good fits:</p>
-<ul>
-<li>Long sparring footage where you want to skim for technique-relevant moments before writing notes manually.</li>
-<li>Pulling potential recap clips from a multi-pair sparring session.</li>
-</ul>
-<p>Bad fits: cold-reading footage for tactical decisions specific to your gym's curriculum. The model doesn't know your house techniques.</p>
+<p>AI review (powered by Twelve Labs) is <strong>currently switched off platform-wide</strong> — you won't see AI options in the app today. When active, it surfaces moments worth attention as flagged suggestions you edit, keep, or delete before students see anything. Track its status in the <a href="#release-notes" onclick="navigate('release-notes');return false">release notes</a>.</p>
 
-<h2>Voice dictation</h2>
-<p>For long review sessions where typing slows you down: click the mic icon in the note editor. Audio is transcribed in real time by Deepgram and appears as you talk. Edit before saving. Microphone access required; consent prompt appears the first time.</p>
+<h2>Voice notes</h2>
+<p>For long review sessions where typing slows you down: hold the mic button and talk (up to 60 seconds per note). The audio attaches to the timestamp and is transcribed automatically, so students can listen <em>or</em> read. Tone survives in a voice note in a way text can't — corrections land softer.</p>
 
 <h2>Progress reviews</h2>
 <p>Run a quick pass on the <a href="#progress" onclick="navigate('progress');return false">progress dashboard</a> weekly — who watched what, who hasn't. Reach out directly to students who haven't watched anything for two weeks. The intervention is small; the retention impact compounds.</p>
@@ -2503,7 +2466,7 @@
 <h2>Multi-coach gyms</h2>
 <p>Each coach has their own student roster, but classes are visible to everyone. Conventions worth aligning on at a team level:</p>
 <ul>
-<li>Tag vocabulary (above).</li>
+<li>Naming conventions (above).</li>
 <li>Who owns class recordings (one person, or the coach who taught).</li>
 <li>How to handle review requests when the student picked another coach.</li>
 <li>Whether assistant coaches add notes to a head coach's sessions (most do — clarify expectations).</li>
@@ -2512,9 +2475,9 @@
 <h2>Tournament footage</h2>
 <p>If you record competition footage for review:</p>
 <ul>
-<li>Upload to a <strong>session</strong> assigned to the competitor — it's their performance, even if you debrief in class later.</li>
-<li>Mirror the recap-clip pattern: a 30-second clip of the key match moment gets watched; the full match doesn't.</li>
-<li>Tag with the event name plus your house convention.</li>
+<li>Upload to a <strong>session</strong> assigned to the competitor — it's their performance, even if you debrief in class later. Set the type to <strong>comp prep</strong>.</li>
+<li>Bracket the key match moment with a <strong>highlight note</strong> (start + end) — the bracketed exchange gets re-watched; the full match doesn't.</li>
+<li>Put the event name in the session title so it's searchable later.</li>
 </ul>
 
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>The single highest-impact habit: write at least one note per video. Notes you write are notes students return to. Notes you don't write fade.</div></div>`},
@@ -2537,9 +2500,11 @@
 <p>The progress dashboard shows three headline numbers for the selected period:</p>
 <ul>
 <li><strong>Watch rate</strong> — percentage of assigned sessions the student has viewed.</li>
-<li><strong>Session count</strong> — total sessions (private and class) in the period.</li>
-<li><strong>Note count</strong> — total coaching notes written on the student's sessions.</li>
+<li><strong>Session count</strong> — total published sessions for the student in the period.</li>
+<li><strong>Note count</strong> — notes and replies the student wrote themselves (a signal of engagement, not coach output).</li>
 </ul>
+<h2>Weekly email digest</h2>
+<p>Coaches and admins with the <strong>Progress reports</strong> email preference on receive a weekly summary: per-student watch rates, school-wide totals, and which students haven't engaged recently. Quiet weeks send nothing — no activity, no email. Toggle it under <a href="#profile" onclick="navigate('profile');return false">Profile → Notifications</a>.</p>
 <h2>Time-period filtering</h2>
 <p>Filter buttons narrow the view to the <strong>last 7, 30, or 90 days</strong>. Default is 30 days.</p>
 <h2>Per-session details</h2>
@@ -2563,11 +2528,11 @@
 <p>Student avatars in the roster show an activity dot: <strong>green</strong> when the student had a session in the last 30 days, <strong>dim</strong> when activity is older than 30 days, no dot when they have no sessions yet.</p>
 <p>For screen-sharing or recording, toggle <strong>Hide emails</strong> in the Members section. Addresses are masked to first letter + domain (<code>j****@example.com</code>); search still works against the full address.</p>
 <h2>Common questions</h2>
-<p><strong>One person, two accounts?</strong> Use a different email per account. Each account is fully separate.</p>
+<p><strong>One person in two schools?</strong> The same email can hold an account in more than one school — at sign-in, Kaynos shows a school picker when the credentials match multiple accounts.</p>
 <p><strong>Member limits?</strong> No headcount cap.</p>
 <p><strong>Student-to-student invites?</strong> Only staff roles can invite; students cannot.</p>
 <h2>Multiple schools</h2>
-<p>Kaynos supports multiple schools under one account. Multi-school setup is handled by a tenant admin or by contacting ${mailLink()} — not self-service. Each school has its own roster, sessions, classes, and storage quota.</p>
+<p>One login can belong to several schools, each with its own roster, sessions, classes, and storage quota — see <a href="#school-switcher" onclick="navigate('school-switcher');return false">Switching between schools</a>. Running several gyms under one billing umbrella is a <strong>tenant</strong> feature handled by Kaynos staff: email ${mailLink()}.</p>
 <h2>Branding</h2>
 <p>Upload a custom logo for your academy under <strong>Admin → Branding</strong>. Members see it in the header after they log in. PNG or SVG, square, at least 200×200px.</p>
 <h2>School hours</h2>
@@ -2601,7 +2566,7 @@
 <h2>Open your profile</h2>
 <p>Desktop: click your name in the sidebar. Mobile: tap the avatar in the top-right of the header, then choose <strong>Profile</strong>.</p>
 <h2>Name and details</h2>
-<p>Update your display name, then click <strong>Save changes</strong>.</p>
+<p>Update your display name, then click <strong>Save changes</strong>. You can also add a short <strong>bio</strong> and a <strong>signature</strong> (appended to your notes), and upload an <strong>avatar</strong> — JPEG, PNG, or WebP up to 2 MB.</p>
 <h2>Email address</h2>
 <p>Your email is your sign-in identifier. To change it:</p>
 <ol>
@@ -2618,20 +2583,33 @@
 <li>Click <strong>Update Password</strong>.</li>
 </ol>
 <p>Locked out? Ask an admin for a reset, or email ${mailLink()}. Login help: <a href="#login-issues" onclick="navigate('login-issues');return false">Login and access issues</a>.</p>
+<h2>Two-factor authentication</h2>
+<p>Add a second factor to your sign-in from the profile security section:</p>
+<ol>
+<li>Click <strong>Set up two-factor authentication</strong> and scan the QR code with an authenticator app (Google Authenticator, 1Password, Authy — any TOTP app).</li>
+<li>Enter the 6-digit code to confirm.</li>
+<li>Save the <strong>recovery codes</strong> shown once — they're your way in if you lose the phone. Each works one time.</li>
+</ol>
+<p>With 2FA on, sign-in asks for a code (or a recovery code) after your password. Disabling 2FA requires your password plus a current code. SMS and email codes aren't offered — authenticator apps only.</p>
 <h2>Billing (admins only)</h2>
 <p>Admins see a <strong>Billing</strong> section with the current subscription status and a <strong>Manage</strong> button that opens the Stripe billing portal in a new tab. Update payment methods, download invoices, or change plans there. Full reference on <a href="#billing" onclick="navigate('billing');return false">Billing &amp; subscription</a>.</p>
 <h2>Notifications</h2>
-<p>Email notifications live in the profile <strong>Notifications</strong> section. A master <strong>Email notifications</strong> toggle sits at the top, with three per-event toggles underneath:</p>
+<p>Email notifications live in the profile <strong>Notifications</strong> section. A master <strong>Email notifications</strong> toggle sits at the top, with per-event toggles underneath:</p>
 <ul>
-<li><strong>New sessions</strong> — when a coach creates a session for you.</li>
+<li><strong>New sessions</strong> — when a coach publishes a session for you.</li>
 <li><strong>Class recordings</strong> — when a class recording is posted to your school.</li>
-<li><strong>Notes from instructors</strong> — when a coach adds a note on your session.</li>
+<li><strong>Notes from instructors</strong> — notes on your sessions, @mentions, and thread replies.</li>
+<li><strong>Progress reports</strong> (coaches/admins) — the weekly engagement digest.</li>
+<li><strong>Usage reports</strong> (admins) — scheduled academy activity summaries.</li>
 </ul>
-<p>Turning the master switch off silences all three. With the master on, flip each sub-toggle individually — for example, keep <strong>Notes from instructors</strong> on but turn off class-recording emails if you only want personal coaching alerts.</p>
-<p><strong>Always sends regardless of toggles:</strong> welcome emails, password resets, invites, email-change verification links, deletion notices, and support form confirmations. Admins also receive automated usage reports on the schedule set under <strong>Admin → Reports &amp; Exports</strong>.</p>
+<p>Turning the master switch off silences all of them. With the master on, flip each sub-toggle individually — for example, keep <strong>Notes from instructors</strong> on but turn off class-recording emails if you only want personal coaching alerts.</p>
+<p><strong>Always sends regardless of toggles:</strong> welcome emails, password resets, invites, email-change verification links, deletion notices, and support form confirmations.</p>
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Delivery problems? See <a href="#email-issues" onclick="navigate('email-issues');return false">Email and notification issues</a>.</div></div>
 <h2>In-app notifications</h2>
-<p>The bell icon in the header shows unread notifications: mentions, note replies, session shares, review requests, and other activity. Click to view, or mark all as read. On mobile, dismiss the panel with the close button.</p>
+<p>The bell icon in the header shows unread notifications: mentions, note replies, review requests, and other activity. Click to view, or mark all as read. On mobile, dismiss the panel with the close button.</p>
+<p>If you've installed Kaynos to your home screen (or allowed notifications in the browser), the same events can arrive as <strong>push notifications</strong> on your device — see <a href="#using-on-mobile" onclick="navigate('using-on-mobile');return false">Using Kaynos on mobile</a>.</p>
+<h2>Delete your account</h2>
+<p>From the profile you can schedule deletion of your own account. Access ends immediately and data is permanently removed after a <strong>30-day grace period</strong> — the confirmation email contains a one-time cancel link if you change your mind. School admins can't self-delete this way; they close the whole school from <strong>Admin → Danger Zone</strong> instead. You can also request a <strong>personal data export</strong>; a download link (valid 7 days) is emailed when it's ready.</p>
 <h3>Not receiving mail</h3>
 <ol>
 <li>Check spam or promotions folders.</li>
@@ -2673,7 +2651,7 @@
 <h2>Pausing</h2>
 <p>There's no in-app pause. The functional equivalent: cancel via the portal (no next-period charge, data preserved during retention), re-subscribe when you're ready. For a longer pause where you're worried about hitting the retention window, email ${mailLink()} and we'll work something out.</p>
 <h2>Adding coaches / changing seats</h2>
-<p>The plan is flat per coach. There are no tiers or seat counts to manage. Add coaches by inviting them as admin/coach in <a href="#managing-members" onclick="navigate('managing-members');return false">Members</a> — Kaynos creates their account at the standard rate and Stripe prorates the change on the next invoice.</p>
+<p>The plan is a flat rate per school — there are no seat counts to manage and no per-member charges. Invite as many coaches and students as you need from <a href="#managing-members" onclick="navigate('managing-members');return false">Members</a>; the invoice doesn't change. Current price and inclusions: <a href="https://www.kaynos.net/#pricing" target="_blank" rel="noopener noreferrer">kaynos.net pricing</a>.</p>
 <h2>Account deletion vs cancellation</h2>
 <p>Two different things:</p>
 <ul>
@@ -2694,7 +2672,9 @@
 <li>Ask an admin for a reset or email ${mailLink()}.</li>
 </ul>
 <h2>"Too many attempts"</h2>
-<p>After several failed attempts from the same IP, sign-ins are rate limited (HTTP 429). Wait a few minutes and try again, or reset your password. Still stuck? Contact ${mailLink()}.</p>
+<p>Repeated failed sign-ins escalate in two steps: after <strong>3 failures</strong> a CAPTCHA appears on the login form; after <strong>6 failures</strong> sign-in from that connection is blocked for about <strong>15 minutes</strong> (HTTP 429). The counter clears on a successful sign-in or after the wait. Use the pause to reset your password if you're unsure of it. Still stuck? Contact ${mailLink()}.</p>
+<h2>Two-factor codes</h2>
+<p>If your account has 2FA enabled, sign-in asks for a 6-digit authenticator code after the password. Lost the device? Use one of your <strong>recovery codes</strong> (each works once). Out of recovery codes too? Email ${mailLink()} from your account address.</p>
 <h2>Blank page or "no access"</h2>
 <p>The account may have been removed, or the browser cached an old session. Try a private/incognito window. If that works, clear site data for <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> in your normal browser.</p>
 <h2>Still locked out</h2>
@@ -2723,7 +2703,7 @@
 <li>Corporate filters may require IT allowlisting; an admin can issue a manual password reset in the meantime.</li>
 </ul>
 <h2>Too many emails</h2>
-<p><strong>Profile</strong> → turn off the master <strong>Email notifications</strong> toggle to silence everything, or use the three per-event toggles (New sessions, Class recordings, Notes from instructors) to mute some and keep others. Security email (password resets, invites, email-change verifications) always sends.</p>`},
+<p><strong>Profile</strong> → turn off the master <strong>Email notifications</strong> toggle to silence everything, or use the per-event toggles (New sessions, Class recordings, Notes from instructors — plus Progress reports and Usage reports for staff) to mute some and keep others. Security email (password resets, invites, email-change verifications) always sends.</p>`},
 
     performance: {
       title: "Performance and loading", section: "Troubleshoot",
@@ -2807,8 +2787,8 @@
 <li><strong>Android Chrome:</strong> in Chrome, tap the <strong>⋮</strong> menu → Settings → Site settings → Camera (or Microphone) → find <code>app.kaynos.net</code> → set to Allow.</li>
 </ul>
 
-<h3>Microphone (voice dictation for notes)</h3>
-<p>Voice dictation uses Deepgram for transcription. Same permission path as Camera/Microphone above. Audio is processed in real time and not stored — see <a href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">Privacy on this site</a>.</p>
+<h3>Microphone (voice notes)</h3>
+<p>Hold the mic button in the note composer to record a voice note (up to 60 seconds); it's transcribed automatically by Deepgram. Same permission path as Camera/Microphone above. Deepgram processes the audio in real time and doesn't keep it — see <a href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">Privacy on this site</a>.</p>
 
 <h3>Photos / files (selecting a video to upload)</h3>
 <ul>
@@ -2817,12 +2797,12 @@
 </ul>
 
 <h2>Notifications</h2>
-<p>Kaynos uses email for most notifications today (configured under <a href="#profile" onclick="navigate('profile');return false">Profile → Notifications</a>) — no native push notifications yet on either platform.</p>
-<p>For a fast bell on your phone, two reliable approaches:</p>
+<p>Kaynos supports <strong>push notifications</strong> on mobile: notes from your coach, @mentions, replies, and review-request updates can pop on your phone like any app notification.</p>
 <ul>
-<li><strong>Email push:</strong> in your phone's mail app, set your Kaynos address to "push" delivery. iOS Mail and Gmail both support this per-account.</li>
-<li><strong>Email-to-notification routing:</strong> IFTTT or Apple Shortcuts can convert specific emails (sender = <code>noreply@kaynos.net</code>) into a phone notification.</li>
+<li><strong>iOS:</strong> install Kaynos to your home screen first (push requires the installed PWA, iOS 16.4+), open it, and allow notifications when prompted.</li>
+<li><strong>Android:</strong> allow notifications when Chrome asks, or enable them from the site settings for <code>app.kaynos.net</code>.</li>
 </ul>
+<p>Email remains the fallback for everything — configure per-event toggles under <a href="#profile" onclick="navigate('profile');return false">Profile → Notifications</a>. Staff can verify their setup with the notification test in the app, which reports delivery per channel (bell, push, email).</p>
 
 <h2>Recording and uploading from a phone</h2>
 
@@ -2835,7 +2815,7 @@
 
 <h3>What to watch out for</h3>
 <ul>
-<li><strong>Screen lock pauses uploads.</strong> If a 30-minute class video is uploading and your phone sleeps, the upload pauses — sometimes the app resumes, sometimes the part URL has expired (1-hour limit) and you'll need to retry. Plug in and disable auto-lock for long uploads.</li>
+<li><strong>Screen lock pauses uploads.</strong> If a 30-minute class video is uploading and your phone sleeps, the upload pauses. Progress isn't lost — reopen the page and reselect the same file and it resumes from the last completed chunk (upload URLs stay valid for 6 hours). Plug in and disable auto-lock for long uploads anyway.</li>
 <li><strong>Hot phone during recording.</strong> Long recordings heat the phone, which can throttle the camera. For 30+ minutes of footage, a dedicated camera or a laptop-tethered phone is more reliable.</li>
 <li><strong>Storage on the phone.</strong> A 1080p video at typical bitrates is roughly 1 GB per 10 minutes. Check free space before recording — you can upload from the camera roll later.</li>
 <li><strong>Cellular data.</strong> Uploading a 1 GB video on cellular eats your plan. Default to Wi-Fi. The <a href="#uploading" onclick="navigate('uploading');return false">upload time calculator</a> on the Uploading page helps you sanity-check before starting.</li>
@@ -2870,7 +2850,7 @@
       title: "Frequently asked questions", section: "Getting Started",
       content: `
 <h1>Frequently asked questions</h1>
-<div class="tldr"><strong>TLDR:</strong> Common pre-purchase and account questions, grouped: signup &amp; what you're getting, day-to-day running, trust &amp; minors on camera, devices &amp; integrations, support, billing &amp; pricing, search &amp; navigation, data, remote coaching, and the internal API. For account-specific issues, ${mailLink('email support')} or use the in-app chat.</div>
+<div class="tldr"><strong>TLDR:</strong> Common pre-purchase and account questions, grouped: signup &amp; what you're getting, day-to-day running, trust &amp; minors on camera, devices &amp; integrations, support, billing &amp; pricing, search &amp; navigation, data, remote coaching, and the API question. For account-specific issues, ${mailLink('email support')} or use the in-app support form.</div>
 <p>Kaynos is built for coaches who use video review: publish sessions and classes, add timestamped notes, and members watch on their own time.</p>
 <div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Quick links:</strong> App: <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> · Support: ${mailLink()} · Setup: <a href="#setup" onclick="navigate('setup');return false">Setting up your account</a></div></div>
 <h2>What you're signing up for</h2>
@@ -2893,7 +2873,7 @@
 <h3>How serious are you about security?</h3>
 <p>HTTPS in transit, hashed passwords, and video in cloud storage served via short-lived presigned URLs. See <a href="#storage" onclick="navigate('storage');return false">Video storage and retention</a> for details.</p>
 <h3>Which third parties process my data?</h3>
-<p>The full subprocessor list is on the <a href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">privacy page</a>. Headline subprocessors: <strong>Stripe</strong> (billing), <strong>Resend</strong> (transactional email), <strong>Backblaze B2</strong> (video storage), and <strong>Neon</strong> (Postgres). Optional features use <strong>Twelve Labs</strong> (AI review of an uploaded video, on demand) and <strong>Deepgram</strong> (voice dictation for note entry, opt-in per use). Audio sent to Deepgram is processed in real time and is not stored by Deepgram.</p>
+<p>The full subprocessor list is on the <a href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">privacy page</a>. Headline subprocessors: <strong>Stripe</strong> (billing), <strong>Resend</strong> (transactional email), <strong>Backblaze B2</strong> (video storage), and <strong>Neon</strong> (Postgres). Optional features use <strong>Twelve Labs</strong> (AI video review — currently disabled platform-wide), <strong>Deepgram</strong> (voice note transcription), <strong>Twilio</strong> (SMS lesson notifications), and <strong>Google</strong> (calendar availability, sign-in). Audio sent to Deepgram is processed in real time and is not stored by Deepgram.</p>
 <h3>What about minors on the footage?</h3>
 <p>Kaynos is not designed for users under 13 (COPPA) or under 16 in the EU (GDPR Article 8). Organizations using Kaynos with minors must obtain appropriate parental or guardian consent. Schools using Kaynos for student records can request a FERPA-compliant data processing agreement.</p>
 <p>Read the <a href="https://app.kaynos.net/terms" target="_blank" rel="noopener">Terms of Service</a> in the app. For legal questions, consult qualified counsel.</p>
@@ -2904,11 +2884,11 @@
 <h3>Which browsers are supported?</h3>
 <p>Current Chrome, Firefox, Safari, and Edge. If upload or playback fails, try Chrome first.</p>
 <h3>Do you expose an API?</h3>
-<p>Admins and coaches can view an internal API reference at <code>/admin/api-docs</code>. A public developer API with tokens and webhooks for third-party integrations is not available today. See the <a href="#developer-api" onclick="navigate('developer-api');return false">Developer API</a> page for details.</p>
+<p>No — there's no public developer API, API keys, or webhooks today. The REST endpoints behind the app are internal and can change between releases. For getting data out, use the admin exports (JSON and CSV). Details on the <a href="#developer-api" onclick="navigate('developer-api');return false">Developer API</a> page.</p>
 <hr>
 <h2>Support</h2>
 <h3>How do I contact you?</h3>
-<p>Email ${mailLink()} with what happened, what you expected, your account name, and your browser. A screenshot or short screen recording speeds up diagnosis. In-app chat is available when logged in to <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a>.</p>
+<p>Email ${mailLink()} with what happened, what you expected, your account name, and your browser. A screenshot or short screen recording speeds up diagnosis. Signed in? The <strong>Support</strong> page in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> files a ticket with a reference number — replies within 1 business day.</p>
 <h3>Can I delete my account?</h3>
 <p>Yes. Delete your own account from <strong>Profile → Delete Account</strong>. Admins can schedule school deletion from <strong>Admin → Delete School</strong> — a 30-day grace period lets you cancel. After 30 days, all data is permanently removed.</p>
 <hr>
@@ -2937,13 +2917,13 @@
 <hr>
 <h2>Data</h2>
 <h3>Can I export my data?</h3>
-<p>Admins can export all school data from <strong>Admin → Export</strong>. The export includes users, sessions, classes, notes, tags, and video metadata in a structured format for backup or GDPR compliance.</p>
+<p>Admins can export all school data from <strong>Admin → Reports &amp; Exports</strong>: full school data as JSON, plus CSV exports (members, session log). Individuals can request a personal data export from their profile — a download link is emailed when it's ready. Useful for backup, migration, or GDPR portability.</p>
 <hr>
 <h2>Remote coaching</h2>
 <h3>Can I coach remotely with Kaynos?</h3>
 <p>Yes. Many coaches use Kaynos for async video review with students worldwide. Tips:</p>
 <ul>
-<li>Organize students by training phase using tags (e.g., <code>beginner</code>, <code>competition</code>, <code>rehab</code>).</li>
+<li>Use session types (drilling, sparring, comp prep) and consistent titles so each student's history reads at a glance.</li>
 <li>Enable <strong>email notifications</strong> so students know when your review is ready.</li>
 <li>Use keyboard shortcuts for speed: <kbd>J</kbd>/<kbd>L</kbd> to scrub the timeline, then <kbd>Cmd+Enter</kbd> (or <kbd>Ctrl+Enter</kbd>) once you're in the note editor to save.</li>
 </ul>`},
@@ -2952,56 +2932,52 @@
       title: "Developer API", section: "Admin",
       content: `
 <h1>Developer API</h1>
-<div class="tldr"><strong>TLDR:</strong> Admins and coaches can view an internal API reference at <a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener"><code>/admin/api-docs</code></a>. Public API tokens, third-party integrations, and customer-facing webhooks are not available today.</div>
-<h2>Internal API reference</h2>
-<p>Kaynos ships an internal API reference for admins and coaches. It's a Swagger UI page backed by an OpenAPI spec covering the REST endpoints the web app uses.</p>
-<ul>
-<li><strong>Where:</strong> Sign in as an admin or coach and open <a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener"><code>/admin/api-docs</code></a> directly. There's no menu item — bookmark the URL.</li>
-<li><strong>Who can see it:</strong> Admins and coaches only. Students do not have access.</li>
-<li><strong>Authentication:</strong> Session-cookie auth — the same login session that powers the app. There are no separate API keys or tokens to manage.</li>
-<li><strong>Scope:</strong> Documentation of internal endpoints (sessions, classes, members, notes, uploads, billing, and more). Useful for understanding behavior, debugging, and internal tooling.</li>
-</ul>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>The internal reference is for transparency and internal use — not a stability contract. Endpoints and shapes can change between releases.</div></div>
-<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div><strong>API field naming:</strong> the role we call <strong>coach</strong> in the UI is stored as <code>"instructor"</code> in API request and response bodies (e.g. <code>role: "instructor"</code>). Plan for that mapping if you're scripting against the internal endpoints.</div></div>
-<h2>Public developer API (not available)</h2>
-<p>Kaynos does not offer a public developer API for third-party integrations today. <strong>Not</strong> supported:</p>
+<div class="tldr"><strong>TLDR:</strong> Kaynos does not offer a public developer API today — no tokens, no webhooks, no SDKs. The REST endpoints behind the app are internal and unversioned. For programmatic data access, use the admin exports.</div>
+<h2>How the app's API works</h2>
+<p>The web app talks to a set of internal REST endpoints (sessions, classes, members, notes, uploads, billing, and more), authenticated by the same session cookie as your login. These endpoints aren't documented for external use and aren't a stability contract — shapes and routes can change in any release without notice.</p>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div><strong>Field naming:</strong> the role we call <strong>coach</strong> in the UI appears as <code>"instructor"</code> in API payloads (e.g. <code>role: "instructor"</code>) — you'll see this in the JSON export too.</div></div>
+<h2>What is not available</h2>
 <ul>
 <li>Public API tokens or personal access tokens</li>
 <li>OAuth apps or third-party clients</li>
 <li>Customer-facing webhooks for real-time events</li>
 <li>SDKs or client libraries</li>
 </ul>
-<p>A public API may come later. If your use case needs programmatic access or webhooks, <a href="${mailHref()}">contact us</a> or visit the <a href="#contact" onclick="navigate('contact');return false">contact page</a> — demand drives priority.</p>
-<p>Follow our <a href="#release-notes" onclick="navigate('release-notes');return false">release notes</a> for updates.</p>`},
+<h2>Getting data out today</h2>
+<p>The supported programmatic surface is exports: full school data as <strong>JSON</strong> and members or session logs as <strong>CSV</strong> from <strong>Admin → Reports &amp; Exports</strong>, plus per-session transcript downloads (SRT/VTT/TXT) where transcripts exist. See <a href="#integrations" onclick="navigate('integrations');return false">Integrations &amp; exports</a>.</p>
+<p>A public API may come later. If your use case needs programmatic access or webhooks, <a href="${mailHref()}">contact us</a> or visit the <a href="#contact" onclick="navigate('contact');return false">contact page</a> — demand drives priority. Follow the <a href="#release-notes" onclick="navigate('release-notes');return false">release notes</a> for updates.</p>`},
 
     integrations: {
       title: "Integrations & exports", section: "Admin",
       content: `
 <h1>Integrations &amp; exports</h1>
-<div class="tldr"><strong>TLDR:</strong> Kaynos is a focused tool — most things stay inside the app. Email notifications, in-app chat, full data export (JSON/CSV), and shareable clip links are the integration surface. Public API and webhooks aren't available yet.</div>
+<div class="tldr"><strong>TLDR:</strong> Kaynos is a focused tool — most things stay inside the app. Exports (JSON/CSV/transcripts), email and push notifications, Google Calendar availability, and SMS lesson alerts are the integration surface. Public API and webhooks aren't available yet.</div>
 
 <h2>What's available</h2>
 <dl>
 <dt>Data export (admin)</dt>
-<dd><strong>Admin → Reports &amp; Exports</strong>. Full school data as JSON; member list as CSV. Includes users, sessions, classes, notes, tags, and video metadata. Useful for backups, migrations, and GDPR portability.</dd>
+<dd><strong>Admin → Reports &amp; Exports</strong>. Full school data as JSON; members and session log as CSV (Excel-friendly). Includes users, sessions, classes, notes, and video metadata. Useful for backups, migrations, and GDPR portability.</dd>
+
+<dt>Transcript export</dt>
+<dd>Where a class video has a transcript, download it as <strong>SRT</strong>, <strong>WebVTT</strong>, or plain <strong>TXT</strong> straight from the browser.</dd>
+
+<dt>Google Calendar (coaches)</dt>
+<dd>Coaches can connect Google Calendar so private-lesson booking checks their free/busy times and prevents double-booking. Read-only — Kaynos doesn't write events to your calendar yet. Connect or disconnect from the calendar settings; pause lookups any time.</dd>
+
+<dt>SMS lesson notifications</dt>
+<dd>Private-lesson requests and confirmations can go out by text message (via Twilio) so booking doesn't stall waiting on email.</dd>
 
 <dt>Usage reports (admin)</dt>
 <dd>Email reports of academy activity at a chosen cadence (off / weekly / monthly). Send a manual report on demand. Available once the school has 5+ sessions or classes.</dd>
 
-<dt>Email notifications</dt>
-<dd>Per-event categories under Profile → Notifications. Mention notifications include a deep link to the exact note timestamp.</dd>
+<dt>Email &amp; push notifications</dt>
+<dd>Per-event categories under Profile → Notifications, plus web push on installed mobile apps. Mention notifications include a deep link to the exact note timestamp.</dd>
 
-<dt>In-app chat</dt>
-<dd>Bottom-right corner inside <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> when logged in. Reaches support directly. Logs are kept for context if you reopen the same conversation later.</dd>
-
-<dt>Shareable clip links</dt>
-<dd>Toggle <strong>Share</strong> on any clip to generate a public link. Anyone with the link can view the clip — no login. Toggle off to revoke immediately. Useful for sharing a single technique clip with a coach at another gym, a parent, or a competition coach.</dd>
+<dt>In-app support</dt>
+<dd>The <strong>Support</strong> page inside <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> files a ticket with a reference number; recent tickets stay visible for follow-up.</dd>
 
 <dt>Add to home screen (PWA)</dt>
 <dd>Both <a href="https://app.kaynos.net" target="_blank" rel="noopener">the app</a> and this help center support Add to Home Screen on iOS and Android — a full-screen icon-launched experience without browser chrome. See <a href="#using-on-mobile" onclick="navigate('using-on-mobile');return false">Using Kaynos on mobile</a>.</dd>
-
-<dt>Internal API reference</dt>
-<dd>Admins and coaches can view <a href="https://app.kaynos.net/admin/api-docs" target="_blank" rel="noopener"><code>/admin/api-docs</code></a> — the Swagger UI for the endpoints the web app uses. Session-cookie auth, no tokens. Not a stability contract — endpoints can change. See <a href="#developer-api" onclick="navigate('developer-api');return false">Developer API</a>.</dd>
 </dl>
 
 <h2>What's not available (yet)</h2>
@@ -3009,18 +2985,17 @@
 <li><strong>Public API with tokens.</strong> No personal access tokens, no OAuth apps, no third-party API clients. Demand drives the roadmap — let us know via <a href="#feature-requests" onclick="navigate('feature-requests');return false">Feature requests</a>.</li>
 <li><strong>Customer-facing webhooks</strong> for real-time events.</li>
 <li><strong>SDKs / client libraries.</strong></li>
-<li><strong>Calendar sync</strong> (Google / Apple / Outlook). Schedule is in-app only today.</li>
+<li><strong>Calendar event sync.</strong> Google Calendar is free/busy-only; no event push to Google / Apple / Outlook yet.</li>
 <li><strong>Slack, Discord, Teams</strong>, or chat-app bridges.</li>
 <li><strong>Direct LMS integration</strong> (Canvas, Schoology, etc.).</li>
-<li><strong>Video CDN embed</strong> on external sites. Clip share links are the closest equivalent.</li>
-<li><strong>Native push notifications</strong> on iOS / Android. Email is the notification channel today; on mobile, set the mailbox to push delivery for instant pings.</li>
+<li><strong>Public video links or external embeds.</strong> Video plays inside Kaynos accounts only — there are no share links and no download button.</li>
 </ul>
 
 <h2>Migrating from another platform</h2>
 <p>Moving from a competitor:</p>
 <ul>
 <li>Export your videos from the source as files (not just URLs) and upload to Kaynos one at a time — the <a href="#uploading" onclick="navigate('uploading');return false">upload flow</a> doesn't import in bulk yet.</li>
-<li>Re-build your tag vocabulary in Kaynos when you go; the source's taxonomy probably doesn't map.</li>
+<li>Re-build your organization in Kaynos as you go — session types plus consistent titles replace whatever taxonomy the source used.</li>
 <li>Hundreds of videos to move? Email ${mailLink()} — we can help.</li>
 </ul>
 
@@ -3038,16 +3013,19 @@
 <div class="glossary-term"><dt>Session</dt><dd>A one-on-one recording assigned to a single student — private lessons, individual review, or competition footage. Only the assigned student, the creator, and admins can see it.</dd></div>
 <div class="glossary-term"><dt>Class</dt><dd>An account-wide recording visible to everyone — group sessions, workshops, or shared recordings. All members, coaches, and admins can view classes.</dd></div>
 <div class="glossary-term"><dt>Admin</dt><dd>The highest-permission role. Admins can do everything coaches can, plus manage the roster, send invites, change roles, and access the Admin area.</dd></div>
-<div class="glossary-term"><dt>Coach</dt><dd>A staff role that can create sessions and classes, upload video, add notes and tags, and view student progress. Coaches can invite students but not other coaches.</dd></div>
-<div class="glossary-term"><dt>Student <code>member</code></dt><dd>An end user who watches assigned sessions and all published classes, adds notes, and tracks their own progress. Students cannot upload video or view other students' private sessions.</dd></div>
+<div class="glossary-term"><dt>Coach</dt><dd>A staff role that can create sessions and classes, upload video, add notes, and view student progress. Coaches can invite students and parents but not other coaches.</dd></div>
+<div class="glossary-term"><dt>Student <code>member</code></dt><dd>An end user who watches assigned sessions and all published classes, adds notes, and tracks their own progress. Students can't view other students' private sessions; the one place they can upload video is their own review request.</dd></div>
+<div class="glossary-term"><dt>Parent</dt><dd>An optional guardian role linked to one or more students by invite. Parents see their linked students' published sessions; commenting is a per-school setting, off by default.</dd></div>
 <div class="glossary-term"><dt>Note</dt><dd>A short text annotation pinned to a specific timestamp on the video timeline. Coaches and students can both create notes; coaches can edit any note.</dd></div>
-<div class="glossary-term"><dt>Tag</dt><dd>A label attached to sessions or classes for organization and filtering. Tags are shared across the account — examples: <code>guard</code>, <code>comp-prep</code>, <code>fundamentals</code>.</dd></div>
+<div class="glossary-term"><dt>Session type</dt><dd>A category set on each session or class — <code>private</code>, <code>drilling</code>, <code>sparring</code>, <code>comp prep</code>, or <code>class</code> — so list views stay scannable as the library grows.</dd></div>
+<div class="glossary-term"><dt>Notebook</dt><dd>A coach's private scratchpad: free-form entries with personal tags and pins, separate from any session. Not visible to students.</dd></div>
 <div class="glossary-term"><dt>Progress</dt><dd>A lightweight tracker that records playback position (for resume), completion status, and last-viewed time. Coaches see completion across their students; no invasive analytics.</dd></div>
-<div class="glossary-term"><dt>Clip</dt><dd>A short excerpt from a session or class, created by a coach to highlight a specific moment or technique. Clips can be shared externally via a token link — no login required for the viewer.</dd></div>
+<div class="glossary-term"><dt>Clip</dt><dd>One of several videos attached to the same session or class — extra angles, separate attempts, or sparring rounds. The player's clip rail switches between them; notes attach to the clip that was playing.</dd></div>
 <div class="glossary-term"><dt>Review Request</dt><dd>A student-initiated request for a coach to review a video. The student picks a coach, adds context, and uploads to a draft session. The coach accepts or declines from their dashboard.</dd></div>
 <div class="glossary-term"><dt>Highlight</dt><dd>A time-range bookmark on the video timeline, marking a start and end point. Used to call attention to a segment worth reviewing.</dd></div>
 <div class="glossary-term"><dt>Annotation</dt><dd>A drawing overlay on a frozen video frame — pen, line, circle, or arrow — attached to a specific timestamp. Appears during playback to highlight technique details.</dd></div>
-<div class="glossary-term"><dt>AI review</dt><dd>An optional, on-demand analysis of a session video that suggests coaching notes from what the model sees. Powered by Twelve Labs. Suggestions arrive as regular notes flagged "AI suggestion" — coaches can edit, keep, or delete them.</dd></div>
+<div class="glossary-term"><dt>AI review</dt><dd>An optional analysis of a session video that suggests coaching notes from what the model sees (powered by Twelve Labs). Suggestions arrive flagged for coach review before students see them. <strong>Currently switched off platform-wide.</strong></dd></div>
+<div class="glossary-term"><dt>Voice note</dt><dd>A recorded spoken note (up to 60 seconds) attached to a timestamp, automatically transcribed so it's readable and searchable.</dd></div>
 <div class="glossary-term"><dt>Presigned URL</dt><dd>A short-lived, signed link to a video file in Backblaze B2 storage. Kaynos serves video through presigned URLs rather than a CDN — each request generates a fresh link scoped to that viewer.</dd></div>
 </dl>
 <h2>BJJ positions and movements</h2>
@@ -3111,9 +3089,7 @@
 <dt>Invalid email or password</dt>
 <dd>The email or password didn't match. Check Caps Lock; paste the password to bypass typos. If you signed up with Google, click <strong>Sign in with Google</strong> rather than entering a password.</dd>
 <dt>Too many attempts (HTTP 429)</dt>
-<dd>The login endpoint is rate-limited per IP. Wait 5–10 minutes and try again. On a corporate network where several people retry at once, the limit can trip — try a different network or wait it out. Reset your password if you're not sure of it.</dd>
-<dt>Email not verified</dt>
-<dd>Your account exists but the welcome email hasn't been confirmed. Check spam and promotions for the verification link. Still missing? Ask your admin to resend the invite or email ${mailLink()}.</dd>
+<dd>Failed sign-ins escalate: 3 failures adds a CAPTCHA, 6 failures blocks that connection for ~15 minutes. On a corporate network where several people retry at once, the limit can trip — wait it out or try a different network. Reset your password if you're not sure of it.</dd>
 <dt>Account suspended</dt>
 <dd>The school's subscription is past due or canceled. The admin updates billing — see <a href="#billing" onclick="navigate('billing');return false">Billing &amp; subscription</a>.</dd>
 </dl>
@@ -3125,7 +3101,9 @@
 <dt>File too big (5 GB limit)</dt>
 <dd>Trim the clip or re-export at 1080p H.264. Most coaching content fits comfortably under 5 GB at 1080p30.</dd>
 <dt>Part upload failed: 403</dt>
-<dd>The signed upload URL expired (1-hour limit). Cancel and re-upload. Most common on long uploads with intermittent connectivity.</dd>
+<dd>The signed upload URL expired (URLs last 6 hours). The app detects this and asks you to start over with the original file. Most common when an upload sat paused for many hours.</dd>
+<dt>Storage or video limit reached</dt>
+<dd>Your school hit its storage (default 50 GB) or video count (default 100) quota. Delete old videos to free space, or an admin can request an increase — see <a href="#storage" onclick="navigate('storage');return false">Video storage and retention</a>.</dd>
 <dt>500 server error during upload</dt>
 <dd>Transient issue on our side. Cancel and retry. If it persists, email ${mailLink()} with the file size and the step it failed at.</dd>
 <dt>Upload stuck at the same percent</dt>
@@ -3144,8 +3122,8 @@
 <dd>Check bandwidth (download speed). Very high-bitrate 4K sources can stutter on standard home networks — a 1080p H.264 export plays more reliably.</dd>
 <dt>403 / "not authorized to view this video"</dt>
 <dd>The playback URL expired (4-hour limit) or your role changed. Refresh the page; the player generates a fresh presigned link.</dd>
-<dt>"This clip is no longer available" (shared link)</dt>
-<dd>The coach disabled sharing on the clip. Ask them to re-enable it — same URL works again.</dd>
+<dt>"This video has expired and is no longer available for playback" (410)</dt>
+<dd>The video passed your school's retention window (default 6 months) and was removed. The session and its notes remain. See <a href="#storage" onclick="navigate('storage');return false">Video storage and retention</a>.</dd>
 </dl>
 
 <h2>Recording / camera errors</h2>
@@ -3153,7 +3131,7 @@
 <dt>"Camera permission denied"</dt>
 <dd>iOS Safari: Settings → Safari → Camera → set Kaynos to Allow. Android Chrome: tap the lock icon in the address bar → Permissions → Camera → Allow.</dd>
 <dt>"Microphone permission denied"</dt>
-<dd>Same path as camera. Required for voice dictation; not required for video upload.</dd>
+<dd>Same path as camera. Required for voice notes; not required for video upload.</dd>
 <dt>"Could not access camera"</dt>
 <dd>Another app or tab is holding the camera (FaceTime, Zoom, another open browser window). Close them, refresh, and try again.</dd>
 </dl>
@@ -3218,7 +3196,7 @@
   <p>We'll reply to the email you provided — usually same day on business days.</p>
   <button class="form-another" onclick="document.getElementById('contactForm').reset();document.getElementById('contactForm').style.display='';document.getElementById('contactSuccess').style.display='none'">Send another</button>
 </div>
-<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Response time:</strong> Usually within 24 business hours (Mon–Fri); weekend messages get the next business day. For urgent issues, use in-app chat once signed in — it's faster. Include your account name and browser for quicker diagnosis.</div></div>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div><strong>Response time:</strong> Usually within 24 business hours (Mon–Fri); weekend messages get the next business day. Signed-in users can also file a ticket from the in-app <strong>Support</strong> page — it captures your account context automatically. Include your account name and browser for quicker diagnosis.</div></div>
 <h2>Other ways to reach us</h2>
 <div class="support-card">
   <div class="support-item">
@@ -3227,7 +3205,7 @@
   </div>
   <div class="support-item">
     <div class="support-item-icon">${IC.chat}</div>
-    <div><strong>In-app chat:</strong> Bottom-right in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> when logged in</div>
+    <div><strong>In-app support:</strong> The <strong>Support</strong> page in <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> when logged in — you'll get a reference number for follow-up</div>
   </div>
 </div>`},
 
@@ -3238,6 +3216,11 @@
 <h1>Release notes</h1>
 <p>Detailed changelog of everything shipped, in progress, and planned for Kaynos.</p>
 <h2>Recent highlights</h2>
+<h3>June 2026</h3>
+<ul>
+<li>Help center accuracy pass: documentation now covers parent &amp; guardian accounts, two-factor authentication, push notifications, voice notes, resumable uploads, Google Calendar availability for lesson booking, and CSV/transcript exports.</li>
+<li><strong>AI review is temporarily disabled platform-wide</strong> — AI options won't appear in the app until further notice.</li>
+</ul>
 <h3>May 2026</h3>
 <ul>
 <li>Multi-video sessions and classes: attach more than one video to the same session or class and switch between them in the player.</li>
@@ -3249,7 +3232,7 @@
 </ul>
 <h3>April 2026</h3>
 <ul>
-<li>AI review (powered by Twelve Labs): on-demand video analysis that suggests coaching notes you can edit, keep, or delete.</li>
+<li>AI review (powered by Twelve Labs): video analysis that suggests coaching notes you can edit, keep, or delete. <em>(Temporarily disabled as of June 2026.)</em></li>
 <li>Help center refresh: improved search with highlighted snippets and keyboard navigation.</li>
 <li>Added keyboard shortcuts for faster help-center navigation — press <kbd>?</kbd> to see them all.</li>
 <li>Print-friendly styles for saving pages offline.</li>
@@ -3326,9 +3309,8 @@
 
 <h2>What's on your dashboard</h2>
 <ul>
-<li><strong>Sessions</strong> — private one-on-one recordings between you and a coach.</li>
+<li><strong>Sessions</strong> — private one-on-one recordings between you and a coach. Some hold several videos — switch between them in the player's clip rail.</li>
 <li><strong>Classes</strong> — recordings shared with everyone in the academy.</li>
-<li><strong>Clips</strong> — short highlights the coach has pulled out.</li>
 <li><strong>Notifications</strong> (bell icon, top of header) — opens when a coach leaves a note or replies to a thread.</li>
 </ul>
 
@@ -3343,7 +3325,7 @@
 <li>Upload the video to the draft session that's created.</li>
 <li>Submit. The coach gets an email.</li>
 </ol>
-<p>You'll get an email back when the coach responds. If they decline or don't respond, re-assign to a different coach from the same screen.</p>
+<p>You'll get an email back when the coach responds. If they decline, the request stays in your history; if it sits unanswered, mention it to the coach at training or submit a new request to a different coach.</p>
 
 <h2>Leaving notes</h2>
 <p>While watching anything shared with you — your own session or a class — pause and click <strong>Add Note</strong>. Notes pin to the exact timestamp. Type a question for your coach, a reminder to yourself, whatever.</p>
@@ -3379,24 +3361,32 @@
       title: "Parent guide", section: "",
       content: `
 <h1>Parent &amp; guardian guide</h1>
-<div class="tldr"><strong>TLDR:</strong> Your child has a student account in Kaynos managed by their coach. They can watch recorded sessions and classes, read coaching notes, and request reviews. All videos are private to the school — nothing is public.</div>
+<div class="tldr"><strong>TLDR:</strong> Your child has a student account in Kaynos managed by their coach. They can watch recorded sessions and classes, read coaching notes, and request reviews. Coaches can also invite you to a <strong>parent account</strong> so you can see your child's published sessions yourself. All videos are private to the school — nothing is public.</div>
 <p>This guide is for parents and guardians whose children train at an academy using Kaynos. You don't need any background in martial arts or the app — this page covers your child's experience and answers common questions. For the student's-eye view of the app itself, the <a href="#student-guide" onclick="navigate('student-guide');return false">student guide</a> walks through the actual screens.</p>
 
 <h2>How your child's account works</h2>
-<p>Kaynos has three roles: <strong>admin</strong>, <strong>coach</strong>, and <strong>student</strong> — there is no separate parent or guardian account. Your child's coach or academy admin creates and manages their student account.</p>
+<p>Your child's coach or academy admin creates and manages their student account.</p>
 <ul>
 <li>Your child logs in at <a href="https://app.kaynos.net" target="_blank" rel="noopener">app.kaynos.net</a> with credentials provided by the academy.</li>
 <li>The coach or admin controls what content is available to students.</li>
-<li>To see what your child sees, ask their coach — they can walk you through it or share details directly.</li>
+<li>To see what your child sees, ask the academy for a parent account (below) — or ask the coach to walk you through it.</li>
 </ul>
+
+<h2>Parent accounts</h2>
+<p>Kaynos has a dedicated <strong>parent role</strong>. A coach or admin sends an invite to your email; the link is valid for 14 days. You set your own password, and from then on you can sign in and watch your child's <strong>published</strong> sessions — the recordings and feedback the coach has shared with them.</p>
+<ul>
+<li>One parent login can be linked to more than one child at the same academy.</li>
+<li>Parents view; they don't upload video or manage the account. Whether parents can comment on coaching notes is a setting each school chooses (off by default).</li>
+<li>The academy can unlink a parent account at any time — access is always under the school's control.</li>
+</ul>
+<p>Ask your child's coach or the academy admin to send a parent invite if you'd like one.</p>
 
 <h2>What your child can see and do</h2>
 <ul>
-<li><strong>Sessions:</strong> Private one-on-one recordings between your child and their coach. Only the coach and your child can view these.</li>
-<li><strong>Classes:</strong> Group class recordings shared with students in that class. Think of these as class replays your child can re-watch to practice at home.</li>
-<li><strong>Clips:</strong> Short excerpts from sessions or classes that the coach has created to highlight key moments or techniques.</li>
+<li><strong>Sessions:</strong> Private one-on-one recordings between your child and their coach. Only the coach, your child, and linked parents can view these once published.</li>
+<li><strong>Classes:</strong> Group class recordings shared with students in the academy. Think of these as class replays your child can re-watch to practice at home.</li>
 <li><strong>Notes:</strong> Timestamped coaching feedback attached to specific moments in a video. Your child can click a note to jump to that exact point in the recording.</li>
-<li><strong>Review requests:</strong> Your child can flag a moment in a video and ask their coach for feedback on it.</li>
+<li><strong>Review requests:</strong> Your child can upload a video and ask their coach for feedback on it.</li>
 </ul>
 
 <h2>Understanding the sport</h2>
@@ -3423,7 +3413,7 @@
 <div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div><strong>Data requests:</strong> Parents can request access to or deletion of their child's data at any time. Email ${mailLink()} or ask your child's coach to connect you with academy administration.</div></div>
 
 <h2>Questions or concerns?</h2>
-<p>With no parent login, the best way to stay informed is to talk to your child's coach or academy admin. They can:</p>
+<p>Beyond the parent account, the best way to stay informed is to talk to your child's coach or academy admin. They can:</p>
 <ul>
 <li>Show you what your child has been working on</li>
 <li>Explain any coaching notes or feedback</li>
@@ -3437,18 +3427,18 @@
       title: "Data & privacy rights", section: "Account",
       content: `
 <h1>Data &amp; privacy rights</h1>
-<div class="tldr"><strong>TLDR:</strong> Export, correct, or delete your data — from Profile or via ${mailLink()}. We respond within 45 calendar days for formal requests. Parents act on a minor's behalf.</div>
+<div class="tldr"><strong>TLDR:</strong> Export, correct, or delete your data — from Profile or via ${mailLink()}. Verified formal requests are completed within 30 days. Parents act on a minor's behalf.</div>
 
 <h2>What you can do yourself</h2>
 <dl>
 <dt>Export</dt>
-<dd>Admins: <strong>Admin → Reports &amp; Exports</strong> for school data (JSON) or members (CSV). Individuals: ask your admin to include you in the export, or email ${mailLink()} for a personal-account export.</dd>
+<dd>Admins: <strong>Admin → Reports &amp; Exports</strong> for school data (JSON) or members (CSV). Individuals: request a personal data export from your profile — a download link (valid 7 days) is emailed when it's ready.</dd>
 <dt>Correct</dt>
 <dd>Profile → name, email, password. Coaches edit their own notes; admins can edit any.</dd>
 <dt>Delete (your account)</dt>
-<dd>Profile → Delete Account. Removes you immediately; notes you wrote stay attributed for history. School admins delete the whole school from <strong>Admin → Delete School</strong> (30-day grace, then permanent).</dd>
+<dd>Profile → schedule account deletion. Your access ends immediately and data is permanently removed after a <strong>30-day grace period</strong>; the confirmation email has a one-time cancel link. School admins delete the whole school from <strong>Admin → Danger Zone</strong> (also a 30-day grace, then permanent).</dd>
 <dt>Opt out</dt>
-<dd>Profile → Notifications toggles email categories off. Voice dictation is opt-in per use. AI review is opt-in per video.</dd>
+<dd>Profile → Notifications toggles email categories off. Voice notes only record when you hold the mic button (browser permission required). AI video analysis is consent-based per user — and is currently switched off platform-wide regardless.</dd>
 </dl>
 
 <h2>What requires a request</h2>
@@ -3459,7 +3449,7 @@
 <li>If you're acting on behalf of someone else (a parent/guardian for a minor; a school employee with delegated authority), describe the relationship.</li>
 <li>For state-specific rights (CCPA/CPRA, VCDPA, CPA, CTDPA), the state you reside in.</li>
 </ul>
-<p>We acknowledge within 5 business days and complete within 45 calendar days. If a request is unusually large we'll tell you up front, and we won't charge a fee for a reasonable first request.</p>
+<p>We acknowledge within 5 business days and complete verified requests within 30 days. If a request is unusually large we'll tell you up front, and we won't charge a fee for a reasonable first request.</p>
 
 <h2>For parents / guardians of minors</h2>
 <p>Kaynos isn't designed for direct use by children under 13 (COPPA) or under 16 in the EU (GDPR Article 8). When a school enrolls a minor, the school holds the consent obligation. As a parent:</p>
@@ -3476,7 +3466,7 @@
 <p>Available for any business customer who needs one — schools, gyms, training facilities, EU customers. Standard DPA with Standard Contractual Clauses for EU transfers. Email ${mailLink()} to start.</p>
 
 <h2>Breach notification</h2>
-<p>If your data is affected by a security incident, you'll receive an email within 48 hours of confirmed discovery. The notice covers what was affected, what's being done about it, and what you can do.</p>
+<p>If a security incident is likely to put your rights or data at risk, you'll receive an email within 72 hours of confirmed discovery (sooner where we can). The notice covers what was affected, what's being done about it, and what you can do.</p>
 
 <h2>Where the rest lives</h2>
 <p>Full data-handling description, third-party subprocessor list, retention schedules, and compliance framework mappings (CCPA, CPRA, VCDPA, COPPA, FERPA, NY SHIELD, MA 201 CMR 17.00) are on <a href="#privacy-on-this-site" onclick="navigate('privacy-on-this-site');return false">Privacy on this site</a>.</p>`},
@@ -3504,8 +3494,8 @@
 </table>
 
 <h2>What is sent externally</h2>
-<p>No analytics, tracking pixels, or cookies are used. The "Contact Support" form composes a <code>mailto:</code> link — your email client sends the message, not this site.</p>
-<p>Fonts are self-hosted. No external requests after the initial page load, except when you click external links.</p>
+<p>No analytics, tracking pixels, or cookies are used. The <strong>Contact support</strong> and <strong>Feature request</strong> forms — and the "Was this helpful?" article-feedback box — send what you type (and the email you provide, if any) to our support ticket system. That's the only time this site transmits anything you enter; if the send fails, feedback falls back to a <code>mailto:</code> link your own email client sends.</p>
+<p>Fonts are self-hosted. No other external requests after the initial page load, except when you click external links.</p>
 <div class="hint hint-info"><div class="hint-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.5"/><line x1="8" y1="7" x2="8" y2="11"/><circle cx="8" cy="5" r=".5" fill="currentColor"/></svg></div><div>This page describes the help center at docs.kaynos.net. The application has its own policy at <a href="https://app.kaynos.net/privacy" target="_blank" rel="noopener">app.kaynos.net/privacy</a>; sections below also cover the application.</div></div>
 
 <h2>Third-party processors (the application)</h2>
@@ -3515,8 +3505,10 @@
 <tr><td>Backblaze B2</td><td>Video storage and playback (via presigned URLs)</td><td>Uploaded video files (encrypted at rest)</td></tr>
 <tr><td>Stripe</td><td>Payment processing</td><td>Billing name, email (not card numbers)</td></tr>
 <tr><td>Resend</td><td>Transactional email delivery (invites, password resets, mention notifications, reports)</td><td>Recipient email addresses, message subject and body</td></tr>
-<tr><td>Twelve Labs</td><td>AI video understanding for the optional AI review feature</td><td>Video file URLs (presigned) and the visual content the model analyzes</td></tr>
-<tr><td>Deepgram</td><td>Voice dictation (opt-in). Audio processed in real time and not stored by Deepgram.</td><td>Audio processed in real time, not stored</td></tr>
+<tr><td>Twelve Labs</td><td>AI video understanding for the optional AI review feature (currently disabled platform-wide)</td><td>Video file URLs (presigned) and the visual content the model analyzes</td></tr>
+<tr><td>Deepgram</td><td>Transcription of voice notes and class videos. Deepgram processes audio in real time and doesn't keep it; the voice note itself is stored with your account data in Kaynos.</td><td>Audio for transcription</td></tr>
+<tr><td>Twilio</td><td>SMS notifications for private-lesson booking</td><td>Phone numbers, message content</td></tr>
+<tr><td>Google</td><td>Optional calendar connection (coaches) for free/busy availability; Google sign-in</td><td>Calendar free/busy times, Google account email</td></tr>
 <tr><td>Neon</td><td>PostgreSQL database hosting</td><td>All structured account data (members, sessions, notes, etc.)</td></tr>
 <tr><td>Netlify</td><td>Application hosting and serverless functions</td><td>Application requests, server logs</td></tr>
 </tbody>
@@ -3546,7 +3538,7 @@
 <li>Playback URLs: time-limited and signed</li>
 <li>Payment: PCI-DSS compliant via Stripe (Kaynos never handles card numbers)</li>
 <li>Written information security program maintained (also covers NY SHIELD and MA 201 CMR 17.00 baselines)</li>
-<li>48-hour incident response protocol</li>
+<li>72-hour breach notification protocol</li>
 <li>Vendor security assessments conducted</li>
 </ul>
 
@@ -3556,7 +3548,7 @@
 <li>Access your data (Admin → Export or email support)</li>
 <li>Correct inaccurate information (Profile settings)</li>
 <li>Delete your account (Profile → Delete Account)</li>
-<li>Opt out of optional features (voice dictation, email notifications)</li>
+<li>Opt out of optional features (voice notes, email notifications)</li>
 </ul>
 <p>Exercising your privacy rights will not result in service degradation, higher prices, or reduced functionality. Step-by-step flows for every action — including parent-on-behalf requests, DPA requests, and breach notification — are on <a href="#data-rights" onclick="navigate('data-rights');return false">Data &amp; privacy rights</a>.</p>
 
@@ -3565,7 +3557,7 @@
 <p>Biometric data in video follows the same retention period as the video itself (default 6 months). You may request earlier deletion by contacting support.</p>
 
 <h2>Data breach notification</h2>
-<p>If a security breach affects your personal data, we will notify you via email within 48 hours of discovery. Notification will include: what data was affected, what we're doing about it, and steps you can take.</p>
+<p>If a security breach is likely to put your personal data at risk, we will notify you via email within 72 hours of discovery (sooner where we can). Notification will include: what data was affected, what we're doing about it, and steps you can take.</p>
 
 <h2>Law enforcement requests</h2>
 <p>Kaynos discloses user data only in response to valid legal process (subpoena, court order, or warrant). We notify affected users unless legally prohibited from doing so.</p>
@@ -3574,7 +3566,7 @@
 <p>Kaynos maintains records of all consumer privacy requests (access, deletion, correction) for 24 months per CCPA/CPRA requirements.</p>
 
 <h2>Compliance frameworks</h2>
-<p>Specific frameworks Kaynos aligns with. To exercise rights under any of them, email ${mailLink()} with your name, email, request type, and (for state-specific rights) which state you reside in. We respond within 45 calendar days.</p>
+<p>Specific frameworks Kaynos aligns with. To exercise rights under any of them, email ${mailLink()} with your name, email, request type, and (for state-specific rights) which state you reside in. Verified requests are completed within 30 days.</p>
 
 <h3>COPPA — children under 13</h3>
 <p>Kaynos is not designed for direct use by children under 13. If your organization enrolls students under 13:</p>
@@ -3608,7 +3600,7 @@
 <ul>
 <li>No invasive analytics or behavioral profiling</li>
 <li>No targeted advertising</li>
-<li>Opt-in only for audio processing (voice dictation)</li>
+<li>Opt-in only for audio processing (voice notes)</li>
 <li>No dark patterns in consent flows</li>
 <li>Parental consent required for users under 13 (COPPA)</li>
 </ul>
@@ -3642,6 +3634,7 @@
       content: `
 <h1>AI inbox</h1>
 <div class="tldr"><strong>TLDR:</strong> AI-generated note suggestions queue in your AI inbox. Accept the keepers, dismiss the rest — one at a time, or in bulk. Nothing is added to a student's timeline until you accept it.</div>
+<div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div><strong>AI review is currently disabled platform-wide</strong>, so the AI Inbox won't appear in the app right now. This page documents how it works for when it returns — watch the <a href="#release-notes" onclick="navigate('release-notes');return false">release notes</a> for status.</div></div>
 <h2>Where it lives</h2>
 <p>Coaches and admins see <strong>AI Inbox</strong> in the top-level nav after the first AI review completes. The badge count shows pending suggestions across every session and class you can review.</p>
 <h2>What it shows</h2>
@@ -3682,6 +3675,7 @@
       content: `
 <h1>Scrutiny picker</h1>
 <div class="tldr"><strong>TLDR:</strong> Pick how opinionated the AI should be when it reviews a video. Lower scrutiny = fewer suggestions, higher trust threshold. Higher scrutiny = more suggestions, more drafting work for the AI.</div>
+<div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div><strong>AI review is currently disabled platform-wide</strong>, so <strong>Start AI Review</strong> and this picker won't appear in the app right now. This page documents how it works for when it returns — watch the <a href="#release-notes" onclick="navigate('release-notes');return false">release notes</a> for status.</div></div>
 <h2>When you see it</h2>
 <p>The scrutiny picker appears when you click <strong>Start AI Review</strong> on a session or class. The default is whatever you set at the school level (Admin → AI review settings); you can override it per session.</p>
 <h2>The three levels</h2>
@@ -3925,9 +3919,9 @@
     'welcome': 'Kaynos help center — setup guides, video upload, playback, troubleshooting, and developer API reference for the video coaching platform.',
     'setup': 'Set up your Kaynos account. First login, password change, Google OAuth, and getting started with video coaching.',
     'uploading': `Upload video to Kaynos. Supported formats (${SUPPORTED_FORMATS}), size limits, chunked upload, and troubleshooting.`,
-    'playback': 'Watch and review video in Kaynos. Playback speed, keyboard shortcuts, timeline notes, clips, and mobile playback.',
+    'playback': 'Watch and review video in Kaynos. Playback speed, keyboard shortcuts, timeline notes, multi-video sessions, and mobile playback.',
     'creating-sessions': 'Create sessions and classes in Kaynos. Private lessons vs shared classes, and scheduling.',
-    'notes': 'Timestamped coaching notes in Kaynos. Add notes, voice dictation, annotations, reactions, AI review, and tags.',
+    'notes': 'Timestamped coaching notes in Kaynos. Add notes, voice notes, annotations, reactions, mentions, and threads.',
     'faq': 'Frequently asked questions about Kaynos. Pricing, security, privacy, browser support, and billing.',
     'developer-api': 'Kaynos Developer API. Internal API reference for admins and instructors at Admin → API Docs. Public API, tokens, and webhooks are not available today.',
     'roles': 'User roles in Kaynos. Admin, coach, and student permissions and capabilities.',
@@ -3946,8 +3940,8 @@
     'recording-setup': 'Recording setup for Kaynos. Phone, tripod, microphone, and lighting recommendations for video coaching.',
     'data-rights': 'Data and privacy rights in Kaynos. Export, correct, delete your data. GDPR, CCPA, COPPA, FERPA, and DPA flows.',
     'student-guide': 'Student guide for Kaynos. Sign in, watch sessions and classes, leave notes, request review, manage notifications.',
-    'coach-handbook': 'Coach handbook for Kaynos. Naming conventions, tagging, class structure, recap clips, AI review, and progress reviews.',
-    'integrations': 'Kaynos integrations and exports. Data export (JSON/CSV), email, in-app chat, shareable clip links. What is and is not supported.',
+    'coach-handbook': 'Coach handbook for Kaynos. Naming conventions, session types, class structure, the coach notebook, and progress reviews.',
+    'integrations': 'Kaynos integrations and exports. Data export (JSON/CSV), transcripts, Google Calendar availability, email and push notifications. What is and is not supported.',
     'ai-inbox': 'Triage AI-generated note suggestions in Kaynos. Bulk accept and dismiss, source pills (Pegasus 1.5), filters by scrutiny level and date.',
     'scrutiny-picker': 'Pick the AI review scrutiny level in Kaynos — minimal, balanced, or thorough. Per-session override and school defaults explained.',
     'school-switcher': 'Switch between schools in Kaynos. Multi-school accounts, role per school, isolated rosters and quotas, joining and leaving.',
@@ -5125,9 +5119,10 @@
     'admin': 'The highest-permission role — manages roster, invites, roles, and settings.',
     'coach': 'Staff role that creates sessions/classes, uploads video, and adds notes.',
     'student': 'End user who watches sessions and classes, adds notes, and tracks progress.',
+    'parent': 'Optional guardian role linked to a student by invite — views their published sessions.',
     'note': 'A text annotation pinned to a specific timestamp on the video timeline.',
-    'tag': 'A label for organizing sessions and classes (e.g. guard, comp-prep, drilling).',
-    'clip': 'A short excerpt from a session or class, shareable externally via a token link.',
+    'session type': 'A category on each session — private, drilling, sparring, comp prep, or class.',
+    'clip': 'One of several videos attached to the same session — switch between them in the clip rail.',
     'review request': 'A student-initiated request for a coach to review a specific video moment.',
     'highlight': 'A time-range bookmark on the video timeline marking a segment worth reviewing.',
     'annotation': 'A drawing overlay on a frozen video frame — arrows, circles, or freehand.',
@@ -5418,19 +5413,11 @@
       ]
     },
     {
-      version: 'v2.5', date: 'Q2 2026', status: 'in-progress',
+      version: 'v2.5', date: 'June 10, 2026', status: 'shipped',
       items: [
-        { type: 'new', text: 'Clip trimming — select a time range and share just that segment' },
-        { type: 'new', text: 'Coach-to-coach handoff — transfer a student session to another coach' },
-        { type: 'improved', text: 'Notification preferences — per-student and per-class granularity' },
-      ]
-    },
-    {
-      version: 'v2.6', date: 'Q3 2026', status: 'planned',
-      items: [
-        { type: 'new', text: 'Mobile app (iOS and Android) with offline playback' },
-        { type: 'new', text: 'Webhook notifications for session and class events' },
-        { type: 'new', text: 'Bulk import — upload a folder of videos at once' },
+        { type: 'improved', text: 'Accuracy pass against the current app: documented parent & guardian accounts, two-factor authentication, push notifications, voice notes, resumable uploads, Google Calendar availability, and CSV/transcript exports' },
+        { type: 'improved', text: 'Removed pages and sections describing features that are not in the product (clip excerpts with public share links, session tags, in-app chat, internal API reference page)' },
+        { type: 'improved', text: 'AI review documented as temporarily disabled platform-wide' },
       ]
     },
   ];

@@ -1,14 +1,27 @@
 const { defineConfig, devices } = require('@playwright/test');
 
+const baseURL = process.env.BASE_URL || 'http://localhost:3000';
+const isLocal = baseURL.includes('localhost') || baseURL.includes('127.0.0.1');
+
 module.exports = defineConfig({
   testDir: './tests',
   timeout: 30000,
   retries: 1,
   use: {
-    baseURL: process.env.BASE_URL || 'http://localhost:3000',
+    baseURL,
     screenshot: 'only-on-failure',
     trace: 'on-first-retry',
   },
+  ...(isLocal
+    ? {
+        webServer: {
+          command: 'npx http-server . -p 3000 -c-1',
+          url: 'http://localhost:3000',
+          reuseExistingServer: !process.env.CI,
+          timeout: 120_000,
+        },
+      }
+    : {}),
   projects: [
     {
       name: 'iPhone 14 (Chromium)',
