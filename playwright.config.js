@@ -17,7 +17,10 @@ module.exports = defineConfig({
         webServer: {
           command: 'npx http-server . -p 3000 -c-1',
           url: 'http://localhost:3000',
-          reuseExistingServer: !process.env.CI,
+          // CI starts its own http-server and waits on it before running
+          // Playwright (see .github/workflows), so always attach to an
+          // already-running server instead of failing on the busy port.
+          reuseExistingServer: true,
           timeout: 120_000,
         },
       }
