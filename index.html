@@ -2532,7 +2532,7 @@
 <p><strong>Member limits?</strong> No headcount cap.</p>
 <p><strong>Student-to-student invites?</strong> Only staff roles can invite; students cannot.</p>
 <h2>Multiple schools</h2>
-<p>Kaynos supports multiple schools under one account. Multi-school setup is handled by a tenant admin or by contacting ${mailLink()} — not self-service. Each school has its own roster, sessions, classes, and storage quota.</p>
+<p>One login can belong to several schools, each with its own roster, sessions, classes, and storage quota — see <a href="#school-switcher" onclick="navigate('school-switcher');return false">Switching between schools</a>. Running several gyms under one billing umbrella is a <strong>tenant</strong> feature handled by Kaynos staff: email ${mailLink()}.</p>
 <h2>Branding</h2>
 <p>Upload a custom logo for your academy under <strong>Admin → Branding</strong>. Members see it in the header after they log in. PNG or SVG, square, at least 200×200px.</p>
 <h2>School hours</h2>
@@ -3494,7 +3494,7 @@
 </table>
 
 <h2>What is sent externally</h2>
-<p>No analytics, tracking pixels, or cookies are used. The <strong>Contact support</strong> and <strong>Feature request</strong> forms send what you type (and the email you provide) to our support ticket system — that's the only time this site transmits anything you enter. Article feedback ("Was this helpful?") falls back to a <code>mailto:</code> link your own email client sends.</p>
+<p>No analytics, tracking pixels, or cookies are used. The <strong>Contact support</strong> and <strong>Feature request</strong> forms — and the "Was this helpful?" article-feedback box — send what you type (and the email you provide, if any) to our support ticket system. That's the only time this site transmits anything you enter; if the send fails, feedback falls back to a <code>mailto:</code> link your own email client sends.</p>
 <p>Fonts are self-hosted. No other external requests after the initial page load, except when you click external links.</p>
 <div class="hint hint-info"><div class="hint-icon"><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6.5"/><line x1="8" y1="7" x2="8" y2="11"/><circle cx="8" cy="5" r=".5" fill="currentColor"/></svg></div><div>This page describes the help center at docs.kaynos.net. The application has its own policy at <a href="https://app.kaynos.net/privacy" target="_blank" rel="noopener">app.kaynos.net/privacy</a>; sections below also cover the application.</div></div>
 
@@ -3627,15 +3627,121 @@
 <p>The Security standards section above (encryption, RBAC, incident response, vendor assessments) is the same baseline that satisfies NY SHIELD's "reasonable safeguards" and Massachusetts 201 CMR 17.00's written information security program requirement.</p>
 
 <h3>Accessibility — ADA / Section 508</h3>
-<p>Kaynos is built to WCAG 2.1 AA standards. Features include keyboard navigation, screen reader support, skip links, focus management, and prefers-reduced-motion support. For a detailed accessibility report (VPAT), contact ${mailLink()}.</p>`}
+<p>Kaynos is built to WCAG 2.1 AA standards. Features include keyboard navigation, screen reader support, skip links, focus management, and prefers-reduced-motion support. For a detailed accessibility report (VPAT), contact ${mailLink()}.</p>`},
+
+    "ai-inbox": {
+      title: "AI inbox & bulk actions", section: "Sessions & Classes",
+      content: `
+<h1>AI inbox</h1>
+<div class="tldr"><strong>TLDR:</strong> AI-generated note suggestions queue in your AI inbox. Accept the keepers, dismiss the rest — one at a time, or in bulk. Nothing is added to a student's timeline until you accept it.</div>
+<div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div><strong>AI review is currently disabled platform-wide</strong>, so the AI Inbox won't appear in the app right now. This page documents how it works for when it returns — watch the <a href="#release-notes" onclick="navigate('release-notes');return false">release notes</a> for status.</div></div>
+<h2>Where it lives</h2>
+<p>Coaches and admins see <strong>AI Inbox</strong> in the top-level nav after the first AI review completes. The badge count shows pending suggestions across every session and class you can review.</p>
+<h2>What it shows</h2>
+<ul>
+<li>Each row is one AI-suggested note tied to a specific clip and timestamp.</li>
+<li>The source pill on each row tells you which model generated it (e.g. <em>Pegasus 1.5</em>) so you can sanity-check the suggestion against the model's strengths.</li>
+<li>Filters: status (pending / accepted / dismissed), scrutiny level used (minimal / balanced / thorough), session vs class, and the date range.</li>
+</ul>
+<h2>Single-row actions</h2>
+<p>Open a suggestion to see the surrounding context (a few seconds before and after the timestamp). From there:</p>
+<ul>
+<li><strong>Accept</strong> — the suggestion becomes a normal note on the student's timeline, tagged "AI suggestion". You can edit the text before or after accepting.</li>
+<li><strong>Dismiss</strong> — the suggestion is hidden from the inbox and never appears on the timeline. Students never see dismissed suggestions.</li>
+</ul>
+<h2>Bulk actions</h2>
+<p>Use the checkboxes on the left of each row to multi-select. The bulk bar appears at the top once you have at least one row selected.</p>
+<ol>
+<li><strong>Select all on this page</strong> — checkbox in the column header. Pagination is preserved (changing pages doesn't clear the selection).</li>
+<li><strong>Bulk accept</strong> — writes every selected suggestion to its student's timeline in one pass. The inbox refreshes when finished.</li>
+<li><strong>Bulk dismiss</strong> — clears every selected suggestion. A confirmation modal lists the count and lets you back out before anything is changed.</li>
+</ol>
+<div class="hint hint-tip"><div class="hint-icon">${IC.tip}</div><div>Bulk actions are atomic per row — if one acceptance fails (e.g. the underlying clip was deleted), the rest still go through. Failures stay in the inbox so you can review them.</div></div>
+<h2>Tips</h2>
+<ul>
+<li>Filter by <strong>scrutiny: minimal</strong> first — those rows are timestamp markers with no opinion, easiest to triage. Accept-all is usually safe.</li>
+<li>For <strong>thorough</strong> rows (full suggested feedback), open each one before accepting. The AI is a draft, not the verdict.</li>
+<li>Empty inbox? Either nothing has been reviewed yet, or you've already triaged everything. The "All caught up" empty state stays dismissed per-clip.</li>
+</ul>
+<h2>Related</h2>
+<ul>
+<li><a href="#scrutiny-picker" onclick="navigate('scrutiny-picker');return false">Scrutiny picker (AI review)</a></li>
+<li><a href="#notes" onclick="navigate('notes');return false">Notes &amp; timestamps</a></li>
+</ul>
+`},
+
+    "scrutiny-picker": {
+      title: "Scrutiny picker (AI review)", section: "Sessions & Classes",
+      content: `
+<h1>Scrutiny picker</h1>
+<div class="tldr"><strong>TLDR:</strong> Pick how opinionated the AI should be when it reviews a video. Lower scrutiny = fewer suggestions, higher trust threshold. Higher scrutiny = more suggestions, more drafting work for the AI.</div>
+<div class="hint hint-warning"><div class="hint-icon">${IC.warn}</div><div><strong>AI review is currently disabled platform-wide</strong>, so <strong>Start AI Review</strong> and this picker won't appear in the app right now. This page documents how it works for when it returns — watch the <a href="#release-notes" onclick="navigate('release-notes');return false">release notes</a> for status.</div></div>
+<h2>When you see it</h2>
+<p>The scrutiny picker appears when you click <strong>Start AI Review</strong> on a session or class. The default is whatever you set at the school level (Admin → AI review settings); you can override it per session.</p>
+<h2>The three levels</h2>
+<dl>
+<dt>Minimal</dt>
+<dd>The AI marks moments it considers significant — no opinion, no suggested feedback. Each suggestion lands in the AI inbox as a blank-bodied note at a timestamp. You write the actual note.</dd>
+<dt>Balanced (default)</dt>
+<dd>The AI marks moments and adds a one-line observation (e.g. "weight shift forward on the left leg"). You review, edit, and accept or dismiss.</dd>
+<dt>Thorough</dt>
+<dd>The AI marks moments and drafts full coaching feedback in your voice — including suggested corrections and drills. Always treat as a draft: edit before accepting, especially when the suggestion relies on context the AI can't see.</dd>
+</dl>
+<h2>How to pick</h2>
+<ul>
+<li><strong>Tournament footage or long classes</strong> — start with Minimal. You'll get a tight set of timestamps to triage and write your own notes.</li>
+<li><strong>Drill review for a focused technique</strong> — Balanced is the sweet spot. The one-line observation usually saves a writing step.</li>
+<li><strong>Onboarding a new student or batch-reviewing back catalogue</strong> — Thorough drafts the feedback so you can edit fast instead of writing from scratch. Slowest to triage, fastest end-to-end.</li>
+</ul>
+<h2>Changing the default</h2>
+<p>Admins set the school default at <strong>Admin → AI review settings</strong>. Anyone with coach access can override it per session at start-review time — the override doesn't change the school default.</p>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Scrutiny only affects how the AI <em>writes</em>. The set of moments it flags is largely the same across levels. Higher scrutiny means more text per moment, not more moments.</div></div>
+<h2>Cost &amp; quota</h2>
+<p>Higher scrutiny uses more tokens per review and may count harder against your AI quota. Watch your monthly usage at <strong>Admin → AI usage</strong>. If you're near the limit, drop to Minimal for the rest of the cycle.</p>
+<h2>Related</h2>
+<ul>
+<li><a href="#ai-inbox" onclick="navigate('ai-inbox');return false">AI inbox &amp; bulk actions</a></li>
+<li><a href="#coach-handbook" onclick="navigate('coach-handbook');return false">Coach handbook → AI review</a></li>
+</ul>
+`},
+
+    "school-switcher": {
+      title: "Switching between schools", section: "Account",
+      content: `
+<h1>Switching between schools</h1>
+<div class="tldr"><strong>TLDR:</strong> One Kaynos login can belong to several schools. Use the school switcher in the top-right of the app to jump between them. Your role and what you see are scoped to whichever school is active.</div>
+<h2>Where it lives</h2>
+<p>If your account belongs to two or more schools, the school name in the top header becomes a button. Click it (or press the keyboard shortcut shown in the modal) to open the switcher.</p>
+<ul>
+<li>Single-school accounts don't see the button — there's nothing to switch to.</li>
+<li>The switcher modal lists every school you're a member of, with your role inside each one shown as a small pill.</li>
+</ul>
+<h2>What changes when you switch</h2>
+<ul>
+<li><strong>Roster, sessions, classes, notes</strong> — each school is fully isolated. You never see another school's data, even as an admin.</li>
+<li><strong>Role</strong> — you can be a student in one school and a coach in another. The active role is whichever school is currently selected.</li>
+<li><strong>Quota &amp; billing</strong> — each school has its own storage and AI quotas. Billing is also per-school.</li>
+<li><strong>Notifications</strong> — the bell only shows alerts for the active school. Switch to surface another school's alerts.</li>
+</ul>
+<h2>Joining another school</h2>
+<p>You don't add a school from inside the app — someone with admin rights at that school has to <a href="#inviting-members" onclick="navigate('inviting-members');return false">invite you</a>. Accept the invite from the email and the new school appears in your switcher on next sign-in.</p>
+<h2>Leaving a school</h2>
+<p>Ask an admin of that school to remove you from <strong>Admin → Members</strong>. The school disappears from your switcher; sessions and notes from that school are no longer accessible to you (the school's copy is unaffected).</p>
+<div class="hint hint-info"><div class="hint-icon">${IC.info}</div><div>Multi-school setup beyond a single account is a <strong>tenant</strong> feature — useful for an organisation running several gyms under one billing umbrella. Tenant admin is a separate role and is not self-service: email ${mailLink()} to set it up.</div></div>
+<h2>Related</h2>
+<ul>
+<li><a href="#managing-members" onclick="navigate('managing-members');return false">Managing members</a></li>
+<li><a href="#roles" onclick="navigate('roles');return false">Understanding user roles</a></li>
+</ul>
+`}
   };
 
   const NAV = [
     { section: "", pages: ["welcome"] },
     { section: "Getting Started", pages: ["setup", "roles", "glossary", "faq"] },
     { section: "Video", pages: ["uploading", "playback", "formats", "storage"] },
-    { section: "Sessions & Classes", pages: ["creating-sessions", "creating-classes", "notes", "progress"] },
-    { section: "Account", pages: ["profile"] },
+    { section: "Sessions & Classes", pages: ["creating-sessions", "creating-classes", "notes", "ai-inbox", "scrutiny-picker", "coach-handbook", "progress"] },
+    { section: "Account", pages: ["profile", "school-switcher"] },
     { section: "Admin", pages: ["inviting-members", "managing-members", "developer-api"] },
     { section: "Troubleshoot", pages: ["troubleshoot", "login-issues", "email-issues", "performance", "using-on-mobile"] },
     // Hidden from sidebar but still routable via hash links and the footer.
@@ -3795,6 +3901,18 @@
     'exports': 'integrations',
     'webhooks': 'integrations',
     'backup': 'integrations',
+    // KAY-1589: new pages
+    'ai-inbox-bulk': 'ai-inbox',
+    'inbox': 'ai-inbox',
+    'ai-suggestions': 'ai-inbox',
+    'scrutiny': 'scrutiny-picker',
+    'minimal': 'scrutiny-picker',
+    'balanced': 'scrutiny-picker',
+    'thorough': 'scrutiny-picker',
+    'switch-school': 'school-switcher',
+    'switch-schools': 'school-switcher',
+    'multi-school': 'school-switcher',
+    'tenant': 'school-switcher',
   };
 
   const PAGE_DESCRIPTIONS = {
@@ -3824,6 +3942,9 @@
     'student-guide': 'Student guide for Kaynos. Sign in, watch sessions and classes, leave notes, request review, manage notifications.',
     'coach-handbook': 'Coach handbook for Kaynos. Naming conventions, session types, class structure, the coach notebook, and progress reviews.',
     'integrations': 'Kaynos integrations and exports. Data export (JSON/CSV), transcripts, Google Calendar availability, email and push notifications. What is and is not supported.',
+    'ai-inbox': 'Triage AI-generated note suggestions in Kaynos. Bulk accept and dismiss, source pills (Pegasus 1.5), filters by scrutiny level and date.',
+    'scrutiny-picker': 'Pick the AI review scrutiny level in Kaynos — minimal, balanced, or thorough. Per-session override and school defaults explained.',
+    'school-switcher': 'Switch between schools in Kaynos. Multi-school accounts, role per school, isolated rosters and quotas, joining and leaving.',
   };
 
   // Last touched per page. Pages absent from this map fall back to LAST_UPDATED_DEFAULT.
@@ -3864,6 +3985,9 @@
     'student-guide': '2026-05-14',
     'coach-handbook': '2026-05-14',
     'integrations': '2026-05-14',
+    'ai-inbox': '2026-05-23',
+    'scrutiny-picker': '2026-05-23',
+    'school-switcher': '2026-05-23',
   };
 
   /* ── NAVIGATE ───────────────────────────────────────── */
@@ -4673,7 +4797,7 @@
         <textarea id="afComment-${escapeHtml(pageId)}" placeholder="What didn't work? Any details help us improve this page." rows="3" autocapitalize="sentences" enterkeyhint="send"></textarea>
         <button type="button" class="article-feedback-submit" onclick="sendArticleFeedback('${pageId}')">Send feedback</button>
       </div>
-      <div class="article-feedback-thanks" hidden>Thanks — your email client will open with the details prefilled.</div>`;
+      <div class="article-feedback-thanks" hidden>Thanks — your feedback is in our queue.</div>`;
     container.appendChild(wrap);
   }
   function rateHelpful(pageId, value) {
@@ -4698,7 +4822,13 @@
     thanks.textContent = 'Thanks!';
     thanks.setAttribute('role', 'status');
   }
-  function sendArticleFeedback(pageId) {
+  // Posts feedback to the kaynos-site Linear feature-request function (KAY-1494);
+  // the function is CORS-allowlisted for https://docs.kaynos.net and creates a
+  // Linear issue tagged [Customer request] with FEATURE + HELP_CENTER labels.
+  // Falls back to the user's mail client if the network request fails so they
+  // are never stuck without a way to send the feedback.
+  const FEEDBACK_ENDPOINT = 'https://www.kaynos.net/.netlify/functions/feature-request';
+  async function sendArticleFeedback(pageId) {
     const wrap = document.querySelector(`.article-feedback[data-page="${pageId}"]`);
     if (!wrap) return;
     const ta = wrap.querySelector('textarea');
@@ -4706,22 +4836,64 @@
     if (!comment) { ta?.focus(); return; }
     const page = PAGES[pageId];
     const title = page?.title || pageId;
-    const subject = 'Docs feedback: ' + title;
-    const body =
-      'Page: ' + title + ' (#' + pageId + ')\n' +
-      'URL: ' + location.origin + location.pathname + '#' + pageId + '\n\n' +
-      comment;
-    const url = mailHref('?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body));
-    // Update the widget first so the UI reflects success even if the mail
-    // client never opens (or the user dismisses the prompt).
-    markFeedbackGiven(pageId);
+    const url = location.origin + location.pathname + '#' + pageId;
+    const submit = wrap.querySelector('.article-feedback-submit');
     const form = wrap.querySelector('.article-feedback-form');
     const thanks = wrap.querySelector('.article-feedback-thanks');
+    const prevLabel = submit ? submit.textContent : '';
+    if (submit) { submit.disabled = true; submit.textContent = 'Sending…'; }
+
+    const description = [
+      `**Page:** ${title} (#${pageId})`,
+      `**URL:** ${url}`,
+      '',
+      '---',
+      '',
+      comment,
+    ].join('\n');
+
+    const payload = {
+      title: `Docs feedback: ${title}`,
+      description,
+      name: 'docs.kaynos.net reader',
+      email: '',
+      priority: 'nice-to-have',
+    };
+
+    let ok = false;
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000);
+      const res = await fetch(FEEDBACK_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        signal: controller.signal,
+      });
+      clearTimeout(timeoutId);
+      ok = res.ok;
+    } catch (_) { ok = false; }
+
+    if (ok) {
+      markFeedbackGiven(pageId);
+      form.hidden = true;
+      thanks.hidden = false;
+      thanks.textContent = 'Thanks — your feedback is in our queue.';
+      thanks.setAttribute('role', 'status');
+      return;
+    }
+
+    // Network or server failure: fall back to mailto so the comment isn't lost.
+    if (submit) { submit.disabled = false; submit.textContent = prevLabel; }
+    const subject = 'Docs feedback: ' + title;
+    const body = 'Page: ' + title + ' (#' + pageId + ')\nURL: ' + url + '\n\n' + comment;
+    const mail = mailHref('?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body));
+    markFeedbackGiven(pageId);
     form.hidden = true;
     thanks.hidden = false;
+    thanks.textContent = 'Couldn’t reach our server — opening your email instead.';
     thanks.setAttribute('role', 'status');
-    // Then trigger the email composer — works on every platform, no Netlify Forms required.
-    window.location.href = url;
+    window.location.href = mail;
   }
   window.sendArticleFeedback = sendArticleFeedback;
   function markFeedbackGiven(pageId) {
@@ -5162,7 +5334,7 @@
   // Scroll save is now handled in the consolidated scroll listener above
 
   /* ── WHATS NEW BADGE ───────────────────────────────── */
-  const WHATS_NEW_VERSION = '2026-04';
+  const WHATS_NEW_VERSION = '2026-05';
   function hasNewUpdates() {
     return localStorage.getItem('whats-new-seen') !== WHATS_NEW_VERSION;
   }
@@ -5174,6 +5346,17 @@
 
   /* ── RELEASE NOTES ──────────────────────────────────── */
   const RELEASES = [
+    {
+      version: 'v2.7', date: 'May 23, 2026', status: 'shipped',
+      items: [
+        { type: 'new', text: 'AI inbox &amp; bulk actions — triage AI-generated note suggestions, accept or dismiss in bulk' },
+        { type: 'new', text: 'Scrutiny picker (AI review) — pick how opinionated the AI is per session (minimal / balanced / thorough)' },
+        { type: 'new', text: 'School switcher — multi-school accounts: how to switch, what changes, how to join or leave' },
+        { type: 'new', text: 'Friendly 404 page with search and popular-articles fallback' },
+        { type: 'improved', text: '"Was this helpful? No" now files Linear issues directly instead of opening a mail client' },
+        { type: 'improved', text: '?q=&lt;term&gt; query string prefills and opens search (used by the 404 fallback)' },
+      ],
+    },
     {
       version: 'v2.4', date: 'April 8, 2026', status: 'shipped',
       items: [
@@ -5595,6 +5778,25 @@
   // Empty hash → welcome. Unknown hash → fall through to navigate() so its
   // "Page not found" handler renders with the preserved URL.
   navigate(resolvedPage || 'welcome');
+  // ?q=<term> arrives from the 404 page's fallback search form. Prefill the
+  // header search input and open the results panel so the user sees matches
+  // immediately without re-typing.
+  try {
+    const params = new URLSearchParams(location.search);
+    const initialQuery = (params.get('q') || '').trim();
+    if (initialQuery) {
+      const input = document.getElementById('searchInput');
+      if (input) {
+        input.value = initialQuery;
+        requestAnimationFrame(() => {
+          input.focus();
+          handleSearch(initialQuery);
+        });
+      }
+      // Strip the query string from the URL so reloads don't re-fire the search.
+      history.replaceState(null, '', location.pathname + location.hash);
+    }
+  } catch (_) { /* URLSearchParams unsupported — ignore */ }
   if (initSection) {
     if (initSection.startsWith('wizard-')) {
       requestAnimationFrame(() => renderWizard(initSection.replace('wizard-', '')));
