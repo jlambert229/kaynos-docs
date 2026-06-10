@@ -428,11 +428,14 @@ test.describe('Release notes', () => {
     }
   });
 
-  test('has in-progress and planned sections', async ({ page }) => {
+  // Changelog is shipped-history only — roadmap entries were removed in the
+  // June 2026 accuracy pass so the docs never promise unshipped features.
+  test('changelog lists shipped releases only', async ({ page }) => {
     await page.goto('/#release-notes');
     await page.waitForSelector('.release-status');
-    await expect(page.locator('.release-status.in-progress')).toHaveCount(1);
-    await expect(page.locator('.release-status.planned')).toHaveCount(1);
+    expect(await page.locator('.release-status.shipped').count()).toBeGreaterThan(0);
+    await expect(page.locator('.release-status.in-progress')).toHaveCount(0);
+    await expect(page.locator('.release-status.planned')).toHaveCount(0);
   });
 });
 
