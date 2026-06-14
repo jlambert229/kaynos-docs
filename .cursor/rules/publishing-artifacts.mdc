@@ -1,0 +1,15 @@
+---
+description: Kaynos Docs — keep feed.xml, sitemap.xml, robots.txt, and manifest valid and consistent with index.html content/URLs.
+globs: feed.xml,sitemap.xml,robots.txt,manifest.webmanifest,sw.js
+alwaysApply: false
+---
+
+# Publishing artifacts
+
+These files are served raw — a malformed one ships to production.
+
+- **Validate XML well-formedness** after editing `feed.xml` / `sitemap.xml` (e.g. `xmllint --noout feed.xml`). A broken feed/sitemap is a silent SEO regression.
+- **Keep URLs consistent** with the headings/sections in `index.html` and with redirects in `netlify.toml`. When you add or rename a doc page, update `sitemap.xml` (and `feed.xml` if it's a release note) in the same change.
+- `robots.txt` and `sitemap.xml` must agree on what's crawlable.
+- Bumping cached assets? Update the version in `sw.js` so the service worker invalidates — stale `sw.js` serves old content.
+- Run the `docs-publish-check` skill before merging artifact changes.

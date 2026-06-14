@@ -1,0 +1,30 @@
+---
+description: Kaynos Docs core — static help site, surgical edits to a huge index.html, auto-merge deploy default.
+alwaysApply: true
+---
+
+# Kaynos Docs core
+
+Static documentation site for `docs.kaynos.net`. Netlify publish root is `.` (no build step). Primary artifacts: `index.html` (~340KB single file), `feed.xml`, `sitemap.xml`, `robots.txt`. Sibling repos: `kaynos` (product), `kaynos-site` (marketing) — keep URLs/naming consistent across them.
+
+## Rules
+
+- **`index.html` is huge — make surgical edits.** Never wholesale-reformat generated HTML; noisy diffs obscure review and break merges.
+- Read a file before editing. Do what was asked; avoid scope creep.
+- Credentials-free repo. No secrets, ever. Keep scratch notes out of the published root.
+- Default branch is **`main`** (not `master`).
+- **Tracker is Linear (`KAY-` prefix)** — authoritative here, overrides any global Jira/`CX-` default. Branch `<type>/KAY-<n>-<desc>`, commit `<type>: <desc> [KAY-<n>]`. See `linear-cli`.
+
+## Auto-merge (this repo only)
+
+After opening a PR here, auto-merge it — the user has said they don't want to be the merge button:
+
+```bash
+gh pr merge <N> --squash --auto --delete-branch
+```
+
+Don't ask, don't wait. Green CI → squash-merges and Netlify ships `docs.kaynos.net`. Failing CI → it waits for your fix. **This default is specific to `kaynos-docs`**; `kaynos` and `kaynos-site` keep standard review.
+
+## Verify
+
+Playwright specs in `tests/` (`playwright.config.js` baseURL targets production). Run `npm install` then `npm test`; override `baseURL` for local/staging so you don't only assert against prod.
