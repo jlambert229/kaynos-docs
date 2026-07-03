@@ -10,7 +10,7 @@
     "test:ci": "BASE_URL=http://localhost:3000 npx playwright test"
   },
   "devDependencies": {
-    "@playwright/test": "^1.60.0",
+    "@playwright/test": "^1.61.1",
     "http-server": "^14.1.1",
     "wait-on": "^9.0.10"
   }
